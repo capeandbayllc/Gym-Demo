@@ -1,5 +1,6 @@
 export { default as AlarmIcon } from "./alarm.vue"
 export { default as ArrowIcon } from "./arrow.vue"
+export { default as CrossCircleIcon } from "./cross-circle.vue"
 export { default as DownloadIcon } from "./download.vue"
 export { default as FavoriteCircleIcon } from "./favorite-circle.vue"
 export { default as FitnessIcon } from "./fitness.vue"

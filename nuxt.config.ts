@@ -16,9 +16,6 @@ export default defineNuxtConfig({
 			}
 		}
 	},
-	router: {
-		base: '/'
-	},
     modules: ['@nuxtjs/tailwindcss'],
     tailwindcss: {
         cssPath: '~/assets/css/tailwind.css',

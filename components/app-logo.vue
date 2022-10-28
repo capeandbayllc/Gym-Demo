@@ -12,6 +12,6 @@
 </template>
 <style scoped>
 	.app-logo {
-		@apply flex bg-primary px-5 h-full items-center w-fit;
+		@apply flex bg-primary-focus px-5 h-full items-center w-fit cursor-pointer;
 	}
 </style>

@@ -1,9 +1,5 @@
 <template>
-	<div class="nav-bar-container"
-		:class="{
-			'border-b-[16px] border-secondary': !collapsed
-		}"
-	>
+	<div class="nav-bar-container">
 		<div class="nav-bar-toggler" @click="toggleCollapse"></div>
 		<div class="nav-bar-items" v-if="!collapsed">
 			<nav-item
@@ -26,7 +22,7 @@
 	@apply bg-secondary h-8 cursor-pointer;
 }
 .nav-bar-items {
-	@apply border border-secondary;
+	@apply border border-secondary border-b-[16px] border-secondary;
 }
 </style>
 <script setup>
