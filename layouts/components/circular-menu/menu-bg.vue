@@ -5,7 +5,7 @@
 			'bg-secondary-focus border-primary-content': isMain,
 			'bg-secondary-content border-info-content': !isMain
 		}"
-        :style="`background-image: url('/_nuxt/assets/img/circular-menu/${activeKey ? activeKey: 'main-bg'}.png');`"
+        :style="`background-image: url('/${activeKey ? activeKey: 'main-bg'}.png');`"
     ></div>
 </template>
 <style scoped>

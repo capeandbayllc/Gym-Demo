@@ -1,7 +1,7 @@
 <template>
 	<div class="alarm-btn">
 		<span class="notification">1</span>
-		<alarm-icon />
+		<alarm-icon/>
 	</div>
 </template>
 <style scoped>

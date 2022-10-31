@@ -2,35 +2,17 @@
     <div
         :class="{
             'flex w-fit': true,
-            'rotate-0': direction === 'right',
-            'rotate-90': direction === 'down',
-            'rotate-180': direction === 'left',
-            '-rotate-90': direction === 'up',
+            'rotate-[-270deg]': direction === 'right',
+            'rotate-0': direction === 'down',
+            'rotate-90': direction === 'left',
+            '-rotate-180': direction === 'up',
         }"
     >
-        <svg
-            id="arrow"
-            xmlns="http://www.w3.org/2000/svg"
-            width="11.949"
-            height="21.668"
-            viewBox="0 0 11.949 21.668"
-            :transform="transform"
-        >
-            <rect
-                width="1.5"
-                height="15"
-                rx="1"
-                transform="translate(1.061 21.668) rotate(-135)"
-                fill="currentColor"
-            />
-            <rect
-                width="1.5"
-                height="15"
-                rx="1"
-                transform="translate(0.281 1.061) rotate(-45)"
-                fill="currentColor"
-            />
-        </svg>
+		<svg xmlns="http://www.w3.org/2000/svg" width="13.04" height="7.846" viewBox="0 0 13.04 7.846">
+		  <g id="Group_4650" data-name="Group 4650" transform="translate(-820.071 1255.86) rotate(-90)">
+			<path id="Path_3005" data-name="Path 3005" d="M5.838,0,0,5.375l5.838,5.685" transform="translate(1254.842 832.121) rotate(-180)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.4"/>
+		  </g>
+		</svg>
     </div>
 </template>
 <script setup>

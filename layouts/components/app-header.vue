@@ -4,10 +4,20 @@
 			<app-logo @click="$emit('show-circular-menu')"/>
 		</div>
 		<Button size="sm" class="btn-pulse">
-			<pulse-icon />
+			<pulse-icon @click="showPulseModal"/>
 		</Button>
-		<header-actions />
+		<header-actions
+			@show-people-search="showPeopleSearchModal"
+		/>
+		<daisy-modal id="pulseModal" ref="pulseModal">
+			<pulse-modal />
+		</daisy-modal>
+		<daisy-modal id="peopleSearchModal" ref="peopleSearchModal">
+			<people-search-modal />
+		</daisy-modal>
+
 	</div>
+	
 </template>
 <style scoped>
 .app-header {
@@ -22,6 +32,20 @@
 }
 </style>
 <script setup>
+import {ref} from 'vue'
 import {PulseIcon} from "@/components/icons"
 import HeaderActions from "./header-actions/index.vue"
+import PulseModal from "./pulse-modal/index.vue"
+import PeopleSearchModal from "./people-search-modal/index.vue"
+
+const pulseModal = ref(null)
+const peopleSearchModal = ref(null)
+
+const showPulseModal = () => {
+	pulseModal.value.open()
+}
+const showPeopleSearchModal = () => {
+	peopleSearchModal.value.open()
+}
+
 </script>

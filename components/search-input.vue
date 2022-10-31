@@ -3,9 +3,10 @@
         <input
             :class="{
                 'search-input': true,
+				'border-secondary': border === 'secondary',
                 'h-6 text-sm': size === 'xs',
                 'h-7 text-base': size === 'sm',
-                'h-8 text-lg': size === 'lg',
+                'search-input-lg text-lg': size === 'lg',
             }"
             :placeholder="placeholder"
         />
@@ -13,7 +14,10 @@
 </template>
 <style scoped>
 .search-input {
-    @apply rounded border overflow-hidden px-2 text-right border-secondary bg-secondary;
+    @apply rounded border overflow-hidden px-2 text-right bg-secondary;
+}
+.search-input-lg {
+	height: 34px;
 }
 
 .search-input:hover,
@@ -48,5 +52,9 @@ const props = defineProps({
         type: String,
         default: "sm",
     },
+	border: {
+		type: String,
+		default: "secondary",
+	}
 })
 </script>
