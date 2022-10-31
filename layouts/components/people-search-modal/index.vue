@@ -19,7 +19,10 @@
 				/>
 				<search-input size="lg" border="base-content"/>
 			</div>
-
+			<div class="border border-secondary rounded px-8 py-6 mt-8 ml-10 flex flex-col space-y-4">
+				<people-lead-table />
+				<people-member-table />
+			</div>
 		</div>
 	</simple-card>
 </template>
@@ -33,6 +36,9 @@
 }
 </style>
 <script setup>
+import PeopleLeadTable from './people-lead-table.vue';
+import PeopleMemberTable from './people-member-table.vue';
+
 const memTypes = [{
 	id: 1,
 	label: "Premium",

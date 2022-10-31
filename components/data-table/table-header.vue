@@ -1,12 +1,12 @@
 <template>
-    <thead class="sticky top-0 bg-neutral text-base-content">
+    <thead class="top-0 text-base-content">
         <th
-            v-for="column in columns"
-            :key="column.field"
-            class="px-3"
-            :class="column.class + (rowBordered ? ' px-3' : '  px-3 border-b')"
+            v-for="(column, ndx) in columns"
+            :key="column.field ? column.field : ndx"
+            class="px-3 capitalize"
+            :class="column.class"
         >
-            {{ column.label }}
+            {{ column.label ? column.label: column }}
         </th>
     </thead>
 </template>
@@ -20,10 +20,6 @@ const props = defineProps({
     columns: {
         type: Array,
         default: [],
-    },
-    rowBordered: {
-        type: Boolean,
-        default: false,
     },
 });
 </script>

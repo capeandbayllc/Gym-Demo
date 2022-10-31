@@ -1,22 +1,22 @@
 <template>
-    <div class="overflow-y-auto max-w-[90vw] pr-2">
-        <table
-            class="border-separate"
-        >
-            <table-header
-                :rowBordered="rowBordered"
-            />
-            <slot name="thead"></slot>
-            <table-body
-                :columns="columns"
-                :data="data"
-            />
+    <div class="overflow-y-auto max-w-[90vw]">
+        <table class="border-separate">
+            <table-header :columns="columns"/>
+            <table-body v-if="!rowComponent"/>
+            <tbody>
+                <component
+                    v-for="item in data"
+                    :key="item.id"
+                    :is="rowComponent"
+                    :data="item"
+                />
+            </tbody>
         </table>
     </div>
 </template>
 <style scoped>
 table {
-    border-spacing: 0 5px;
+    border-spacing: 0 10px;
     @apply w-full;
 }
 </style>
@@ -32,5 +32,6 @@ const props = defineProps({
         type: Array,
         default: [],
     },
+    rowComponent: Object
 });
 </script>
