@@ -10,12 +10,17 @@
 			<alarm-btn />
 			<alert-list class="alert-list"/>
 		</div>
-		<person-add-icon />
+		<div class="relative">
+			<person-add-icon @click="showUserMenu"/>
+			<user-add-menu ref="userMenu"/>
+		</div>
 		<setting-icon />
 		<question-round-icon
 			@click="$emit('show-help')"
 		/>
-		<account-btn />
+		<account-btn
+			@click="$emit('show-profile-menu')"
+		/>
 	</div>
 </template>
 <style scoped>
@@ -46,4 +51,9 @@ import AlarmBtn from "./alarm-btn.vue"
 import AccountBtn from "./account-btn.vue"
 import AlertList from "./alert-list.vue"
 import HelpBot from "../help-bot/index.vue"
+import UserAddMenu from "./user-add-menu.vue"
+
+const userMenu = ref(null)
+
+const showUserMenu = () => userMenu.value.open()
 </script>

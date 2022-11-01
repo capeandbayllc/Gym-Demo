@@ -9,6 +9,7 @@
 		<header-actions
 			@show-people-search="showPeopleSearchModal"
 			@show-help="$emit('show-help')"
+			@show-profile-menu="$emit('show-profile-menu')"
 		/>
 		<daisy-modal id="pulseModal" ref="pulseModal">
 			<pulse-modal />
