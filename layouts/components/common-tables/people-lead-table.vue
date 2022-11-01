@@ -1,5 +1,4 @@
 <template>
-    <div class="people-lead-table-title">Leads</div>
     <div class="people-lead-table">
         <data-table
             :columns="columns"
@@ -10,12 +9,10 @@
     </div>
 </template>
 <style scoped>
-.people-lead-table-title {
-    @apply text-2xl font-semibold pt-4;
-}
 </style>
 <script setup>
-import PeopleLeadTableRow from './people-lead-table-row.vue';
+import PeopleLeadTableRow from "~~/components/data-table/common/people-lead-table-row.vue"
+
 const columns = [
     {
         label: "Created",

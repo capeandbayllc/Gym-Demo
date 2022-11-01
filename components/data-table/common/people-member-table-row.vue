@@ -1,23 +1,23 @@
 <template>
     <tr class="people-member-tbl-row">
-        <td>{{data.data.created}}</td>
-        <td>{{data.data.first_name}}</td>
-        <td>{{data.data.last_name}}</td>
-        <td class="px-4">{{data.data.phone}}</td>
-        <td class="px-4">{{data.data.email}}</td>
-        <td>{{data.data.location}}</td>
+        <td>{{data.created}}</td>
+        <td>{{data.first_name}}</td>
+        <td>{{data.last_name}}</td>
+        <td class="px-4">{{data.phone}}</td>
+        <td class="px-4">{{data.email}}</td>
+        <td>{{data.location}}</td>
         <td>
             <div
-                :class="'type-' +data.data.type"
+                :class="'type-' + data.type"
             >
-                {{data.data.type}}
+                {{data.type}}
             </div>
         </td>
         <td>
             <span
                 class="add-ons"
                 :class="{
-                'add-ons-active': data.data.addOns,
+                'add-ons-active': data.addOns,
             }">
                 PT
             </span>
@@ -55,7 +55,7 @@
 }
 </style>
 <script setup>
-const data = defineProps({
+const props = defineProps({
     data: Object
 })
 </script>

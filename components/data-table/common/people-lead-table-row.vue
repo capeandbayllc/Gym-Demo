@@ -1,22 +1,18 @@
 <template>
     <tr class="people-lead-tbl-row">
-        <td>{{data.data.created}}</td>
+        <td>{{data.created}}</td>
         <td>
-            <div
-                :class="'opportunity-' +data.data.opportunity"
-            ></div>
+            <div :class="'opportunity-' + data.opportunity"></div>
         </td>
-        <td>{{data.data.first_name}}</td>
-        <td>{{data.data.last_name}}</td>
-        <td>{{data.data.location}}</td>
+        <td>{{data.first_name}}</td>
+        <td>{{data.last_name}}</td>
+        <td>{{data.location}}</td>
         <td>
-            <div
-                :class="'type-' +data.data.type"
-            >
-                {{data.data.type}}
+            <div :class="'type-' + data.type">
+                {{data.type}}
             </div>
         </td>
-        <td>{{data.data.status}}</td>
+        <td>{{data.status}}</td>
     </tr>
 </template>
 <style scoped>
@@ -65,7 +61,7 @@
 }
 </style>
 <script setup>
-const data = defineProps({
+const props = defineProps({
     data: Object
 })
 </script>

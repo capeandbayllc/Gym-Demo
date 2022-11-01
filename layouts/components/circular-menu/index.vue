@@ -7,7 +7,7 @@
 				:rotation="getDegree(ndx)"
 				:icon="icon"
 				:scale="activeKey !== key ? .75: 1.4"
-				url="#"
+				:url="key"
 				@mouseover="setActiveKey(key)"
 				@mouseleave="setActiveKey(null)"
 			/>
@@ -56,7 +56,7 @@ import MenuItem from './menu-item.vue';
 
 const items = [{
     key: 'check-in',
-    icon: CheckInIcon
+    icon: CheckInIcon,
 }, {
     key: 'report',
     icon: ReportingIcon

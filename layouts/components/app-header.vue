@@ -17,7 +17,6 @@
 		<daisy-modal id="peopleSearchModal" ref="peopleSearchModal">
 			<people-search-modal />
 		</daisy-modal>
-
 	</div>
 	
 </template>

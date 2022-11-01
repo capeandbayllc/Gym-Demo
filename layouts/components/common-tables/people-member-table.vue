@@ -1,5 +1,4 @@
 <template>
-    <div class="people-member-table-title">Members</div>
     <div class="people-member-table">
         <data-table
             :columns="columns"
@@ -9,13 +8,9 @@
         />
     </div>
 </template>
-<style scoped>
-.people-member-table-title {
-    @apply text-lg text-2xl font-semibold;
-}
-</style>
 <script setup>
-import PeopleMemberTableRow from './people-member-table-row.vue';
+import PeopleMemberTableRow from "~~/components/data-table/common/people-member-table-row.vue"
+
 const columns = [
     {
         label: "Created",

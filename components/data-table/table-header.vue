@@ -1,13 +1,15 @@
 <template>
     <thead class="top-0 text-base-content">
-        <th
-            v-for="(column, ndx) in columns"
-            :key="column.field ? column.field : ndx"
-            class="px-3 capitalize"
-            :class="column.class"
-        >
-            {{ column.label ? column.label: column }}
-        </th>
+        <tr>
+            <th
+                v-for="(column, ndx) in columns"
+                :key="column.field ? column.field : ndx"
+                class="px-3 capitalize"
+                :class="column.class"
+            >
+                {{ column.label ? column.label: column }}
+            </th>
+        </tr>
     </thead>
 </template>
 <style scoped>

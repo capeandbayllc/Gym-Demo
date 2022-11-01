@@ -14,7 +14,10 @@
 				<span v-else>&#11165;</span>
 			</span>
 			<div class="search-input-box" v-if="!collapsed">
-				<search-input size="8"/>
+				<search-input size="8"
+					v-model="modelValue"
+					@update:modelValue="$emit('update:modelValue', $event)"
+				/>
 			</div>
 		</div>
 	</div>
@@ -35,9 +38,13 @@
 import { ref } from 'vue'
 import { ArrowIcon } from "@/components/icons"
 
+const props = defineProps({
+	modelValue: String
+})
 const collapsed = ref(true)
 
 const toggleSearch = () => {
 	collapsed.value = !collapsed.value
 }
+
 </script>

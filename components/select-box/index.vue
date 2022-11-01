@@ -48,6 +48,9 @@ const props = defineProps({
     value: {
         type: String,
     },
+    color: {
+        type: String,
+    },
     onChange: {
         type: Function,
         default: () => null,

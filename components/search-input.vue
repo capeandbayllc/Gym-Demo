@@ -9,6 +9,8 @@
                 'search-input-lg text-lg': size === 'lg',
             }"
             :placeholder="placeholder"
+            v-model="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
         />
     </div>
 </template>
@@ -55,6 +57,7 @@ const props = defineProps({
 	border: {
 		type: String,
 		default: "secondary",
-	}
+	},
+    modelValue: String
 })
 </script>

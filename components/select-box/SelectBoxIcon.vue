@@ -12,7 +12,6 @@
                 color,
                 'fill-base-content': !isCollapsed,
             }"
-            :size="size"
         />
     </span>
 </template>

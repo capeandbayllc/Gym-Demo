@@ -19,8 +19,10 @@
 				/>
 				<search-input size="lg" border="base-content"/>
 			</div>
-			<div class="border border-secondary rounded px-8 py-6 mt-8 ml-10 flex flex-col space-y-4">
+			<div class="people-search-result">
+				<div class="result-title">Leads</div>
 				<people-lead-table />
+				<div class="result-title">Members</div>
 				<people-member-table />
 			</div>
 		</div>
@@ -34,10 +36,17 @@
 .people-search-actions {
 	@apply flex flex-row space-x-8 justify-end;
 }
+
+.people-search-result {
+	@apply border border-secondary rounded px-8 py-6 mt-8 ml-10 flex flex-col space-y-4 max-h-[70vh] overflow-y-auto;
+	.result-title {
+		@apply text-lg text-2xl font-semibold;
+	}
+}
 </style>
 <script setup>
-import PeopleLeadTable from './people-lead-table.vue';
-import PeopleMemberTable from './people-member-table.vue';
+import PeopleLeadTable from '../common-tables/people-lead-table.vue';
+import PeopleMemberTable from '../common-tables/people-member-table.vue';
 
 const memTypes = [{
 	id: 1,

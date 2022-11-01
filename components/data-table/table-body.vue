@@ -61,7 +61,7 @@
                         'border-neutral': border !== 'secondary',
                     }"
                 >
-                    <table-cell value="No campaigns found" :renderer="null" />
+                    <table-cell value="No Matches Found" :renderer="null" class="no-match-cell"/>
                 </div>
             </td>
         </tr>
@@ -73,6 +73,9 @@ td {
 }
 td > div {
     @apply text-center;
+}
+.no-match-cell {
+    @apply font-semibold text-xl py-14 text-neutral-content;    
 }
 </style>
 <script setup>
