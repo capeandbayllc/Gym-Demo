@@ -8,6 +8,7 @@
 		</Button>
 		<header-actions
 			@show-people-search="showPeopleSearchModal"
+			@show-help="$emit('show-help')"
 		/>
 		<daisy-modal id="pulseModal" ref="pulseModal">
 			<pulse-modal />

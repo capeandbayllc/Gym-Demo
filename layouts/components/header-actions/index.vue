@@ -12,7 +12,9 @@
 		</div>
 		<person-add-icon />
 		<setting-icon />
-		<question-round-icon />
+		<question-round-icon
+			@click="$emit('show-help')"
+		/>
 		<account-btn />
 	</div>
 </template>
@@ -43,4 +45,5 @@ import { PosIcon, PeopleIcon, PersonAddIcon, SettingIcon, QuestionRoundIcon } fr
 import AlarmBtn from "./alarm-btn.vue"
 import AccountBtn from "./account-btn.vue"
 import AlertList from "./alert-list.vue"
+import HelpBot from "../help-bot/index.vue"
 </script>

@@ -2,11 +2,13 @@
     <div class="app-layout">
 		<app-header
 			@show-circular-menu="toggleCircularMenu"
+			@show-help="showBot"
 		/>
 		<circular-menu
 			v-if="showCircularMenu"
 			@close="toggleCircularMenu"
 		/>
+		<help-bot ref="helpBot"/>
 		<div class="app-content">
 			<nav-bar />
 			<div class="w-full relative">
@@ -37,10 +39,14 @@ import NavBar from "./components/nav-bar/index.vue"
 import GlobalSearch from "./components/global-search.vue"
 import SideBar from "./components/side-bar.vue"
 import CircularMenu from "./components/circular-menu/index.vue"
+import HelpBot from "./components/help-bot/index.vue"
 
 const showCircularMenu = ref(false)
 
 const toggleCircularMenu = () => {
 	showCircularMenu.value = !showCircularMenu.value;
 }
+
+const helpBot = ref(null)
+const showBot = () => helpBot.value.open();
 </script>
