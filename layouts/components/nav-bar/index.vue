@@ -16,13 +16,13 @@
 </template>
 <style scoped>
 .nav-bar-container {
-	@apply overflow-hidden w-16;
+	@apply overflow-hidden w-16 z-10;
 }
 .nav-bar-toggler {
 	@apply bg-secondary h-8 cursor-pointer;
 }
 .nav-bar-items {
-	@apply border border-secondary border-b-[16px] border-secondary;
+	@apply border border-secondary border-b-[16px] border-secondary bg-base-300;
 }
 </style>
 <script setup>

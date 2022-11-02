@@ -37,6 +37,7 @@
 }
 .app-body {
 	@apply flex flex-row justify-between relative;
+	margin-left: -4rem;
 }
 </style>
 <script setup>

@@ -1,5 +1,4 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
-
 export default defineNuxtConfig({
 	app: {
 		head: {
@@ -13,12 +12,19 @@ export default defineNuxtConfig({
 			],
 		}
 	},
-    modules: ['@nuxtjs/tailwindcss'],
+    modules: ['@nuxtjs/tailwindcss', '@nuxtjs/apollo'],
     tailwindcss: {
         cssPath: '~/assets/css/tailwind.css',
         configPath: 'tailwind.config',
         exposeConfig: false,
         injectPosition: 0,
         viewer: true,
-    }
+    },
+	apollo: {
+		clients: {
+			default: {
+				httpEndpoint: 'https://api.spacex.land/graphql',
+			}
+		},
+	}
 })

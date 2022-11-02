@@ -7,20 +7,10 @@
         <td class="px-4">{{data.email}}</td>
         <td>{{data.location}}</td>
         <td>
-            <div
-                :class="'type-' + data.type"
-            >
-                {{data.type}}
-            </div>
+            <btn-membership :membership="data.type" />
         </td>
         <td>
-            <span
-                class="add-ons"
-                :class="{
-                'add-ons-active': data.addOns,
-            }">
-                PT
-            </span>
+            <btn-addon :value="data.addOns" class="!rounded-full"/>
         </td>
     </tr>
 </template>
@@ -36,21 +26,6 @@
     }
     td:last-child {
         @apply border-r-2 rounded-r px-4;
-    }
-    .type-premimum {
-        @apply bg-accent rounded px-4 py-1.5 font-semibold;
-    }
-    .type-basic {
-        @apply border-2 rounded font-semibold px-4 py-1.5;
-    }
-    .type-gold {
-        @apply bg-warning/80 rounded font-semibold px-4 py-1.5;
-    }
-    .add-ons {
-        @apply w-fit border rounded-full px-2;
-    }
-    .add-ons.add-ons-active {
-        @apply bg-accent-focus/60 border-accent-focus/60;
     }
 }
 </style>

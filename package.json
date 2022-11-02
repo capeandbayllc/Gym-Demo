@@ -9,9 +9,12 @@
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.1.1",
     "daisyui": "^2.33.0",
+    "mock-apollo-client": "^1.2.1",
     "nuxt": "3.0.0-rc.12"
   },
   "dependencies": {
+    "@nuxtjs/apollo": "^5.0.0-alpha.3",
+    "graphql-tag": "^2.12.6",
     "vue-composable": "^1.0.0-beta.24"
   }
 }
