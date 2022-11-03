@@ -4,18 +4,22 @@
             <profile-option-item
                 v-for="item in options"
                 :key="item.key"
-                :model-value="item.key !== selectedOption"
-                @udpate:modelValue="handleSelect(key, $event)"
+                :model-value="item.key === selectedOption"
+                @update:modelValue="handleSelect(item.key, $event)"
                 :label="item.label"
             />
-        </div>    
+        </div>
+        <div class="btn-close-selection">Close Member Selection</div>
     </div>
 </template>
 <style scoped>
 .profile-options-container {
-    @apply flex flex-col space-y-7;
+    @apply flex flex-col space-y-8;
     .profile-options {
-        @apply flex flex-col space-y-10 border border-secondary rounded w-48 p-5;
+        @apply flex flex-col space-y-12 border border-secondary rounded w-48 p-5;
+    }
+    .btn-close-selection {
+        @apply cursor-pointer bg-base-content text-secondary rounded p-2 font-semibold;
     }
 }
 </style>
@@ -47,7 +51,6 @@ const options = [{
 const selectedOption = ref(null)
 
 const handleSelect = (key, value) => {
-    console.log(key, value)
     if (value) {
         selectedOption.value = key
     } else {

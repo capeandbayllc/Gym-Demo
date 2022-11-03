@@ -1,15 +1,21 @@
 <template>
-    <div class="page-checkin-container">
-        <div class="page-title">Member account page</div>
-        <div class="page-content">
-            <event-card />
-            <profile-card />
+    <div class="app-body-content">
+        <div class="page-checkin-container">
+            <div class="page-title">Member account page</div>
+            <div class="page-content">
+                <event-card />
+                <profile-card />
+            </div>
         </div>
+        <footer-logo class="m-auto"/>
     </div>
 </template>
 <style scoped>
+.app-body-content {
+    @apply flex flex-col w-full items-center;
+    }
 .page-checkin-container {
-    @apply py-4 pr-5 pl-20 bg-base-300 w-full h-fit border-b border-secondary;
+    @apply py-4 pr-5 bg-base-300 w-full h-fit border-b border-secondary pl-16;
     .page-title {
         @apply text-lg font-light pb-3;
     }
