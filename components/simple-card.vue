@@ -16,6 +16,10 @@
 </style>
 <script setup>
 const props = defineProps({
-	title: String
+	title: String,
+	closable: {
+		type: Boolean,
+		default: false
+	}
 })
 </script>

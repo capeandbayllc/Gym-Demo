@@ -18,7 +18,9 @@
 					v-model="globalSearch"
 				/>
 				<div class="app-body">
-					<slot />
+				    <div class="app-body-content">
+						<slot />
+					</div>
 					<side-bar />
 				</div>
 			</div>
@@ -38,6 +40,9 @@
 .app-body {
 	@apply flex flex-row justify-between relative;
 	margin-left: -4rem;
+	.app-body-content {
+	    @apply flex flex-col w-full items-center;
+	}
 }
 </style>
 <script setup>
