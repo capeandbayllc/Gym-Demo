@@ -2,6 +2,18 @@
     <div class="page-reporting-container">
         <div class="page-title">Reporting</div>
         <div class="page-content">
+            <simple-card title="Reporting Fields" class="reporting-fields-container">
+                <div class="reporting-fields">
+                    <membership-card />
+                    <goal-card />
+                    <calendar-card />
+                    <attrition-card />
+                    <communication-card />
+                    <kpi-card />
+                    <sales-funnel-card />
+                    <company-card />
+                </div>
+            </simple-card>
         </div>
     </div>
 </template>
@@ -11,7 +23,18 @@
     .page-title {
         @apply text-lg font-light pb-3 pl-5;
     }
+    .page-content {
+        @apply border border-secondary rounded bg-neutral px-6 py-5 w-fit m-auto;
+        .reporting-fields-container {
+            @apply bg-neutral;
+        }
+
+        .reporting-fields {
+            @apply grid grid-cols-3 grid-rows-3 gap-y-8 gap-x-7 px-7 py-8;
+        }
+    }
 }
 </style>
 <script setup>
+import { MembershipCard, GoalCard, CalendarCard, AttritionCard, CommunicationCard, KpiCard, SalesFunnelCard, CompanyCard } from './components/cards'
 </script>

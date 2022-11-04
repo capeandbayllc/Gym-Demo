@@ -1,7 +1,6 @@
 <template>
-    <div
+    <span
         :class="{
-            'flex w-fit': true,
             'rotate-[-270deg]': direction === 'right',
             'rotate-0': direction === 'down',
             'rotate-90': direction === 'left',
@@ -13,7 +12,7 @@
 			<path id="Path_3005" data-name="Path 3005" d="M5.838,0,0,5.375l5.838,5.685" transform="translate(1254.842 832.121) rotate(-180)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.4"/>
 		  </g>
 		</svg>
-    </div>
+    </span>
 </template>
 <script setup>
 import { computed } from "@vue/reactivity"
