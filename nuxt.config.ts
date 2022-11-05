@@ -10,7 +10,10 @@ export default defineNuxtConfig({
 				{ href: 'https://fonts.gstatic.com', rel: 'preconnect' },
 				{ href: 'https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap', rel: 'stylesheet' },
 			],
-		}
+			bodyAttrs: {
+				class: "overflow-x-hidden"
+			}	
+		},
 	},
     modules: ['@nuxtjs/tailwindcss', '@nuxtjs/apollo'],
     tailwindcss: {

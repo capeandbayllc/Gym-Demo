@@ -4,7 +4,7 @@
 			class="select-box-btn"
             :onClick="toggleCollapsed"
         >
-            {{ label }}
+            {{ value ? selected : label }}
             <select-box-icon
                 :isCollapsed="isCollapsed"
                 :color="color"
@@ -13,7 +13,7 @@
         <select-box-content v-if="!isCollapsed">
             <select-box-item
                 v-for="item in items"
-                v-bind:key="item"
+                :key="item.value"
                 :label="item.label"
                 :selected="item.value === value"
                 :onClick="onChange"
@@ -75,4 +75,6 @@ const className = computed({
         return "select-box-wrapper " + props.class + additional;
     },
 });
+
+const selected = computed(() => props.items?.filter(item => item.value === props.value)[0]?.label)
 </script>

@@ -21,10 +21,10 @@
             </div>
         </div>
         <component :is="titleComponent" v-else/>
-        <div class="card-summary" v-if="isCollapsed">
+        <div class="card-summary-container" v-if="isCollapsed">
             <slot name="summary"/>
         </div>
-        <div class="card-content" v-else>
+        <div class="card-content-container" v-else>
             <slot name="content"/>
         </div>
     </div>

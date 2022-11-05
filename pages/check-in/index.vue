@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full">
+    <div class="w-full h-full flex flex-col">
         <div class="page-checkin-container">
             <div class="page-title">Member account page</div>
             <div class="page-content">
@@ -8,7 +8,7 @@
             </div>
         </div>
         <!-- <pos-card /> -->
-        <!-- <footer-logo class="m-auto"/> -->
+        <footer-logo class="m-auto"/>
     </div>
 </template>
 <style scoped>

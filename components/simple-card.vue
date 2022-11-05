@@ -1,6 +1,10 @@
 <template>
     <div class="simple-card">
-	    <div class="simple-card-title">
+		<component
+			:is="titleComponent"
+			v-if="titleComponent"
+		/>
+	    <div class="simple-card-title" v-else>
 			{{title}}
 		</div>
 		<slot />
@@ -17,6 +21,7 @@
 <script setup>
 const props = defineProps({
 	title: String,
+	titleComponent: Object,
 	closable: {
 		type: Boolean,
 		default: false

@@ -12,5 +12,5 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    @apply border rounded-lg bg-secondary border-neutral;
+    @apply border rounded-lg bg-base-content;
 }
