@@ -9,7 +9,7 @@
             'btn-square': square,
             loading: loading,
             'btn-primary': primary,
-            'btn-secondary': secondary,
+            'btn-secondary text-base-content': secondary,
             'btn-accent': accent,
             'btn-info': info,
             'btn-success': success,
