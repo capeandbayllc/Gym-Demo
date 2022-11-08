@@ -1,3 +1,4 @@
+export { default as AddIcon } from "./add.vue"
 export { default as AlarmIcon } from "./alarm.vue"
 export { default as ArrowIcon } from "./arrow.vue"
 export { default as CheckCircleIcon } from "./check-circle.vue"
