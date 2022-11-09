@@ -1,7 +1,18 @@
 <template>
     <div class="page-setting-container">
-        <div class="page-title">setting</div>
+        <div class="page-title">Settings</div>
         <div class="page-content">
+            <div class="col-span-3 flex justify-center">
+                <img src="/account-lg.png" class="w-32"/>
+            </div>
+            
+            <template v-for="section in sections" :key="section.key">
+                <div v-for="item in section.data" :key="item.key">
+                    <div>{{item.label}}</div>
+                    <input :class="item.class" v-model="form[item.key]"/>
+                </div>
+                <div class="divider"></div>
+            </template>
         </div>
     </div>
 </template>
@@ -11,7 +22,109 @@
     .page-title {
         @apply text-lg font-light pb-3 pl-5;
     }
+    .page-content {
+        @apply bg-neutral border border-secondary rounded grid grid-cols-3 gap-x-12 gap-y-8 w-fit px-8 py-10;
+    }
+    input {
+        @apply h-9 rounded mt-3 w-full w-64;
+    }
+    input:focus {
+        @apply outline-none;
+    }
+    .secondary-input {
+        @apply bg-secondary;
+    }
+    .neutral-input {
+        @apply bg-base-content/40;
+    }
+    .readonly-input {
+        @apply bg-transparent text-base-content/50;
+    }
+    .outline-input {
+        @apply bg-transparent border border-secondary;
+    }
+    .divider {
+        @apply border-b h-0 border-secondary col-span-3;
+    }
 }
 </style>
 <script setup>
+import {ref} from 'vue'
+
+const form = ref({
+    username: "kevinbuchanan@email.com"
+})
+const profile = [{
+    key: "first_name",
+    label: "First Name",
+    class: "secondary-input"
+}, {
+    key: "middle_name",
+    label: "Middle Name",
+    class: "secondary-input"
+}, {
+    key: "last_name",
+    label: "Last Name",
+    class: "secondary-input"
+}, {
+    key: "birthday",
+    label: "Date of Birth",
+    class: "neutral-input"
+}, {
+    key: "gender",
+    label: "Gender",
+    class: "neutral-input"
+}, {
+    key: "username",
+    label: "Username",
+    class: "readonly-input"
+}, {
+    key: "email",
+    label: "Email",
+    class: "neutral-input"
+}, {
+    key: "altenrate_email",
+    label: "Personal Email",
+    class: "neutral-input"
+}, {
+    key: "phone",
+    label: "Mobile",
+    class: "neutral-input"
+}, {
+    key: "employee_id",
+    label: "Employee I.D. Number",
+    class: "neutral-input"
+}, {
+    key: "manager",
+    label: "Manager",
+    class: "outline-input"
+}]
+
+const location = [{
+    key: "address",
+    label: "Address",
+    class: "neutral-input col-span-3"
+}, {
+    key: "city",
+    label: "City",
+    class: "neutral-input"
+}, {
+    key: "state",
+    label: "State",
+    class: "neutral-input"
+}, {
+    key: "zip",
+    label: "Zip",
+    class: "neutral-input"
+}]
+
+const sections = [
+    {
+        key: 'profile',
+        data: profile
+    }, {
+        key: 'location',
+        data: location
+    }
+]
 </script>

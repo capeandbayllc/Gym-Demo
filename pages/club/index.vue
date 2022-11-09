@@ -76,5 +76,5 @@ const cities = [{
 }]
 
 const columns = ["Club Number", "Address", "Phone", "Email", ""]
-const mock = new Array(10).fill({id: 0}).map((item, ndx) => item.id = ndx)
+const mock = new Array(10).fill({id: 0}).map((item, ndx) => ({id: ndx}))
 </script>
