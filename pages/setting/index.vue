@@ -23,7 +23,7 @@
         @apply text-lg font-light pb-3 pl-5;
     }
     .page-content {
-        @apply bg-neutral border border-secondary rounded grid grid-cols-3 gap-x-12 gap-y-8 w-fit px-8 py-10;
+        @apply bg-neutral border border-secondary rounded grid grid-cols-3 gap-x-12 gap-y-8 w-fit px-8 py-10 m-auto;
     }
     input {
         @apply h-9 rounded mt-3 w-full w-64;
