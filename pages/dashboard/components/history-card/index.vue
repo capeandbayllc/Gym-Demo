@@ -19,7 +19,7 @@
                 :columns="columns"
                 :row-component="HistoryTableRow"
                 :data="mock"
-                class="h-40 overflow-y-auto mt-6 text-xs"
+                class="h-40 overflow-y-auto mt-6 text-sm"
             />
         </div>
     </dashboard-card>
