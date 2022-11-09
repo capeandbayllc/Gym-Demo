@@ -8,7 +8,7 @@
 </template>
 <style scoped>
     .membership-btn {
-        @apply flex items-center justify-center rounded font-semibold cursor-pointer uppercase;
+        @apply flex items-center justify-center rounded font-semibold cursor-pointer uppercase h-full;
     }
     .type-premimum {
         @apply bg-accent;

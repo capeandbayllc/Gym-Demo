@@ -3,9 +3,13 @@
         <input
             :class="{
                 'search-input': true,
+                'bg-secondary': secondary,
 				'border-secondary': border === 'secondary',
+                'bg-base-content/20': neutral,
+				'border-base-content/20': border === 'neutral',
                 'h-6 text-sm': size === 'xs',
                 'h-7 text-base': size === 'sm',
+                'h-8 text-base': size === 'md',
                 'search-input-lg text-lg': size === 'lg',
             }"
             :placeholder="placeholder"
@@ -16,7 +20,7 @@
 </template>
 <style scoped>
 .search-input {
-    @apply rounded border overflow-hidden px-2 text-right bg-secondary;
+    @apply rounded border overflow-hidden px-2 text-right;
 }
 .search-input-lg {
 	height: 34px;
@@ -58,6 +62,14 @@ const props = defineProps({
 		type: String,
 		default: "secondary",
 	},
+    secondary: {
+        type: Boolean,
+        default: true
+    },
+    neutral: {
+        type: Boolean,
+        default: false
+    },
     modelValue: String
 })
 </script>

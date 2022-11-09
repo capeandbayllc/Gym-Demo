@@ -39,18 +39,16 @@
 <script setup>
 import {ref} from 'vue';
 import {
-    CalendarIcon,
-    CheckInIcon,
     ClubIcon,
     DashboardIcon,
     DocumentIcon,
     EngageIcon,
     FitnessIcon,
-    MassComIcon,
     ReportingIcon,
     ScheduleIcon,
     SettingIcon
 } from './menu-icons'
+import { CalendarIcon, ComTowerIcon, CheckInIcon } from '~~/components/icons';
 import MenuBg from './menu-bg.vue';
 import MenuItem from './menu-item.vue';
 
@@ -62,7 +60,7 @@ const items = [{
     icon: ReportingIcon
 }, {
     key: 'mass-com',
-    icon: MassComIcon
+    icon: ComTowerIcon
 }, {
     key: 'engage',
     icon: EngageIcon
