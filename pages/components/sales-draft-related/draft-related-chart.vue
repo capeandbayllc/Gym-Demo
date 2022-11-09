@@ -4,7 +4,8 @@
             type="bar"
             :options="options"
             :series="data"
-            :height="200"
+            :width="490"
+            :height="280"
         />
     </ClientOnly>
 </template>

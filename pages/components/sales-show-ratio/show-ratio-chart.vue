@@ -1,6 +1,6 @@
 <template>
     <ClientOnly>
-        <apexchart type="bar" :options="options" :series="data" :height="200"/>
+        <apexchart type="bar" :options="options" :series="data" :height="200" :width="490"/>
     </ClientOnly>
 </template>
 <script setup>
