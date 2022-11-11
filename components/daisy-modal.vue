@@ -77,8 +77,6 @@ export default defineComponent({
         // const open = () => (isOpen.value = true);
 
         const close = () => {
-            console.log("close handler")
-
             isOpen.value = false;
             if (locked) {
                 unlock();

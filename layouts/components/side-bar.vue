@@ -2,11 +2,11 @@
 	<div
 		class="side-bar"
 		:class="{
-			'w-7': collapsed,
-			'w-14': !collapsed
+			'collapsed': collapsed,
+			'expanded': !collapsed
 		}"
 	>
-		<div class="side-bar-toggler" @click="toggleCollapsed">
+		<div class="side-bar-toggler" @click="toggleCollapsed" v-if="collapsed">
 			<div class="side-bar-arrow">
 				{{collapsed ? '&#11164;' : '&#11166;'}}
 			</div>
@@ -14,12 +14,19 @@
 				Check In Button
 			</div>
 		</div>
+		<side-bar-content v-else />
 	</div>
 </template>
 <style scoped>
 .side-bar {
-	@apply bg-primary bg-secondary right-0;
+	@apply absolute right-0;
 	height: calc(100vh - 6rem);
+	&.collapsed {
+		@apply w-5 hover:w-7 bg-secondary;
+	}
+	&.expanded {
+		@apply w-80 border border-secondary bg-neutral;
+	}
 }
 .side-bar:hover .side-bar-toggler {
 	@apply flex;
@@ -39,7 +46,7 @@
 </style>
 <script setup>
 import {ref} from 'vue';
-
+import SideBarContent from './side-bar-content/index.vue'
 const collapsed = ref(true);
 
 const toggleCollapsed = () => {

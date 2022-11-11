@@ -1,5 +1,6 @@
 <template>
     <div
+        class="w-fit h-fit"
         :class="{
             'rotate-90': direction === 'right',
             'rotate-0': direction === 'down',
@@ -20,16 +21,6 @@ const props = defineProps({
     direction: {
         type: String,
         default: "right",
-    },
-    size: {
-        type: String,
-        default: "sm",
-    },
-})
-
-const transform = computed({
-    get() {
-        return props.size === "xs" ? "scale(0.7)" : "scale(1)"
-    },
+    }
 })
 </script>

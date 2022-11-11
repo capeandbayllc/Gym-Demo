@@ -42,6 +42,7 @@
 	margin-left: -4rem;
 	.app-body-content {
 	    @apply flex flex-col w-full items-center;
+		height: calc(100vh - 6rem);
 	}
 }
 </style>
