@@ -1,6 +1,8 @@
 <template>
     <div class="checkin-profile-card">
-        <profile-info />
+        <profile-info
+            @create-alert="$emit('create-alert')"
+            @create-note="$emit('create-note')" />
         <profile-options />
     </div>
 </template>

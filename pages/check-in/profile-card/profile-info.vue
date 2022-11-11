@@ -11,8 +11,8 @@
             Club ID# {{mock.club_id}}
         </div>
         <div class="profile-status">
-            <btn-membership :membership="mock.membership" />
-            <btn-addon :value="true" />
+            <membership-btn :membership="mock.membership" />
+            <addon-btn :value="true" />
         </div>
         <div class="font-semibold pb-2">Contact</div>
         <div class="profile-contact-methods">
@@ -20,9 +20,17 @@
             <Button secondary>Email</Button>
             <Button secondary>SMS</Button>
         </div>
-        <div class="flex flex-row space-x-12 pb-5">
-            <Button secondary class="text-base-content text-sm font-semibold" size="sm">Create a Note</Button>
-            <Button secondary class="text-base-content text-sm font-semibold" size="sm">Add an Alert</Button>
+        <div class="profile-actions">
+            <Button secondary size="sm"
+                @click="$emit('create-note')" 
+            >
+                Create a Note
+            </Button>
+            <Button secondary size="sm"
+                @click="$emit('create-alert')" 
+            >
+                Add an Alert
+            </Button>
         </div>
     </div>
 </template>
@@ -50,9 +58,17 @@
             @apply text-base-content text-lg font-semibold border border-base-content w-24;
         }
     }
+    .profile-actions {
+        @apply flex flex-row space-x-12 pb-5;
+        .btn {
+            @apply text-base-content text-sm font-semibold
+        }
+    }
 }
 </style>
 <script setup>
+import MembershipBtn from '~~/components/buttons/membership-btn.vue';
+import AddonBtn from '~~/components/buttons/addon-btn.vue'
 const mock = {
     img: '/checkin/kevin.png',
     name: 'Kevin Buchanan',

@@ -14,7 +14,7 @@
                     @click="close"
                     v-if="closable && showCloseButton"
 				/>
-                <slot />
+                <slot :close="close" />
                 <template v-if="$slots?.actions">
                     <div class="modal-action">
                         <slot name="actions"></slot>
@@ -77,6 +77,8 @@ export default defineComponent({
         // const open = () => (isOpen.value = true);
 
         const close = () => {
+            console.log("close handler")
+
             isOpen.value = false;
             if (locked) {
                 unlock();
