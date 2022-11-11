@@ -13,7 +13,7 @@
                 'search-input-lg text-lg': size === 'lg',
             }"
             :placeholder="placeholder"
-            v-model="modelValue"
+            :modelValue="modelValue"
             @input="$emit('update:modelValue', $event.target.value)"
         />
     </div>

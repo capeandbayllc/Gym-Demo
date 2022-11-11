@@ -15,7 +15,7 @@
 			</span>
 			<div class="search-input-box" v-if="!collapsed">
 				<search-input size="8"
-					v-model="modelValue"
+					:modelValue="modelValue"
 					@update:modelValue="$emit('update:modelValue', $event)"
 				/>
 			</div>
