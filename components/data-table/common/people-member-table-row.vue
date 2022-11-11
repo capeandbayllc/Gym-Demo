@@ -7,10 +7,10 @@
         <td class="px-4">{{data.email}}</td>
         <td>{{data.location}}</td>
         <td>
-            <btn-membership :membership="data.type" />
+            <membership-btn :membership="data.type" class="text-sm"/>
         </td>
         <td>
-            <btn-addon :value="data.addOns" class="!rounded-full"/>
+            <addon-btn :value="data.addOns" class="!rounded-full"/>
         </td>
     </tr>
 </template>
@@ -30,6 +30,8 @@
 }
 </style>
 <script setup>
+import MembershipBtn from '~~/components/buttons/membership-btn.vue';
+import AddonBtn from '~~/components/buttons/addon-btn.vue';
 const props = defineProps({
     data: Object
 })

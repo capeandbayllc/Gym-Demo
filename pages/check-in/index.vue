@@ -4,11 +4,21 @@
             <div class="page-title">Member account page</div>
             <div class="page-content">
                 <event-card />
-                <profile-card />
+                <profile-card
+                    @create-alert="showAlertAddModal"
+                    @create-note="showNoteAddModal"
+                />
             </div>
         </div>
         <!-- <pos-card /> -->
         <footer-logo class="m-auto"/>
+		<daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
+            <alert-add-modal @close="scope.close()"/>
+		</daisy-modal>
+		<daisy-modal id="noteAddModal" ref="noteAddModal" v-slot="scope">
+            <note-add-modal @close="scope.close()" />
+		</daisy-modal>
+        
     </div>
 </template>
 <style scoped>
@@ -24,9 +34,23 @@
 }
 </style>
 <script setup>
+import {ref} from 'vue'
 import EventCard from './event-card/index.vue'
 import ProfileCard from './profile-card/index.vue'
 import PosCard from './pos-card/index.vue'
+
+import AlertAddModal from './alert-add-modal.vue';
+import NoteAddModal from './note-add-modal.vue';
+
+const alertAddModal = ref(null)
+const showAlertAddModal = () => {
+    alertAddModal.value.open()
+}
+
+const noteAddModal = ref(null)
+const showNoteAddModal = () => {
+    noteAddModal.value.open()
+}
 // import { GET_MEMBERS } from '~~/api/queries/member';
 // const { result, error } = useQuery(GET_MEMBERS)
 // console.log("client", client)
