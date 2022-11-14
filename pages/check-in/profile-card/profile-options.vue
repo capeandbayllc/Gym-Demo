@@ -47,7 +47,7 @@ const options = [{
     selected: false
 }, {
     label: "Note Pad",
-    key: "note-pad",
+    key: "note",
     selected: false
 }]
 
