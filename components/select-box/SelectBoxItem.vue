@@ -15,6 +15,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    value: {
+        type: String,
+        required: true,
+    },
     selected: {
         type: Boolean,
         default: false,
@@ -25,6 +29,6 @@ const props = defineProps({
     },
 });
 const handleClick = (e) => {
-    props.onClick(props.label);
+    props.onClick(props.value);
 };
 </script>

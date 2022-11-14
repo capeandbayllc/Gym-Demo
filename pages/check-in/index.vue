@@ -14,6 +14,8 @@
         </div>
         <pos-card v-if="option === 'pos'" @close="option = null"/>
         <calendar-card v-if="option === 'calendar'" @close="option = null"/>
+        <notification-card v-if="option === 'notification'" @close="option = null"/>
+        <guest-card v-if="option === 'guest-pass'" @close="option = null"/>
         <footer-logo class="m-auto" v-else/>
 		<daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
             <alert-add-modal @close="scope.close()"/>
@@ -42,6 +44,8 @@ import EventCard from './event-card/index.vue'
 import ProfileCard from './profile-card/index.vue'
 import PosCard from './pos-card/index.vue'
 import CalendarCard from './calendar-card/index.vue'
+import NotificationCard from './notification-card/index.vue'
+import GuestCard from './guest-card/index.vue'
 
 import AlertAddModal from './alert-add-modal.vue'
 import NoteAddModal from './note-add-modal.vue'

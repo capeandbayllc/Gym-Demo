@@ -2,6 +2,10 @@
     <div :class="className">
         <button
 			class="select-box-btn"
+            :class="{
+                'bg-secondary': secondary,
+                'bg-transparent border-secondary': transparent
+            }"
             :onClick="toggleCollapsed"
         >
             {{ value ? selected : label }}
@@ -14,6 +18,7 @@
             <select-box-item
                 v-for="item in items"
                 :key="item.value"
+                :value="item.value"
                 :label="item.label"
                 :selected="item.value === value"
                 :onClick="onChange"
@@ -26,7 +31,7 @@
     @apply relative min-w-fit;
 }
 .select-box-btn {
-	@apply flex flex-row border rounded bg-secondary px-2 py-1 items-center justify-between w-full;
+	@apply flex flex-row border rounded px-2 py-1 items-center justify-between w-full;
 }
 
 </style>
@@ -59,6 +64,15 @@ const props = defineProps({
         type: String,
         default: "",
     },
+    secondary: {
+        type: Boolean,
+        default: true
+    },
+    transparent: {
+        type: Boolean,
+        default: true
+    }
+
 });
 const isCollapsed = ref(true);
 const toggleCollapsed = () => {
