@@ -12,7 +12,7 @@
                             {{item}}
                         </div>
                     </div>
-                    <membership-chart width="140"/>
+                    <membership-chart :width="140"/>
                 </div>
                 <div class="membership-sum-up">
                     <div>Total: 83%</div>

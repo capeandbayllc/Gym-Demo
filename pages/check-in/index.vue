@@ -7,11 +7,14 @@
                 <profile-card
                     @create-alert="showAlertAddModal"
                     @create-note="showNoteAddModal"
+                    @select-option="option = $event"
+                    :active-option="option"
                 />
             </div>
         </div>
-        <!-- <pos-card /> -->
-        <footer-logo class="m-auto"/>
+        <pos-card v-if="option === 'pos'" @close="option = null"/>
+        <calendar-card v-if="option === 'calendar'" @close="option = null"/>
+        <footer-logo class="m-auto" v-else/>
 		<daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
             <alert-add-modal @close="scope.close()"/>
 		</daisy-modal>
@@ -38,9 +41,13 @@ import {ref} from 'vue'
 import EventCard from './event-card/index.vue'
 import ProfileCard from './profile-card/index.vue'
 import PosCard from './pos-card/index.vue'
+import CalendarCard from './calendar-card/index.vue'
 
-import AlertAddModal from './alert-add-modal.vue';
-import NoteAddModal from './note-add-modal.vue';
+import AlertAddModal from './alert-add-modal.vue'
+import NoteAddModal from './note-add-modal.vue'
+
+
+const option = ref('pos')
 
 const alertAddModal = ref(null)
 const showAlertAddModal = () => {
@@ -51,7 +58,4 @@ const noteAddModal = ref(null)
 const showNoteAddModal = () => {
     noteAddModal.value.open()
 }
-// import { GET_MEMBERS } from '~~/api/queries/member';
-// const { result, error } = useQuery(GET_MEMBERS)
-// console.log("client", client)
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="side-bar-content-container">
-        <arrow-icon direction="right" class="scale-150 self-end"/>
+        <arrow-icon direction="right" class="collapse-icon" @click="$emit('close')"/>
         <div class="mem-checkin-btn">Member Check In</div>
         <div class="divider"></div>
         <div class="active-members">
@@ -21,6 +21,9 @@
 <style scoped>
 .side-bar-content-container {
     @apply flex flex-col px-4 pt-6 items-center;
+    .collapse-icon {
+        @apply scale-150 self-end cursor-pointer;
+    }
     .mem-checkin-btn {
         @apply w-fit px-4 py-2 my-4 font-semibold border border-accent-focus hover:bg-accent-focus/80 rounded cursor-pointer;
     }

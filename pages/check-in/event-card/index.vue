@@ -13,19 +13,9 @@
         <div class="events-header pt-8">Upcoming Events</div>
         <div class="event-description border-none">At your location</div>
         <div class="events-header pb-2">September</div>
-        <div class="upcoming-event-container">
-            <div
-                v-for="item in mock.upcoming"
-                :key="item.id"
-                class="event-items"
-            >
-                <div class="event-description">{{item.due}}</div>
-                <div class="event-detail">
-                    <div>{{item.title}}</div>
-                    <book-checker v-model="form[item.id]"/>
-                </div>
-            </div>
-        </div>
+        <event-list
+            :data="mock.upcoming"
+        />
     </div>
 </template>
 <style scoped>
@@ -58,8 +48,8 @@
 </style>
 <script setup>
 import { ref } from 'vue'
-import BookChecker from './book-checker.vue';
-
+import EventList from '../event-list.vue';
+import BookChecker from '../book-checker.vue';
 const mock = {
     scheduled: [{
         id: 1,

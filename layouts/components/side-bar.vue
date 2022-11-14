@@ -14,7 +14,7 @@
 				Check In Button
 			</div>
 		</div>
-		<side-bar-content v-else />
+		<side-bar-content v-else @close="toggleCollapsed"/>
 	</div>
 </template>
 <style scoped>

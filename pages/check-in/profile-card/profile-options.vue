@@ -4,7 +4,7 @@
             <profile-option-item
                 v-for="item in options"
                 :key="item.key"
-                :model-value="item.key === selectedOption"
+                :model-value="item.key === selected"
                 @update:modelValue="handleSelect(item.key, $event)"
                 :label="item.label"
             />
@@ -25,6 +25,9 @@
 </style>
 <script setup>
 import ProfileOptionItem from './profile-option-item.vue'
+const props = defineProps({
+    selected: String
+})
 
 const options = [{
     label: "POS",
@@ -48,13 +51,12 @@ const options = [{
     selected: false
 }]
 
-const selectedOption = ref(null)
-
+const emit = defineEmits(["update:selected"])
 const handleSelect = (key, value) => {
     if (value) {
-        selectedOption.value = key
+        emit('update:selected', key)
     } else {
-        selectedOption.value = null
+        emit('update:selected', null)
     }
 } 
 </script>

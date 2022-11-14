@@ -3,7 +3,10 @@
         <profile-info
             @create-alert="$emit('create-alert')"
             @create-note="$emit('create-note')" />
-        <profile-options />
+        <profile-options
+            :selected="activeOption"
+            @update:selected="$emit('select-option', $event)"
+        />
     </div>
 </template>
 <style scoped>
@@ -12,6 +15,10 @@
 }
 </style>
 <script setup>
-import ProfileInfo from './profile-info.vue';
-import ProfileOptions from './profile-options.vue';
+import ProfileInfo from './profile-info.vue'
+import ProfileOptions from './profile-options.vue'
+
+const props = defineProps({
+    activeOption: String
+})
 </script>
