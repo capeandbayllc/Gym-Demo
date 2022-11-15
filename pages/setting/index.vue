@@ -7,12 +7,18 @@
             </div>
             
             <template v-for="section in sections" :key="section.key">
-                <div v-for="item in section.data" :key="item.key">
+                <div
+                    v-for="item in section.data" :key="item.key"
+                    :class="`col-span-${item.span ? item.span : 1}`"
+                >
                     <div>{{item.label}}</div>
-                    <input :class="item.class" v-model="form[item.key]"/>
+                    <input :class="item.class" v-model="form[item.key]"
+                        :placeholder="item.placeholder"
+                    />
                 </div>
                 <div class="divider"></div>
             </template>
+            <profile-relation />
         </div>
     </div>
 </template>
@@ -26,7 +32,8 @@
         @apply bg-neutral border border-secondary rounded grid grid-cols-3 gap-x-12 gap-y-8 w-fit px-8 py-10 m-auto;
     }
     input {
-        @apply h-9 rounded mt-3 w-full w-64;
+        @apply h-9 rounded mt-3 w-full pl-2;
+        min-width: 16rem;
     }
     input:focus {
         @apply outline-none;
@@ -35,7 +42,7 @@
         @apply bg-secondary;
     }
     .neutral-input {
-        @apply bg-base-content/40;
+        @apply bg-base-content/20;
     }
     .readonly-input {
         @apply bg-transparent text-base-content/50;
@@ -50,7 +57,7 @@
 </style>
 <script setup>
 import {ref} from 'vue'
-
+import ProfileRelation from './components/profile-relation.vue'
 const form = ref({
     username: "kevinbuchanan@email.com"
 })
@@ -97,13 +104,15 @@ const profile = [{
 }, {
     key: "manager",
     label: "Manager",
-    class: "outline-input"
+    class: "outline-input",
+    placeholder: "Session Manager"
 }]
 
 const location = [{
     key: "address",
     label: "Address",
-    class: "neutral-input col-span-3"
+    class: "neutral-input",
+    span: 3
 }, {
     key: "city",
     label: "City",

@@ -37,7 +37,7 @@
 </style>
 <script setup>
 import { ref, computed } from "vue";
-import SelectBoxIcon from "./SelectBoxIcon.vue";
+import SelectBoxIcon from "./select-box-icon.vue";
 import SelectBoxContent from "./SelectBoxContent.vue";
 import SelectBoxItem from "./SelectBoxItem.vue";
 

@@ -53,7 +53,7 @@ import AlertAddModal from './alert-add-modal.vue'
 import NoteAddModal from './note-add-modal.vue'
 
 
-const option = ref('pos')
+const option = ref(null)
 
 const alertAddModal = ref(null)
 const showAlertAddModal = () => {

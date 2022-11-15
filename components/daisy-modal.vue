@@ -2,7 +2,11 @@
     <teleport to="body">
         <div
             class="modal"
-            :class="{ 'modal-open': isOpen }"
+            :class="{
+                'modal-open': isOpen,
+                '!bg-black/50': transparent,
+                '!bg-black': !transparent,
+            }"
         >
             <div v-if="closable" class="absolute inset-0" @click="close"></div>
             <div
@@ -26,7 +30,7 @@
 </template>
 <style scoped>
 .modal {
-    @apply items-center !bg-black/50;
+    @apply items-center overflow-x-hidden;
     max-width: 100vw;
 }
 .modal-close-btn {
@@ -55,6 +59,10 @@ export default defineComponent({
             default: false,
         },
         closable: {
+            type: Boolean,
+            default: true,
+        },
+        transparent: {
             type: Boolean,
             default: true,
         },
