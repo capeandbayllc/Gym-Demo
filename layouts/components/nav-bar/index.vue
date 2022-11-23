@@ -1,7 +1,7 @@
 <template>
 	<div class="nav-bar-container">
 		<div class="nav-bar-toggler" @click="toggleCollapse"></div>
-		<div class="nav-bar-items" v-if="!collapsed">
+		<div class="nav-bar-items" v-if="!collapsed || windowWidth >= 1920">
 			<nav-item
 				:icon="UpperArrowIcon"
 				@click.prevent="toggleCollapse"
@@ -16,7 +16,7 @@
 </template>
 <style scoped>
 .nav-bar-container {
-	@apply overflow-hidden w-16 z-10;
+	@apply overflow-hidden w-16 z-20 top-0 left-0 -xl:absolute;
 }
 .nav-bar-toggler {
 	@apply bg-secondary h-8 cursor-pointer;
@@ -26,7 +26,7 @@
 }
 </style>
 <script setup>
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
 import {
 	DownloadIcon,
 	FavoriteCircleIcon,
@@ -86,5 +86,16 @@ const navItems = [
 		url: "/#",
 		icon: MarketingIcon
 	}
-]
+];
+const windowWidth = ref(null);
+
+onMounted(async () => {
+	windowWidth.value = window.innerWidth
+	await nextTick();
+	window.addEventListener('resize', onResize);
+});
+
+const onResize = ()=> {
+    windowWidth.value = window.innerWidth
+}
 </script>
