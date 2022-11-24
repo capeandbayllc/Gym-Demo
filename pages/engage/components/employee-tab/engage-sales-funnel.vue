@@ -2,13 +2,16 @@
     <div class="engage-sales-funnel-container">
         <div class="engage-sales-funnel-header">
             <h3>Acquisition & Sales Funnel</h3>
-            <Button class="text-base-content" size="sm" secondary>Edit</Button>
+            <Button class="text-base-content" size="sm" secondary @click="showEditSalesFunnelModal">Edit</Button>
         </div>
         <funnel-chart
             :data="data" class="h-36"
             :content-item="ChartContent"
         />
     </div>
+    <daisy-modal id="editSalesFunnelModal" ref="editSalesFunnelModal">
+        <edit-sales-funnel-modal />
+    </daisy-modal>
 </template>
 <style scoped>
 .engage-sales-funnel-container {
@@ -23,6 +26,7 @@
 </style>
 <script setup>
 import ChartContent from './chart-content.vue';
+import EditSalesFunnelModal from "./edit-sales-funnel/index.vue";
 const data = [{
     id: 1,
     start: 80,
@@ -59,4 +63,10 @@ const data = [{
     value: 22,
     percent: 33
 }]
+
+const editSalesFunnelModal = ref(null);
+
+const showEditSalesFunnelModal = () => {
+    editSalesFunnelModal.value.open();
+};
 </script>
