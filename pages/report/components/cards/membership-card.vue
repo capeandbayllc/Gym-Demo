@@ -16,11 +16,14 @@
                 </div>
                 <div class="membership-sum-up">
                     <div>Total: 83%</div>
-                    <go-btn />
+                    <go-btn @click="showReportingModal" />
                 </div>
             </div>
         </template>
     </card>
+    <daisy-modal id="reportingModal" ref="reportingModal">
+        <reporting-modal />
+    </daisy-modal>
 </template>
 <style scoped>
 .membership-card {
@@ -47,6 +50,11 @@
 </style>
 <script setup>
 import MembershipChart from './membership-chart.vue';
+import ReportingModal from '../reporting-popup-modal/index.vue';
 import GoBtn from './go-btn.vue';
 const memberships = ["Basic Membership", "Premium Membership", "Platinum Membership", "Childcare Add-on"]
+const reportingModal = ref(null);
+const showReportingModal = () => {
+    reportingModal.value.open();
+};
 </script>
