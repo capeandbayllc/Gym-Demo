@@ -20,7 +20,7 @@
 </template>
 <style scoped>
 .circular-menu {
-    @apply fixed z-20;
+    @apply fixed z-30;
     top: -12vw;
     left: -12vw;
 }

@@ -35,11 +35,10 @@
 	@apply w-screen overflow-x-hidden;
 }
 .app-content {
-	@apply flex flex-row;
+	@apply flex flex-row relative;
 }
 .app-body {
 	@apply flex flex-row justify-between relative;
-	margin-left: -4rem;
 	.app-body-content {
 	    @apply flex flex-col w-full items-center;
 		height: calc(100vh - 6rem);
