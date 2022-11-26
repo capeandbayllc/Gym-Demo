@@ -18,7 +18,7 @@ export const getDefaultMultiselectTWClasses = () => ({
     tagRemove:
         "flex items-center justify-center p-1 mx-0.5 rounded-sm hover:bg-black hover:bg-opacity-10 group",
     tagRemoveIcon:
-        "bg-multiselect-remove text-base-con bg-center bg-no-repeat opacity-30 inline-block w-3 h-3 group-hover:opacity-60",
+        "bg-multiselect-remove text-base-con bg-center bg-no-repeat inline-block w-3 h-3 group-hover:opacity-60 multiselect-tag-remove-icon",
     tagsSearchWrapper: "inline-block relative flex-grow flex-shrink h-full",
     tagsSearch:
         "absolute inset-0 border-0 outline-none focus:ring-0 appearance-none p-0 text-base font-sans box-border border-none focus:shadow-none mt-[-14px]",
@@ -63,4 +63,6 @@ export const getDefaultMultiselectTWClasses = () => ({
     fakeInput:
         "bg-transparent absolute left-0 right-0 -bottom-px w-full h-px border-0 p-0 appearance-none outline-none text-transparent",
     spacer: "h-9 py-px box-content",
+    caret: 'bg-multiselect-caret bg-center bg-no-repeat w-2.5 h-4 py-px box-content mr-3.5 relative z-10 opacity-40 flex-shrink-0 flex-grow-0 transition-transform transform pointer-events-none rtl:mr-0 rtl:ml-3.5 multiselect-caret',
+    caretOpen: 'rotate-180 pointer-events-auto',
 });

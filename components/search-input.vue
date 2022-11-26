@@ -20,7 +20,7 @@
 </template>
 <style scoped>
 .search-input {
-    @apply rounded border overflow-hidden px-2 text-right;
+    @apply w-full rounded border overflow-hidden px-2 text-right;
 }
 .search-input-lg {
 	height: 34px;
