@@ -39,7 +39,7 @@
 	right: -52px;
 }
 .modal-box {
-	@apply overflow-visible bg-transparent shadow-none p-0 min-w-fit;
+	@apply overflow-visible shadow-none p-0 min-w-fit;
 }
 </style>
 <script>
