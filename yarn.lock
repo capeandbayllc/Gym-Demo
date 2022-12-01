@@ -5496,6 +5496,11 @@
   "resolved" "https://registry.npmjs.org/vue3-apexcharts/-/vue3-apexcharts-1.4.1.tgz"
   "version" "1.4.1"
 
+"vue3-carousel@^0.2.5":
+  "integrity" "sha512-/Dj8p2munldyX9vlKAA+w3QUMvjNm8+jNgVgypVZiX4wEEVK+aEbbYTNSWhfPejC7J44vvgG+a+oGeKMctrAsA=="
+  "resolved" "https://registry.npmjs.org/vue3-carousel/-/vue3-carousel-0.2.6.tgz"
+  "version" "0.2.6"
+
 "watchpack@^2.4.0":
   "integrity" "sha512-Lcvm7MGST/4fup+ifyKi2hjyIAwcdI4HRgtvTpIUxBRhB+RFtUh8XtDOxUfctVCnhVi+QQj49i91OyvzkJl6cg=="
   "resolved" "https://registry.npmjs.org/watchpack/-/watchpack-2.4.0.tgz"
