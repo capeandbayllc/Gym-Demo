@@ -4,6 +4,27 @@
         label="Home Location(s)"
         v-model="form.location"
     />
+    <multi-select
+        :options="teams"
+        label="Role(s)"
+        v-model="form.teams"
+    />
+    <multi-select
+        :options="departments"
+        label="Department(s)"
+        v-model="form.departments"
+    />
+    <multi-select
+        :options="teams"
+        label="Team(s)"
+        v-model="form.teams"
+    />
+    <multi-select
+        :options="roles"
+        label="Security Role(s)"
+        v-model="form.roles"
+        :disabled="true"
+    />
 </template>
 <script setup>
 import {ref} from 'vue'
