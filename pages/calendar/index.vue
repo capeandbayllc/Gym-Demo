@@ -19,23 +19,25 @@
             <Button @click="handleChangeView('timeGridDay')" gost> Day </Button>
         </div>
         <div class="page-content">
-            <div :class="calenderView =='timeGridDay' ? 'w-[65%] -lg:w-full mb-5' : 'w-full'" class="relative">
+            <div :class="calenderView =='timeGridDay' ? 'w-[65%] -lg:w-full -lg:mb-5' : 'w-full'" class="relative h-full">
                 <h2 class="text absolute top-2 left-0 text-xl font-bold cursor-pointer flex flex-row" @click="showDateSelectModal">
                     {{ calendarTitle }} <arrow-icon direction="right" class="h-[30px] items-center" />
                 </h2>
-                <FullCalendar :options="calendarOptions" ref="calendar" />
+                <FullCalendar :options="calendarOptions" ref="calendar"/>
             </div>
-            <div v-if="calenderView == 'timeGridDay'" class="md:flex w-[35%] -lg:w-full ml-4 flex-col -lg:flex-row -lg:ml-0 -md:block">
-                <div class="mb-8 flex-1 -lg:w-2/4 -lg:mb-0 -lg:mr-5 -md:w-full -md:mb-5">
+            <div v-if="calenderView == 'timeGridDay'" class="md:flex md:gap-y-5 w-[35%] -lg:w-full ml-4 flex-col -lg:flex-row -lg:ml-0 -md:block">
+                <div class="flex-1 -lg:w-2/4 -lg:mb-0 -lg:mr-5 -md:w-full -md:mb-5">
                     <div class="flex items-center mb-2">
                         <h2 class="text top-2 left-0 text-md  font-bold cursor-pointer flex flex-row" @click="showDateSelectModal">
                             {{ calendarTitle }} <arrow-icon direction="right" class="h-[25px] items-center" />
                         </h2>
                         <Button ghost class="ml-auto min-h-fit h-6">...</Button>
                     </div>
-                    <FullCalendar :options="monthCalendarOptions" ref="monthCalendar" class="w-full"/>
+                    <FullCalendar :options="monthCalendarOptions" ref="monthCalendar" class="w-full month-calender"/>
                 </div>
-                <div class="list-calendar flex-1 -lg:w-2/4 -md:w-full"><FullCalendar :options="listCalendarOptions" ref="listCalendar" class="h-full w-full"/></div>
+                <div class="list-calendar flex-1 -lg:w-2/4 -md:w-full">
+                    <FullCalendar :options="listCalendarOptions" ref="listCalendar" class="h-full w-full"/>
+                </div>
             </div>
         </div>
     </div>
@@ -205,18 +207,17 @@ const calendarTitle = computed(() => {
 });
 const dateSelect = ref();
 const showDateSelectModal = () => {
-    if (currentView.value !== "timeGridWeek") {
+    if (calenderView.value !== "timeGridWeek") {
         selectedDate.value = start.value;
     }
     dateSelect.value.open();
 };
 const onSelectDate = (modelData) => {
     selectedDate.value = modelData;
-    if (currentView.value !== "timeGridWeek") {
+    if (calenderView.value !== "timeGridWeek") {
         start.value = modelData;
         calendar.value.getApi().gotoDate(start.value);
     } else {
-        console.log(modelData[0]);
         start.value = modelData[0];
         calendar.value.getApi().gotoDate(start.value);
     }
@@ -257,7 +258,11 @@ const onSelectDate = (modelData) => {
         background-color: rgba(188, 232, 241, 0.3) !important;
         @apply cursor-pointer;
     }
-    
+    .month-calender .fc-daygrid-day-bottom a{
+        font-size: 0px;
+        height: 10px;
+        width: 10px;
+    }
     /* .list-calendar .fc-view-harness{
         @screen -md{
             max-height: auto !important
