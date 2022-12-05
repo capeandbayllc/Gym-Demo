@@ -2,8 +2,16 @@
     <div class="page-setting-container">
         <div class="page-title">Settings</div>
         <div class="page-content">
-            <div class="col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-span-1 flex justify-center">
-                <img src="/account-lg.png" class="w-32"/>
+            <div class="col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-span-1 relative flex justify-center">
+                <img src="/account-lg.png" class="w-32 cursor-pointer" @click="uploadPopUp = true"/>
+                <div v-if="uploadPopUp" class="bg-white absolute p-4 w-[300px] text-right rounded border border-secondary">
+                    <label class="mb-4 block">
+                        <UploadIcon class="bg-secondary rounded-full text-center relative z-10 text-secondary block mx-auto cursor-pointer"/>
+                        <input type="file" class="absolute z-0 top-0 left-0 hidden">
+                    </label>
+                    <Button ghost size="sm" class="text-black" @click="uploadPopUp = false">Cancel</Button>
+                    <Button secondary size="sm" @click="uploadPopUp = false">Save</Button>
+                </div>
             </div>
             
             <template v-for="section in sections" :key="section.key">
@@ -21,7 +29,7 @@
             <profile-relation />
             <div class="divider"></div>
             <div>
-                <h4 class="mb-4 inline-block">Calendar Access</h4>
+                <h4 class="mb-4 inline-block">Calendar Access <LockIcon class="inline-block"/></h4>
                 <multi-select
                 :options="departments"
                 label="Department(s)"
@@ -87,7 +95,7 @@
 <script setup>
 import {ref} from 'vue'
 import ProfileRelation from './components/profile-relation.vue';
-import { ClockIcon } from '~~/components/icons';
+import { ClockIcon,LockIcon, UploadIcon } from '~~/components/icons';
 const form = ref({
     username: "kevinbuchanan@email.com"
 })
@@ -175,5 +183,6 @@ const departments = [{
 }, {
     value: 3,
     label: "Group Fitness"     
-}]
+}];
+const uploadPopUp = ref(false)
 </script>
