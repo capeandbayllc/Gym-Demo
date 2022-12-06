@@ -8,7 +8,7 @@
     >
         <template #content>
             <div class="card-content">
-                <div class="btn btn-outline btn-secondary btn-circle btn-lg mt-28">
+                <div class="btn btn-outline btn-secondary btn-circle btn-lg my-6">
                     <add-campaign-icon />
                 </div>
             </div>

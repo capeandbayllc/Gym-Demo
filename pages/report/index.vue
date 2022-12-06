@@ -30,7 +30,7 @@
         }
 
         .reporting-fields {
-            @apply grid grid-cols-3 grid-rows-3 gap-y-8 gap-x-7 px-7 py-8;
+            @apply grid grid-cols-3 4xl:grid-cols-4 -md:grid-cols-1 -xl:grid-cols-2 grid-rows-3 gap-y-8 gap-x-7 px-7 py-8;
         }
     }
 }
