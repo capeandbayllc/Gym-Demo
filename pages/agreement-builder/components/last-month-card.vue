@@ -3,7 +3,7 @@
         <div class="last-month-card-content">
             <div class="last-month-docs">
                 <div v-for="doc in docs" :key="doc.id" class="last-month-doc">
-                    <normal-doc class="mb-2" />
+                    <normal-doc class="mb-2 mx-4" />
                     <div class="text-xs">{{doc.name}}</div>
                     <div class="doc-date">{{doc.date}}</div>
                 </div>

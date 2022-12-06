@@ -2,10 +2,7 @@
     <simple-card title="">
         <div class="search-filer-action-card-content">
             <div class="search-filer-action-title">
-                <h3>Search</h3>
-                <!-- <div class="flex gap-4">
-                    <search-input neutral size="md" border="neutral"/>
-                </div> -->
+                <search-input class="agreement-search" neutral size="md" border="neutral" v-model="seachInput"/>
                 <div class="search-filer-action">
                     <select-box
                         :items="filterType"
@@ -27,16 +24,31 @@
                     </select-box>
                 </div>
             </div>
+            <div class="mt-10" v-if="seachInput">
+                <div class="text-xl font-semibold">Leads</div>
+                <people-lead-table  class="search-filter-table"/>
+                <div class="text-xl font-semibold mt-5">Members</div>
+                <people-member-table class="search-filter-table" />
+            </div>
         </div>
     </simple-card>
 </template>
+<style>
+    .agreement-search .search-input  {
+        background-color: transparent !important;
+        border: 0;
+        padding-right: 0;
+        text-align: left;
+        font-size: 20px !important;
+    }
+</style>
 <style scoped>
 .search-filer-action-card-content {
     @apply pt-1 pb-2 px-3 bg-transparent items-center w-full;
     .search-filer-action-title {
         @apply flex flex-row justify-between items-center;
         h3 {
-            @apply text-xl font-semibold pl-4;
+            @apply text-xl font-medium pl-4;
         }
     }
     .search-filer-action {
@@ -45,6 +57,8 @@
 }
 </style>
 <script setup>
+import PeopleLeadTable from '~~/layouts/components/common-tables/people-lead-table.vue';
+import PeopleMemberTable from '~~/layouts/components/common-tables/people-member-table.vue';
 const filterType = [
     {
         value: "1",
@@ -67,4 +81,5 @@ const filterType = [
         label: "Filter 5"
     },
 ];
+const seachInput = ref(null);
 </script>

@@ -3,7 +3,7 @@
         <div class="folder-card-content">
             <div class="folder-docs">
                 <div v-for="(item, index) in foldersList" :key="index" class="folder-doc">
-                    <folder-icon class="mb-2" />
+                    <folder-icon class="mb-2 mx-2" />
                     <div class="text-xs">{{item}}</div>
                 </div>
             </div>

@@ -3,7 +3,7 @@
         <div class="recent-card-content">
             <div class="recent-docs">
                 <div v-for="doc in docs" :key="doc.id" class="recent-doc">
-                    <normal-doc class="mb-2" />
+                    <normal-doc class="mb-2 mx-4" />
                     <div class="text-xs">{{doc.name}}</div>
                     <div class="doc-date">{{doc.date}}</div>
                 </div>

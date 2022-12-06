@@ -1,0 +1,28 @@
+<template>
+    <simple-card title="Start a new agreement">
+        <div class="new-agreement-card-content">
+            <div class="w-28 text-lg pt-5">Select your Template</div>
+            <div v-for="(type, ndx) in types" :key="ndx" class="create-option">
+                <empty-file class="mb-2" />
+                {{type}}
+            </div>
+            <div class="create-option">
+                <add-icon class="mb-2.5" />
+               Upload a document
+            </div>
+        </div>
+    </simple-card>
+</template>
+<style scoped>
+.new-agreement-card-content {
+    @apply grid grid-cols-7 gap-4 py-6 px-9 bg-transparent;
+    .create-option {
+        @apply flex flex-col items-center text-xs;
+    }
+}
+</style>
+<script setup>
+import EmptyFile from '../../document/components/empty-file.vue';
+import { AddIcon } from '~~/components/icons';
+const types = ["Blank", "Basic Membership", "Silver Membership", "Premium Membership", "Traning"]
+</script>
