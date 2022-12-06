@@ -1,5 +1,5 @@
 <template>
-    <div class="circular-menu">
+    <div class="circular-menu" id="menu-wheel">
         <menu class="items-wrapper">
 			<menu-item
                 v-for="({key, icon, path}, ndx) in items"
@@ -10,6 +10,7 @@
 				:url="path"
 				@mouseover="setActiveKey(key)"
 				@mouseleave="setActiveKey(null)"
+                @toggleMenu="$emit('close')"
 			/>
         </menu>
 		<close-btn @click="$emit('close')"
@@ -51,6 +52,25 @@ import {
 import { CalendarIcon, ComTowerIcon, CheckInIcon } from '~~/components/icons';
 import MenuBg from './menu-bg.vue';
 import MenuItem from './menu-item.vue';
+const emit = defineEmits(['close']);
+onMounted(() => {
+    document.addEventListener('click', onMenuOutsideClickHandler);
+});
+
+onUnmounted(() => {
+    document.removeEventListener('click', onMenuOutsideClickHandler);
+})
+
+const onMenuOutsideClickHandler = (event) => {
+    const specifiedElement = document.getElementById('menu-wheel')
+    const appLogoElement = document.getElementsByClassName('app-logo')
+    const isClickInside = specifiedElement.contains(event.target) || appLogoElement[0].contains(event.target);
+
+    if (!isClickInside) {
+        // The click was outside the specifiedElement, do something
+        emit('close')
+    }
+}
 
 const items = [
     {
