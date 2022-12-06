@@ -4,9 +4,9 @@
         <div class="page-content">
             <h2>Overall/Trends</h2>
             <div class="overall-trends">
-                <sales-show-ratio class="h-96 col-span-2"/>
-                <sales-draft-related class="h-96 col-span-2" />
-                <build-campaign-card class="h-96 col-span-1" />
+                <sales-show-ratio class="min-h-96 col-span-2 h-full"/>
+                <sales-draft-related class="min-h-96 col-span-2 h-full"/>
+                <build-campaign-card class="min-h-96 col-span-1 h-full flex flex-col" />
             </div>
             <campaign-card />
         </div>
@@ -14,17 +14,21 @@
 </template>
 <style scoped>
 .page-mass-com-container {
-    @apply py-4 pr-5 w-full h-fit pl-16;
+    @apply py-4 w-full h-fit;
     .page-title {
         @apply text-lg font-light pb-3 pl-5;
     }
     .page-content {
-        @apply px-32;
+        /* @apply px-32; */
+        @apply block border border-secondary bg-neutral rounded p-7 max-w-screen-lg m-auto;
         h2 {
             @apply text-xl font-bold pt-6;
         }
         .overall-trends {
-            @apply grid lg:grid-cols-5 grid-rows-1 grid-cols-1 md:grid-rows-2 lg:grid-rows-1 md:grid-flow-col gap-5 py-4;
+            @apply grid grid-rows-1 grid-cols-1 md:grid-rows-2 lg:grid-rows-1 lg:grid-flow-col -lg:gap-y-5 lg:gap-5 py-4;
+            @screen lg {
+                grid-template-columns:auto auto auto auto max-content;
+            }
         }
     }
 }
