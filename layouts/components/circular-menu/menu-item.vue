@@ -3,6 +3,7 @@
 		class="menu-item"
 		:to="url"
 		:style="`transform: rotate(${rotation}deg) translate(18vw) scale(${scale})`"
+		@click="toggleMenu"
 	>
 		<component
 			:is="icon"
@@ -29,4 +30,9 @@ const props = defineProps({
 		default: .75
 	}
 })
+const emit = defineEmits(['toggleMenu']);
+
+const toggleMenu = () => {
+	emit('toggleMenu');
+}
 </script>
