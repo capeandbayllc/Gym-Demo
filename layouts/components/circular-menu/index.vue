@@ -1,15 +1,16 @@
 <template>
-    <div class="circular-menu">
+    <div class="circular-menu" id="menu-wheel">
         <menu class="items-wrapper">
 			<menu-item
-                v-for="({key, icon}, ndx) in items"
+                v-for="({key, icon, path}, ndx) in items"
 				:key="key"
 				:rotation="getDegree(ndx)"
 				:icon="icon"
 				:scale="activeKey !== key ? .75: 1.4"
-				:url="key"
+				:url="path"
 				@mouseover="setActiveKey(key)"
 				@mouseleave="setActiveKey(null)"
+                @toggleMenu="$emit('close')"
 			/>
         </menu>
 		<close-btn @click="$emit('close')"
@@ -51,41 +52,83 @@ import {
 import { CalendarIcon, ComTowerIcon, CheckInIcon } from '~~/components/icons';
 import MenuBg from './menu-bg.vue';
 import MenuItem from './menu-item.vue';
+const emit = defineEmits(['close']);
+onMounted(() => {
+    document.addEventListener('click', onMenuOutsideClickHandler);
+});
 
-const items = [{
-    key: 'check-in',
-    icon: CheckInIcon,
-}, {
-    key: 'report',
-    icon: ReportingIcon
-}, {
-    key: 'mass-com',
-    icon: ComTowerIcon
-}, {
-    key: 'engage',
-    icon: EngageIcon
-}, {
-    key: 'document',
-    icon: DocumentIcon
-}, {
-    key: 'fitness',
-    icon: FitnessIcon
-}, {
-    key: 'dashboard',
-    icon: DashboardIcon
-}, {
-    key: 'calendar',
-    icon: CalendarIcon
-}, {
-    key: 'club',
-    icon: ClubIcon
-}, {
-    key: 'setting',
-    icon: SettingIcon
-}, {
-    key: 'schedule',
-    icon: ScheduleIcon
-}];
+onUnmounted(() => {
+    document.removeEventListener('click', onMenuOutsideClickHandler);
+})
+
+const onMenuOutsideClickHandler = (event) => {
+    const specifiedElement = document.getElementById('menu-wheel')
+    const appLogoElement = document.getElementsByClassName('app-logo')
+    const isClickInside = specifiedElement.contains(event.target) || appLogoElement[0].contains(event.target);
+
+    if (!isClickInside) {
+        // The click was outside the specifiedElement, do something
+        emit('close')
+    }
+}
+
+const items = [
+    {
+        key: 'check-in',
+        path: '/check-in',
+        icon: CheckInIcon,
+    }, 
+    {
+        key: 'report',
+        path: '/report',
+        icon: ReportingIcon
+    }, 
+    {
+        key: 'mass-com',
+        path: '/mass-com',
+        icon: ComTowerIcon
+    }, 
+    {
+        key: 'engage',
+        path: '/engage',
+        icon: EngageIcon
+    }, 
+    {
+        key: 'document',
+        path: '/document',
+        icon: DocumentIcon
+    }, 
+    {
+        key: 'fitness',
+        path: '/fitness',
+        icon: FitnessIcon
+    }, 
+    {
+        key: 'dashboard',
+        path: '/dashboard',
+        icon: DashboardIcon
+    }, 
+    {
+        key: 'calendar',
+        path: '/calendar',
+        icon: CalendarIcon
+    }, 
+    {
+        key: 'club',
+        path: '/club',
+        icon: ClubIcon
+    }, 
+    {
+        key: 'setting',
+        path: '/setting',
+        icon: SettingIcon
+    }, 
+    {
+        key: 'schedule',
+        path: '/schedule',
+        icon: ScheduleIcon
+    }
+];
 
 const activeKey = ref('main-bg');
 const getDegree = (ndx) => {
