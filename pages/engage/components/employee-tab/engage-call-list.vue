@@ -11,7 +11,7 @@
 </template>
 <style scoped>
 .engage-call-list-container {
-    @apply col-span-2 border border-secondary rounded p-3 pb-1;
+    @apply col-span-2 border border-secondary rounded p-3 pb-1 -md:col-span-3;
     h3 {
         @apply text-base font-semibold;
     }

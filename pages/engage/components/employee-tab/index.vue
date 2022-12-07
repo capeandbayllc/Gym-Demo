@@ -1,5 +1,5 @@
 <template>
-    <engage-calendar-events />
+    <engage-calendar-events class="-md:col-span-3 -mdd:grid-row-1"/>
     <engage-sales-funnel />
     <engage-call-list />
     <engage-break-down />

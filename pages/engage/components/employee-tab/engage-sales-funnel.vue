@@ -9,13 +9,13 @@
             :content-item="ChartContent"
         />
     </div>
-    <daisy-modal id="editSalesFunnelModal" ref="editSalesFunnelModal">
-        <edit-sales-funnel-modal />
+    <daisy-modal id="editSalesFunnelModal" ref="editSalesFunnelModal" class="w-full !min-w-0 max-w-fit h-full">
+        <edit-sales-funnel-modal class="h-full overflow-auto"/>
     </daisy-modal>
 </template>
 <style scoped>
 .engage-sales-funnel-container {
-    @apply col-span-2 h-56 border border-secondary rounded p-3;
+    @apply col-span-2 h-56 border border-secondary rounded p-3 -md:col-span-3;
     .engage-sales-funnel-header {
         @apply flex justify-between items-center pb-3;
         h3 {

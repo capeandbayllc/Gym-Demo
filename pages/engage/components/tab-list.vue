@@ -13,9 +13,9 @@
 </template>
 <style scoped>
 .tab-list {
-    @apply flex flex-row space-x-5 pb-4;
+    @apply flex flex-row space-x-5 pb-4 -lg:block -lg:w-full -lg:text-center;
     .tab-item {
-        @apply px-4 py-1 rounded bg-base-content text-secondary text-sm cursor-pointer;
+        @apply px-4 py-1 rounded bg-base-content text-secondary text-sm cursor-pointer -lg:inline-block -lg:mb-2;
     }
     .tab-item.active {
         @apply bg-secondary text-base-content relative;
