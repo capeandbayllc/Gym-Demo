@@ -20,6 +20,7 @@
                 <div class="note-actions">
                     <Button size="sm" secondary>Create a Note</Button>
                     <Button size="sm" secondary>Add an Alert</Button>
+                    <hr class="invisible sm:hidden w-full"/>
                     <Button size="sm" ghost>Delete</Button>
                     <Button size="sm" secondary>Save</Button>
                 </div>
@@ -31,7 +32,7 @@
 .note-card {
     @apply m-auto bg-neutral;
     @screen -lg {
-        margin: 20px 40px 19px 83px;
+        @apply m-4;
     }
     .note-card-container {
         @apply flex flex-col lg:flex-row m-8 gap-2 relative py-10;

@@ -17,7 +17,7 @@
 .checkin-calendar-card {
     @apply m-auto bg-neutral;
     @screen -lg {
-        margin: 20px 40px 19px 83px;
+        @apply m-4;
     }
 }
 </style>

@@ -75,7 +75,7 @@
 .checkin-notification-card {
     @apply bg-neutral  m-auto;
 	@screen -lg {
-        margin: 20px 40px 19px 83px;
+        @apply m-4
     }
 	.notification-container {
 		@apply p-4 gap-5;

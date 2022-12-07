@@ -37,7 +37,8 @@
 .checkin-pos-card {
     @apply bg-neutral m-auto;
     @screen -lg {
-        margin: 20px 40px 19px 83px;
+        /* margin: 20px 40px 19px 10px; */
+        @apply m-4
     }
     .profile-info {
         @apply flex flex-col items-center sm:flex-row space-x-7;

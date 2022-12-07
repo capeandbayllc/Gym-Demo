@@ -16,13 +16,14 @@
         </div>
         <div class="font-semibold pb-2">Contact</div>
         <div class="profile-contact-methods">
-            <Button secondary>Phone</Button>
-            <Button secondary>Email</Button>
-            <Button secondary>SMS</Button>
+            <Button secondary class="-sm:!ml-2">Phone</Button>
+            <Button secondary class="-sm:!ml-2">Email</Button>
+            <Button secondary class="-sm:!ml-2">SMS</Button>
         </div>
         <div class="profile-actions">
             <Button secondary size="sm"
                 @click="$emit('create-note')" 
+                class="-sm:!mr-1"
             >
                 Create a Note
             </Button>
@@ -59,7 +60,7 @@
         }
     }
     .profile-actions {
-        @apply flex flex-row space-x-12 pb-5;
+        @apply flex flex-row space-x-12 pb-5 text-center;
         .btn {
             @apply text-base-content text-sm font-semibold
         }
