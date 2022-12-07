@@ -29,7 +29,7 @@
 .transaction-data-list {
     @apply flex flex-col border-t-4 border-secondary px-5 mb-7;
     .transaction-data-row {
-        @apply flex flex-row justify-between pb-3 pt-6 w-80;
+        @apply flex flex-row justify-between pb-3 pt-6 w-full;
         .item-description {
             @apply flex flex-row space-x-3 items-center;
         }

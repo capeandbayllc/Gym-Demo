@@ -2,8 +2,6 @@
     <ClientOnly>
         <apexchart
             type="area"
-            :height="170"
-            :width="410"
             :options="options"
             :series="mock"
         />
