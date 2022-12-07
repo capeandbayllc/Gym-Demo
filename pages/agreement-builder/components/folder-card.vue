@@ -23,5 +23,5 @@
 </style>
 <script setup>
 import FolderIcon from '../../file-browser/components/folder-icon.vue';
-const foldersList = ["Folder 1", "Folder 2", "Folder 3", "Folder 4", "Folder 5", "Folder 6", "Folder 7"]
+const foldersList = ["Folder 1", "Folder 2", "Folder 3", "Folder 4", "Folder 5", "Folder 6", "Folder 7"];
 </script>

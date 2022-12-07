@@ -64,5 +64,5 @@ const docs = [
         name: "Campagne O'Neil",
         date: "April 9, 2022"
     }
-]
+];
 </script>
