@@ -1,26 +1,26 @@
 <template>
-    <div class="profile-options-container">
-        <div class="profile-options">
-            <profile-option-item
-                v-for="item in options"
-                :key="item.key"
-                :model-value="item.key === selected"
-                @update:modelValue="handleSelect(item.key, $event)"
-                :label="item.label"
-            />
-        </div>
-        <div class="btn-close-selection">Close Member Selection</div>
+  <div class="profile-options-container">
+    <div class="profile-options">
+      <profile-option-item
+        v-for="item in options"
+        :key="item.key"
+        :model-value="item.key === selected"
+        @update:modelValue="handleSelect(item.key, $event)"
+        :label="item.label"
+      />
     </div>
+    <div class="btn-close-selection">Close Member Selection</div>
+  </div>
 </template>
 <style scoped>
 .profile-options-container {
-    @apply flex flex-col space-y-8;
-    .profile-options {
-        @apply flex flex-col space-y-12 border border-secondary rounded w-48 p-5;
-    }
-    .btn-close-selection {
-        @apply cursor-pointer bg-base-content text-secondary rounded p-2 font-semibold;
-    }
+  @apply flex flex-col space-y-8 items-center;
+  .profile-options {
+    @apply flex flex-col space-y-12 border border-secondary rounded w-full xl:w-48 p-5;
+  }
+  .btn-close-selection {
+    @apply w-full cursor-pointer bg-base-content text-secondary rounded p-2 font-semibold;
+  }
 }
 </style>
 <script setup>
@@ -53,10 +53,10 @@ const options = [{
 
 const emit = defineEmits(["update:selected"])
 const handleSelect = (key, value) => {
-    if (value) {
+  if (value) {
         emit('update:selected', key)
-    } else {
+  } else {
         emit('update:selected', null)
-    }
+  }
 } 
 </script>

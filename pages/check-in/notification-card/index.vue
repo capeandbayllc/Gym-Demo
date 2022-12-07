@@ -5,14 +5,14 @@
 				<h3>Today</h3>
 				<div class="notification-actions">
 					<select-box
-						class="w-36"
+						class="w-full md:w-36"
 						label="Locations"
 						:items="locations"
 						transparent
 						:secondary="false"
 					/>
 					<select-box
-						class="w-36"
+						class="w-full md:w-36"
 						label="Names"
 						:items="names"
 						:secondary="false"
@@ -31,14 +31,14 @@
 				<h3>Leads/Members</h3>
 				<div class="notification-actions">
 					<select-box
-						class="w-36"
+						class="w-full md:w-36"
 						label="Locations"
 						:items="locations"
 						transparent
 						:secondary="false"
 					/>
 					<select-box
-						class="w-36"
+						class="w-full md:w-36"
 						label="Names"
 						:items="names"
 						:secondary="false"
@@ -73,18 +73,32 @@
 </style>
 <style scoped>
 .checkin-notification-card {
-    @apply w-fit m-auto bg-neutral;
+    @apply bg-neutral  m-auto;
+	@screen -sm {
+        margin: 20px 40px 19px 83px;
+    }
 	.notification-container {
 		@apply p-4;
 	}
 	.notification-title {
-		@apply flex flex-row justify-between items-center;
+		@apply flex flex-col md:flex-row justify-between items-center;
 		h3 {
 			@apply text-xl font-semibold pl-4;
 		}
 	}
     .notification-actions {
-    	@apply flex flex-row space-x-8 justify-end mb-2 mt-5;
+		@screen -md {
+			.select-box-wrapper {
+				@apply !m-0;
+			}
+			.search-input-wrapper {
+				@apply	!w-full !m-0;
+			}
+			.search-input {
+				@apply	!w-full;
+			}
+    	}
+    	@apply flex flex-col gap-2 md:gap-0 w-full  md:flex-row space-x-8 justify-end mb-2 mt-5;
     }
 }
 </style>
