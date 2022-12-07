@@ -2,7 +2,7 @@
     <simple-card
         :title-component="CampaignCardTitle"
     >
-    <campaign-table class="mx-16 my-5 h-64 overflow-y-auto"/>
+    <campaign-table class="px-6 my-5 h-64 overflow-y-auto"/>
     </simple-card>
 </template>
 <script setup>

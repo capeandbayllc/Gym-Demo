@@ -42,6 +42,9 @@
         }
     }
 }
+.build-campaign-card .card-content-container {
+    @apply flex-1;
+}
 .card-container.collapsed {
     @apply h-fit;
 }
