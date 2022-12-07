@@ -74,7 +74,7 @@ progress::-webkit-progress-value {
 }
 </style>
 <script setup>
-import { ref, computed, onMounted, defineEmits } from "vue";
+import { ref, computed, onMounted } from "vue";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
