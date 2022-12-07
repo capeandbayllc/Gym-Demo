@@ -1,6 +1,6 @@
 <template>
     <simple-card class="checkin-pos-card" :closable="true" title="Point of Sale">
-        <div class="p-7 flex flex-row gap-3">
+        <div class="p-4 lg:p-7 flex flex-col lg:flex-row gap-3">
             <div class="flex flex-col">
                 <div class="profile-info">
                     <div class="profile-avatar">
@@ -35,9 +35,13 @@
 </template>
 <style scoped>
 .checkin-pos-card {
-    @apply bg-neutral w-fit m-auto;
+    @apply bg-neutral m-auto;
+    @screen -lg {
+        /* margin: 20px 40px 19px 10px; */
+        @apply m-4
+    }
     .profile-info {
-        @apply flex flex-row space-x-7;
+        @apply flex flex-col items-center sm:flex-row space-x-7;
         .profile-avatar {
             @apply w-fit h-fit bg-secondary rounded-full p-1;
             img {
@@ -52,7 +56,7 @@
         @apply border border-secondary rounded p-5 mt-7;
     }
     .new-cart-container {
-        @apply flex flex-col w-96;
+        @apply flex flex-col lg:items-center w-full lg:w-96;
         h3 {
             @apply text-2xl font-semibold;
         }

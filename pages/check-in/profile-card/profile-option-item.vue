@@ -12,9 +12,9 @@
 </template>
 <style scoped>
 .profile-option-item {
-    @apply flex flex-row cursor-pointer text-lg font-semibold;
+    @apply flex flex-row cursor-pointer text-base lg:text-lg font-semibold m-1;
     .checker {
-        @apply w-6 h-6 bg-secondary rounded-full mr-4;
+        @apply w-5 h-5 lg:w-6 lg:h-6 bg-secondary rounded-full mr-4;
         box-shadow: 0 0 0 4px hsl(var(--bc));
     }
 }

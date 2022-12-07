@@ -1,42 +1,42 @@
 <template>
-    <div class="w-full h-full flex flex-col">
-        <div class="page-checkin-container">
-            <div class="page-title">Member account page</div>
-            <div class="page-content">
-                <event-card />
-                <profile-card
-                    @create-alert="showAlertAddModal"
-                    @create-note="showNoteAddModal"
-                    @select-option="option = $event"
-                    :active-option="option"
-                />
-            </div>
-        </div>
+  <div class="w-full h-full flex flex-col">
+    <div class="page-checkin-container">
+      <div class="page-title">Member account page</div>
+      <div class="page-content">
+        <event-card />
+        <profile-card
+          @create-alert="showAlertAddModal"
+          @create-note="showNoteAddModal"
+          @select-option="option = $event"
+          :active-option="option"
+        />
+      </div>
+    </div>
         <pos-card v-if="option === 'pos'" @close="option = null"/>
         <calendar-card v-if="option === 'calendar'" @close="option = null"/>
         <notification-card v-if="option === 'notification'" @close="option = null"/>
         <guest-card v-if="option === 'guest-pass'" @close="option = null"/>
         <note-card v-if="option === 'note'" @close="option = null"/>
         <footer-logo class="m-auto" v-else/>
-		<daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
+    <daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
             <alert-add-modal @close="scope.close()"/>
-		</daisy-modal>
-		<daisy-modal id="noteAddModal" ref="noteAddModal" v-slot="scope">
-            <note-add-modal @close="scope.close()" />
-		</daisy-modal>
+    </daisy-modal>
+    <daisy-modal id="noteAddModal" ref="noteAddModal" v-slot="scope">
+      <note-add-modal @close="scope.close()" />
+    </daisy-modal>
         
-    </div>
+  </div>
 </template>
 <style scoped>
 
 .page-checkin-container {
-    @apply py-4 pr-5 bg-base-300 w-full h-fit border-b border-secondary pl-16;
-    .page-title {
-        @apply text-lg font-light pb-3 pl-5;
-    }
-    .page-content {
-        @apply flex flex-row space-x-5 px-40 justify-center;
-    }
+  @apply py-4 pr-5 bg-base-300 w-full h-fit border-b border-secondary pl-16 -md:pl-0;
+  .page-title {
+    @apply text-lg font-light pb-3 pl-5;
+  }
+  .page-content {
+    @apply flex flex-col-reverse md:flex-row gap-5  px-5 justify-center;
+  }
 }
 </style>
 <script setup>

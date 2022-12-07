@@ -24,11 +24,14 @@
 </template>
 <style scoped>
 .guest-pass-card {
-    @apply bg-neutral w-fit m-auto;
+    @apply bg-neutral m-auto;
+    @screen -lg {
+        @apply m-4
+    }
     .guest-card-form {
-        @apply border border-secondary my-8 mx-16 p-8 rounded grid grid-cols-2 gap-x-12 gap-y-8;
+        @apply border border-secondary my-8 mx-4 lg:mx-16 p-8 rounded grid  grid-cols-1  lg:grid-cols-2 gap-x-12 gap-y-8;
         input {
-            @apply h-9 rounded mt-3 w-full w-64 pl-2;
+            @apply h-9 rounded mt-3 w-full pl-2;
         }
         input:focus {
             @apply outline-none;

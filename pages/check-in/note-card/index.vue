@@ -20,6 +20,7 @@
                 <div class="note-actions">
                     <Button size="sm" secondary>Create a Note</Button>
                     <Button size="sm" secondary>Add an Alert</Button>
+                    <hr class="invisible sm:hidden w-full"/>
                     <Button size="sm" ghost>Delete</Button>
                     <Button size="sm" secondary>Save</Button>
                 </div>
@@ -29,9 +30,12 @@
 </template>
 <style scoped>
 .note-card {
-    @apply w-fit m-auto bg-neutral;
+    @apply m-auto bg-neutral;
+    @screen -lg {
+        @apply m-4;
+    }
     .note-card-container {
-        @apply flex flex-row m-8 gap-2 relative py-10;
+        @apply flex flex-col lg:flex-row m-8 gap-2 relative py-10;
         .note-list {
             @apply flex flex-col gap-2;
         }
@@ -42,7 +46,7 @@
             @apply text-neutral p-2 rounded h-full w-full;
         }
         .note-actions {
-            @apply flex flex-row justify-end gap-2 mt-2 ml-4;
+            @apply flex flex-row flex-wrap justify-end gap-2 mt-2 ml-4;
         }
     }
 }

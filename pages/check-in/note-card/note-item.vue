@@ -14,7 +14,7 @@
 </template>
 <style scoped>
 .note-item {
-    @apply w-72 border rounded p-3 cursor-pointer;
+    @apply w-full lg:w-72 border rounded p-3 cursor-pointer;
 }
 .note-item:first-child {
     @apply border-accent;
