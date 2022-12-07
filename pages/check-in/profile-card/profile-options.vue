@@ -16,7 +16,7 @@
 .profile-options-container {
   @apply flex flex-col space-y-8 items-center;
   .profile-options {
-    @apply flex flex-col space-y-12 border border-secondary rounded w-full xl:w-48 p-5;
+    @apply grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1 lg:gap-4 border border-secondary rounded w-full  p-5;
   }
   .btn-close-selection {
     @apply w-full cursor-pointer bg-base-content text-secondary rounded p-2 font-semibold;

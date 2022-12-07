@@ -53,9 +53,9 @@
         @apply flex flex-row space-x-4 pb-3;
     }
     .profile-contact-methods {
-        @apply flex flex-row w-full space-x-7 pb-8;
+        @apply flex flex-row  space-x-7 pb-8;
         button {
-            @apply text-base-content text-lg font-semibold border border-base-content w-24;
+            @apply text-base-content text-base xl:text-lg font-semibold border border-base-content w-24;
         }
     }
     .profile-actions {

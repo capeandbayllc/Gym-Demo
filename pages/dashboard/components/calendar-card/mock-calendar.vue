@@ -1,5 +1,5 @@
 <template>
-<svg xmlns="http://www.w3.org/2000/svg" width="398" height="234" viewBox="0 0 398 234">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 398 234">
   <g id="Calendar" transform="translate(0 -1)">
     <g id="Column" transform="translate(358 36)">
       <rect id="Rectangle_8_Copy_17" data-name="Rectangle 8 Copy 17" width="40" height="40" rx="2" fill="hsl(var(--s))" opacity="0.1"/>

@@ -35,7 +35,7 @@
     @apply text-lg font-light pb-3 pl-5;
   }
   .page-content {
-    @apply flex flex-col-reverse xl:flex-row gap-5  px-5 justify-center;
+    @apply flex flex-col-reverse md:flex-row gap-5  px-5 justify-center;
   }
 }
 </style>

@@ -27,7 +27,7 @@
 				:row-component="NotificationResponseRow"
 				:columns="columns"
 			/>
-			<div class="notification-title">
+			<div class="notification-title -md:mt-5">
 				<h3>Leads/Members</h3>
 				<div class="notification-actions">
 					<select-box
@@ -74,11 +74,11 @@
 <style scoped>
 .checkin-notification-card {
     @apply bg-neutral  m-auto;
-	@screen -sm {
+	@screen -lg {
         margin: 20px 40px 19px 83px;
     }
 	.notification-container {
-		@apply p-4;
+		@apply p-4 gap-5;
 	}
 	.notification-title {
 		@apply flex flex-col md:flex-row justify-between items-center;

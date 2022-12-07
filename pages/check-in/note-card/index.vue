@@ -30,7 +30,7 @@
 <style scoped>
 .note-card {
     @apply m-auto bg-neutral;
-    @screen -sm {
+    @screen -lg {
         margin: 20px 40px 19px 83px;
     }
     .note-card-container {
