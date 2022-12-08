@@ -12,7 +12,7 @@
 </template>
 <style scoped>
 .page-document-container {
-    @apply py-4 pr-5 w-full h-fit pl-16;
+    @apply py-4 pr-5 w-full h-fit pl-16 -md:pl-0;
     .page-title {
         @apply text-lg font-light pb-3 pl-5;
     }
