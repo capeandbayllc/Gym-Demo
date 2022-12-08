@@ -19,7 +19,7 @@
     .page-content {
         @apply flex justify-center;
         .document-container {
-            @apply grid border border-secondary bg-neutral py-5 px-7 rounded grid-rows-3 gap-5;
+            @apply grid border border-secondary bg-neutral py-5 px-7 rounded grid-rows-3 gap-5 -lg:block -lg:w-full;
         }
     }
 }

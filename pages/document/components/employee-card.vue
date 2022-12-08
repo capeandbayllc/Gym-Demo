@@ -16,7 +16,7 @@
 .employee-card-content {
     @apply flex flex-row pt-4 pb-2 px-9 bg-transparent items-center w-full;
     .employee-docs {
-        @apply grid grid-cols-7 gap-5 mr-6;
+        @apply grid grid-cols-7 gap-5 mr-6 -lg:flex overflow-x-auto;
         .employee-doc {
             @apply flex flex-col items-center;
             .doc-date {
