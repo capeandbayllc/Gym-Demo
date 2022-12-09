@@ -14,13 +14,19 @@
 			<person-add-icon @click="showUserMenu"/>
 			<user-add-menu ref="userMenu"/>
 		</div>
-		<setting-icon class="setting-icon" />
-		<question-round-icon
-			@click="$emit('show-help')"
-		/>
-		<account-btn
-			@click="$emit('show-profile-menu')"
-		/>
+		<div class="setting-icon">		
+			<setting-icon />
+		</div>
+		<div>
+			<question-round-icon
+				@click="$emit('show-help')"
+			/>
+		</div>
+		<div>
+			<account-btn
+				@click="$emit('show-profile-menu')"
+			/>
+		</div>
 	</div>
 </template>
 <style>
@@ -36,7 +42,7 @@
 	.setting-icon:hover{
 		animation: spin 1s linear 0.5; opacity: 0.5;
 	}
-	
+
 </style>
 <style scoped>
 .header-actions {
