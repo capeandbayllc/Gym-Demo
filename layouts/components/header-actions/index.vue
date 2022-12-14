@@ -1,11 +1,11 @@
 <template>
 	<div class="header-actions">
-		<Button outline size="sm" class="hover:text-secondary"><pos-icon />POS</Button>
+		<!-- <Button outline size="sm" class="hover:text-secondary"><pos-icon />POS</Button>
 		<Button outline size="sm" class="hover:text-secondary"
 			@click="$emit('show-people-search')"
 		>
 			<people-icon />People
-		</Button>
+		</Button> -->
 		<div class="alert-container">
 			<alarm-btn />
 			<alert-list class="alert-list"/>

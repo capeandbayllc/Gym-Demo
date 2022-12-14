@@ -75,7 +75,7 @@ const mock = {
     name: 'Kevin Buchanan',
     joined: 2020,
     club_id: 1234567890,
-    membership: 'premimum',
+    membership: 'premium',
     addOns: 'pt',
     notifications: 3,
 }
