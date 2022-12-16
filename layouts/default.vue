@@ -14,10 +14,10 @@
 		<div class="app-content">
 			<nav-bar />
 			<div class="w-full relative">
-				<global-search
+				<!-- <global-search
 					v-model="globalSearch"
-				/>
-				<div class="app-body">
+				/> -->
+				<div class="app-body mt-8">
 				    <div class="app-body-content">
 						<slot />
 					</div>
@@ -25,9 +25,9 @@
 				</div>
 			</div>
 		</div>
-		<daisy-modal id="globalSearchModal" ref="globalSearchModal" :show-close-button="false">
+		<!-- <daisy-modal id="globalSearchModal" ref="globalSearchModal" :show-close-button="false">
 			<global-search-modal />
-		</daisy-modal>
+		</daisy-modal> -->
     </div>
 </template>
 <style scoped>

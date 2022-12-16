@@ -43,7 +43,7 @@
 }
 </style>
 <style>
-    .page-people-search-center-container thead {
+    .people-search-tbl-content thead {
         @apply top-0 sticky bg-black h-10;
     }
 </style>
