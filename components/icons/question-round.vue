@@ -1,5 +1,5 @@
 <template>
-<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+<svg xmlns="http://www.w3.org/2000/svg" width="24.263" height="23.256" viewBox="0 0 28 28">
   <g id="Ellipse_71" data-name="Ellipse 71" transform="translate(2 2)" fill="#0074c8" stroke="currentColor" stroke-width="2">
     <circle cx="12" cy="12" r="12" stroke="none"/>
     <circle cx="12" cy="12" r="13" fill="none"/>

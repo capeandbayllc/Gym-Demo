@@ -10,11 +10,11 @@
 </template>
 <style scoped>
 .pulse-modal-border {
-	@apply border-8 rounded-lg border-secondary w-fit;
+	@apply border-8 rounded-lg border-secondary w-full;
 	box-shadow: 0 0 16px 4px hsl(var(--s, var(--nc)));
 }
 .pulse-modal-container {
-	@apply flex flex-col px-10 py-11 border-4 rounded-lg shadow-lg justify-center bg-neutral space-y-10;
+	@apply flex flex-col p-5 xl:p-10 border-4 rounded-lg shadow-lg justify-center bg-neutral space-y-10;
 	margin: -3px;
 }
 .pulse-icon {

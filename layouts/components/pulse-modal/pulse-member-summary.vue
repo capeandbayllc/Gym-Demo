@@ -1,6 +1,6 @@
 <template>
 	<div class="pulse-member-summary">
-		<div class="w-max">
+		<div class="w-full">
 			<div class="member-info-date">
 				Thursday <br/>
 				September 29

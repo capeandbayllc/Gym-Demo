@@ -17,7 +17,7 @@
 </template>
 <style scoped>
 .pulse-summary {
-	@apply flex flex-row space-x-5;
+	@apply flex flex-col xl:flex-row xl:space-x-5 -xl:space-y-5 overflow-y-auto max-h-[100vw];
 }
 .pulse-summary-item {
 	@apply flex flex-col space-y-3;
