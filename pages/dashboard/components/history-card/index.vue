@@ -4,16 +4,16 @@
         title="Member History Check-In"
     >
         <div class="member-history-container">
-            <div class="flex flex-row w-full justify-between">
-                <div class="flex flex-row gap-5">
-                    <div class="history-meta bg-base-content/30">
+            <div class="flex flex-row w-full justify-between -sm:block">
+                <div class="flex flex-row gap-5 -sm:mb-4 -sm:gap-0 justify-between">
+                    <div class="history-meta bg-base-content/30 -sm:mr-2">
                         Gym Location 1
                     </div>
                     <div class="history-meta bg-secondary/50">
                         Active Members: <span class="text-secondary font-bold">54</span>
                     </div>
                 </div>
-                <search-input size="md" neutral border="neutral" class="place-end"/>
+                <search-input size="md" neutral border="neutral" class="place-end -sm:!w-full"/>
             </div>
             <data-table
                 :columns="columns"

@@ -5,7 +5,7 @@
             <data-table
                 :data="data"
                 :row-component="LeadsTableRow"
-                class="h-44 overflow-y-auto text-xs my-2 mt-4 border-spacing-2" style="width:400px;"
+                class="h-44 overflow-y-auto text-xs my-2 mt-4 border-spacing-2 w-[400px] -md:w-full"
             />
         </div>
         <Button secondary size="xs" class="view-btn float-right font-semibold mb-3 mt-2 mr-3">

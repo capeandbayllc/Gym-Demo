@@ -16,7 +16,7 @@
 </template>
 <style scoped>
 .nav-bar-container {
-	@apply overflow-hidden w-16 z-20 top-0 left-0 -xl:absolute;
+	@apply w-16 z-20 top-0 left-0 -xl:absolute;
 }
 .nav-bar-toggler {
 	@apply bg-secondary h-8 cursor-pointer;

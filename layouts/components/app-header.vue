@@ -6,19 +6,23 @@
 		<Button size="sm" class="btn-ghost block lg:hidden" @click.stop="$emit('show-circular-menu')">
 			<menu-icon />
 		</Button>
-		<Button size="sm" class="btn-pulse ml-4 -xl:mr-10">
+		<Button size="sm" class="btn-pulse ml-4">
 			<pulse-icon @click="showPulseModal"/>
 		</Button>
 		<header-actions
 			@show-people-search="showPeopleSearchModal"
 			@show-help="$emit('show-help')"
 			@show-profile-menu="$emit('show-profile-menu')"
+			@show-global-search="showGlobalSearchModal"
 		/>
 		<daisy-modal id="pulseModal" ref="pulseModal">
 			<pulse-modal />
 		</daisy-modal>
 		<daisy-modal id="peopleSearchModal" ref="peopleSearchModal">
 			<people-search-modal />
+		</daisy-modal>
+		<daisy-modal id="globalSearchModal" ref="globalSearchModal">
+			<global-search-modal />
 		</daisy-modal>
 	</div>
 	
@@ -35,6 +39,14 @@
 	box-shadow: 0 0 0 4px hsl(var(--inc, var(--nc)));
 }
 </style>
+<style>
+	@media (max-width: 1920px){
+		#globalSearchModal {min-width: 90%;}
+	}
+	@media (max-width: 980px){
+		#globalSearchModal {min-width: 85%;}
+	}
+</style>
 <script setup>
 import {ref} from 'vue'
 import {PulseIcon} from "@/components/icons"
@@ -42,15 +54,20 @@ import HeaderActions from "./header-actions/index.vue"
 import PulseModal from "./pulse-modal/index.vue"
 import PeopleSearchModal from "./people-search-modal/index.vue"
 import { MenuIcon } from "@/components/icons"
+import GlobalSearchModal from "./global-search-modal.vue"
 
 const pulseModal = ref(null)
 const peopleSearchModal = ref(null)
+const globalSearchModal = ref(null)
 
 const showPulseModal = () => {
 	pulseModal.value.open()
 }
 const showPeopleSearchModal = () => {
 	peopleSearchModal.value.open()
+}
+const showGlobalSearchModal = () => {
+	globalSearchModal.value.open();
 }
 
 </script>

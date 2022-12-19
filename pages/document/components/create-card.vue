@@ -1,5 +1,5 @@
 <template>
-    <simple-card title="Create">
+    <simple-card title="Create" class="-lg:mb-4">
         <div class="create-card-content">
             <div v-for="(type, ndx) in types" :key="ndx" class="create-option">
                 <empty-file class="mb-2" />

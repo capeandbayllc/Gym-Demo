@@ -6,7 +6,7 @@
 </template>
 <style scoped>
 .engage-calendar-events {
-    @apply row-span-2 w-64 border border-secondary rounded p-2;
+    @apply row-span-2 border border-secondary rounded p-2;
 }
 </style>
 <script setup>

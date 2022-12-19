@@ -1,5 +1,5 @@
 <template>
-    <simple-card title="Employee">
+    <simple-card title="Employee" class="-lg:mb-4">
         <div class="employee-card-content">
             <div class="employee-docs">
                 <div v-for="doc in docs" :key="doc.id" class="employee-doc">

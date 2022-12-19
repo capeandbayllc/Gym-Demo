@@ -49,6 +49,7 @@ import {
     ScheduleIcon,
     SettingIcon
 } from './menu-icons'
+import { PeopleIcon } from "@/components/icons"
 import { CalendarIcon, ComTowerIcon, CheckInIcon } from '~~/components/icons';
 import MenuBg from './menu-bg.vue';
 import MenuItem from './menu-item.vue';
@@ -77,6 +78,11 @@ const items = [
         key: 'check-in',
         path: '/check-in',
         icon: CheckInIcon,
+    }, 
+    {
+        key: 'people-search',
+        path: '/people-search',
+        icon: PeopleIcon,
     }, 
     {
         key: 'report',
