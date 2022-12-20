@@ -1,6 +1,6 @@
 <template>
 <div class="account-btn">
-	<img src="~/assets/account.png"/>
+	<img src="~/assets/account-btn.png"/>
 </div>
 </template>
 <style scoped>
