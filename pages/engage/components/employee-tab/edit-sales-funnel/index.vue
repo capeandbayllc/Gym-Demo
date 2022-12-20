@@ -8,7 +8,7 @@
     >
         <template #content>
             <div class="edit-funnel-container flex flex-col">
-                <div class="flex flex-row justify-between gap-4">
+                <div class="flex flex-row justify-between gap-4 -md:flex-col">
                     <leads-card  @editSalesFunnelTableSelected="getTableList"/>
                     <leads-table :table-selected="tableSelected"/>
                 </div>

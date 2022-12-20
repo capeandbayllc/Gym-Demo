@@ -3,16 +3,16 @@
         <mock-calendar class="mx-5 my-6"/>
         <div class="calendar-footer">
             <div class="calendar-footer-labels">
-                <div>
+                <div class="-md:text-xs">
                     <span class="text-accent-focus mr-2">●</span>
                     Deposit
                 </div>
-                <div>
+                <div class="-md:text-xs">
                     <span class="text-info mr-2">●</span>
                     DirectDebit
                 </div>
             </div>
-            <div>Configure…</div>
+            <div class="-md:text-xs">Configure…</div>
         </div>
     </dashboard-card>
 </template>

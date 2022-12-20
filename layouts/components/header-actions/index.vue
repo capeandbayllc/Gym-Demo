@@ -1,11 +1,14 @@
 <template>
 	<div class="header-actions">
-		<Button outline size="sm" class="hover:text-secondary"><pos-icon />POS</Button>
-		<Button outline size="sm" class="hover:text-secondary -sm:!ml-2"
+		<!-- <Button outline size="sm" class="hover:text-secondary"><pos-icon />POS</Button>
+		<Button outline size="sm" class="hover:text-secondary"
 			@click="$emit('show-people-search')"
 		>
 			<people-icon />People
-		</Button>
+		</Button> -->
+		<div @mouseover="showFocus" @mouseleave="hideFocus">
+			<input ref="globalSearchInput" type="text" placeholder="Search" class="input global-search-input w-52 -xl:w-40 -lg:w-36 -lg:mr-0 mr-9 bg-slate-50 text-black text-lg h-9" @click="$emit('show-global-search')"/>
+		</div>
 		<div class="alert-container">
 			<alarm-btn />
 			<alert-list class="alert-list"/>
@@ -14,10 +17,10 @@
 			<person-add-icon @click="showUserMenu"/>
 			<user-add-menu ref="userMenu"/>
 		</div>
-		<div class="setting-icon -sm:!ml-4">		
+		<!-- <div class="setting-icon">		
 			<setting-icon />
-		</div>
-		<div class="-sm:!ml-4">
+		</div> -->
+		<div>
 			<question-round-icon
 				@click="$emit('show-help')"
 			/>
@@ -39,19 +42,22 @@
 	.person-add-icon:hover path{
 		@apply opacity-100;
 	}
-	.setting-icon:hover{
+	/* .setting-icon:hover{
 		animation: spin 1s linear 0.5; opacity: 0.5;
-	}
+	} */
 
 </style>
 <style scoped>
 .header-actions {
-	@apply flex items-center justify-end space-x-9 mr-8;
+	@apply flex items-center justify-end space-x-9 mr-8 -lg:space-x-4 -xl:space-x-3;
 	> button svg {
 		@apply mr-1;
 	}
 	svg {
 		@apply cursor-pointer;
+	}
+	.global-search-input:hover {
+		cursor: pointer;
 	}
 }
 .alert-container:hover .alert-list {
@@ -75,6 +81,14 @@ import HelpBot from "../help-bot/index.vue"
 import UserAddMenu from "./user-add-menu.vue"
 
 const userMenu = ref(null)
+const globalSearchInput = ref('')
+const showFocus = () => {
+	globalSearchInput.value.style = ''
+	globalSearchInput.value.focus();
+}
+const hideFocus = () => {
+	globalSearchInput.value.blur();
+} 
 
 const showUserMenu = () => userMenu.value.open()
 </script>

@@ -13,6 +13,9 @@
     .type-premimum {
         @apply bg-accent;
     }
+    .type-premium {
+        @apply bg-accent;
+    }
     .type-basic {
         @apply border-2;
     }
