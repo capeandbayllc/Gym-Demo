@@ -1,7 +1,7 @@
 <template>
 	<div class="header-actions">
 		<Button outline size="sm" class="hover:text-secondary"><pos-icon />POS</Button>
-		<Button outline size="sm" class="hover:text-secondary"
+		<Button outline size="sm" class="hover:text-secondary -sm:!ml-2"
 			@click="$emit('show-people-search')"
 		>
 			<people-icon />People
@@ -10,14 +10,14 @@
 			<alarm-btn />
 			<alert-list class="alert-list"/>
 		</div>
-		<div class="relative">
+		<div class="relative -sm:!ml-4">
 			<person-add-icon @click="showUserMenu"/>
 			<user-add-menu ref="userMenu"/>
 		</div>
-		<div class="setting-icon">		
+		<div class="setting-icon -sm:!ml-4">		
 			<setting-icon />
 		</div>
-		<div>
+		<div class="-sm:!ml-4">
 			<question-round-icon
 				@click="$emit('show-help')"
 			/>
@@ -58,7 +58,7 @@
 	@apply block;
 }
 .alert-container {
-	@apply relative;
+	@apply relative -sm:!ml-4;
 	.alert-list {
 		@apply absolute z-20 hidden;
 		right: -8rem;
