@@ -33,6 +33,7 @@
 <style scoped>
 .app-layout {
 	@apply w-screen overflow-x-hidden;
+	background-image: linear-gradient(#2f72c4 -80%, #0c1c31 17%, #000000 100%, #2f72c4 0%);
 }
 .app-content {
 	@apply flex flex-row relative;
