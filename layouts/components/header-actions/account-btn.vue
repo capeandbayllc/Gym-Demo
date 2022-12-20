@@ -1,5 +1,5 @@
 <template>
-<div class="account-btn">
+<div class="account-btn w-12">
 	<img src="~/assets/account-btn.png"/>
 </div>
 </template>

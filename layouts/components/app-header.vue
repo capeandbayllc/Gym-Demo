@@ -1,9 +1,12 @@
 <template>
 	<div class="app-header" data-theme="dark">
-		<div>
+		<div class="hidden lg:block">
 			<app-logo @click="$emit('show-circular-menu')"/>
 		</div>
-		<Button size="sm" class="btn-pulse bg-secondary">
+		<Button size="sm" class="btn-ghost block lg:hidden" @click.stop="$emit('show-circular-menu')">
+			<menu-icon />
+		</Button>
+		<Button size="sm" class="btn-pulse ml-4 bg-secondary">
 			<pulse-icon @mouseover="setIconPath" @mouseout="resetIconPath" :iconPath="iconPath" @click="showPulseModal"/>
 		</Button>
 		<header-actions
@@ -53,6 +56,7 @@ import {PulseIcon} from "@/components/icons"
 import HeaderActions from "./header-actions/index.vue"
 import PulseModal from "./pulse-modal/index.vue"
 import PeopleSearchModal from "./people-search-modal/index.vue"
+import { MenuIcon } from "@/components/icons"
 import GlobalSearchModal from "./global-search-modal.vue"
 
 const pulseModal = ref(null)
