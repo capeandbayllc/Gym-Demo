@@ -9,6 +9,9 @@
                 <build-campaign-card class="min-h-96 col-span-1 h-full flex flex-col" />
             </div>
             <campaign-card />
+            <h2 class="mb-4">Recent campaigns</h2>
+            <new-member-campaigns class="mb-4"/>
+            <marketing/>
         </div>
     </div>
 </template>
@@ -38,4 +41,6 @@ import SalesShowRatio from '@/pages/components/sales-show-ratio/index.vue';
 import SalesDraftRelated from '@/pages/components/sales-draft-related/index.vue';
 import BuildCampaignCard from './components/build-campaign-card/index'
 import CampaignCard from './components/campaign-card/index.vue';
+import newMemberCampaigns from './components/new-member-campaigns.vue';
+import marketing from './components/marketing.vue';
 </script>
