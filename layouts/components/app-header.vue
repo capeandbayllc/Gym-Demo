@@ -29,7 +29,7 @@
 </template>
 <style scoped>
 .app-header {
-	@apply bg-secondary h-16 flex flex-row items-center justify-between;
+	@apply h-16 flex flex-row items-center justify-between border-b-2 border-secondary;
 	> div {
 		@apply w-full h-full;
 	}
