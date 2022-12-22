@@ -1,5 +1,9 @@
 <template>
   <div class="profile-options-container">
+    <div class="flex flex-row gap-2">
+      <div class="btn-check-in">Check in</div>
+      <div class="btn-close-selection">Close Selection</div>
+    </div>
     <div class="profile-options">
       <profile-option-item
         v-for="item in options"
@@ -9,17 +13,20 @@
         :label="item.label"
       />
     </div>
-    <div class="btn-close-selection">Close Member Selection</div>
+    <!-- <div class="btn-close-selection">Close Member Selection</div> -->
   </div>
 </template>
 <style scoped>
 .profile-options-container {
-  @apply flex flex-col space-y-8 items-center;
+  @apply flex flex-col space-y-6 items-center;
   .profile-options {
-    @apply grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1 lg:gap-4 border border-secondary rounded w-full  p-5;
+    @apply grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1 lg:gap-6 border-2 border-secondary rounded-lg w-full  p-5;
   }
   .btn-close-selection {
-    @apply w-full cursor-pointer bg-base-content text-secondary rounded p-2 font-semibold;
+    @apply cursor-pointer bg-base-content text-secondary rounded p-2 text-sm text-black;
+  }
+  .btn-check-in {
+    @apply px-4 flex items-center rounded cursor-pointer bg-accent-focus/60 uppercase text-black font-medium;
   }
 }
 </style>
@@ -29,7 +36,13 @@ const props = defineProps({
     selected: String
 })
 
-const options = [{
+const options = [
+{
+    label: "Profile",
+    key: "profile",
+    selected: false
+},
+{
     label: "POS",
     key: "pos",
     selected: false
@@ -42,12 +55,16 @@ const options = [{
     key: "notification",
     selected: false
 }, {
-    label: "Guest Pass",
-    key: "guest-pass",
+    label: "Add a Guest",
+    key: "addGuest",
     selected: false
 }, {
     label: "Note Pad",
     key: "note",
+    selected: false
+}, {
+    label: "New Agreement",
+    key: "newAgreement",
     selected: false
 }]
 

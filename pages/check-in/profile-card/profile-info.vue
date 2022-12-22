@@ -14,13 +14,13 @@
             <membership-btn :membership="mock.membership" />
             <addon-btn :value="true" />
         </div>
-        <div class="font-semibold pb-2">Contact</div>
+        <div class="pb-2">Contact</div>
         <div class="profile-contact-methods">
             <Button secondary class="-sm:!ml-2">Phone</Button>
             <Button secondary class="-sm:!ml-2">Email</Button>
             <Button secondary class="-sm:!ml-2">SMS</Button>
         </div>
-        <div class="profile-actions">
+        <!-- <div class="profile-actions">
             <Button secondary size="sm"
                 @click="$emit('create-note')" 
                 class="-sm:!mr-1"
@@ -32,19 +32,21 @@
             >
                 Add an Alert
             </Button>
-        </div>
+        </div> -->
     </div>
 </template>
 <style scoped>
 .profile-info-container {
     @apply flex flex-col items-center text-lg text-center;
     .profile-avatar {
-        @apply relative rounded-full bg-info p-2;
+        @apply relative rounded-full border-2 p-2;
         img {
             @apply w-36 h-36;
         }
         .alert-badge {
             @apply absolute flex items-center justify-center w-12 h-12 rounded-full bg-error text-3xl font-semibold;
+            left: -0.5rem;
+		    top: -0.375rem;
         }
     }
     .profile-name {
@@ -58,6 +60,9 @@
         button {
             @apply text-base-content text-base xl:text-lg font-semibold border border-base-content w-24;
         }
+    }
+    .guest-pass {
+        @apply border border-secondary rounded p-5;
     }
     .profile-actions {
         @apply flex flex-row space-x-12 pb-5 text-center;
