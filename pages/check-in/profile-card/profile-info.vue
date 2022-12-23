@@ -13,12 +13,13 @@
         <div class="profile-status">
             <membership-btn :membership="mock.membership" />
             <addon-btn :value="true" />
+            <Button size="sm" secondary>Added: Family Member</Button>
         </div>
         <div class="pb-2">Contact</div>
         <div class="profile-contact-methods">
-            <Button secondary class="-sm:!ml-2">Phone</Button>
-            <Button secondary class="-sm:!ml-2">Email</Button>
-            <Button secondary class="-sm:!ml-2">SMS</Button>
+            <Button size="sm" secondary class="-sm:!ml-2">Phone</Button>
+            <Button size="sm" secondary class="-sm:!ml-2">Email</Button>
+            <Button size="sm" secondary class="-sm:!ml-2">SMS</Button>
         </div>
         <!-- <div class="profile-actions">
             <Button secondary size="sm"
@@ -33,6 +34,23 @@
                 Add an Alert
             </Button>
         </div> -->
+        <div class="bg-gray p-4 border border-secondary bg-[#191919]">
+            <p class="text-sm mb-2">Guest Pass:</p>
+            <ul class="max-h-[80px] overflow-auto px-2">
+                <li class="flex my-4">
+                    <div class="mr-2">
+                        <input type="text" class="rounded-md bg-white text-black text-xs h-full px-2" value="Issued December 12, 2021">
+                    </div>
+                    <Button size="sm" class="!bg-[#5BC600] text-black">Day Left:2</Button>
+                </li>
+                <li class="flex my-4">
+                    <div class="mr-2">
+                        <input type="text" class="rounded-md bg-white text-black text-xs h-full px-2" value="Issued December 12, 2021">
+                    </div>
+                    <Button size="sm" class="!bg-[#5BC600] text-black">Day Left:2</Button>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 <style scoped>
@@ -54,6 +72,21 @@
     }
     .profile-status {
         @apply flex flex-row space-x-4 pb-3;
+        > div, > button{
+            @apply relative;
+            &:before{
+                @apply absolute w-full rounded-md h-full text-sm top-0 left-0 text-center invisible capitalize;
+                content:"edit";
+                background: inherit;
+                line-height: 30px;
+            }
+            &:hover {
+                color:inherit;
+                &:before{
+                    @apply visible;
+                }
+            }
+        }
     }
     .profile-contact-methods {
         @apply flex flex-row  space-x-7 pb-8;

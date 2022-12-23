@@ -8,13 +8,13 @@
 </template>
 <style scoped>
     .membership-btn {
-        @apply flex items-center justify-center rounded font-semibold cursor-pointer uppercase h-full px-5 py-1;
+        @apply flex items-center justify-center rounded font-semibold cursor-pointer uppercase h-full px-3 text-sm;
     }
     .type-premimum {
         @apply bg-accent;
     }
     .type-premium {
-        @apply bg-accent;
+        @apply bg-amber-400;
     }
     .type-basic {
         @apply border-2;

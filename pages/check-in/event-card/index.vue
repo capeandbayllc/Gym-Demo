@@ -21,6 +21,7 @@
 <style scoped>
 .event-card-container {
   @apply w-full md:w-80 flex-grow-0 -lg:grow-[1];
+  background-image: linear-gradient(#0074C8, #000);
 }
 .event-card-container, .scheduled-event-container {
   @apply border border-secondary rounded flex flex-col p-3;

@@ -3,13 +3,34 @@
     <div class="page-checkin-container">
       <div class="page-title">Member account page</div>
       <div class="page-content">
-        <event-card />
-        <profile-card
-          @create-alert="showAlertAddModal"
-          @create-note="showNoteAddModal"
-          @select-option="option = $event"
-          :active-option="option"
-        />
+        <div class="wrapper p-4 bg-secondary rounded-md">
+          <div class="flex">
+            <event-card class="mr-4"/>
+            <profile-card
+            @create-alert="showAlertAddModal"
+            @create-note="showNoteAddModal"
+            @select-option="option = $event"
+            :active-option="option"
+            />
+          </div>
+          <div class="bg-secondary w-full">
+            <p class="text-center cursor-pointer align-middle my-4" @click="viewAccount = !viewAccount">{{viewAccount ? 'View Account' : 'Close'}}  
+              <LockIcon class="inline-block" v-if="viewAccount"/>
+              <UnlockIcon class="inline-block" v-else/>
+            </p>
+            <div class="account-box" v-if="!viewAccount">
+              <ul>
+                <li><button><AccountIcon/></button></li>
+                <li><button><SettingIcon/></button></li>
+                <li><button><DollarDocIcon/></button></li>
+                <li><button><AnnouncementIcon/></button></li>
+                <li><button><PieChartIcon/></button></li>
+                <li><button><BookIcon/></button></li>
+                <li><button><DocIcon/></button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
         <pos-card v-if="option === 'pos'" @close="option = null"/>
@@ -35,7 +56,18 @@
     @apply text-lg font-light pb-3 pl-5;
   }
   .page-content {
-    @apply flex flex-col-reverse md:flex-row gap-5  px-5 justify-center;
+    @apply flex flex-col-reverse md:flex-row gap-5 flex-wrap justify-center mx-auto;
+
+    .account-box{
+      ul{
+        @apply flex w-10/12 justify-around mx-auto;
+
+        li{
+          @apply inline-block;
+        }
+      }
+      
+    }
   }
 }
 </style>
@@ -48,7 +80,7 @@ import CalendarCard from './calendar-card/index.vue'
 import NotificationCard from './notification-card/index.vue'
 import GuestCard from './guest-card/index.vue'
 import NoteCard from './note-card/index.vue'
-
+import { LockIcon, AccountIcon, SettingIcon, DollarDocIcon, AnnouncementIcon, PieChartIcon, BookIcon, DocIcon, UnlockIcon } from '~~/components/icons';
 import AlertAddModal from './alert-add-modal.vue'
 import NoteAddModal from './note-add-modal.vue'
 
@@ -64,4 +96,6 @@ const noteAddModal = ref(null)
 const showNoteAddModal = () => {
     noteAddModal.value.open()
 }
+
+const viewAccount = ref(false)
 </script>

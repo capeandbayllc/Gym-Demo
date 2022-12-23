@@ -13,7 +13,8 @@
     @apply w-fit border px-4 flex items-center rounded cursor-pointer;
 }
 .add-ons.add-ons-active {
-    @apply bg-accent-focus/60 border-accent-focus/60;
+    @apply border-accent-focus/60;
+    background: #5BC600;
 }
 </style>
 <script setup>
