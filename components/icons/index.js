@@ -1,5 +1,5 @@
 export { default as AddIcon } from "./add.vue"
-export { default as AccountIcon } from "./account.vue"
+export { default as MemberInfoIcon } from "./member-info.vue"
 export { default as AnnouncementIcon } from "./announcement.vue"
 export { default as AlarmIcon } from "./alarm.vue"
 export { default as ArrowIcon } from "./arrow.vue"
