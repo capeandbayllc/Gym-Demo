@@ -1,26 +1,25 @@
 <template>
     <div>
-        <div class="mx-auto pt-32">
+        <div class="mx-auto pt-24 2xl:pt-32">
             <div class="text-center z-20">
-                <h1 class="text-9xl sm:text-10xl font-medium mb-8 text-secondary">404</h1>
-                <p class="text-xl px-8 sm:px-0 sm:text-4xl  font-light mb-16 leading-tight">Page not found: {{$route.fullPath}}</p>
+                <div class="flex flex-col-3">
+                    <img src="/broken_weight-left.png" alt="" class="w-24 h-24 mt-20 m-2">
+                    <h1 class="error-type font-medium text-secondary">
+                        404
+                    </h1>
+                    <img src="/broken_weight-right.png" alt="" class="w-24 h-24 mt-20 m-2">
+                </div>
+                <p class="text-xl px-8 sm:px-0 font-semibold mb-14 2xl:text-2xl">Page not found</p>
                 <div class="w-full flex items-center justify-center">
-                    <NuxtLink to="/" class="relative border border-white text-md sm:text-xl py-2 px-4 sm:py-3 sm:px-6 cursor-pointer">Go back home</NuxtLink>
+                    <NuxtLink to="/" class="rounded relative border-2 border-primary-content text-sm py-1.5 px-1.5 font-semibold cursor-pointer">Go back home</NuxtLink>
                 </div>
             </div>
         </div>
     </div>
 </template>
-<script setup>
-    onMounted(() => {
-        document.getElementsByClassName('app-layout')[0].classList.add("page-not-found")
-    });
-    onUnmounted(() => {
-        document.getElementsByClassName('app-layout')[0].classList.remove("page-not-found")
-    })
-</script>
-<style>
-    .page-not-found{
-        background: linear-gradient(-174deg, #0074c72b 0%, transparent 21%, #0074c75c 100%);
-    }
+<style scoped>
+    .error-type {
+        font-size: 168px;
+        line-height: 1;
+    } 
 </style>
