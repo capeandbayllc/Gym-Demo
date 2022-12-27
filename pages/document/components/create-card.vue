@@ -2,7 +2,7 @@
     <simple-card title="Create" class="-lg:mb-4">
         <div class="create-card-content">
             <div v-for="(type, ndx) in types" :key="ndx" class="create-option">
-                <empty-file class="mb-2" />
+                <empty-file-icon class="mb-2" />
                 <span class="text-center">{{type}}</span>
             </div>
             <div class="create-option">
@@ -25,7 +25,6 @@
 }
 </style>
 <script setup>
-import EmptyFile from './empty-file.vue';
-import { AddIcon } from '~~/components/icons';
+import { AddIcon, EmptyFileIcon } from '~~/components/icons';
 const types = ["Blank", "Project Proposal", "Meeting Notepad", "Campaign", "Campaign"]
 </script>

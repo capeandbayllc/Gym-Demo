@@ -3,7 +3,7 @@
         <div class="grid grid-cols-3 gap-6 py-4 px-10">
             <Button class="text-white capitalize" :class="isActiveMember ? 'bg-slate-400 hover:bg-slate-500' : 'bg-lime-500 hover:bg-lime-600'" @click="isActiveMember = !isActiveMember" >{{isActiveMember ? "In-Active" : "Active"}}</Button>
             <h2 class="text-center leading-10 text-lg">Member Information</h2>
-            <Button class="ml-auto bg-[#0074C8] text-white capitalize">Create New Agreement</Button>
+            <Button class="ml-auto bg-[#0074C8] text-white capitalize" @click="showAgreementPopUp">Create New Agreement</Button>
 
             <div v-for="item in memberInformation" :key="item.key" class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
                 <div class="mb-2">{{item.label}}</div>
@@ -11,9 +11,22 @@
             </div>
         </div>
     </simple-card>
+    <daisy-modal id="agreementPopUp" ref="agreementPopUp" class="w-fit">
+        <div class="bg-black rounded-md p-6 border border-secondary">
+            <Agreement/>
+            <!-- <SelectGym/> -->
+            <div class="flex justify-end mt-6">
+                <Button size="sm" class="normal-case mx-2" ghost>Cancel</Button>
+                <Button size="sm" class="normal-case mx-2" secondary>Save as a Draft</Button>
+                <Button size="sm" class="normal-case mx-2 border border-secondary" outline>Continue ></Button>
+            </div>
+        </div>
+    </daisy-modal>
 </template>
 <script setup>
 import {ref} from 'vue';
+import Agreement from './agreement'
+import SelectGym from './select-gym'
 const isActiveMember = ref(false);
 
 const memberInfo = ref({});
@@ -78,7 +91,13 @@ const memberInformation = [{
     key: "member-misc-2",
     label: "Member Misc. 2",
     class: "neutral-input"
-}]
+}];
+
+const agreementPopUp = ref(null)
+
+const showAgreementPopUp = () => {
+	agreementPopUp.value.open()
+}
 
 </script>
 <style scoped>
