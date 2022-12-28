@@ -14,11 +14,11 @@
             />
           </div>
           <div class="bg-secondary w-full">
-            <p class="text-center cursor-pointer align-middle my-4" @click="isAccountViewOpen = !isAccountViewOpen, accountView = null">{{isAccountViewOpen ? 'View Account' : 'Close'}}  
-              <LockIcon class="inline-block" v-if="isAccountViewOpen"/>
+            <p class="text-center cursor-pointer align-middle my-4" @click="isAccountViewOpen = !isAccountViewOpen, accountView = null">{{isAccountViewOpen ? 'Close' : 'View Account'}}  
+              <LockIcon class="inline-block" v-if="!isAccountViewOpen"/>
               <UnlockIcon class="inline-block" v-else/>
             </p>
-            <div class="account-box" v-if="!isAccountViewOpen">
+            <div class="account-box" v-if="isAccountViewOpen">
               <ul>
                 <li><button @click="changeAccountView('memberinfo')"><MemberInfoIcon/></button></li>
                 <li><button @click="changeAccountView('setting')"><SettingIcon/></button></li>
@@ -36,12 +36,13 @@
         </div>
       </div>
     </div>
-        <pos-card v-if="option === 'pos'" @close="option = null"/>
-        <calendar-card v-if="option === 'calendar'" @close="option = null"/>
-        <notification-card v-if="option === 'notification'" @close="option = null"/>
-        <guest-card v-if="option === 'guest-pass'" @close="option = null"/>
-        <note-card v-if="option === 'note'" @close="option = null"/>
-        <footer-logo class="m-auto" v-else/>
+    <pos-card v-if="option === 'pos'" @close="option = null"/>
+    <calendar-card v-if="option === 'calendar'" @close="option = null"/>
+    <notification-card v-if="option === 'notification'" @close="option = null"/>
+    <guest-card v-if="option === 'guest-pass'" @close="option = null"/>
+    <note-card v-if="option === 'note'" @close="option = null"/>
+    <new-agreement v-if="option === 'newAgreement'" @close="option = null"/>
+    <footer-logo class="m-auto" v-else/>
     <daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
         <alert-add-modal @close="scope.close()"/>
     </daisy-modal>
@@ -83,6 +84,7 @@ import CalendarCard from './calendar-card/index.vue';
 import NotificationCard from './notification-card/index.vue';
 import GuestCard from './guest-card/index.vue';
 import NoteCard from './note-card/index.vue';
+import NewAgreement from './new-agreement/index.vue';
 import { LockIcon, MemberInfoIcon, SettingIcon, DollarDocIcon, AnnouncementIcon, PieChartIcon, BookIcon, DocIcon, UnlockIcon } from '~~/components/icons';
 import AlertAddModal from './alert-add-modal.vue';
 import NoteAddModal from './note-add-modal.vue';
