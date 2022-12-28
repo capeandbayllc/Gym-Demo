@@ -13,12 +13,12 @@
     </simple-card>
     <daisy-modal id="agreementPopUp" ref="agreementPopUp" class="w-fit">
         <div class="bg-black rounded-md p-6 border border-secondary">
-            <Agreement/>
-            <!-- <SelectGym/> -->
+            <component :is="agreementScreens[agreementScreenIndex]"></component>
             <div class="flex justify-end mt-6">
-                <Button size="sm" class="normal-case mx-2" ghost>Cancel</Button>
-                <Button size="sm" class="normal-case mx-2" secondary>Save as a Draft</Button>
-                <Button size="sm" class="normal-case mx-2 border border-secondary" outline>Continue ></Button>
+                <Button size="sm" class="normal-case mx-2" ghost @click="prevScreen" v-if="agreementScreenIndex > 0">Back</Button>
+                <Button size="sm" class="normal-case mx-2 ml-auto" ghost>Cancel</Button>
+                <Button size="sm" class="normal-case mx-2" secondary v-if="agreementScreenIndex == 0">Save as a Draft</Button>
+                <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue ></Button>
             </div>
         </div>
     </daisy-modal>
@@ -27,6 +27,7 @@
 import {ref} from 'vue';
 import Agreement from './agreement'
 import SelectGym from './select-gym'
+import PersonalInformation from './personal-information'
 const isActiveMember = ref(false);
 
 const memberInfo = ref({});
@@ -93,10 +94,19 @@ const memberInformation = [{
     class: "neutral-input"
 }];
 
-const agreementPopUp = ref(null)
+const agreementPopUp = ref(null);
+const agreementScreens = ref([Agreement,SelectGym,PersonalInformation])
+const agreementScreenIndex = ref(0)
 
 const showAgreementPopUp = () => {
 	agreementPopUp.value.open()
+}
+const nextScreen = ()=>{
+    agreementScreenIndex.value = agreementScreenIndex.value < (agreementScreens.value.length - 1) ? agreementScreenIndex.value + 1 : agreementScreenIndex.value;
+    console.log("agreementScreenIndex",agreementScreenIndex.value)
+}
+const prevScreen = ()=>{
+    agreementScreenIndex.value = agreementScreenIndex.value > 0 ? agreementScreenIndex.value - 1 : agreementScreenIndex.value
 }
 
 </script>
