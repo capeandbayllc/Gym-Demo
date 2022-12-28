@@ -64,7 +64,7 @@
 	@apply block;
 }
 .alert-container {
-	@apply relative;
+	@apply relative -sm:!ml-4;
 	.alert-list {
 		@apply absolute z-20 hidden;
 		right: -8rem;
