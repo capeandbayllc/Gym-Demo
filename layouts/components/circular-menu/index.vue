@@ -145,7 +145,7 @@ const activeKey = ref('main-bg');
 const getDegree = (ndx) => {
     console.log(ndx)
     const start = -20;
-    const end = 100;
+    const end = 110;
     return start + (end - start) * ndx / 10
 }
 const setActiveKey = (key) => {
