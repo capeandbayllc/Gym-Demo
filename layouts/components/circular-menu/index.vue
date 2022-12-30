@@ -6,7 +6,7 @@
 				:key="key"
 				:rotation="getDegree(ndx)"
 				:icon="icon"
-				:scale="activeKey !== key ? .75: 1.4"
+				:scale="activeKey !== key ? .75: 1.2"
 				:url="path"
 				@mouseover="setActiveKey(key)"
 				@mouseleave="setActiveKey(null)"
@@ -35,6 +35,11 @@
 	@apply absolute text-base-content scale-75 cursor-pointer;
 	right: -2.5rem;
 	top: 12vw;
+}
+</style>
+<style>
+.menu-close svg g{
+	fill: #0074C8;
 }
 </style>
 <script setup>

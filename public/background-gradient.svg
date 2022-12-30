@@ -1,10 +1,10 @@
 <svg id="grad_backer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440" height="927" viewBox="0 0 1440 927">
   <defs>
-    <linearGradient id="linear-gradient" x1="0.806" y1="-1.118" x2="0.634" y2="1.429" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#2f72c4" stop-opacity="0.659"/>
-      <stop offset="0.512" stop-color="#0c1c31" stop-opacity="0.914"/>
-      <stop offset="0.758"/>
-      <stop offset="1" stop-color="#2f72c4" stop-opacity="0.467"/>
+    <linearGradient id="linear-gradient" x1="0.774" y1="-0.587" x2="0.634" y2="1.429" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#2f72c4" stop-opacity="0.886"/>
+      <stop offset="0.526" stop-color="#0c1c31" stop-opacity="0.914"/>
+      <stop offset="0.669"/>
+      <stop offset="1" stop-color="#2f72c4" stop-opacity="0.788"/>
     </linearGradient>
   </defs>
   <rect id="grad_backer-2" data-name="grad_backer" width="1440" height="927" fill="url(#linear-gradient)"/>
