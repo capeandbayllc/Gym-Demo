@@ -91,7 +91,7 @@ const items = [
     }, 
     {
         key: 'report',
-        path: '/report',
+        path: '/reporting',
         icon: ReportingIcon
     }, 
     {
