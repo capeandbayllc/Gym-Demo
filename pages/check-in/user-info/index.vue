@@ -3,7 +3,7 @@
     <Demographics/>
     <AccessCode/>
     <BankingInformation/>
-    <EmployeeDetails/>   
+    <EmployeeDetails/>
 </template>
 
 <script setup>

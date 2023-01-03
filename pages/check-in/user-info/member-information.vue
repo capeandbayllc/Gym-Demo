@@ -28,6 +28,8 @@ import {ref} from 'vue';
 import Agreement from './agreement'
 import SelectGym from './select-gym'
 import PersonalInformation from './personal-information'
+import PersonalInformationNext from './personal-information/personal-info-next.vue'
+import FinancialCollect from './financial-collect'
 const isActiveMember = ref(false);
 
 const memberInfo = ref({});
@@ -95,8 +97,8 @@ const memberInformation = [{
 }];
 
 const agreementPopUp = ref(null);
-const agreementScreens = ref([Agreement,SelectGym,PersonalInformation])
-const agreementScreenIndex = ref(0)
+const agreementScreens = ref([Agreement,SelectGym,PersonalInformation, PersonalInformationNext,FinancialCollect]);
+const agreementScreenIndex = ref(0);
 
 const showAgreementPopUp = () => {
 	agreementPopUp.value.open()
