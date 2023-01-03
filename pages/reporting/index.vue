@@ -39,4 +39,8 @@ import ReportingWidgetLeads from './components/reporting-widget-leads.vue';
 import ReportingWidgetConversion from './components/reporting-widget-conversion.vue'
 import ReportingWidgetMember from './components/reporting-widget-member.vue'
 import ReportingWidgetClients from './components/reporting-widget-clients.vue'
+onMounted(async () => {
+    await nextTick();
+    window.dispatchEvent(new Event('resize'))
+});
 </script>
