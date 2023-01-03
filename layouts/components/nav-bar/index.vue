@@ -7,7 +7,7 @@
 				@click.prevent="toggleCollapse"
 			/>
 			<nav-item
-				v-for="(item, ndx) in navigation"
+				v-for="(item, ndx) in navItems"
 				:key="ndx"
 				v-bind="{...item}"
 			/>
@@ -37,60 +37,110 @@ import {
 	PosIcon,
 	ReportIcon,
 	SpeedMeterIcon,
-	UpperArrowIcon
+	UpperArrowIcon,
+	ContractEditIcon,
+	ContractIcon,
+	TrainingIcon,
 }
 from '@/components/icons'
 import NavItem from './nav-item.vue';
-
-const props = defineProps({
-    navigation: {
-        type: Array,
-        default: [
-			{
-				label: 'Financial Reporting',
-				icon: ReportIcon,
-				url: "/#"
-			}, {
-				label: "Communications",
-				url: "/#",
-				icon: MassComIcon
-			}, {
-				label: "Favorites",
-				url: "/#",
-				icon: FavoriteCircleIcon
-			}, {
-				label: "Point Of Sale",
-				url: "/#",
-				icon: PosIcon
-			}, {
-				label: "Fitness",
-				url: "/#",
-				icon: FitnessIcon
-			}, {
-				label: "KPIS",
-				url: "/#",
-				icon: SpeedMeterIcon
-			}, {
-				label: "Employee Tracking",
-				url: "/#",
-				icon: LocationIcon
-			}, {
-				label: "Company Inbox",
-				url: "/#",
-				icon: DownloadIcon
-			}, {
-				label: "Marketing",
-				url: "/#",
-				icon: MarketingIcon
-			}
-		],
-    },
-});
 
 const collapsed = ref(true)
 
 const toggleCollapse = () => {
 	collapsed.value = !collapsed.value
+}
+
+let navItems = ref([]); 
+
+const navList = [
+	{
+		type: 'default',
+		navigation: [
+			{
+				label: 'Financial Reporting',
+				icon: ReportIcon,
+				url: "/#"
+			},
+			{
+				label: "Communications",
+				url: "/#",
+				icon: MassComIcon
+			},
+			{
+				label: "Favorites",
+				url: "/#",
+				icon: FavoriteCircleIcon
+			},
+			{
+				label: "Point Of Sale",
+				url: "/#",
+				icon: PosIcon
+			},
+			{
+				label: "Fitness",
+				url: "/#",
+				icon: FitnessIcon
+			},
+			{
+				label: "KPIS",
+				url: "/#",
+				icon: SpeedMeterIcon
+			},
+			{
+				label: "Employee Tracking",
+				url: "/#",
+				icon: LocationIcon
+			},
+			{
+				label: "Company Inbox",
+				url: "/#",
+				icon: DownloadIcon
+			},
+			{
+				label: "Marketing",
+				url: "/#",
+				icon: MarketingIcon
+			}
+		]
+	},
+	{
+		type: 'document',
+		navigation: [
+			{
+				label: 'Contracts',
+				icon: ContractEditIcon,
+				url: "/#"
+			},
+			{
+				label: "Forms",
+				url: "/#",
+				icon: ContractIcon
+			},
+			{
+				label: "Training & Development",
+				url: "/#",
+				icon: TrainingIcon
+			},
+		]
+	}
+];
+
+const route = useRoute()
+
+watch(route, () => {
+	getNavList()
+})
+
+const getNavList = () => {
+	const result = navList.find(data => {
+		return data.type === route.name;
+	});
+	if(result) {
+		navItems.value =  result.navigation;
+	}else {
+		navItems.value = navList[0].navigation;
+	}
 }
 
 const windowWidth = ref(null);
@@ -99,6 +149,7 @@ onMounted(async () => {
 	windowWidth.value = window.innerWidth
 	await nextTick();
 	window.addEventListener('resize', onResize);
+	getNavList();
 });
 
 const onResize = ()=> {
