@@ -2,7 +2,7 @@
     <div class="page-people-search-center-container">
         <div class="page-title">People Search</div>
         <div class="-md:px-4 page-content flex-col">
-            <input type="text" placeholder="Search" class="input w-full bg-primary-content text-black text-lg"  v-model="searchInput"/>
+            <input type="text" placeholder="Search" class="input w-full bg-base-content text-black text-lg"  v-model="searchInput"/>
             <people-search-action @peopleSearchActionSelected="filterSelected"></people-search-action>
             <search-list :filter="tblFilter"></search-list>
         </div>
@@ -15,7 +15,7 @@
         @apply text-lg font-light pb-3 pl-5;
     }
     .page-content {
-        @apply block border border-secondary bg-neutral rounded p-7 w-fit m-auto;
+        @apply block p-7 w-fit m-auto;
     }
 }
 </style>

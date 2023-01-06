@@ -2,10 +2,10 @@
 	<div class="nav-bar-container">
 		<div class="nav-bar-toggler" @click="toggleCollapse"></div>
 		<div class="nav-bar-items" v-if="!collapsed || windowWidth >= 1920">
-			<nav-item
+			<!-- <nav-item
 				:icon="UpperArrowIcon"
 				@click.prevent="toggleCollapse"
-			/>
+			/> -->
 			<nav-item
 				v-for="(item, ndx) in navItems"
 				:key="ndx"
@@ -41,6 +41,10 @@ import {
 	ContractEditIcon,
 	ContractIcon,
 	TrainingIcon,
+	PersonAddIcon,
+	MembersIcon,
+	EmployeeIcon,
+	StatsIcon
 }
 from '@/components/icons'
 import NavItem from './nav-item.vue';
@@ -121,6 +125,31 @@ const navList = [
 				label: "Training & Development",
 				url: "/#",
 				icon: TrainingIcon
+			},
+		]
+	},
+	{
+		type: 'people-search',
+		navigation: [
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/people-search/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/people-search/members"
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/#"
+			},
+			{
+				label: 'Statistics',
+				icon: StatsIcon,
+				url: "/#"
 			},
 		]
 	}
