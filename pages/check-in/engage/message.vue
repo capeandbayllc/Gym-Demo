@@ -1,5 +1,5 @@
 <template>
-    <simple-card title="Make a call">
+    <simple-card title="Send an SMS Text">
         <div class="email-modal-container flex flex-col">
             <div class="content col-span-3">
                 <div class="email-inner-content m-5 p-4 col-span-3 mb-8">
@@ -32,6 +32,7 @@
                             class="btn w-max rounded btn-sm font-medium ml-32 mr-3"
                             error
                             outline
+                            @click="$emit('close')"
                         >
                             Cancel
                         </button>

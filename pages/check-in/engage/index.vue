@@ -12,13 +12,13 @@
             </div>
         </div>
         <daisy-modal ref="outgoingCallModalRef">
-            <outgoing-call-modal @callNow="showInCallModal"></outgoing-call-modal>
+            <outgoing-call-modal @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal>
         </daisy-modal>
         <daisy-modal ref="emailModalRef">
-            <EmailModal/>
+            <EmailModal @close="closeEmailModal"/>
         </daisy-modal>
         <daisy-modal ref="smsModalRef">
-            <SMSModal/>
+            <SMSModal @close="closeSMSModal"/>
         </daisy-modal>
     </simple-card>
 </template>
@@ -91,17 +91,27 @@ const smsModalRef = ref(null);
 const outgoingCall = ()=>{
     outgoingCallModalRef.value.open();
 }
+const closeOutgoingCall = ()=>{
+    outgoingCallModalRef.value.close();
+}
 
 const openEmailModal = ()=>{
     emailModalRef.value.open();
 }
+const closeEmailModal = ()=>{
+    emailModalRef.value.close();
+}
 const openSMSModal = ()=>{
     smsModalRef.value.open();
+}
+const closeSMSModal = ()=>{
+    smsModalRef.value.close();
 }
 
 const showInCallModal = () => {
     outgoingCallModalRef.value.close();
 };
+
 </script>
 
 <style scoped>

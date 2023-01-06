@@ -18,12 +18,12 @@
                 <span class="edit-icon"><empty-file-icon class="mb-2" /></span>
             </Button>
         </div>
-        <div class="profile-contact-methods">
+        <button class="profile-contact-methods" @click="openEngage">
             <span class="mr-14 font-bold text-xl">Engage</span>
-            <button class="-sm:!ml-2"><CallIcon/></button>
-            <button class="-sm:!ml-2"><EmailIcon/></button>
-            <button class="-sm:!ml-2"><MessageIcon/></button>
-        </div>
+            <div class="-sm:!ml-2"><CallIcon/></div>
+            <div class="-sm:!ml-2"><EmailIcon/></div>
+            <div class="-sm:!ml-2"><MessageIcon/></div>
+        </button>
         <!-- <div class="profile-actions">
             <Button secondary size="sm"
                 @click="$emit('create-note')" 
@@ -109,7 +109,7 @@
     }
     
     .profile-contact-methods {
-        @apply flex flex-row  space-x-7 p-4 mb-4 border border-secondary rounded-md;
+        @apply flex flex-row space-x-7 p-4 mb-4 border border-secondary rounded-md items-center;
         button {
             @apply text-base-content text-base xl:text-lg font-semibold;
         }
@@ -137,5 +137,10 @@ const mock = {
     membership: 'p',
     addOns: 'pt',
     notifications: 3,
+}
+const emit = defineEmits(["openEngage"])
+
+const openEngage = ()=>{
+    emit("openEngage")
 }
 </script>

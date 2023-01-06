@@ -2,7 +2,7 @@
   <div class="checkin-profile-card">
     <profile-info
       @create-alert="$emit('create-alert')"
-            @create-note="$emit('create-note')" />
+            @create-note="$emit('create-note')" @open-engage="$emit('select-option','engage')" />
     <profile-options
       :selected="activeOption"
       @update:selected="$emit('select-option', $event)"
