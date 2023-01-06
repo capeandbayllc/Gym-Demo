@@ -33,6 +33,8 @@
 <style scoped>
 .app-layout {
 	@apply w-screen overflow-x-hidden;
+	background-image: url('/background-gradient.svg');
+	background-size: cover;
 }
 .app-content {
 	@apply flex flex-row relative;

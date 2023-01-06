@@ -9,13 +9,13 @@
 		<div @mouseover="showFocus" @mouseleave="hideFocus">
 			<input ref="globalSearchInput" type="text" placeholder="Search" class="input global-search-input w-52 -xl:w-40 -lg:w-36 -lg:mr-0 mr-9 bg-slate-50 text-black text-lg h-9" @click="$emit('show-global-search')"/>
 		</div>
-		<div class="alert-container">
-			<alarm-btn />
-			<alert-list class="alert-list"/>
-		</div>
 		<div class="relative">
 			<person-add-icon @click="showUserMenu"/>
 			<user-add-menu ref="userMenu"/>
+		</div>
+		<div class="alert-container mt-1">
+			<alarm-btn />
+			<alert-list class="alert-list"/>
 		</div>
 		<!-- <div class="setting-icon">		
 			<setting-icon />
@@ -64,7 +64,7 @@
 	@apply block;
 }
 .alert-container {
-	@apply relative;
+	@apply relative -sm:!ml-4;
 	.alert-list {
 		@apply absolute z-20 hidden;
 		right: -8rem;
