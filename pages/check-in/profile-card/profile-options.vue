@@ -2,7 +2,7 @@
   <div class="profile-options-container">
     <div class="flex flex-row gap-2">
       <div class="btn-check-in">Check in</div>
-      <div class="btn-close-selection">Close Selection</div>
+      <!-- <div class="btn-close-selection">Close Selection</div> -->
     </div>
     <div class="profile-options">
       <profile-option-item
