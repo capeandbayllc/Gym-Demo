@@ -42,6 +42,7 @@
     <guest-card v-if="option === 'guest-pass'" @close="option = null"/>
     <note-card v-if="option === 'note'" @close="option = null"/>
     <new-agreement v-if="option === 'newAgreement'" @close="option = null"/>
+    <Engage v-if="isEngageOpen"/>
     <footer-logo class="m-auto" v-else/>
     <daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
         <alert-add-modal @close="scope.close()"/>
@@ -90,19 +91,20 @@ import AlertAddModal from './alert-add-modal.vue';
 import NoteAddModal from './note-add-modal.vue';
 import UserInfo from './user-info/index.vue';
 import Setting from './setting/index.vue';
+import Engage from './engage/index.vue';
 
 
-const option = ref(null)
+const option = ref(null);
 
-const alertAddModal = ref(null)
+const alertAddModal = ref(null);
 const showAlertAddModal = () => {
     alertAddModal.value.open()
-}
+};
 
-const noteAddModal = ref(null)
+const noteAddModal = ref(null);
 const showNoteAddModal = () => {
-    noteAddModal.value.open()
-}
+  noteAddModal.value.open()
+};
 
 const isAccountViewOpen = ref(false);
 const accountView = ref(null);
@@ -113,7 +115,9 @@ const changeAccountView = (view)=> {
   } else {
     accountView.value = view
   }
-}
+};
+
+const isEngageOpen = ref(true)
 
 const backToTop = ()=>{
   const appLayout = document.querySelector(".app-layout")

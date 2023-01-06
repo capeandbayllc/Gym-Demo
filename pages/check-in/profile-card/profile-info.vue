@@ -19,10 +19,10 @@
             </Button>
         </div>
         <div class="profile-contact-methods">
-            <span>Engage</span>
-            <Button size="sm" secondary class="-sm:!ml-2">Phone</Button>
-            <Button size="sm" secondary class="-sm:!ml-2">Email</Button>
-            <Button size="sm" secondary class="-sm:!ml-2">SMS</Button>
+            <span class="mr-14 font-bold text-xl">Engage</span>
+            <button class="-sm:!ml-2"><CallIcon/></button>
+            <button class="-sm:!ml-2"><EmailIcon/></button>
+            <button class="-sm:!ml-2"><MessageIcon/></button>
         </div>
         <!-- <div class="profile-actions">
             <Button secondary size="sm"
@@ -82,7 +82,7 @@
                 content:"edit";
                 background: inherit;
                 line-height: 30px;
-            }
+            } 
             &:hover {
                 color:inherit;
                 &:before{
@@ -107,11 +107,11 @@
             @apply h-full w-full;
         }
     }
-    }
+    
     .profile-contact-methods {
-        @apply flex flex-row  space-x-7 pb-8;
+        @apply flex flex-row  space-x-7 p-4 mb-4 border border-secondary rounded-md;
         button {
-            @apply text-base-content text-base xl:text-lg font-semibold border border-base-content w-24;
+            @apply text-base-content text-base xl:text-lg font-semibold;
         }
     }
     .guest-pass {
@@ -128,7 +128,7 @@
 <script setup>
 import MembershipBtn from '~~/components/buttons/membership-btn.vue';
 import AddonBtn from '~~/components/buttons/addon-btn.vue'
-import { EmptyFileIcon } from '~~/components/icons';
+import { CallIcon,EmailIcon,MessageIcon,EmptyFileIcon } from '~~/components/icons';
 const mock = {
     img: '/checkin/kevin.png',
     name: 'Kevin Buchanan',
