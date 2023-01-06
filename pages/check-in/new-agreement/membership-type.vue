@@ -48,7 +48,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-secondary py-3 align-top">Total Due Today</td>
+                        <td class="text-secondary border border-secondary py-3 align-top">Total Due Today</td>
                         <td class="text-secondary border border-secondary py-3 text-center">
                             <p class="mb-6">$0.00</p>
                             <Button secondary size="sm">Select</Button>
@@ -153,7 +153,10 @@ const membershipTable = ref([
 </script>
 
 <style scoped>
+    .membership-table tbody tr th, .membership-table tbody tr td{
+        @apply px-4;
+    }
     .membership-table tbody tr td{
-        @apply border ;
+        @apply border;
     }
 </style>

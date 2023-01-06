@@ -11,13 +11,15 @@
             </div>
         </div>
     </simple-card>
-    <daisy-modal id="agreementPopUp" ref="agreementPopUp" class="w-fit">
+    <daisy-modal id="agreementPopUp" ref="agreementPopUp" class="w-fit" @close="closeModel">
         <div class="bg-black rounded-md p-6 border border-secondary">
             <component :is="agreementScreens[agreementScreenIndex]"></component>
             <div class="flex justify-end mt-6">
                 <Button size="sm" class="normal-case mx-2" ghost @click="prevScreen" v-if="agreementScreenIndex > 0">Back</Button>
                 <Button size="sm" class="normal-case mx-2 ml-auto" ghost>Cancel</Button>
                 <Button size="sm" class="normal-case mx-2" secondary v-if="agreementScreenIndex == 0">Save as a Draft</Button>
+                <Button size="sm" class="normal-case mx-2">Add to Segment</Button>
+                <!-- <Button size="sm" class="normal-case mx-2">Complet and Send Document</Button> -->
                 <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue ></Button>
             </div>
         </div>
@@ -30,6 +32,8 @@ import SelectGym from './select-gym'
 import PersonalInformation from './personal-information'
 import PersonalInformationNext from './personal-information/personal-info-next.vue'
 import FinancialCollect from './financial-collect'
+import TermsAndCondition from './terms-condition.vue'
+import PayNow from './pay-now.vue'
 const isActiveMember = ref(false);
 
 const memberInfo = ref({});
@@ -97,8 +101,14 @@ const memberInformation = [{
 }];
 
 const agreementPopUp = ref(null);
-const agreementScreens = ref([Agreement,SelectGym,PersonalInformation, PersonalInformationNext,FinancialCollect]);
+const agreementScreens = ref([Agreement,SelectGym,PersonalInformation, PersonalInformationNext,FinancialCollect,TermsAndCondition,PayNow]);
 const agreementScreenIndex = ref(0);
+
+const closeModel = ()=>{
+    setTimeout(() => {   
+        agreementScreenIndex.value = 0;
+    },500);
+}
 
 const showAgreementPopUp = () => {
 	agreementPopUp.value.open()
