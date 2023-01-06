@@ -13,10 +13,13 @@
         <div class="profile-status">
             <membership-btn :membership="mock.membership" />
             <addon-btn :value="true" />
-            <Button size="sm" secondary>Added: Family Member</Button>
+            <Button size="sm" class="rounded-full px-[6px] femily-member" secondary>
+                FM
+                <span class="edit-icon"><empty-file-icon class="mb-2" /></span>
+            </Button>
         </div>
-        <div class="pb-2">Contact</div>
         <div class="profile-contact-methods">
+            <span>Engage</span>
             <Button size="sm" secondary class="-sm:!ml-2">Phone</Button>
             <Button size="sm" secondary class="-sm:!ml-2">Email</Button>
             <Button size="sm" secondary class="-sm:!ml-2">SMS</Button>
@@ -74,7 +77,7 @@
         @apply flex flex-row space-x-4 pb-3;
         > div, > button{
             @apply relative;
-            &:before{
+            /* &:before{
                 @apply absolute w-full rounded-md h-full text-sm top-0 left-0 text-center invisible capitalize;
                 content:"edit";
                 background: inherit;
@@ -85,8 +88,25 @@
                 &:before{
                     @apply visible;
                 }
+            } */
+        }
+    }
+    .femily-member{
+        @apply relative;
+        &:hover {
+            font-size:0;
+            @apply px-4;
+            .edit-icon{
+                @apply visible;
             }
         }
+    }
+    .edit-icon{
+        @apply absolute h-[20px] w-[20px] invisible mx-auto left-0 right-0;
+        svg {
+            @apply h-full w-full;
+        }
+    }
     }
     .profile-contact-methods {
         @apply flex flex-row  space-x-7 pb-8;
@@ -108,12 +128,13 @@
 <script setup>
 import MembershipBtn from '~~/components/buttons/membership-btn.vue';
 import AddonBtn from '~~/components/buttons/addon-btn.vue'
+import { EmptyFileIcon } from '~~/components/icons';
 const mock = {
     img: '/checkin/kevin.png',
     name: 'Kevin Buchanan',
     joined: 2020,
     club_id: 1234567890,
-    membership: 'premium',
+    membership: 'p',
     addOns: 'pt',
     notifications: 3,
 }
