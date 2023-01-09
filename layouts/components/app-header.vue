@@ -15,13 +15,13 @@
 			@show-profile-menu="$emit('show-profile-menu')"
 			@show-global-search="showGlobalSearchModal"
 		/>
-		<daisy-modal id="pulseModal" ref="pulseModal">
+		<daisy-modal :overlay="true" id="pulseModal" ref="pulseModal">
 			<pulse-modal />
 		</daisy-modal>
 		<daisy-modal id="peopleSearchModal" ref="peopleSearchModal">
 			<people-search-modal />
 		</daisy-modal>
-		<daisy-modal id="globalSearchModal" ref="globalSearchModal">
+		<daisy-modal :overlay="true" id="globalSearchModal" ref="globalSearchModal">
 			<global-search-modal />
 		</daisy-modal>
 	</div>

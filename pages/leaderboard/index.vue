@@ -91,7 +91,7 @@
         @apply text-left text-lg font-light pb-3 pl-5;
     }
     .page-content {
-        @apply block border border-secondary bg-neutral rounded p-7 max-w-screen-lg m-auto;
+        @apply block p-7 max-w-screen-lg m-auto;
         /* @screen xl{
             @apply inline-block
         } */
@@ -277,4 +277,10 @@ const membershipData = ref([
         dollarAmount:"$1,200",
     }
 ])
+
+onMounted(() => {
+    setTimeout(() => {
+        membershipCarousel.value.restartCarousel();
+    }, 500);
+})
 </script>

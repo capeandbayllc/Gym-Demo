@@ -13,9 +13,19 @@
             </div>
         </td>
         <td class="capitalize text-accent-focus/60">{{data.status}}</td>
-        <td> <div class="flex items-center">
-                <img src="/ellypsis.svg" class="w-7 h-7"/>
-            </div>
+        <td>
+            <div class="dropdown dropdown-end">
+                <div class="btn btn-ghost btn-sm text-base-content" tabindex="0" @click.prevent.stop>
+                    <font-awesome-icon icon="ellipsis-h" size="lg" />
+                </div>
+                <context-menu class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <Button outline size="sm" class="my-1 border-primary">Preview</Button>
+                    <Button outline size="sm" class="my-1 border-primary">Edit</Button>
+                    <Button outline size="sm" class="my-1 border-primary">Trash</Button>
+                    <Button outline size="sm" class="my-1 border-primary">Contact Lead</Button>
+                    <Button outline size="sm" class="my-1 border-primary">Add a Note</Button>
+                </context-menu>
+            </div> 
         </td>
     </tr>
 </template>
@@ -62,9 +72,19 @@
     .type-streaming_preview {
         @apply rounded font-semibold p-1 mx-2 text-sm bg-accent-focus/70;
     }
+    /* .table-action-menu  {
+        position: absolute;
+        top: -50%;
+    } */
 }
 </style>
 <script setup>
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faEllipsisH);
 const props = defineProps({
     data: Object
 })

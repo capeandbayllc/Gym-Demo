@@ -58,7 +58,7 @@ const columns = [
         class: "text-secondary"
     }, {
         label: "Action",
-        class: "text-secondary"
+        class: ""
     }
 ]
 const members = [{

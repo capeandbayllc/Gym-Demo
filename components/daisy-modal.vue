@@ -4,8 +4,9 @@
             class="modal"
             :class="{
                 'modal-open': isOpen,
-                '!bg-black/50': transparent,
-                '!bg-black': !transparent,
+                '!bg-black/50': transparent && !overlay,
+                '!bg-black': !transparent && !overlay,
+                'overlay-modal' : overlay
             }"
         >
             <div v-if="closable" class="absolute inset-0" @click="close"></div>
@@ -41,6 +42,10 @@
 .modal-box {
 	@apply overflow-visible shadow-none p-0 min-w-fit;
 }
+.overlay-modal {
+    background: rgb(25 25 25 / 60%);
+    backdrop-filter: blur(10px) opacity(70%);
+}
 </style>
 <script>
 import {
@@ -69,6 +74,10 @@ export default defineComponent({
         showCloseButton: {
             type: Boolean,
             default: true,
+        },
+        overlay: {
+            type: Boolean,
+            default: false,
         },
     },
     setup(props, { emit }) {

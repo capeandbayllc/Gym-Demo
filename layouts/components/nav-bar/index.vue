@@ -44,7 +44,6 @@ import {
 	PersonAddIcon,
 	MembersIcon,
 	EmployeeIcon,
-	StatsIcon
 }
 from '@/components/icons'
 import NavItem from './nav-item.vue';
@@ -134,22 +133,17 @@ const navList = [
 			{
 				label: 'Leads',
 				icon: PersonAddIcon,
-				url: "/people-search/leads"
+				url: "/leads"
 			},
 			{
 				label: 'Members',
 				icon: MembersIcon,
-				url: "/people-search/members"
+				url: "/members"
 			},
 			{
 				label: 'Employees',
 				icon: EmployeeIcon,
-				url: "/#"
-			},
-			{
-				label: 'Statistics',
-				icon: StatsIcon,
-				url: "/#"
+				url: "/leaderboard"
 			},
 		]
 	}
