@@ -7,7 +7,18 @@
                 class="px-3 capitalize"
                 :class="column.class"
             >
+            <div v-if="column.label === 'Action'">
+                <font-awesome-icon
+                    :icon="[
+                        'fas',
+                        'align-left',
+                    ]"
+                    size="lg"
+                />
+            </div>
+            <div v-else>
                 {{ column.label ? column.label: column }}
+            </div>
             </th>
         </tr>
     </thead>
@@ -18,6 +29,12 @@ thead {
 }
 </style>
 <script setup>
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faAlignLeft } from "@fortawesome/free-solid-svg-icons";
+
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faAlignLeft);
 const props = defineProps({
     columns: {
         type: Array,

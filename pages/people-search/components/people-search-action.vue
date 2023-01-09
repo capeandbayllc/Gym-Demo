@@ -21,6 +21,9 @@
 }
 </style>
 <script setup>
+const props = defineProps({
+    actionsBtn: Array,
+});
 const activeBtn = ref('');
 const emit = defineEmits(['people-search-action-selected'])
 const setActiveAction = (name) => {
@@ -52,24 +55,6 @@ const filterType = [
     {
         value: "5",
         label: "Location 5"
-    },
-];
-const actionsBtn = [
-    {
-        name: 'Leads',
-        type: 'leads'
-    },
-    {
-        name: 'Members',
-        type: 'members'
-    },
-    {
-        name: 'Employees',
-        type: 'employees'
-    },
-    {
-        name: 'Segments',
-        type: 'segments'
     },
 ];
 </script>
