@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center items-center pt-8 pb-10">
-        <button class="flex flex-col items-center">
+        <button class="flex flex-col items-center" @click="$emit('newAgreement')">
             <NewAgreementIcon class="w-[160px] h-[50px] mb-2"/>
             <span>Start a New Agreement</span>
         </button>
