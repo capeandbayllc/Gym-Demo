@@ -28,28 +28,28 @@
         </div> -->
     <div class="flex w-full gap-6 p-6">
         <div class="w-[140px]">
-            <button class="flex flex-col items-center">
+            <button class="flex flex-col items-center mb-6" @click="createNote">
                 <NewAgreementIcon class="w-[140px] h-[50px] mb-2"/>
                 <span>Create a new note</span>
             </button>
-            <Button secondary size="sm" class="w-full mb-4 normal-case flex justify-between"> <span> Shared </span> <span>21</span></Button>
-            <Button secondary size="sm" class="w-full mb-4 normal-case flex justify-between"> <span> Admin Notes </span> <span>3</span></Button>
-            <Button outline size="sm" class="w-full mb-4 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
-            <Button outline size="sm" class="w-full mb-4 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
-            <Button outline size="sm" class="w-full mb-4 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
-            <Button outline size="sm" class="w-full mb-4 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
-            <Button outline size="sm" class="w-full mb-4 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
-            <Button outline size="sm" class="w-full mb-4 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
+            <Button secondary size="sm" class="w-full mb-6 normal-case flex justify-between"> <span> Shared </span> <span>21</span></Button>
+            <Button secondary size="sm" class="w-full mb-6 normal-case flex justify-between"> <span> Admin Notes </span> <span>3</span></Button>
+            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
+            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
+            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
+            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
+            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
+            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
         </div>
         <div>
             <div class="w-fit">
-                <div class="flex">
-                    <Button size="sm" secondary class="w-[120px] normal-case mx-3">Recent</Button>
-                    <Button size="sm" secondary class="w-[120px] normal-case mx-3">Completed</Button>
+                <div class="flex mb-8">
+                    <Button size="sm" outline class="w-[120px] normal-case mx-3" :class="[{'!bg-secondary !border-secondary':notesType == 'recent'},{'border-slate-400 text-slate-400':notesType !== 'recent'}]" @click="notesType='recent'">Recent</Button>
+                    <Button size="sm" outline class="w-[120px] normal-case mx-3" :class="[{'!bg-secondary !border-secondary':notesType == 'completed'},{'border-slate-400 text-slate-400':notesType !== 'completed'}]" @click="notesType='completed'">Completed</Button>
                 </div>
                 <div class="w-full">
-                    <p>Today</p>
-                    <div class="bg-black border border-white rounded-md p-1 mb-4" v-for="note in notes" :key="note.id">
+                    <p class="mb-2">Today</p>
+                    <div class="bg-black border border-white rounded-md p-1 mb-4" :class="{'!bg-secondary !border-slate-400':note.completed}" v-for="note in notes.filter(n=> notesType== 'completed' ? n.completed : !n.completed )" :key="note.id">
                         <div class="flex justify-between">
                             <span>{{note.title}}</span>
                             <AlertButton v-model="note.alert" class="w-[250px]"/>
@@ -80,6 +80,17 @@
             </div>
         </div>
     </div>
+    <daisy-modal class="w-fit" id="noteModal" ref="noteModal">
+        <div class="p-4 w-[600px]">
+            <h3 class="text-center mb-4 ">{{today}}</h3>
+            <textarea v-model="activeNote.title" class="w-full h-80 rounded p-2 mb-4" placeholder="New Note Name"></textarea>
+            <div class="note-actions flex justify-end">
+                <AlertButton v-model="activeNote.alert" class="w-[250px] mr-4"/>
+                <Button size="sm" class="normal-case mr-4" ghost>Delete</Button>
+                <Button size="sm" class="normal-case" secondary>Save</Button>
+            </div>
+        </div>
+    </daisy-modal>
     </simple-card>
 </template>
 <style scoped>
@@ -127,13 +138,19 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 
-const activeNote = ref({title: ""})
-const notes = [{
+const noteModal = ref(null);
+
+const notesType = ref("recent");
+
+const activeNote = ref({title: ""});
+
+const notes = ref([{
     id: 1,
     title: "Note #16",
     date: "Month 1, 2022",
     time: "0:00 PM",
     content: "Cecil Ellington",
+    completed:false,
     alert: true
 }, {
     id: 2,
@@ -141,6 +158,7 @@ const notes = [{
     date: "Month 1, 2022",
     time: "0:00 PM",
     content: "Cecil Ellington",
+    completed:false,
     alert: false
 }, {
     id: 3,
@@ -148,6 +166,7 @@ const notes = [{
     date: "Month 1, 2022",
     time: "0:00 PM",
     content: "Cecil Ellington",
+    completed:true,
     alert: false
 }, {
     id: 4,
@@ -155,6 +174,7 @@ const notes = [{
     date: "Month 1, 2022",
     time: "0:00 PM",
     content: "Cecil Ellington",
+    completed:false,
     alert: true
 }, {
     id: 5,
@@ -162,8 +182,20 @@ const notes = [{
     date: "Month 1, 2022",
     time: "0:00 PM",
     content: "Cecil Ellington",
+    completed:true,
     alert: true
-}];
+}]);
+
+const today = computed(() => {
+    const date = new Date();
+    const months =  ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+});
+
+const createNote = () =>{
+    noteModal.value.open();
+}
+
 const events = [
     {
         title: 'Priority One',
@@ -197,9 +229,11 @@ const events = [
         backgroundColor: 'green',
     }
 ];
+
 const eventClick = (info) =>{
     alert("event Clicked");
 };
+
 const calendar = ref(null);
 const currentView = ref("timeGridWeek");
 const calenderView = ref("timeGridWeek");

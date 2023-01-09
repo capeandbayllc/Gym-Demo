@@ -11,13 +11,13 @@
             <check-circle-icon v-if="modelValue"/>
         </div>
         <div class="font-normal text-xs">
-            {{ modelValue ? "Alert" : "Create Alert" }}
+            {{ modelValue ? "Alert" : "Create an Alert" }}
         </div>
     </div>
 </template>
 <style scoped>
 .alert-container {
-    @apply flex flex-row items-center space-x-2 w-fit pr-4 cursor-pointer bg-white rounded-full text-black;
+    @apply flex flex-row items-center space-x-2 h-[30px] w-fit pr-4 py-1 cursor-pointer bg-white rounded-full text-black;
     .checker {
         @apply p-1 rounded-full;
         /* bg-accent-focus */
