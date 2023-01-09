@@ -42,7 +42,7 @@
     <guest-card v-if="option === 'guest-pass'" @close="option = null"/>
     <note-card v-if="option === 'note'" @close="option = null"/>
     <new-agreement v-if="option === 'newAgreement'" @close="option = null"/>
-    <Engage v-if="option === 'engage'" @close="isEngageOpen=null"/>
+    <Engage v-if="option === 'engage'" @close="option = null"/>
     <footer-logo class="m-auto" v-else/>
     <daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
         <alert-add-modal @close="scope.close()"/>
@@ -95,9 +95,10 @@ import Engage from './engage/index.vue';
 
 
 const option = ref(null);
-const appLayout = document.querySelector(".app-layout")
+
 
 watch(option,()=>{
+  const appLayout = document.querySelector(".app-layout");
   const scrollTO = document.querySelector(".page-checkin-container").offsetHeight + 100;
   setTimeout(() => {
     appLayout.scroll({
@@ -130,9 +131,8 @@ const changeAccountView = (view)=> {
   }
 };
 
-const isEngageOpen = ref(false)
-
 const backToTop = ()=>{
+  const appLayout = document.querySelector(".app-layout");
   appLayout.scroll({
     top: 0,         
     left: 0, 

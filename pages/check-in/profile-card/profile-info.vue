@@ -40,17 +40,17 @@
         <div class="bg-gray p-4 border border-secondary bg-[#191919]">
             <p class="text-sm mb-2">Guest Pass:</p>
             <ul class="max-h-[80px] overflow-auto px-2">
-                <li class="flex my-4">
+                <li class="flex my-4 items-center">
                     <div class="mr-2">
-                        <input type="text" class="rounded-md bg-white text-black text-xs h-full px-2" value="Issued December 12, 2021">
+                        <input type="text" class="rounded-md bg-white text-black text-xs h-full p-2 " value="Issued December 12, 2021">
                     </div>
-                    <Button size="sm" class="!bg-[#5BC600] text-black">Day Left:2</Button>
+                    <span class="text-xs ml-2">Day Left: <b class="text-md bg-black border border-secondary py-2 px-3 rounded-full">2</b></span>
                 </li>
-                <li class="flex my-4">
+                <li class="flex my-4 items-center">
                     <div class="mr-2">
-                        <input type="text" class="rounded-md bg-white text-black text-xs h-full px-2" value="Issued December 12, 2021">
+                        <input type="text" class="rounded-md bg-white text-black text-xs h-full p-2 " value="Issued December 12, 2021">
                     </div>
-                    <Button size="sm" class="!bg-[#5BC600] text-black">Day Left:2</Button>
+                    <span class="text-xs ml-2">Day Left: <b class="text-md bg-black border border-secondary py-2 px-3 rounded-full">2</b></span>
                 </li>
             </ul>
         </div>
