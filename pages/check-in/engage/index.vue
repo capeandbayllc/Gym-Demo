@@ -116,6 +116,6 @@ const showInCallModal = () => {
 
 <style scoped>
     .engage-card{
-        @apply max-w-[1080px] mx-auto w-full;
+        @apply max-w-[1120px] mx-auto w-full;
     }
 </style>

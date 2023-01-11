@@ -2,14 +2,14 @@
     <simple-card class="mb-8">
         <div class="py-4 px-10">
             <h2 class="text-center leading-10 text-lg">Salary/Banking Information</h2>
-            <div class="flex">
-                <div class="chart w-[60%]">
+            <div class="flex -md:block">
+                <div class="chart w-[60%] -md:w-full -md:mb-4">
                     <banking-info-cahrt :width="350" class="mx-auto"/>
                 </div>
-                <div class="w-[40%]">
-                    <div v-for="(item, index) in bankingInfo" :key="item.key" class="mx-auto w-fit mb-4">
+                <div class="w-[40%] -md:w-full">
+                    <div v-for="(item, index) in bankingInfo" :key="item.key" class="mx-auto w-fit mb-4 -md:w-full">
                         <div class="mb-2">{{item.label}}</div>
-                        <input :class="item.class" class="w-full p-1 rounded-sm w-[250px]" v-model="bankingInfoObj[item.key]"/>
+                        <input :class="item.class" class="w-full p-1 rounded-sm w-[250px] -md:w-full" v-model="bankingInfoObj[item.key]"/>
                     </div>
                 </div>
             </div>

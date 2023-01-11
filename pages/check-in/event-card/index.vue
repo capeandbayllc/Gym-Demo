@@ -20,7 +20,7 @@
 </template>
 <style scoped>
 .event-card-container {
-  @apply w-full md:w-80 flex-grow-0 -lg:grow-[1];
+  @apply w-[33%]  -md:w-2/5 flex-grow-0;
   background-image: linear-gradient(#0074C8, #000);
 }
 .event-card-container, .scheduled-event-container {

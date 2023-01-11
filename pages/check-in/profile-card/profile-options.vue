@@ -1,12 +1,12 @@
 <template>
-  <div class="profile-options-container">
+  <div class="profile-options-container relative">
+    <div class="absolute bg-secondary px-8 py-2 z-10 rounded w-[140px] top-[-100px] text-center cursor-pointer -xl:right-[10px] -xl:top-[20px] -lg:static -lg:mt-4" @click="openAddMemberPopUp">
+      <AddIcon class="h-[40px] w-[40px] border inline-block border-white rounded-full"/>
+      <p>
+        Add Lead
+      </p>
+    </div>
     <div class="flex flex-row gap-2 relative">
-      <div class="absolute bg-secondary px-8 py-2 z-10 rounded w-[140px] top-[-100px] text-center cursor-pointer" @click="openAddMemberPopUp">
-        <AddIcon class="h-[40px] w-[40px] border inline-block border-white rounded-full"/>
-        <p>
-          Add Lead
-        </p>
-      </div>
       <div class="btn-check-in">Check in</div>
       <!-- <div class="btn-close-selection">Close Selection</div> -->
     </div>

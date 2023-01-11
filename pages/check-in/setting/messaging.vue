@@ -1,31 +1,31 @@
 <template>
     <simple-card class="">
-        <div class="grid grid-cols-3 gap-6 py-4 px-10">
-            <h2 class="text-center leading-10 text-lg col-span-3">Messaging</h2>
+        <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:!grid-cols-2 -md:!grid-cols-1">
+            <h2 class="text-center leading-10 text-lg col-span-3 -lg:col-span-2 -md:col-auto">Messaging</h2>
             
-            <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
+            <div class="col-span-1 -lg:col-span-1 -md:col-auto mx-auto w-full">
                 <div class="mb-2">Email Address</div>
                 <input class="neutral-input w-full p-1 rounded-sm" v-model="messagingForm.email"/>
             </div>
-            <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
+            <div class="col-span-1 -lg:col-span-1 -md:col-auto mx-auto w-full">
                 <div class="mb-2">Receive Emails:</div>
-                <select class="select select-sm w-full max-w-xs rounded-sm" v-model="messagingForm.receiveEmail">
+                <select class="select select-sm w-full rounded-sm w-full" v-model="messagingForm.receiveEmail">
                     <option disabled selected>Emails</option>
                     <option v-for="opt in receiveEmail" :value="opt.value" :key="opt.value">{{opt.label}}</option>
                 </select>
             </div>
-            <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
+            <div class="col-span-1 -lg:col-span-1 -md:col-auto mx-auto w-full">
                 <div class="mb-2">Receive Text:</div>
-                <select class="select select-sm w-full max-w-xs rounded-sm" v-model="messagingForm.receiveText">
+                <select class="select select-sm w-full rounded-sm" v-model="messagingForm.receiveText">
                     <option disabled selected>Text</option>
                     <option v-for="opt in receiveText" :value="opt.value" :key="opt.value">{{opt.label}}</option>
                 </select>
             </div>
-            <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
+            <div class="col-span-1 -lg:col-span-1 -md:col-auto mx-auto w-full">
                 <div class="mb-2">Text Number</div>
                 <input class="neutral-input w-full p-1 rounded-sm" v-model="messagingForm.textNumber"/>
             </div>
-            <div class="col-span-3 -lg:col-span-2 -md:col-auto mx-auto w-full text-center">
+            <div class="col-span-3 -lg:!col-span-2 -md:!col-auto mx-auto w-full text-center">
                 <Button secondary size="sm" class="capitalize">Save</Button>
             </div>
         </div>

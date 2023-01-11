@@ -58,7 +58,7 @@
 </template>
 <style scoped>
 .profile-info-container {
-    @apply flex flex-col items-center text-lg text-center;
+    @apply flex flex-col flex-1 items-center text-lg text-center;
     .profile-avatar {
         @apply relative rounded-full border-2 p-2;
         img {

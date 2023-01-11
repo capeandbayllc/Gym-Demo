@@ -1,6 +1,6 @@
 <template>
-    <div class="grid grid-cols-3 gap-6 w-full">
-        <simple-card class="p-4 flex flex-col w-fit">
+    <div class="grid grid-cols-3 gap-x-6 w-full -md:grid-cols-1">
+        <simple-card class="p-4 flex flex-col w-full mb-4">
             <h3 class="text-lg font-bold mb-4">Two Factor Authentication</h3>
             <p class="mb-4 flex-1">Add additional security to your account using two factor authentication.
                 <br/><br/>
@@ -10,7 +10,7 @@
             </p>
             <Button secondary size="sm" class="mx-auto capitalize">Enable</Button>
         </simple-card>
-        <simple-card class="p-4 flex flex-col w-fit">
+        <simple-card class="p-4 flex flex-col w-full mb-4">
             <h3 class="text-lg font-bold mb-4">Browser Sessions</h3>
             <p class="mb-4 flex-1">Manage and log out your active sessions on other browsers and devices.
                 <br/><br/>
@@ -20,7 +20,7 @@
             </p>
             <Button secondary size="sm" class="mx-auto capitalize">Log Out Other Browser Sessions</Button>
         </simple-card>
-        <simple-card class="p-4 flex flex-col w-fit">
+        <simple-card class="p-4 flex flex-col w-full mb-4">
             <h3 class="text-lg font-bold mb-4">Delete Account <LockIcon class="inline-block"/></h3>
             <p class="mb-4 flex-1">Permanently delete your account.
                 <br/><br/> Once your account is deleted, all of its resources and data will be permanently deleted. 

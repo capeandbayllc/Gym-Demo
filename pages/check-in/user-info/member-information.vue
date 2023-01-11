@@ -1,11 +1,13 @@
 <template>
     <simple-card class="mb-8">
-        <div class="grid grid-cols-3 gap-6 py-4 px-10">
-            <Button class="text-white capitalize" :class="isActiveMember ? 'bg-slate-400 hover:bg-slate-500' : 'bg-lime-500 hover:bg-lime-600'" @click="isActiveMember = !isActiveMember" >{{isActiveMember ? "In-Active" : "Active"}}</Button>
-            <h2 class="text-center leading-10 text-lg">Member Information</h2>
-            <Button class="ml-auto bg-[#0074C8] text-white capitalize" @click="showAgreementPopUp">Create New Agreement</Button>
+        <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2">
+            <div class="flex justify-between items-center col-span-3 -lg:col-span-2">
+                <Button class="text-white capitalize mr-[100px] -md:!mr-0" :class="isActiveMember ? 'bg-slate-400 hover:bg-slate-500' : 'bg-lime-500 hover:bg-lime-600'" @click="isActiveMember = !isActiveMember" >{{isActiveMember ? "In-Active" : "Active"}}</Button>
+                <h2 class="text-center leading-10 text-lg">Member Information</h2>
+                <Button class="bg-[#0074C8] text-white capitalize" @click="showAgreementPopUp">Create New Agreement</Button>
+            </div>
 
-            <div v-for="item in memberInformation" :key="item.key" class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
+            <div v-for="item in memberInformation" :key="item.key" class="col-span-1 -lg:col-span-1 -md:col-span-2 -md:col-auto mx-auto w-full">
                 <div class="mb-2">{{item.label}}</div>
                 <input :class="item.class" class="w-full p-1 rounded-sm" v-model="memberInfo[item.key]"/>
             </div>

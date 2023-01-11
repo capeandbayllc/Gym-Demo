@@ -3,8 +3,8 @@
     <div class="page-checkin-container">
       <div class="page-title">Member account page</div>
       <div class="page-content">
-        <div class="wrapper p-4 bg-secondary rounded-md" :class="{'pb-0':accountView !== null}">
-          <div class="flex">
+        <div class="wrapper p-4 w-full bg-secondary rounded-md" :class="{'pb-0':accountView !== null}">
+          <div class="flex -md:block">
             <event-card class="mr-4"/>
             <profile-card
             @create-alert="showAlertAddModal"
@@ -56,7 +56,7 @@
 <style scoped>
 
 .page-checkin-container {
-  @apply py-4 pr-5 bg-base-300 w-full h-fit border-b border-secondary pl-16 -md:pl-0;
+  @apply py-4 px-5 bg-base-300 w-full h-fit border-b border-secondary -md:pl-0;
   .page-title {
     @apply text-lg font-light pb-3 pl-5;
   }
@@ -65,7 +65,7 @@
 
     .account-box{
       ul{
-        @apply flex w-10/12 justify-around mx-auto;
+        @apply flex w-10/12 justify-around mx-auto -md:w-full;
 
         li{
           @apply inline-block;

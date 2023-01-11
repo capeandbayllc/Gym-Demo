@@ -1,7 +1,7 @@
 <template>
     <simple-card>
-        <div class="grid grid-cols-3 gap-6 py-4 px-10">
-            <h2 class="text-center leading-10 text-lg col-span-3">Employee Details</h2>
+        <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2 -md:grid-cols-1">
+            <h2 class="text-center leading-10 text-lg col-span-3 -lg:col-span-2 -md:col-auto">Employee Details</h2>
             <div v-for="(item, index) in employeeFields" :key="item.key" class="-lg:col-span-2 -md:col-auto mx-auto w-full">
                 <div class="mb-2">{{item.label}}</div>
                 <input :class="item.class" class="w-full p-1 rounded-sm" v-model="employeeForm[item.key]"/>
@@ -76,6 +76,6 @@ const departments = [{
         @apply bg-transparent border border-secondary;
     }
     .divider {
-        @apply border-b h-0 border-secondary col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-auto;
+        @apply border-b h-0 border-secondary col-span-3 3xl:col-span-4 -lg:!col-span-2 -md:!col-auto;
     }
 </style>

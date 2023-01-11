@@ -48,7 +48,7 @@ const prevScreen = ()=>{
 
 <style scoped>
 .agreements-card {
-    @apply m-auto bg-neutral w-full max-w-[1100px];
+    @apply m-auto bg-neutral w-full max-w-[1120px];
     @screen -lg {
         @apply m-4;
     }
