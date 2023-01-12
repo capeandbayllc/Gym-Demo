@@ -73,7 +73,7 @@
             </div>
             <img src="/close_arrow.svg" class="close-chat-icon-btn w-10 absolute -left-4 bottom-9 cursor-pointer" @click="toggleChatConversation"/>
         </div>
-        <div class="chat-icon rounded-full w-12 h-12 text-center fixed bottom-5 right-10 px-2 bg-base-content flex" @click="toggleChatConversation" v-else>
+        <div class="chat-icon rounded-full w-12 h-12 text-center fixed bottom-5 right-10 px-2 bg-base-content flex z-20" @click="toggleChatConversation" v-else>
             <img src="/chat_icon.svg" class="hover-chat-icon-none" />
             <img src="/chat_hover.svg" class="hover-chat-icon-display" />
         </div>
