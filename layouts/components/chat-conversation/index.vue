@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="chat-conversation-container" v-if="chatConversation">
-            <div class="chat-content">
+        <div class="chat-conversation-container fixed bottom-0 right-5 z-20" v-if="chatConversation">
+            <div class="chat-content border-2 border-secondary overflow-hidden">
                 <div class="flex">
                     <div class="left-side-chat-container border-r-2 border-secondary w-96">
                         <div class="bg-neutral px-8 py-4 border-b border-secondary">
@@ -9,7 +9,7 @@
                                 <img src="/account.png" class="w-16 h-16"/>
                             </div>
                             <div class="inline-block align-top mb-1 ml-2">
-                                <div class="text-2xl font-semibold pt-2">Kevin Buchanam</div>
+                                <div class="text-2xl -lg:text-lg font-semibold pt-2">Kevin Buchanam</div>
                                 <div class="text-accent-focus/80">Online</div>
                             </div>
                         </div>
@@ -23,44 +23,45 @@
                                 </div>
                                 <div class="flex gap-4  mt-5">
                                     <div class="relative cursor-pointer" v-for="(item, index) in onlineMembers">
-                                        <img class="w-12 h-12" :src="item.profile" alt="" :key="index">
-                                        <div class="rounded-full w-3 h-3 bg-accent-focus/80 absolute right-0 bottom-0"></div>
+                                        <img class="w-12 h-12 -lg:w-10 -lg:h-10" :src="item.profile" alt="" :key="index">
+                                        <div class="rounded-full w-3 h-3 -lg:w-2 -lg:h-2 bg-accent-focus/80 absolute right-0 bottom-0"></div>
                                     </div>
                                 </div>
                                 <div class="mt-5">
                                    Messages
                                 </div>
-                                <div class="chat-messages-container">
+                                <div class="chat-messages-container overflow-auto">
                                     <UserMessagesCard v-for="(chat, index) in messages" :key="index" :chat="chat"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="right-side-chat-container">
-                        <div class="bg-base-300 px-4 py-4 border-b border-secondary flex">
+                        <div class="bg-base-300 px-4 py-4 -lg:p-2 border-b border-secondary flex relative">
                             <div class="relative p-1">
-                                <img src="/chat-conversation/group-chat.svg" class="w-18 h-18"/>
+                                <img src="/chat-conversation/group-chat.svg" class="w-16 h-16 -lg:w-14 -lg:h-14"/>
                             </div>
-                            <div class="align-top mb-1 ml-2">
-                                <div class="text-xl font-semibold pt-2 text-ellipsis">Mona Parksdale, Geor…</div>
+                            <div class="align-top mb-1 ml-2 mr-2">
+                                <div class="text-xl -lg:text-sm font-semibold pt-2 text-ellipsis">Mona Parksdale, Geor…</div>
                                 <div class="text-accent-focus/80 text-xs">Online</div>
                             </div>
                             <div class="align-middle ml-auto justify-end mt-3">
-                                <div class="flex justify-between gap-8">
-                                    <img src="/chat-conversation/call.svg"  class="w-7 h-7"/>
-                                    <img src="/chat-conversation/video.svg" class="w-7 h-7" />
-                                    <img src="/chat-conversation/menu.svg" class="w-7 h-7" />
+                                <div class="flex justify-between gap-8 -lg:gap-4 ">
+                                    <img src="/chat-conversation/call.svg"  class="-lg:w-4 -lg:h-4"/>
+                                    <img src="/chat-conversation/video.svg" class="-lg:w-4 -lg:h-4" />
+                                    <img src="/chat-conversation/menu.svg" class="-lg:w-4 -lg:h-4" @click="toggleDropdown" />
                                 </div>
                             </div>
+                            <DropdownCard v-if="showDropDown" @closeDropdown="toggleDropdown"/>
                         </div>
-                        <div class="message-body px-10 py-4">
+                        <div class="message-body px-10 py-4 -lg:px-2 -lg:py-2 -lg:pr-6 overflow-auto">
                             <div>
                                 <ChatMessagesCard />
                             </div>
                         </div>
-                        <div class="bg-base-content p-4 py-2">
+                        <div class="bg-base-content p-4 py-2 -lg:p-2 h-full">
                             <div class="flex justify-between">
-                                <input type="text" placeholder="Type here" class="input w-full max-w-md bg-base-content text-base-300" />
+                                <input type="text" placeholder="Type here" class="input w-full max-w-md -lg:max-w-max bg-base-content text-base-300" />
                                 <div class="gap-5 flex">
                                     <img src="/chat-conversation/image.svg" class="w-5"/>
                                     <img src="/chat-conversation/send.svg" class="w-5"/>
@@ -70,9 +71,9 @@
                     </div>
                 </div>
             </div>
-            <img src="/close_arrow.svg" class="close-chat-icon-btn" @click="toggleChatConversation"/>
+            <img src="/close_arrow.svg" class="close-chat-icon-btn w-10 absolute -left-4 bottom-9 cursor-pointer" @click="toggleChatConversation"/>
         </div>
-        <div class="chat-icon" @click="toggleChatConversation" v-else>
+        <div class="chat-icon rounded-full w-12 h-12 text-center fixed bottom-5 right-10 px-2 bg-base-content flex" @click="toggleChatConversation" v-else>
             <img src="/chat_icon.svg" class="hover-chat-icon-none" />
             <img src="/chat_hover.svg" class="hover-chat-icon-display" />
         </div>
@@ -81,66 +82,46 @@
 
 <style scoped>
     .chat-icon{
-        border-radius: 100px;
-        width: 50px;
-        height: 50px;
         line-height: 50px;
-        text-align: center;
-        position: fixed;
-        bottom: 20px;
-        right: 40px;
-        padding: 0px 7px;
-        background-color: #fff;
-        display: flex;
         &:hover{
             background-color: #0074C8;
-            .hover-chat-icon-none{display: none;}
-            .hover-chat-icon-display{ display: block; cursor: pointer;}
+            .hover-chat-icon-none{
+                display: none;
+            }
+            .hover-chat-icon-display{
+                display: block; cursor: pointer;
+            }
         }
         .hover-chat-icon-display{
             display: none;
         }
     }
-    .chat-conversation-container {        
-        min-width: 400px;        
-        position: fixed;
-        bottom: 0;
-        right: 20px;
-        max-width: 1000px;
-        z-index: 10;
-
+    .chat-conversation-container {
         .chat-content{
             height: calc(100vh - 4rem);
-            border: 2px solid #0074C8;
-            overflow: hidden;
             .left-side-chat-container {
                 .chat-messages-container{
                     height: calc(100vh - 380px);
-                    overflow: auto;       
                 }
                 .chat-messages-container::-webkit-scrollbar {
                     display: none;
                 }
             }
             .right-side-chat-container{
-                width: 600px;
+                min-width: 550px;
                 .message-body{
                     height: calc(100vh - 220px);
-                    overflow: auto;
-                    background-image: url('/background-gradient.svg');
-                    background-size: cover;
+                    background: linear-gradient(0deg, rgba(0,116,200,1) 0%, rgba(0,0,0,1) 100%);
                 }
                 .message-body::-webkit-scrollbar {
                     display: none;
                 }
             }
         }
-        .close-chat-icon-btn{
-            width: 40px;
-            position: absolute;
-            left: -16px;
-            bottom: 35px;
-            cursor: pointer;
+    }
+    @media (max-width:820px) {
+        .chat-conversation-container .chat-content .right-side-chat-container{
+            min-width: 100px !important;
         }
     }
 </style>
@@ -148,10 +129,12 @@
 <script setup>
 import UserMessagesCard from './components/user-messages-card.vue'
 import ChatMessagesCard from './components/chat-messages-card.vue'
+import DropdownCard from './components/dropdown-card.vue';
 const chatConversation = ref(false);
 const toggleChatConversation = () => {
     chatConversation.value = !chatConversation.value;
 };
+const showDropDown = ref(false);
 
 const onlineMembers = [
     {
@@ -218,4 +201,8 @@ const messages = [
         conversationAt: '9:20'
     },
 ];
+
+const toggleDropdown = () => {
+    showDropDown.value = !showDropDown.value;
+}
 </script>
