@@ -1,6 +1,6 @@
 <template>
     <simple-card class="mb-8">
-        <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2">
+        <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2 gradient-bg">
             <h2 class="text-center leading-10 text-lg col-span-3 -lg:col-span-2">Marketing</h2>
             <div class="col-span-1 -lg:col-span-1 -md:col-span-2 mx-auto w-full">
                 <div class="mb-2">Receive Emails:</div>

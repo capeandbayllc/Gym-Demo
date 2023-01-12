@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-[900px] gap-4">
-    <div class="w-7/12 border border-secondary rounded-md p-4 card-details">
+    <div class="w-7/12 border border-secondary rounded-md p-4 card-details gradient-bg">
         <div class="flex justify-between mb-4">
             <p>Due Today*</p>
             <div class="w-[200px]">
@@ -18,12 +18,12 @@
         <PayWithCard v-if="payWith == 'card'"/>
     </div>
     <div class="border border-secondary p-4 rounded-md flex-1">
-      <div class="border border-secondary p-4 rounded-md summury-wrap">
+      <div class="border border-secondary p-4 rounded-md summury-wrap gradient-bg">
         <div class="flex justify-between mb-4">
           <p>Summary</p>
           <p><span class="text-xs border-r border-secondary pr-2 mr-2 h-full">Gym</span> Tampa, Florida</p>
         </div>
-        <div class="border border-secondary rounded-md">
+        <div class="border border-secondary rounded-md bg-black">
           <p class="p-2 text-lg mb-1">Primary Member</p>
           <div class="px-8 mb-4">
             <div class="flex justify-between mb-1"><p>Enrollment Fee</p> <span class="font-bold"> <i class="bg-secondary px-2 mr-2 rounded-full">i</i> $0.00</span> </div>
@@ -69,9 +69,3 @@ import PayWithChecking from './pay-with-checking.vue';
 const payWith = ref("checking")
 
 </script>
-
-<style scoped>
-.card-details,.summury-wrap{
-  background-image: linear-gradient(#0074c8b5, #000);
-}
-</style>

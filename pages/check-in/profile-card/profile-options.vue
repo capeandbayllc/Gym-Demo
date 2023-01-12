@@ -10,7 +10,7 @@
       <div class="btn-check-in">Check in</div>
       <!-- <div class="btn-close-selection">Close Selection</div> -->
     </div>
-    <div class="profile-options">
+    <div class="profile-options gradient-bg">
       <profile-option-item
         v-for="item in options"
         :key="item.key"
@@ -20,7 +20,7 @@
       />
     </div>
     <!-- <div class="btn-close-selection">Close Member Selection</div> -->
-    <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit" @close="closeModel">
+    <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit">
       <div class="bg-black rounded-md p-6 border border-secondary">
         <component :is="addMemberScreens[addMemberScreenIndex]"></component>
         <div class="flex justify-end mt-6">
@@ -37,7 +37,6 @@
   @apply flex flex-col space-y-6 items-center;
   .profile-options {
     @apply grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1 lg:gap-6 border-2 border-secondary rounded-lg w-full  p-5;
-    background-image: linear-gradient(#0074c8b5, #000);
   }
   .btn-close-selection {
     @apply cursor-pointer bg-base-content text-secondary rounded p-2 text-sm text-black;

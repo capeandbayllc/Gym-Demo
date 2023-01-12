@@ -1,6 +1,6 @@
 <template>
     <simple-card class="mb-8">
-        <div class="grid grid-cols-3 gap-6 py-4 px-10">
+        <div class="grid grid-cols-3 gap-6 py-4 px-10 gradient-bg">
             <h2 class="text-center leading-10 text-lg col-span-3">Access Code</h2>
             <div v-for="(item, index) in accessCode" :key="item.key" :class="index == 0 ? 'col-span-2' : 'col-span-1'" class="-md:!col-span-3 -md:col-auto mx-auto w-full">
                 <div class="mb-2">{{item.label}}</div>

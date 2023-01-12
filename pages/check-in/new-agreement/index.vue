@@ -1,5 +1,5 @@
 <template>
-    <simple-card title="Agreements" class="agreements-card" closable>
+    <simple-card title="Agreements" class="agreements-card gradient-bg" closable>
         <div class="p-8">
             <CurrentAgreement v-if="!showNewAgreement" @new-agreement="newAgreement"/>
             <div v-else class="bg-black w-fit mx-auto rounded-md p-6 border border-secondary">

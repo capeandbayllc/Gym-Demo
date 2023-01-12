@@ -1,6 +1,6 @@
 <template>
     <simple-card class="mb-8">
-        <div class="py-4 px-10">
+        <div class="py-4 px-10 gradient-bg">
             <h2 class="text-center leading-10 text-lg">Salary/Banking Information</h2>
             <div class="flex -md:block">
                 <div class="chart w-[60%] -md:w-full -md:mb-4">
@@ -36,6 +36,7 @@ const bankingInfo = [{
 }]
 </script>
 <style scoped>
+
     .secondary-input {
         @apply bg-secondary;
     }

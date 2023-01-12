@@ -1,10 +1,10 @@
 <template>
-  <div class="border border-secondary p-4 rounded-md summury-wrap">
+  <div class="border border-secondary p-4 rounded-md summury-wrap gradient-bg">
     <div class="flex justify-between mb-4">
       <p>Summary</p>
       <p><span class="text-xs border-r border-secondary pr-2 mr-2 h-full">Gym</span> Tampa, Florida</p>
     </div>
-    <div class="border border-secondary rounded-md flex items-center">
+    <div class="border border-secondary rounded-md flex items-center bg-black px-4">
       <div class="flex-1">
         <p class="p-2 text-lg mb-2">Primary Member</p>
         <div class="px-8 mb-4">

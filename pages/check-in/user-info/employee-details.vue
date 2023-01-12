@@ -1,6 +1,6 @@
 <template>
     <simple-card>
-        <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2 -md:grid-cols-1">
+        <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2 -md:grid-cols-1 gradient-bg">
             <h2 class="text-center leading-10 text-lg col-span-3 -lg:col-span-2 -md:col-auto">Employee Details</h2>
             <div v-for="(item, index) in employeeFields" :key="item.key" class="-lg:col-span-2 -md:col-auto mx-auto w-full">
                 <div class="mb-2">{{item.label}}</div>
@@ -63,6 +63,7 @@ const departments = [{
 </script>
 
 <style scoped>
+
     .secondary-input {
         @apply bg-secondary;
     }

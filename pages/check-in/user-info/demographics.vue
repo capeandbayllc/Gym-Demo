@@ -1,6 +1,6 @@
 <template>
     <simple-card class="mb-8">
-        <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2">
+        <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2 gradient-bg">
             <h2 class="text-center leading-10 text-lg col-span-3 -lg:col-span-2">Demographics</h2>
             
             <div v-for="(item, index) in demographics" :key="item.key" :class="index == 0 ? 'col-span-3 -lg:col-span-2' :''" class="col-span-1 -md:col-span-2 -md:col-auto mx-auto w-full">

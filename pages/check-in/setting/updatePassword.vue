@@ -1,5 +1,6 @@
 <template>
     <simple-card class="mb-8">
+        <div class="w-full gradient-bg">
         <div class="w-full py-4 px-10 mx-auto max-w-[600px]">
             <h2 class="text-center leading-10 text-lg">Update Password</h2>
             <p class="text-center leading-10 text-sm mb-6">Ensure your account is using a long, random password to stay secure.</p>
@@ -21,6 +22,7 @@
                 <Button secondary size="sm" class="capitalize" :disabled="updatePassword.currentPass == '' || updatePassword.newPass == '' || updatePassword.confirmPass == '' || updatePassword.newPass !== updatePassword.confirmPass">Save</Button>
             </div>
         </div>
+    </div>
     </simple-card>
  </template>
 <script setup>

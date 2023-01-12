@@ -1,6 +1,6 @@
 <template>
     <simple-card class="mb-8">
-        <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2">
+        <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2 gradient-bg">
             <div class="flex justify-between items-center col-span-3 -lg:col-span-2">
                 <Button class="text-white capitalize mr-[100px] -md:!mr-0" :class="isActiveMember ? 'bg-slate-400 hover:bg-slate-500' : 'bg-lime-500 hover:bg-lime-600'" @click="isActiveMember = !isActiveMember" >{{isActiveMember ? "In-Active" : "Active"}}</Button>
                 <h2 class="text-center leading-10 text-lg">Member Information</h2>
