@@ -20,7 +20,5 @@ const props = defineProps({
         default: []
     }
 });
-const foo = (status)=>{
-    alert(status)
-}
+
 </script>

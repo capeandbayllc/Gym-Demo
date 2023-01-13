@@ -3,7 +3,7 @@
         <div class="page-title">Agreement Templates</div>
         <div class="page-content">
             <div class="flex justify-center items-center pt-8 pb-10">
-                <button class="flex flex-col items-center mr-[40px]" @click="$emit('newAgreement')">
+                <button class="flex flex-col items-center mr-[40px]" @click="openNewAgreementModal">
                     <NewAgreementIcon class="h-[50px] mb-2"/>
                     <span>Start a New Agreement</span>
                 </button>
@@ -28,14 +28,32 @@
             </div>
         </simple-card>
     </daisy-modal>
+    <daisy-modal ref="newAgreementModal" id="newAgreementModal">
+        <simple-card class="p-4">
+            <component :is="newAgreementScreens[newAgreementScreenIndex]" @change-type="changeType"></component>
+            <div class="flex justify-end mt-6 mb-2">
+                <Button size="sm" class="normal-case mx-2" ghost @click="prevScreen" v-if="newAgreementScreens > 0">Back</Button>
+                <Button size="sm" class="normal-case mx-2 ml-auto" ghost @click="statusChangedModal = false">Cancel</Button>
+                <Button v-if="showButtons" size="sm" class="normal-case mx-2" secondary>Save as a Draft</Button>
+                <Button v-if="showButtons" size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue ></Button>
+            </div>
+        </simple-card>
+    </daisy-modal>
 </template>
 
 <script setup>
 import { NewAgreementIcon, AddIcon } from "@/components/icons";
 import FilterActions from './components/filter-actions.vue';
 import AgreementSearchTable from './components/agreement-search-table.vue';
+import AgreementModal from './components/agreement-modal.vue';
 
 const searchInput =  ref("");
+const showButtons = ref(false)
+
+const newAgreementScreens = ref([AgreementModal]);
+const newAgreementScreenIndex = ref(0);
+
+const newAgreementModal = ref(null);
 
 const columns = [
     {
@@ -147,14 +165,18 @@ const data = [
 
 const statusChangedModal = ref(null);
 
-onMounted(() => {
-    statusChangedModal.value.open()
-});
 const cancel =()=>{
     statusChangedModal.value.close()
 }
 const confirm =()=>{
     statusChangedModal.value.close()
+}
+
+const openNewAgreementModal =()=>{
+    newAgreementModal.value.open()
+}
+const changeType = (type)=>{
+    showButtons.value =  type ? true : false;
 }
 
 </script>
