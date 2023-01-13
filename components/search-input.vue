@@ -7,6 +7,7 @@
 				'border-secondary': border === 'secondary',
                 'bg-base-content/20': neutral,
 				'border-base-content/20': border === 'neutral',
+				'bg-transparent': transparent,
                 'h-6 text-sm': size === 'xs',
                 'h-7 text-base': size === 'sm',
                 'h-8 text-base': size === 'md',
@@ -67,6 +68,10 @@ const props = defineProps({
         default: true
     },
     neutral: {
+        type: Boolean,
+        default: false
+    },
+    transparent: {
         type: Boolean,
         default: false
     },
