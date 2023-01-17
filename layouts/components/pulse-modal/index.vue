@@ -3,7 +3,7 @@
 		<div class="pulse-modal-container">
 			<pulse-summary />
 			<div class="pulse-icon">
-				<pulse-icon id="mem-pulse"/>
+				<img src="/pulse-logo.svg" alt="" class="w-20 h-5">
 			</div>
 		</div>
 	</div>
@@ -23,6 +23,5 @@
 }
 </style>
 <script setup>
-import { PulseIcon } from '@/components/icons'
 import PulseSummary from './pulse-summary.vue'
 </script>
