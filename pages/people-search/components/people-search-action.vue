@@ -10,7 +10,7 @@
                 :items="filterType"
                 value=""
                 :label="'Locations'" 
-                class="w-40">
+                class="w-40 bg-secondary border rounded border-base-content">
             </select-box>
         </div>
     </div>

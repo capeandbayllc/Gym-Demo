@@ -9,6 +9,7 @@
 			<select-box
 				label="Location"
 				:items="locations"
+				:secondary="true"
 			/>
 		</div>
 		<div class="checkin-value">08</div>
@@ -39,7 +40,7 @@
 </template>
 <style scoped>
 .pulse-check-history {
-	@apply h-full border border-secondary rounded flex flex-col justify-between px-7 py-4 items-center;
+	@apply h-full border border-secondary rounded flex flex-col justify-between px-7 py-4 items-center bg-base-300;
 	.checkin-header {
 		@apply flex flex-row justify-between w-full;
 		.checkin-date {
