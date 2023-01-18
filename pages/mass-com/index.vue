@@ -43,4 +43,10 @@ import BuildCampaignCard from './components/build-campaign-card/index'
 import CampaignCard from './components/campaign-card/index.vue';
 import newMemberCampaigns from './components/new-member-campaigns.vue';
 import marketing from './components/marketing.vue';
+
+onMounted(async () => {
+    await nextTick();
+    window.dispatchEvent(new Event('resize'))
+});
+
 </script>

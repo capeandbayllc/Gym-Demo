@@ -2,7 +2,7 @@
   <div class="checkin-profile-card">
     <profile-info
       @create-alert="$emit('create-alert')"
-            @create-note="$emit('create-note')" />
+            @create-note="$emit('create-note')" @open-engage="$emit('select-option','engage')" />
     <profile-options
       :selected="activeOption"
       @update:selected="$emit('select-option', $event)"
@@ -11,7 +11,7 @@
 </template>
 <style scoped>
 .checkin-profile-card {
-  @apply border border-secondary rounded flex flex-col flex-grow-0 -lg:grow-[2]  xl:flex-row xl:space-x-16 px-3 xl:px-12 pt-7 pb-4;
+  @apply border bg-black border-secondary rounded flex flex-col flex-1 -lg:grow-[2]  xl:flex-row xl:space-x-16 px-3 xl:px-12 pt-7 pb-4;
 }
 </style>
 <script setup>

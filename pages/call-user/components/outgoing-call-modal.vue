@@ -18,6 +18,7 @@
                             class="btn w-max rounded btn-sm font-medium ml-32 mr-3"
                             error
                             outline
+                            @click="$emit('close')"
                         >
                             Cancel
                         </button>
