@@ -2,8 +2,8 @@
     <tr class="history-table-row">
         <td>
             <div class="min-w-max">
-                {{ data.date }}
-                <span class="text-secondary">{{ data.time }}</span>
+                {{ data.date }}:
+                <span class="text-secondary pl-0.5">{{ data.time }}</span>
             </div>
         </td>
         <td>
