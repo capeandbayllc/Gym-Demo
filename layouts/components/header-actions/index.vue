@@ -7,7 +7,7 @@
 			<people-icon />People
 		</Button> -->
 		<div @mouseover="showFocus" @mouseleave="hideFocus">
-			<input ref="globalSearchInput" type="text" placeholder="Search" class="input global-search-input w-52 -xl:w-40 -lg:w-36 -lg:mr-0 mr-9 bg-slate-50 text-black text-lg h-9" @click="$emit('show-global-search')"/>
+			<input ref="globalSearchInput" type="text" placeholder="Search" class="input global-search-input w-52 -xl:w-40 -lg:w-36 -lg:mr-0 mr-9 bg-base-content rounded text-black text-lg h-9" @click="$emit('show-global-search')"/>
 		</div>
 		<div class="relative">
 			<person-add-icon @click="showUserMenu"/>
