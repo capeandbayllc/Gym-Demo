@@ -1,11 +1,18 @@
 <template>
     <div class="page-alerts-notifications-container">
-        <div class="page-title">Alerts & Notifications</div>
         <div class="-md:px-4 page-content flex-col">
-            <input type="text" placeholder="Search" class="input w-full bg-base-content text-black text-lg mb-8"  v-model="searchInput"/>
+            <input
+                type="text"
+                placeholder="Search"
+                class="input w-full bg-base-content text-black text-lg mb-8"
+                v-model="searchInput"
+            />
             <filter-actions></filter-actions>
             <div class="mt-5">
-                <simple-card title="Recent Alerts" class="mb-5">
+                <simple-card
+                    title="Recent Alerts"
+                    class="mb-5"
+                >
                     <div class="p-6">
                         <data-table
                             :columns="columns"
@@ -22,58 +29,57 @@
 <style scoped>
 .page-alerts-notifications-container {
     @apply py-4 pr-5 w-full h-fit pl-16;
-    .page-title {
-        @apply text-lg font-light pb-3 pl-5;
-    }
     .page-content {
         @apply block border border-secondary bg-neutral rounded p-7 w-fit m-auto;
     }
 }
 </style>
 <style>
-    .recent-alerts-datatable thead {
-        @apply top-0 sticky bg-black h-10;
+.recent-alerts-datatable thead {
+    @apply top-0 sticky bg-black h-10;
+}
+@media (max-width: 1300px) {
+    .page-content {
+        width: 90% !important;
     }
-    @media (max-width:1300px){
-        .page-content {width:90% !important}
-    }
+}
 </style>
 <script setup>
 import FilterActions from './components/filter-actions.vue';
-import RecentAlertsTableRow from './components/recent-alerts-table-row.vue'
+import RecentAlertsTableRow from './components/recent-alerts-table-row.vue';
 const columns = [
     {
-        label: "Segment",
-        class: "text-secondary text-left"
+        label: 'Segment',
+        class: 'text-secondary text-left',
     },
     {
-        label: "First Name",
-        class: "text-secondary text-left"
+        label: 'First Name',
+        class: 'text-secondary text-left',
     },
     {
-        label: "Last Name",
-        class: "text-secondary text-left"
+        label: 'Last Name',
+        class: 'text-secondary text-left',
     },
     {
-        label: "Mobile",
-        class: "text-secondary text-left"
+        label: 'Mobile',
+        class: 'text-secondary text-left',
     },
     {
-        label: "Email",
-        class: "text-secondary text-left"
-    }, 
-    {
-        label: "Location",
-        class: "text-secondary text-left"
+        label: 'Email',
+        class: 'text-secondary text-left',
     },
     {
-        label: "Type",
-        class: "text-secondary text-left"
+        label: 'Location',
+        class: 'text-secondary text-left',
     },
     {
-        label: "Created",
-        class: "text-secondary text-left"
-    }
+        label: 'Type',
+        class: 'text-secondary text-left',
+    },
+    {
+        label: 'Created',
+        class: 'text-secondary text-left',
+    },
 ];
 const list = [
     {
@@ -81,120 +87,120 @@ const list = [
         segment: 'New Member',
         phone: '(123) 456-7890',
         email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "warning",
-        first_name: "Kevin",
-        last_name: "Buchanan",
-        location: "1",
-        type: "Premium"
+        created: '5/5 2002, 12:24:44PM',
+        type_status: 'warning',
+        first_name: 'Kevin',
+        last_name: 'Buchanan',
+        location: '1',
+        type: 'Premium',
     },
     {
         id: 2,
         segment: 'New Member',
         phone: '(123) 456-7890',
         email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "warning",
-        first_name: "Kevin",
-        last_name: "Buchanan",
-        location: "1",
-        type: "Premium"
+        created: '5/5 2002, 12:24:44PM',
+        type_status: 'warning',
+        first_name: 'Kevin',
+        last_name: 'Buchanan',
+        location: '1',
+        type: 'Premium',
     },
     {
         id: 3,
         segment: 'New Member',
         phone: '(123) 456-7890',
         email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "warning",
-        first_name: "Kevin",
-        last_name: "Buchanan",
-        location: "1",
-        type: "Premium"
+        created: '5/5 2002, 12:24:44PM',
+        type_status: 'warning',
+        first_name: 'Kevin',
+        last_name: 'Buchanan',
+        location: '1',
+        type: 'Premium',
     },
     {
         id: 4,
         segment: 'Marketing Campaign',
         phone: '(123) 456-7890',
         email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "warning",
-        first_name: "Kevin",
-        last_name: "Buchanan",
-        location: "1",
-        type: "Premium"
-    },  
+        created: '5/5 2002, 12:24:44PM',
+        type_status: 'warning',
+        first_name: 'Kevin',
+        last_name: 'Buchanan',
+        location: '1',
+        type: 'Premium',
+    },
     {
         id: 5,
         segment: 'Marketing Campaign',
         phone: '(123) 456-7890',
         email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "warning",
-        first_name: "Kevin",
-        last_name: "Buchanan",
-        location: "1",
-        type: "Premium"
+        created: '5/5 2002, 12:24:44PM',
+        type_status: 'warning',
+        first_name: 'Kevin',
+        last_name: 'Buchanan',
+        location: '1',
+        type: 'Premium',
     },
     {
         id: 6,
         segment: 'PT Sessions',
         phone: '(123) 456-7890',
         email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "warning",
-        first_name: "Kevin",
-        last_name: "Buchanan",
-        location: "1",
-        type: "Premium"
+        created: '5/5 2002, 12:24:44PM',
+        type_status: 'warning',
+        first_name: 'Kevin',
+        last_name: 'Buchanan',
+        location: '1',
+        type: 'Premium',
     },
     {
         id: 7,
         segment: 'PT Sessions',
         phone: '(123) 456-7890',
         email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "warning",
-        first_name: "Kevin",
-        last_name: "Buchanan",
-        location: "1",
-        type: "Premium"
+        created: '5/5 2002, 12:24:44PM',
+        type_status: 'warning',
+        first_name: 'Kevin',
+        last_name: 'Buchanan',
+        location: '1',
+        type: 'Premium',
     },
     {
         id: 8,
         segment: 'PT Sessions',
         phone: '(123) 456-7890',
         email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "warning",
-        first_name: "Kevin",
-        last_name: "Buchanan",
-        location: "1",
-        type: "Premium"
+        created: '5/5 2002, 12:24:44PM',
+        type_status: 'warning',
+        first_name: 'Kevin',
+        last_name: 'Buchanan',
+        location: '1',
+        type: 'Premium',
     },
     {
         id: 9,
         segment: 'PT Sessions',
         phone: '(123) 456-7890',
         email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "warning",
-        first_name: "Kevin",
-        last_name: "Buchanan",
-        location: "1",
-        type: "Premium"
+        created: '5/5 2002, 12:24:44PM',
+        type_status: 'warning',
+        first_name: 'Kevin',
+        last_name: 'Buchanan',
+        location: '1',
+        type: 'Premium',
     },
     {
         id: 10,
         segment: 'PT Sessions',
         phone: '(123) 456-7890',
         email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "warning",
-        first_name: "Kevin",
-        last_name: "Buchanan",
-        location: "1",
-        type: "Premium"
+        created: '5/5 2002, 12:24:44PM',
+        type_status: 'warning',
+        first_name: 'Kevin',
+        last_name: 'Buchanan',
+        location: '1',
+        type: 'Premium',
     },
 ];
 </script>

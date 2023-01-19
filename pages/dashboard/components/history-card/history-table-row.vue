@@ -1,9 +1,9 @@
 <template>
     <tr class="history-table-row">
         <td>
-            <div class="w-44">
-                {{data.date}}:
-                <span class="text-secondary ml-1">{{data.time}}</span>
+            <div class="min-w-max">
+                {{ data.date }}:
+                <span class="text-secondary ml-0.5">{{ data.time }}</span>
             </div>
         </td>
         <td>
@@ -23,7 +23,25 @@
         </td>
         <td>
             <div>
-                <Button secondary class="text-base-content" size="sm">View</Button>
+                <span class="border rounded px-4 py-2">{{ data.event }}</span>
+            </div>
+        </td>
+        <td>
+            <div>
+                <membership-btn
+                    :membership="data.membership"
+                    class="w-28"
+                />
+            </div>
+        </td>
+        <td>
+            <div>
+                <Button
+                    secondary
+                    class="text-base-content"
+                    size="sm"
+                    >View</Button
+                >
             </div>
         </td>
     </tr>
@@ -47,6 +65,6 @@
 import MembershipBtn from '~~/components/buttons/membership-btn.vue';
 
 const props = defineProps({
-    data: Object
-})
+    data: Object,
+});
 </script>

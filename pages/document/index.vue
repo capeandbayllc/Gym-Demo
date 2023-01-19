@@ -1,6 +1,5 @@
 <template>
     <div class="page-document-container">
-        <div class="page-title">Document Center</div>
         <div class="page-content">
             <filter-actions></filter-actions>
             <div class="document-container">
@@ -15,9 +14,6 @@
 <style scoped>
 .page-document-container {
     @apply py-4 pr-5 w-full h-fit pl-16 -md:pl-0;
-    .page-title {
-        @apply text-lg font-light pb-3 pl-5;
-    }
     .page-content {
         @apply grid gap-2 justify-center m-auto;
         .document-container {
