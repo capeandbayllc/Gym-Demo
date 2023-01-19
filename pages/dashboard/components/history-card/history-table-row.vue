@@ -3,7 +3,7 @@
         <td>
             <div class="min-w-max">
                 {{ data.date }}:
-                <span class="text-secondary pl-0.5">{{ data.time }}</span>
+                <span class="text-secondary ml-0.5">{{ data.time }}</span>
             </div>
         </td>
         <td>

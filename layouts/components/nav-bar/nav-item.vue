@@ -1,7 +1,7 @@
 <template>
 	<NuxtLink class="nav-item" :to="url">
 		<component :is="icon"/>
-		<span v-if="url" class="nav-item-label">{{ label }}</span>
+		<span v-if="label" class="nav-item-label">{{ label }}</span>
 	</NuxtLink>
 </template>
 <style scoped>

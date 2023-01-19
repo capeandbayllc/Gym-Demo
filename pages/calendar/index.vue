@@ -306,6 +306,12 @@ const onSelectDate = (modelData) => {
         calendar.value.getApi().gotoDate(start.value);
     }
 };
+
+onMounted(async () => {
+    await nextTick();
+    window.dispatchEvent(new Event('resize'))
+});
+
 </script>
 
 <style scoped>
