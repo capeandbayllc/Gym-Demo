@@ -1,7 +1,7 @@
 <template>
     <simple-card class="checkin-pos-card" :closable="true" title="Point of Sale">
         <div class="p-4 lg:p-7 flex flex-col lg:flex-row gap-3">
-            <div class="flex flex-col">
+            <div class="flex flex-col flex-1">
                 <div class="profile-info">
                     <div class="profile-avatar">
                         <img :src="mock.img"/>
@@ -35,7 +35,7 @@
 </template>
 <style scoped>
 .checkin-pos-card {
-    @apply bg-neutral m-auto;
+    @apply bg-neutral m-auto w-full max-w-[1120px];
     @screen -lg {
         /* margin: 20px 40px 19px 10px; */
         @apply m-4

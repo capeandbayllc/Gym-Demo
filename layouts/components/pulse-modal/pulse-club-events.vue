@@ -19,7 +19,7 @@
 </template>
 <style scoped>
 .pulse-club-events {
-	@apply px-10 py-4 h-full border border-secondary rounded flex flex-col justify-between;
+	@apply px-10 py-4 h-full border border-secondary rounded flex flex-col justify-between bg-base-300;
 }
 .pulse-club-event-list {
 	@apply flex flex-col space-y-7;
@@ -31,7 +31,7 @@
 	@apply text-xl font-semibold w-max;
 }
 .pulse-club-event-count {
-	@apply flex items-center justify-center text-4xl font-bold bg-black border border-secondary rounded w-12;
+	@apply flex items-center justify-center text-4xl font-bold bg-black border border-secondary rounded w-12 pb-2;
 }
 </style>
 <script setup>

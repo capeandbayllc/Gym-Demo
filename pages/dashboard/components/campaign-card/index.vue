@@ -11,4 +11,8 @@
 import DashboardCard from '../dashboard-card.vue'
 import CampaignIcon from './campaign-icon.vue'
 import CapmaignChart from './campaign-chart.vue'
+onMounted(async () => {
+    await nextTick();
+    window.dispatchEvent(new Event('resize'))
+});
 </script>

@@ -3,7 +3,7 @@
         <div class="new-agreement-card-content">
             <div class="title-text w-28 text-lg pt-5">Select your Template</div>
             <div v-for="(type, ndx) in types" :key="ndx" class="create-option">
-                <empty-file class="mb-2" />
+                <empty-file-icon class="mb-2" />
                 {{type}}
             </div>
             <div class="create-option" @click="showAgreementModal">
@@ -25,8 +25,7 @@
 }
 </style>
 <script setup>
-import EmptyFile from '../../document/components/empty-file.vue';
-import { AddIcon } from '~~/components/icons';
+import { AddIcon,EmptyFileIcon } from '~~/components/icons';
 import AgreementModal from './agreement-modal.vue';
 const types = ["Blank", "Basic Membership", "Silver Membership", "Premium Membership", "Traning"];
 const agreementModal = ref(null);
