@@ -1,9 +1,9 @@
 <template>
     <tr class="history-table-row">
         <td>
-            <div>
-                {{data.date}}
-                <span class="text-secondary">{{data.time}}</span>
+            <div class="w-44">
+                {{data.date}}:
+                <span class="text-secondary ml-1">{{data.time}}</span>
             </div>
         </td>
         <td>

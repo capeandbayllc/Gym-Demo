@@ -2,7 +2,7 @@
     <ClientOnly>
         <apexchart
             type="donut"
-            height="240"
+            height="280"
             :options="options"
             :series="data"
         />
@@ -12,7 +12,7 @@
 const props = defineProps({
     data: {
         type: Array,
-        default: [54, 16, 23, 34],
+        default: [25, 45, 20, 10],
     },
 });
 
@@ -22,10 +22,10 @@ const options = {
     },
     labels: ["basic", "premimum", "platinum", "addon"],
     colors: [
-        "hsl(var(--wa))",
-        "hsl(var(--er))",
-        "hsl(var(--in))",
-        "hsl(var(--s))",
+        "#CBCBCB",
+        "#0074C8",
+        "#06538B",
+        "#04375C",
     ],
     legend: {
         show: false,
@@ -35,7 +35,10 @@ const options = {
         show: false,
     },
     dataLabels: {
-        enabled: false,
+        enabled: true,
+        formatter: function (val) {
+            return val + "%"
+        },
     },
     grid: {
         padding: {
@@ -46,14 +49,15 @@ const options = {
     plotOptions: {
         pie: {
             donut: {
+                background: '#0074c863',
                 labels: {
                     show: true,
                     name: {
-                        show: false,
+                        show: true,
                     },
                     value: {
                         show: true,
-                        fontSize: "22px",
+                        fontSize: "15px",
                         color: "hsl(var(--bc))",
                         fontWeight: 400,
                         offsetY: 8,
@@ -61,6 +65,17 @@ const options = {
                             return val + "%";
                         },
                     },
+                    total: {
+                        show: true,
+                        showAlways: true,
+                        label: '$14,145',
+                        fontSize: '29px',
+                        fontWeight: 600,
+                        color: 'hsl(var(--bc))',
+                        formatter: function (w) {
+                            return 'Cash Report'
+                        }
+                    }
                 },
             },
         },
