@@ -18,11 +18,11 @@ const props = defineProps({
 const mock = [
     {
         name: "New Members",
-        data: [65, 80, 70, 150, 90, 210, 180],
+        data: [220, 170, 165, 140, 160, 125, 235],
     },
     {
         name: "Renewals",
-        data: [20, 65, 250, 80, 150, 120, 90],
+        data: [180, 155, 125, 200, 210, 160, 200],
     },
 ];
 
@@ -33,7 +33,7 @@ const options = {
             show: false,
         },
     },
-    colors: ["hsl(var(--in))", "hsl(var(--af))"],
+    colors: ["hsl(var(--s))", "hsl(var(--s))"],
     fill: {
         type: "gradient",
         opacity: 0.1,
@@ -82,6 +82,54 @@ const options = {
         labels: {
             show: false,
         },
+    },
+    annotations: {
+        points: [
+            {
+                x: 120,
+                y: 125,
+                marker: {
+                    size: 8,
+                    fillColor: '#0074C8',
+                    strokeColor: '#0074C8',
+                    radius: 2,
+                    cssClass: 'apexcharts-custom-class'
+                },
+                label: {
+                    borderColor: '#004B81',
+                    offsetY: 0,
+                    style: {
+                        color: '#fff',
+                        background: '#004B81',
+                        fontSize: '12px',
+                        fontWeight: 400,
+                    },
+                    text: '11 Febuary $24.150',
+                }
+            },
+            {
+                x: 320,
+                y: 130,
+                marker: {
+                    size: 8,
+                    fillColor: '#0074C8',
+                    strokeColor: '#0074C8',
+                    radius: 2,
+                    cssClass: 'apexcharts-custom-class'
+                },
+                label: {
+                    borderColor: '#004B81',
+                    offsetY: 0,
+                    style: {
+                        color: '#fff',
+                        background: '#004B81',
+                        fontSize: '12px',
+                        fontWeight: 400,
+                    },
+                    text: '11 March $24.150',
+                }
+            }
+        ],
     },
 };
 </script>
