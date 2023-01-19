@@ -8,11 +8,17 @@
         </td>
         <td>
             <div class="w-48 !justify-start">
-                <img
-                    class="w-10 pr-2"
-                    src="/account.png"
-                />
-                {{ data.name }}
+                <img class="w-10 pr-2" src="/account.png" /> 
+                {{data.name}}
+                <img v-if="data.notification" class="pl-1" src="/bell-table-icon.svg">
+            </div>
+        </td>
+        <td>
+            <div><span class="border rounded px-4 py-2">{{data.event}}</span></div>
+        </td>
+        <td>
+            <div>
+                <membership-btn :membership="data.membership" class="w-28"/>
             </div>
         </td>
         <td>

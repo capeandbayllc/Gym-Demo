@@ -44,7 +44,8 @@ const mock = [{
     time: "10:00am",
     name: "Donna Alafonzo",
     event: "PT",
-    membership: 'premimum'
+    membership: 'premimum',
+    notification: true
 }, {
     id: 2,
     date: "August 1",
@@ -58,7 +59,8 @@ const mock = [{
     time: "10:00am",
     name: "Tyler Andrezano",
     event: "PT",
-    membership: 'gold'
+    membership: 'gold',
+    notification: true
 }, {
     id: 4,
     date: "August 1",
