@@ -27,18 +27,15 @@
                 <div class="flex justify-center text-secondary text-xl -xl:text-sm font-medium mt-3">
                     NEW MEMBERS
                 </div>
-                <reporting-members-line-chart />
-                <div v-if="false">
-                    <reporting-members-chart></reporting-members-chart>
-                    <data-table
-                        :columns="columns"
-                        :data="data"
-                        :row-component="MembersList"
-                        class="text-xs reporting-member-tbl"
-                    />
-                    <div class="flex text-secondary justify-center mt-2 font-medium">
-                        View All
-                    </div>
+                <reporting-members-chart></reporting-members-chart>
+                <data-table
+                    :columns="columns"
+                    :data="data"
+                    :row-component="MembersList"
+                    class="text-xs reporting-member-tbl"
+                />
+                <div class="flex text-secondary justify-center mt-2 font-medium">
+                    View All
                 </div>
             </div>
         </template>
@@ -69,7 +66,6 @@
 <script setup>
 import ReportingMembersChart from './reporting-members-chart.vue';
 import MembersList from './members-list-item.vue'
-import ReportingMembersLineChart from './reporting-members-line-chart.vue';
 const columns = ["Members Name", "Members Type", "Date"]
 const data = [
     {
