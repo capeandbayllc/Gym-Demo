@@ -55,7 +55,6 @@
   </div>
 </template>
 <style scoped>
-
 .page-checkin-container {
   @apply py-4 px-5 bg-base-300 w-full h-fit border-b border-secondary -md:pl-0;
   background: linear-gradient(to top, rgba(10, 33, 60, 0.93) 0%, rgba(2, 5, 9, 0.93) 20%, rgba(15, 42, 77, 0.93) 100%);
@@ -100,7 +99,6 @@ import Engage from './engage/index.vue';
 
 
 const option = ref(null);
-
 
 watch(option,()=>{
   const appLayout = document.querySelector(".app-layout");
