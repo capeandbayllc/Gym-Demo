@@ -1,7 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col">
     <div class="page-checkin-container">
-      <div class="page-title">Member account page</div>
       <div class="page-content">
         <div class="wrapper p-4 w-full rounded-md" :class="{'pb-0':accountView !== null}">
           <div class="flex -md:block">
