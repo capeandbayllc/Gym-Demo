@@ -58,7 +58,7 @@
 		.checkin-history-list {
 			@apply flex flex-col w-fit space-y-2;
 			.checkin-history-list-item {
-				@apply flex flex-row border rounded space-x-2 w-80 pl-4 pr-6 py-2 items-center justify-between;
+				@apply flex flex-row border rounded space-x-2 w-80 pl-4 pr-6 py-2 items-center justify-between bg-neutral;
 				.history-user-name {
 					@apply flex flex-row space-x-2 items-center;
 					.history-user-avatar {
