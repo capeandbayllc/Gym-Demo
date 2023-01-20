@@ -17,7 +17,7 @@
     .page-content {
         @apply grid gap-2 justify-center m-auto;
         .document-container {
-            @apply grid border border-secondary bg-neutral py-7 px-7 rounded gap-5 -lg:block -lg:w-full;
+            @apply grid border border-secondary bg-neutral py-7 px-7 rounded gap-5 -lg:block -lg:w-full max-w-[1120px] mx-auto;
         }
     }
 }

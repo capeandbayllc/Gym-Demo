@@ -35,10 +35,10 @@
 </template>
 <style scoped>
 .page-club-container {
-    @apply py-4 pr-5 bg-base-300 w-full h-fit border-b border-secondary pl-16 -md:pl-0;
+    @apply py-4 pr-16 bg-base-300 w-full h-fit border-b border-secondary pl-16 -md:pl-0;
 
     .page-content {
-        @apply flex flex-col-reverse md:flex-row gap-5 px-5 justify-center;
+        @apply flex flex-col-reverse md:flex-row gap-5 px-5 justify-center max-w-[1120px] mx-auto;
         .location-filter {
             @screen -md {
                 .search-input-wrapper {

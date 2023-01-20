@@ -133,7 +133,7 @@
 .page-setting-container {
     @apply py-4 pr-5 w-full h-fit pl-16;
     .page-content {
-        @apply bg-neutral border border-secondary rounded grid grid-cols-3 3xl:grid-cols-4 -lg:grid-cols-2 -md:grid-cols-1 gap-x-12 gap-y-8 w-fit px-8 py-10 m-auto;
+        @apply bg-neutral border border-secondary rounded grid grid-cols-3 3xl:grid-cols-4 -lg:grid-cols-2 -md:grid-cols-1 gap-x-12 gap-y-8 w-fit px-8 py-10 max-w-[1120px] mx-auto;
     }
     input {
         @apply h-9 rounded mt-3 w-full pl-2;

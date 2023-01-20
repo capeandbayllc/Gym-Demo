@@ -15,7 +15,7 @@
 .page-dashboard-container {
     @apply py-4 pr-5 w-full h-fit -xl:pr-6;
     .page-content {
-        @apply m-auto max-w-[1164px];
+        @apply m-auto max-w-[1164px] max-w-[1120px] mx-auto;
     }
 }
 </style>

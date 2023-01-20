@@ -98,9 +98,6 @@ import Engage from './engage/index.vue';
 
 const option = ref(null);
 
-const option = ref(null);
-
-
 watch(option,()=>{
   const appLayout = document.querySelector(".app-layout");
   const scrollTO = document.querySelector(".page-checkin-container").offsetHeight + 100;

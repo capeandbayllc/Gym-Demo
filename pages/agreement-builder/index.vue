@@ -13,7 +13,7 @@
 .agreement-builder-container {
     @apply py-4 pr-5 w-full h-fit pl-16;
     .page-content {
-        @apply block border border-secondary bg-neutral rounded p-7 w-fit m-auto;
+        @apply block border border-secondary bg-neutral rounded p-7 w-fit max-w-[1120px] mx-auto;
     }
 }
 </style>
