@@ -187,8 +187,5 @@ const changeType = (type)=>{
     .page-title {
         @apply text-lg font-light pb-3 pl-5;
     }
-    .page-content {
-        @apply w-full max-w-[1120px] mx-auto;
-    }
 }
 </style>

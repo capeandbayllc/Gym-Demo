@@ -35,33 +35,36 @@
         </div>
       </div>
     </div>
-    <Profile v-if="option === 'profile'" @close="option = null"/>
-    <pos-card v-if="option === 'pos'" @close="option = null"/>
-    <calendar-card v-if="option === 'calendar'" @close="option = null"/>
-    <notification-card v-if="option === 'notification'" @close="option = null"/>
-    <guest-card v-if="option === 'guest-pass'" @close="option = null"/>
-    <note-card v-if="option === 'note'" @close="option = null"/>
-    <new-agreement v-if="option === 'newAgreement'" @close="option = null"/>
-    <Engage v-if="option === 'engage'" @close="option = null"/>
-    <footer-logo class="m-auto" v-else/>
-    <daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
-        <alert-add-modal @close="scope.close()"/>
-    </daisy-modal>
-    <daisy-modal id="noteAddModal" ref="noteAddModal" v-slot="scope">
-      <note-add-modal @close="scope.close()" />
-    </daisy-modal>
+    <div class="px-5">    
+      <Profile v-if="option === 'profile'" @close="option = null"/>
+      <pos-card v-if="option === 'pos'" @close="option = null"/>
+      <calendar-card v-if="option === 'calendar'" @close="option = null"/>
+      <notification-card v-if="option === 'notification'" @close="option = null"/>
+      <guest-card v-if="option === 'guest-pass'" @close="option = null"/>
+      <note-card v-if="option === 'note'" @close="option = null"/>
+      <new-agreement v-if="option === 'newAgreement'" @close="option = null"/>
+      <Engage v-if="option === 'engage'" @close="option = null"/>
+      <footer-logo class="m-auto" v-else/>
+      <daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
+          <alert-add-modal @close="scope.close()"/>
+      </daisy-modal>
+      <daisy-modal id="noteAddModal" ref="noteAddModal" v-slot="scope">
+        <note-add-modal @close="scope.close()" />
+      </daisy-modal>
+    </div>
+
         
   </div>
 </template>
 <style scoped>
 .page-checkin-container {
-  @apply py-4 px-5 bg-base-300 w-full h-fit border-b border-secondary -md:pl-0;
+  @apply py-4 px-5 bg-base-300 w-full h-fit border-b border-secondary;
   background: linear-gradient(to top, rgba(10, 33, 60, 0.93) 0%, rgba(2, 5, 9, 0.93) 20%, rgba(15, 42, 77, 0.93) 100%);
   .page-title {
     @apply text-lg font-light pb-3 pl-5;
   }
   .page-content {
-    @apply flex flex-col-reverse md:flex-row gap-5 flex-wrap justify-center mx-auto w-full max-w-[1120px];
+    @apply flex flex-col-reverse md:flex-row gap-5 flex-wrap justify-center;
     .wrapper{
       background: #0074C8;
     }

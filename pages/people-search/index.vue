@@ -18,16 +18,11 @@
 .page-people-search-center-container {
     @apply py-4 pr-5 w-full h-fit pl-16;
     .page-content {
-        @apply block p-7 w-fit max-w-[1120px] mx-auto;
+        @apply block p-7;
     }
 }
 </style>
 <style>
-@media (max-width: 1300px) {
-    .page-content {
-        width: 90% !important;
-    }
-}
 </style>
 <script setup>
 import PeopleSearchAction from './components/people-search-action.vue';

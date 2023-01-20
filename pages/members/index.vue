@@ -16,16 +16,16 @@
 .page-members-center-container {
     @apply py-4 pr-5 w-full h-fit pl-16;
     .page-content {
-        @apply block border border-secondary bg-neutral rounded p-7 w-fit max-w-[1120px] mx-auto;
+        @apply block border border-secondary bg-neutral rounded p-7;
     }
 }
 </style>
 <style>
-@media (max-width: 1300px) {
+/* @media (max-width: 1300px) {
     .page-content {
         width: 90% !important;
     }
-}
+} */
 </style>
 <script setup>
 import MemberTableRow from './components/member-table-row.vue';

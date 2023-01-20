@@ -21,7 +21,7 @@
     @apply py-4 w-full h-fit;
     .page-content {
         /* @apply px-32; */
-        @apply block border border-secondary bg-neutral rounded p-7 max-w-screen-lg max-w-[1120px] mx-auto;
+        @apply block border border-secondary bg-neutral rounded p-7;
         h2 {
             @apply text-xl font-bold pt-6;
         }

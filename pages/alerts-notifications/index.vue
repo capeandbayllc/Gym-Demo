@@ -38,11 +38,7 @@
 .recent-alerts-datatable thead {
     @apply top-0 sticky bg-black h-10;
 }
-@media (max-width: 1300px) {
-    .page-content {
-        width: 90% !important;
-    }
-}
+
 </style>
 <script setup>
 import FilterActions from './components/filter-actions.vue';

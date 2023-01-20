@@ -95,10 +95,7 @@
 </template>
 <style scoped>
 .note-card {
-    @apply m-auto bg-neutral;
-    @screen -lg {
-        @apply m-4;
-    }
+    @apply m-auto bg-neutral max-w-[1120px] xl:w-[1120px] w-full;
     .note-card-container {
         @apply flex flex-col lg:flex-row m-8 gap-2 relative py-10;
         .note-list {

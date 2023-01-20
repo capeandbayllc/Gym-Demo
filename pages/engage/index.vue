@@ -19,7 +19,7 @@
 .page-engage-container {
     @apply py-4 pr-5 w-full h-fit pl-16 -md:px-6;
     .page-content {
-        @apply flex flex-col items-center max-w-[1120px] mx-auto;
+        @apply flex flex-col items-center;
         /* margin-top: -2.25rem; */
         .tab-view {
             @apply grid grid-cols-3 grid-rows-3 gap-4 border-2 border-secondary rounded py-5 px-4 bg-neutral;

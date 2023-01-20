@@ -34,3 +34,7 @@
     background: -moz-linear-gradient(top, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
     background: linear-gradient(to bottom, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
 }
+
+.page-content {
+    @apply mx-auto w-full max-w-[1120px]
+}
