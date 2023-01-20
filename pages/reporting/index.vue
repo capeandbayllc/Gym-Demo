@@ -11,7 +11,8 @@
                 <reporting-widget-member></reporting-widget-member>
             </div>
             <div class="col-span-2">
-                <reporting-widget-clients></reporting-widget-clients>
+                <create-report-card></create-report-card>
+                <!-- <reporting-widget-clients></reporting-widget-clients> -->
             </div>
         </div>
     </div>
@@ -39,6 +40,7 @@ import ReportingWidgetLeads from './components/reporting-widget-leads.vue';
 import ReportingWidgetConversion from './components/reporting-widget-conversion.vue'
 import ReportingWidgetMember from './components/reporting-widget-member.vue'
 import ReportingWidgetClients from './components/reporting-widget-clients.vue'
+import CreateReportCard from './components/create-report-card.vue';
 onMounted(async () => {
     await nextTick();
     window.dispatchEvent(new Event('resize'))
