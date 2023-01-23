@@ -5,7 +5,7 @@
 </template>
 <style scoped>
 .page-schedule-container {
-    @apply py-4 pr-5 w-full h-fit pl-16;
+    @apply py-4 pr-5 w-full h-fit ;
 }
 </style>
 <script setup></script>

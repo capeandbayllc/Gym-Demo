@@ -15,6 +15,7 @@
     <div class="events-header pb-2">September</div>
         <event-list
             :data="mock.upcoming"
+            class="max-h-[340px] overflow-auto"
         />
   </div>
 </template>
@@ -68,6 +69,26 @@ const mock = {
       booked: false,
         due: "Monday 6:30 - 6:40"
     },  {
+      id: 4,
+        title: 'Yoga',
+      booked: false,
+        due: "Tuesday 6:30 - 6:40"
+    },{
+      id: 4,
+        title: 'Yoga',
+      booked: false,
+        due: "Tuesday 6:30 - 6:40"
+    },{
+      id: 4,
+        title: 'Yoga',
+      booked: false,
+        due: "Tuesday 6:30 - 6:40"
+    },{
+      id: 4,
+        title: 'Yoga',
+      booked: false,
+        due: "Tuesday 6:30 - 6:40"
+    },{
       id: 4,
         title: 'Yoga',
       booked: false,

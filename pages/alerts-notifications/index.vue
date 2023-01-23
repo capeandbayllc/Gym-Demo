@@ -28,9 +28,9 @@
 </template>
 <style scoped>
 .page-alerts-notifications-container {
-    @apply py-4 pr-5 w-full h-fit pl-16;
+    @apply py-4 pr-5 w-full h-fit;
     .page-content {
-        @apply block border border-secondary bg-neutral rounded p-7 w-fit m-auto;
+        @apply block border border-secondary bg-neutral rounded p-7 w-fit max-w-[1120px] mx-auto;
     }
 }
 </style>
@@ -38,11 +38,7 @@
 .recent-alerts-datatable thead {
     @apply top-0 sticky bg-black h-10;
 }
-@media (max-width: 1300px) {
-    .page-content {
-        width: 90% !important;
-    }
-}
+
 </style>
 <script setup>
 import FilterActions from './components/filter-actions.vue';

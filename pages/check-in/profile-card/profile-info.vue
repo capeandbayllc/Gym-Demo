@@ -11,7 +11,7 @@
             Club ID# {{mock.club_id}}
         </div>
         <div class="profile-status">
-            <membership-btn :membership="mock.membership" />
+            <membership-btn editIconOnHover :membership="mock.membership" />
             <addon-btn :value="true" />
             <Button size="sm" class="rounded-full px-[6px] femily-member" secondary>
                 FM
@@ -57,6 +57,22 @@
     </div>
 </template>
 <style scoped>
+
+.edit-on-hover {
+    &:hover {
+        font-size:0;
+        @apply px-4;
+        .edit-icon{
+            @apply visible;
+        }
+    }
+    .edit-icon{
+        @apply absolute h-[20px] w-[20px] invisible;
+        svg {
+            @apply h-full w-full;
+        }
+    }
+}
 .profile-info-container {
     @apply flex flex-col flex-1 items-center text-lg text-center;
     .profile-avatar {

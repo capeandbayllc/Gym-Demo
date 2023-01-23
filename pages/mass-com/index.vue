@@ -18,10 +18,10 @@
 </template>
 <style scoped>
 .page-mass-com-container {
-    @apply py-4 w-full h-fit;
+    @apply py-4 w-full h-fit pr-5;
     .page-content {
         /* @apply px-32; */
-        @apply block border border-secondary bg-neutral rounded p-7 max-w-screen-lg m-auto;
+        @apply block border border-secondary bg-neutral rounded p-7;
         h2 {
             @apply text-xl font-bold pt-6;
         }

@@ -21,9 +21,9 @@
 </template>
 <style scoped>
 .page-reporting-container {
-    @apply py-4 pr-5 w-full h-fit pl-16;
+    @apply py-4 pr-5 w-full h-fit;
     .page-content {
-        @apply border border-secondary rounded bg-neutral px-6 py-5 w-fit m-auto;
+        @apply border border-secondary rounded bg-neutral px-6 py-5;
         .reporting-fields-container {
             @apply bg-neutral;
         }

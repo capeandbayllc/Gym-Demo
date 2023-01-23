@@ -18,7 +18,7 @@
 </template>
 <style scoped>
 .reporting-page-content {
-    @apply flex flex-col items-center pb-5 pt-4;
+    @apply flex flex-col items-center pb-5 pt-4 max-w-[1120px] mx-auto w-full pr-5;
     .reporting-container { 
         @apply grid grid-cols-3 gap-4;
     }
@@ -31,7 +31,7 @@
         }
     }
     @media (max-width:1300px){
-        .reporting-page-content {width:90% !important}
+        /* .reporting-page-content {width:90% !important} */
     }
 </style>
 <script setup>

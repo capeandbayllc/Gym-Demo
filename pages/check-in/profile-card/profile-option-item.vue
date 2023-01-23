@@ -15,7 +15,7 @@
 .profile-option-item {
     @apply relative flex flex-row cursor-pointer text-base lg:text-lg font-semibold m-1;
     .checker {
-        @apply w-5 h-5 lg:w-6 lg:h-6 bg-secondary rounded-full mr-4;
+        @apply w-5 h-5 min-w-[24px] min-h-[24px] lg:w-6 lg:h-6 bg-secondary rounded-full mr-4;
         box-shadow: 0 0 0 3px hsl(var(--bc));
     }
     .alert-badge {

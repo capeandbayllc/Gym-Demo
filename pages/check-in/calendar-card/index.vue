@@ -1,8 +1,8 @@
 <template>
     <simple-card class="checkin-calendar-card" :closable="true" title="Calendar">
-        <div class="flex flex-col md:flex-row py-6 px-9 md:gap-2 gap-12">
+        <div class="flex flex-col md:flex-row py-6 px-9 md:gap-2 gap-12 justify-center">
             <calendar-card />
-            <div class="px-0 md:px-3 md:w-full">
+            <div class="px-0 md:px-3">
                 <div class="text-lg font-semibold">Today: September 20, 2022</div>
                 <div class="text-3xl py-4">September</div>
                 <event-list
@@ -15,10 +15,8 @@
 </template>
 <style scoped>
 .checkin-calendar-card {
-    @apply m-auto bg-neutral;
-    @screen -lg {
-        @apply m-4;
-    }
+    @apply m-auto bg-neutral max-w-[1120px] xl:w-[1120px] w-full ;
+    
 }
 </style>
 <script setup>

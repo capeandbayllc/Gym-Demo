@@ -157,7 +157,7 @@
 .page-club-container {
     @apply py-4 w-full h-fit text-center -xl:pr-6;
     .page-content {
-        @apply block p-7 max-w-screen-lg m-auto;
+        @apply block;
         /* @screen xl{
             @apply inline-block
         } */

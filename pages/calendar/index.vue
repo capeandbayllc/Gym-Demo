@@ -316,9 +316,9 @@ onMounted(async () => {
 
 <style scoped>
 .page-calendar-container {
-    @apply py-4 pr-5 w-full h-fit pl-16;
+    @apply py-4 pr-5 w-full h-fit;
     .page-content {
-        @apply flex block border border-secondary bg-neutral rounded p-7 max-w-screen-lg m-auto -lg:block;
+        @apply flex block border border-secondary bg-neutral rounded p-7 -lg:block;
     }
     .calender-view-wrap {
         input[type='radio'] {
