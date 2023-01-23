@@ -8,11 +8,11 @@
 }
 
 ::-webkit-scrollbar-track {
-    @apply border border-solid border-secondary rounded-lg;
+    @apply bg-secondary bg-opacity-40 rounded-lg;
 }
 
 ::-webkit-scrollbar-thumb {
-    @apply border rounded-lg bg-base-content;
+    @apply border rounded-lg bg-secondary;
 }
 
 .apexcharts-tooltip * {

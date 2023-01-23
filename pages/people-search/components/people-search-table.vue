@@ -4,7 +4,8 @@
             :columns="columns"
             :data="items"
             :row-component="PeopleSearchTableRow"
-            class="h-56 overflow-y-auto"
+            class="overflow-y-auto"
+            :class="{'h-56': !filter}"
         />
     </div>
 </template>
@@ -18,6 +19,10 @@ const props = defineProps({
     items: {
         type: Array,
         default: []
+    },
+    filter: {
+        type: String,
+        default: null
     }
 });
 </script>
