@@ -35,7 +35,7 @@
 </template>
 <style scoped>
 .page-club-container {
-    @apply py-4 bg-base-300 w-full h-fit border-b border-secondary;
+    @apply py-4 w-full h-fit border-b border-secondary;
 
     .page-content {
         @apply flex flex-col-reverse md:flex-row gap-5 justify-center ;
