@@ -131,7 +131,7 @@
 </template>
 <style scoped>
 .page-setting-container {
-    @apply py-4 pr-5 w-full h-fit pl-16;
+    @apply py-4 w-full h-fit;
     .page-content {
         @apply bg-neutral border border-secondary rounded grid grid-cols-3 3xl:grid-cols-4 -lg:grid-cols-2 -md:grid-cols-1 gap-x-12 gap-y-8 px-8 py-10;
     }

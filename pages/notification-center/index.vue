@@ -9,7 +9,7 @@
 </template>
 <style scoped>
 .page-notification-center-container {
-    @apply py-4 pr-5 w-full h-fit pl-16;
+    @apply py-4 pr-5 w-full h-fit;
     .page-content {
         /* @apply border border-secondary bg-neutral rounded p-7 w-fit m-auto; */
         @apply block border border-secondary bg-neutral rounded p-7;

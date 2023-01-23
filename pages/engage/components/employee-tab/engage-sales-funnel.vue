@@ -22,6 +22,9 @@
             @apply text-base font-semibold;
         }
     }
+    .funnel-chart {
+        @apply w-[502px] mx-auto;
+    }
 }
 </style>
 <script setup>

@@ -18,7 +18,7 @@
 </template>
 <style scoped>
 .reporting-page-content {
-    @apply flex flex-col items-center pb-5 pt-4 max-w-[1120px] mx-auto w-full;
+    @apply flex flex-col items-center pb-5 pt-4 max-w-[1120px] mx-auto w-full pr-5;
     .reporting-container { 
         @apply grid grid-cols-3 gap-4;
     }

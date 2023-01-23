@@ -18,7 +18,7 @@
 </template>
 <style scoped>
 .page-mass-com-container {
-    @apply py-4 w-full h-fit;
+    @apply py-4 w-full h-fit pr-5;
     .page-content {
         /* @apply px-32; */
         @apply block border border-secondary bg-neutral rounded p-7;
