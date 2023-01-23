@@ -18,7 +18,7 @@
 				<div class="w-3/4">Name</div>
 				<div class="w-1/4">Sign-Ins</div>
 			</div>
-			<div class="checkin-history-list">
+			<div class="checkin-history-list no-scrollbar">
 				<div
 					v-for="item in history"
 					:key="item.id"
@@ -26,7 +26,7 @@
 				>
 					<div class="history-user-name">
 						<div class="history-user-avatar">
-							<img src="~/assets/account.png"/>
+							<img :src="item.avatar"/>
 							<div class="history-user-unread" v-if="item.unread">{{item.unread}}</div>
 
 						</div>
@@ -56,7 +56,8 @@
 			@apply flex flex-row font-semibold;
 		}
 		.checkin-history-list {
-			@apply flex flex-col w-fit space-y-2;
+			max-height: 10.5rem;
+			@apply flex flex-col w-fit space-y-2 overflow-auto;
 			.checkin-history-list-item {
 				@apply flex flex-row border rounded space-x-2 w-80 pl-4 pr-6 py-2 items-center justify-between bg-neutral;
 				.history-user-name {
@@ -102,16 +103,25 @@ const history = [{
 	id: 1,
 	count: 14,
 	name: "Sherry Champagne",
-	unread: 0
+	unread: 0,
+	avatar: "/pulse-modal/sherry-champagne.svg"
 }, {
 	id: 2,
 	count: 1,
 	name: "Chet James",
-	unread: 3
+	unread: 3,
+	avatar: "/pulse-modal/chet-james.svg"
 }, {
 	id: 3,
 	count: 2,
 	name: "Bruce Phillus",
-	unread: 0
+	unread: 0,
+	avatar: "/pulse-modal/bruce-phillus.svg"
+},{
+	id: 4,
+	count: 76,
+	name: "Jackie O’Leary",
+	unread: 0,
+	avatar: "/pulse-modal/jackie.svg"
 }]
 </script>

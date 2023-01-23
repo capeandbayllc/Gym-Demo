@@ -19,6 +19,17 @@
     @apply text-neutral-focus;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 /* .gradient-bg{
     background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.53) 0%, rgba(0, 120, 210, 0.31) 1%, rgba(0, 68, 117, 0.6) 41%, rgba(0, 21, 37, 0.87) 82%, rgba(0, 1, 1, 0.85) 99%, rgba(0, 0, 0, 0.85) 100%);
     background: -o-linear-gradient(top, rgba(0, 0, 0, 0.53) 0%, rgba(0, 120, 210, 0.31) 1%, rgba(0, 68, 117, 0.6) 41%, rgba(0, 21, 37, 0.87) 82%, rgba(0, 1, 1, 0.85) 99%, rgba(0, 0, 0, 0.85) 100%);

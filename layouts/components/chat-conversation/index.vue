@@ -30,7 +30,7 @@
                                 <div class="mt-5">
                                    Messages
                                 </div>
-                                <div class="chat-messages-container overflow-auto">
+                                <div class="chat-messages-container overflow-auto no-scrollbar">
                                     <UserMessagesCard v-for="(chat, index) in messages" :key="index" :chat="chat"/>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                             </div>
                             <DropdownCard v-if="showDropDown" @closeDropdown="toggleDropdown"/>
                         </div>
-                        <div class="message-body px-10 py-4 -lg:px-2 -lg:py-2 -lg:pr-6 overflow-auto">
+                        <div class="message-body no-scrollbar px-10 py-4 -lg:px-2 -lg:py-2 -lg:pr-6 overflow-auto">
                             <div>
                                 <ChatMessagesCard />
                             </div>
@@ -103,18 +103,12 @@
                 .chat-messages-container{
                     height: calc(100vh - 380px);
                 }
-                .chat-messages-container::-webkit-scrollbar {
-                    display: none;
-                }
             }
             .right-side-chat-container{
                 min-width: 550px;
                 .message-body{
                     height: calc(100vh - 220px);
                     background: linear-gradient(0deg, rgba(0,116,200,1) 0%, rgba(0,0,0,1) 100%);
-                }
-                .message-body::-webkit-scrollbar {
-                    display: none;
                 }
             }
         }
