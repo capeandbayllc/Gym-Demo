@@ -20,7 +20,7 @@
 		<!-- <div class="setting-icon">		
 			<setting-icon />
 		</div> -->
-		<div class="absolute right-[11.25rem]">
+		<div>
 			<question-round-icon
 				@click="$emit('show-help')"
 			/>
