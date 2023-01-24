@@ -1,34 +1,43 @@
 <template>
-    <context-menu ref="profileMenu" class="profile-menu-container">
-        <ul>
-            <li v-for="(item, ndx) in menu" :key="ndx">
-                {{item.label}}
-                <ul v-if="item.children">
-                    <li v-for="(child, sub_ndx) in item.children" :key="sub_ndx">
-                        {{child.label}}
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <div class="pt-3 self-end cursor-pointer">Logout</div>
+    <context-menu ref="profileMenu" class="gradient-bg profile-menu-container z-21 top-[3.50rem]" >
+        <div class="flex flex-col">
+            <ul class="menu-list">
+                <li class="menu-items" v-for="(item, ndx) in menu" :key="ndx">
+                    <span class="font-semibold">{{item.label}}</span>
+                    <ul v-if="item.children" class="submenu-list">
+                        <li class="submenu-items" v-for="(child, sub_ndx) in item.children" :key="sub_ndx">
+                            {{child.label}}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="self-end cursor-pointer mr-4 mb-4">Logout</div>
+        </div>
     </context-menu>
 </template>
 <style scoped>
 .profile-menu-container {
-    @apply flex flex-col bg-[#001B5D] absolute top-20 right-4 p-3 text-sm rounded;
+    @apply absolute right-4 p-3 text-sm border-8 rounded-xl border-secondary;
+    > div {
+        @apply border-4 rounded-lg -m-4;
+    }
+    .menu-list {
+        @apply m-6
+    }
+    .menu-items {
+        @apply py-2 px-0
+    }
     li {
         @apply py-1.5 px-2 cursor-pointer;
     }
     li:last-child {
         @apply pb-2;
     }
-    > ul {
-        > li {
-            @apply border-b;
-        }
-        > ul {
-            @apply py-2;
-        }
+    .menu-items {
+        @apply border-b;
+    }
+    .submenu-items {
+        @apply rounded-md bg-[#2F72C4] my-2 font-normal w-fit;
     }
 }
 </style>
