@@ -1,8 +1,10 @@
 <template>
     <div class="page-reporting-container">
-        <div class="page-title">Reporting</div>
         <div class="page-content">
-            <simple-card title="Reporting Fields" class="reporting-fields-container">
+            <simple-card
+                title="Reporting Fields"
+                class="reporting-fields-container"
+            >
                 <div class="reporting-fields">
                     <membership-card />
                     <goal-card />
@@ -19,12 +21,9 @@
 </template>
 <style scoped>
 .page-reporting-container {
-    @apply py-4 pr-5 w-full h-fit pl-16;
-    .page-title {
-        @apply text-lg font-light pb-3 pl-5;
-    }
+    @apply py-4 pr-5 w-full h-fit;
     .page-content {
-        @apply border border-secondary rounded bg-neutral px-6 py-5 w-fit m-auto;
+        @apply border border-secondary rounded bg-neutral px-6 py-5;
         .reporting-fields-container {
             @apply bg-neutral;
         }
@@ -36,5 +35,14 @@
 }
 </style>
 <script setup>
-import { MembershipCard, GoalCard, CalendarCard, AttritionCard, CommunicationCard, KpiCard, SalesFunnelCard, CompanyCard } from './components/cards'
+import {
+    MembershipCard,
+    GoalCard,
+    CalendarCard,
+    AttritionCard,
+    CommunicationCard,
+    KpiCard,
+    SalesFunnelCard,
+    CompanyCard,
+} from './components/cards';
 </script>

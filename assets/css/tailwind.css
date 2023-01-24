@@ -8,13 +8,44 @@
 }
 
 ::-webkit-scrollbar-track {
-    @apply border border-solid border-secondary rounded-lg;
+    @apply bg-secondary bg-opacity-40 rounded-lg;
 }
 
 ::-webkit-scrollbar-thumb {
-    @apply border rounded-lg bg-base-content;
+    @apply border rounded-lg bg-secondary;
 }
 
 .apexcharts-tooltip * {
     @apply text-neutral-focus;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* .gradient-bg{
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.53) 0%, rgba(0, 120, 210, 0.31) 1%, rgba(0, 68, 117, 0.6) 41%, rgba(0, 21, 37, 0.87) 82%, rgba(0, 1, 1, 0.85) 99%, rgba(0, 0, 0, 0.85) 100%);
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0.53) 0%, rgba(0, 120, 210, 0.31) 1%, rgba(0, 68, 117, 0.6) 41%, rgba(0, 21, 37, 0.87) 82%, rgba(0, 1, 1, 0.85) 99%, rgba(0, 0, 0, 0.85) 100%);
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.53) 0%, rgba(0, 120, 210, 0.31) 1%, rgba(0, 68, 117, 0.6) 41%, rgba(0, 21, 37, 0.87) 82%, rgba(0, 1, 1, 0.85) 99%, rgba(0, 0, 0, 0.85) 100%);
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.53) 0%, rgba(0, 120, 210, 0.31) 1%, rgba(0, 68, 117, 0.6) 41%, rgba(0, 21, 37, 0.87) 82%, rgba(0, 1, 1, 0.85) 99%, rgba(0, 0, 0, 0.85) 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.53) 0%, rgba(0, 120, 210, 0.31) 1%, rgba(0, 68, 117, 0.6) 41%, rgba(0, 21, 37, 0.87) 82%, rgba(0, 1, 1, 0.85) 99%, rgba(0, 0, 0, 0.85) 100%);
+} */
+
+.gradient-bg{
+    background: -webkit-linear-gradient(top, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
+    background: -o-linear-gradient(top, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
+    background: -ms-linear-gradient(top, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
+    background: -moz-linear-gradient(top, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
+    background: linear-gradient(to bottom, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
+}
+
+.page-content {
+    @apply mx-auto w-full max-w-[1120px]
 }

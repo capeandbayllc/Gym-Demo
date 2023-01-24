@@ -4,7 +4,7 @@
 			class="select-box-btn"
             :class="{
                 'bg-secondary': secondary,
-                'bg-transparent border-secondary': transparent
+                'bg-transparent border-secondary': transparent && !secondary
             }"
             :onClick="toggleCollapsed"
         >
@@ -66,7 +66,7 @@ const props = defineProps({
     },
     secondary: {
         type: Boolean,
-        default: true
+        default: false
     },
     transparent: {
         type: Boolean,

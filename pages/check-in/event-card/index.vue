@@ -1,5 +1,5 @@
 <template>
-  <div class="event-card-container">
+  <div class="event-card-container gradient-bg">
     <div class="scheduled-event-container">
       <div class="events-header">Scheduled Events</div>
       <div class="event-items" v-if="mock.scheduled.length">
@@ -15,12 +15,13 @@
     <div class="events-header pb-2">September</div>
         <event-list
             :data="mock.upcoming"
+            class="max-h-[340px] overflow-auto"
         />
   </div>
 </template>
 <style scoped>
 .event-card-container {
-  @apply w-full md:w-80 flex-grow-0 -lg:grow-[1];
+  @apply w-[33%] -md:w-full flex-grow-0;
 }
 .event-card-container, .scheduled-event-container {
   @apply border border-secondary rounded flex flex-col p-3;
@@ -68,6 +69,26 @@ const mock = {
       booked: false,
         due: "Monday 6:30 - 6:40"
     },  {
+      id: 4,
+        title: 'Yoga',
+      booked: false,
+        due: "Tuesday 6:30 - 6:40"
+    },{
+      id: 4,
+        title: 'Yoga',
+      booked: false,
+        due: "Tuesday 6:30 - 6:40"
+    },{
+      id: 4,
+        title: 'Yoga',
+      booked: false,
+        due: "Tuesday 6:30 - 6:40"
+    },{
+      id: 4,
+        title: 'Yoga',
+      booked: false,
+        due: "Tuesday 6:30 - 6:40"
+    },{
       id: 4,
         title: 'Yoga',
       booked: false,

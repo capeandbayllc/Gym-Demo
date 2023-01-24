@@ -8,8 +8,8 @@
     >
         <template #content>
             <div class="global-search-popup-container">
-                <input type="text" placeholder="Search" class="input w-full bg-primary-content text-black text-lg"  v-model="searchInput"/>
-                <people-search-action @peopleSearchActionSelected="filterSelected"></people-search-action>
+                <input type="text" placeholder="Search" class="input w-full bg-base-content text-black text-lg"  v-model="searchInput"/>
+                <people-search-action @peopleSearchActionSelected="filterSelected" :actions-btn="actionsBtn"></people-search-action>
                 <search-list :filter="tblFilter" class="modal_scroll" ></search-list>
             </div>
         </template>
@@ -39,4 +39,22 @@ const tblFilter = ref(null);
 const filterSelected = (value) => {
     tblFilter.value = value;
 };
+const actionsBtn = [
+    {
+        name: 'Leads',
+        type: 'leads'
+    },
+    {
+        name: 'Members',
+        type: 'members'
+    },
+    {
+        name: 'Employees',
+        type: 'employees'
+    },
+    {
+        name: 'Segments',
+        type: 'segments'
+    },
+];
 </script>

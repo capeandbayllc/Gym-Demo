@@ -7,15 +7,15 @@
 			<people-icon />People
 		</Button> -->
 		<div @mouseover="showFocus" @mouseleave="hideFocus">
-			<input ref="globalSearchInput" type="text" placeholder="Search" class="input global-search-input w-52 -xl:w-40 -lg:w-36 -lg:mr-0 mr-9 bg-slate-50 text-black text-lg h-9" @click="$emit('show-global-search')"/>
-		</div>
-		<div class="alert-container">
-			<alarm-btn />
-			<alert-list class="alert-list"/>
+			<input ref="globalSearchInput" type="text" placeholder="Search" class="input global-search-input w-80 -xl:w-40 -lg:w-80 -md:w-40 -lg:mr-0 mr-9 bg-base-content rounded text-black text-lg h-9" @click="$emit('show-global-search')"/>
 		</div>
 		<div class="relative">
 			<person-add-icon @click="showUserMenu"/>
 			<user-add-menu ref="userMenu"/>
+		</div>
+		<div class="alert-container mt-1">
+			<alarm-btn />
+			<alert-list class="alert-list"/>
 		</div>
 		<!-- <div class="setting-icon">		
 			<setting-icon />
@@ -49,7 +49,7 @@
 </style>
 <style scoped>
 .header-actions {
-	@apply flex items-center justify-end space-x-9 mr-8 -lg:space-x-4 -xl:space-x-3;
+	@apply flex items-center justify-end space-x-9 mx-8 -lg:space-x-4 -xl:space-x-3;
 	> button svg {
 		@apply mr-1;
 	}
@@ -64,7 +64,7 @@
 	@apply block;
 }
 .alert-container {
-	@apply relative;
+	@apply relative -sm:!ml-4;
 	.alert-list {
 		@apply absolute z-20 hidden;
 		right: -8rem;

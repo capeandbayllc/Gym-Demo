@@ -9,6 +9,7 @@
 			<select-box
 				label="Location"
 				:items="locations"
+				:secondary="true"
 			/>
 		</div>
 		<div class="checkin-value">08</div>
@@ -17,7 +18,7 @@
 				<div class="w-3/4">Name</div>
 				<div class="w-1/4">Sign-Ins</div>
 			</div>
-			<div class="checkin-history-list">
+			<div class="checkin-history-list no-scrollbar">
 				<div
 					v-for="item in history"
 					:key="item.id"
@@ -25,7 +26,7 @@
 				>
 					<div class="history-user-name">
 						<div class="history-user-avatar">
-							<img src="~/assets/account.png"/>
+							<img :src="item.avatar"/>
 							<div class="history-user-unread" v-if="item.unread">{{item.unread}}</div>
 
 						</div>
@@ -39,7 +40,7 @@
 </template>
 <style scoped>
 .pulse-check-history {
-	@apply h-full border border-secondary rounded flex flex-col justify-between px-7 py-4 items-center;
+	@apply h-full border border-secondary rounded flex flex-col justify-between px-7 py-4 items-center bg-base-300;
 	.checkin-header {
 		@apply flex flex-row justify-between w-full;
 		.checkin-date {
@@ -55,9 +56,10 @@
 			@apply flex flex-row font-semibold;
 		}
 		.checkin-history-list {
-			@apply flex flex-col w-fit space-y-2;
+			max-height: 10.5rem;
+			@apply flex flex-col w-fit space-y-2 overflow-auto;
 			.checkin-history-list-item {
-				@apply flex flex-row border rounded space-x-2 w-80 pl-4 pr-6 py-2 items-center justify-between;
+				@apply flex flex-row border rounded space-x-2 w-80 pl-4 pr-6 py-2 items-center justify-between bg-neutral;
 				.history-user-name {
 					@apply flex flex-row space-x-2 items-center;
 					.history-user-avatar {
@@ -101,16 +103,25 @@ const history = [{
 	id: 1,
 	count: 14,
 	name: "Sherry Champagne",
-	unread: 0
+	unread: 0,
+	avatar: "/pulse-modal/sherry-champagne.svg"
 }, {
 	id: 2,
 	count: 1,
 	name: "Chet James",
-	unread: 3
+	unread: 3,
+	avatar: "/pulse-modal/chet-james.svg"
 }, {
 	id: 3,
 	count: 2,
 	name: "Bruce Phillus",
-	unread: 0
+	unread: 0,
+	avatar: "/pulse-modal/bruce-phillus.svg"
+},{
+	id: 4,
+	count: 76,
+	name: "Jackie O’Leary",
+	unread: 0,
+	avatar: "/pulse-modal/jackie.svg"
 }]
 </script>

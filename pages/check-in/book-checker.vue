@@ -10,7 +10,7 @@
             <plus-circle-icon v-if="!modelValue"/>
             <check-circle-icon v-else/>
         </div>
-        <div>
+        <div class="font-normal" :class="{'text-black' : modelValue}">
             {{ modelValue ? "Booked" : "Book Event" }}
         </div>
     </div>

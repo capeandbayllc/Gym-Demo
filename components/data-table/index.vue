@@ -17,7 +17,7 @@
 <style scoped>
 table {
     border-spacing: 0 10px;
-    @apply w-full;
+    width: 99.5%;
 }
 </style>
 <script setup>

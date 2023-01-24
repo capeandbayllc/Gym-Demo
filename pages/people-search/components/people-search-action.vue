@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-row justify-between space-x-4 mt-10 mb-4">
         <div class="flex gap-6">
-            <Button size="sm" class="font-medium border-primary-content" :class="{'active' : activeBtn === item.type}" @click="setActiveAction(item.type)" v-for="(item, index) in actionsBtn" :key="index">
+            <Button size="sm" class="font-medium border-base-content text-base-content" :class="{'active' : activeBtn === item.type}" @click="setActiveAction(item.type)" v-for="(item, index) in actionsBtn" :key="index">
                 {{ item.name }}
             </Button>
         </div>
@@ -10,6 +10,7 @@
                 :items="filterType"
                 value=""
                 :label="'Locations'" 
+                :secondary="true"
                 class="w-40">
             </select-box>
         </div>
@@ -21,6 +22,9 @@
 }
 </style>
 <script setup>
+const props = defineProps({
+    actionsBtn: Array,
+});
 const activeBtn = ref('');
 const emit = defineEmits(['people-search-action-selected'])
 const setActiveAction = (name) => {
@@ -52,24 +56,6 @@ const filterType = [
     {
         value: "5",
         label: "Location 5"
-    },
-];
-const actionsBtn = [
-    {
-        name: 'Leads',
-        type: 'leads'
-    },
-    {
-        name: 'Members',
-        type: 'members'
-    },
-    {
-        name: 'Employees',
-        type: 'employees'
-    },
-    {
-        name: 'Segments',
-        type: 'segments'
     },
 ];
 </script>

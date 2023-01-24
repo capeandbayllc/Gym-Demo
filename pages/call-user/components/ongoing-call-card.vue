@@ -32,7 +32,7 @@
 .call-image-container{
     @apply p-4;
     .profile-avatar {
-        @apply relative rounded-full bg-white p-0.5 inline-block ;
+        @apply relative rounded-full bg-base-content p-0.5 inline-block ;
         img {
             @apply w-20 h-20;
         }

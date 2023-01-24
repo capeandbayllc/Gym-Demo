@@ -17,14 +17,15 @@
 				<!-- <global-search
 					v-model="globalSearch"
 				/> -->
-				<div class="app-body mt-8">
-				    <div class="app-body-content">
+				<div class="app-body">
+				    <div class="app-body-content mt-8">
 						<slot />
 					</div>
 					<side-bar />
 				</div>
 			</div>
 		</div>
+		<ChatConversation />
 		<!-- <daisy-modal id="globalSearchModal" ref="globalSearchModal" :show-close-button="false">
 			<global-search-modal />
 		</daisy-modal> -->
@@ -33,6 +34,8 @@
 <style scoped>
 .app-layout {
 	@apply w-screen overflow-x-hidden;
+	background-image: url('/background-gradient.svg');
+	background-size: cover;
 }
 .app-content {
 	@apply flex flex-row relative;
@@ -56,6 +59,8 @@ import HelpBot from "./components/help-bot/index.vue"
 import ProfileMenu from "./components/profile-menu/index.vue"
 
 import GlobalSearchModal from "./components/global-search-modal/index.vue"
+
+import ChatConversation from "./components/chat-conversation/index.vue"
 
 const showCircularMenu = ref(false)
 

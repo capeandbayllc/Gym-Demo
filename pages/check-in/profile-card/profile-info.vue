@@ -11,16 +11,20 @@
             Club ID# {{mock.club_id}}
         </div>
         <div class="profile-status">
-            <membership-btn :membership="mock.membership" />
+            <membership-btn editIconOnHover :membership="mock.membership" />
             <addon-btn :value="true" />
+            <Button size="sm" class="rounded-full px-[6px] femily-member" secondary>
+                FM
+                <span class="edit-icon"><empty-file-icon class="mb-2" /></span>
+            </Button>
         </div>
-        <div class="font-semibold pb-2">Contact</div>
-        <div class="profile-contact-methods">
-            <Button secondary class="-sm:!ml-2">Phone</Button>
-            <Button secondary class="-sm:!ml-2">Email</Button>
-            <Button secondary class="-sm:!ml-2">SMS</Button>
-        </div>
-        <div class="profile-actions">
+        <button class="profile-contact-methods" @click="openEngage">
+            <span class="mr-14 font-bold text-xl">Engage</span>
+            <div class="-sm:!ml-2"><CallIcon/></div>
+            <div class="-sm:!ml-2"><EmailIcon/></div>
+            <div class="-sm:!ml-2"><MessageIcon/></div>
+        </button>
+        <!-- <div class="profile-actions">
             <Button secondary size="sm"
                 @click="$emit('create-note')" 
                 class="-sm:!mr-1"
@@ -32,19 +36,54 @@
             >
                 Add an Alert
             </Button>
+        </div> -->
+        <div class="bg-gray p-4 border border-secondary bg-[#191919]">
+            <p class="text-sm mb-2">Guest Pass:</p>
+            <ul class="max-h-[80px] overflow-auto px-2">
+                <li class="flex my-4 items-center">
+                    <div class="mr-2">
+                        <input type="text" class="rounded-md bg-white text-black text-xs h-full p-2 " value="Issued December 12, 2021">
+                    </div>
+                    <span class="text-xs ml-2">Day Left: <b class="text-md bg-black border border-secondary py-2 px-3 rounded-full">2</b></span>
+                </li>
+                <li class="flex my-4 items-center">
+                    <div class="mr-2">
+                        <input type="text" class="rounded-md bg-white text-black text-xs h-full p-2 " value="Issued December 12, 2021">
+                    </div>
+                    <span class="text-xs ml-2">Day Left: <b class="text-md bg-black border border-secondary py-2 px-3 rounded-full">2</b></span>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
 <style scoped>
+
+.edit-on-hover {
+    &:hover {
+        font-size:0;
+        @apply px-4;
+        .edit-icon{
+            @apply visible;
+        }
+    }
+    .edit-icon{
+        @apply absolute h-[20px] w-[20px] invisible;
+        svg {
+            @apply h-full w-full;
+        }
+    }
+}
 .profile-info-container {
-    @apply flex flex-col items-center text-lg text-center;
+    @apply flex flex-col flex-1 items-center text-lg text-center;
     .profile-avatar {
-        @apply relative rounded-full bg-info p-2;
+        @apply relative rounded-full border-2 p-2;
         img {
             @apply w-36 h-36;
         }
         .alert-badge {
             @apply absolute flex items-center justify-center w-12 h-12 rounded-full bg-error text-3xl font-semibold;
+            left: -0.5rem;
+		    top: -0.375rem;
         }
     }
     .profile-name {
@@ -52,12 +91,47 @@
     }
     .profile-status {
         @apply flex flex-row space-x-4 pb-3;
-    }
-    .profile-contact-methods {
-        @apply flex flex-row  space-x-7 pb-8;
-        button {
-            @apply text-base-content text-base xl:text-lg font-semibold border border-base-content w-24;
+        > div, > button{
+            @apply relative;
+            /* &:before{
+                @apply absolute w-full rounded-md h-full text-sm top-0 left-0 text-center invisible capitalize;
+                content:"edit";
+                background: inherit;
+                line-height: 30px;
+            } 
+            &:hover {
+                color:inherit;
+                &:before{
+                    @apply visible;
+                }
+            } */
         }
+    }
+    .femily-member{
+        @apply relative;
+        &:hover {
+            font-size:0;
+            @apply px-4;
+            .edit-icon{
+                @apply visible;
+            }
+        }
+    }
+    .edit-icon{
+        @apply absolute h-[20px] w-[20px] invisible mx-auto left-0 right-0;
+        svg {
+            @apply h-full w-full;
+        }
+    }
+    
+    .profile-contact-methods {
+        @apply flex flex-row space-x-7 p-4 mb-4 border border-secondary rounded-md items-center;
+        button {
+            @apply text-base-content text-base xl:text-lg font-semibold;
+        }
+    }
+    .guest-pass {
+        @apply border border-secondary rounded p-5;
     }
     .profile-actions {
         @apply flex flex-row space-x-12 pb-5 text-center;
@@ -70,13 +144,19 @@
 <script setup>
 import MembershipBtn from '~~/components/buttons/membership-btn.vue';
 import AddonBtn from '~~/components/buttons/addon-btn.vue'
+import { CallIcon,EmailIcon,MessageIcon,EmptyFileIcon } from '~~/components/icons';
 const mock = {
     img: '/checkin/kevin.png',
     name: 'Kevin Buchanan',
     joined: 2020,
     club_id: 1234567890,
-    membership: 'premium',
+    membership: 'p',
     addOns: 'pt',
     notifications: 3,
+}
+const emit = defineEmits(["openEngage"])
+
+const openEngage = ()=>{
+    emit("openEngage")
 }
 </script>

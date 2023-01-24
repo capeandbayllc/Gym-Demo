@@ -29,7 +29,7 @@
                         Files
                     </div>
                     <div v-for="(type, ndx) in filesTypes[activeTab]" :key="ndx" class="create-option">
-                        <empty-file class="mb-2 mx-auto w-14" />
+                        <empty-file-icon class="mb-2 mx-auto w-14" />
                         <span class="mb-4">{{type}}</span>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
 </style>
 
 <script setup>
-import EmptyFile from '../../document/components/empty-file.vue';
+import { EmptyFileIcon } from '~~/components/icons';
 const activeTab = ref(0)
 const tabs = ["Membership", "Fitness", "HR"];
 const filesTypes = [
