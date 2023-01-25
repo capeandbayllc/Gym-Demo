@@ -1,5 +1,5 @@
 <template>
-    <div class="app-layout">
+    <div class="app-layout gradient-bg">
 		<app-header
 			@show-circular-menu="toggleCircularMenu"
 			@show-help="showBot"
@@ -34,8 +34,6 @@
 <style scoped>
 .app-layout {
 	@apply w-screen overflow-x-hidden;
-	background-image: url('/background-gradient.svg');
-	background-size: cover;
 }
 .app-content {
 	@apply flex flex-row relative;
