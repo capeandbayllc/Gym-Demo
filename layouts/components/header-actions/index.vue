@@ -14,7 +14,7 @@
 			<user-add-menu ref="userMenu"/>
 		</div>
 		<div class="alert-container mt-1">
-			<alarm-btn />
+			<alarm-btn @click="$emit('show-alert-modal')"/>
 			<alert-list class="alert-list"/>
 		</div>
 		<!-- <div class="setting-icon">		
