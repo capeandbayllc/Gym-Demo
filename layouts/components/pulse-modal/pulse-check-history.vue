@@ -104,24 +104,24 @@ const history = [{
 	count: 14,
 	name: "Sherry Champagne",
 	unread: 0,
-	avatar: "/pulse-modal/sherry-champagne.svg"
+	avatar: "/pulse-modal/sherry-champagne.png"
 }, {
 	id: 2,
 	count: 1,
 	name: "Chet James",
 	unread: 3,
-	avatar: "/pulse-modal/chet-james.svg"
+	avatar: "/pulse-modal/chet-james.png"
 }, {
 	id: 3,
 	count: 2,
 	name: "Bruce Phillus",
 	unread: 0,
-	avatar: "/pulse-modal/bruce-phillus.svg"
+	avatar: "/pulse-modal/bruce-phillus.png"
 },{
 	id: 4,
 	count: 76,
 	name: "Jackie O’Leary",
 	unread: 0,
-	avatar: "/pulse-modal/jackie.svg"
+	avatar: "/pulse-modal/jackie.png"
 }]
 </script>

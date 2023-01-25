@@ -10,7 +10,7 @@
     "@nuxtjs/tailwindcss": "^6.1.1",
     "daisyui": "^2.33.0",
     "mock-apollo-client": "^1.2.1",
-    "nuxt": "3.0.0-rc.12"
+    "nuxt": "3.0.0-rc.11"
   },
   "dependencies": {
     "@fullcalendar/core": "^5.11.0",
