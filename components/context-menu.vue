@@ -1,5 +1,5 @@
 <template>
-    <div tabindex="1" ref="contextMenu" class="context-menu">
+    <div tabindex="1" ref="contextMenu" class="context-menu" @blur="$emit('isProfileMenuOpen',false)" @focus="$emit('isProfileMenuOpen',true)">
         <slot />
     </div>
 </template>

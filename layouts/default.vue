@@ -10,7 +10,7 @@
 			@close="toggleCircularMenu"
 		/>
 		<help-bot ref="helpBot"/>
-		<profile-menu ref="profileMenu"/>
+		<profile-menu ref="profileMenu" @isProfileMenuOpen="isProfileMenuOpenFn"/>
 		<div class="app-content">
 			<nav-bar />
 			<div class="w-full relative">
@@ -49,7 +49,7 @@
 }
 </style>
 <script setup>
-import {ref, watchEffect} from 'vue'
+import {ref, watchEffect,provide} from 'vue'
 import AppHeader from "./components/app-header.vue";
 import NavBar from "./components/nav-bar/index.vue"
 import GlobalSearch from "./components/global-search.vue"
@@ -72,8 +72,15 @@ const helpBot = ref(null)
 const showBot = () => helpBot.value.open();
 
 const profileMenu = ref(null)
-const showProfileMenu = () => profileMenu.value.open()
-
+const showProfileMenu = () => {
+	profileMenu.value.open()
+}
+const profileMenuStatus = ref(false);
+provide('profileMenu',profileMenuStatus);
+const isProfileMenuOpenFn = (data) =>{
+	profileMenuStatus.value = data;
+	provide('profileMenu',profileMenuStatus);
+}
 
 const globalSearch = ref("")
 const globalSearchModal = ref(null)

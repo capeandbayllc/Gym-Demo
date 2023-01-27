@@ -20,12 +20,12 @@
 		<!-- <div class="setting-icon">		
 			<setting-icon />
 		</div> -->
-		<div class="absolute right-[11.25rem]">
+		<div class="relative z-10">
 			<question-round-icon
 				@click="$emit('show-help')"
 			/>
 		</div>
-		<div>
+		<div class="!ml-[-40px]">
 			<account-btn
 				@click="$emit('show-profile-menu')"
 			/>
