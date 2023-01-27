@@ -8,7 +8,7 @@
     >
         <template #content>
             <div class="global-search-popup-container">
-                <input type="text" placeholder="Search" class="input w-full bg-primary-content text-black text-lg"  v-model="searchInput"/>
+                <input type="text" placeholder="Search" class="input w-full bg-base-content text-black text-lg"  v-model="searchInput"/>
                 <people-search-action @peopleSearchActionSelected="filterSelected" :actions-btn="actionsBtn"></people-search-action>
                 <search-list :filter="tblFilter" class="modal_scroll" ></search-list>
             </div>

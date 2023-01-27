@@ -1,12 +1,12 @@
 <template>
-    <div class="flex justify-center items-center pt-8 pb-10">
+    <div class="flex justify-center items-center gap-10 pt-8 pb-16">
         <button class="flex flex-col items-center" @click="$emit('newAgreement')">
-            <NewAgreementIcon class="w-[160px] h-[50px] mb-2"/>
-            <span>Start a New Agreement</span>
+            <NewAgreementIcon class="w-[140px] h-[45px] mb-2"/>
+            <span class="font-semibold">Start a New Agreement</span>
         </button>
         <button class="flex flex-col items-center">
-            <AddIcon class="w-[150px] h-[50px] mb-2"/>
-            <span>Pick up Template</span>
+            <AddIcon class="w-[150px] h-[45px] mb-2"/>
+            <span class="font-semibold">Pick up Template</span>
         </button>
     </div>
     <simple-card title="Current Agreements">

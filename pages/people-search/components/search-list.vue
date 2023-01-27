@@ -1,16 +1,17 @@
 <template>
     <div class="mt-5 people-search-tbl-content">
         <simple-card title="Members" class="mb-5" v-if="!filter || filter === 'members'">
-            <people-search-table :columns="columns" :items="membersData" class="p-6"/>
+            <people-search-table :columns="columns" :items="membersData" :filter="filter" class="p-6"/>
         </simple-card>
         <simple-card title="Leads" class="mb-5" v-if="!filter || filter === 'leads'">
-            <people-search-table :columns="columns" :items="leadsData" class="p-6"/>
+            <people-search-table :columns="columns" :items="leadsData" :filter="filter" class="p-6"/>
         </simple-card>
         <simple-card title="Employees" class="mb-5" v-if="!filter || filter === 'employees'">
-            <data-table />
+            <people-search-table v-if="employeeData.length > 0" :columns="columns" :items="employeeData" :filter="filter" class="p-6"/>
+            <data-table v-else />
         </simple-card>
         <simple-card title="Segments" class="mb-5" v-if="!filter || filter === 'segments'">
-            <people-search-table :columns="columns" :items="leadsData" class="p-6"/>
+            <people-search-table :columns="columns" :items="leadsData" :filter="filter" class="p-6"/>
         </simple-card>
     </div>
 </template>
@@ -18,8 +19,8 @@
 import PeopleSearchTable from './people-search-table.vue';
 const props = defineProps({
     filter: {
-        type: Array,
-        default: String
+        type: String,
+        default: null
     },
 });
 const columns = [
@@ -300,4 +301,12 @@ const leadsData = [
         type: "Premium"
     },
 ];
+const employeeData = ref([]);
+watch(() => props.filter, (newValue) => {
+    if(newValue === 'employees') {
+        employeeData.value = [...membersData];
+    }else {
+        employeeData.value = [];
+    }
+});
 </script>

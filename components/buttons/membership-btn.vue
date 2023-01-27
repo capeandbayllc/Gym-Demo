@@ -1,26 +1,31 @@
 <template>
     <div
         class="membership-btn"
-        :class="'type-' + membership"
+        :class="['type-' + membership , editIconOnHover ? 'edit-hover-icon': '']"
     >
     {{membership}}
+    
     <span class="edit-icon"><empty-file-icon class="mb-2" /></span>
     </div>
 </template>
 <style scoped>
     .membership-btn {
         @apply flex items-center justify-center rounded-full font-semibold cursor-pointer capitalize h-full px-3 text-sm relative;
+        
+        .edit-icon{
+            @apply absolute h-[20px] w-[20px] invisible;
+            svg {
+                @apply h-full w-full;
+            }
+        }
+        
+    }
+    .membership-btn.edit-hover-icon {
         &:hover {
             font-size:0;
             @apply px-4;
             .edit-icon{
                 @apply visible;
-            }
-        }
-        .edit-icon{
-            @apply absolute h-[20px] w-[20px] invisible;
-            svg {
-                @apply h-full w-full;
             }
         }
     }
@@ -38,8 +43,14 @@
     }
 </style>
 <script setup>
+
 import { EmptyFileIcon } from '~~/components/icons';
+
 const props = defineProps({
-    membership: String
+    membership: String,
+    editIconOnHover: {
+        type: Boolean,
+        default: false,
+    }
 })
 </script>

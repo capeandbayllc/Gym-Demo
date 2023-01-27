@@ -34,7 +34,7 @@
                     <data-table
                         :columns="columns"
                         :data="data"
-                        :row-component="membersList"
+                        :row-component="MembersList"
                         class="text-xs reporting-member-tbl"
                     />
                     <div class="flex text-secondary justify-center mt-2 font-medium">
@@ -73,11 +73,11 @@
 <script setup>
 import ReportingMembersLineChart from './reporting-members-line-chart.vue';
 import ReportingMembersChart from './reporting-members-chart.vue';
-import membersList from './members-list-item.vue'
+import MembersList from './members-list-item.vue'
 const columns = ["Members Name", "Members Type", "Date"]
 const filterList = ['TODAY', 'MTD', 'QTD', 'YTD', 'RANGE'];
 const activeFilter = ref(4);
-const filterByRange = ref(true);
+const filterByRange = ref(false);
 const setFilter = (index)  => {
     activeFilter.value = index;
     filterByRange.value = index === 4 ? true : false;

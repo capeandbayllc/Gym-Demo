@@ -1,13 +1,9 @@
 <template>
   <div class="profile-options-container relative">
-    <div class="absolute bg-secondary px-8 py-2 z-10 rounded w-[140px] top-[-100px] text-center cursor-pointer -xl:right-[10px] -xl:top-[20px] -lg:static -lg:mt-4" @click="openAddMemberPopUp">
-      <AddIcon class="h-[40px] w-[40px] border inline-block border-white rounded-full"/>
-      <p>
-        Add Lead
-      </p>
-    </div>
+    
     <div class="flex flex-row gap-2 relative">
-      <div class="btn-check-in">Check in</div>
+      <CheckInButton v-model="checkIn" class="w-[250px] mr-4"/>
+      <!-- <div class="btn-check-in">Check in</div> -->
       <!-- <div class="btn-close-selection">Close Selection</div> -->
     </div>
     <div class="profile-options gradient-bg">
@@ -55,7 +51,8 @@ import Infomrmation from './add-member/information.vue'
 import PersonalInformation from '../user-info/personal-information/index.vue'
 import Interests from './add-member/interests.vue'
 import EmergencyInfo from './add-member/emergency-info.vue'
-import BroughtToday from './add-member/brought-today.vue'
+import BroughtToday from './add-member/brought-today.vue';
+import CheckInButton from './check-in-button.vue'
 const props = defineProps({
     selected: String
 })
@@ -91,6 +88,8 @@ const options = [
     key: "newAgreement",
     selected: false
 }]
+
+const checkIn = ref(false)
 
 const emit = defineEmits(["update:selected"])
 const handleSelect = (key, value) => {

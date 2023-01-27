@@ -1,6 +1,6 @@
 <template>
     <ClientOnly>
-        <apexchart class="reporting-members-line-chart mt-6" type="area" height="500" :options="chartOptions" :series="series"></apexchart>
+        <apexchart class="reporting-members-line-chart mt-6" type="area" height="550" :options="chartOptions" :series="series"></apexchart>
     </ClientOnly>
 </template>
 <style scoped>

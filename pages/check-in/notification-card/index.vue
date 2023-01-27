@@ -73,10 +73,7 @@
 </style>
 <style scoped>
 .checkin-notification-card {
-    @apply bg-neutral  m-auto;
-	@screen -lg {
-        @apply m-4
-    }
+    @apply bg-neutral m-auto max-w-[1120px] xl:w-[1120px] w-full;
 	.notification-container {
 		@apply p-4 gap-5;
 	}

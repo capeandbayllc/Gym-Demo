@@ -1,38 +1,46 @@
 <template>
-    <div class="page-alerts-notifications-container">
-        <div class="-md:px-4 page-content flex-col">
-            <input
-                type="text"
-                placeholder="Search"
-                class="input w-full bg-base-content text-black text-lg mb-8"
-                v-model="searchInput"
-            />
-            <filter-actions></filter-actions>
-            <div class="mt-5">
-                <simple-card
-                    title="Recent Alerts"
-                    class="mb-5"
-                >
-                    <div class="p-6">
-                        <data-table
-                            :columns="columns"
-                            :data="list"
-                            :row-component="RecentAlertsTableRow"
-                            class="h-72 overflow-y-auto recent-alerts-datatable"
-                        />
-                    </div>
-                </simple-card>
+    <card
+        title="" class="alert-popup-card"
+        :options="{
+            'collapse': false,
+            'favorite': false,
+        }"
+    >
+        <template #content>
+            <div class="alert-popup-container">
+                <input type="text" placeholder="Search" class="input w-full bg-base-content text-black text-lg"  v-model="searchInput"/>
+                <filter-action class="pt-6" />
+                <div class="mt-5">
+                    <simple-card
+                        title="Recent Alerts"
+                        class="mb-5"
+                    >
+                        <div class="p-6">
+                            <data-table
+                                :columns="columns"
+                                :data="list"
+                                :row-component="RecentAlertsTableRow"
+                                class="h-72 overflow-y-auto recent-alerts-datatable"
+                            />
+                        </div>
+                    </simple-card>
+                </div>
             </div>
-        </div>
-    </div>
+        </template>
+    </card>
 </template>
 <style scoped>
-.page-alerts-notifications-container {
-    @apply py-4 pr-5 w-full h-fit;
-    .page-content {
-        @apply block border border-secondary bg-neutral rounded p-7 w-fit max-w-[1120px] mx-auto;
+ .alert-popup-card {
+    @apply rounded-2xl bg-neutral;
+    .alert-popup-container {
+        @apply pl-2 pr-2 pt-6 pb-6;
+        .modal_scroll{
+            @apply overflow-y-auto;
+            height: 60vh;
+        }
     }
 }
+
 </style>
 <style>
 .recent-alerts-datatable thead {
@@ -41,8 +49,10 @@
 
 </style>
 <script setup>
-import FilterActions from './components/filter-actions.vue';
-import RecentAlertsTableRow from './components/recent-alerts-table-row.vue';
+import FilterAction from "./alert-modal/filter-action.vue";
+import RecentAlertsTableRow from '~~/pages/alerts-notifications/components/recent-alerts-table-row.vue';
+
+const searchInput =  ref("Kev");
 const columns = [
     {
         label: 'Segment',

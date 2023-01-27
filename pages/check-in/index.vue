@@ -1,7 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col">
     <div class="page-checkin-container">
-      <div class="page-title">Member account page</div>
       <div class="page-content">
         <div class="wrapper p-4 w-full rounded-md" :class="{'pb-0':accountView !== null}">
           <div class="flex -md:block">
@@ -36,34 +35,35 @@
         </div>
       </div>
     </div>
-    <Profile v-if="option === 'profile'" @close="option = null"/>
-    <pos-card v-if="option === 'pos'" @close="option = null"/>
-    <calendar-card v-if="option === 'calendar'" @close="option = null"/>
-    <notification-card v-if="option === 'notification'" @close="option = null"/>
-    <guest-card v-if="option === 'guest-pass'" @close="option = null"/>
-    <note-card v-if="option === 'note'" @close="option = null"/>
-    <new-agreement v-if="option === 'newAgreement'" @close="option = null"/>
-    <Engage v-if="option === 'engage'" @close="option = null"/>
-    <footer-logo class="m-auto" v-else/>
-    <daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
-        <alert-add-modal @close="scope.close()"/>
-    </daisy-modal>
-    <daisy-modal id="noteAddModal" ref="noteAddModal" v-slot="scope">
-      <note-add-modal @close="scope.close()" />
-    </daisy-modal>
+    <div class="px-5">    
+      <Profile v-if="option === 'profile'" @close="option = null"/>
+      <pos-card v-if="option === 'pos'" @close="option = null"/>
+      <calendar-card v-if="option === 'calendar'" @close="option = null"/>
+      <notification-card v-if="option === 'notification'" @close="option = null"/>
+      <guest-card v-if="option === 'guest-pass'" @close="option = null"/>
+      <note-card v-if="option === 'note'" @close="option = null"/>
+      <new-agreement v-if="option === 'newAgreement'" @close="option = null"/>
+      <Engage v-if="option === 'engage'" @close="option = null"/>
+      <footer-logo class="m-auto" v-else/>
+      <daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
+          <alert-add-modal @close="scope.close()"/>
+      </daisy-modal>
+      <daisy-modal id="noteAddModal" ref="noteAddModal" v-slot="scope">
+        <note-add-modal @close="scope.close()" />
+      </daisy-modal>
+    </div>
+
         
   </div>
 </template>
 <style scoped>
-
 .page-checkin-container {
-  @apply py-4 px-5 bg-base-300 w-full h-fit border-b border-secondary -md:pl-0;
-  background: linear-gradient(to top, rgba(10, 33, 60, 0.93) 0%, rgba(2, 5, 9, 0.93) 20%, rgba(15, 42, 77, 0.93) 100%);
+  @apply py-4 px-5 w-full h-fit border-b border-secondary;
   .page-title {
     @apply text-lg font-light pb-3 pl-5;
   }
   .page-content {
-    @apply flex flex-col-reverse md:flex-row gap-5 flex-wrap justify-center mx-auto w-full max-w-[1120px];
+    @apply flex flex-col-reverse md:flex-row gap-5 flex-wrap justify-center;
     .wrapper{
       background: #0074C8;
     }
@@ -98,9 +98,7 @@ import UserInfo from './user-info/index.vue';
 import Setting from './setting/index.vue';
 import Engage from './engage/index.vue';
 
-
 const option = ref(null);
-
 
 watch(option,()=>{
   const appLayout = document.querySelector(".app-layout");

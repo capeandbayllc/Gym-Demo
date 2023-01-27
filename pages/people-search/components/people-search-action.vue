@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-row justify-between space-x-4 mt-10 mb-4">
         <div class="flex gap-6">
-            <Button size="sm" class="font-medium border-primary-content" :class="{'active' : activeBtn === item.type}" @click="setActiveAction(item.type)" v-for="(item, index) in actionsBtn" :key="index">
+            <Button size="sm" class="font-medium border-base-content text-base-content" :class="{'active' : activeBtn === item.type}" @click="setActiveAction(item.type)" v-for="(item, index) in actionsBtn" :key="index">
                 {{ item.name }}
             </Button>
         </div>
@@ -10,7 +10,8 @@
                 :items="filterType"
                 value=""
                 :label="'Locations'" 
-                class="w-40 bg-secondary border rounded border-base-content">
+                :secondary="true"
+                class="w-40">
             </select-box>
         </div>
     </div>
