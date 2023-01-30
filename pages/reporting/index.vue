@@ -11,14 +11,15 @@
                 <reporting-widget-member></reporting-widget-member>
             </div>
             <div class="col-span-2">
-                <reporting-widget-clients></reporting-widget-clients>
+                <create-report-card></create-report-card>
+                <!-- <reporting-widget-clients></reporting-widget-clients> -->
             </div>
         </div>
     </div>
 </template>
 <style scoped>
 .reporting-page-content {
-    @apply flex flex-col items-center pb-5 pt-4 max-w-[1120px] mx-auto w-full pr-5;
+    @apply flex flex-col items-center pb-5 pt-4 max-w-[1120px] mx-auto w-full px-5;
     .reporting-container { 
         @apply grid grid-cols-3 gap-4;
     }
@@ -39,6 +40,7 @@ import ReportingWidgetLeads from './components/reporting-widget-leads.vue';
 import ReportingWidgetConversion from './components/reporting-widget-conversion.vue'
 import ReportingWidgetMember from './components/reporting-widget-member.vue'
 import ReportingWidgetClients from './components/reporting-widget-clients.vue'
+import CreateReportCard from './components/create-report-card.vue';
 onMounted(async () => {
     await nextTick();
     window.dispatchEvent(new Event('resize'))
