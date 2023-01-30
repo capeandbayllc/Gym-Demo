@@ -76,7 +76,7 @@ import ReportingMembersChart from './reporting-members-chart.vue';
 import MembersList from './members-list-item.vue'
 const columns = ["Members Name", "Members Type", "Date"]
 const filterList = ['TODAY', 'MTD', 'QTD', 'YTD', 'RANGE'];
-const activeFilter = ref(4);
+const activeFilter = ref(0);
 const filterByRange = ref(false);
 const setFilter = (index)  => {
     activeFilter.value = index;
