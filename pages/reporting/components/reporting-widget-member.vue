@@ -22,7 +22,7 @@
                         </span>
                         <span class="ml-1">Previous Month</span>
                         <span class="mx-2">or</span>
-                        <span class="ml-1">Previous Year</span>
+                        <span>Previous Year</span>
                     </div>
                 </div>
                 <div class="flex justify-center text-secondary text-xl -xl:text-sm font-medium mt-3">

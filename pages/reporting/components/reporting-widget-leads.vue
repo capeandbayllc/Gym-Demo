@@ -17,7 +17,7 @@
                         </span>
                         <span class="ml-1 filter-list" @click="reportBy('Previous Month')" :class="{'text-secondary': compareReport === 'Previous Month'}">Previous Month</span>
                         <span class="mx-2">or</span>
-                        <span class="ml-1 filter-list" @click="reportBy('Previous Year')" :class="{'text-secondary': compareReport === 'Previous Year'}">Previous Year</span>
+                        <span class="filter-list" @click="reportBy('Previous Year')" :class="{'text-secondary': compareReport === 'Previous Year'}">Previous Year</span>
                     </div>
                 </div>
                 <div class="relative">

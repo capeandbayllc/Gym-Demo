@@ -17,7 +17,7 @@
                         </span>
                         <span class="ml-1">Previous Month</span>
                         <span class="mx-2">or</span>
-                        <span class="ml-1">Previous Year</span>
+                        <span>Previous Year</span>
                     </div>
                 </div>
                 <div class="chart-wrapper relative">
