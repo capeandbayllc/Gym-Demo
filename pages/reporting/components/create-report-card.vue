@@ -25,23 +25,40 @@
                         </Button>
                     </div>
                     <div class="grid gap-3 mt-4 p-4 border border-secondary overflow-auto">
-                        <div class="flex gap-5 justify-between" v-for="(item, index) in buildReportBy" :key="index">
+                        <div class="flex gap-2 justify-between" v-for="(item, index) in buildReportBy" :key="index">
                             <select-box
                                 :items="item.filter1"
                                 value="1"
                                 :label="'Asset'"
-                                class="w-32"
+                                class="dropdown-select"
                                 :secondary="true" 
+                            
                             >
                             </select-box>
-                            <div class="w-9 h-9 rounded-full text-center border border-base-content bg-secondary cursor-pointer">
-                                <span class="text-2xl">=</span>
+                            <div class="relative w-9 h-9" :class="{'equal-to-icon': calculateByDropDown === item.id}"  ref="componentRef">
+                                <span class="equation-icon flex w-9 h-9 rounded-full text-center border-white bg-secondary cursor-pointer border-[3px] border-opacity-50" @click="showCalculateByDropDown(item.id)">{{ item.equation }}</span>
+                                <div class="calculation-dropdown" v-if="calculateByDropDown === item.id"> 
+                                    <div class="gradient-bg border-4 border-white border-opacity-75 flex justify-between w-full py-3 px-2 rounded-xl">                                 
+                                        <a class="dropdown-item cursor-pointer">
+                                            <img src="/equal.png" alt="" />
+                                        </a>
+                                        <a class="dropdown-item cursor-pointer">
+                                            <img src="/notequal.png" alt="" />
+                                        </a>
+                                        <a class="dropdown-item cursor-pointer">
+                                            <img src="/greaterthan.png" alt="" />
+                                        </a>
+                                        <a class="dropdown-item cursor-pointer">
+                                            <img src="/lessthan.png" alt="" />
+                                        </a>
+                                    </div>
+                                </div>     
                             </div>
                             <select-box
                                 :items="[]"
                                 value=""
-                                :label="'abcd,def453,ghi789,jkl101112'"
-                                class="w-32"
+                                :label="item.mutiselect"
+                                class="w-32 multiselect"
                                 :secondary="true" 
                             >
                             </select-box>
@@ -71,6 +88,35 @@
 <style scoped>
 .active{
     @apply border-secondary bg-transparent;
+}
+.dropdown-select {
+    @apply min-w-[140px]
+}
+.multiselect {
+    @apply min-w-[300px]
+}
+.equation-icon{
+    font-size: 30px;
+    line-height: 25px;
+    padding: 0px 5px;
+}
+.equal-to-icon {
+    @apply relative z-10;
+    .calculation-dropdown{
+        @apply flex w-[180px] absolute -left-[70px] p-[7px] bg-secondary rounded-xl justify-between mt-[6px];
+    }
+}
+.calculation-dropdown::before {
+    content: '';
+    background: url(/equal_bg.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 50px;
+    width: 120px;
+    position: absolute;
+    top: -47px;
+    left: 25px;
+    z-index: -1;
 }
 </style>
 <style>
@@ -104,31 +150,35 @@ const buildReportBy = [
                 label: "Asset"
             }, 
         ],
-        equation: '',
-        filter2: '',
+        equation: '=',
+        mutiselect: 'abc123, def456, ghi789, jkl101112',
     }, 
     {
-        id: 1,
+        id: 2,
         filter1:  [
             {
                 value: "1",
                 label: "Sensor Value"
             }, 
         ],
-        equation: '',
-        filter2: '',
+        equation: '=',
+        mutiselect: 'Mode',
     }, 
     {
-        id: 1,
+        id: 3,
         filter1:  [
             {
                 value: "1",
                 label: "Sensor Value"
             }, 
         ],
-        equation: '',
-        filter2: '',
+        equation: '=',
+        mutiselect: 'Mode',
     }, 
 ];
 const showAddNewForm = ref(false);
+const calculateByDropDown = ref(null);
+const showCalculateByDropDown = (id) => {
+    calculateByDropDown.value = !calculateByDropDown.value ? id : calculateByDropDown.value = null;
+}
 </script>
