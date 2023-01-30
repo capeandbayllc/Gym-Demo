@@ -74,22 +74,22 @@ const mock = {
       booked: false,
         due: "Tuesday 6:30 - 6:40"
     },{
-      id: 4,
+      id: 5,
         title: 'Yoga',
       booked: false,
         due: "Tuesday 6:30 - 6:40"
     },{
-      id: 4,
+      id: 6,
         title: 'Yoga',
       booked: false,
         due: "Tuesday 6:30 - 6:40"
     },{
-      id: 4,
+      id: 7,
         title: 'Yoga',
       booked: false,
         due: "Tuesday 6:30 - 6:40"
     },{
-      id: 4,
+      id: 8,
         title: 'Yoga',
       booked: false,
         due: "Tuesday 6:30 - 6:40"
