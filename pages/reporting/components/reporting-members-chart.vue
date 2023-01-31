@@ -1,10 +1,12 @@
 <template>
     <ClientOnly>
-        <apexchart class="mt-2" type="radialBar" height="250" :options="options" :series="series"></apexchart>
+        <apexchart class="mt-2" type="radialBar" height="250" :options="options" :series="totalCount"></apexchart>
     </ClientOnly>
 </template>
 <script setup>
-
+const props = defineProps({
+   totalCount: Array
+});
 const series = [75];
 const options = {
     chart: {
