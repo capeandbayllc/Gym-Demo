@@ -251,10 +251,12 @@ const reportBy = (type) => {
         data.value = result.list;
         totalCount.value = result.userTotal;
         compareReport.value = type;
+        filterByRange.value = false;
     }else {
         data.value = membersList[0].list;
         compareReport.value = null;
         totalCount.value = [radialChatValues[activeFilter.value]];
+        filterByRange.value = activeFilter.value === 4 ? true : false;
     }
 }
 </script>
