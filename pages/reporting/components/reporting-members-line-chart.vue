@@ -1,13 +1,8 @@
 <template>
     <ClientOnly>
-        <apexchart class="reporting-members-line-chart mt-6" type="area" height="550" :options="chartOptions" :series="series"></apexchart>
+        <apexchart class="gradient-bg mt-6" type="area" height="550" :options="chartOptions" :series="series"></apexchart>
     </ClientOnly>
 </template>
-<style scoped>
-.reporting-members-line-chart {
-    background: linear-gradient(to bottom,  #191919 0%,#191919 0%,#171f25 1%,#11344f 1%,#0e3d5f 1%,#0d436b 1%,#0d4168 99%,#0e4064 100%,#152531 100%,#191919 100%);
-}
-</style>
 <script setup>
 const series = [
     {

@@ -8,20 +8,26 @@
         <template #content>
             <div class="card-content">
                 <div class="grid grid-cols-5 mt-2 font-semibold text-lg -xl:text-sm -lg:text-xs text-center">
-                    <div class="filter-list" :class="{'text-secondary': activeFilter === index}" v-for="(item, index) in filterList" :key="index" @click="setFilter(index)">{{ item }}</div>
+                    <div class="cursor-pointer" :class="{'text-secondary': activeFilter === index}" v-for="(item, index) in filterList" :key="index" @click="setFilter(index)">{{ item }}</div>
                 </div>
                 <div class="grid grid-cols-1 mt-2 text-base -xl:text-xs font-normal">
                     <div>
                         <span>
                             Compare:
                         </span>
-                        <span class="ml-1 filter-list" @click="reportBy('Previous Month')" :class="{'text-secondary': compareReport === 'Previous Month'}">Previous Month</span>
+                        <span class="ml-1 cursor-pointer" @click="reportBy('Previous Month')" :class="{'text-secondary': compareReport === 'Previous Month'}">Previous Month</span>
                         <span class="mx-2">or</span>
-                        <span class="filter-list" @click="reportBy('Previous Year')" :class="{'text-secondary': compareReport === 'Previous Year'}">Previous Year</span>
+                        <span class="cursor-pointer" @click="reportBy('Previous Year')" :class="{'text-secondary': compareReport === 'Previous Year'}">Previous Year</span>
                     </div>
                 </div>
                 <div class="relative">
-                    <total-card :title="title" :total-count="filteredValue[activeFilter]"></total-card>
+                    <div v-if="showTable">
+                        <div class="text-secondary flex mt-2 text-xl -xl:text-sm font-semibold justify-center">
+                            {{ title }}
+                        </div>
+                        <reporting-leads-line-chart />
+                    </div>
+                    <total-card :title="title" :total-count="filteredValue[activeFilter]" v-else></total-card>
                     <filtered-report-card class="absolute top-12 -lg:left-1 bg-neutral" :title="compareReport" :report-data="comparedByReportData" v-if="compareReport"></filtered-report-card>
                 </div>
                 <div class="grid grid-cols-1 mt-2 text-base -xl:text-xs font-normal">
@@ -29,41 +35,42 @@
                         <span>
                             Forecast:
                         </span>
-                        <span class="ml-1 filter-list" @click="reportBy('Index')" :class="{'text-secondary': compareReport === 'Index'}">Index</span>
+                        <span class="ml-1 cursor-pointer" @click="reportBy('Index')" :class="{'text-secondary': compareReport === 'Index'}">Index</span>
                         <span class="mx-2">or</span>
-                        <span class="ml-1 filter-list" @click="reportBy('Straight Line')" :class="{'text-secondary': compareReport === 'Straight Line'}">Straight Line</span>
+                        <span class="ml-1 cursor-pointer" @click="reportBy('Straight Line')" :class="{'text-secondary': compareReport === 'Straight Line'}">Straight Line</span>
                     </div>
                 </div>
             </div>
         </template>
     </card>
 </template>
-<style scoped>
-.filter-list{
-    cursor: pointer;
-}
-</style>
 <script setup>
 import TotalCard from './total-card.vue';
 import FilteredReportCard from './filtered-report-card.vue';
+import ReportingLeadsLineChart from './reporting-leads-line-chart.vue'
 const title = ref('NEW LEADS');
 const filterList = ['TODAY', 'MTD', 'QTD', 'YTD', 'RANGE'];
 const activeFilter = ref(0);
 const filteredValue = ['1,567','3,241','5,678','8,324']
+const showTable = ref(false);
 const setFilter = (index)  => {
     compareReport.value = null;
-    if(index !== 4) {
-        activeFilter.value = index;
-    }
+    activeFilter.value = index;
+    showTable.value = index === 4 ? true : false;
 }
 const compareReport = ref(null);
 const comparedByReportData = ref([]);
 const reportBy = (type) => {
-    const result = compareBy.find(item => {
-        return item.variation === type;
-    });
-    compareReport.value = type;
-    comparedByReportData.value = result.data;
+    if(type !== compareReport.value) {
+        const result = compareBy.find(item => {
+            return item.variation === type;
+        });
+        compareReport.value = type;
+        comparedByReportData.value = result.data;
+    }else {
+        compareReport.value = null; 
+        comparedByReportData.value = [];
+    }
 }
 
 const compareBy = [
