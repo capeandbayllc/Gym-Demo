@@ -1,6 +1,28 @@
 <template>
+    <div class="cursor-pointer text-center mb-4">
+        <AddIcon class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold"/>
+        <p class="text-xs mt-1">
+            Update Lead
+        </p>
+    </div>
     <div class="page-members-center-container">
-        <div class="-md:px-4 page-content flex-col">
+        <div class="custom-page-content-header">
+            <span>Members</span>
+            <search-icon class="search-icon" />
+        </div>
+        <div class="-md:px-4 custom-page-content flex-col">
+            <div class="flex flex-row justify-between space-x-4 mb-4">
+                <div class="flex gap-4">
+                    <select-box
+                        :items="filterBy"
+                        value=""
+                        :label="'Filter By'"
+                        :secondary="true"
+                        class="w-40 filter-selected"
+                    >
+                    </select-box>
+                </div>
+            </div>
             <div>
                 <data-table
                     :columns="columns"
@@ -15,8 +37,14 @@
 <style scoped>
 .page-members-center-container {
     @apply py-4 pr-5 w-full h-fit;
-    .page-content {
-        @apply block border border-secondary bg-neutral rounded p-7;
+    .custom-page-content {
+        @apply block border border-secondary bg-black rounded-b p-7 mx-auto w-full max-w-[1220px];
+    }
+    .custom-page-content-header {
+        @apply bg-secondary rounded-t-lg pl-6 p-2 font-semibold mx-auto w-full max-w-[1220px];
+        .search-icon {
+            @apply float-right m-1 mr-6 cursor-pointer;
+        }
     }
 }
 </style>
@@ -29,6 +57,31 @@
 </style>
 <script setup>
 import MemberTableRow from './components/member-table-row.vue';
+import { SearchIcon, AddIcon } from '@/components/icons'
+
+const filterBy = [
+    {
+        value: '1',
+        label: 'App Referal',
+    },
+    {
+        value: '2',
+        label: 'Snapshot',
+    },
+    {
+        value: '3',
+        label: 'Grand Opening',
+    },
+    {
+        value: '4',
+        label: 'Free Trial',
+    },
+    {
+        value: '5',
+        label: 'Streaming Preview',
+    },
+];
+
 const columns = [
     {
         label: 'Created',

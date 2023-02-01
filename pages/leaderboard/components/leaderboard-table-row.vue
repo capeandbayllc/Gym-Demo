@@ -1,4 +1,5 @@
 <template>
+    <div class="text-start font-semibold">Category</div>
     <tr class="club-table-row">
         <td><div class="w-48 flex items-center justify-center"><img class="w-10 pr-2" src="/account.png" /> {{data.name}}</div></td>
         <td>
@@ -15,6 +16,7 @@
 </template>
 <style scoped>
 .club-table-row {
+    @apply bg-neutral;
     td {
         @apply border-y h-14 py-3;
         > div {

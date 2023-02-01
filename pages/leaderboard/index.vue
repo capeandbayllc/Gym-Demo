@@ -1,20 +1,30 @@
 <template>
     <div class="page-club-container">
         <div class="-md:px-4 page-content flex-col">
-            <simple-card
+            <!-- <simple-card
                 title="Top Employee Ranking in All Categories"
-                class="-md:text-xs"
-            >
-                <div class="px-3 py-3 bg-neutral">
+                class="-md:text-xs mb-14"
+            > -->
+            <div class="custom-page-content-header">
+                <span>Top Employee Ranking in All Categories</span>
+            </div>
+            <div class="-md:px-4 custom-page-content flex-col mb-14">
+                <div class="bg-black">
                     <data-table
                         class="leaderboard-table"
                         :data="mock"
                         :row-component="LeaderboardTableRow"
                     />
                 </div>
-            </simple-card>
-            <div class="flex flex-row my-4">
-                <multiselect
+            </div>
+            <!-- </simple-card> -->
+            <div class="flex flex-row my-4 mt-4">
+                <select-box
+                    :items="statsFilter"
+                    label="States Filter"
+                    class="w-36"
+                />
+                <!-- <multiselect
                     :modelValue="statsFilterList"
                     @update:modelValue="$emit('update:modelValue', $event)"
                     :options="statsFilter"
@@ -22,12 +32,16 @@
                     placeholder="States Filter"
                     :caret="true"
                     :classes="getDefaultMultiselectTWClasses()"
-                    class="w-[150px] transparent"
+                    class="w-[150px] transparent custom-multioption"
                     :close-on-select="false"
-                />
+                /> -->
             </div>
-            <simple-card title="Membership Sales">
-                <div class="-md:px-4 px-12 py-3 bg-neutral">
+            <!-- <simple-card title="Membership Sales"> -->
+            <div class="custom-page-content-header">
+                <span>Membership Sales</span>
+            </div>
+
+                <div class="-md:px-4 px-12 py-3 bg-black border border-secondary">
                     <div class="flex flex-row my-4 justify-end">
                         <Button
                             secondary
@@ -55,7 +69,7 @@
                                 v-for="(member, index) in membershipData"
                                 :key="index"
                             >
-                                <simple-card class="px-4">
+                                <simple-card class="px-4 membership-simple-card">
                                     <span
                                         v-if="member.isFavourite"
                                         class="text-yellow-500 text-xl absolute top-0 right-2"
@@ -149,7 +163,7 @@
                         </button>
                     </div>
                 </div>
-            </simple-card>
+            <!-- </simple-card> -->
         </div>
     </div>
 </template>
@@ -165,11 +179,20 @@
             @apply flex flex-row justify-between mb-3;
         }
         .leaderboard-table {
-            @apply px-3 bg-neutral overflow-y-auto;
-            height: 20vh;
+            @apply px-3 overflow-y-auto;
+            height: 30vh;
         }
         .carousel-wrap {
             position: relative;
+            .membership-simple-card {
+                @apply bg-neutral;
+            }
+        }
+        .custom-page-content {
+            @apply block border border-secondary bg-black rounded-b p-4 mx-auto w-full max-w-[1220px];
+        }
+        .custom-page-content-header {
+            @apply bg-secondary text-start rounded-t-lg pl-6 p-2 font-semibold mx-auto w-full max-w-[1220px];
         }
     }
 }

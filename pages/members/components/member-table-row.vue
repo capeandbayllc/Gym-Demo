@@ -7,7 +7,10 @@
         <td class="px-4">{{data.email}}</td>
         <td>{{data.location}}</td>
         <td>
-            <membership-btn :membership="data.type" class="text-sm"/>
+            <div class="membership-btn" :class="'type-' + data.type">
+                {{data.type}}
+            </div>
+            <!-- <membership-btn :membership="data.type" class="text-sm"/> -->
         </td>
         <td>
             <addon-btn :value="data.addOns" class="!rounded-full"/>
@@ -40,6 +43,18 @@
     }
     td:last-child {
         @apply border-r-2 rounded-r;
+    }
+    .type-premimum {
+        @apply bg-orange-400;
+    }
+    .type-basic {
+        @apply border border-white;
+    }
+    .type-gold {
+        @apply bg-yellow-400;
+    }
+    .membership-btn {
+        @apply items-center justify-center rounded text-sm cursor-pointer px-2 py-1;
     }
 }
 </style>
