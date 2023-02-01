@@ -1,13 +1,16 @@
 <template>
-    <div class="engage-sales-funnel-container">
-        <div class="engage-sales-funnel-header">
-            <h3>Acquisition & Sales Funnel</h3>
-            <Button class="text-base-content" size="sm" secondary @click="showEditSalesFunnelModal">Edit</Button>
+    <div class="border border-secondary rounded p-3 bg-black">
+        <div class="engage-sales-funnel-container">
+            <div class="engage-sales-funnel-header">
+                <h3>Acquisition & Sales Funnel</h3>
+                <Button class="text-base-content" size="sm" secondary @click="showEditSalesFunnelModal">Edit</Button>
+            </div>
+            <funnel-chart
+                :data="data" class="h-36"
+                :content-item="ChartContent"
+            />
         </div>
-        <funnel-chart
-            :data="data" class="h-36"
-            :content-item="ChartContent"
-        />
+        <engage-call-list />
     </div>
     <daisy-modal id="editSalesFunnelModal" ref="editSalesFunnelModal" class="w-full !min-w-0 max-w-fit h-full">
         <edit-sales-funnel-modal class="h-full overflow-auto"/>
@@ -15,7 +18,7 @@
 </template>
 <style scoped>
 .engage-sales-funnel-container {
-    @apply col-span-2 h-56 border border-secondary rounded p-3 -md:col-span-3;
+    @apply col-span-2 h-56 -md:col-span-3;
     .engage-sales-funnel-header {
         @apply flex justify-between items-center pb-3;
         h3 {
@@ -30,6 +33,8 @@
 <script setup>
 import ChartContent from './chart-content.vue';
 import EditSalesFunnelModal from "./edit-sales-funnel/index.vue";
+import EngageCallList from './engage-call-list.vue';
+
 const data = [{
     id: 1,
     start: 80,

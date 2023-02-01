@@ -1,16 +1,16 @@
 <template>
 <div class="engage-today-event-container">
-    <div class="main-title">Todays Events</div>
-    <div class="text-xs">At your location</div>
+    <!-- <div class="main-title">Todays Events</div>
+    <div class="text-xs">At your location</div> -->
     <div class="event-list">
-        <div class="event-list-item" v-for="item in mock" :key="item.id">
+        <div class="event-list-item" v-for="(item, i) in mock" :key="item.id">
             <div class="event-item-header">
-                <div class="text-warning">{{item.start}} - {{item.end}}</div>
-                <div class="text-secondary">Event Type</div>
+                <div class="text-warning">{{item.start}} AM - {{item.end}} PM</div>
+                <div v-if="!i" class="text-secondary">Event Type</div>
             </div>
             <div class="event-item-content">
                 <div class="event-name">
-                    <img :src="item.avatar" class="h-6 pr-2"/>
+                    <img v-if="item.avatar" :src="item.avatar" class="h-6 pr-2"/>
                     {{item.name}}
                 </div>
                 <div>{{item.event_name}}</div>
@@ -28,12 +28,12 @@
     .event-list {
         @apply flex flex-col space-y-1 pt-3 h-72 overflow-y-auto;
         .event-list-item {
-            @apply flex flex-col text-sm font-semibold;
+            @apply flex flex-col text-sm;
             .event-item-header {
                 @apply flex flex-row justify-between border-b p-1;
             }
             .event-item-content {
-                @apply flex flex-row justify-between p-1 border-b;
+                @apply flex flex-row justify-between p-1 pb-3;
                 .event-name {
                     @apply flex items-center;
                 }
@@ -54,7 +54,7 @@ const mock = [{
     id: 2,
     start: "6:30",
     end: "6:40",
-    avatar: "/account.png",
+    avatar: "",
     name: "Kristy Philips",
     event_name: "PT Training"
 }, {
