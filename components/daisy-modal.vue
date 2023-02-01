@@ -77,7 +77,7 @@ export default defineComponent({
         },
         overlay: {
             type: Boolean,
-            default: false,
+            default: true,
         },
     },
     setup(props, { emit }) {
