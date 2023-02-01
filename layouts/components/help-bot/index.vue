@@ -23,7 +23,7 @@
 </template>
 <style scoped>
 .help-bot {
-    @apply absolute right-4 top-20 bg-secondary z-50 w-72 rounded-lg;
+    @apply absolute right-10 top-16 bg-secondary z-50 w-72 rounded-lg;
     .close-btn {
         @apply absolute top-4 right-4 cursor-pointer hover:text-neutral;
     }
