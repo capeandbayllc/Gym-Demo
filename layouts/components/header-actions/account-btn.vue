@@ -1,6 +1,6 @@
 <template>
-	<div class="bg-no-repeat relative h-16 w-44" :class="{'bg-image':profileMenuIsOpen}">
-		<div class="account-btn w-12 absolute top-1 left-[4.125rem]">
+	<div class="bg-no-repeat relative h-16 w-44 flex items-center justify-center bg-contain self-end bg-[center_5px]" :class="{'bg-image':profileMenuIsOpen}">
+		<div class="account-btn w-10 ml-[20px]">
 			<img src="~/assets/account.png"/>
 		</div>
 	</div>

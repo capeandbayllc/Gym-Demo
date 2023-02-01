@@ -16,16 +16,7 @@
       />
     </div>
     <!-- <div class="btn-close-selection">Close Member Selection</div> -->
-    <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit">
-      <div class="bg-black rounded-md p-6 border border-secondary">
-        <component :is="addMemberScreens[addMemberScreenIndex]"></component>
-        <div class="flex justify-end mt-6">
-          <button class="normal-case mx-2" ghost @click="prevScreen" v-if="addMemberScreenIndex > 0"><NextIcon/></button>
-          <Button size="sm" class="normal-case mx-2 ml-auto" ghost>Cancel</Button>
-          <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue ></Button>
-        </div>
-      </div>
-    </daisy-modal>
+    
   </div>
 </template>
 <style scoped>
@@ -43,15 +34,9 @@
 }
 </style>
 <script setup>
+import {ref, onMounted} from 'vue'
 import ProfileOptionItem from './profile-option-item.vue';
 import { AddIcon,NextIcon } from "@/components/icons";
-import Welcome from './add-member/welcom.vue'
-import JoinTour from './add-member/join-tour.vue'
-import Infomrmation from './add-member/information.vue'
-import PersonalInformation from '../user-info/personal-information/index.vue'
-import Interests from './add-member/interests.vue'
-import EmergencyInfo from './add-member/emergency-info.vue'
-import BroughtToday from './add-member/brought-today.vue';
 import CheckInButton from './check-in-button.vue'
 const props = defineProps({
     selected: String
@@ -98,20 +83,6 @@ const handleSelect = (key, value) => {
   } else {
         emit('update:selected', null)
   }
-} 
+}
 
-const addMemberPopUp = ref(null)
-const addMemberScreens = ref([Welcome,JoinTour,Infomrmation,PersonalInformation,Interests,EmergencyInfo,BroughtToday]);
-const addMemberScreenIndex = ref(0);
-
-const openAddMemberPopUp =()=>{
-  addMemberPopUp.value.open()
-}
-const nextScreen = ()=>{
-    addMemberScreenIndex.value = addMemberScreenIndex.value < (addMemberScreens.value.length - 1) ? addMemberScreenIndex.value + 1 : addMemberScreenIndex.value;
-    console.log("addMemberScreenIndex",addMemberScreenIndex.value)
-}
-const prevScreen = ()=>{
-    addMemberScreenIndex.value = addMemberScreenIndex.value > 0 ? addMemberScreenIndex.value - 1 : addMemberScreenIndex.value
-}
 </script>

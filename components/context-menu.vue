@@ -8,7 +8,7 @@
     @apply absolute shadow opacity-0 pointer-events-none;
 }
 :focus {
-    @apply opacity-100 z-20 pointer-events-auto outline-none;
+    @apply opacity-100 z-50 pointer-events-auto outline-none;
 }
 </style>
 <script setup>
