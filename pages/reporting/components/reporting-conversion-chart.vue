@@ -1,13 +1,8 @@
 <template>
     <ClientOnly>
-        <apexchart class="reporting-conversion-chart mt-2" height="145" type="area" :options="options" :series="data"></apexchart>
+        <apexchart class="gradient-bg mt-2" height="145" type="area" :options="options" :series="data"></apexchart>
     </ClientOnly>
 </template>
-<style scoped>
-.reporting-conversion-chart {
-    background: linear-gradient(35deg, rgba(0,116,200,0.85) 0%, rgba(0,0,0,1) 100%);
-}
-</style>
 <script setup>
 
 const props = defineProps({
