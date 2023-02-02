@@ -8,7 +8,8 @@
     <div class="page-members-center-container">
         <div class="custom-page-content-header">
             <span>Members</span>
-            <search-icon class="search-icon" />
+            <search-icon v-if="!isSearchEnable" class="search-icon" @click="isSearchEnable = !isSearchEnable" />
+            <input v-else type="text" placeholder="Search" class="input input-sm max-w-xs search-input" />
         </div>
         <div class="-md:px-4 custom-page-content flex-col">
             <div class="flex flex-row justify-between space-x-4 mb-4">
@@ -41,9 +42,12 @@
         @apply block border border-secondary bg-black rounded-b p-7 mx-auto w-full max-w-[1220px];
     }
     .custom-page-content-header {
-        @apply bg-secondary rounded-t-lg pl-6 p-2 font-semibold mx-auto w-full max-w-[1220px];
+        @apply bg-secondary rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-[1220px];
         .search-icon {
             @apply float-right m-1 mr-6 cursor-pointer;
+        }
+        .search-input {
+            @apply float-right -mt-1 mr-6 cursor-pointer bg-secondary border border-white rounded;
         }
     }
 }
@@ -59,6 +63,7 @@
 import MemberTableRow from './components/member-table-row.vue';
 import { SearchIcon, AddIcon } from '@/components/icons'
 
+const isSearchEnable = ref(false)
 const filterBy = [
     {
         value: '1',

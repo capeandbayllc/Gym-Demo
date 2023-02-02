@@ -31,9 +31,20 @@
     </div>
 </template>
 <style>
-    .custom-date .dp__theme_dark {
-    --dp-background-color: #000000;
-    --dp-menu-border-color: #FFFFFF;
+    .custom-date {
+        .dp__theme_dark {
+            --dp-background-color: #000000;
+            --dp-menu-border-color: #FFFFFF;
+        }
+        .dp__calendar_header {
+            width: 100%;
+        }
+        .dp__calendar {
+            width: 100%;
+            .dp__calendar_row {
+                padding-left: 8px;
+            }
+        }
     }
 </style>
 <style scoped>

@@ -8,7 +8,8 @@
     <div class="page-leads-center-container">
         <div class="page-content custom-page-content-header">
             <span>Leads</span>
-            <search-icon class="search-icon" />
+            <search-icon v-if="!isSearchEnable" class="search-icon" @click="isSearchEnable = !isSearchEnable" />
+            <input v-else type="text" placeholder="Search" class="input input-sm max-w-xs search-input" />
         </div>
         <div class="-md:px-4 page-content custom-page-content flex-col">
             <div class="flex flex-row justify-between space-x-4 mb-4">
@@ -67,9 +68,12 @@
         @apply block border border-secondary bg-black rounded-b p-7;
     }
     .custom-page-content-header {
-        @apply bg-secondary rounded-t-lg pl-6 p-2 font-semibold;
+        @apply bg-secondary rounded-t-lg pl-6 p-3 font-semibold;
         .search-icon {
             @apply float-right m-1 mr-6 cursor-pointer;
+        }
+        .search-input {
+            @apply float-right -mt-1 mr-6 cursor-pointer bg-secondary border border-white rounded;
         }
     }
 }
@@ -92,6 +96,7 @@ import Interests from '~/pages/check-in/profile-card/add-member/interests.vue'
 import EmergencyInfo from '~/pages/check-in/profile-card/add-member/emergency-info.vue'
 import BroughtToday from '~/pages/check-in/profile-card/add-member/brought-today.vue';
 
+const isSearchEnable = ref(false)
 const addMemberPopUp = ref(null)
 const addMemberScreens = ref([Welcome,JoinTour,Infomrmation,PersonalInformation,Interests,EmergencyInfo,BroughtToday]);
 const addMemberScreenIndex = ref(0);

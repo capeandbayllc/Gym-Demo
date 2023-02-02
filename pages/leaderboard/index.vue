@@ -42,16 +42,17 @@
             </div>
 
                 <div class="-md:px-4 px-12 py-3 bg-black border border-secondary">
-                    <div class="flex flex-row my-4 justify-end">
+                    <div class="flex flex-row my-4 mr-8 justify-end">
                         <Button
                             secondary
                             size="sm"
                             >View All</Button
                         >
                         <select-box
-                            :items="states"
-                            label="States Filter"
-                            class="w-36 mx-2"
+                            :items="statsFilter"
+                            label="Sort by: Top 5"
+                            class="w-36 mx-2 custom-select-box-height"
+                            :secondary="true"
                         />
                         <search-input
                             neutral
@@ -221,6 +222,11 @@
     transform: rotate(0deg);
     transition: transform 0.3s;
     z-index: 10;
+}
+.custom-select-box-height {
+    .select-box-btn {
+        height: 32px;
+    }
 }
 </style>
 <script setup>

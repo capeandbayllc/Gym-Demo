@@ -188,17 +188,17 @@ const navList = [
 			{
 				label: 'Vendors',
 				icon: VendorIcon,
-				url: "/#"
+				url: "/vendors"
 			},
 			{
 				label: 'Corporation',
 				icon: CorporationIcon,
-				url: "/#"
+				url: "/corporation"
 			},
 			{
 				label: 'Recruiting',
 				icon: RecruitingIcon,
-				url: "/#"
+				url: "/recruitment"
 			},
 		]
 	},
