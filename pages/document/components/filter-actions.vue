@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-6 gap-3 mb-2 text-sm font-semibold -lg:flex -lg:text-xs">
+    <div class="document-center-filter-action grid grid-cols-6 gap-3 mb-2 text-sm font-semibold -lg:flex -lg:text-xs">
         <select-box
             :items="categoriesList"
             value=""
@@ -34,6 +34,11 @@
         </select-box>
     </div>
 </template>
+<style>
+.document-center-filter-action .select-box-content {
+    @apply text-sm -lg:text-xs;
+}
+</style>
 <script setup>
     const categoriesList = [
         {
