@@ -6,21 +6,21 @@
                     <tr class="text-center">
                         <th></th>
                         <th>
-                            <div class="py-2 border border-secondary rounded-md">
+                            <div class="py-2 m-1 border border-secondary rounded-md gradient-bg">
                                 <b>Basic</b>
                                 <p>$9.99</p>
                                 <p>Per month</p>
                             </div>
                         </th>
                         <th>
-                            <div class="py-2 border border-secondary rounded-md">
+                            <div class="py-2 m-1 border border-secondary rounded-md gradient-bg">
                                 <b>Basic</b>
                                 <p>$14.99</p>
                                 <p>Per month</p>
                             </div>
                         </th>
                         <th>
-                            <div class="py-2 border border-secondary rounded-md">
+                            <div class="py-2 m-1 border border-secondary rounded-md gradient-bg">
                                 <b>Basic</b>
                                 <p>$21.99</p>
                                 <p>Per month</p>
@@ -28,7 +28,9 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <div class="shadow-div absolute gradient-bg overflow-auto">
+                </div>
+                <tbody class="relative">
                     <tr v-for="(item, index) in membershipTable" :key="index">
                         <td class="border-b border-secondary py-3 align-bottom">{{ item.label }}</td>
                         <td class="border border-secondary py-3 text-center">
@@ -158,5 +160,9 @@ const membershipTable = ref([
     }
     .membership-table tbody tr td{
         @apply border;
+    }
+    .shadow-div {
+        height: 794px;
+        width: 335px;
     }
 </style>
