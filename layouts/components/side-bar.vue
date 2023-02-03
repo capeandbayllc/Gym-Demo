@@ -19,8 +19,8 @@
 </template>
 <style scoped>
 .side-bar {
-	@apply absolute right-0 z-20;
-	height: calc(100vh - 6rem);
+	@apply absolute right-0 z-20 h-full;
+	/* height: calc(100vh - 6rem); */
 	&.collapsed {
 		@apply w-5 hover:w-7 bg-secondary;
 		@screen 3xl {
