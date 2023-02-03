@@ -203,6 +203,270 @@ const navList = [
 		]
 	},
 	{
+		type: 'leads',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/#"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/#",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'members',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/#"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/#",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'leaderboard',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/#"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/#",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'vendors',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/#"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/#",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'corporation',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/#"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/#",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'recruitment',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/#"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/#",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
 		type: 'mass-com',
 		navigation: [
 			{

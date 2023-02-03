@@ -1,44 +1,20 @@
 <template>
-    <!-- <div class="cursor-pointer text-center mb-4" @click="openAddMemberPopUp">
-      <AddIcon class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold"/>
-      <p class="text-xs mt-1">
-        Add a Recuiter
-      </p>
-    </div> -->
-    <div class="page-vendor-center-container">
-        <div class="page-content custom-page-content-header">
-            <span>Vendors</span>
-            <search-icon v-if="!isSearchEnable" class="search-icon" @click="isSearchEnable = !isSearchEnable" />
-            <input v-else type="text" placeholder="Search" class="input input-sm max-w-xs search-input" />
-        </div>
-        <div class="-md:px-4 page-content custom-page-content flex-col">
-            <!-- <div class="flex flex-row justify-between space-x-4 mb-4">
-                <div class="flex gap-4">
-                    <select-box
-                        :items="locationType"
-                        value=""
-                        :label="'Locations'"
-                        :secondary="true"
-                        class="w-40 filter-selected"
-                    >
-                    </select-box>
-                    <select-box
-                        :items="leadType"
-                        value=""
-                        :label="'Lead Type'"
-                        :secondary="true"
-                        class="w-40 filter-selected"
-                    >
-                    </select-box>
+    <div>
+        <div class="page-vendor-center-container">
+            <div class="page-content custom-page-content-header">
+                <span>Vendors</span>
+                <search-icon v-if="!isSearchEnable" class="search-icon" @click="isSearchEnable = !isSearchEnable" />
+                <input v-else type="text" placeholder="Search" class="input input-sm max-w-xs search-input" />
+            </div>
+            <div class="-md:px-4 page-content custom-page-content flex-col">
+                <div>
+                    <data-table
+                        :columns="columns"
+                        :data="leads"
+                        :row-component="VendorsTableRow"
+                        class="h-96 overflow-y-auto"
+                    />
                 </div>
-            </div> -->
-            <div>
-                <data-table
-                    :columns="columns"
-                    :data="leads"
-                    :row-component="VendorsTableRow"
-                    class="h-96 overflow-y-auto"
-                />
             </div>
         </div>
     </div>

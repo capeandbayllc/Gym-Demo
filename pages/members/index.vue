@@ -1,36 +1,38 @@
 <template>
-    <div class="cursor-pointer text-center mb-4">
-        <AddIcon class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold"/>
-        <p class="text-xs mt-1">
-            Update Lead
-        </p>
-    </div>
-    <div class="page-members-center-container">
-        <div class="custom-page-content-header">
-            <span>Members</span>
-            <search-icon v-if="!isSearchEnable" class="search-icon" @click="isSearchEnable = !isSearchEnable" />
-            <input v-else type="text" placeholder="Search" class="input input-sm max-w-xs search-input" />
+    <div>
+        <div class="cursor-pointer text-center mb-4">
+            <AddIcon class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold"/>
+            <p class="text-xs mt-1">
+                Update Lead
+            </p>
         </div>
-        <div class="-md:px-4 custom-page-content flex-col">
-            <div class="flex flex-row justify-between space-x-4 mb-4">
-                <div class="flex gap-4">
-                    <select-box
-                        :items="filterBy"
-                        value=""
-                        :label="'Filter By'"
-                        :secondary="true"
-                        class="w-40 filter-selected"
-                    >
-                    </select-box>
-                </div>
+        <div class="page-members-center-container">
+            <div class="custom-page-content-header">
+                <span>Members</span>
+                <search-icon v-if="!isSearchEnable" class="search-icon" @click="isSearchEnable = !isSearchEnable" />
+                <input v-else type="text" placeholder="Search" class="input input-sm max-w-xs search-input" />
             </div>
-            <div>
-                <data-table
-                    :columns="columns"
-                    :data="members"
-                    :row-component="MemberTableRow"
-                    class="h-96 overflow-y-auto"
-                />
+            <div class="-md:px-4 custom-page-content flex-col">
+                <div class="flex flex-row justify-between space-x-4 mb-4">
+                    <div class="flex gap-4">
+                        <select-box
+                            :items="filterBy"
+                            value=""
+                            :label="'Filter By'"
+                            :secondary="true"
+                            class="w-40 filter-selected"
+                        >
+                        </select-box>
+                    </div>
+                </div>
+                <div>
+                    <data-table
+                        :columns="columns"
+                        :data="members"
+                        :row-component="MemberTableRow"
+                        class="h-96 overflow-y-auto"
+                    />
+                </div>
             </div>
         </div>
     </div>
