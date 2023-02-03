@@ -14,15 +14,15 @@
 				</div>
 			</div>
 		</div>
-		<span class="self-end">View Details</span>
+		<span class="self-end pr-5 pb-4">View Details</span>
 	</div>
 </template>
 <style scoped>
 .pulse-club-events {
-	@apply px-10 py-4 h-full border border-secondary rounded flex flex-col justify-between bg-base-300;
+	@apply h-full border border-secondary rounded flex flex-col justify-between bg-base-300;
 }
 .pulse-club-event-list {
-	@apply flex flex-col space-y-7;
+	@apply pt-10 pb-3 px-10 flex flex-col space-y-7;
 }
 .pulse-club-event {
 	@apply flex flex-row space-x-3 items-center;
@@ -31,7 +31,7 @@
 	@apply text-xl font-semibold w-max;
 }
 .pulse-club-event-count {
-	@apply flex items-center justify-center text-4xl font-bold bg-black border border-secondary rounded w-12 pb-2;
+	@apply flex items-center justify-center text-4xl font-bold bg-black border border-secondary rounded w-11 pb-1;
 }
 </style>
 <script setup>
