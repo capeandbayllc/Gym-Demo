@@ -1,11 +1,12 @@
 <template>
-	<div class="nav-bar-container">
-		<!-- <div class="nav-bar-toggler" @click="toggleCollapse"></div> -->
+	<div class="nav-bar-container" :class="{'mt-11' :  windowWidth > 1250}">
+		<div class="nav-bar-toggler" @click="toggleCollapse" v-if="windowWidth <= 1250 && navItems.length > 0"></div>
 		<div class="nav-bar-items" v-if="collapsed">
-			<!-- <nav-item
+			<nav-item
+				v-if="windowWidth <= 1250"
 				:icon="UpperArrowIcon"
 				@click.prevent="toggleCollapse"
-			/> -->
+			/>
 			<nav-item
 				v-for="(item, ndx) in navItems"
 				:key="ndx"
@@ -22,7 +23,7 @@
 	@apply bg-secondary h-8 cursor-pointer;
 }
 .nav-bar-items {
-	@apply border border-secondary border-secondary bg-base-300 h-full;
+	@apply border border-secondary bg-base-300 h-full;
 }
 </style>
 <script setup>
@@ -298,6 +299,7 @@ const getNavList = () => {
 		navItems.value =  result.navigation;
 		collapsed.value = true;
 	}else {
+		navItems.value = [];
 		collapsed.value = false;
 	}
 }
