@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="side-bar h-full"
+		class="side-bar"
 		:class="{
 			'collapsed': collapsed,
 			'expanded': (!collapsed || windowWidth >= 1920)
@@ -20,9 +20,9 @@
 <style scoped>
 .side-bar {
 	@apply absolute right-0 z-20;
-	/* height: calc(100vh - 6rem); */
+	height: calc(100vh - 6rem);
 	&.collapsed {
-		@apply w-6 hover:w-7 bg-secondary;
+		@apply w-5 hover:w-7 bg-secondary;
 		@screen 3xl {
 			@apply hover:w-80;
 		}

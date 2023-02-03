@@ -43,7 +43,7 @@
 	@apply flex flex-row justify-between relative;
 	.app-body-content {
 	    @apply flex flex-col w-full items-center;
-		min-height: calc(100vh - 6rem);
+		height: calc(100vh - 6rem);
 	}
 }
 </style>
