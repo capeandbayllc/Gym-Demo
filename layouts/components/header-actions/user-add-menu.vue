@@ -4,7 +4,7 @@
         <div class="border border-white inline-block rounded py-1 px-2 w-max cursor-pointer hover:bg-white hover:text-black transition uppercase font-semibold" @click.prevent="openAddMemberPopUp">+ Lead</div>
         <div class="border border-white inline-block rounded py-1 px-2 w-max cursor-pointer hover:bg-white hover:text-black transition uppercase font-semibold">+ Guest Pass</div>
     </context-menu>
-    <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit" @close="addMemberScreenIndex=0" :class="addMemberScreenIndex == 8 ? 'h-full' : ''">
+    <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit" @close="addMemberScreenIndex=0" :class="addMemberScreenIndex == 7 ? 'h-full' : ''">
       <div class="bg-black rounded-md p-6 border border-secondary h-full overflow-auto">
         <component :is="addMemberScreens[addMemberScreenIndex]"></component>
         <div class="flex justify-end mt-6">
