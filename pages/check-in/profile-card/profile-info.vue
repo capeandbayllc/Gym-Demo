@@ -44,13 +44,13 @@
                     <div class="mr-2">
                         <input type="text" class="rounded-md bg-white text-black text-xs h-full p-2 " value="Issued December 12, 2021">
                     </div>
-                    <span class="text-xs ml-2">Day Left: <b class="text-md bg-black border border-secondary py-2 px-3 rounded-full">2</b></span>
+                    <span class="text-xs ml-2 flex whitespace-nowrap items-center">Day Left: <b class="text-md bg-black border border-secondary py-2 px-3 rounded-full ml-2">2</b></span>
                 </li>
                 <li class="flex my-4 items-center">
                     <div class="mr-2">
                         <input type="text" class="rounded-md bg-white text-black text-xs h-full p-2 " value="Issued December 12, 2021">
                     </div>
-                    <span class="text-xs ml-2">Day Left: <b class="text-md bg-black border border-secondary py-2 px-3 rounded-full">2</b></span>
+                    <span class="text-xs ml-2 flex whitespace-nowrap items-center">Day Left: <b class="text-md bg-black border border-secondary py-2 px-3 rounded-full ml-2">2</b></span>
                 </li>
             </ul>
         </div>
