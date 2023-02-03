@@ -42,7 +42,7 @@
 .app-body {
 	@apply flex flex-row justify-between relative h-full;
 	.app-body-content {
-	    @apply flex flex-col w-full items-center h-full;
+	    @apply flex flex-col w-full items-center h-full py-8;
 		/* height: calc(100vh - 6rem); */
 
 	}
