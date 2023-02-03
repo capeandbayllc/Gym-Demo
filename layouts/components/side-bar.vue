@@ -19,7 +19,7 @@
 </template>
 <style scoped>
 .side-bar {
-	@apply absolute right-0 z-20;
+	@apply fixed right-0 z-20;
 	/* height: calc(100vh - 6rem); */
 	&.collapsed {
 		@apply w-5 hover:w-7 bg-secondary;
