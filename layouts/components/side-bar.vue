@@ -8,7 +8,7 @@
 	>
 		<div class="side-bar-toggler" @click="toggleCollapsed" v-if="collapsed && windowWidth < 1920">
 			<div class="side-bar-arrow">
-				{{collapsed ? '&#11164;' : '&#11166;'}}
+				<arrow-icon direction="left" class="collapse-icon scale-150 self-end cursor-pointer mt-4" />
 			</div>
 			<div class="side-bar-text">
 				Check In Button
@@ -50,6 +50,7 @@
 <script setup>
 import {ref,onMounted,nextTick} from 'vue';
 import SideBarContent from './side-bar-content/index.vue'
+import { ArrowIcon } from '~~/components/icons'
 const collapsed = ref(true);
 
 const toggleCollapsed = () => {
