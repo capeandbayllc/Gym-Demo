@@ -1,8 +1,8 @@
 <template>
     <simple-card title="Select your membership type below:">
         <div class="px-10 relative">
-            <div class="shadow-layer absolute gradient-bg overflow-auto right-10 rounded-[18px] top-[100px] bottom-0"></div>
-            <table class="w-full membership-table border-separate border-spacing-0 mb-5">
+            <div class="shadow-layer absolute z-[1] gradient-bg overflow-auto right-10 rounded-[18px] top-[100px] bottom-0"></div>
+            <table class="w-full membership-table relative z-[10] border-separate border-spacing-0 mb-5">
                 <thead>
                     <tr class="text-center">
                         <th></th>
@@ -37,7 +37,7 @@
                             <Button v-else-if="item.basic == 'select'" secondary size="sm" class="my-5">Select</Button>
                             <span v-else> <span v-if="item.basic != false"> {{ item.premiumPlus }} </span> </span>
                         </td>
-                        <td class="border border-secondary py-3 text-center" :class="index==0 ? '!border-solid' : '' ">
+                        <td class="border border-secondary py-3 text-center" :class="index==0 ? '!border-solid !border-l-0' : '' ">
                             <CheckCircleIcon v-if="item.premium == true" class="inline-block"/>
                             <Button v-else-if="item.premium == 'select'" secondary size="sm" class="my-5">Select</Button>
                             <span v-else> <span v-if="item.premium != false"> {{ item.premiumPlus }} </span> </span>
@@ -161,8 +161,11 @@ const membershipTable = ref([
         @apply border;
         border-style: none solid solid none;
     }
+    .membership-table thead tr th:not(:first-child){
+        width:7rem;
+    }
     .shadow-layer{
-        width:calc(100% - 24.5rem)
+        width:21rem;
     }
     .top-left-corner{
         border-top-left-radius: 20px;
@@ -171,6 +174,7 @@ const membershipTable = ref([
     }
     .top-right-corner{
         border-top-right-radius: 20px;
+        border-left: none !important;
     }
     .bottom-left-corner{
         border-bottom-left-radius: 20px;
