@@ -40,7 +40,7 @@
             </div> -->
             <div class="bg-gray p-4 border border-secondary bg-[#191919]">
                 <p class="text-sm mb-2">Guest Pass:</p>
-                <ul class="max-h-[80px] overflow-auto px-4">
+                <ul class="max-h-[80px] overflow-auto px-4 no-scrollbar">
                     <li class="flex my-4 items-center">
                         <div class="mr-2">
                             <input type="text" class="rounded-md bg-white text-black text-xs h-full p-2 " value="Issued December 12, 2021">
