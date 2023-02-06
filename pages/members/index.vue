@@ -41,10 +41,10 @@
 .page-members-center-container {
     @apply py-4 pr-5 w-full h-fit;
     .custom-page-content {
-        @apply block border border-secondary bg-black rounded-b p-7 mx-auto w-full max-w-[1220px];
+        @apply block border border-secondary bg-black rounded-b p-7 mx-auto w-full max-w-[1120px];
     }
     .custom-page-content-header {
-        @apply bg-secondary rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-[1220px];
+        @apply bg-secondary rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-[1120px];
         .search-icon {
             @apply float-right m-1 mr-6 cursor-pointer;
         }

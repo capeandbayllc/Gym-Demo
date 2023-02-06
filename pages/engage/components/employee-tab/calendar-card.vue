@@ -45,6 +45,9 @@
                 padding-left: 8px;
             }
         }
+        .dp__menu {
+            @apply p-1;
+        }
     }
 </style>
 <style scoped>

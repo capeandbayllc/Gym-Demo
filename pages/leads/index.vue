@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="w-full">
         <div class="cursor-pointer text-center mb-4" @click="openAddMemberPopUp">
         <AddIcon class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold"/>
         <p class="text-xs mt-1">
