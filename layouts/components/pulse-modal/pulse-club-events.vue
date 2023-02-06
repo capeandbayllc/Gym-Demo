@@ -31,7 +31,8 @@
 	@apply text-xl font-semibold w-max;
 }
 .pulse-club-event-count {
-	@apply flex items-center justify-center text-4xl font-bold bg-black border border-secondary rounded w-11 pb-1;
+	@apply flex items-center text-4xl  justify-center font-bold bg-black border border-secondary rounded w-12 py-1;
+	font-family: sans-serif;
 }
 </style>
 <script setup>
