@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="cursor-pointer text-center mb-4">
-            <AddIcon class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold"/>
+        <div class="text-center mb-4">
+            <AddIcon class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold cursor-pointer"/>
             <p class="text-xs mt-1">
                 Update Lead
             </p>

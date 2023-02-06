@@ -177,7 +177,7 @@ const navList = [
 			},
 			{
 				label: "Fitness",
-				url: "/#",
+				url: "/fitness",
 				icon: FitnessIcon
 			},
 			{
@@ -221,7 +221,7 @@ const navList = [
 			},
 			{
 				label: "Fitness",
-				url: "/#",
+				url: "/fitness",
 				icon: FitnessIcon
 			},
 			{
@@ -265,7 +265,51 @@ const navList = [
 			},
 			{
 				label: "Fitness",
-				url: "/#",
+				url: "/fitness",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'fitness',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/#"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/fitness",
 				icon: FitnessIcon
 			},
 			{
@@ -309,7 +353,7 @@ const navList = [
 			},
 			{
 				label: "Fitness",
-				url: "/#",
+				url: "/fitness",
 				icon: FitnessIcon
 			},
 			{
@@ -353,7 +397,7 @@ const navList = [
 			},
 			{
 				label: "Fitness",
-				url: "/#",
+				url: "/fitness",
 				icon: FitnessIcon
 			},
 			{
@@ -397,7 +441,7 @@ const navList = [
 			},
 			{
 				label: "Fitness",
-				url: "/#",
+				url: "/fitness",
 				icon: FitnessIcon
 			},
 			{
@@ -441,7 +485,7 @@ const navList = [
 			},
 			{
 				label: "Fitness",
-				url: "/#",
+				url: "/fitness",
 				icon: FitnessIcon
 			},
 			{

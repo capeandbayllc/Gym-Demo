@@ -9,10 +9,16 @@
                 <div class="btn btn-ghost btn-sm text-base-content" tabindex="0" @click.prevent.stop>
                     <font-awesome-icon icon="ellipsis-h" size="lg" />
                 </div>
-                <context-menu class="dropdown-content menu p-2 shadow bg-black rounded w-52">
-                    <Button outline size="sm" class="my-1 border-primary text-secondary">+ Email</Button>
-                    <Button outline size="sm" class="my-1 border-primary text-secondary">+ Call</Button>
-                </context-menu>
+                <div class="dropdown-content menu p-2 shadow bg-black rounded w-52">
+                    <Button outline size="sm" class="my-1 border-primary text-secondary" @click="openEmailModal">+ Email</Button>
+                    <Button outline size="sm" class="my-1 border-primary text-secondary" @click="outgoingCall">+ Call</Button>
+                </div>
+                <daisy-modal ref="outgoingCallModalRef">
+                    <outgoing-call-modal @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal>
+                </daisy-modal>
+                <daisy-modal ref="emailModalRef">
+                    <EmailModal @close="closeEmailModal"/>
+                </daisy-modal>
             </div> 
         </td>
     </tr>
@@ -39,11 +45,33 @@
 <script setup>
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-
+import OutgoingCallModal from '../../call-user/components/outgoing-call-modal.vue';
+import EmailModal from '../../check-in/engage/email.vue';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faEllipsisH);
 const props = defineProps({
     data: Object
 })
+
+const outgoingCallModalRef = ref(null);
+const emailModalRef = ref(null);
+
+const outgoingCall = ()=>{
+    outgoingCallModalRef.value.open();
+}
+const closeOutgoingCall = ()=>{
+    outgoingCallModalRef.value.close();
+}
+
+const openEmailModal = ()=>{
+    emailModalRef.value.open();
+}
+const closeEmailModal = ()=>{
+    emailModalRef.value.close();
+}
+
+const showInCallModal = () => {
+    outgoingCallModalRef.value.close();
+};
 </script>
