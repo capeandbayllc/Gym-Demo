@@ -38,6 +38,7 @@
 }
 .app-content {
 	@apply flex flex-row relative;
+	min-height:calc(100vh - 4rem);
 }
 .app-body {
 	@apply flex flex-row justify-between relative h-full;
