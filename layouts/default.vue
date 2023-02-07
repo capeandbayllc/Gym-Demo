@@ -19,7 +19,7 @@
 					v-model="globalSearch"
 				/> -->
 				<div class="app-body">
-				    <div class="app-body-content mt-8">
+				    <div class="app-body-content">
 						<slot />
 					</div>
 					<side-bar />
@@ -34,16 +34,18 @@
 </template>
 <style scoped>
 .app-layout {
-	@apply w-screen overflow-x-hidden;
+	@apply w-screen /* overflow-x-hidden */;
 }
 .app-content {
 	@apply flex flex-row relative;
+	min-height:calc(100vh - 4rem);
 }
 .app-body {
-	@apply flex flex-row justify-between relative;
+	@apply flex flex-row justify-between relative h-full;
 	.app-body-content {
-	    @apply flex flex-col w-full items-center;
-		height: calc(100vh - 6rem);
+	    @apply flex flex-col w-full items-center h-full py-8;
+		/* height: calc(100vh - 6rem); */
+
 	}
 }
 </style>

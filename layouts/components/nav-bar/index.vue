@@ -23,7 +23,7 @@
 	@apply bg-secondary h-8 cursor-pointer;
 }
 .nav-bar-items {
-	@apply border border-secondary bg-base-300;
+	@apply border border-secondary bg-base-300 h-full;
 }
 </style>
 <script setup>
