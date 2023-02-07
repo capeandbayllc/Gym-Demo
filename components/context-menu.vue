@@ -1,5 +1,5 @@
 <template>
-    <div tabindex="1" ref="contextMenu" class="context-menu">
+    <div tabindex="1" ref="contextMenu" class="context-menu" @blur="$emit('isProfileMenuOpen',false)" @focus="$emit('isProfileMenuOpen',true)">
         <slot />
     </div>
 </template>
@@ -8,7 +8,7 @@
     @apply absolute shadow opacity-0 pointer-events-none;
 }
 :focus {
-    @apply opacity-100 z-20 pointer-events-auto outline-none;
+    @apply opacity-100 z-50 pointer-events-auto outline-none;
 }
 </style>
 <script setup>

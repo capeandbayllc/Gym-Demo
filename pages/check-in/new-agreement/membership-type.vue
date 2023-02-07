@@ -1,26 +1,27 @@
 <template>
     <simple-card title="Select your membership type below:">
-        <div class="px-10">
-            <table class="w-full membership-table">
+        <div class="px-10 relative">
+            <div class="shadow-layer absolute z-[1] gradient-bg overflow-auto right-10 rounded-[18px] top-[100px] bottom-0"></div>
+            <table class="w-full membership-table relative z-[10] border-separate border-spacing-0 mb-5">
                 <thead>
                     <tr class="text-center">
                         <th></th>
                         <th>
-                            <div class="py-2 border border-secondary rounded-md">
+                            <div class="py-2 m-1 border border-secondary rounded-md gradient-bg">
                                 <b>Basic</b>
                                 <p>$9.99</p>
                                 <p>Per month</p>
                             </div>
                         </th>
                         <th>
-                            <div class="py-2 border border-secondary rounded-md">
+                            <div class="py-2 m-1 border border-secondary rounded-md gradient-bg">
                                 <b>Basic</b>
                                 <p>$14.99</p>
                                 <p>Per month</p>
                             </div>
                         </th>
                         <th>
-                            <div class="py-2 border border-secondary rounded-md">
+                            <div class="py-2 m-1 border border-secondary rounded-md gradient-bg">
                                 <b>Basic</b>
                                 <p>$21.99</p>
                                 <p>Per month</p>
@@ -28,28 +29,28 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="relative">
                     <tr v-for="(item, index) in membershipTable" :key="index">
-                        <td class="border-b border-secondary py-3 align-bottom">{{ item.label }}</td>
-                        <td class="border border-secondary py-3 text-center">
+                        <td class="border-b border-secondary py-3 align-bottom" :class="index==0 ? '!border-r-0' : '' ">{{ item.label }}</td>
+                        <td class="border border-secondary py-3 text-center" :class="index==0 ? '!border-solid top-left-corner':''">
                             <CheckCircleIcon v-if="item.basic == true" class="inline-block"/>
                             <Button v-else-if="item.basic == 'select'" secondary size="sm" class="my-5">Select</Button>
                             <span v-else> <span v-if="item.basic != false"> {{ item.premiumPlus }} </span> </span>
                         </td>
-                        <td class="border border-secondary py-3 text-center">
+                        <td class="border border-secondary py-3 text-center" :class="index==0 ? '!border-solid !border-l-0' : '' ">
                             <CheckCircleIcon v-if="item.premium == true" class="inline-block"/>
                             <Button v-else-if="item.premium == 'select'" secondary size="sm" class="my-5">Select</Button>
                             <span v-else> <span v-if="item.premium != false"> {{ item.premiumPlus }} </span> </span>
                         </td>
-                        <td class="border border-secondary py-3 text-center">
+                        <td class="border border-secondary py-3 text-center" :class="index==0 ? '!border-solid top-right-corner' : '' ">
                             <CheckCircleIcon v-if="item.premiumPlus == true" class="inline-block"/>
                             <Button v-else-if="item.premiumPlus == 'select'" secondary size="sm" class="my-5">Select</Button>
                             <span v-else> <span v-if="item.premiumPlus != false"> {{ item.premiumPlus }} </span> </span>
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-secondary border border-secondary py-3 align-top">Total Due Today</td>
-                        <td class="text-secondary border border-secondary py-3 text-center">
+                        <td class="text-secondary border border-secondary py-3 align-top !border-b-0 !border-r-0">Total Due Today</td>
+                        <td class="text-secondary border border-secondary py-3 text-center bottom-left-corner">
                             <p class="mb-6">$0.00</p>
                             <Button secondary size="sm">Select</Button>
                         </td>
@@ -57,7 +58,7 @@
                             <p class="mb-6">$0.00</p>
                             <Button secondary size="sm">Select</Button>
                         </td>
-                        <td class="text-secondary border border-secondary py-3 text-center">
+                        <td class="text-secondary border border-secondary py-3 text-center bottom-right-corner">
                             <p class="mb-6">$0.00</p>
                             <Button secondary size="sm">Select</Button>
                         </td>
@@ -158,5 +159,29 @@ const membershipTable = ref([
     }
     .membership-table tbody tr td{
         @apply border;
+        border-style: none solid solid none;
+    }
+    .membership-table thead tr th:not(:first-child){
+        width:7rem;
+    }
+    .shadow-layer{
+        width:21rem;
+    }
+    .top-left-corner{
+        border-top-left-radius: 20px;
+        border-top-style: solid !important;
+        border-left-style: solid !important;
+    }
+    .top-right-corner{
+        border-top-right-radius: 20px;
+        border-left: none !important;
+    }
+    .bottom-left-corner{
+        border-bottom-left-radius: 20px;
+        border-bottom-style: solid !important;
+        border-left-style: solid !important;
+    }
+    .bottom-right-corner{
+        border-bottom-right-radius: 20px;
     }
 </style>
