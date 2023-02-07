@@ -1,7 +1,7 @@
 <template>
     <div class="side-bar-content-container">
         <arrow-icon direction="right" class="collapse-icon" @click="$emit('close')"/>
-        <div class="mem-checkin-btn">Member Check In</div>
+        <div class="mem-checkin-btn" @click="showCheckInModal">Member Check In</div>
         <div class="divider"></div>
         <div class="active-members">
             <div class="text-lg">Active Club Members</div>
@@ -17,6 +17,13 @@
             />
         </div>
     </div>
+    <daisy-modal
+      :overlay="true"  
+      ref="checkInModal"
+      id="check-in-modal"
+    >
+        <CheckInModal/>
+    </daisy-modal>
 </template>
 <style scoped>
 .side-bar-content-container {
@@ -44,9 +51,21 @@
     }
 }
 </style>
+<style>
+  @media (max-width: 1920px){
+    #check-in-modal {min-width: 80%; background: none;}
+    /* .check-in-modal-height {overflow: auto;max-height: 80vh;} */
+    .check-in-modal-height {overflow: auto;max-height: 95vh;}
+    /* #check-in-modal .page-content {max-width: 100%;} */
+  }
+  @media (max-width: 980px){
+    #check-in-modal {min-width: 85%;}
+  }
+</style>
 <script setup>
 import { ArrowIcon } from '~~/components/icons'
 import SideBarMember from './side-bar-member.vue';
+import CheckInModal from '../check-in-modal/index.vue'
 const locations = [{
     value: 1,
     label: "This Location"
@@ -68,5 +87,9 @@ const members = [{
 }, {
     id: 3,
     name: "Walter K."
-}]
+}];
+const checkInModal = ref(null);
+const showCheckInModal = () => {
+    checkInModal.value.open();
+}
 </script>

@@ -1,10 +1,4 @@
 <template>
-  <daisy-modal
-    :closable="true"
-    :open="true"
-    :showCloseButton="true"
-    id="check-in-modal"
-  >
   <div class="w-full h-full flex flex-col check-in-modal-height">
     <div class="page-checkin-container">
       <div class="page-content">
@@ -50,7 +44,7 @@
       <note-card v-if="option === 'note'" @close="option = null"/>
       <new-agreement v-if="option === 'newAgreement'" @close="option = null"/>
       <Engage v-if="option === 'engage'" @close="option = null"/>
-      <!-- <footer-logo class="m-auto" v-else/> -->
+      <footer-logo class="m-auto" v-else/>
       <daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
           <alert-add-modal @close="scope.close()"/>
       </daisy-modal>
@@ -58,14 +52,11 @@
         <note-add-modal @close="scope.close()" />
       </daisy-modal>
     </div>
-
-        
   </div>
-  </daisy-modal>
 </template>
 <style scoped>
 .page-checkin-container {
-  @apply py-4 px-5 w-full h-fit border-secondary;
+  @apply py-4 px-5 w-full h-fit border-b border-secondary;
   .page-title {
     @apply text-lg font-light pb-3 pl-5;
   }
@@ -85,17 +76,6 @@
       
     }
   }
-}
-</style>
-
-<style>
-@media (max-width: 1920px){
-  #check-in-modal {min-width: 80%;}
-  .check-in-modal-height {overflow: auto;max-height: 80vh;}
-  #check-in-modal .page-content {max-width: 100%;}
-}
-@media (max-width: 980px){
-  #check-in-modal {min-width: 85%;}
 }
 </style>
 <script setup>
