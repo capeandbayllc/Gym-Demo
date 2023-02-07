@@ -19,8 +19,11 @@
             <span class="text-lg">Calendar</span>
         </div>
         <div class="col-start-7">
-            <Button secondary size="xs">View</Button>
+            <Button secondary size="xs" @click="showCalendarViewModal">View</Button>
         </div>
+        <daisy-modal id="calendarView" ref="calendarView" class="!min-w-0 h-[600px] max-w-[1120px]">
+            <calendar-view-modal class="h-[600px] max-w-[1120px] overflow-auto p-4"/>
+        </daisy-modal>
     </div>
     <div class="px-2 mt-4 mb-4">
         <Datepicker class="custom-date" v-model="date" inline auto-apply :enable-time-picker="false" dark/>
@@ -83,6 +86,12 @@
 import { ArrowIcon } from '~~/components/icons'
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-
+import calendarViewModal from '../../../../components/calendar-view/index.vue';
 const date = ref(new Date());
+const calendarView = ref(null);
+
+const showCalendarViewModal = () => {
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 200);
+    calendarView.value.open();
+};
 </script>

@@ -259,8 +259,8 @@ const handleChangeView = (value) => {
 };
 
 const onViewChanged = () => {
-    start.value = calendar.value.getApi().view.activeStart;
-    start.end = calendar.value.getApi().view.activeEnd;
+    start.value = calendar.value.getApi().view.currentStart;
+    start.end = calendar.value.getApi().view.currentEnd;
     console.log({
         start,
         end,
