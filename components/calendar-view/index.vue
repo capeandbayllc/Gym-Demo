@@ -144,7 +144,7 @@ const calendarOptions = ref({
         },
     },
     viewDidMount : function(info) {
-        console.log("viewDidMount")
+        console.log("viewDidMount", info)
         onViewChanged()
     }
 });
