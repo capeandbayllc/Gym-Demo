@@ -32,8 +32,8 @@
         <simple-card class="p-4">
             <component :is="newAgreementScreens[newAgreementScreenIndex]" @change-type="changeType"></component>
             <div class="flex justify-end mt-6 mb-2">
-                <Button size="sm" class="normal-case mx-2" ghost @click="prevScreen" v-if="newAgreementScreens > 0">Back</Button>
-                <Button size="sm" class="normal-case mx-2 ml-auto" ghost @click="statusChangedModal = false">Cancel</Button>
+                <Button size="sm" class="normal-case mx-2" ghost @click="prevScreen" v-if="newAgreementScreenIndex > 0">Back</Button>
+                <Button size="sm" class="normal-case mx-2 ml-auto" ghost @click="closeNewAgreementModal">Cancel</Button>
                 <Button v-if="showButtons" size="sm" class="normal-case mx-2" secondary>Save as a Draft</Button>
                 <Button v-if="showButtons" size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue ></Button>
             </div>
@@ -46,13 +46,21 @@ import { NewAgreementIcon, AddIcon } from "@/components/icons";
 import FilterActions from './components/filter-actions.vue';
 import AgreementSearchTable from './components/agreement-search-table.vue';
 import AgreementModal from './components/agreement-modal.vue';
+import AgreementTemplate from './components/agreement-template.vue';
+import PaymentSchedule from './components/payment-schedule.vue';
 
 const searchInput =  ref("");
 const showButtons = ref(false)
 
-const newAgreementScreens = ref([AgreementModal]);
+const newAgreementScreens = ref([AgreementModal, AgreementTemplate, PaymentSchedule]);
 const newAgreementScreenIndex = ref(0);
-
+const nextScreen = ()=>{
+    newAgreementScreenIndex.value = newAgreementScreenIndex.value < (newAgreementScreens.value.length - 1) ? newAgreementScreenIndex.value + 1 : newAgreementScreenIndex.value;
+    console.log("newAgreementScreenIndex",newAgreementScreenIndex.value)
+}
+const prevScreen = ()=>{
+    newAgreementScreenIndex.value = newAgreementScreenIndex.value > 0 ? newAgreementScreenIndex.value - 1 : newAgreementScreenIndex.value
+}
 const newAgreementModal = ref(null);
 
 const columns = [
@@ -175,6 +183,12 @@ const confirm =()=>{
 const openNewAgreementModal =()=>{
     newAgreementModal.value.open()
 }
+
+const closeNewAgreementModal =()=>{
+    newAgreementScreenIndex.value = 0;
+    newAgreementModal.value.close()
+}
+
 const changeType = (type)=>{
     showButtons.value =  type ? true : false;
 }

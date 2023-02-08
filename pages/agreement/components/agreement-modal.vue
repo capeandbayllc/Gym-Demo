@@ -45,7 +45,7 @@ import { EmptyFileIcon } from '~~/components/icons';
 const emit = defineEmits(['close']);
 
 const activeTab = ref(null);
-const filesTypes = [ "Membership", "Personal Training", "Childcare" ];
+const filesTypes = [ "Membership", "Personal Training", "FLA. PIF" ];
 
 watch(activeTab,()=>{
     emit("changeType",filesTypes[activeTab.value])
