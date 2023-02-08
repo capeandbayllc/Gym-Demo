@@ -1,6 +1,6 @@
 <template>
-  <div class="flex w-[900px] gap-4">
-    <div class="w-7/12 border border-secondary rounded-md p-4 card-details gradient-bg">
+  <div class="flex w-[900px] gap-4 width-full display-flex-column">
+    <div class="w-7/12 border border-secondary rounded-md p-4 card-details gradient-bg width-full">
         <div class="flex justify-between mb-4">
             <p>Due Today*</p>
             <div class="w-[200px]">

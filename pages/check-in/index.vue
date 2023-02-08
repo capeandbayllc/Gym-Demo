@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full flex flex-col">
+  <div class="w-full h-full flex flex-col check-in-modal-height">
     <div class="page-checkin-container">
       <div class="page-content">
         <div class="wrapper p-4 w-full rounded-md" :class="{'pb-0':accountView !== null}">
@@ -52,8 +52,6 @@
         <note-add-modal @close="scope.close()" />
       </daisy-modal>
     </div>
-
-        
   </div>
 </template>
 <style scoped>

@@ -49,14 +49,10 @@
 <style>
 	@media (max-width: 1920px){
 		#globalSearchModal {min-width: 90%;}
-	}
-	@media (max-width: 980px){
-		#globalSearchModal {min-width: 85%;}
-	}
-	@media (max-width: 1920px){
 		#alertModal {min-width: 90%;}
 	}
 	@media (max-width: 980px){
+		#globalSearchModal {min-width: 85%;}
 		#alertModal {min-width: 85%;}
 	}
 </style>
