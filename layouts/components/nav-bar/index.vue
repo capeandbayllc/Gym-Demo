@@ -23,7 +23,7 @@
 	@apply bg-secondary h-8 cursor-pointer;
 }
 .nav-bar-items {
-	@apply border border-secondary bg-base-300 h-full;
+	@apply border border-secondary bg-base-300;
 }
 </style>
 <script setup>
@@ -164,7 +164,7 @@ const navList = [
 		navigation: [
 			{
 				icon: WidgetIcon,
-				url: "/#"
+				url: "/engage"
 			},
 			{
 				label: 'Leads',
@@ -178,7 +178,7 @@ const navList = [
 			},
 			{
 				label: "Fitness",
-				url: "/#",
+				url: "/fitness",
 				icon: FitnessIcon
 			},
 			{
@@ -189,17 +189,325 @@ const navList = [
 			{
 				label: 'Vendors',
 				icon: VendorIcon,
-				url: "/#"
+				url: "/vendors"
 			},
 			{
 				label: 'Corporation',
 				icon: CorporationIcon,
-				url: "/#"
+				url: "/corporation"
 			},
 			{
 				label: 'Recruiting',
 				icon: RecruitingIcon,
-				url: "/#"
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'leads',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/engage"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/fitness",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'members',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/engage"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/fitness",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'fitness',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/engage"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/fitness",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'leaderboard',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/engage"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/fitness",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'vendors',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/engage"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/fitness",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'corporation',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/engage"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/fitness",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
+			},
+		]
+	},
+	{
+		type: 'recruitment',
+		navigation: [
+			{
+				icon: WidgetIcon,
+				url: "/engage"
+			},
+			{
+				label: 'Leads',
+				icon: PersonAddIcon,
+				url: "/leads"
+			},
+			{
+				label: 'Members',
+				icon: MembersIcon,
+				url: "/members"
+			},
+			{
+				label: "Fitness",
+				url: "/fitness",
+				icon: FitnessIcon
+			},
+			{
+				label: 'Employees',
+				icon: EmployeeIcon,
+				url: "/leaderboard"
+			},
+			{
+				label: 'Vendors',
+				icon: VendorIcon,
+				url: "/vendors"
+			},
+			{
+				label: 'Corporation',
+				icon: CorporationIcon,
+				url: "/corporation"
+			},
+			{
+				label: 'Recruiting',
+				icon: RecruitingIcon,
+				url: "/recruitment"
 			},
 		]
 	},

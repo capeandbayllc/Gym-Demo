@@ -2,8 +2,8 @@
     <simple-card class="select-gym">
         <div class="flex p-4 justify-between">
             <p>Select a Gym </p>
-            <select class="select select-sm bg-white text-black w-fit max-w-xs rounded-sm" v-model="city">
-                <option disabled selected value="">Select City</option>
+            <select class="select select-sm bg-white text-black w-fit max-w-xs rounded-sm text-black" v-model="city">
+                <option value="" selected>Select City</option>
                 <option v-for="opt in cities" :value="opt.value" :key="opt.value">{{opt.label}}</option>
             </select>
         </div>
@@ -21,7 +21,7 @@
 <script setup>
 import {ref} from 'vue';
 
-const city = ref([])
+const city = ref("")
 const cities = ref([
     {
         label:"Florida",

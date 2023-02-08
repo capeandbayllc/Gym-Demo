@@ -7,7 +7,10 @@
         <td class="px-4">{{data.email}}</td>
         <td>{{data.location}}</td>
         <td>
-            <membership-btn :membership="data.type" class="text-sm"/>
+            <div class="membership-btn" :class="'type-' + data.type">
+                {{data.type}}
+            </div>
+            <!-- <membership-btn :membership="data.type" class="text-sm"/> -->
         </td>
         <td>
             <addon-btn :value="data.addOns" class="!rounded-full"/>
@@ -17,13 +20,22 @@
                 <div class="btn btn-ghost btn-sm text-base-content" tabindex="0" @click.prevent.stop>
                     <font-awesome-icon icon="ellipsis-h" size="lg" />
                 </div>
-                <context-menu class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                    <Button outline size="sm" class="my-1 border-primary">Preview</Button>
+                <!-- <div class="dropdown-content menu p-2 shadow bg-black rounded w-52 items-start">
+                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1"  @click.stop="openEmailModal">+ Email</div>
+                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1" @click.stop="outgoingCall">+ Call</div>
+                </div> -->
+                <div class="dropdown-content menu p-2 shadow bg-black rounded w-52 items-start">
+                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1">Preview</div>
+                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1">Edit</div>
+                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1">Trash</div>
+                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1">Contact Lead</div>
+                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1">Add a Note</div>
+                    <!-- <Button outline size="sm" class="my-1 border-primary">Preview</Button>
                     <Button outline size="sm" class="my-1 border-primary">Edit</Button>
                     <Button outline size="sm" class="my-1 border-primary">Trash</Button>
                     <Button outline size="sm" class="my-1 border-primary">Contact Lead</Button>
-                    <Button outline size="sm" class="my-1 border-primary">Add a Note</Button>
-                </context-menu>
+                    <Button outline size="sm" class="my-1 border-primary">Add a Note</Button> -->
+                </div>
             </div> 
         </td>
     </tr>
@@ -40,6 +52,18 @@
     }
     td:last-child {
         @apply border-r-2 rounded-r;
+    }
+    .type-premimum {
+        @apply bg-orange-400;
+    }
+    .type-basic {
+        @apply border border-white;
+    }
+    .type-gold {
+        @apply bg-yellow-400;
+    }
+    .membership-btn {
+        @apply items-center justify-center rounded text-sm cursor-pointer px-2 py-1;
     }
 }
 </style>
