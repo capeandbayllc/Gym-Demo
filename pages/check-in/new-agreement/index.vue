@@ -2,7 +2,7 @@
     <simple-card title="Agreements" class="agreements-card gradient-bg" closable>
         <div class="p-8">
             <CurrentAgreement v-if="!showNewAgreement" @new-agreement="newAgreement"/>
-            <div v-else class="bg-black w-fit mx-auto rounded-md p-6 border border-secondary">
+            <div v-else class="bg-black w-fit mx-auto rounded-md p-6 border border-secondary new-agreements-wrapper">
                 <component :is="agreementScreens[agreementScreenIndex]"></component>
                 <div class="flex justify-end mt-6">
                     <Button size="sm" class="normal-case mx-2" ghost @click="prevScreen" v-if="agreementScreenIndex > 0">Back</Button>
@@ -50,4 +50,16 @@ const prevScreen = ()=>{
 .agreements-card {
     @apply m-auto bg-neutral w-full max-w-[1120px];
 }
+</style>
+<style>
+@media (max-width:1152px){
+    .new-agreements-wrapper {
+        width:100%;
+        .width-full{
+            width:100%;
+        }
+        .display-flex-column{flex-direction: column;}
+    }
+}
+
 </style>

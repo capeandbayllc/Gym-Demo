@@ -7,7 +7,7 @@
                 <option v-for="opt in cities" :value="opt.value" :key="opt.value">{{opt.label}}</option>
             </select>
         </div>
-        <div class="w-[600px] gap-4 grid grid-cols-2 p-4 h-[400px] overflow-auto m-2">
+        <div class="w-[600px] gap-4 grid grid-cols-2 p-4 h-[400px] overflow-auto m-2 width-full">
             <div class="bg-white p-4 rounded-md text-black" v-for="(gym, index) in gyms" :key="index">
                 <p class="font-semibold mb-4">{{gym.name}}</p>
                 <p class="font-light mb-4">{{gym.address}}</p>

@@ -1,5 +1,5 @@
 <template>
-    <simple-card class="grid grid-cols-2 p-4 gap-4 w-[600px] text-sm max-h-[70vh] overflow-auto">
+    <simple-card class="grid grid-cols-2 p-4 gap-4 w-[600px] text-sm max-h-[70vh] overflow-auto width-full">
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">First Name</div>
             <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.firstName"/>
