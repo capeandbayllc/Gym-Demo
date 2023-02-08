@@ -1,8 +1,9 @@
 <template>
-    <div class="grid grid-cols-6 gap-3 mb-2 -lg:flex -lg:text-xs">
+    <div class="document-center-filter-action grid grid-cols-6 gap-3 mb-2 text-sm font-semibold -lg:flex -lg:text-xs">
         <select-box
             :items="categoriesList"
             value=""
+            :secondary="true"
             :label="'Categories'" 
             class="col-start-2"
             >
@@ -10,25 +11,34 @@
         <select-box
             :items="scheduleList"
             value=""
+            :secondary="true"
             :label="'Schedule Types'">
         </select-box>
         <select-box
             :items="agreementList"
             value=""
+            :secondary="true"
             :label="'Agreement Types'">
         </select-box>
         <select-box
             :items="availabilityList"
             value=""
+            :secondary="true"
             :label="'Availability'">
         </select-box>
         <select-box
             :items="locationList"
             value=""
+            :secondary="true"
             :label="'Locations'">
         </select-box>
     </div>
 </template>
+<style>
+.document-center-filter-action .select-box-content {
+    @apply text-sm -lg:text-xs;
+}
+</style>
 <script setup>
     const categoriesList = [
         {

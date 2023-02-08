@@ -1,5 +1,5 @@
 <template>
-    <context-menu ref="profileMenu" class="gradient-bg profile-menu-container z-21 top-[3.50rem]" >
+    <context-menu ref="profileMenu" class="gradient-bg profile-menu-container top-[3.50rem]" @isProfileMenuOpen="isProfileMenuOpenFn">
         <div class="flex flex-col">
             <ul class="menu-list">
                 <li class="menu-items" v-for="(item, ndx) in menu" :key="ndx">
@@ -17,7 +17,7 @@
 </template>
 <style scoped>
 .profile-menu-container {
-    @apply absolute right-4 p-3 text-sm border-8 rounded-xl border-secondary;
+    @apply z-[22] absolute right-4 p-3 text-sm border-8 rounded-xl border-secondary;
     > div {
         @apply border-4 rounded-lg -m-4;
     }
@@ -51,6 +51,10 @@ const open = () => {
 }
 const close = () => {
     profileMenu.value.close()
+}
+const emit = defineEmits(['isProfileMenuOpen']);
+const isProfileMenuOpenFn = (data) =>{
+    emit('isProfileMenuOpen',data)
 }
 defineExpose({ open, close })
 

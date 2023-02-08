@@ -108,8 +108,8 @@ const options = {
                 }
             },
             {
-                x: 320,
-                y: 130,
+                x: 315,
+                y: 145,
                 marker: {
                     size: 8,
                     fillColor: '#0074C8',

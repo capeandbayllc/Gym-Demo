@@ -4,13 +4,14 @@
 			@show-circular-menu="toggleCircularMenu"
 			@show-help="showBot"
 			@show-profile-menu="showProfileMenu"
+			class="sticky top-0 z-[22]"
 		/>
 		<circular-menu
 			v-if="showCircularMenu"
 			@close="toggleCircularMenu"
 		/>
 		<help-bot ref="helpBot"/>
-		<profile-menu ref="profileMenu"/>
+		<profile-menu ref="profileMenu" @isProfileMenuOpen="isProfileMenuOpenFn"/>
 		<div class="app-content">
 			<nav-bar />
 			<div class="w-full relative">
@@ -18,7 +19,7 @@
 					v-model="globalSearch"
 				/> -->
 				<div class="app-body">
-				    <div class="app-body-content mt-8">
+				    <div class="app-body-content">
 						<slot />
 					</div>
 					<side-bar />
@@ -33,21 +34,23 @@
 </template>
 <style scoped>
 .app-layout {
-	@apply w-screen overflow-x-hidden;
+	@apply w-screen /* overflow-x-hidden */;
 }
 .app-content {
 	@apply flex flex-row relative;
+	min-height:calc(100vh - 4rem);
 }
 .app-body {
-	@apply flex flex-row justify-between relative;
+	@apply flex flex-row justify-between relative h-full;
 	.app-body-content {
-	    @apply flex flex-col w-full items-center;
-		height: calc(100vh - 6rem);
+	    @apply flex flex-col w-full items-center h-full py-8;
+		/* height: calc(100vh - 6rem); */
+
 	}
 }
 </style>
 <script setup>
-import {ref, watchEffect} from 'vue'
+import {ref, watchEffect,provide} from 'vue'
 import AppHeader from "./components/app-header.vue";
 import NavBar from "./components/nav-bar/index.vue"
 import GlobalSearch from "./components/global-search.vue"
@@ -70,8 +73,15 @@ const helpBot = ref(null)
 const showBot = () => helpBot.value.open();
 
 const profileMenu = ref(null)
-const showProfileMenu = () => profileMenu.value.open()
-
+const showProfileMenu = () => {
+	profileMenu.value.open()
+}
+const profileMenuStatus = ref(false);
+provide('profileMenu',profileMenuStatus);
+const isProfileMenuOpenFn = (data) =>{
+	profileMenuStatus.value = data;
+	provide('profileMenu',profileMenuStatus);
+}
 
 const globalSearch = ref("")
 const globalSearchModal = ref(null)
