@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[900px]">
+    <div class="w-[900px] width-full">
         <div class="bg-secondary flex p-4 justify-between mb-4 rounded-md">
             <div>
                 <h2 class="text-lg font-bold">Membership Agreement</h2>

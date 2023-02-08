@@ -38,7 +38,7 @@
                     Add an Alert
                 </Button>
             </div> -->
-            <div class="bg-gray p-4 border border-secondary bg-[#191919]">
+            <div class="bg-gray p-4 border border-secondary bg-[#191919] rounded-md -xl:mb-2">
                 <p class="text-sm mb-2">Guest Pass:</p>
                 <ul class="max-h-[80px] overflow-auto px-4 no-scrollbar">
                     <li class="flex my-4 items-center">
