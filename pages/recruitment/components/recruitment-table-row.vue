@@ -9,14 +9,14 @@
                 <div class="btn btn-ghost btn-sm text-base-content" tabindex="0" @click.prevent.stop>
                     <font-awesome-icon icon="ellipsis-h" size="lg" />
                 </div>
-                <!-- <ul class="dropdown-content menu p-2 shadow bg-black rounded w-52">
-                    <li class="border border-secondary inline-block my-1 border-primary text-secondary" tabindex="-1"  @click.stop="openEmailModal">+ Email</li>
-                    <li class="border border-secondary inline-block my-1 border-primary text-secondary" tabindex="-1" @click.stop="outgoingCall">+ Call</li>
-                </ul> -->
-                <div class="dropdown-content menu p-2 shadow bg-black rounded w-52">
-                    <Button outline size="sm" class="my-1 border-primary text-secondary" tabindex="-1" @click="openEmailModal">+ Email</Button>
-                    <Button outline size="sm" class="my-1 border-primary text-secondary" tabindex="-1" @click="outgoingCall">+ Call</Button>
+                <div class="dropdown-content menu p-2 shadow bg-black rounded w-52 items-start">
+                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1"  @click.stop="openEmailModal">+ Email</div>
+                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1" @click.stop="outgoingCall">+ Call</div>
                 </div>
+                <!-- <div class="dropdown-content menu p-2 shadow bg-black rounded w-52">
+                    <Button outline size="sm" class="my-1 border-primary text-secondary" tabindex="-1" @click="outgoingCall">+ Call</Button>
+                    <Button outline size="sm" class="my-1 border-primary text-secondary" tabindex="-1" @click="openEmailModal">+ Email</Button>
+                </div> -->
                 <daisy-modal ref="outgoingCallModalRef">
                     <outgoing-call-modal @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal>
                 </daisy-modal>
