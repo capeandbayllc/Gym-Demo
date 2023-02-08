@@ -1,5 +1,5 @@
 <template>
-    <simple-card class="p-4 gap-4 w-[400px]">
+    <simple-card class="p-4 gap-4 w-[400px] width-full">
         <h2 class="text-md font-bold mb-4">Personal information</h2>
         <p class="px-4 text-sm mb-4">Want to add family members to help keep you accountable to your fitness goals? This is your chance to add memberships for $0 down and $17 a month.</p>
         <div class="form-control w-full max-w-xs">

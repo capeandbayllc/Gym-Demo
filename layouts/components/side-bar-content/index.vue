@@ -52,11 +52,24 @@
 }
 </style>
 <style>
-  @media (max-width: 1920px){
-    #check-in-modal {min-width: 80%; background: none;}
-    /* .check-in-modal-height {overflow: auto;max-height: 80vh;} */
-    .check-in-modal-height {overflow: auto;max-height: 95vh;}
-    /* #check-in-modal .page-content {max-width: 100%;} */
+  #check-in-modal .modal-close-btn svg g{fill: #0074C8;}
+  #check-in-modal .modal-close-btn{top: -18px;right: -12px;}
+  .checkin-action-items .w-full{max-width:100% !important;}
+  .checkin-action-items .simple-card {max-width:100% !important; width: auto !important;}
+  @media (max-width: 2100px){
+    #check-in-modal {min-width: 65%; background: none;}
+    .check-in-modal-content {overflow: auto;max-height: 95vh;}
+  }
+  @media (max-width: 1900px){
+    #check-in-modal {min-width: 80%;}
+  }
+  @media (max-width: 1350px){
+    #check-in-modal {min-width: 85%;}
+  }
+  @media (max-width: 1250px){
+    #check-in-modal .event-list {
+        max-height: fit-content;
+    }
   }
   @media (max-width: 980px){
     #check-in-modal {min-width: 85%;}
