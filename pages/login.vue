@@ -3,6 +3,7 @@
     <div class="-mt-60">
       <svg
         xmlns="http://www.w3.org/2000/svg"
+        class="pointer-events-none"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         width="482"
         height="48"
@@ -70,6 +71,7 @@
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              class="pointer-events-none"
               width="14.997"
               height="12.998"
               viewBox="0 0 14.997 12.998"
@@ -113,7 +115,7 @@
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="stroke-current flex-shrink-0 h-6 w-6"
+              class="stroke-current flex-shrink-0 h-6 w-6 pointer-events-none"
               fill="none"
               viewBox="0 0 24 24"
             >
@@ -130,9 +132,9 @@
       </div>
 
       <!-- btn background effect svg composition layers -->
-      <svg height="0">
+      <svg class="pointer-events-none" height="0">
         <filter id="btnbg" x="0" y="0" filterUnits="userSpaceOnUse">
-          <feOffset dx="3.994" dy="10.65" input="SourceAlpha" />
+          <feOffset dx="4" dy="10" input="SourceAlpha" />
           <feGaussianBlur stdDeviation="28.5" result="blur" />
           <feFlood flood-color="#005bc4" flood-opacity="0.353" />
           <feComposite operator="in" in2="blur" />
