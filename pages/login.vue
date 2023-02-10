@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="-mt-60">
+    <div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="pointer-events-none"
@@ -28,11 +28,11 @@
       </svg>
     </div>
 
-    <h1 class="text-center mb-12 mt-16 text-3xl">Sign In</h1>
+    <h1 class="text-center mb-12 mt-20 text-3xl">Sign In</h1>
 
     <form
       @submit.prevent="handleClickLogin"
-      class="px-4 min-w-[20rem] max-w-sm mx-auto flex flex-col gap-2"
+      class="px-12 min-w-[20rem] max-w-sm mx-auto flex flex-col gap-3"
     >
       <!-- username -->
       <label for="uname"> Email Address or Username* </label>
@@ -89,17 +89,19 @@
       </div>
 
       <!-- persistence -->
-      <div class="flex justify-between gap-4 my-8">
+      <div class="flex justify-between items-center gap-2 my-8 px-2">
         <input
           type="checkbox"
           name="remember me"
           v-model="remember"
           id="persist"
         />
-        <label class="mr-auto" for="persist">Remember me</label>
+        <label class="mr-auto whitespace-nowrap" for="persist"
+          >Remember me</label
+        >
 
         <a
-          class="text-secondary hover:text-primary transition-colors"
+          class="text-secondary hover:text-primary transition-colors whitespace-nowrap"
           href="/forgot"
           >Forgot password?</a
         >
@@ -176,7 +178,7 @@ const authenticate = (username, password) => {
   return username === "admin" && btoa(password) === "SGVsbG8xMjMh";
 };
 </script>
-
+<!-- #C0BDCC -->
 <style scoped lang="postcss">
 input {
   @apply bg-base-300 outline-none;
@@ -187,6 +189,15 @@ input[type="password"] {
   @apply bg-primary transition-colors duration-300 rounded-lg px-4 py-3 text-opacity-50 text-white;
   @apply active:bg-secondary active:text-white;
   @apply focus-within:bg-secondary focus-within:text-white focus-within:text-opacity-100;
+}
+
+input[type="checkbox"] {
+  @apply rounded-md bg-white appearance-none m-0 h-5 w-5 border border-[#C0BDCC] outline-none;
+  @apply focus:border;
+}
+
+input[type="checkbox"]:checked {
+  @apply bg-secondary border-primary;
 }
 
 button[type="submit"] {
