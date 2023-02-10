@@ -203,6 +203,7 @@ input[type="checkbox"]:checked {
 button[type="submit"] {
   @apply bg-black py-4 capitalize rounded-lg border border-white transition-colors duration-300;
   @apply hover:bg-secondary hover:border-secondary;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .pass-visible {
