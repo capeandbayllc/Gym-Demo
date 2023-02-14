@@ -1,38 +1,38 @@
 <template>
-    <div
+    <button
         class="add-ons"
         :class="{
             'add-ons-active': value,
         }"
     >
-        PT
-        <span class="edit-icon"><empty-file-icon class="mb-2" /></span>
-    </div>
+        <span class="add-ons-text">PT</span>
+        <span class="edit-icon"><edit-icon class="mb-2" /></span>
+    </button>
 </template>
 <style scoped>
 .add-ons {
-    @apply w-fit border px-[5px] flex items-center rounded-full cursor-pointer;
+    @apply w-fit border flex flex-row items-center justify-center rounded-full cursor-pointer;
     &:hover {
-        font-size:0;
-        @apply px-4;
+        .add-ons-text {
+            font-size:0;
+        }
         .edit-icon{
-            @apply visible;
+            @apply flex visible;
         }
     }
     .edit-icon{
-        @apply absolute h-[20px] w-[20px] invisible mx-auto left-0 right-0;
+        @apply h-5 w-5 hidden mx-auto;
         svg {
             @apply h-full w-full;
         }
     }
 }
 .add-ons.add-ons-active {
-    @apply border-accent-focus/60;
-    background: #5BC600;
+    @apply bg-accent-focus border-accent-focus;
 }
 </style>
 <script setup>
-import { EmptyFileIcon } from '~~/components/icons';
+import { EditIcon } from '~~/components/icons';
 const props = defineProps({
     value: Boolean
 })

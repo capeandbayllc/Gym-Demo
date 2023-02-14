@@ -2,21 +2,18 @@
   <div class="profile-options-container relative">
     
     <div class="flex flex-row gap-2 relative">
-      <CheckInButton v-model="checkIn" class="w-[250px] mr-4"/>
-      <!-- <div class="btn-check-in">Check in</div> -->
-      <!-- <div class="btn-close-selection">Close Selection</div> -->
+      <CheckInButton v-model="checkIn" class="w-64 mr-4"/>
     </div>
-    <div class="profile-options gradient-bg">
+    <div class="profile-options card-gradient-bg">
       <profile-option-item
         v-for="item in options"
         :key="item.key"
         :model-value="item.key === selected"
         @update:modelValue="handleSelect(item.key, $event)"
         :label="item.label"
+        :unread="item.unread"
       />
     </div>
-    <!-- <div class="btn-close-selection">Close Member Selection</div> -->
-    
   </div>
 </template>
 <style scoped>
@@ -55,7 +52,8 @@ const options = [
 }, {
     label: "Calendar",
     key: "calendar",
-    selected: false
+    selected: false,
+    unread: 3
 }, {
     label: "Notifications",
     key: "notification",

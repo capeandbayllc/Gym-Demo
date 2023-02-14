@@ -6,9 +6,8 @@
         }"
         @click="$emit('update:modelValue', !modelValue)"
     >
-        <div class="checker">
-            <!-- <plus-circle-icon v-if="!modelValue"/> -->
-            <check-circle-icon v-if="modelValue" class="text-accent-focus border border-black rounded-full"/>
+        <div class="checker" v-if="modelValue">
+            <check-circle-icon class="checkin-icon"/>
         </div>
         <div class="text-xs font-semibold">
             CHECK IN
@@ -17,12 +16,22 @@
 </template>
 <style scoped>
 .alert-container {
-    @apply flex flex-row items-center space-x-2 h-[30px] w-fit pr-4 py-1 cursor-pointer bg-accent-focus rounded-full text-black;
-    .checker {
-        @apply p-1 rounded-full !bg-accent-focus;
-    }
+    @apply flex flex-row w-fit hover:flex-row-reverse items-center justify-between h-8 p-2 py-1 cursor-pointer rounded-full bg-accent-focus hover:bg-secondary text-base-300 hover:text-base-content;
     &.checked {
-        @apply bg-accent-focus text-black;
+        @apply w-28 pr-3 pl-1 hover:pr-1 hover:pl-3;
+    }
+    .checker {
+        @apply p-1 rounded-full;
+        .checkin-icon {
+            @apply border-2 border-base-300 rounded-full;
+        }
+    }
+    &:hover {
+        .checker {
+            .checkin-icon {
+                @apply border-base-content;
+            }
+        }
     }
 }
 

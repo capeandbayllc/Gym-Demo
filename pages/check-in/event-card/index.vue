@@ -1,5 +1,5 @@
 <template>
-  <div class="event-card-container gradient-bg">
+  <div class="event-card-container card-gradient-bg">
     <div class="scheduled-event-container">
       <div class="events-header">Scheduled Events</div>
       <div class="event-items" v-if="mock.scheduled.length">
