@@ -25,11 +25,15 @@
             </button>
         </div>
         <div class="grid">
-            <button class="profile-contact-methods" @click="openEngage">
+            <button class="profile-contact-methods" @click="$emit('open-engage')">
                 <span class="mr-14 font-bold text-2xl">Engage</span>
-                <div class="-sm:!ml-2"><CallIcon/></div>
-                <div class="-sm:!ml-2"><EmailIcon/></div>
-                <div class="-sm:!ml-2"><MessageIcon/></div>
+                <div
+                    v-for="{icon}, ndx in engageOptions"
+                    :key="ndx"
+                    class="-sm:!ml-2"
+                >
+                    <component :is="icon"/>
+                </div>
             </button>
             <div class="guest-pass-container">
                 <h6>Guest Pass:</h6>
@@ -143,11 +147,6 @@ const mock = {
     addOns: 'pt',
     notifications: 3,
 }
-const emit = defineEmits(["openEngage"])
-
-const openEngage = ()=>{
-    emit("openEngage")
-}
 
 const guests = [{
     id: 1,
@@ -157,5 +156,12 @@ const guests = [{
     id: 2,
     date: "December 12, 2021",
     dat_left: 2
+}]
+const engageOptions = [{
+    icon: CallIcon
+}, {
+    icon: EmailIcon
+}, {
+    icon: MessageIcon
 }]
 </script>

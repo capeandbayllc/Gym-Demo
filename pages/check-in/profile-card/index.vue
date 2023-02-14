@@ -2,6 +2,7 @@
   <div class="checkin-profile-card">
     <profile-info
       @toggle-detail="$emit('toggle-detail', $event)"
+      @open-engage="$emit('open-engage')"
     />
     <profile-options
       :selected="activeOption"

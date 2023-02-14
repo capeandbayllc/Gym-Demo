@@ -9,6 +9,7 @@
               :active-option="option"
               @select-option="option = $event"
               @toggle-detail="toggleDetailSection"
+              @open-engage="showEngageModal"
             />
           </div>
           <div class="bg-secondary w-full">
@@ -40,10 +41,9 @@
         @close="option = null"
         :key="option"
       />
-      <!-- <daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
-          <alert-add-modal @close="scope.close()"/>
-      </daisy-modal> -->
-      <engage-modal />
+      <daisy-modal id="engageModal" ref="engageModal" v-slot="scope">
+          <engage-modal @close="scope.close()"/>
+      </daisy-modal>
     </div>
 
   </div>
@@ -105,10 +105,10 @@ watch(option,()=>{
   
 })
 
-// const alertAddModal = ref(null);
-// const showAlertAddModal = () => {
-//     alertAddModal.value.open()
-// };
+const engageModal = ref(null);
+const showEngageModal = () => {
+    engageModal.value.open()
+};
 
 const isDetailOpened = ref(false);
 const detailView = ref(null);
