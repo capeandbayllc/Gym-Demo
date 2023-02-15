@@ -2,12 +2,13 @@
   <div class="w-full h-full flex flex-col check-in-modal-height">
     <div class="page-checkin-container">
       <div class="page-content">
+        {{ detailView }}
         <div class="wrapper px-2 pt-2 w-full rounded-md" :class="{'pb-0':detailView !== null}">
           <div class="flex -md:block">
             <event-card class="mr-2"/>
             <profile-card
-              :active-option="option"
-              @select-option="option = $event"
+              :active-option="detailView"
+              @select-option="detailView = $event"
               @toggle-detail="toggleDetailSection"
               @open-engage="showEngageModal"
             />
@@ -35,15 +36,18 @@
       </div>
     </div>
     <div class="page-content">
-      <component
-        v-for="{option, component} in subSections"
-        v-if="option === option"
-        @close="option = null"
-        :key="option"
-      />
-      <daisy-modal id="engageModal" ref="engageModal" v-slot="scope">
-          <engage-modal @close="scope.close()"/>
-      </daisy-modal>
+      <template
+        v-for="{key, component} in subSections"
+        :key="key"
+      >
+        <component
+          v-if="detailView === key"
+          @close="detailView = null"
+          :key="key"
+          :is="component"
+        />
+      </template>
+      
     </div>
 
   </div>
@@ -89,7 +93,6 @@ import { LockIcon, MemberInfoIcon, SettingIcon, DollarDocIcon, AnnouncementIcon,
 import UserInfo from './user-info/index.vue';
 import Setting from './setting/index.vue';
 import Engage from './engage/index.vue';
-import EngageModal from './modals/engage-modal/index.vue';
 const option = ref(null);
 
 watch(option,()=>{
@@ -105,9 +108,8 @@ watch(option,()=>{
   
 })
 
-const engageModal = ref(null);
 const showEngageModal = () => {
-    engageModal.value.open()
+  detailView.value = 'engage'
 };
 
 const isDetailOpened = ref(false);
@@ -131,24 +133,24 @@ const backToTop = ()=>{
 }
 
 const subSections = [
-  { option: "profile", component: Profile },
-  { option: "pos", component: PosCard },
-  { option: "calendar", component: CalendarCard },
-  { option: "notification", component: NotificationCard },
-  { option: "guest-pass", component: GuestCard },
-  { option: "note", component: NoteCard },
-  { option: "newAgreement", component: NewAgreement },
-  { option: "engage", component: Engage }
+  { key: "profile", component: Profile },
+  { key: "pos", component: PosCard },
+  { key: "calendar", component: CalendarCard },
+  { key: "notification", component: NotificationCard },
+  { key: "guest-pass", component: GuestCard },
+  { key: "note", component: NoteCard },
+  { key: "newAgreement", component: NewAgreement },
+  { key: "engage", component: Engage }
 ]
 
 const accountOptions = [
-  { key: "memberinfo", icon: MemberInfoIcon },
-  { key: "setting", icon: SettingIcon },
-  { key: "dollardoc", icon: DollarDocIcon },
-  { key: "announcement", icon: AnnouncementIcon },
-  { key: "piechart", icon: PieChartIcon },
-  { key: "book", icon: BookIcon },
-  { key: "doc", icon: DocIcon }
+  { key: "profile", icon: MemberInfoIcon },
+  { key: "pos", icon: SettingIcon },
+  { key: "calendar", icon: DollarDocIcon },
+  { key: "notification", icon: AnnouncementIcon },
+  { key: "guest-pass", icon: PieChartIcon },
+  { key: "note", icon: BookIcon },
+  { key: "newAgreement", icon: DocIcon }
 ]
 
 const toggleDetailSection = (event) => {
