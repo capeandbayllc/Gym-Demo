@@ -4,29 +4,7 @@
         class="note-card"
         closable
     >
-        <!-- <div class="note-card-container">
-            <div class="note-list">
-                <note-item
-                    v-for="note in notes"
-                    :is-active="note.id === activeNote?.id"
-                    :key="note.id"
-                    :note="note"
-                    @click="activeNote={...note}"
-                />
-            </div>
-            <div>
-                <h3>Title</h3>
-                <textarea v-model="activeNote.title"></textarea>
-                <div class="note-actions">
-                    <Button size="sm" secondary>Create a Note</Button>
-                    <Button size="sm" secondary>Add an Alert</Button>
-                    <hr class="invisible sm:hidden w-full"/>
-                    <Button size="sm" ghost>Delete</Button>
-                    <Button size="sm" secondary>Save</Button>
-                </div>
-            </div>
-        </div> -->
-    <div class="flex w-full gap-6 p-6">
+    <div class="flex w-full gap-6 p-6 card-gradient-bg">
         <div class="w-[140px]">
             <button class="flex flex-col items-center mb-6" @click="createNote">
                 <NewAgreementIcon class="w-[140px] h-[50px] mb-2"/>
@@ -34,12 +12,7 @@
             </button>
             <Button secondary size="sm" class="w-full mb-6 normal-case flex justify-between"> <span> Shared </span> <span>21</span></Button>
             <Button secondary size="sm" class="w-full mb-6 normal-case flex justify-between"> <span> Admin Notes </span> <span>3</span></Button>
-            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
-            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
-            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
-            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
-            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
-            <Button outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>12</span></Button>
+            <Button v-for="folder in folders" :key="folder.id" outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>{{folder.name}}</span></Button>
         </div>
         <div>
             <div class="w-fit">
@@ -64,16 +37,8 @@
             </div>
         </div>
         <div class="w-[600px]">
-            <div class="mb-5 text-center calender-view-wrap">
-                <input type="radio" v-model="calenderView" name="calenderView" value="timeGridWeek"/>
-                <Button @click="handleChangeView('timeGridWeek')" gost class="mr-3">Week</Button>
-                <input type="radio" v-model="calenderView" name="calenderView" value="dayGridMonth"/>
-                <Button @click="handleChangeView('dayGridMonth')" gost> Month </Button>
-                <input type="radio" v-model="calenderView" name="calenderView" value="timeGridDay"/>
-                <Button @click="handleChangeView('timeGridDay')" gost> Day </Button>
-            </div>
             <div class="relative border border-secondary rounded-lg overflow-hidden p-2">
-                <h2 class="text absolute top-0 left-0 text-xl font-bold cursor-pointer flex flex-row bg-secondary w-full py-3 px-2" @click="showDateSelectModal">
+                <h2 class="calendar-title" @click="showDateSelectModal">
                     {{ calendarTitle }} <arrow-icon direction="right" class="h-[30px] items-center" />
                 </h2>
                 <FullCalendar :options="calendarOptions" ref="calendar"/>
@@ -124,10 +89,23 @@
         }
     }
 }
+.calendar-title {
+    @apply absolute top-0 left-0 w-full flex items-center h-14 text-xl font-semibold px-6 text-base-content bg-gradient-to-b from-secondary to-base-300/30 bg-secondary bg-blend-darken;
+}
+</style>
+<style>
+.note-card {
+    .fc .fc-button-group {
+        @apply hidden;
+    }
+    .fc .fc-button {
+        @apply bg-base-content text-secondary font-semibold cursor-pointer;
+    }
+}
 </style>
 <script setup>
 import NoteItem from './note-item.vue';
-import { NewAgreementIcon } from "@/components/icons";
+import { NewAgreementIcon, ArrowIcon } from "@/components/icons";
 import AlertButton from './alert-button.vue'
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -192,6 +170,15 @@ const today = computed(() => {
 const createNote = () =>{
     noteModal.value.open();
 }
+
+const folders = [
+    { id: 1, name: 12 },
+    { id: 2, name: 12 },
+    { id: 3, name: 12 },
+    { id: 4, name: 12 },
+    { id: 5, name: 12 },
+    { id: 6, name: 12 },
+]
 
 const events = [
     {
