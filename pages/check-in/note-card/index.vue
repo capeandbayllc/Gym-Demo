@@ -37,9 +37,9 @@
             </div>
         </div>
         <div class="w-[600px]">
-            <div class="relative border border-secondary rounded-lg overflow-hidden p-2">
+            <div class="relative border border-secondary rounded-lg overflow-hidden">
                 <h2 class="calendar-title" @click="showDateSelectModal">
-                    {{ calendarTitle }} <arrow-icon direction="right" class="h-[30px] items-center" />
+                    {{ calendarTitle }} <arrow-icon direction="right" class="h-9 items-center" />
                 </h2>
                 <FullCalendar :options="calendarOptions" ref="calendar"/>
             </div>
@@ -90,7 +90,7 @@
     }
 }
 .calendar-title {
-    @apply absolute top-0 left-0 w-full flex items-center h-14 text-xl font-semibold px-6 text-base-content bg-gradient-to-b from-secondary to-base-300/30 bg-secondary bg-blend-darken;
+    @apply absolute top-0 left-0 w-full flex items-center h-10 text-xl font-semibold px-6 text-base-content bg-gradient-to-b from-secondary to-base-300/30 bg-secondary bg-blend-darken;
 }
 </style>
 <style>
@@ -98,8 +98,11 @@
     .fc .fc-button-group {
         @apply hidden;
     }
-    .fc .fc-button {
-        @apply bg-base-content text-secondary font-semibold cursor-pointer;
+    .fc .fc-header-toolbar .fc-toolbar-chunk {
+        @apply bg-base-content mix-blend-hard-light rounded mt-2 mr-2;
+        .fc-button {
+            @apply bg-base-content text-secondary font-semibold cursor-pointer capitalize h-6 flex items-center text-sm;
+        }
     }
 }
 </style>
@@ -257,14 +260,12 @@ const onViewChanged = () => {
 
 const calendarOptions = ref({
     plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin],
-    initialView: 'timeGridWeek',
+    initialView: 'dayGridMonth',
     dateClick: handleDateClick,
     headerToolbar: {
         left: "",
         center: "",
-        right: "prev,next today",
-        // center: "title",
-        // right: "prev,next today",
+        right: "today",
     },
     events,
     editable: true,
@@ -272,7 +273,6 @@ const calendarOptions = ref({
     dayMaxEvents: true,
     eventClick,
     datesSet: (params)=> {
-        console.log("params-->",params)
         /* listCalendar?.value?.getApi()?.gotoDate(params.start);
         monthCalendar?.value?.getApi()?.gotoDate(params.start);
         monthCalendar?.value?.getApi()?.select(params.start) */
@@ -292,7 +292,6 @@ const calendarOptions = ref({
         console.log("viewDidMount")
         onViewChanged()
     }
-    //eventContent: { html: '<i>some html</i>' }
 });
 
 </script>
