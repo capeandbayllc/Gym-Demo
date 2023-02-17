@@ -6,9 +6,14 @@
     >
     <div class="flex w-full gap-6 p-6 card-gradient-bg">
         <div class="w-[140px]">
-            <button class="flex flex-col items-center mb-6" @click="createNote">
-                <NewAgreementIcon class="w-[140px] h-[50px] mb-2"/>
-                <span>Create a new note</span>
+            <button class="create-note-btn" @click="createNote">
+                <div class="btn-normal">
+                    <NewAgreementIcon class="mb-2"/>
+                    <span>Create a new note</span>
+                </div>
+                <div class="btn-hover">
+                    <NewAgreementHoverIcon/>
+                </div>
             </button>
             <Button secondary size="sm" class="w-full mb-6 normal-case flex justify-between"> <span> Shared </span> <span>21</span></Button>
             <Button secondary size="sm" class="w-full mb-6 normal-case flex justify-between"> <span> Admin Notes </span> <span>3</span></Button>
@@ -76,6 +81,26 @@
             @apply flex flex-row flex-wrap justify-end gap-2 mt-2 ml-4;
         }
     }
+    .create-note-btn {
+        @apply w-full mb-6 h-16;
+        > div {
+            @apply w-full;
+        }
+        .btn-normal {
+            @apply flex flex-col items-center;
+        }
+        .btn-hover {
+            @apply hidden;
+        }
+        &:hover {
+            .btn-normal {
+                @apply hidden;
+            }
+            .btn-hover {
+                @apply flex w-full items-center justify-center;
+            }
+        }
+    }
     .calender-view-wrap {
         input[type="radio"] {
             @apply absolute invisible left-[-9999px];
@@ -108,7 +133,7 @@
 </style>
 <script setup>
 import NoteItem from './note-item.vue';
-import { NewAgreementIcon, ArrowIcon } from "@/components/icons";
+import { NewAgreementIcon, NewAgreementHoverIcon, ArrowIcon } from "@/components/icons";
 import AlertButton from './alert-button.vue'
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";

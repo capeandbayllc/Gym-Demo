@@ -2,7 +2,6 @@
   <div class="w-full h-full flex flex-col check-in-modal-height">
     <div class="page-checkin-container">
       <div class="page-content">
-        {{ detailView }}
         <div class="wrapper px-2 pt-2 w-full rounded-md" :class="{'pb-0':detailView !== null}">
           <div class="flex -md:block">
             <event-card class="mr-2"/>
@@ -144,13 +143,13 @@ const subSections = [
 ]
 
 const accountOptions = [
-  { key: "profile", icon: MemberInfoIcon },
-  { key: "pos", icon: SettingIcon },
-  { key: "calendar", icon: DollarDocIcon },
-  { key: "notification", icon: AnnouncementIcon },
-  { key: "guest-pass", icon: PieChartIcon },
-  { key: "note", icon: BookIcon },
-  { key: "newAgreement", icon: DocIcon }
+  { key: "memberinfo", icon: MemberInfoIcon },
+  { key: "setting", icon: SettingIcon },
+  { key: "#", icon: DollarDocIcon },
+  { key: "#", icon: AnnouncementIcon },
+  { key: "#", icon: PieChartIcon },
+  { key: "#", icon: BookIcon },
+  { key: "#", icon: DocIcon }
 ]
 
 const toggleDetailSection = (event) => {

@@ -35,7 +35,7 @@
     }
 }
 .profile-option-item.selected {
-    @apply px-4 bg-secondary h-7 rounded rounded-full w-fit;
+    @apply px-6 bg-secondary h-7 rounded rounded-full w-fit;
     box-shadow: 0 0 0 3px hsl(var(--bc));
 }
 </style>

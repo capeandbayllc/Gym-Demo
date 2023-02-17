@@ -11,18 +11,30 @@
                         v-model="form[item.key]"
                     />
                     <div v-else class="flex flex-row justify-between">
-                        <Datepicker
-                            v-model="form['start']"
-                            placeholder="00-00-0000"
-                            text-input
-                            input-class-name="dp-custom-input"
-                        />
-                        <Datepicker
-                            v-model="form['end']"
-                            placeholder="00-00-0000"
-                            text-input
-                            input-class-name="dp-custom-input"
-                        />
+                        <div class="flex flex-row items-center ">
+                            <calendar-icon />
+                            <Datepicker
+                                v-model="form['start']"
+                                placeholder="00-00-0000"
+                                text-input
+                                input-class-name="dp-custom-input"
+                                hide-input-icon
+                                :format="format"
+                                :enable-time-picker="false"
+                            />
+                        </div>
+                        <div class="flex flex-row items-center ">
+                            <calendar-icon />
+                            <Datepicker
+                                v-model="form['end']"
+                                placeholder="00-00-0000"
+                                text-input
+                                input-class-name="dp-custom-input"
+                                hide-input-icon
+                                :format="format"
+                                :enable-time-picker="false"
+                            />
+                        </div>
                     </div>
                 </div>
             </template>
@@ -62,7 +74,7 @@
 </style>
 <style>
     .dp-custom-input {
-        @apply bg-transparent border-none text-secondary;
+        @apply bg-transparent border-none text-secondary mt-1;
         &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
             @apply text-secondary font-bold;
         }
@@ -73,6 +85,15 @@
 import {ref} from 'vue'
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import { CalendarIcon } from '~~/components/icons';
+
+const format = (date) => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  return `${day}-${month}-${year}`;
+}
 
 const form = ref({
     location: "1"

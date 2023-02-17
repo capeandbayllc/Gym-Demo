@@ -1,5 +1,5 @@
 <template>
-    <dashboard-card :title-icon="CalendarIcon" title="March" class="flex flex-col justify-between">
+    <dashboard-card :title-icon="CalendarIcon" :title="month" class="flex flex-col justify-between">
         <Datepicker
             v-model="date"
             inline
@@ -9,7 +9,8 @@
             auto-apply
             disable-month-year-select
             :enable-time-picker="false"
-            :day-names="dayNames" 
+            :day-names="dayNames"
+            @update-month-year="handleMonthYear" 
         />
         <div class="calendar-footer">
             <div class="calendar-footer-labels">
@@ -40,7 +41,7 @@
 </style>
 <style>
 .dp-custom-menu {
-    @apply !bg-base-300 grid m-6 border-none;
+    @apply !bg-base-content/20 grid p-6 border-none;
 }
 .dp-custom-calendar {
     .dp__calendar_header {
@@ -75,7 +76,6 @@
 <script setup>
 import { CalendarIcon } from '~~/components/icons'
 import DashboardCard from '../dashboard-card.vue'
-import MockCalendar from './mock-calendar.vue';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -85,6 +85,16 @@ const yoga = ["2023-02-01", "2023-02-02", "2023-02-05"]
 const pt = ["2023-02-17", "2023-02-18"]
 const cycle = ["2023-03-01", "2023-02-10"]
 const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+const page = ref(new Date());
+
+const handleMonthYear = ({ instance, month, year }) => {
+    page.value = new Date(year, month, 1)
+}
+const month = computed(() => {
+    const options = { month: "long" };
+    return Intl.DateTimeFormat("en-US", options).format(page.value);
+})
 
 const getDayClass = (date) => {
     let year = date.getFullYear();
