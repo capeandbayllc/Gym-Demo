@@ -1,6 +1,6 @@
 <template>
-	<div class="nav-bar-container" :class="{'mt-11' :  windowWidth > 1250}">
-		<div class="nav-bar-toggler" @click="toggleCollapse" v-if="windowWidth <= 1250 && navItems.length > 0"></div>
+	<div class="nav-bar-container" :class="{'mt-11' :  windowWidth > 1250}" v-if="navItems.length > 0">
+		<div class="nav-bar-toggler" @click="toggleCollapse" v-if="windowWidth <= 1250"></div>
 		<div class="nav-bar-items" v-if="collapsed">
 			<nav-item
 				v-if="windowWidth <= 1250"
