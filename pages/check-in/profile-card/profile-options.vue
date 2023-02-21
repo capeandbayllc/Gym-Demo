@@ -2,7 +2,7 @@
   <div class="profile-options-container relative">
     
     <div class="flex flex-row gap-2 relative">
-      <CheckInButton v-model="checkIn" class="w-64 mr-4"/>
+      <CheckInButton v-model="checkIn" class="w-64 mr-4 text-base-content"/>
     </div>
     <div class="profile-options card-gradient-bg">
       <profile-option-item

@@ -23,7 +23,7 @@
     .checker {
         @apply p-1 rounded-full;
         .checkin-icon {
-            @apply border-2 border-base-300 rounded-full;
+            @apply border-2 border-base-300 rounded-full text-transparent;
         }
     }
     &:hover {
