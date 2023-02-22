@@ -209,13 +209,12 @@ const eventClick = (info) => {
 const calendarOptions = ref({
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
     initialView: 'timeGridWeek',
+    slotDuration: '01:00',
     dateClick: handleDateClick,
     headerToolbar: {
         left: '',
         center: '',
         right: 'prev,next today',
-        // center: "title",
-        // right: "prev,next today",
     },
     events,
     editable: true,
@@ -223,11 +222,13 @@ const calendarOptions = ref({
     dayMaxEvents: true,
     eventClick,
     datesSet: (params) => {
-        console.log('params-->', params);
         listCalendar?.value?.getApi()?.gotoDate(params.start);
         monthCalendar?.value?.getApi()?.gotoDate(params.start);
         monthCalendar?.value?.getApi()?.select(params.start);
         //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
+    },
+    timeAxis: {
+        slotDuration: '01:00:00'
     },
     views: {
         timeGridDay: {
@@ -238,9 +239,15 @@ const calendarOptions = ref({
             },
             nowIndicator: true,
         },
+        timeGridWeek: {
+            dayHeaderFormat: {
+                month: "short",
+                day: "numeric"
+            },
+            nowIndicator: true,
+        }
     },
     viewDidMount: function (info) {
-        console.log('viewDidMount');
         onViewChanged();
     },
     //eventContent: { html: '<i>some html</i>' }
@@ -264,6 +271,9 @@ const monthCalendarOptions = ref({
 const listCalendarOptions = ref({
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
     initialView: 'listDay',
+    timeAxis: {
+        slotDuration: '01:00:00'
+    },
     headerToolbar: false,
     events,
     eventClick,
@@ -344,6 +354,26 @@ onMounted(async () => {
 .fc .fc-list-event:hover td {
     background-color: transparent !important;
 }
+
+.fc .fc-scrollgrid-section.fc-scrollgrid-section-body:first-child  {
+    * {
+        @apply border-b-secondary;
+    }
+}
+.fc-col-header-cell.fc-day {
+    height: 4em;
+    @apply bg-gradient-to-b from-secondary/80 via-secondary to-secondary/60;
+    div {
+        @apply h-full flex items-center justify-center;
+    }
+}
+
+.fc .fc-scrollgrid-section:nth-child(2) {
+    @apply bg-secondary;
+    * {
+        @apply border-b-secondary;
+    }
+}
 .fc-theme-standard td:hover {
     @apply cursor-pointer;
 }
@@ -355,6 +385,12 @@ onMounted(async () => {
     font-size: 0px;
     height: 10px;
     width: 10px;
+}
+.fc .fc-timegrid-slot {
+    height: 3.5em;
+}
+.fc .fc-day-today {
+    @apply !bg-base-300/40 bg-blend-darken;
 }
 /* .list-calendar .fc-view-harness{
         @screen -md{
