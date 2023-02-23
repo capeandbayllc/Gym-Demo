@@ -72,19 +72,24 @@
                 class="relative h-full"
             >
                 <h2
-                    class="text absolute top-2 left-0 text-xl font-bold cursor-pointer flex flex-row"
+                    class="text absolute top-2 left-0 text-xl font-bold cursor-pointer"
                     @click="showDateSelectModal"
                 >
-                    {{ calendarTitle }}
-                    <arrow-icon
-                        direction="right"
-                        class="h-[30px] items-center"
-                    />
+                <!-- <profile-btn /> -->
                 </h2>
-                <FullCalendar
-                    :options="calendarOptions"
-                    ref="calendar"
-                />
+                <div>
+                    <Datepicker
+                        class="calendar-date-picker"
+                        menu-class-name="!bg-transparent !border-none"
+                        :day-class="getDayClass"
+                        month-name-format="long"
+                        inline auto-apply :enable-time-picker="false" dark/>
+                    <FullCalendar
+                        :options="calendarOptions"
+                        ref="calendar"
+                    />
+            
+                </div>
             </div>
             <div
                 v-if="calenderView == 'timeGridDay'"
@@ -136,8 +141,9 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import EventPopup from './components/event-popup.vue';
-import DatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css';
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+import { isEqual, set } from 'date-fns';
 
 const calenderView = ref('timeGridWeek');
 watch(calenderView, () => {
@@ -213,8 +219,8 @@ const calendarOptions = ref({
     dateClick: handleDateClick,
     headerToolbar: {
         left: '',
-        center: '',
-        right: 'prev,next today',
+        center: 'prev,today,next,timeGridWeek,dayGridMonth,timeGridDay',
+        right: '',
     },
     events,
     editable: true,
@@ -317,6 +323,12 @@ const onSelectDate = (modelData) => {
     }
 };
 
+const getDayClass = (date) => {
+  if (isEqual(date, set(new Date(), { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 })))
+    return '!rounded-full bg-secondary';
+  return '';
+};
+
 onMounted(async () => {
     await nextTick();
     window.dispatchEvent(new Event('resize'))
@@ -347,6 +359,38 @@ onMounted(async () => {
 }
 </style>
 <style>
+.calendar-date-picker {
+    .dp__theme_dark {
+        --dp-background-color: #000000;
+        --dp-menu-border-color: #FFFFFF;
+    }
+    .dp__calendar_header {
+        @apply text-secondary;
+    }
+    .dp__month_year_row {
+        @apply border-none;
+        .dp__month_year_col_nav {
+            @apply bg-secondary rounded;
+            .dp__inner_nav {
+                @apply text-base-content;
+                &:hover {
+                    @apply bg-secondary;
+                }
+
+            }
+        }
+    }
+    .dp__calendar {
+        @apply bg-transparent;
+        .dp__calendar_wrap {
+            @apply bg-base-content/10 border border-secondary rounded;
+            .dp__calendar_header_separator {
+                @apply h-0;
+            }
+        }
+    }
+}
+
 .fc .fc-list-sticky .fc-list-day > *,
 .fc-theme-standard .fc-list-day-cushion,
 .fc .fc-cell-shaded,
@@ -364,7 +408,7 @@ onMounted(async () => {
     height: 4em;
     @apply bg-gradient-to-b from-secondary/80 via-secondary to-secondary/60;
     div {
-        @apply h-full flex items-center justify-center;
+        @apply h-full flex items-center justify-center uppercase;
     }
 }
 
@@ -390,7 +434,7 @@ onMounted(async () => {
     height: 3.5em;
 }
 .fc .fc-day-today {
-    @apply !bg-base-300/40 bg-blend-darken;
+    @apply bg-blend-darken;
 }
 /* .list-calendar .fc-view-harness{
         @screen -md{

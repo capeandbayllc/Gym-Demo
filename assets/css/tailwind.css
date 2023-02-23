@@ -49,3 +49,10 @@
 .page-content {
     @apply mx-auto w-full max-w-[1120px]
 }
+
+:root {
+    --fc-border-color: hsl(var(--bc) / 0.5);
+    --fc-today-bg-color: hsl(var(--b3) / 0.4);
+    --fc-button-bg-color: hsl(var(--p));
+    --fc-button-active-bg-color: hsl(var(--s));
+}
