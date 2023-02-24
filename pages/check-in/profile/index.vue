@@ -1,20 +1,18 @@
 <template>
     <div class="w-full max-w-[1120px] mx-auto">
         <simple-card class="profile-wrap" :closable="true" title="Profile" @close="$emit('close')">
-            <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2 mb-6 bg-black m-4 rounded-md gradient-bg">
-                <!-- <div class="flex justify-between items-center col-span-3 -lg:col-span-2"> -->
+            <div class="profile-section mb-6">
                     <div></div>
-                    <h2 class="text-center leading-10 text-lg">Member Information</h2>
-                    <Button class="text-white capitalize ml-auto -md:!mr-0" :class="isActiveMember ? 'bg-slate-400 hover:bg-slate-500' : 'bg-lime-500 hover:bg-lime-600'" @click="isActiveMember = !isActiveMember" >{{isActiveMember ? "In-Active" : "Active"}}</Button>
-                <!-- </div> -->
+                    <h2 class="">Member Information</h2>
+                    <Button class="text-base-content capitalize ml-auto -md:!mr-0" size="sm" :class="isActiveMember ? 'bg-neutral-content hover:bg-neutral-content/80' : 'bg-accent-focus hover:bg-accent-focus/80'" @click="isActiveMember = !isActiveMember" >{{isActiveMember ? "In-Active" : "Active"}}</Button>
                 
                 <div v-for="item in memberInformation" :key="item.key" class="col-span-1 -lg:col-span-1 -md:col-span-2 -md:col-auto mx-auto w-full mb-4">
                     <div class="mb-2">{{item.label}}</div>
                     <input :class="item.class" class="w-full p-1 rounded-sm" v-model="memberInfo[item.key]"/>
                 </div>
             </div>
-            <div class="grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2 bg-black m-4 rounded-md gradient-bg">
-                <h2 class="text-center leading-10 text-lg col-span-3 -lg:col-span-2">Demographics</h2>
+            <div class="profile-section">
+                <h2 class=" col-span-3 -lg:col-span-2">Demographics</h2>
                 
                 <div v-for="(item, index) in demographics" :key="item.key" :class="index == 0 ? 'col-span-3 -lg:col-span-2' :''" class="col-span-1 -md:col-span-2 -md:col-auto mx-auto w-full">
                     <div class="mb-2">{{item.label}}</div>
@@ -149,13 +147,19 @@ const demographics = ref([{
 </script>
 <style scoped>
     .profile-wrap{
-        @apply w-full max-w-[1120px] mx-auto bg-transparent mb-4;
+        @apply w-full max-w-[1120px] mx-auto bg-secondary/30 mb-4;
+        .profile-section {
+            @apply grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2 bg-base-300 m-4 rounded-md;
+            h2 {
+                @apply text-center leading-10 text-lg;
+            }
+        }
     }
     .secondary-input {
         @apply bg-secondary;
     }
     .neutral-input {
-        @apply bg-base-content/20;
+        @apply bg-base-content/30;
     }
     .readonly-input {
         @apply bg-transparent text-base-content/50;

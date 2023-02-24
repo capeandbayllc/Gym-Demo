@@ -10,7 +10,7 @@
         </button>
     </div>
     <simple-card title="Current Agreements">
-        <people-search-table :columns="columns" :items="leadsData" class="p-6"/>
+        <people-search-table :columns="columns" :items="leadsData" class="p-6 text-sm"/>
     </simple-card>
 </template>
 

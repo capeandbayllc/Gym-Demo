@@ -1,6 +1,6 @@
 <template>
     <simple-card class="checkin-notification-card" :closable="true" title="Notifications">
-        <div class="notification-container">
+        <div class="notification-container card-gradient-bg">
 			<div class="notification-title">
 				<h3>Today</h3>
 				<div class="notification-actions">
@@ -73,7 +73,7 @@
 </style>
 <style scoped>
 .checkin-notification-card {
-    @apply bg-neutral m-auto max-w-[1120px] xl:w-[1120px] w-full;
+    @apply m-auto max-w-[1120px] xl:w-[1120px] w-full;
 	.notification-container {
 		@apply p-4 gap-5;
 	}

@@ -2,28 +2,25 @@
   <div class="profile-options-container relative">
     
     <div class="flex flex-row gap-2 relative">
-      <CheckInButton v-model="checkIn" class="w-[250px] mr-4"/>
-      <!-- <div class="btn-check-in">Check in</div> -->
-      <!-- <div class="btn-close-selection">Close Selection</div> -->
+      <CheckInButton v-model="checkIn" class="w-64 mr-4 text-base-content"/>
     </div>
-    <div class="profile-options gradient-bg">
+    <div class="profile-options card-gradient-bg">
       <profile-option-item
         v-for="item in options"
         :key="item.key"
         :model-value="item.key === selected"
         @update:modelValue="handleSelect(item.key, $event)"
         :label="item.label"
+        :unread="item.unread"
       />
     </div>
-    <!-- <div class="btn-close-selection">Close Member Selection</div> -->
-    
   </div>
 </template>
 <style scoped>
 .profile-options-container {
   @apply flex flex-col space-y-6 items-center;
   .profile-options {
-    @apply grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1 lg:gap-6 border-2 border-secondary rounded-lg w-full  p-5;
+    @apply grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1 lg:gap-6 border-2 border-secondary rounded-lg w-full p-5 bg-secondary/20;
   }
   .btn-close-selection {
     @apply cursor-pointer bg-base-content text-secondary rounded p-2 text-sm text-black;
@@ -55,14 +52,15 @@ const options = [
 }, {
     label: "Calendar",
     key: "calendar",
-    selected: false
+    selected: false,
+    unread: 3
 }, {
     label: "Notifications",
     key: "notification",
     selected: false
 }, {
     label: "Add a Guest",
-    key: "addGuest",
+    key: "guest-pass",
     selected: false
 }, {
     label: "Note Pad",
