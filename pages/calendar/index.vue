@@ -1,5 +1,5 @@
 <template>
-  <div class="page-calendar-container">
+  <div class="py-4 px-12 w-full h-fit">
     <daisy-modal class="w-fit" id="eventModal" ref="eventModal">
       <event-popup></event-popup>
     </daisy-modal>
@@ -20,100 +20,113 @@
         />
       </div>
     </daisy-modal>
-    <div class="mb-5 text-center calender-view-wrap">
-      <input
-        type="radio"
-        v-model="calenderView"
-        name="calenderView"
-        value="timeGridWeek"
-      />
-      <Button @click="handleChangeView('timeGridWeek')" gost class="mr-3"
-        >Week</Button
-      >
-      <input
-        type="radio"
-        v-model="calenderView"
-        name="calenderView"
-        value="dayGridMonth"
-      />
-      <Button @click="handleChangeView('dayGridMonth')" gost> Month </Button>
-      <input
-        type="radio"
-        v-model="calenderView"
-        name="calenderView"
-        value="timeGridDay"
-      />
-      <Button @click="handleChangeView('timeGridDay')" gost> Day </Button>
-    </div>
-    <div class="page-content">
-      <div
-        :class="
-          calenderView == 'timeGridDay'
-            ? 'w-[65%] -lg:w-full -lg:mb-5'
-            : 'w-full'
-        "
-        class="relative h-full"
-      >
-        <h2
-          class="text absolute top-2 left-0 text-xl font-bold cursor-pointer"
-          @click="showDateSelectModal"
-        >
-          <!-- <profile-btn /> -->
-        </h2>
+
+    <!-- main content wrapper  -->
+    <div
+      class="border border-secondary bg-neutral rounded p-7 max-w-none flex gap-4"
+    >
+      <!-- left sidebar -->
+      <aside class="flex flex-col justify-between">
+        <Datepicker
+          class="calendar-date-picker"
+          menu-class-name="!bg-transparent !border-none"
+          :day-class="getDayClass"
+          month-name-format="long"
+          inline
+          auto-apply
+          :enable-time-picker="false"
+          dark
+        />
+
+        <CalendarMenu :calendars="calendarsList" />
+      </aside>
+
+      <section class="w-full h-full">
+        <!-- main section heading area -->
+        <div class="flex justify-between items-center w-full mb-8">
+          <h1 class="text-4xl">January 2088</h1>
+          <!-- filters/page actions -->
+          <div class="flex gap-2">
+            <button
+              class="bg-secondary py-2 px-2 rounded-md border-2 border-transparent flex items-center gap-2"
+            >
+              <span> Add New </span>
+              <span class="w-4 fill-white">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                  <path
+                    d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
+                  />
+                </svg>
+              </span>
+            </button>
+            <button
+              class="bg-neutral py-2 px-2 rounded-md border-secondary border-2 flex items-center gap-2"
+            >
+              <span> All Bookings </span>
+              <span class="w-4 p-1 fill-white">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                  <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                  <path
+                    d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"
+                  />
+                </svg>
+              </span>
+            </button>
+            <input
+              placeholder="Search"
+              class="text-black p-2 rounded-md border-2 border-transparent"
+              type="text"
+            />
+          </div>
+        </div>
+        <!-- main calendar content -->
         <div>
-          <Datepicker
-            class="calendar-date-picker"
-            menu-class-name="!bg-transparent !border-none"
-            :day-class="getDayClass"
-            month-name-format="long"
-            inline
-            auto-apply
-            :enable-time-picker="false"
-            dark
-          />
           <FullCalendar :options="calendarOptions" ref="calendar" />
         </div>
+      </section>
+    </div>
+    <div
+      v-if="calenderView == 'timeGridDay'"
+      class="md:flex md:gap-y-5 w-[35%] -lg:w-full ml-4 flex-col -lg:flex-row -lg:ml-0 -md:block"
+    >
+      <div class="flex-1 -lg:w-2/4 -lg:mb-0 -lg:mr-5 -md:w-full -md:mb-5">
+        <div class="flex items-center mb-2">
+          <h2
+            class="text top-2 left-0 text-md font-bold cursor-pointer flex flex-row"
+            @click="showDateSelectModal"
+          >
+            {{ calendarTitle }}
+            <arrow-icon direction="right" class="h-[25px] items-center" />
+          </h2>
+          <Button ghost class="ml-auto min-h-fit h-6">...</Button>
+        </div>
+        <FullCalendar
+          :options="monthCalendarOptions"
+          ref="monthCalendar"
+          class="w-full month-calender"
+        />
       </div>
-      <div
-        v-if="calenderView == 'timeGridDay'"
-        class="md:flex md:gap-y-5 w-[35%] -lg:w-full ml-4 flex-col -lg:flex-row -lg:ml-0 -md:block"
-      >
-        <div class="flex-1 -lg:w-2/4 -lg:mb-0 -lg:mr-5 -md:w-full -md:mb-5">
-          <div class="flex items-center mb-2">
-            <h2
-              class="text top-2 left-0 text-md font-bold cursor-pointer flex flex-row"
-              @click="showDateSelectModal"
-            >
-              {{ calendarTitle }}
-              <arrow-icon direction="right" class="h-[25px] items-center" />
-            </h2>
-            <Button ghost class="ml-auto min-h-fit h-6">...</Button>
-          </div>
-          <FullCalendar
-            :options="monthCalendarOptions"
-            ref="monthCalendar"
-            class="w-full month-calender"
-          />
-        </div>
-        <div class="list-calendar flex-1 -lg:w-2/4 -md:w-full">
-          <FullCalendar
-            :options="listCalendarOptions"
-            ref="listCalendar"
-            class="h-full w-full"
-          />
-        </div>
+      <div class="list-calendar flex-1 -lg:w-2/4 -md:w-full">
+        <FullCalendar
+          :options="listCalendarOptions"
+          ref="listCalendar"
+          class="h-full w-full"
+        />
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import "@fullcalendar/core/vdom"; // solves problem with Vite
+import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
 import { ArrowIcon } from "~~/components/icons";
 import FullCalendar from "@fullcalendar/vue3";
+import { fakeCalendars } from "./components/fakedata";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
+import CalendarMenu from "./components/partials/calendar-menu.vue";
 import EventPopup from "./components/event-popup.vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
@@ -123,18 +136,19 @@ const calenderView = ref("timeGridWeek");
 watch(calenderView, () => {
   setTimeout(() => {
     calendar.value.getApi().render();
+    console.log("huh");
   });
 });
 
 const handleDateClick = (arg) => {
   console.log("date click! " + arg.dateStr);
 };
-const handleChangeView = (value) => {
-  calenderView.value = value;
-  console.log("calenderView", calenderView.value);
-  calendar.value.getApi().changeView(value);
-  onViewChanged();
-};
+// const handleChangeView = (value) => {
+//   calenderView.value = value;
+//   console.log("calenderView", calenderView.value);
+//   calendar.value.getApi().changeView(value);
+//   onViewChanged();
+// };
 
 const calendar = ref(null);
 const currentView = ref("timeGridWeek");
@@ -146,6 +160,9 @@ const monthCalendar = ref(null);
 const listCalendar = ref(null);
 
 const eventModal = ref(null);
+
+const calendarsList = ref(fakeCalendars);
+const calendarEventVisibility = ref();
 
 const events = [
   {
@@ -193,8 +210,8 @@ const calendarOptions = ref({
   dateClick: handleDateClick,
   headerToolbar: {
     left: "",
-    center: "prev,today,next,timeGridWeek,dayGridMonth,timeGridDay",
-    right: "",
+    center: "prev,today,next",
+    right: "timeGridWeek,dayGridMonth,timeGridDay",
   },
   events,
   editable: true,
@@ -314,29 +331,7 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped lang="postcss">
-.page-calendar-container {
-  @apply py-4 pr-5 w-full h-fit;
-  .page-content {
-    @apply flex block border border-secondary bg-neutral rounded p-7 -lg:block;
-  }
-  .calender-view-wrap {
-    input[type="radio"] {
-      @apply absolute invisible left-[-9999px];
-      &:checked + button {
-        @apply bg-secondary text-white;
-      }
-      + button {
-        @apply w-[100px] min-h-0 h-8 mx-3 inline-block bg-white text-secondary hover:bg-secondary hover:text-white;
-        &:hover {
-          @apply bg-secondary text-white;
-        }
-      }
-    }
-  }
-}
-</style>
-<style>
+<style lang="postcss">
 .calendar-date-picker {
   .dp__theme_dark {
     --dp-background-color: #000000;
@@ -360,7 +355,7 @@ onMounted(async () => {
   .dp__calendar {
     @apply bg-transparent;
     .dp__calendar_wrap {
-      @apply bg-base-content/10 border border-secondary rounded;
+      @apply bg-base-content/5 border border-secondary rounded;
       .dp__calendar_header_separator {
         @apply h-0;
       }
@@ -374,6 +369,18 @@ onMounted(async () => {
 .fc-theme-standard th,
 .fc .fc-list-event:hover td {
   background-color: transparent !important;
+}
+
+.fc-event-main {
+  @apply !border-l-8 border-white border-opacity-20 pl-2;
+}
+
+.fc {
+  @apply w-full;
+}
+
+.fc-event-main-frame {
+  @apply !pl-2;
 }
 
 .fc .fc-scrollgrid-section.fc-scrollgrid-section-body:first-child {
