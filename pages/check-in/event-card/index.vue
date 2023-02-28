@@ -1,12 +1,12 @@
 <template>
-  <div class="event-card-container gradient-bg">
+  <div class="event-card-container card-gradient-bg">
     <div class="scheduled-event-container">
       <div class="events-header">Scheduled Events</div>
       <div class="event-items" v-if="mock.scheduled.length">
-                <div class="event-description">{{mock.scheduled[0].due}}</div>
+          <div class="event-description">{{mock.scheduled[0].due}}</div>
         <div class="event-detail">
-                    <div>{{mock.scheduled[0].title}}</div>
-                    <book-checker v-model="form[mock.scheduled[0].id]"/>
+          <div>{{mock.scheduled[0].title}}</div>
+          <book-checker v-model="form[mock.scheduled[0].id]"/>
         </div>
       </div>
     </div>
@@ -21,7 +21,7 @@
 </template>
 <style scoped>
 .event-card-container {
-  @apply w-[33%] -md:w-full flex-grow-0;
+  @apply w-[33%] -md:w-full flex-grow-0 bg-base-300/40;
 }
 .event-card-container, .scheduled-event-container {
   @apply border border-secondary rounded flex flex-col p-3;
