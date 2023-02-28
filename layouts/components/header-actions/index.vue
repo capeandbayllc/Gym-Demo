@@ -25,6 +25,12 @@
 				@click="$emit('show-help')"
 			/>
 		</div>
+    <div class="relative z-10">
+      <question-round-icon
+          @mouseover="$emit('show-leader-popup')"
+          @click="$emit('show-leader-board')"
+      />
+    </div>
 		<div class="!ml-[-40px]">
 			<account-btn
 				@click="$emit('show-profile-menu')"
@@ -77,7 +83,8 @@ import { PosIcon, PeopleIcon, PersonAddIcon, SettingIcon, QuestionRoundIcon } fr
 import AlarmBtn from "./alarm-btn.vue"
 import AccountBtn from "./account-btn.vue"
 import AlertList from "./alert-list.vue"
-import HelpBot from "../help-bot/index.vue"
+import LeaderBoard from "../leader-board/index.vue"
+import LeaderPop from "../leader-board/popup.vue"
 import UserAddMenu from "./user-add-menu.vue"
 
 const userMenu = ref(null)

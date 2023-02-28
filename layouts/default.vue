@@ -2,12 +2,16 @@
   <div class="app-layout gradient-bg" v-if="isLoggedIn">
     <app-header
       @show-circular-menu="toggleCircularMenu"
+      @show-leader-board="showLeaderBoard"
       @show-help="showBot"
+      @show-leader-pop="showLeaderPop"
       @show-profile-menu="showProfileMenu"
       class="sticky top-0 z-[22]"
     />
     <circular-menu v-if="showCircularMenu" @close="toggleCircularMenu" />
     <help-bot ref="helpBot" />
+    <leader-board ref="leaderBoard" />
+    <leader-board-pop ref="leaderBoardPop" />
     <profile-menu ref="profileMenu" @isProfileMenuOpen="isProfileMenuOpenFn" />
     <div class="app-content">
       <nav-bar />
@@ -59,6 +63,8 @@ import GlobalSearch from "./components/global-search.vue";
 import SideBar from "./components/side-bar.vue";
 import CircularMenu from "./components/circular-menu/index.vue";
 import HelpBot from "./components/help-bot/index.vue";
+import LeaderBoard from "./components/leader-board/index.vue";
+import LeaderBoardPop from "./components/leader-board/popup.vue";
 import ProfileMenu from "./components/profile-menu/index.vue";
 
 import GlobalSearchModal from "./components/global-search-modal/index.vue";
@@ -73,6 +79,12 @@ const toggleCircularMenu = () => {
 
 const helpBot = ref(null);
 const showBot = () => helpBot.value.open();
+
+const leaderBoard = ref(null);
+const showLeaderBoard = () => leaderBoard.value.open();
+
+const leaderBoardPop = ref(null);
+const showLeaderPop = () => leaderBoardPop.value.open();
 
 const profileMenu = ref(null);
 const showProfileMenu = () => {
