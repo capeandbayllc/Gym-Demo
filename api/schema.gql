@@ -1,0 +1,2069 @@
+type Ability {
+  id: ID!
+  name: String!
+  title: String
+}
+
+type Announcement {
+  id: ID!
+  version: String!
+  notes: [String]
+}
+
+type AttendeeDetailData {
+  profile_photo_url: String
+  name: String
+  first_name: String
+  last_name: String
+  email: String
+}
+
+type Audience {
+  id: ID
+  entity: String
+  name: String
+  filters: AudienceTargets
+  created_at: DateTime
+  deleted_at: DateTime
+  updated_at: DateTime
+  editable: Int
+}
+
+input AudienceFiltersInput {
+  lead_type_id: [ID]
+  membership_type_id: [ID]
+}
+
+"""
+A paginated list of Audience items.
+"""
+type AudiencePaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Audience items.
+  """
+  data: [Audience!]!
+}
+
+type AudienceTargets {
+  lead_type_id: [ID]
+  membership_type_id: [ID]
+}
+
+type CalendarEvent {
+  id: ID!
+  title: String!
+  description: String
+  full_day_event: Int
+  event_type_id: ID
+  type: CalendarEventType
+  owner: User!
+  owner_id: ID
+  start: DateTime
+  end: DateTime
+  created_at: DateTime
+  event_completion: DateTime
+  editable: Int
+  user_attendees: [EventAttendee]
+  lead_attendees: [EventAttendee]
+  member_attendees: [EventAttendee]
+  attendees: [EventAttendee]
+  location_id: ID
+  call_task: Int
+  im_attending: Boolean
+  my_reminder: Reminder
+}
+
+input CalendarEventInput {
+  search: String
+  start: String
+  end: String
+  viewUser: ID
+}
+
+type CalendarEventType {
+  id: ID!
+  name: String!
+  description: String
+  color: String
+  type: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+"""
+A paginated list of CalendarEventType items.
+"""
+type CalendarEventTypePaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of CalendarEventType items.
+  """
+  data: [CalendarEventType!]!
+}
+
+type CallScriptTemplate {
+  id: ID!
+  name: String
+  script: String
+  thumbnail: Thumbnail
+  active: Boolean
+  team_id: ID
+  created_by_user_id: ID
+  creator: User
+  created_at: DateTime
+  updated_at: DateTime
+  use_once: Boolean
+}
+
+"""
+A paginated list of CallScriptTemplate items.
+"""
+type CallScriptTemplatePaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of CallScriptTemplate items.
+  """
+  data: [CallScriptTemplate!]!
+}
+
+input CampaignDayInput {
+  call_template_id: ID
+  email_template_id: ID
+  sms_template_id: ID
+  day_of_campaign: Int
+}
+
+type Client {
+  id: ID!
+  name: String!
+}
+
+type ContactPreference {
+  id: ID!
+  active: Int
+  created_at: DateTime
+  deleted_at: DateTime
+  field: String
+  misc: String
+  updated_at: DateTime
+  user_id: String
+  value: String
+}
+
+input CreateAudienceInput {
+  name: String
+  filters: AudienceFiltersInput
+  entity: String
+}
+
+input CreateCalendarEventInput {
+  title: String
+  description: String
+  full_day_event: Boolean
+  start: DateTime
+  end: DateTime
+  event_type_id: ID
+  user_attendees: [ID]
+  lead_attendees: [ID]
+  member_attendees: [ID]
+  location_id: String
+}
+
+input CreateCalendarEventTypeInput {
+  name: String
+  description: String
+  color: String
+  type: String
+}
+
+input CreateCallScriptTemplateInput {
+  name: String
+  script: String
+  active: Boolean
+  use_once: Boolean
+}
+
+input CreateDripCampaignInput {
+  name: String
+  audience_id: String
+  campaignType: String
+  days: [CampaignDayInput]
+  type: String
+}
+
+input CreateEmailTemplateInput {
+  name: String
+  subject: String
+  markup: String
+  json: String
+}
+
+input CreateFileInput {
+  id: ID
+  filename: String
+  original_filename: String
+  extension: String
+  bucket: String
+  key: String
+  size: Int
+  visibility: Boolean
+}
+
+input CreateLocationInput {
+  gymrevenue_id: String
+  location_no: String!
+  location_type: LocationType!
+  name: String!
+  city: String!
+  state: String!
+  active: Boolean
+  zip: String
+  phone: String
+  address1: String!
+  address2: String
+  poc_phone: String
+  poc_first: String
+  poc_last: String
+  opened_at: DateTime
+  closed_at: DateTime
+  latitude: Int
+  longitude: Int
+  capacity: Int
+}
+
+input CreateNoteInput {
+  title: String
+  entity_id: String
+  entity_type: String
+  note: String
+  active: Boolean
+}
+
+input CreatePositionInput {
+  name: String
+  departments: [ID]
+}
+
+input CreateRoleInput {
+  name: String
+  ability_names: [String]
+  group: Int
+}
+
+input CreateScheduledCampaignInput {
+  name: String
+  audience_id: String
+  call_template_id: String
+  email_template_id: String
+  sms_template_id: String
+  campaignType: String
+  send_at: String
+}
+
+input CreateSmsTemplateDetailsInput {
+  sms_template_id: ID
+  field: String
+  value: String
+}
+
+input CreateSmsTemplateInput {
+  name: String
+  markup: String
+  active: Boolean
+  details: [CreateSmsTemplateDetailsInput]
+}
+
+type Customer {
+  id: ID!
+  first_name: String
+  last_name: String
+  middle_name: String
+  email: String
+  phone: String
+  alternate_phone: String
+  address1: String
+  zip: String
+  city: String
+  state: String
+  gender: String
+  date_of_birth: DateTime
+  created_at: DateTime!
+  updated_at: DateTime!
+  gr_location_id: ID
+  interaction_count: InteractionCount!
+  homeLocation: Location
+  locations: [Location]
+  user_type: String
+  agreement_number: String
+  external_id: String
+  misc: String
+  notes: [Note]
+}
+
+"""
+A paginated list of Customer items.
+"""
+type CustomerPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Customer items.
+  """
+  data: [Customer!]!
+}
+
+type DashboardProps {
+  teamName: String
+  accountName: String
+  teams: [Team]
+  announcements: [Announcement]
+  widgets: [Widget]!
+}
+
+"""
+A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`.
+"""
+scalar DateTime
+
+type Department {
+  id: ID!
+  name: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  positions: [Position]!
+}
+
+input DepartmentFilter {
+  search: String
+  trashed: String
+  state: String
+}
+
+"""
+A paginated list of Department items.
+"""
+type DepartmentPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Department items.
+  """
+  data: [Department!]!
+}
+
+input Departments {
+  department: ID
+  position: ID
+}
+
+type DripCampaign {
+  id: ID!
+  name: String
+  days: [DripCampaignDay]
+  audience_id: String
+  start_at: DateTime
+  end_at: DateTime
+  completed_at: DateTime
+  status: Enum
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+}
+
+type DripCampaignDay {
+  id: ID!
+  drip_campaign_id: String
+  day_of_campaign: Int
+  email_template_id: String
+  sms_template_id: String
+  call_template_id: String
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+}
+
+"""
+A paginated list of DripCampaign items.
+"""
+type DripCampaignPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of DripCampaign items.
+  """
+  data: [DripCampaign!]!
+}
+
+type EmailTemplate {
+  id: ID!
+  name: String!
+  markup: String!
+  subject: String!
+  json: String!
+  thumbnail: Thumbnail
+  active: Boolean
+  team_id: ID
+  team: Team
+  created_by_user_id: ID
+  creator: User
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+"""
+A paginated list of EmailTemplate items.
+"""
+type EmailTemplatePaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of EmailTemplate items.
+  """
+  data: [EmailTemplate!]!
+}
+
+type EmergencyContact {
+  ec_first_name: String
+  ec_last_name: String
+  ec_phone: String
+}
+
+type Employee {
+  id: ID!
+  first_name: String
+  last_name: String
+  middle_name: String
+  email: String
+  phone: String
+  alternate_phone: String
+  address1: String
+  zip: String
+  city: String
+  state: String
+  gender: String
+  date_of_birth: DateTime
+  created_at: DateTime!
+  updated_at: DateTime!
+  gr_location_id: ID
+  home_location: Location
+  locations: [Location]
+  user_type: String
+  agreement_number: String
+  external_id: String
+  misc: String
+  notes: [Note]
+}
+
+"""
+A paginated list of Employee items.
+"""
+type EmployeePaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Employee items.
+  """
+  data: [Employee!]!
+}
+
+"""
+EndUsers
+"""
+type EndUser {
+  id: ID!
+  name: String!
+  first_name: String
+  middle_name: String
+  last_name: String
+  email: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  location: Location
+  owner_user_id: String
+  primary_phone: String
+  alternate_phone: String
+  gender: Boolean
+  date_of_birth: DateTime!
+  interaction_count: InteractionCount!
+  preview_note: [String]!
+  club_location: Location
+  opportunity: String
+  agreement_number: String
+  misc: String
+  external_id: String
+  lead_status_id: String
+  notes: [Note]
+  gr_location_id: ID
+  locations: [Location]
+}
+
+"""
+A paginated list of EndUser items.
+"""
+type EndUserPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of EndUser items.
+  """
+  data: [EndUser!]!
+}
+
+"""
+Entry Sources
+"""
+type EntrySource {
+  """
+  Unique primary key.
+  """
+  id: ID!
+
+  """
+  Non-unique name.
+  """
+  name: String!
+
+  """
+  When the account was created.
+  """
+  created_at: DateTime!
+
+  """
+  When the account was last updated.
+  """
+  updated_at: DateTime!
+}
+
+type Enum {
+  label: String!
+  value: String!
+  description: String
+}
+
+type EventAttendee {
+  id: ID
+  entity_type: String
+  invitation_status: String
+  entity_data: AttendeeDetailData
+}
+
+type File {
+  id: ID
+  extension: String
+  url: String
+  filename: String
+  created_at: DateTime
+  size: Int
+  fileable: Fileable!
+}
+
+union Fileable = User | Lead | Member | Customer
+
+input Filter {
+  search: String
+  trashed: String
+  state: String
+}
+
+type Folder {
+  id: ID
+  url: String
+  name: String
+  created_at: DateTime
+  files_count: Int
+  files: [File]
+}
+
+input FolderSharingInput {
+  id: ID
+  team_ids: [ID]
+  location_ids: [ID]
+  user_ids: [ID]
+  position_ids: [ID]
+  department_ids: [ID]
+  role_ids: [ID]
+}
+
+type GlobalSearchItem {
+  id: ID!
+  name: String!
+  type: String!
+  link: String!
+}
+
+type GlobalSearchResult {
+  paginatorInfo: PaginatorInfo
+  data: [GlobalSearchItem]!
+}
+
+type InteractionCount {
+  totalCount: Int
+  calledCount: Int
+  emailedCount: Int
+  smsCount: Int
+}
+
+"""
+Leads
+"""
+type Lead {
+  id: ID!
+  name: String!
+  first_name: String
+  middle_name: String
+  last_name: String
+  email: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  lead_owners: [TeamUser]
+  owner_user_id: String
+  primary_phone: String
+  alternate_phone: String
+  gender: Boolean
+  date_of_birth: DateTime
+  interaction_count: InteractionCount!
+  homeLocation: Location
+  locations: [Location]
+  opportunity: String
+  agreement_number: String
+  misc: String
+  external_id: String
+  lead_status_id: String
+  notes: [Note]
+  gr_location_id: ID
+  user_type: String
+}
+
+"""
+A paginated list of Lead items.
+"""
+type LeadPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Lead items.
+  """
+  data: [Lead!]!
+}
+
+type LeadStatus {
+  id: ID!
+  status: String
+  order: String
+  active: Boolean
+}
+
+type LeadType {
+  id: ID!
+  name: String
+}
+
+type Location {
+  id: ID
+  gymrevenue_id: String
+  location_no: String
+  location_type: LocationType
+  name: String
+  city: String
+  state: String
+  active: Boolean
+  zip: String
+  address1: String
+  address2: String
+  phone: String
+  open_date: DateTime
+  close_date: DateTime
+  latitude: Int
+  longitude: Int
+  poc_first: String
+  poc_last: String
+  poc_phone: String
+  details: [LocationDetails]
+}
+
+type LocationDetails {
+  id: ID
+  field: String
+  value: String
+}
+
+"""
+A paginated list of Location items.
+"""
+type LocationPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Location items.
+  """
+  data: [Location!]!
+}
+
+"""
+Available Location Types
+"""
+enum LocationType {
+  """
+  Locations that are available to the public
+  """
+  STORE
+
+  """
+  Locations that are not generally available to the public
+  """
+  OFFICE
+
+  """
+  Locations that are considered corporate headquarter offices
+  """
+  HQ
+}
+
+type Member {
+  id: ID!
+  first_name: String
+  last_name: String
+  middle_name: String
+  email: String
+  primary_phone: String
+  alternate_phone: String
+  gender: String
+  date_of_birth: DateTime
+  created_at: DateTime
+  updated_at: DateTime
+  gr_location_id: ID
+  interaction_count: InteractionCount
+  homeLocation: Location
+  locations: [Location]
+  agreement_number: String
+  external_id: String
+  misc: String
+  notes: [Note]
+}
+
+"""
+A paginated list of Member items.
+"""
+type MemberPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Member items.
+  """
+  data: [Member!]!
+}
+
+type Mutation {
+  """
+  Create an Audience
+  """
+  createAudience(input: CreateAudienceInput): Audience
+
+  """
+  Update an Audience
+  """
+  updateAudience(input: UpdateAudienceInput): Audience
+
+  """
+  Creates a Calendar Event
+  """
+  createCalendarEvent(input: CreateCalendarEventInput!): CalendarEvent!
+  updateCalendarEvent(input: PatchCalendarEventInput!): CalendarEvent!
+
+  """
+  Creates a calandar event type
+  """
+  createCalandarEventType(
+    input: CreateCalendarEventTypeInput!
+  ): CalendarEventType!
+
+  """
+  Updates a calendar event type
+  """
+  updateCalendarEventType(
+    input: UpdateCalendarEventTypeInput!
+  ): CalendarEventType!
+
+  """
+  Creates a CallTemplate
+  """
+  createCallScriptTemplate(
+    input: CreateCallScriptTemplateInput
+  ): CallScriptTemplate!
+
+  """
+  Updates a CallTemplate
+  """
+  updateCallScriptTemplate(
+    input: UpdateCallScriptTemplateInput
+  ): CallScriptTemplate!
+  createDepartment(name: String, positions: [ID]): Department!
+  updateDepartment(id: ID, name: String, positions: [ID]): Department!
+
+  """
+  Creates a Drip Campaign
+  """
+  createDripCampaign(campaign: CreateDripCampaignInput): DripCampaign
+
+  """
+  Updates a Drip Campaign
+  """
+  updateDripCampaign(campaign: UpdateDripCampaignInput): DripCampaign
+
+  """
+  Duplicate an existing drip campaign
+  """
+  duplicateDripCampaign(id: ID): DripCampaign
+
+  """
+  Creates a EmailTemplate
+  """
+  createEmailTemplate(input: CreateEmailTemplateInput): EmailTemplate!
+
+  """
+  Updates a EmailTemplate
+  """
+  updateEmailTemplate(input: UpdateEmailTemplateInput): EmailTemplate!
+  createFile(file: CreateFileInput): File!
+  renameFile(input: RenameFileInput): File!
+  updateFileFolder(input: UpdateFileFolderInput): File!
+  updateFilePermissions(input: UpdateFilePermissionsInput): File!
+  restoreFile(id: ID!): File!
+  deleteFile(id: ID!): File!
+  trashFile(id: ID!): File!
+  createFolder(name: String): Folder!
+  deleteFolder(id: ID!): Folder!
+  restoreFolder(id: ID!): Folder!
+  trashFolder(id: ID!): Folder!
+  updateFolder(id: ID!, name: String): Folder!
+  updateFolderSharing(input: FolderSharingInput): Folder!
+
+  """
+  Creates a Location
+  """
+  createLocation(location: CreateLocationInput!): Location!
+
+  """
+  Updates a location
+  """
+  updateLocation(location: UpdateLocationInput!): Location!
+  createNote(input: CreateNoteInput): Note!
+  updateNote(input: UpdateNoteInput): Note!
+
+  """
+  Creates a Position
+  """
+  createPosition(input: CreatePositionInput): Position!
+
+  """
+  Updates a Position
+  """
+  updatePosition(input: UpdatePositionInput): Position!
+
+  """
+  Creates a Scheduled Campaign
+  """
+  createScheduledCampaign(
+    campaign: CreateScheduledCampaignInput
+  ): ScheduledCampaign!
+
+  """
+  Updates a Scheduled Campaign
+  """
+  updateScheduledCampaign(
+    campaign: UpdateScheduledCampaignInput
+  ): ScheduledCampaign!
+
+  """
+  Duplicate an existing scheduled campaign
+  """
+  duplicateScheduledCampaign(id: ID): ScheduledCampaign
+
+  """
+  Creates a SmsTemplate
+  """
+  createSmsTemplate(input: CreateSmsTemplateInput): SmsTemplate!
+
+  """
+  Updates a SmsTemplate
+  """
+  updateSmsTemplate(input: UpdateSmsTemplateInput): SmsTemplate!
+  createTeam(name: String, positions: [ID]): Team!
+  updateTeam(id: ID, name: String, positions: [ID]): Team!
+  updateUser(input: UserInput): User!
+  createUser(input: UserInput): User!
+  createRole(input: CreateRoleInput): Role!
+  updateRole(input: UpdateRoleInput): Role!
+  deleteRole(id: ID!): Role!
+}
+
+type Note {
+  id: ID!
+  title: String
+  note: String
+  active: Boolean
+  read: Boolean
+  entity_type: String
+}
+
+input NoteInput {
+  note: String
+  title: String
+}
+
+"""
+A paginated list of Note items.
+"""
+type NotePaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Note items.
+  """
+  data: [Note!]!
+}
+
+"""
+Allows ordering a list of records.
+"""
+input OrderByClause {
+  """
+  The column that is used for ordering.
+  """
+  column: String!
+
+  """
+  The direction that is used for ordering.
+  """
+  order: SortOrder!
+}
+
+"""
+Aggregate functions when ordering by a relation without specifying a column.
+"""
+enum OrderByRelationAggregateFunction {
+  """
+  Amount of items.
+  """
+  COUNT
+}
+
+"""
+Aggregate functions when ordering by a relation that may specify a column.
+"""
+enum OrderByRelationWithColumnAggregateFunction {
+  """
+  Average.
+  """
+  AVG
+
+  """
+  Minimum.
+  """
+  MIN
+
+  """
+  Maximum.
+  """
+  MAX
+
+  """
+  Sum.
+  """
+  SUM
+
+  """
+  Amount of items.
+  """
+  COUNT
+}
+
+"""
+Information about pagination using a Relay style cursor connection.
+"""
+type PageInfo {
+  """
+  When paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+
+  """
+  When paginating backwards, are there more items?
+  """
+  hasPreviousPage: Boolean!
+
+  """
+  The cursor to continue paginating backwards.
+  """
+  startCursor: String
+
+  """
+  The cursor to continue paginating forwards.
+  """
+  endCursor: String
+
+  """
+  Total number of nodes in the paginated connection.
+  """
+  total: Int!
+
+  """
+  Number of nodes in the current page.
+  """
+  count: Int!
+
+  """
+  Index of the current page.
+  """
+  currentPage: Int!
+
+  """
+  Index of the last available page.
+  """
+  lastPage: Int!
+}
+
+input PaginationInput {
+  page: Int = 1
+  limit: Int = 10
+}
+
+"""
+Information about pagination using a fully featured paginator.
+"""
+type PaginatorInfo {
+  """
+  Number of items in the current page.
+  """
+  count: Int!
+
+  """
+  Index of the current page.
+  """
+  currentPage: Int!
+
+  """
+  Index of the first item in the current page.
+  """
+  firstItem: Int
+
+  """
+  Are there more pages after this one?
+  """
+  hasMorePages: Boolean!
+
+  """
+  Index of the last item in the current page.
+  """
+  lastItem: Int
+
+  """
+  Index of the last available page.
+  """
+  lastPage: Int!
+
+  """
+  Number of items per page.
+  """
+  perPage: Int!
+
+  """
+  Number of total available items.
+  """
+  total: Int!
+}
+
+input PatchCalendarEventInput {
+  id: ID!
+  title: String
+  description: String
+  full_day_event: Boolean
+  start: String
+  end: String
+  event_type_id: ID
+  user_attendees: [ID]
+  lead_attendees: [ID]
+  member_attendees: [ID]
+  location_id: String
+}
+
+type Position {
+  id: ID!
+  name: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  departments: [Department]!
+}
+
+input PositionFilter {
+  search: String
+  trashed: String
+  state: String
+}
+
+"""
+A paginated list of Position items.
+"""
+type PositionPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Position items.
+  """
+  data: [Position!]!
+}
+
+type ProfileProps {
+  user: User
+}
+
+type Query {
+  clientId(
+    """
+    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
+    """
+    id: ID
+  ): ID!
+  dashboardQuery: DashboardProps
+  globalSearch(term: String, pagination: PaginationInput): GlobalSearchResult
+
+  """
+  Find a single reminder by an identifying attribute.
+  """
+  reminder(id: ID): Reminder
+  tasksQuery(param: TaskParam, pagination: PaginationInput): Tasks
+  widgetsQuery: [Widget]!
+  audience(id: ID): Audience
+  calendarEvents(param: CalendarEventInput): [CalendarEvent!]!
+  calendarEventById(id: ID): CalendarEvent
+
+  """
+  Queries Calendar Event Types without pagination
+  """
+  allCalendarEventTypes: [CalendarEventType!]!
+
+  """
+  Queries Calendar Event Type by ID
+  """
+  calendarEventType(id: ID): CalendarEventType
+
+  """
+  Find a single Call Template by an identifying attribute.
+  """
+  callTemplate(id: ID): CallScriptTemplate
+  department(id: ID): Department
+
+  """
+  Finds a single drip campaign by ID
+  """
+  dripCampaign(id: ID): DripCampaign
+
+  """
+  Get the Topol API Key
+  """
+  topolApiKey: String!
+
+  """
+  Find a single Email Template by an identifying attribute.
+  """
+  emailTemplate(id: ID): EmailTemplate
+  files(filter: Filter, orderBy: [OrderByClause!]): [File!]!
+  folders(filter: Filter, orderBy: [OrderByClause!]): [Folder!]!
+  folder(id: ID): Folder
+
+  """
+  Find a single location by ID
+  """
+  location(id: ID): Location
+
+  """
+  Get Location Types
+  """
+  locationTypes: [Enum!]!
+  note(id: ID): Note
+  position(id: ID): Position
+
+  """
+  Finds a single scheduled campaign by ID
+  """
+  scheduledCampaign(id: ID): ScheduledCampaign
+
+  """
+  Find a single SMS Template by an identifying attribute.
+  """
+  smsTemplate(id: ID): SmsTemplate
+  team(id: ID): Team
+  user(
+    """
+    Find a single user by an identifying attribute.
+    """
+    id: ID
+
+    """
+    Search by email address.
+    """
+    email: String
+  ): User
+  me: User
+
+  """
+  Find a single user by an identifying attribute.
+  """
+  leadOwners: [TeamUser]!
+  lead_statuses: [LeadStatus!]!
+
+  """
+  Find a single user by an identifying attribute.
+  """
+  lead(id: ID): Lead
+  lead_types(filter: Filter, orderBy: [OrderByClause!]): [LeadType!]!
+  entry_sources: [EntrySource!]!
+  isClientUser(
+    """
+    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
+    """
+    id: ID
+  ): Boolean!
+
+  """
+  Find a single user by an identifying attribute.
+  """
+  customer(id: ID): Customer
+
+  """
+  Find a single user by an identifying attribute.
+  """
+  member(id: ID): Member
+  role(id: ID): Role
+  availableAbilities: [Ability]!
+  securityGroups: [SecurityGroups]!
+  profileQuery: ProfileProps
+  reminders(
+    """
+    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
+    """
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): ReminderPaginator
+  audiences(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 50
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): AudiencePaginator
+
+  """
+  Queries Calendar Event Types
+  """
+  calendarEventTypes(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): CalendarEventTypePaginator
+
+  """
+  Queries Call Templates according to optional input filters
+  """
+  callTemplates(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): CallScriptTemplatePaginator
+  departments(
+    """
+    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
+    """
+    filter: DepartmentFilter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): DepartmentPaginator
+
+  """
+  Queries drip campaigns according to optional input filter
+  """
+  dripCampaigns(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): DripCampaignPaginator
+
+  """
+  Queries Email Templates according to optional input filters
+  """
+  emailTemplates(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): EmailTemplatePaginator
+
+  """
+  Queries locations according to optional input filters
+  """
+  locations(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): LocationPaginator
+  notes(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): NotePaginator
+  positions(
+    """
+    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
+    """
+    filter: PositionFilter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): PositionPaginator
+
+  """
+  Queries scheduled campaigns according to optional input filter
+  """
+  scheduledCampaigns(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): ScheduledCampaignPaginator
+
+  """
+  Queries SMS Templates according to optional input filters
+  """
+  smsTemplates(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): SmsTemplatePaginator
+  teams(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): TeamPaginator
+  users(
+    """
+    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
+    """
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): UserPaginator
+  employee(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): EmployeePaginator
+  leads(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): LeadPaginator
+  customers(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): CustomerPaginator
+  endUsers(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): EndUserPaginator
+  members(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): MemberPaginator
+  roles(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): RolePaginator
+}
+
+type Reminder {
+  id: ID!
+  name: String!
+  description: String
+  remind_time: String
+  triggered_at: DateTime
+}
+
+"""
+A paginated list of Reminder items.
+"""
+type ReminderPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Reminder items.
+  """
+  data: [Reminder!]!
+}
+
+input RenameFileInput {
+  id: ID
+  filename: String
+}
+
+type Role {
+  id: ID!
+  title: String!
+  name: String
+  created_at: DateTime!
+  updated_at: DateTime!
+  abilities: [Ability]!
+  availableAbilities: [Ability]!
+  group: Int
+}
+
+"""
+A paginated list of Role items.
+"""
+type RolePaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Role items.
+  """
+  data: [Role!]!
+}
+
+type ScheduledCampaign {
+  id: ID
+  name: String
+  audience_id: String
+  send_at: DateTime
+  completed_at: DateTime
+  status: Enum
+  email_template_id: String
+  sms_template_id: String
+  call_template_id: String
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+}
+
+"""
+A paginated list of ScheduledCampaign items.
+"""
+type ScheduledCampaignPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of ScheduledCampaign items.
+  """
+  data: [ScheduledCampaign!]!
+}
+
+type SecurityGroups {
+  value: String
+  name: String
+}
+
+"""
+Information about pagination using a simple paginator.
+"""
+type SimplePaginatorInfo {
+  """
+  Number of items in the current page.
+  """
+  count: Int!
+
+  """
+  Index of the current page.
+  """
+  currentPage: Int!
+
+  """
+  Index of the first item in the current page.
+  """
+  firstItem: Int
+
+  """
+  Index of the last item in the current page.
+  """
+  lastItem: Int
+
+  """
+  Number of items per page.
+  """
+  perPage: Int!
+
+  """
+  Are there more pages after this one?
+  """
+  hasMorePages: Boolean!
+}
+
+type SmsTemplate {
+  id: ID!
+  name: String
+  markup: String
+  active: Boolean
+  team_id: ID
+  created_by_user_id: ID
+  creator: User
+  details: [SmsTemplateDetails]
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type SmsTemplateDetails {
+  id: ID
+  sms_template_id: ID
+  field: String
+  value: String
+}
+
+"""
+A paginated list of SmsTemplate items.
+"""
+type SmsTemplatePaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of SmsTemplate items.
+  """
+  data: [SmsTemplate!]!
+}
+
+input SortInput {
+  field: String = "id"
+  direction: String = "asc"
+}
+
+"""
+Directions for ordering a list of records.
+"""
+enum SortOrder {
+  """
+  Sort records in ascending order.
+  """
+  ASC
+
+  """
+  Sort records in descending order.
+  """
+  DESC
+}
+
+type Target {
+  id: ID
+  name: String
+  created_at: DateTime
+  deleted_at: DateTime
+  updated_at: DateTime
+}
+
+input TaskParam {
+  start: String
+  type: String
+}
+
+type Tasks {
+  paginatorInfo: PaginatorInfo
+  data: [CalendarEvent]!
+}
+
+type Team {
+  id: ID!
+  name: String
+  home_team: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+  users: [User]!
+  user: TeamUser
+  locations: [Location]
+}
+
+"""
+A paginated list of Team items.
+"""
+type TeamPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Team items.
+  """
+  data: [Team!]!
+}
+
+type TeamUser {
+  user: User
+}
+
+type Thumbnail {
+  key: String
+  url: String
+}
+
+"""
+Specify if you want to include or exclude trashed results from a query.
+"""
+enum Trashed {
+  """
+  Only return trashed results.
+  """
+  ONLY
+
+  """
+  Return both trashed and non-trashed results.
+  """
+  WITH
+
+  """
+  Only return non-trashed results.
+  """
+  WITHOUT
+}
+
+input UpdateAudienceInput {
+  id: ID
+  name: String
+  filters: AudienceFiltersInput
+  entity: String
+}
+
+input UpdateCalendarEventTypeInput {
+  name: String
+  description: String
+  color: String
+  type: String
+}
+
+input UpdateCallScriptTemplateInput {
+  id: ID!
+  name: String
+  active: Boolean
+  script: String
+  use_once: Boolean
+}
+
+input UpdateDripCampaignInput {
+  id: ID
+  name: String
+  audience_id: String
+  campaignType: String
+  days: [CampaignDayInput]
+}
+
+input UpdateEmailTemplateInput {
+  id: ID!
+  name: String
+  subject: String
+  markup: String
+  json: String
+}
+
+input UpdateFileFolderInput {
+  id: ID
+  folder: ID
+}
+
+input UpdateFilePermissionsInput {
+  id: ID
+  permissions: String
+}
+
+input UpdateLocationInput {
+  id: ID!
+  gymrevenue_id: String
+  location_no: String
+  location_type: LocationType
+  name: String
+  city: String
+  state: String
+  active: Boolean
+  zip: String
+  phone: String
+  address1: String
+  address2: String
+  poc_phone: String
+  poc_first: String
+  poc_last: String
+  opened_at: DateTime
+  closed_at: DateTime
+  latitude: Int
+  longitude: Int
+  capacity: Int
+}
+
+input UpdateNoteInput {
+  id: ID
+  title: String
+  entity_id: String
+  entity_type: String
+  note: String
+  active: Boolean
+}
+
+input UpdatePositionInput {
+  id: ID
+  name: String
+  departments: [ID]
+}
+
+input UpdateRoleInput {
+  id: ID
+  name: String
+  ability_names: [String]
+  group: Int
+}
+
+input UpdateScheduledCampaignInput {
+  id: ID
+  name: String
+  audience_id: String
+  call_template_id: String
+  email_template_id: String
+  sms_template_id: String
+  campaignType: String
+  send_at: String
+}
+
+input UpdateSmsTemplateDetailsInput {
+  id: ID
+  sms_template_id: ID
+  field: String
+  value: String
+}
+
+input UpdateSmsTemplateInput {
+  id: ID
+  name: String
+  markup: String
+  active: Boolean
+  details: [CreateSmsTemplateDetailsInput]
+}
+
+"""
+Account of a person who utilizes this application.
+"""
+type User {
+  id: ID!
+  name: String!
+  first_name: String
+  middle_name: String
+  last_name: String
+  email: String!
+  alternate_email: String
+  address1: String
+  address2: String
+  email_verified_at: DateTime
+  created_at: DateTime!
+  updated_at: DateTime!
+  start_date: DateTime
+  end_date: DateTime
+  termination_date: DateTime
+  manager: String
+  zip: String
+  defaultTeam: Team
+  roles: [Role]
+  phone: String
+  city: String
+  state: String
+  homeLocation: Location
+  teams: [Team]
+  contact_preference: String
+  emergency_contact: EmergencyContact
+  departments: [Department]
+  positions: [Position]
+  gender: String
+  isClientUser: Boolean
+  files: [File]!
+}
+
+input UserInput {
+  id: ID
+  first_name: String
+  middle_name: String
+  last_name: String
+  email: String
+  alternate_email: String
+  address1: String
+  address2: String
+  phone: String
+  alternate_phone: String
+  city: String
+  state: String
+  zip: String
+  gender: String
+  contact_preference: String
+  started_at: String
+  ended_at: String
+  terminated_at: String
+  notes: NoteInput
+  team_id: ID
+  role_id: ID
+  external_id: ID
+  home_location_id: ID
+  date_of_birth: DateTime
+  agreement_number: Int
+  manager: String
+  user_type: String
+  departments: [Departments]
+  positions: [ID]
+}
+
+"""
+A paginated list of User items.
+"""
+type UserPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of User items.
+  """
+  data: [User!]!
+}
+
+type Widget {
+  title: String
+  value: String
+  type: String
+  icon: String
+}
