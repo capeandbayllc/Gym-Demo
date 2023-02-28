@@ -20,7 +20,8 @@
 .profile-options-container {
   @apply flex flex-col space-y-6 items-center;
   .profile-options {
-    @apply grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1 lg:gap-6 border-2 border-secondary rounded-lg w-full p-5 bg-secondary/20;
+    @apply grid grid-cols-1 gap-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-1 lg:gap-6 border-2 border-secondary rounded-lg w-full p-5 bg-secondary/20;
+    /*@apply grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1 lg:gap-6 border-2 border-secondary rounded-lg w-full p-5 bg-secondary/20;*/
   }
   .btn-close-selection {
     @apply cursor-pointer bg-base-content text-secondary rounded p-2 text-sm text-black;
