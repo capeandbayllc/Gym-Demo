@@ -9,11 +9,13 @@
                                 :items="states"
                                 label="State"
                                 class="w-36"
+                                secondary
                             />
                             <select-box
                                 :items="cities"
                                 label="City"
                                 class="w-36"
+                                secondary
                             />
                         </div>
                         <search-input
