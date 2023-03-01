@@ -1,9 +1,29 @@
 <template>
     <div>
-        <div class="chat-conversation-container fixed bottom-0 right-5 z-20" v-if="chatConversation">
-            <div class="chat-content border-2 border-secondary overflow-hidden">
+        <div class="chat-conversation-container mt-2 bg-black fixed bottom-0 right-5 z-20 rounded-md" v-if="chatConversation">
+            <div class="chat-content border-2 gradient-bg bg-white overflow-hidden m-2 p-4 z-22 rounded-md">
                 <div class="flex">
-                    <div class="left-side-chat-container border-r-2 border-secondary w-96">
+                    
+                    <div class="w-full left-side-chat-container border-black-700 w-80 h-10 rounded-md" v-if="chatOpen==false">
+                        <div class="w-full justify-center bg-transparent">
+                            <chat-search-input
+                            transparent size="md"
+                            />
+                        </div>
+                        <div>
+                            <div class="w-full justify-start bg-black rounded-md flex mt-4">
+                                <div class=" pl-4 inline-block py-4 justify-start">
+                                    <img src="/account.png" class="w-16 h-16"/>
+                                </div>
+                                <div class="inline-block place-self-center pl-6 ml-2 p-y">
+                                    <div class="text-2xl -lg:text-lg font-semibold pt-2">Kevin Buchanam</div>
+                                    <div class="text-accent-focus/80">Online</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="grid w-96 justify-center bg-transparent">
+                                <search-input transparent size="md" border="solid 1px #fff"/>
+                            </div>
                         <div class="bg-neutral px-8 py-4 border-b border-secondary">
                             <div class="relative p-1 inline-block">
                                 <img src="/account.png" class="w-16 h-16"/>
@@ -11,35 +31,36 @@
                             <div class="inline-block align-top mb-1 ml-2">
                                 <div class="text-2xl -lg:text-lg font-semibold pt-2">Kevin Buchanam</div>
                                 <div class="text-accent-focus/80">Online</div>
+                               
                             </div>
                         </div>
                         <div class="bg-base-300 py-2 px-4">
                             <div class="grid justify-end">
-                                <search-input transparent size="md" border=""/>
+                                <search-input transparent size="md" border="solid 1px #fff"/>
                             </div>
                             <div class="online-chat-content">
                                 <div class="mt-5">
                                     Online Members (18)
                                 </div>
                                 <div class="flex gap-4  mt-5">
-                                    <div class="relative cursor-pointer" v-for="(item, index) in onlineMembers">
-                                        <img class="w-12 h-12 -lg:w-10 -lg:h-10" :src="item.profile" alt="" :key="index">
+                                    <div class="relative cursor-pointer" v-for="(item, index) in onlineMembers" :key="index" >
+                                        <img class="w-12 h-12 -lg:w-10 -lg:h-10" :src="item.profile" alt="" @click="toggleChatOpen">
                                         <div class="rounded-full w-3 h-3 -lg:w-2 -lg:h-2 bg-accent-focus/80 absolute right-0 bottom-0"></div>
                                     </div>
                                 </div>
                                 <div class="mt-5">
                                    Messages
                                 </div>
-                                <div class="chat-messages-container overflow-auto no-scrollbar">
+                                <div class="chat-messages-container overflow-auto no-scrollbar" >
                                     <UserMessagesCard v-for="(chat, index) in messages" :key="index" :chat="chat"/>
                                 </div>
-                            </div>
-                        </div>
+                            </div> 
+                        </div>-->
                     </div>
-                    <div class="right-side-chat-container">
+                    <div class="right-side-chat-container" v-if="chatOpen==true">
                         <div class="bg-base-300 px-4 py-4 -lg:p-2 border-b border-secondary flex relative">
                             <div class="relative p-1">
-                                <img src="/chat-conversation/group-chat.svg" class="w-16 h-16 -lg:w-14 -lg:h-14"/>
+                                <img src="/chat-conversation/group-chat.svg" class="w-16 h-16 -lg:w-14 -lg:h-14" @click="toggleChatOpen"/>
                             </div>
                             <div class="align-top mb-1 ml-2 mr-2">
                                 <div class="text-xl -lg:text-sm font-semibold pt-2 text-ellipsis">Mona Parksdale, Geor…</div>
@@ -129,7 +150,7 @@ const toggleChatConversation = () => {
     chatConversation.value = !chatConversation.value;
 };
 const showDropDown = ref(false);
-
+const chatOpen = ref(false)
 const onlineMembers = [
     {
         id: '1',
@@ -199,4 +220,15 @@ const messages = [
 const toggleDropdown = () => {
     showDropDown.value = !showDropDown.value;
 }
+const toggleChatOpen=()=>{
+    chatOpen.value=!chatOpen.value;
+}
+/* const toggleChatClose=()=>{
+    
+} */
+
+/* watch(chatOpen, (newChatOpen) => {
+    
+}); */
+
 </script>
