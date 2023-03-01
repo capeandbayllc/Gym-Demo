@@ -18,7 +18,7 @@
         {{ subtitle }}
       </span>
       <div
-        class="grid grid-cols-[repeat(7,_1fr)] grid-rows-[repeat(6,_1fr)] h-48"
+        class="grid grid-cols-[1rem_repeat(6,_1fr)] grid-rows-[repeat(6,_1fr)] h-48"
       >
         <!-- row label -->
         <span class="row-[1] col-[1] self-end text-right">40</span>
