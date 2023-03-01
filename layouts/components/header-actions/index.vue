@@ -25,11 +25,11 @@
 				@click="$emit('show-help')"
 			/>
 		</div>
-    <div class="relative z-10">
-      <question-round-icon
-          @mouseover="$emit('show-leader-popup')"
+    <div class="leader-board-container relative z-10">
+      <people-icon
           @click="$emit('show-leader-board')"
       />
+      <leader-pop class="leader-pop" />
     </div>
 		<div class="!ml-[-40px]">
 			<account-btn
@@ -51,6 +51,12 @@
 	/* .setting-icon:hover{
 		animation: spin 1s linear 0.5; opacity: 0.5;
 	} */
+  .leader-board-container:hover svg{
+    @apply rotate-12;
+  }
+  .leader-board-container:hover .notification{
+    @apply -right-2 left-auto z-10 ease-linear;
+  }
 
 </style>
 <style scoped>
@@ -69,12 +75,23 @@
 .alert-container:hover .alert-list {
 	@apply block;
 }
+
+.leader-board-container:hover .leader-pop {
+  @apply block;
+}
 .alert-container {
 	@apply relative -sm:!ml-4;
 	.alert-list {
 		@apply absolute z-20 hidden;
 		right: -8rem;
 	}
+}
+.leader-board-container {
+  @apply relative -sm:!ml-4;
+.leader-pop {
+  @apply block;
+  right: -8rem;
+}
 }
 </style>
 <script setup>
@@ -83,8 +100,7 @@ import { PosIcon, PeopleIcon, PersonAddIcon, SettingIcon, QuestionRoundIcon } fr
 import AlarmBtn from "./alarm-btn.vue"
 import AccountBtn from "./account-btn.vue"
 import AlertList from "./alert-list.vue"
-import LeaderBoard from "../leader-board/index.vue"
-import LeaderPop from "../leader-board/popup.vue"
+import LeaderPop from "~/layouts/components/leader-board/popup.vue";
 import UserAddMenu from "./user-add-menu.vue"
 
 const userMenu = ref(null)

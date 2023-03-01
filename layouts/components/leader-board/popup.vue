@@ -7,18 +7,37 @@
         }"
     >
         <div class="close-btn" @click="toggleLeaderPop">
-            <cross-icon/>
+          <cross-icon></cross-icon>
+
         </div>
-<!--        <div class="leader-pop-info">-->
-<!--            <leader-pop-avatar />-->
-<!--            <div class="leader-pop-title">Leader Board</div>-->
-<!--            <search-input border="base-content"/>-->
-<!--            <div class="leader-pop-help">-->
-<!--                <div><question-round-icon class="scale-50"/><b>Hello Everybody!</b></div>-->
-<!--            </div>-->
-<!--        </div>-->
-      <div>
-        Show More...
+        <div class="leader-pop-info">
+            <leader-pop-avatar />
+            <div class="leader-pop-title justify-center">Leader Board</div>
+            <radio-group class="justify-center bg-[#18203A] border-color-[#073A76] border-2 ">
+              <radio-group-option>
+                Clubs
+              </radio-group-option>
+              <radio-group-option>
+                Trainers
+              </radio-group-option>
+
+            </radio-group>
+
+
+            <search-input border="base-content"/>
+            <div class="leader-pop-help">
+              <div class="employee-lead-table">
+                <data-table
+                    :columns="columns"
+                    :data="employees"
+                    :row-component="LeaderboardTableRow"
+                    class="h-56 overflow-y-auto"
+                />
+              </div>
+            </div>
+        </div>
+      <div class="float-right">
+        View More...
       </div>
     </div>
 </template>
@@ -46,6 +65,8 @@
 import {ref} from 'vue'
 import { CrossIcon, QuestionRoundIcon } from '~~/components/icons';
 import LeaderPopAvatar from './leader-pop-avatar.vue';
+import LeaderboardTableRow from "~/pages/leaderboard/components/leaderboard-table-row.vue";
+import {RadioGroup, RadioGroupOption} from "@headlessui/vue";
 
 const showLeaderPop = ref(false);
 
