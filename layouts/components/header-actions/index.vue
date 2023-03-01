@@ -51,9 +51,9 @@
 	/* .setting-icon:hover{
 		animation: spin 1s linear 0.5; opacity: 0.5;
 	} */
-  .leader-board-container:hover svg{
-    @apply rotate-12;
-  }
+  /*.leader-board-container:hover svg{*/
+  /*  @apply rotate-12;*/
+  /*}*/
   .leader-board-container:hover .notification{
     @apply -right-2 left-auto z-10 ease-linear;
   }
