@@ -6,7 +6,7 @@
 		<Button size="sm" class="btn-ghost block lg:hidden" @click.stop="$emit('show-circular-menu')">
 			<menu-icon />
 		</Button>
-		<Button size="sm" class="btn-pulse ml-4 bg-secondary -sm:mx-5">
+		<Button size="sm" class="btn-pulse ml-4 bg-secondary -sm:mx-5" @click="showPulseModal">
 			<pulse-icon @mouseover="setIconPath" @mouseout="resetIconPath" :iconPath="iconPath" @click="showPulseModal"/>
 		</Button>
 		<header-actions
