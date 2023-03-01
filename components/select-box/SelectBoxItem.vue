@@ -1,6 +1,6 @@
 <template>
     <div
-        class="font-bold hover:neutral hover:bg-base-content px-4 py-2"
+        class="font-medium  text-sm hover:neutral hover:bg-base-content px-4 py-2"
         :class="{
             'bg-secondary text-base-content': selected,
         }"

@@ -4,7 +4,9 @@
 			class="select-box-btn"
             :class="{
                 'bg-secondary': secondary,
-                'bg-transparent border-secondary': transparent && !secondary
+                'bg-transparent border-secondary': transparent && !secondary,
+                'rounded-t': !isCollapsed,
+                'rounded': isCollapsed
             }"
             :onClick="toggleCollapsed"
         >
@@ -15,6 +17,11 @@
             />
         </button>
         <select-box-content v-if="!isCollapsed">
+            <select-box-search-input 
+                :secondary="false"
+                :placeholder="placeholderSearch" 
+                size="xs" 
+            ></select-box-search-input>
             <select-box-item
                 v-for="item in items"
                 :key="item.value"
@@ -23,6 +30,7 @@
                 :selected="item.value === value"
                 :onClick="onChange"
             />
+            <p class="select-box-clear-btn" :onClick="toggleCollapsed">Clear List</p>
         </select-box-content>
     </div>
 </template>
@@ -31,7 +39,10 @@
     @apply relative min-w-fit;
 }
 .select-box-btn {
-	@apply flex flex-row border rounded px-2 py-1 items-center justify-between w-full;
+	@apply flex flex-row border px-2 py-1 items-center justify-between w-full;
+}
+.select-box-clear-btn {
+	@apply text-right font-medium mr-3 text-sm cursor-pointer;
 }
 
 </style>
@@ -45,6 +56,10 @@ const props = defineProps({
     label: {
         type: String,
         default: "Select...",
+    },
+    placeholderSearch: {
+        type: String,
+        default: "Search",
     },
     items: {
         type: Array,
