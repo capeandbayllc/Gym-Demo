@@ -23,7 +23,7 @@
 
     <!-- main content wrapper  -->
     <div
-      class="border border-secondary bg-neutral rounded p-7 max-w-none flex gap-4"
+      class="border border-secondary bg-black rounded p-7 max-w-none flex gap-4"
     >
       <!-- left sidebar -->
       <aside class="flex flex-col justify-between">
@@ -39,6 +39,7 @@
         />
 
         <CalendarMenu :calendars="calendarsList" />
+        <ReportsStatistics />
       </aside>
 
       <section class="w-full h-full">
@@ -127,6 +128,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import CalendarMenu from "./components/partials/calendar-menu.vue";
+import ReportsStatistics from "./components/partials/reports-statistics.vue";
 import EventPopup from "./components/event-popup.vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
@@ -355,7 +357,7 @@ onMounted(async () => {
   .dp__calendar {
     @apply bg-transparent;
     .dp__calendar_wrap {
-      @apply bg-base-content/5 border border-secondary rounded;
+      @apply bg-neutral border border-secondary rounded;
       .dp__calendar_header_separator {
         @apply h-0;
       }
@@ -377,6 +379,10 @@ onMounted(async () => {
 
 .fc {
   @apply w-full;
+}
+
+.fc-media-screen {
+  @apply min-h-[55rem];
 }
 
 .fc-event-main-frame {

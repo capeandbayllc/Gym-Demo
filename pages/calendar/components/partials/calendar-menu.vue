@@ -1,5 +1,5 @@
 <template>
-  <ul class="temp">
+  <ul>
     <!-- list header -->
     <div class="flex justify-between items-center mb-4">
       <h3 class="text-2xl font-bold">Calendars ({{ calendars.length }})</h3>
@@ -16,44 +16,79 @@
           </svg>
         </button>
         <!-- actions button (new/subscribe) -->
-        <button
-          class="fill-white border-secondary hover:bg-secondary border-2 p-2 w-8 rounded-md"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-            <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-            <path
-              d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
-            />
-          </svg>
-        </button>
+        <div class="relative">
+          <button
+            @click="enableDropdown"
+            class="fill-white border-secondary hover:bg-secondary border-2 p-2 w-8 rounded-md"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+              <path
+                d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
+              />
+            </svg>
+          </button>
+          <template v-if="dropdownVisibility">
+            <DropdownMenu @outclick="disableDropdown" />
+          </template>
+        </div>
       </div>
     </div>
 
     <!-- list items (calendars) -->
     <li
-      class="flex items-center gap-2 my-2"
+      class="flex items-center justify-between gap-2 my-2"
       v-for="cal in calendars"
       :key="cal.id"
     >
-      <input type="checkbox" :name="cal.title" :id="'cal_' + cal.id" />
-      <label :for="'cal_' + cal.id">{{ cal.title }}</label>
+      <div class="flex items-center gap-2">
+        <input type="checkbox" :name="cal.title" :id="'cal_' + cal.id" />
+        <label :for="'cal_' + cal.id">{{ cal.title }}</label>
+      </div>
+      <div class="flex items-center gap-6">
+        <button class="w-3 fill-white">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+            <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path
+              d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"
+            />
+          </svg>
+        </button>
+        <button class="w-[0.3125rem] fill-white">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
+            <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path
+              d="M48 464a48 48 0 1 1 0-96 48 48 0 1 1 0 96zm0-160a48 48 0 1 1 0-96 48 48 0 1 1 0 96zM0 96a48 48 0 1 1 96 0A48 48 0 1 1 0 96z"
+            />
+          </svg>
+        </button>
+      </div>
     </li>
   </ul>
 </template>
 
 <script setup>
+import DropdownMenu from "./dropdown-menu.vue";
+
 const props = defineProps({
   calendars: {
     type: Array,
     default: null,
   },
 });
+
+const dropdownVisibility = ref(false);
+
+const enableDropdown = () => {
+  dropdownVisibility.value = true;
+};
+
+const disableDropdown = () => {
+  dropdownVisibility.value = false;
+};
 </script>
 
 <style scoped>
-.temp {
-}
-
 input[type="checkbox"] {
   @apply rounded-md bg-white appearance-none m-0 h-5 w-5 border border-[#C0BDCC] outline-none;
   @apply focus:border;
