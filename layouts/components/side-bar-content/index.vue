@@ -4,10 +4,10 @@
         <div class="mem-checkin-btn" @click="showCheckInModal">Member Check In</div>
         <div class="divider"></div>
         <div class="active-members">
-            <div class="text-lg">Active Club Members</div>
-            <div class="active-member-count">24</div>
+            <div class="text-lg my-auto">Active Club Members</div>
+            <div class="active-member-count my-auto">24</div>
         </div>
-        <select-box :items="locations" label="Location" class="w-32 self-start"/>
+        <select-box :items="locations" label="Location" class="w-32 self-start bg-secondary rounded"/>
         <div class="divider my-6"></div>
         <div class="member-list">
             <side-bar-member
@@ -27,7 +27,7 @@
 </template>
 <style scoped>
 .side-bar-content-container {
-    @apply flex flex-col px-4 pt-6 items-center;
+    @apply flex flex-col p-6 items-center;
     .collapse-icon {
         @apply scale-150 self-end cursor-pointer;
         @screen 3xl {
@@ -43,7 +43,7 @@
     .active-members {
         @apply flex flex-row items-center justify-between w-full;
         .active-member-count {
-            @apply text-3xl font-bold p-2 rounded border-4 border-secondary bg-secondary/50;
+            @apply text-2xl py-1 px-2.5 font-semibold rounded border-[2.5px] border-secondary bg-secondary/50;
         }
     }
     .member-list {
