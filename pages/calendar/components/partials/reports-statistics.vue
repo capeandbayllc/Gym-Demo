@@ -37,26 +37,26 @@
 
         <!-- data plots -->
         <span
-          class="w-3 rounded-full justify-self-center h-full row-start-2 row-end-6 col-[2] bg-secondary"
+          class="plotted-bar w-3 rounded-full justify-self-center h-full row-start-2 row-end-6 col-[2] bg-secondary"
         ></span>
         <span
-          class="w-3 rounded-full justify-self-center h-full row-start-3 row-end-6 col-[3] bg-secondary"
-        ></span>
-
-        <span
-          class="w-3 rounded-full justify-self-center h-full row-start-4 row-end-6 col-[4] bg-secondary"
+          class="plotted-bar w-3 rounded-full justify-self-center h-full row-start-3 row-end-6 col-[3] bg-secondary"
         ></span>
 
         <span
-          class="w-3 rounded-full justify-self-center h-full row-start-5 row-end-6 col-[5] bg-secondary"
+          class="plotted-bar w-3 rounded-full justify-self-center h-full row-start-4 row-end-6 col-[4] bg-secondary"
         ></span>
 
         <span
-          class="w-3 rounded-full justify-self-center h-full row-start-3 row-end-6 col-[6] bg-secondary"
+          class="plotted-bar w-3 rounded-full justify-self-center h-full row-start-5 row-end-6 col-[5] bg-secondary"
         ></span>
 
         <span
-          class="w-3 rounded-full justify-self-center h-full row-start-2 row-end-6 col-[7] bg-secondary"
+          class="plotted-bar w-3 rounded-full justify-self-center h-full row-start-3 row-end-6 col-[6] bg-secondary"
+        ></span>
+
+        <span
+          class="plotted-bar w-3 rounded-full justify-self-center h-full row-start-2 row-end-6 col-[7] bg-secondary"
         ></span>
       </div>
     </div>
@@ -79,3 +79,9 @@ const props = defineProps({
   },
 });
 </script>
+
+<style scoped>
+.plotted-bar {
+  @apply bg-gradient-to-t to-secondary from-[#042137];
+}
+</style>

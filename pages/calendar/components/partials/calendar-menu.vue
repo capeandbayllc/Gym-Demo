@@ -73,7 +73,7 @@ import DropdownMenu from "./dropdown-menu.vue";
 const props = defineProps({
   calendars: {
     type: Array,
-    default: null,
+    default: [],
   },
 });
 

@@ -1,9 +1,16 @@
 <template>
   <div class="py-4 px-12 w-full h-fit">
+    <!-- modal -->
     <daisy-modal class="w-fit" id="eventModal" ref="eventModal">
       <event-popup></event-popup>
     </daisy-modal>
-    <daisy-modal
+    <!-- event details -->
+    <div class="z-50 fixed h-screen w-screen flex items-center justify-center">
+      <EventDetails />
+    </div>
+
+    <!-- sidebar date selector popup -->
+    <!-- <daisy-modal
       ref="dateSelect"
       id="dateSelect"
       class="bg-base-300 w-fit rounded-lg"
@@ -19,7 +26,7 @@
           @update:modelValue="onSelectDate"
         />
       </div>
-    </daisy-modal>
+    </daisy-modal> -->
 
     <!-- main content wrapper  -->
     <div
@@ -87,7 +94,7 @@
         </div>
       </section>
     </div>
-    <div
+    <!-- <div
       v-if="calenderView == 'timeGridDay'"
       class="md:flex md:gap-y-5 w-[35%] -lg:w-full ml-4 flex-col -lg:flex-row -lg:ml-0 -md:block"
     >
@@ -115,56 +122,48 @@
           class="h-full w-full"
         />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup>
 import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
 import { ArrowIcon } from "~~/components/icons";
-import FullCalendar from "@fullcalendar/vue3";
+import { isEqual, set } from "date-fns";
 import { fakeCalendars } from "./components/fakedata";
+import CalendarMenu from "./components/partials/calendar-menu.vue";
+import ReportsStatistics from "./components/partials/reports-statistics.vue";
+import EventDetails from "./components/partials/event-details.vue";
+import Datepicker from "@vuepic/vue-datepicker";
+
+/** FullCalendar component & plugins */
+import FullCalendar from "@fullcalendar/vue3";
+import EventPopup from "./components/event-popup.vue";
+import listPlugin from "@fullcalendar/list";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import listPlugin from "@fullcalendar/list";
-import CalendarMenu from "./components/partials/calendar-menu.vue";
-import ReportsStatistics from "./components/partials/reports-statistics.vue";
-import EventPopup from "./components/event-popup.vue";
-import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { isEqual, set } from "date-fns";
 
 const calenderView = ref("timeGridWeek");
-watch(calenderView, () => {
-  setTimeout(() => {
-    calendar.value.getApi().render();
-    console.log("huh");
-  });
-});
 
 const handleDateClick = (arg) => {
   console.log("date click! " + arg.dateStr);
 };
-// const handleChangeView = (value) => {
-//   calenderView.value = value;
-//   console.log("calenderView", calenderView.value);
-//   calendar.value.getApi().changeView(value);
-//   onViewChanged();
-// };
 
+/** DOM References */
 const calendar = ref(null);
-const currentView = ref("timeGridWeek");
+const eventModal = ref(null);
 const start = ref(null);
 const end = ref(null);
+const currentView = ref("timeGridWeek");
 const selectedDate = ref(null);
 const isMobile = computed(() => window.innerWidth <= 480);
 const monthCalendar = ref(null);
 const listCalendar = ref(null);
 
-const eventModal = ref(null);
-
+/** Component State */
 const calendarsList = ref(fakeCalendars);
-const calendarEventVisibility = ref();
+const calendarEventVisibility = ref(false);
 
 const events = [
   {
@@ -199,6 +198,12 @@ const events = [
     backgroundColor: "green",
   },
 ];
+const handleChangeView = (value) => {
+  calenderView.value = value;
+  console.log("calenderView", calenderView.value);
+  calendar.value.getApi().changeView(value);
+  onViewChanged();
+};
 
 const eventClick = (info) => {
   var eventObj = info.event;
@@ -207,6 +212,7 @@ const eventClick = (info) => {
 
 const calendarOptions = ref({
   plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+  schedulerLicenseKey: "0157232768-fcs-1652392378",
   initialView: "timeGridWeek",
   slotDuration: "01:00",
   dateClick: handleDateClick,
@@ -326,6 +332,13 @@ const getDayClass = (date) => {
     return "!rounded-full bg-secondary";
   return "";
 };
+
+watch(calenderView, () => {
+  setTimeout(() => {
+    calendar.value.getApi().render();
+    console.log("huh");
+  });
+});
 
 onMounted(async () => {
   await nextTick();
