@@ -148,6 +148,10 @@
 </template>
 
 <script setup>
+import {request} from "~/api/utils/request";
+import queries from "~/api/queries/user";
+import {KIOSK_EMAIL} from "~/api/data/users/UserFactory";
+
 const username = ref();
 const password = ref();
 const remember = ref();
@@ -159,23 +163,31 @@ const handleTogglePasswordInputType = () => {
     passwordInputType.value === "password" ? "text" : "password";
 };
 
-const authCookie = useCookie("token");
+const authCookie = useCookie("auth");
 
 // TODO: would be better as a server route, but we would have to use Amplifiy adapter
-const handleClickLogin = () => {
+const handleClickLogin = async () => {
   error.value = null;
-  const authenticated = authenticate(username.value, password.value);
+  const authenticated = await authenticate(username.value, password.value);
   if (!authenticated) {
     error.value = "Credentials not found.";
     return;
   }
-  authCookie.value = true;
+
+  authCookie.value = authenticated;
   navigateTo("/");
 };
 
-const authenticate = (username, password) => {
-  console.log({ username, password, hashed: btoa(password) });
-  return username === "admin" && btoa(password) === "SGVsbG8xMjMh";
+const authenticate = async (username, password) => {
+  const result = await request(queries.user.findByMail, { email: username });
+  // Password: "Hello123!"
+  if (! result.data.data.user || (btoa(password) !== "SGVsbG8xMjMh")) {
+    return null;
+  }
+
+  return Object.assign(result.data.data.user, {
+    isKioskUser: result.data.data.user.email === KIOSK_EMAIL
+  });
 };
 </script>
 <!-- #C0BDCC -->
