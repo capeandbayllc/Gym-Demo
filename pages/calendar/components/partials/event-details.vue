@@ -4,7 +4,7 @@
   >
     <SectionHeader title="Body by Bryan">
       <template #subtitle>
-        <div slopt class="mt-2 flex gap-4 items-center">
+        <div class="mt-2 flex gap-4 items-center">
           <span>Thursday, January 5</span>
           <span class="h-2 w-2 bg-white rounded-full"></span>
           <span>00:00 AM - 00:00 AM</span>

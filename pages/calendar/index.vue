@@ -5,8 +5,15 @@
       <event-popup></event-popup>
     </daisy-modal>
     <!-- event details -->
-    <div class="z-50 fixed h-screen w-screen flex items-center justify-center">
+    <div
+      v-if="eventDetailsVisibibility"
+      class="z-50 fixed h-screen w-screen flex items-center justify-center"
+    >
       <EventDetails />
+    </div>
+    <!-- more in depth event information -->
+    <div class="z-50 fixed h-screen w-screen flex items-center justify-end">
+      <EventInformation />
     </div>
 
     <!-- sidebar date selector popup -->
@@ -133,6 +140,7 @@ import { fakeCalendars } from "./components/fakedata";
 import CalendarMenu from "./components/partials/calendar-menu.vue";
 import ReportsStatistics from "./components/partials/reports-statistics.vue";
 import EventDetails from "./components/partials/event-details.vue";
+import EventInformation from "./components/partials/event-information.vue";
 import Datepicker from "@vuepic/vue-datepicker";
 
 /** FullCalendar component & plugins */
@@ -164,6 +172,9 @@ const listCalendar = ref(null);
 /** Component State */
 const calendarsList = ref(fakeCalendars);
 const calendarEventVisibility = ref(false);
+
+const eventDetails = ref(null); // selected event information we need to pass into the details & event panels
+const eventDetailsVisibibility = ref(false);
 
 const events = [
   {
