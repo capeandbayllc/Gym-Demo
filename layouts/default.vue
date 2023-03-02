@@ -20,42 +20,40 @@
                 <!-- <global-search
 					v-model="globalSearch"
 				/> -->
-                <div class="app-body">
-                    <div class="app-body-content">
-                        <slot />
-                    </div>
-                </div>
-            </div>
-            <div>
-                <side-bar />
-            </div>
+        <div class="app-body">
+          <div class="app-body-content">
+            <slot />
+          </div>
+          <side-bar />
         </div>
-        <ChatConversation />
-        <!-- <daisy-modal id="globalSearchModal" ref="globalSearchModal" :show-close-button="false">
+      </div>
+    </div>
+    <ChatConversation />
+    <!-- <daisy-modal id="globalSearchModal" ref="globalSearchModal" :show-close-button="false">
 			<global-search-modal />
 		</daisy-modal> -->
-    </div>
-    <div
-        class="gradient-bg min-h-screen w-screen flex flex-col items-center justify-center"
-        v-else
-    >
-        <slot />
-    </div>
+  </div>
+  <div
+    class="gradient-bg min-h-screen w-screen flex flex-col items-center justify-center"
+    v-else
+  >
+    <slot />
+  </div>
 </template>
 <style scoped>
 .app-layout {
-    @apply w-screen /* overflow-x-hidden */;
+  @apply w-screen /* overflow-x-hidden */;
 }
 .app-content {
-    @apply flex flex-row relative justify-between;
-    min-height: calc(100vh - 4rem);
+  @apply flex flex-row relative;
+  min-height: calc(100vh - 4rem);
 }
 .app-body {
-    @apply flex flex-row justify-between relative h-full;
-    .app-body-content {
-        @apply flex flex-col w-full items-center h-full py-8;
-        /* height: calc(100vh - 6rem); */
-    }
+  @apply flex flex-row justify-between relative h-full;
+  .app-body-content {
+    @apply flex flex-col w-full items-center h-full py-8;
+    /* height: calc(100vh - 6rem); */
+  }
 }
 </style>
 <script setup>
@@ -75,7 +73,7 @@ import ChatConversation from "./components/chat-conversation/index.vue";
 const showCircularMenu = ref(false);
 
 const toggleCircularMenu = () => {
-    showCircularMenu.value = !showCircularMenu.value;
+  showCircularMenu.value = !showCircularMenu.value;
 };
 
 const helpBot = ref(null);
@@ -83,22 +81,22 @@ const showBot = () => helpBot.value.open();
 
 const profileMenu = ref(null);
 const showProfileMenu = () => {
-    profileMenu.value.open();
+  profileMenu.value.open();
 };
 const profileMenuStatus = ref(false);
 provide("profileMenu", profileMenuStatus);
 const isProfileMenuOpenFn = (data) => {
-    profileMenuStatus.value = data;
-    provide("profileMenu", profileMenuStatus);
+  profileMenuStatus.value = data;
+  provide("profileMenu", profileMenuStatus);
 };
 
 const globalSearch = ref("");
 const globalSearchModal = ref(null);
 
 watchEffect(() => {
-    if (globalSearch.value) {
-        globalSearchModal.value.open();
-    }
+  if (globalSearch.value) {
+    globalSearchModal.value.open();
+  }
 });
 
 const isLoggedIn = ref(false);
@@ -106,11 +104,11 @@ const route = useRoute();
 const authCookie = useCookie("token", { watch: true });
 
 watchEffect(() => {
-    if (route.path === "/login") {
-        isLoggedIn.value = false;
-    } else {
-        isLoggedIn.value = true;
-    }
+  if (route.path === "/login") {
+    isLoggedIn.value = false;
+  } else {
+    isLoggedIn.value = true;
+  }
 });
 // watch(route, (newRoute) => {
 //   console.log({ route: route.value, newRoute: newRoute.value });
