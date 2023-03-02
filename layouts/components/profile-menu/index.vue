@@ -32,7 +32,7 @@
     @apply border-4 rounded-lg -m-4;
   }
   .menu-list {
-    @apply m-6;
+    @apply m-6 mb-0;
   }
   .menu-items {
     @apply py-2 px-0;
@@ -44,10 +44,10 @@
     @apply pb-2;
   }
   .menu-items {
-    @apply border-b;
+    @apply border-b last:border-b-0;
   }
   .submenu-items {
-    @apply rounded-md bg-[#2F72C4] my-2 font-normal w-fit;
+    @apply my-1 font-normal w-fit hover:rounded-md hover:bg-[#2F72C4];
   }
 }
 </style>
@@ -93,15 +93,12 @@ const menu = [
     label: "Manage Team Account",
   },
   {
-    label: "Extras",
+    label: "",
     children: [
       {
-        label: "Workout Generator",
-      },
-      {
-        label: "Sales Slideshow",
-      },
-    ],
+        label: "Help",
+      }
+    ]
   },
 ];
 
