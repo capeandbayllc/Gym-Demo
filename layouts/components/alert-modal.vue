@@ -98,7 +98,7 @@ const list = [
         first_name: 'Kevin',
         last_name: 'Buchanan',
         location: '1',
-        type: 'Premium',
+        type: 'platinum',
     },
     {
         id: 2,
@@ -110,7 +110,7 @@ const list = [
         first_name: 'Kevin',
         last_name: 'Buchanan',
         location: '1',
-        type: 'Premium',
+        type: 'platinum',
     },
     {
         id: 3,
@@ -122,7 +122,7 @@ const list = [
         first_name: 'Kevin',
         last_name: 'Buchanan',
         location: '1',
-        type: 'Premium',
+        type: 'platinum',
     },
     {
         id: 4,
@@ -134,7 +134,7 @@ const list = [
         first_name: 'Kevin',
         last_name: 'Buchanan',
         location: '1',
-        type: 'Premium',
+        type: 'platinum',
     },
     {
         id: 5,
@@ -146,7 +146,7 @@ const list = [
         first_name: 'Kevin',
         last_name: 'Buchanan',
         location: '1',
-        type: 'Premium',
+        type: 'platinum',
     },
     {
         id: 6,
@@ -158,7 +158,7 @@ const list = [
         first_name: 'Kevin',
         last_name: 'Buchanan',
         location: '1',
-        type: 'Premium',
+        type: 'platinum',
     },
     {
         id: 7,
@@ -170,7 +170,7 @@ const list = [
         first_name: 'Kevin',
         last_name: 'Buchanan',
         location: '1',
-        type: 'Premium',
+        type: 'platinum',
     },
     {
         id: 8,
@@ -182,7 +182,7 @@ const list = [
         first_name: 'Kevin',
         last_name: 'Buchanan',
         location: '1',
-        type: 'Premium',
+        type: 'platinum',
     },
     {
         id: 9,
@@ -194,7 +194,7 @@ const list = [
         first_name: 'Kevin',
         last_name: 'Buchanan',
         location: '1',
-        type: 'Premium',
+        type: 'platinum',
     },
     {
         id: 10,
@@ -206,7 +206,7 @@ const list = [
         first_name: 'Kevin',
         last_name: 'Buchanan',
         location: '1',
-        type: 'Premium',
+        type: 'platinum',
     },
 ];
 </script>

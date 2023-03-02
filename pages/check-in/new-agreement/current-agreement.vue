@@ -63,7 +63,7 @@ const leadsData = [
         first_name: "Caleb",
         last_name: "Sauer",
         location: "1",
-        type: "Premium"
+        type: "gold"
     },
     {
         id: 2,
@@ -75,7 +75,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 3,
@@ -87,7 +87,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 4,
@@ -99,7 +99,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },  
     {
         id: 5,
@@ -111,7 +111,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 6,
@@ -123,7 +123,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "bronze"
     },
     {
         id: 7,
@@ -135,7 +135,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "silver"
     },
     {
         id: 8,
@@ -147,7 +147,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 9,
@@ -159,7 +159,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 10,
@@ -171,7 +171,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
 ];
 </script>
