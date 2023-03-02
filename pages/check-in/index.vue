@@ -9,6 +9,7 @@
               :active-option="detailView"
               @select-option="detailView = $event"
               @toggle-detail="toggleDetailSection"
+              @check-in="OnCheckInStatusChange"
               @open-engage="showEngageModal"
             />
           </div>
@@ -160,5 +161,9 @@ const toggleDetailSection = (event) => {
     isDetailOpened.value = event;
     detailView.value = null;
   }
+}
+
+function OnCheckInStatusChange(isCheckedIn) {
+  toggleDetailSection(isCheckedIn)
 }
 </script>

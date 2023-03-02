@@ -7,6 +7,7 @@
     <profile-options
       :selected="activeOption"
       @update:selected="$emit('select-option', $event)"
+      @update:check-in="$emit('check-in', $event)"
     />
   </div>
 </template>
@@ -22,4 +23,8 @@ import ProfileOptions from './profile-options.vue'
 const props = defineProps({
     activeOption: String
 })
+
+function test() {
+  console.log(arguments, 111)
+}
 </script>
