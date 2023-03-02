@@ -68,7 +68,7 @@ const membersData = [
         first_name: "Caleb",
         last_name: "Sauer",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 2,
@@ -80,7 +80,7 @@ const membersData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "gold"
     },
     {
         id: 3,
@@ -92,7 +92,7 @@ const membersData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "silver"
     },
     {
         id: 4,
@@ -104,7 +104,7 @@ const membersData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "bronze"
     },  
     {
         id: 5,
@@ -116,7 +116,7 @@ const membersData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 6,
@@ -128,7 +128,7 @@ const membersData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 7,
@@ -140,7 +140,7 @@ const membersData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 8,
@@ -152,7 +152,7 @@ const membersData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 9,
@@ -164,7 +164,7 @@ const membersData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 10,
@@ -176,7 +176,7 @@ const membersData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
 ];
 const leadsData = [
@@ -190,7 +190,7 @@ const leadsData = [
         first_name: "Caleb",
         last_name: "Sauer",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 2,
@@ -202,7 +202,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "gold"
     },
     {
         id: 3,
@@ -214,7 +214,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "bronze"
     },
     {
         id: 4,
@@ -226,7 +226,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "silver"
     },  
     {
         id: 5,
@@ -238,7 +238,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 6,
@@ -250,7 +250,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 7,
@@ -262,7 +262,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 8,
@@ -274,7 +274,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 9,
@@ -286,7 +286,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
     {
         id: 10,
@@ -298,7 +298,7 @@ const leadsData = [
         first_name: "Nathan",
         last_name: "Sipes",
         location: "1",
-        type: "Premium"
+        type: "platinum"
     },
 ];
 const employeeData = ref([]);

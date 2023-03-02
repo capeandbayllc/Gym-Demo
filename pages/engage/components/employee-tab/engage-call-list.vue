@@ -28,7 +28,7 @@ const data = [{
     name: "Sandy Lin",
     location: "Location",
     date: "1.02.22",
-    membership: "Premimum",
+    membership: "platinum",
     call_type: 'Call'
 }, {
     id: 2,
@@ -36,7 +36,7 @@ const data = [{
     name: "Randy Portis",
     location: "Location",
     date: "1.02.22",
-    membership: "Premimum",
+    membership: "platinum",
     call_type: 'Email'
 }, {
     id: 3,
@@ -44,7 +44,7 @@ const data = [{
     name: "Tess Hightower",
     location: "Location",
     date: "1.02.22",
-    membership: "Premimum",
+    membership: "platinum",
     call_type: 'In-Club'
 }, {
     id: 4,
@@ -52,7 +52,7 @@ const data = [{
     name: "Sandy Lin",
     location: "Location",
     date: "1.02.22",
-    membership: "Premimum",
+    membership: "platinum",
     call_type: 'Call'
 }, {
     id: 5,
@@ -60,7 +60,7 @@ const data = [{
     name: "Randy Portis",
     location: "Location",
     date: "1.02.22",
-    membership: "Premimum",
+    membership: "platinum",
     call_type: 'Email'
 }, {
     id: 6,
@@ -68,7 +68,7 @@ const data = [{
     name: "Tess Hightower",
     location: "Location",
     date: "1.02.22",
-    membership: "Premimum",
+    membership: "platinum",
     call_type: 'In-Club'
 }]
 </script>

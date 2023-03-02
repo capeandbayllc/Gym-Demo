@@ -24,7 +24,7 @@ const options = {
     chart: {
         type: "donut",
     },
-    labels: ["basic", "premimum", "platinum", "addon"],
+    labels: ["bronze", "silver", "gold", "platinum", "addon"],
     colors: [
         "hsl(var(--wa))",
         "hsl(var(--er))",
