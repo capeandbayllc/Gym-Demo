@@ -16,7 +16,7 @@
             <div class="w-auto">
                 <nav-bar />
             </div>
-            <div class="relative">
+            <div class="w-full relative">
                 <!-- <global-search
 					v-model="globalSearch"
 				/> -->
