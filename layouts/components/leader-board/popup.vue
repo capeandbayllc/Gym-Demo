@@ -11,11 +11,21 @@
       <div
         class="justify-center bg-[#18203A] border-color-[#073A76] button2 w-[60%] h-10 p-1"
       >
-        <button type="button" class="btn-xs button2 pad-left">Clubs</button>
+        <button
+            type="button"
+            class="btn-xs text-white p-1 m-1 button2 margin-left"
+            @click="(e) => { selected = 'clubs' }"
+            :class="{'btn-secondary': selected==='clubs'}"
+            name="clubs"
+        >
+          Clubs
+        </button>
         <button
           type="button"
-          class="btn-xs btn-secondary text-white p-1 m-1 button2"
-
+          class="btn-xs  text-white p-1 m-1 button2"
+          :class="{'btn-secondary': selected==='trainers'}"
+          @click="(e) => { selected = 'trainers' }"
+          name="trainers"
         >
           Trainers
         </button>
@@ -26,8 +36,8 @@
         class="leader-pop-help bg-black border border-secondary px-0 rounded-md"
       >
         <div class="carousel-wrap col-span-6">
-          <carousel :breakpoints="breakpoints" class="m-2">
-            <tr v-for="(leader, index) in leaderBoardData" :key="index" >
+          <div v-if="selected==='trainers'" :breakpoints="breakpoints" class="m-2" name="data">
+            <tr v-for="leader in trainerData" :key='leader.name' >
               <td>
                 <div class="px-1 m-1">{{ leader.rank }}</div>
               </td>
@@ -44,7 +54,26 @@
               </td>
               <td><div class="px-1">PTS</div></td>
             </tr>
-          </carousel>
+          </div>
+          <div v-if="selected==='clubs'" :breakpoints="breakpoints" class="m-2" name="data">
+            <tr v-for="leader in locationData" :key='leader.name' >
+              <td>
+                <div class="px-1 m-1">{{ leader.rank }}</div>
+              </td>
+              <td class="pr-4">
+                <div v-if="leader.trending === 'up'" class="arrow-up"></div>
+                <div v-if="leader.trending === 'down'" class="arrow-down"></div>
+                <div v-if="leader.trending === '-'" class="solid"></div>
+              </td>
+              <td>
+                <div class="px-1">{{ leader.name }}</div>
+              </td>
+              <td>
+                <div class="px-1 text-right">{{ leader.unitSold }}</div>
+              </td>
+              <td><div class="px-1">PTS</div></td>
+            </tr>
+          </div>
         </div>
       </div>
     </div>
@@ -82,8 +111,8 @@
   border-radius: 4px;
 }
 
-.pad-left {
-  padding-left: 17.5%;
+.margin-left {
+  margin-left: 17.5%;
 }
 .arrow-up {
   width: 0;
@@ -105,14 +134,10 @@
 <script setup>
 import { ref } from "vue";
 import { CrossIcon } from "~~/components/icons";
-import TrophyIcon from "~/components/icons/trophy-circle.vue"
+import TrophyIcon from "~/components/icons/trophy-circle.vue";
 
 
-
-// const toggleData = () => {
-//   let leaderBoardData = locationData;
-//
-// }
+const selected = ref('trainers')
 
 const locationData = ref([
   {
