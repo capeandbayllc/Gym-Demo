@@ -105,7 +105,7 @@ const menu = [
   },
 ];
 
-const authToken = useCookie("token");
+const authToken = useCookie("auth");
 
 const handleClickLogout = () => {
   authToken.value = null;
