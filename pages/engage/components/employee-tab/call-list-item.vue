@@ -16,10 +16,7 @@
         </td>
         <td>
             <div class="px-2 min-h-[28px]">
-                <span class="membership-btn type-warning">
-                    {{data.membership}}
-                </span>
-                <!-- <membership-btn :membership="data.membership" class="px-4 py-1"/> -->
+                <membership-btn :membership="data.type"/>
             </div>
         </td>
         <td>
@@ -50,9 +47,6 @@
         > div {
             @apply border-none px-2;
         }
-    }
-    .membership-btn {
-        @apply items-center justify-center rounded text-sm cursor-pointer px-2 py-1;
     }
     .type-warning {
         @apply bg-orange-400;

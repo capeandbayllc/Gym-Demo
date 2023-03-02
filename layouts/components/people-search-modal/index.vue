@@ -50,16 +50,20 @@ import PeopleMemberTable from '../common-tables/people-member-table.vue';
 
 const memTypes = [{
 	id: 1,
-	label: "Premium",
-	value: "premium"
+	label: "bronze",
+	value: "Bronze"
 }, {
 	id: 2,
-	value: "basic",
-	label: "Basic"
+	value: "silver",
+	label: "Silver"
 }, {
 	id: 3,
 	value: "gold",
 	label: "Gold"
+}, {
+	id: 4,
+	value: "platinum",
+	label: "Platinum"
 }]
 const locations = [{
 	id: 1,

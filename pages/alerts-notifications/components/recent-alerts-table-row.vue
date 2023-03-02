@@ -11,9 +11,7 @@
         <td>{{data.email}}</td>
         <td>{{data.location}}</td>
         <td>
-            <div class="membership-btn" :class="'type-' + data.type_status">
-                {{data.type}}
-            </div>
+            <membership-btn :membership="data.type" class="text-sm"/>
         </td>
         <td>{{data.created}}</td>
     </tr>
