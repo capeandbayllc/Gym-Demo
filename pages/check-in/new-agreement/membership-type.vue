@@ -201,7 +201,7 @@ const membershipTable = ref([
         width:7rem;
     }
     .shadow-layer{
-        width:21rem;
+        width:28rem;
     }
     .top-left-corner{
         border-top-left-radius: 20px;
