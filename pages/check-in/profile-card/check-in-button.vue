@@ -1,35 +1,51 @@
 <template>
     <div
-        class="alert-container"
+        class="alert-container transition-all duration-150 ease-linear"
         :class="{
-            'checked': modelValue
+            checked: modelValue,
         }"
         @click="$emit('update:modelValue', !modelValue)"
     >
-        <div class="checker">
-            <!-- <plus-circle-icon v-if="!modelValue"/> -->
-            <check-circle-icon v-if="modelValue" class="text-accent-focus border border-black rounded-full"/>
+        <div
+            class="checker"
+            :class="{
+                checked: modelValue,
+            }"
+        >
+            <check-circle-icon class="checkin-icon" />
         </div>
-        <div class="text-xs font-semibold">
-            CHECK IN
-        </div>
+        <div class="text-xs my-auto">CHECK IN</div>
+        <span></span>
     </div>
 </template>
 <style scoped>
 .alert-container {
-    @apply flex flex-row items-center space-x-2 h-[30px] w-fit pr-4 py-1 cursor-pointer bg-accent-focus rounded-full text-black;
-    .checker {
-        @apply p-1 rounded-full !bg-accent-focus;
-    }
+    @apply flex flex-row w-fit items-center gap-3 mx-auto h-8 px-1 py-1 cursor-pointer rounded-full bg-accent-focus hover:bg-secondary text-base-300 hover:text-base-content;
     &.checked {
-        @apply bg-accent-focus text-black;
+        @apply w-28;
+    }
+    .checker {
+        @apply rounded-full w-0 h-0 overflow-hidden transition-all duration-150 ease-linear;
+
+        &.checked {
+            @apply w-[22px] h-[22px];
+        }
+        .checkin-icon {
+            @apply border-2 border-base-300 rounded-full text-transparent transition-all duration-150 ease-linear;
+        }
+    }
+    &:hover {
+        .checker {
+            .checkin-icon {
+                @apply border-base-content;
+            }
+        }
     }
 }
-
 </style>
 <script setup>
-    import { PlusCircleIcon, CheckCircleIcon } from "~~/components/icons"
-    const props = defineProps({
-        modelValue: Boolean
-    })
+import { PlusCircleIcon, CheckCircleIcon } from "~~/components/icons";
+const props = defineProps({
+    modelValue: Boolean,
+});
 </script>

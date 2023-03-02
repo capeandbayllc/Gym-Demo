@@ -20,9 +20,6 @@
     td:last-child {
         @apply border-r-2 rounded-r capitalize;
     }
-    .membership-btn {
-        @apply flex items-center justify-center rounded text-sm cursor-pointer h-full px-2 py-1;
-    }
     .type-warning {
         @apply bg-orange-400;
     }

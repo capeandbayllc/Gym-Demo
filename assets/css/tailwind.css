@@ -39,13 +39,21 @@
 } */
 
 .gradient-bg{
-    background: -webkit-linear-gradient(top, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
-    background: -o-linear-gradient(top, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
-    background: -ms-linear-gradient(top, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
-    background: -moz-linear-gradient(top, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
-    background: linear-gradient(to bottom, rgba(13, 40, 73, 0.98) 0%, rgba(7, 16, 29, 0.98) 40%, rgba(5, 17, 31, 0.98) 89%);
+    background: -webkit-linear-gradient(top, rgba(47, 114, 196, 0.89) 0%, rgba(12, 28, 49, 0.91) 50%, rgb(0, 0, 0) 65%, rgba(47, 114, 196, 0.79) 100%) rgba(0, 0, 0, 0.35);
+    background: -o-linear-gradient(top, rgba(47, 114, 196, 0.89) 0%, rgba(12, 28, 49, 0.91) 50%, rgb(0, 0, 0) 65%, rgba(47, 114, 196, 0.79) 100%) rgba(0, 0, 0, 0.35);
+    background: -ms-linear-gradient(top, rgba(47, 114, 196, 0.89) 0%, rgba(12, 28, 49, 0.91) 50%, rgb(0, 0, 0) 65%, rgba(47, 114, 196, 0.79) 100%) rgba(0, 0, 0, 0.35);
+    background: -moz-linear-gradient(top, rgba(47, 114, 196, 0.89) 0%, rgba(12, 28, 49, 0.91) 50%, rgb(0, 0, 0) 65%, rgba(47, 114, 196, 0.79) 100%) rgba(0, 0, 0, 0.35);
+    background: linear-gradient(to bottom, rgba(47, 114, 196, 0.89) 0%, rgba(12, 28, 49, 0.91) 50%, rgb(0, 0, 0) 65%, rgba(47, 114, 196, 0.79) 100%) rgba(0, 0, 0, 0.35);
+    background-blend-mode: multiply;
 }
-
+.card-gradient-bg {
+    background: -webkit-linear-gradient(top, rgba(0, 116, 200, 0.75) 0%, rgba(0, 0, 0, 0.2) 100%) rgba(0, 0, 0, 0.35);
+    background: -o-linear-gradient(top, rgba(0, 116, 200, 0.75) 0%, rgba(0, 0, 0, 0.2) 100%) rgba(0, 0, 0, 0.35);
+    background: -ms-linear-gradient(top, rgba(0, 116, 200, 0.75) 0%, rgba(0, 0, 0, 0.2) 100%) rgba(0, 0, 0, 0.35);
+    background: -moz-linear-gradient(top, rgba(0, 116, 200, 0.75) 0%, rgba(0, 0, 0, 0.2) 100%) rgba(0, 0, 0, 0.35);
+    background: linear-gradient(to bottom, rgba(0, 116, 200, 0.75) 0%, rgba(0, 0, 0, 0.2) 100%) rgba(0, 0, 0, 0.35);
+    background-blend-mode: multiply;
+}
 .page-content {
     @apply mx-auto w-full max-w-[1120px]
 }

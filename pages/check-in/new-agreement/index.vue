@@ -1,6 +1,6 @@
 <template>
-    <simple-card title="Agreements" class="agreements-card gradient-bg" closable>
-        <div class="p-8">
+    <simple-card title="Agreements" class="agreements-card" closable>
+        <div class="p-8 card-gradient-bg">
             <CurrentAgreement v-if="!showNewAgreement" @new-agreement="newAgreement"/>
             <div v-else class="bg-black w-fit mx-auto rounded-md p-6 border border-secondary new-agreements-wrapper">
                 <component :is="agreementScreens[agreementScreenIndex]"></component>
@@ -48,7 +48,7 @@ const prevScreen = ()=>{
 
 <style scoped>
 .agreements-card {
-    @apply m-auto bg-neutral w-full max-w-[1120px];
+    @apply m-auto w-full max-w-[1120px];
 }
 </style>
 <style>

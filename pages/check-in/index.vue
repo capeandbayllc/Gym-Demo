@@ -2,61 +2,58 @@
   <div class="w-full h-full flex flex-col check-in-modal-height">
     <div class="page-checkin-container">
       <div class="page-content">
-        <div class="wrapper p-4 w-full rounded-md" :class="{'pb-0':accountView !== null}">
+        <div class="wrapper px-2 pt-2 w-full rounded-md" :class="{'pb-0':detailView !== null}">
           <div class="flex -md:block">
-            <event-card class="mr-4"/>
+            <event-card class="mr-2"/>
             <profile-card
-            @create-alert="showAlertAddModal"
-            @create-note="showNoteAddModal"
-            @select-option="option = $event"
-            :active-option="option"
+              :active-option="detailView"
+              @select-option="detailView = $event"
+              @toggle-detail="toggleDetailSection"
+              @open-engage="showEngageModal"
             />
           </div>
           <div class="bg-secondary w-full">
-            <p class="text-center cursor-pointer align-middle my-4" @click="isAccountViewOpen = !isAccountViewOpen, accountView = null">{{isAccountViewOpen ? 'Close' : 'View Account'}}  
-              <LockIcon class="inline-block" v-if="!isAccountViewOpen"/>
+            <p class="checkin-card-detail" @click="toggleDetailSection">
+              <span>
+                {{isDetailOpened ? 'Close' : 'View Account'}}
+              </span>
+              <LockIcon class="inline-block" v-if="!isDetailOpened"/>
               <UnlockIcon class="inline-block" v-else/>
             </p>
-            <div class="account-box" v-if="isAccountViewOpen">
+            <div class="account-box" v-if="isDetailOpened">
               <ul>
-                <li><button @click="changeAccountView('memberinfo')"><MemberInfoIcon/></button></li>
-                <li><button @click="changeAccountView('setting')"><SettingIcon/></button></li>
-                <li><button @click="changeAccountView('dollardoc')"><DollarDocIcon/></button></li>
-                <li><button @click="changeAccountView('announcement')"><AnnouncementIcon/></button></li>
-                <li><button @click="changeAccountView('piechart')"><PieChartIcon/></button></li>
-                <li><button @click="changeAccountView('book')"><BookIcon/></button></li>
-                <li><button @click="changeAccountView('doc')"><DocIcon/></button></li>
+                <ii v-for="{key, icon} in accountOptions" :key="key">
+                  <button @click="changeDetailView(key)"><component :is="icon"/></button>
+                </ii>
               </ul>
-              <UserInfo v-if="accountView == 'memberinfo'"/>
-              <Setting v-if="accountView == 'setting'"/>
-              <button v-if="accountView !== null" class="mx-auto p-4 w-full" @click="backToTop"> Back to Top</button>
+              <UserInfo v-if="detailView == 'memberinfo'"/>
+              <Setting v-if="detailView == 'setting'"/>
+              <button v-if="detailView !== null" class="mx-auto p-4 w-full" @click="backToTop">Back to Top</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="px-5">    
-      <Profile v-if="option === 'profile'" @close="option = null"/>
-      <pos-card v-if="option === 'pos'" @close="option = null"/>
-      <calendar-card v-if="option === 'calendar'" @close="option = null"/>
-      <notification-card v-if="option === 'notification'" @close="option = null"/>
-      <guest-card v-if="option === 'guest-pass'" @close="option = null"/>
-      <note-card v-if="option === 'note'" @close="option = null"/>
-      <new-agreement v-if="option === 'newAgreement'" @close="option = null"/>
-      <Engage v-if="option === 'engage'" @close="option = null"/>
-      <footer-logo class="m-auto" v-else/>
-      <daisy-modal id="alertAddModal" ref="alertAddModal" v-slot="scope">
-          <alert-add-modal @close="scope.close()"/>
-      </daisy-modal>
-      <daisy-modal id="noteAddModal" ref="noteAddModal" v-slot="scope">
-        <note-add-modal @close="scope.close()" />
-      </daisy-modal>
+    <div class="page-content">
+      <template
+        v-for="{key, component} in subSections"
+        :key="key"
+      >
+        <component
+          v-if="detailView === key"
+          @close="detailView = null"
+          :key="key"
+          :is="component"
+        />
+      </template>
+      
     </div>
+
   </div>
 </template>
 <style scoped>
 .page-checkin-container {
-  @apply py-4 px-5 w-full h-fit border-b border-secondary;
+  @apply py-4 px-5 w-full h-fit;
   .page-title {
     @apply text-lg font-light pb-3 pl-5;
   }
@@ -73,8 +70,10 @@
           @apply inline-block;
         }
       }
-      
     }
+    .checkin-card-detail {
+       @apply text-center cursor-pointer align-middle my-2 flex flex-row items-center justify-center space-x-3;
+     }
   }
 }
 </style>
@@ -90,12 +89,9 @@ import GuestCard from './guest-card/index.vue';
 import NoteCard from './note-card/index.vue';
 import NewAgreement from './new-agreement/index.vue';
 import { LockIcon, MemberInfoIcon, SettingIcon, DollarDocIcon, AnnouncementIcon, PieChartIcon, BookIcon, DocIcon, UnlockIcon } from '~~/components/icons';
-import AlertAddModal from './alert-add-modal.vue';
-import NoteAddModal from './note-add-modal.vue';
 import UserInfo from './user-info/index.vue';
 import Setting from './setting/index.vue';
 import Engage from './engage/index.vue';
-
 const option = ref(null);
 
 watch(option,()=>{
@@ -111,24 +107,18 @@ watch(option,()=>{
   
 })
 
-const alertAddModal = ref(null);
-const showAlertAddModal = () => {
-    alertAddModal.value.open()
+const showEngageModal = () => {
+  detailView.value = 'engage'
 };
 
-const noteAddModal = ref(null);
-const showNoteAddModal = () => {
-  noteAddModal.value.open()
-};
+const isDetailOpened = ref(false);
+const detailView = ref(null);
 
-const isAccountViewOpen = ref(false);
-const accountView = ref(null);
-
-const changeAccountView = (view)=> {
-  if(view == accountView.value){
-    accountView.value = null
+const changeDetailView = (view)=> {
+  if(view == detailView.value){
+    detailView.value = null
   } else {
-    accountView.value = view
+    detailView.value = view
   }
 };
 
@@ -139,5 +129,36 @@ const backToTop = ()=>{
     left: 0, 
     behavior: 'smooth' 
   });
+}
+
+const subSections = [
+  { key: "profile", component: Profile },
+  { key: "pos", component: PosCard },
+  { key: "calendar", component: CalendarCard },
+  { key: "notification", component: NotificationCard },
+  { key: "guest-pass", component: GuestCard },
+  { key: "note", component: NoteCard },
+  { key: "newAgreement", component: NewAgreement },
+  { key: "engage", component: Engage }
+]
+
+const accountOptions = [
+  { key: "memberinfo", icon: MemberInfoIcon },
+  { key: "setting", icon: SettingIcon },
+  { key: "#", icon: DollarDocIcon },
+  { key: "#", icon: AnnouncementIcon },
+  { key: "#", icon: PieChartIcon },
+  { key: "#", icon: BookIcon },
+  { key: "#", icon: DocIcon }
+]
+
+const toggleDetailSection = (event) => {
+  if (typeof(event) != "boolean") {
+    isDetailOpened.value = !isDetailOpened.value;
+    detailView.value = null;
+  } else {
+    isDetailOpened.value = event;
+    detailView.value = null;
+  }
 }
 </script>

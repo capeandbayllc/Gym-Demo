@@ -52,7 +52,7 @@
 import MembershipChart from './membership-chart.vue';
 import ReportingModal from '../reporting-popup-modal/index.vue';
 import GoBtn from './go-btn.vue';
-const memberships = ["Basic Membership", "Premium Membership", "Platinum Membership", "Childcare Add-on"]
+const memberships = ["Bronze Membership", "Silver Membership", "Gold Membership", "Platinum Membership", "Childcare Add-on"]
 const reportingModal = ref(null);
 const showReportingModal = () => {
     reportingModal.value.open();

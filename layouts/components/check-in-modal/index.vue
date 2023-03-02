@@ -89,8 +89,8 @@
   import NoteCard from '~~/pages/check-in/note-card/index.vue';
   import NewAgreement from '~~/pages/check-in/new-agreement/index.vue';
   import { LockIcon, MemberInfoIcon, SettingIcon, DollarDocIcon, AnnouncementIcon, PieChartIcon, BookIcon, DocIcon, UnlockIcon } from '~~/components/icons';
-  import AlertAddModal from '~~/pages/check-in/alert-add-modal.vue';
-  import NoteAddModal from '~~/pages/check-in/note-add-modal.vue';
+  import AlertAddModal from '~~/pages/check-in/modals/alert-add-modal.vue';
+  import NoteAddModal from '~~/pages/check-in/modals/note-add-modal.vue';
   import UserInfo from '~~/pages/check-in/user-info/index.vue';
   import Setting from '~~/pages/check-in/setting/index.vue';
   import Engage from '~~/pages/check-in/engage/index.vue';

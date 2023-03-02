@@ -1,15 +1,47 @@
 <template>
     <simple-card class="guest-pass-card" :closable="true" title="Guest Pass">
-        <div class="guest-card-form">
+        <div class="guest-card-form card-gradient-bg">
+            <div class="text-xl text-secondary col-span-2 font-bold">Create Guest Pass</div>
             <template v-for="item in fields" :key="item.key">
                 <div>
                     <div>{{item.label}}</div>
-                    <input class="bg-secondary" v-model="form[item.key]"/>
+                    <input
+                        v-if="item.key != 'date'"
+                        class="bg-secondary"
+                        v-model="form[item.key]"
+                    />
+                    <div v-else class="flex flex-row justify-between">
+                        <div class="flex flex-row items-center ">
+                            <calendar-icon />
+                            <Datepicker
+                                v-model="form['start']"
+                                placeholder="00-00-0000"
+                                text-input
+                                input-class-name="dp-custom-input"
+                                hide-input-icon
+                                :format="format"
+                                :enable-time-picker="false"
+                            />
+                        </div>
+                        <div class="flex flex-row items-center ">
+                            <calendar-icon />
+                            <Datepicker
+                                v-model="form['end']"
+                                placeholder="00-00-0000"
+                                text-input
+                                input-class-name="dp-custom-input"
+                                hide-input-icon
+                                :format="format"
+                                :enable-time-picker="false"
+                            />
+                        </div>
+                    </div>
                 </div>
             </template>
             <div>
                 <div>Location</div>
                 <select-box
+                    class="bg-base-content/30"
                     :items="locations"
                     :value="form.location"
                     :on-change="value => form.location = value"
@@ -29,7 +61,7 @@
         @apply m-4
     }
     .guest-card-form {
-        @apply border border-secondary my-8 mx-4 lg:mx-16 p-8 rounded grid  grid-cols-1  lg:grid-cols-2 gap-x-12 gap-y-8;
+        @apply py-16 px-4 lg:px-36 rounded grid  grid-cols-1  lg:grid-cols-2 gap-x-16 gap-y-8;
         input {
             @apply h-9 rounded mt-3 w-full pl-2;
         }
@@ -38,9 +70,30 @@
         }
     }
 }
+
+</style>
+<style>
+    .dp-custom-input {
+        @apply bg-transparent border-none text-secondary mt-1;
+        &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            @apply text-secondary font-bold;
+        }
+    }
+
 </style>
 <script setup>
 import {ref} from 'vue'
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+import { CalendarIcon } from '~~/components/icons';
+
+const format = (date) => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  return `${day}-${month}-${year}`;
+}
 
 const form = ref({
     location: "1"
