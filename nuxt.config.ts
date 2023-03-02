@@ -18,20 +18,13 @@ export default defineNuxtConfig({
       },
     },
   },
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/apollo"],
+  modules: ["@nuxtjs/tailwindcss"],
   tailwindcss: {
     cssPath: "~/assets/css/tailwind.css",
     configPath: "tailwind.config",
     exposeConfig: false,
     injectPosition: 0,
     viewer: true,
-  },
-  apollo: {
-    clients: {
-      default: {
-        httpEndpoint: "https://api.spacex.land/graphql",
-      },
-    },
   },
   ssr: false,
 });
