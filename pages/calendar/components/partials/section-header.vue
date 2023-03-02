@@ -19,6 +19,8 @@
  *  - you can either use props, or slots for more control over the way content is shown.
  *  - simply use whichever method you require and component will handle the rest.
  *  - choose either props OR slots. title/subtitle are independant so you may mix and match methods.
+ *
+ *  example shown in file `./event-details.vue`
  */
 
 const props = defineProps({
