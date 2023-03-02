@@ -11,9 +11,7 @@
         <td>{{data.email}}</td>
         <td class="text-center">{{data.location}}</td>
         <td>
-            <div class="membership-btn" :class="'type-' + data.type_status">
-                {{data.type}}
-            </div>
+            <membership-btn :membership="data.type"/>
         </td>
         <td>{{data.created}}</td>
     </tr>
@@ -48,6 +46,7 @@
     }
 </style>
 <script setup>
+import MembershipBtn from '~~/components/buttons/membership-btn.vue';
 const props = defineProps({
     data: Object
 })

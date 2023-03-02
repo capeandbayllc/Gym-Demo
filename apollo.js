@@ -6,7 +6,7 @@ const members = [{
     "phone": "(123) 456-7890",
     "email": "email@email.com",
     "location": "1",
-    "type": "premimum",
+    "type": "platinum",
     "addOns": true
 }, {
     "id": 2,
@@ -17,7 +17,7 @@ const members = [{
     "phone": "(123) 456-7890",
     "email": "email@email.com",
     "location": "1",
-    "type": "basic",
+    "type": "bronze",
     "addOns": false
 }, {
     "id": 3,
@@ -28,7 +28,7 @@ const members = [{
     "phone": "(123) 456-7890",
     "email": "email@email.com",
     "location": "1",
-    "type": "premimum",
+    "type": "silver",
     "addOns": true
 }, {
     "id": 4,
@@ -50,7 +50,7 @@ const members = [{
     "phone": "(123) 456-7890",
     "email": "email@email.com",
     "location": "1",
-    "type": "premimum",
+    "type": "platinum",
     "addOns": false
 }]
 
