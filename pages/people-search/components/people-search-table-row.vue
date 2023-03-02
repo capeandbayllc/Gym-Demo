@@ -11,9 +11,7 @@
         <td>{{data.email}}</td>
         <td>{{data.location}}</td>
         <td>
-            <div class="membership-btn" :class="'type-' + data.type_status">
-                {{data.type}}
-            </div>
+            <membership-btn :membership="data.type"/>
         </td>
         <td>{{data.created}}</td>
     </tr>
@@ -31,9 +29,6 @@
     td:last-child {
         @apply border-r-2 rounded-r capitalize;
     }
-    .membership-btn {
-        @apply flex items-center justify-center rounded text-sm cursor-pointer h-full px-2 py-1;
-    }
     .type-warning {
         @apply bg-orange-400;
     }
@@ -48,6 +43,7 @@
     }
 </style>
 <script setup>
+import MembershipBtn from '~~/components/buttons/membership-btn.vue';
 const props = defineProps({
     data: Object
 })

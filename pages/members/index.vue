@@ -136,7 +136,7 @@ const members = [
         phone: '(123) 456-7890',
         email: 'email@email.com',
         location: '1',
-        type: 'premimum',
+        type: 'silver',
         addOns: true,
     },
     {
@@ -148,7 +148,7 @@ const members = [
         phone: '(123) 456-7890',
         email: 'email@email.com',
         location: '1',
-        type: 'basic',
+        type: 'bronze',
         addOns: false,
     },
     {
@@ -160,7 +160,7 @@ const members = [
         phone: '(123) 456-7890',
         email: 'email@email.com',
         location: '1',
-        type: 'premimum',
+        type: 'platinum',
         addOns: true,
     },
     {
@@ -184,7 +184,7 @@ const members = [
         phone: '(123) 456-7890',
         email: 'email@email.com',
         location: '1',
-        type: 'premimum',
+        type: 'platinum',
         addOns: false,
     },
 ];

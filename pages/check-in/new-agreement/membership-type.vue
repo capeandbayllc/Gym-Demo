@@ -8,22 +8,29 @@
                         <th></th>
                         <th>
                             <div class="py-2 m-1 border border-secondary rounded-md gradient-bg">
-                                <b>Basic</b>
+                                <b>Bronze</b>
                                 <p>$9.99</p>
                                 <p>Per month</p>
                             </div>
                         </th>
                         <th>
                             <div class="py-2 m-1 border border-secondary rounded-md gradient-bg">
-                                <b>Basic</b>
+                                <b>Silver</b>
                                 <p>$14.99</p>
                                 <p>Per month</p>
                             </div>
                         </th>
                         <th>
                             <div class="py-2 m-1 border border-secondary rounded-md gradient-bg">
-                                <b>Basic</b>
+                                <b>Gold</b>
                                 <p>$21.99</p>
+                                <p>Per month</p>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="py-2 m-1 border border-secondary rounded-md gradient-bg">
+                                <b>Platinum</b>
+                                <p>$25.99</p>
                                 <p>Per month</p>
                             </div>
                         </th>
@@ -33,24 +40,33 @@
                     <tr v-for="(item, index) in membershipTable" :key="index">
                         <td class="border-b border-secondary py-3 align-bottom" :class="index==0 ? '!border-r-0' : '' ">{{ item.label }}</td>
                         <td class="border border-secondary py-3 text-center" :class="index==0 ? '!border-solid top-left-corner':''">
-                            <CheckCircleIcon v-if="item.basic == true" class="inline-block"/>
-                            <Button v-else-if="item.basic == 'select'" secondary size="sm" class="my-5">Select</Button>
-                            <span v-else> <span v-if="item.basic != false"> {{ item.premiumPlus }} </span> </span>
+                            <CheckCircleIcon v-if="item.bronze == true" class="inline-block"/>
+                            <Button v-else-if="item.bronze == 'select'" secondary size="sm" class="my-5">Select</Button>
+                            <span v-else> <span v-if="item.bronze != false"> {{ item.gold }} </span> </span>
                         </td>
                         <td class="border border-secondary py-3 text-center" :class="index==0 ? '!border-solid !border-l-0' : '' ">
-                            <CheckCircleIcon v-if="item.premium == true" class="inline-block"/>
-                            <Button v-else-if="item.premium == 'select'" secondary size="sm" class="my-5">Select</Button>
-                            <span v-else> <span v-if="item.premium != false"> {{ item.premiumPlus }} </span> </span>
+                            <CheckCircleIcon v-if="item.silver == true" class="inline-block"/>
+                            <Button v-else-if="item.silver == 'select'" secondary size="sm" class="my-5">Select</Button>
+                            <span v-else> <span v-if="item.silver != false"> {{ item.gold }} </span> </span>
+                        </td>
+                        <td class="border border-secondary py-3 text-center" :class="index==0 ? '!border-solid' : '' ">
+                            <CheckCircleIcon v-if="item.gold == true" class="inline-block"/>
+                            <Button v-else-if="item.gold == 'select'" secondary size="sm" class="my-5">Select</Button>
+                            <span v-else> <span v-if="item.gold != false"> {{ item.gold }} </span> </span>
                         </td>
                         <td class="border border-secondary py-3 text-center" :class="index==0 ? '!border-solid top-right-corner' : '' ">
-                            <CheckCircleIcon v-if="item.premiumPlus == true" class="inline-block"/>
-                            <Button v-else-if="item.premiumPlus == 'select'" secondary size="sm" class="my-5">Select</Button>
-                            <span v-else> <span v-if="item.premiumPlus != false"> {{ item.premiumPlus }} </span> </span>
+                            <CheckCircleIcon v-if="item.platinum == true" class="inline-block"/>
+                            <Button v-else-if="item.platinum == 'select'" secondary size="sm" class="my-5">Select</Button>
+                            <span v-else> <span v-if="item.platinum != false"> {{ item.platinum }} </span> </span>
                         </td>
                     </tr>
                     <tr>
                         <td class="text-secondary border border-secondary py-3 align-top !border-b-0 !border-r-0">Total Due Today</td>
                         <td class="text-secondary border border-secondary py-3 text-center bottom-left-corner">
+                            <p class="mb-6">$0.00</p>
+                            <Button secondary size="sm">Select</Button>
+                        </td>
+                        <td class="text-secondary border border-secondary py-3 text-center">
                             <p class="mb-6">$0.00</p>
                             <Button secondary size="sm">Select</Button>
                         </td>
@@ -74,81 +90,101 @@ import { CheckCircleIcon } from "@/components/icons";
 const membershipTable = ref([
     {
         label:"Month-to-Month",
-        basic: true,
-        premium: true,
-        premiumPlus: true
+        bronze: true,
+        silver: true,
+        gold: true,
+        platinum: true,
     },
     {
         label:"Open 24 hours a Day",
-        basic: true,
-        premium: true,
-        premiumPlus: true
+        bronze: true,
+        silver: true,
+        gold: true,
+        platinum: true,
     },
     {
         label:"Access to Cardio & Strength Equipment",
-        basic: true,
-        premium: true,
-        premiumPlus: true
+        bronze: true,
+        silver: true,
+        gold: true,
+        platinum: true,
     },
     {
         label:"Complimentary Welcome Workout",
-        basic: true,
-        premium: true,
-        premiumPlus: true
+        bronze: true,
+        silver: true,
+        gold: true,
+        platinum: true,
     },
     {
         label:"Swimming Pool and Hot Tub",
-        basic: false,
-        premium: true,
-        premiumPlus: true
+        bronze: false,
+        silver: true,
+        gold: true,
+        platinum: true,
     },
     {
         label:"Group Fitness Classes",
-        basic: false,
-        premium: false,
-        premiumPlus: true
+        bronze: false,
+        silver: false,
+        gold: true,
+        platinum: true,
+    },
+    {
+        label:"Personal Trainer",
+        bronze: false,
+        silver: false,
+        gold: false,
+        platinum: true,
     },
     {
         label:"Summary of Fees",
-        basic: "select",
-        premium: "select",
-        premiumPlus: "select"
+        bronze: "select",
+        silver: "select",
+        gold: "select",
+        platinum: "select",
     },
     {
         label:"Enrollment Fee",
-        basic: "$0.00",
-        premium: "$0.00",
-        premiumPlus: "$0.00"
+        bronze: "$0.00",
+        silver: "$0.00",
+        gold: "$0.00",
+        platinum: "$0.00",
     },
     {
         label:"Taxes",
-        basic: "$0.00",
-        premium: "$0.00",
-        premiumPlus: "$0.00"
+        bronze: "$0.00",
+        silver: "$0.00",
+        gold: "$0.00",
+        platinum: "$0.00",
     },
         {
         label:"Monthly Dues",
-        basic: "$0.00",
-        premium: "$0.00",
-        premiumPlus: "$0.00"
+        bronze: "$0.00",
+        silver: "$0.00",
+        gold: "$0.00",
+        platinum: "$0.00",
     },
     {
         label:"Pro-rated",
-        basic: "$0.00",
-        premium: "$0.00",
-        premiumPlus: "$0.00"
+        bronze: "$0.00",
+        silver: "$0.00",
+        gold: "$0.00",
+        platinum: "$0.00",
     },
     {
         label:"Taxes",
-        basic: "$0.00",
-        premium: "$0.00",
-        premiumPlus: "$0.00"
+        bronze: "$0.00",
+        silver: "$0.00",
+        gold: "$0.00",
+        platinum: "$0.00",
     },
         {
         label:"Annual Fee",
-        basic: "$0.00",
-        premium: "$0.00",
-        premiumPlus: "$0.00"
+        bronze: "$0.00",
+        silver: "$0.00",
+        gold: "$0.00",
+        platinum: "$0.00",
     }
 ]);
 </script>
@@ -165,7 +201,7 @@ const membershipTable = ref([
         width:7rem;
     }
     .shadow-layer{
-        width:21rem;
+        width:28rem;
     }
     .top-left-corner{
         border-top-left-radius: 20px;

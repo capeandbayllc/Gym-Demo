@@ -1,14 +1,22 @@
-const LOGIN_ROUTE = "/login";
+export const LOGIN_ROUTE = "/login";
+export const KIOSK_ROUTE = "/kiosk";
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  const authCookie = useCookie("token");
+  const authCookie = useCookie("auth");
+  const isLoggedIn = authCookie && authCookie.value?.id;
+  const path = to?.path;
 
-  const isLoggedIn = !!authCookie?.value;
   //   console.log({ isLoggedIn: isLoggedIn.value, to: to.path });
-  if (to?.path !== LOGIN_ROUTE && !isLoggedIn) {
+  if (path !== LOGIN_ROUTE && !isLoggedIn) {
     return navigateTo(LOGIN_ROUTE);
-  } else if (to?.path === LOGIN_ROUTE && isLoggedIn) {
+  }
+
+  if (path === LOGIN_ROUTE && isLoggedIn) {
     authCookie.value = null;
     return navigateTo("/");
+  }
+
+  if (path !== KIOSK_ROUTE && isLoggedIn && authCookie.value.isKioskUser) {
+    return navigateTo(KIOSK_ROUTE);
   }
 });

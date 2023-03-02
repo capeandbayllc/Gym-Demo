@@ -27,7 +27,7 @@
 <script setup>
 import { AddIcon,EmptyFileIcon } from '~~/components/icons';
 import AgreementModal from './agreement-modal.vue';
-const types = ["Blank", "Basic Membership", "Silver Membership", "Premium Membership", "Traning"];
+const types = ["Blank", "Bronze Membership", "Silver Membership", "Gold Membership", "Platinum Membership", "Traning"];
 const agreementModal = ref(null);
 const showAgreementModal = () => {
     agreementModal.value.open();

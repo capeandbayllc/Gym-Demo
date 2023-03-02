@@ -1,5 +1,5 @@
 <template>
-  <div class="app-layout gradient-bg" v-if="isLoggedIn">
+  <div class="app-layout gradient-bg" v-if="showHeader">
     <app-header
       @show-circular-menu="toggleCircularMenu"
       @show-help="showBot"
@@ -52,18 +52,16 @@
 }
 </style>
 <script setup>
-import { ref, watchEffect, provide, onMounted, watch } from "vue";
+import { ref, watchEffect, provide } from "vue";
 import AppHeader from "./components/app-header.vue";
 import NavBar from "./components/nav-bar/index.vue";
-import GlobalSearch from "./components/global-search.vue";
 import SideBar from "./components/side-bar.vue";
 import CircularMenu from "./components/circular-menu/index.vue";
 import HelpBot from "./components/help-bot/index.vue";
 import ProfileMenu from "./components/profile-menu/index.vue";
 
-import GlobalSearchModal from "./components/global-search-modal/index.vue";
-
 import ChatConversation from "./components/chat-conversation/index.vue";
+import {KIOSK_ROUTE, LOGIN_ROUTE} from "~/middleware/auth.global";
 
 const showCircularMenu = ref(false);
 
@@ -94,34 +92,17 @@ watchEffect(() => {
   }
 });
 
-const isLoggedIn = ref(false);
+const showHeader = ref(false);
 const route = useRoute();
 const authCookie = useCookie("token", { watch: true });
 
 watchEffect(() => {
-  if (route.path === "/login") {
-    isLoggedIn.value = false;
-  } else {
-    isLoggedIn.value = true;
+  if ([LOGIN_ROUTE, KIOSK_ROUTE].includes(route.path)) {
+    showHeader.value = false;
+    return;
   }
+
+  showHeader.value = true;
 });
-// watch(route, (newRoute) => {
-//   console.log({ route: route.value, newRoute: newRoute.value });
-//   if (newRoute.path === "/login") {
-//   }
-// });
 
-// const authCookie = useCookie("token", { watch: true });
-// watchEffect(() => console.log("layou", { authCookie: authCookie.value }));
-
-// const isLoggedIn = computed(() => authCookie?.value === true);
-
-// watch(isLoggedIn, async () => {
-//   console.log({ isLoggedIn: isLoggedIn.value });
-//   if (isLoggedIn) {
-//     await navigateTo("/");
-//   } else {
-//     await navigateTo("/login");
-//   }
-// });
 </script>
