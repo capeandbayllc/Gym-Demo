@@ -24,8 +24,10 @@
                     <div class="app-body-content">
                         <slot />
                     </div>
-                    <side-bar />
                 </div>
+            </div>
+            <div class="transition-all duration-200 ease-linear">
+                <side-bar />
             </div>
         </div>
         <ChatConversation />
