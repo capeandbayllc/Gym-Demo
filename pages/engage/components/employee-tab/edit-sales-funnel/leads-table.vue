@@ -36,12 +36,12 @@ const data = [
     {
         id: 1,
         name: "Ray Unser",
-        membership: "Premimum",
+        membership: "platinum",
         phone:"123-147-3456"
     }, {
         id: 2,
         name: "Randy Portis",
-        membership: "Basic",
+        membership: "bronze",
         phone:"123-255-9887"
     }, 
     {
@@ -53,7 +53,7 @@ const data = [
     {
         id: 4,
         name: "Sandy Lin",
-        membership: "Gold",
+        membership: "Silver",
         phone:"123-255-6898"
     }
 ];
