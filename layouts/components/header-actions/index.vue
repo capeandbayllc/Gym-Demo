@@ -23,16 +23,17 @@
       <alarm-btn @click="$emit('show-alert-modal')" />
       <alert-list class="alert-list" />
     </div>
-    <!-- <div class="setting-icon">		
+    <!-- <div class="setting-icon">
 			<setting-icon />
 		</div> -->
-    <div class="relative z-10">
-      <question-round-icon @click="$emit('show-help')" />
-    </div>
+<!--    <div class="relative z-10">-->
+<!--      <question-round-icon @click="$emit('show-help')" />-->
+<!--    </div>-->
     <div class="leader-board-container relative z-10">
-      <people-icon @click="toggle" />
-
-      <LeaderPop v-if="showLeaderPop" @close="toggle" class="leader-pop" />
+      <button class="w-6">
+        <TrophyIcon @mouseover="openPop" />
+      </button>
+        <LeaderPop v-if="showLeaderPop" @close="toggle" class="leader-pop" />
     </div>
     <div class="!ml-[-40px]">
       <account-btn @click="$emit('show-profile-menu')" />
@@ -102,12 +103,14 @@ import {
   PersonAddIcon,
   SettingIcon,
   QuestionRoundIcon,
+
 } from "@/components/icons";
 import AlarmBtn from "./alarm-btn.vue";
 import AccountBtn from "./account-btn.vue";
 import AlertList from "./alert-list.vue";
 import LeaderPop from "~/layouts/components/leader-board/popup.vue";
 import UserAddMenu from "./user-add-menu.vue";
+import TrophyIcon from "~/components/icons/trophy.vue"
 
 const userMenu = ref(null);
 const globalSearchInput = ref("");
@@ -123,6 +126,9 @@ const toggle = () => {
   showLeaderPop.value = !showLeaderPop.value;
   console.log("toggle");
 };
+const openPop = () => {
+  showLeaderPop.value = true;
+}
 
 const showUserMenu = () => userMenu.value.open();
 </script>

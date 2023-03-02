@@ -5,7 +5,7 @@
     </div>
 
     <div class="leader-pop-info">
-      <leader-pop-avatar />
+      <TrophyIcon class="w-12"/>
 
       <div class="leader-pop-title justify-center">Leaderboard</div>
       <div
@@ -15,6 +15,7 @@
         <button
           type="button"
           class="btn-xs btn-secondary text-white p-1 m-1 button2"
+
         >
           Trainers
         </button>
@@ -26,11 +27,11 @@
       >
         <div class="carousel-wrap col-span-6">
           <carousel :breakpoints="breakpoints" class="m-2">
-            <tr v-for="(leader, index) in leaderBoardData" :key="index">
+            <tr v-for="(leader, index) in leaderBoardData" :key="index" >
               <td>
-                <div class="px-1">{{ leader.rank }}</div>
+                <div class="px-1 m-1">{{ leader.rank }}</div>
               </td>
-              <td>
+              <td class="pr-4">
                 <div v-if="leader.trending === 'up'" class="arrow-up"></div>
                 <div v-if="leader.trending === 'down'" class="arrow-down"></div>
                 <div v-if="leader.trending === '-'" class="solid"></div>
@@ -104,8 +105,118 @@
 <script setup>
 import { ref } from "vue";
 import { CrossIcon } from "~~/components/icons";
-import LeaderPopAvatar from "./leader-pop-avatar.vue";
-const leaderBoardData = ref([
+import TrophyIcon from "~/components/icons/trophy-circle.vue"
+
+
+
+// const toggleData = () => {
+//   let leaderBoardData = locationData;
+//
+// }
+
+const locationData = ref([
+  {
+    name: "Ames",
+    rank: "1st",
+    clubLocation: 65,
+    goalUnitSold: 90,
+    unitSold: 1150,
+    trending: "-",
+    goalRevenue: "$1950",
+    dollarAmount: "$1,2000",
+  },
+  {
+    name: "Lubbock",
+    rank: "2nd",
+    clubLocation: 65,
+    goalUnitSold: 90,
+    unitSold: 1100,
+    trending: "up",
+    goalRevenue: "$1950",
+    dollarAmount: "$1,2000",
+  },
+  {
+    name: "Stillwater",
+    rank: "3rd",
+    clubLocation: 65,
+    goalUnitSold: 90,
+    unitSold: 1050,
+    trending: "down",
+    goalRevenue: "$1950",
+    dollarAmount: "$1,2000",
+  },
+  {
+    name: "Fort Worth",
+    rank: "4th",
+    clubLocation: 65,
+    goalUnitSold: 90,
+    unitSold: 1000,
+    trending: "-",
+    goalRevenue: "$1950",
+    dollarAmount: "$1,2000",
+  },
+  {
+    name: "Manhattan",
+    rank: "5th",
+    clubLocation: 65,
+    goalUnitSold: 90,
+    unitSold: 950,
+    trending: "up",
+    goalRevenue: "$1950",
+    dollarAmount: "$1,2000",
+  },
+  {
+    name: "Morgantown",
+    rank: "6th",
+    clubLocation: 65,
+    goalUnitSold: 90,
+    unitSold: 900,
+    trending: "down",
+    goalRevenue: "$1950",
+    dollarAmount: "$1,2000",
+  },
+  {
+    name: "Lawrence",
+    rank: "7th",
+    clubLocation: 65,
+    goalUnitSold: 90,
+    unitSold: 850,
+    trending: "-",
+    goalRevenue: "$1950",
+    dollarAmount: "$1,2000",
+  },
+  {
+    name: "Waco",
+    rank: "8th",
+    clubLocation: 65,
+    goalUnitSold: 90,
+    unitSold: 800,
+    trending: "up",
+    goalRevenue: "$1950",
+    dollarAmount: "$1,2000",
+  },
+  {
+    name: "Norman",
+    rank: "9th",
+    clubLocation: 65,
+    goalUnitSold: 90,
+    unitSold: 750,
+    trending: "-",
+    goalRevenue: "$1950",
+    dollarAmount: "$1,2000",
+  },
+  {
+    name: "Austin",
+    rank: "10th",
+    clubLocation: 65,
+    goalUnitSold: 90,
+    unitSold: 700,
+    trending: "down",
+    goalRevenue: "$1950",
+    dollarAmount: "$1,2000",
+  },
+]);
+const trainerData = ref([
   {
     name: "Caleb Grill",
     rank: "1st",
@@ -223,4 +334,5 @@ const breakpoints = ref({
     snapAlign: "start",
   },
 });
+let leaderBoardData = trainerData;
 </script>
