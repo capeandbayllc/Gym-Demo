@@ -27,9 +27,11 @@
 		</div>
     <div class="leader-board-container relative z-10">
       <people-icon
-          @click="$emit('show-leader-board')"
+          @click="toggle"
       />
-      <leader-pop class="leader-pop" />
+<!--      <div v-if="showLeaderPop.value">-->
+        <LeaderPop class="leader-pop" />
+<!--      </div>-->
     </div>
 		<div class="!ml-[-40px]">
 			<account-btn
@@ -111,7 +113,10 @@ const showFocus = () => {
 }
 const hideFocus = () => {
 	globalSearchInput.value.blur();
-} 
+}
+const showLeaderPop = ref(false);
+const toggle = () => showLeaderPop.value = !showLeaderPop.value;
+
 
 const showUserMenu = () => userMenu.value.open()
 </script>
