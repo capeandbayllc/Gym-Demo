@@ -8,6 +8,7 @@ import { createGraphQLHandler } from "@miragejs/graphql";
 import graphQLSchema from "../api/schema.gql?raw";
 import { UserFactory } from "../api/data/users/UserFactory";
 import { LocationFactory } from "../api/data/locations/LocationFactory";
+import { NotificationFactory } from "../api/data/notifications/NotificationFactory";
 import { UUIDManager } from "../api/utils/UUIDManager";
 import { getPageInfo } from "../api/utils/getPageInfo";
 
@@ -57,6 +58,7 @@ const server = createServer({
   factories: {
     user: UserFactory,
     location: LocationFactory,
+    notification: NotificationFactory,
   },
   identityManagers: {
     application: UUIDManager,

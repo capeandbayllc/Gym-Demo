@@ -20,8 +20,8 @@
       <user-add-menu ref="userMenu" />
     </div>
     <div class="alert-container mt-1">
-      <alarm-btn @click="$emit('show-alert-modal')" />
-      <alert-list class="alert-list" />
+      <alarm-btn :count="user.notifications.length" @click="$emit('show-alert-modal')" />
+      <alert-list :list="user.notifications" class="alert-list" />
     </div>
     <!-- <div class="setting-icon">
 			<setting-icon />
@@ -131,4 +131,5 @@ const openPop = () => {
 }
 
 const showUserMenu = () => userMenu.value.open();
+const user = useCookie("auth");
 </script>

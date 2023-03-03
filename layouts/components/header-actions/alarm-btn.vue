@@ -1,6 +1,6 @@
 <template>
 	<div class="alarm-btn">
-		<span class="notification">1</span>
+		<span v-if="count > 0" class="notification">{{ count }}</span>
 		<alarm-icon/>
 	</div>
 </template>
@@ -16,4 +16,11 @@
 </style>
 <script setup>
 import {AlarmIcon} from "@/components/icons"
+
+defineProps({
+  count: {
+    Type: Number,
+    default: 0,
+  }
+})
 </script>

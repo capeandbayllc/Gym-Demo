@@ -45,6 +45,7 @@ const options = [
         label: "Profile",
         key: "profile",
         selected: false,
+        unread: 4,
     },
     {
         label: "POS",

@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { Factory } from "miragejs";
+import {getRandomInt} from "~/api/utils/number";
 
 export const KIOSK_EMAIL = 'kiosk@gymrevenue.com';
 // https://miragejs.com/docs/main-concepts/factories/
@@ -17,4 +18,9 @@ export const UserFactory = Factory.extend({
   },
   phone: faker.phone.number("###-###-###"),
   // created_at: faker.date.past, //DISABLED BC IT BREAKS MUTATIONS.
+  afterCreate(user, server) {
+    user.update({
+      notifications: server.createList("notification", getRandomInt(10)),
+    })
+  },
 });
