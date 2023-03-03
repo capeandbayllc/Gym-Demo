@@ -3,18 +3,19 @@
 </template>
 
 <script setup>
-import { createServer } from "miragejs";
 import { createGraphQLHandler } from "@miragejs/graphql";
-import graphQLSchema from "../api/schema.gql?raw";
+import { createServer } from "miragejs";
+import { MemberFactory } from "../api/data/members/MemberFactory";
 import { UserFactory } from "../api/data/users/UserFactory";
-import { UUIDManager } from "../api/data/utils/UUIDManager";
+import { LocationFactory } from "../api/data/locations/LocationFactory";
+import { UUIDManager } from "../api/utils/UUIDManager";
 import { getPageInfo } from "../api/utils/getPageInfo";
 
 // Mirage GraphQL README:
 // https://github.com/miragejs/graphql
 
 // queries that are paginated via the @paginate directive
-const paginatedQueries = ["users"];
+const paginatedQueries = ["users", "members"];
 
 //setup object to hold resolvers
 const resolvers = {
@@ -55,12 +56,16 @@ const server = createServer({
   },
   factories: {
     user: UserFactory,
+    member: MemberFactory,
+    location: LocationFactory,
   },
   identityManagers: {
     application: UUIDManager,
   },
   seeds(server) {
     server.createList("user", 25);
+    server.createList("member", 25);
+    server.createList("location", 7);
   },
 });
 

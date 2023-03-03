@@ -30,10 +30,12 @@
 }
 </style>
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import ProfileOptionItem from "./profile-option-item.vue";
-import { AddIcon, NextIcon } from "@/components/icons";
 import CheckInButton from "./check-in-button.vue";
+
+const emit = defineEmits(['update:selected', 'update:check-in'])
+
 const props = defineProps({
     selected: String,
 });
@@ -79,7 +81,9 @@ const options = [
 
 const checkIn = ref(false);
 
-const emit = defineEmits(["update:selected"]);
+
+watch(checkIn, (value) => emit('update:check-in', value));
+
 const handleSelect = (key, value) => {
     if (value) {
         emit("update:selected", key);
