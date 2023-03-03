@@ -65,6 +65,8 @@ import NavBar from "./components/nav-bar/index.vue";
 import SideBar from "./components/side-bar.vue";
 import CircularMenu from "./components/circular-menu/index.vue";
 import HelpBot from "./components/help-bot/index.vue";
+// import LeaderBoard from "./components/leader-board/index.vue";
+// import LeaderBoardPop from "./components/leader-board/popup.vue";
 import ProfileMenu from "./components/profile-menu/index.vue";
 
 import ChatConversation from "./components/chat-conversation/index.vue";
@@ -78,6 +80,12 @@ const toggleCircularMenu = () => {
 
 const helpBot = ref(null);
 const showBot = () => helpBot.value.open();
+
+// const leaderBoard = ref(null);
+// const showLeaderBoard = () => leaderBoard.value.open();
+//
+// const leaderBoardPop = ref(null);
+// const showLeaderPop = () => leaderBoardPop.value.open();
 
 const profileMenu = ref(null);
 const showProfileMenu = () => {
