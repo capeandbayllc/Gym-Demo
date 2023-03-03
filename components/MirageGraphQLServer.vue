@@ -7,8 +7,8 @@ import { createGraphQLHandler } from "@miragejs/graphql";
 import { createServer } from "miragejs";
 import { MemberFactory } from "../api/data/members/MemberFactory";
 import { UserFactory } from "../api/data/users/UserFactory";
-import graphQLSchema from "../api/schema.gql?raw";
-import { UUIDManager } from "../api/data/utils/UUIDManager";
+import { LocationFactory } from "../api/data/locations/LocationFactory";
+import { UUIDManager } from "../api/utils/UUIDManager";
 import { getPageInfo } from "../api/utils/getPageInfo";
 
 // Mirage GraphQL README:
@@ -56,7 +56,8 @@ const server = createServer({
   },
   factories: {
     user: UserFactory,
-    member: MemberFactory
+    member: MemberFactory,
+    location: LocationFactory,
   },
   identityManagers: {
     application: UUIDManager,
@@ -64,6 +65,7 @@ const server = createServer({
   seeds(server) {
     server.createList("user", 25);
     server.createList("member", 25);
+    server.createList("location", 7);
   },
 });
 
