@@ -1,25 +1,25 @@
 <template>
-  <div class="py-4 px-12 w-full h-fit">
-    <!-- modal -->
-    <daisy-modal class="w-fit" id="eventModal" ref="eventModal">
-      <event-popup></event-popup>
-    </daisy-modal>
-    <!-- event details -->
-    <div
-      v-if="eventDetailsVisibibility"
-      class="z-50 fixed h-screen w-screen flex items-center justify-center"
-    >
-      <EventDetails />
-    </div>
-    <!-- more in depth event information -->
-    <div
-      class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16"
-    >
-      <EventInformation />
-    </div>
+    <div class="py-4 px-12 w-full h-fit">
+        <!-- modal -->
+        <daisy-modal class="w-fit" id="eventModal" ref="eventModal">
+            <event-popup></event-popup>
+        </daisy-modal>
+        <!-- event details -->
+        <div
+            v-if="eventDetailsVisibibility"
+            class="z-50 fixed h-screen w-screen flex items-center justify-center"
+        >
+            <EventDetails />
+        </div>
+        <!-- more in depth event information -->
+        <div
+            class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16"
+        >
+            <EventInformation />
+        </div>
 
-    <!-- sidebar date selector popup -->
-    <!-- <daisy-modal
+        <!-- sidebar date selector popup -->
+        <!-- <daisy-modal
       ref="dateSelect"
       id="dateSelect"
       class="bg-base-300 w-fit rounded-lg"
@@ -54,9 +54,9 @@
                     dark
                 />
 
-        <CalendarMenu :calendars="calendarsList" />
-        <ReportsStatistics />
-      </aside>
+                <CalendarMenu :calendars="calendarsList" />
+                <ReportsStatistics />
+            </aside>
 
             <section class="w-full">
                 <!-- main section heading area -->
