@@ -37,102 +37,76 @@
       </div>
     </daisy-modal> -->
 
-    <!-- main content wrapper  -->
-    <div
-      class="border border-secondary bg-black rounded-2xl p-7 max-w-none flex gap-4"
-    >
-      <!-- left sidebar -->
-      <aside class="flex flex-col justify-between">
-        <Datepicker
-          class="calendar-date-picker"
-          menu-class-name="!bg-transparent !border-none"
-          :day-class="getDayClass"
-          month-name-format="long"
-          inline
-          auto-apply
-          :enable-time-picker="false"
-          dark
-        />
+        <!-- main content wrapper  -->
+        <div
+            class="border border-secondary bg-[#202020]/[0.9] rounded-2xl p-7 max-w-none flex gap-4"
+        >
+            <!-- left sidebar -->
+            <aside class="flex flex-col gap-5">
+                <Datepicker
+                    class="calendar-date-picker"
+                    menu-class-name="!bg-transparent !border-none"
+                    :day-class="getDayClass"
+                    month-name-format="long"
+                    inline
+                    auto-apply
+                    :enable-time-picker="false"
+                    dark
+                />
 
         <CalendarMenu :calendars="calendarsList" />
         <ReportsStatistics />
       </aside>
 
-      <section class="w-full h-full">
-        <!-- main section heading area -->
-        <div class="flex justify-between items-center w-full mb-5">
-          <h1 class="text-3xl">January 2088</h1>
-          <!-- filters/page actions -->
-          <div class="flex gap-2">
-            <button
-              class="bg-secondary py-1 px-2 rounded-md border-2 border-transparent flex items-center gap-2 text-[0.8rem]"
-            >
-              <span> Add New </span>
-              <span class="w-4 fill-white">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                  <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                  <path
-                    d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
-                  />
-                </svg>
-              </span>
-            </button>
-            <button
-              class="bg-neutral py-1 px-2 rounded-md border-secondary border-2 flex items-center gap-2 text-[0.8rem]"
-            >
-              <span> All Bookings </span>
-              <span class="w-4 p-1 fill-white">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                  <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                  <path
-                    d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"
-                  />
-                </svg>
-              </span>
-            </button>
-            <input
-              placeholder="Search"
-              class="text-black py-1 p-2 rounded-md border-2 border-transparent text-[0.8rem]"
-              type="text"
-            />
-          </div>
+            <section class="w-full">
+                <!-- main section heading area -->
+                <div class="flex justify-between items-center w-full">
+                    <h1 class="text-3xl">January 2088</h1>
+                    <!-- filters/page actions -->
+                    <div class="flex gap-2">
+                        <button
+                            class="bg-secondary py-1 px-2 rounded-md border-2 border-transparent flex items-center gap-2 text-[0.8rem]"
+                        >
+                            <span> Add New </span>
+                            <span class="w-4 fill-white">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512"
+                                >
+                                    <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
+                                    />
+                                </svg>
+                            </span>
+                        </button>
+                        <button
+                            class="bg-neutral py-1 px-2 rounded-md border-secondary border-2 flex items-center gap-2 text-[0.8rem]"
+                        >
+                            <span> All Bookings </span>
+                            <span class="w-4 p-1 fill-white">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 320 512"
+                                >
+                                    <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"
+                                    />
+                                </svg>
+                            </span>
+                        </button>
+                        <input
+                            placeholder="Search"
+                            class="text-black py-1 p-2 rounded-md border-2 border-transparent text-[0.8rem]"
+                            type="text"
+                        />
+                    </div>
+                </div>
+                <FullCalendar :options="calendarOptions" ref="calendar" />
+            </section>
         </div>
-        <!-- main calendar content -->
-        <div>
-          <FullCalendar :options="calendarOptions" ref="calendar" />
-        </div>
-      </section>
     </div>
-    <!-- <div
-      v-if="calenderView == 'timeGridDay'"
-      class="md:flex md:gap-y-5 w-[35%] -lg:w-full ml-4 flex-col -lg:flex-row -lg:ml-0 -md:block"
-    >
-      <div class="flex-1 -lg:w-2/4 -lg:mb-0 -lg:mr-5 -md:w-full -md:mb-5">
-        <div class="flex items-center mb-2">
-          <h2
-            class="text top-2 left-0 text-md font-bold cursor-pointer flex flex-row"
-            @click="showDateSelectModal"
-          >
-            {{ calendarTitle }}
-            <arrow-icon direction="right" class="h-[25px] items-center" />
-          </h2>
-          <Button ghost class="ml-auto min-h-fit h-6">...</Button>
-        </div>
-        <FullCalendar
-          :options="monthCalendarOptions"
-          ref="monthCalendar"
-          class="w-full month-calender"
-        />
-      </div>
-      <div class="list-calendar flex-1 -lg:w-2/4 -md:w-full">
-        <FullCalendar
-          :options="listCalendarOptions"
-          ref="listCalendar"
-          class="h-full w-full"
-        />
-      </div>
-    </div> -->
-  </div>
 </template>
 <script setup>
 import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
@@ -153,6 +127,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "@vuepic/vue-datepicker/dist/main.css";
+import { calendarEvents as events } from "./helpers/calendar-events";
 
 const calenderView = ref("timeGridWeek");
 
@@ -178,39 +153,6 @@ const calendarEventVisibility = ref(false);
 const eventDetails = ref(null); // selected event information we need to pass into the details & event panels
 const eventDetailsVisibibility = ref(false);
 
-const events = [
-  {
-    title: "Priority One",
-    start: "2022-12-01T06:00:00",
-    backgroundColor: "red",
-    extendedProps: {
-      department: "BioChemistry",
-    },
-    description: "Lecture",
-    parth: "jasani",
-    data: {
-      foo: "bar",
-    },
-  },
-  {
-    title: "To Do Two",
-    start: "2022-12-01T07:00:00",
-    backgroundColor: "blue",
-  },
-  {
-    title: "To Do Three",
-    start: "2022-12-01T08:30:00",
-    extendedProps: {
-      status: "done",
-    },
-    backgroundColor: "lime",
-  },
-  {
-    title: "Birthday Party",
-    start: "2022-12-01T10:00:00",
-    backgroundColor: "green",
-  },
-];
 const handleChangeView = (value) => {
   calenderView.value = value;
   console.log("calenderView", calenderView.value);
@@ -264,11 +206,30 @@ const calendarOptions = ref({
       },
       nowIndicator: true,
     },
-  },
-  viewDidMount: function (info) {
-    onViewChanged();
-  },
-  //eventContent: { html: '<i>some html</i>' }
+    timeAxis: {
+        slotDuration: "01:00:00",
+    },
+    views: {
+        timeGridDay: {
+            dayHeaderFormat: {
+                month: "long",
+                day: "numeric",
+                omitCommas: "false",
+            },
+            nowIndicator: true,
+        },
+        timeGridWeek: {
+            dayHeaderFormat: {
+                month: "short",
+                day: "2-digit",
+            },
+            nowIndicator: true,
+        },
+    },
+    viewDidMount: function (info) {
+        onViewChanged();
+    },
+    //eventContent: { html: '<i>some html</i>' }
 });
 
 const monthCalendarOptions = ref({
@@ -366,34 +327,48 @@ onMounted(async () => {
 
 <style>
 .calendar-date-picker {
-  .dp__theme_dark {
-    --dp-background-color: #000000;
-    --dp-menu-border-color: #ffffff;
-  }
-  .dp__calendar_header {
-    @apply text-secondary;
-  }
-  .dp__month_year_row {
-    @apply border-none;
-    .dp__month_year_col_nav {
-      @apply bg-secondary rounded;
-      .dp__inner_nav {
-        @apply text-base-content;
-        &:hover {
-          @apply bg-secondary;
+    .dp__theme_dark {
+        --dp-background-color: #000000;
+        --dp-menu-border-color: #191919;
+    }
+    .dp__calendar_header {
+        @apply text-secondary;
+    }
+    .dp__month_year_row {
+        @apply border-none;
+        .dp__month_year_col_nav {
+            @apply bg-secondary rounded;
+            .dp__inner_nav {
+                @apply text-base-content;
+                &:hover {
+                    @apply bg-secondary;
+                }
+            }
         }
       }
     }
-  }
-  .dp__calendar {
-    @apply bg-transparent;
-    .dp__calendar_wrap {
-      @apply bg-neutral border border-secondary rounded;
-      .dp__calendar_header_separator {
-        @apply h-0;
-      }
+    .dp__calendar {
+        @apply bg-transparent text-[0.8rem];
+        .dp__calendar_wrap {
+            @apply bg-neutral border border-secondary rounded;
+            .dp__calendar_header_separator {
+                @apply h-0;
+            }
+        }
     }
   }
+}
+
+.dp__cell_inner {
+    @apply !p-0 !h-[25px];
+}
+
+.dp__month_year_select {
+    @apply flex-row !py-0 !h-auto;
+}
+
+.dp__month_year_select {
+    @apply flex-row !py-0 !h-auto;
 }
 
 .fc .fc-list-sticky .fc-list-day > *,
@@ -440,6 +415,10 @@ onMounted(async () => {
   @apply min-h-[55rem];
 }
 
+th.fc-day-today {
+    @apply !bg-[#191919]/[0.4];
+}
+
 .fc-event-main-frame {
   @apply !pl-2;
 }
@@ -481,9 +460,26 @@ onMounted(async () => {
 .fc .fc-day-today {
   @apply bg-blend-darken;
 }
-/* .list-calendar .fc-view-harness{
-            @screen -md{
-                max-height: auto !important
-            }
-        } */
+.fc-col-header-cell-cushion {
+    @apply !font-normal !capitalize;
+}
+
+.fc-timegrid-axis-cushion {
+    @apply capitalize text-[0.7rem];
+}
+
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+    @apply !my-4;
+}
+.fc-scrollgrid.fc-scrollgrid-liquid {
+    @apply !max-h-[66vh] !overflow-scroll;
+}
+.fc-timegrid th,
+.fc-timegrid td {
+    @apply !text-[0.8rem];
+}
+.fc-timegrid,
+.fc-view-harness {
+    @apply !max-h-[66vh];
+}
 </style>
