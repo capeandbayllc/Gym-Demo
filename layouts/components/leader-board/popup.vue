@@ -9,11 +9,11 @@
 
       <div class="leader-pop-title justify-center">Leaderboard</div>
       <div
-        class="justify-center bg-[#18203A] border-color-[#073A76] button2 w-[60%] h-10 p-1"
+        class="justify-center bg-[#18203A] border-color-[#073A76] button2 w-[60%] h-8 "
       >
         <button
             type="button"
-            class="btn-xs text-white p-1 m-1 button2 margin-left"
+            class="btn-xs text-white pl-3 pr-3 m-1 button2"
             @click="(e) => { selected = 'clubs' }"
             :class="{'btn-secondary': selected==='clubs'}"
             name="clubs"
@@ -22,7 +22,7 @@
         </button>
         <button
           type="button"
-          class="btn-xs  text-white p-1 m-1 button2"
+          class="btn-xs text-white pl-3 pr-3 m-1 button2"
           :class="{'btn-secondary': selected==='trainers'}"
           @click="(e) => { selected = 'trainers' }"
           name="trainers"

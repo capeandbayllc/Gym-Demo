@@ -31,7 +31,7 @@
 <!--    </div>-->
     <div class="leader-board-container relative z-10">
       <button class="w-6">
-        <TrophyIcon @mouseover="openPop" />
+        <TrophyIcon @mouseover="openPop" @click="$router.push('/leaderboard')"/>
       </button>
         <LeaderPop v-if="showLeaderPop" @close="toggle" class="leader-pop" />
     </div>
@@ -102,7 +102,7 @@ import {
   PeopleIcon,
   PersonAddIcon,
   SettingIcon,
-  QuestionRoundIcon,
+  QuestionRoundIcon, EmployeeIcon,
 
 } from "@/components/icons";
 import AlarmBtn from "./alarm-btn.vue";
