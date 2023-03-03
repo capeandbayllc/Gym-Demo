@@ -762,7 +762,6 @@ type Member {
   last_name: String
   middle_name: String
   email: String
-  phone: String
   primary_phone: String
   alternate_phone: String
   gender: String
@@ -777,7 +776,6 @@ type Member {
   external_id: String
   misc: String
   notes: [Note]
-  status: Boolean
 }
 
 """
@@ -934,7 +932,6 @@ type Mutation {
   updateTeam(id: ID, name: String, positions: [ID]): Team!
   updateUser(input: UserInput): User!
   createUser(input: UserInput): User!
-  createMember(input: MemberInput): Member!
   createRole(input: CreateRoleInput): Role!
   updateRole(input: UpdateRoleInput): Role!
   deleteRole(id: ID!): Role!
@@ -2047,26 +2044,6 @@ input UserInput {
   user_type: String
   departments: [Departments]
   positions: [ID]
-}
-
-input MemberInput {
-  id: ID
-  first_name: String
-  last_name: String
-  middle_name: String
-  email: String
-  phone: String
-  primary_phone: String
-  alternate_phone: String
-  gender: String
-  date_of_birth: DateTime
-  created_at: DateTime
-  updated_at: DateTime
-  gr_location_id: ID
-  agreement_number: String
-  external_id: String
-  misc: String
-  status: Boolean
 }
 
 """
