@@ -6,12 +6,12 @@
       :class="{
         'selected-button': currentValue === btn,
       }"
-      class="px-6 py-1 rounded-md border-2 border-transparent font-bold"
+      class="px-4 rounded-md border-2 border-transparent font-bold"
       v-for="btn in choices"
       :key="btn"
     >
       <button
-        class="capitalize"
+        class="capitalize text-sm"
         @click="
           {
             currentValue = btn;
