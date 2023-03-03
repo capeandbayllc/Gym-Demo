@@ -79,7 +79,7 @@
     </div>
 
     <div class="float-right m-2">
-      <button class="text-xs">View More</button>
+      <button class="text-xs" @click="showSlideout, $emit('close')">View More</button>
     </div>
   </div>
 </template>
@@ -102,18 +102,15 @@
     }
   }
 }
+
+.button2 {
+  border-radius: 4px;
+}
 .solid {
   border-top: 1px solid #bbb;
   padding-bottom: 4px;
 }
 
-.button2 {
-  border-radius: 4px;
-}
-
-.margin-left {
-  margin-left: 17.5%;
-}
 .arrow-up {
   width: 0;
   height: 0;
@@ -359,5 +356,14 @@ const breakpoints = ref({
     snapAlign: "start",
   },
 });
+const showLeaderSlide = ref(false);
+const toggle = () => {
+  showLeaderSlide.value = !showLeaderSlide.value;
+  console.log("showLeaderSlide");
+};
+const showSlideout = () => {
+  showLeaderSlide.value = true;
+  console.log(showLeaderSlide);
+}
 let leaderBoardData = trainerData;
 </script>
