@@ -1,25 +1,26 @@
 <template>
-    <div class="py-4 px-12 w-full h-fit">
-        <!-- modal -->
-        <daisy-modal class="w-fit" id="eventModal" ref="eventModal">
-            <event-popup></event-popup>
-        </daisy-modal>
-        <!-- event details -->
-        <div
-            v-if="eventDetailsVisibibility"
-            class="z-50 fixed h-screen w-screen flex items-center justify-center"
-        >
-            <EventDetails />
-        </div>
-        <!-- more in depth event information -->
-        <div
-            class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16"
-        >
-            <EventInformation />
-        </div>
+  <div class="py-4 px-12 w-full h-fit">
+    <!-- modal -->
+    <daisy-modal class="w-fit" id="eventModal" ref="eventModal">
+      <event-popup></event-popup>
+    </daisy-modal>
+    <!-- event details -->
+    <div
+      v-if="eventDetailsVisibibility"
+      class="z-50 fixed h-screen w-screen flex items-center justify-center"
+    >
+      <EventDetails />
+    </div>
+    <!-- more in depth event information -->
+    <div
+      v-if="eventInformationVisibibility"
+      class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16 pointer-events-none"
+    >
+      <EventInformation />
+    </div>
 
-        <!-- sidebar date selector popup -->
-        <!-- <daisy-modal
+    <!-- sidebar date selector popup -->
+    <!-- <daisy-modal
       ref="dateSelect"
       id="dateSelect"
       class="bg-base-300 w-fit rounded-lg"
@@ -37,76 +38,70 @@
       </div>
     </daisy-modal> -->
 
-        <!-- main content wrapper  -->
-        <div
-            class="border border-secondary bg-[#202020]/[0.9] rounded-2xl p-7 max-w-none flex gap-4"
-        >
-            <!-- left sidebar -->
-            <aside class="flex flex-col gap-5">
-                <Datepicker
-                    class="calendar-date-picker"
-                    menu-class-name="!bg-transparent !border-none"
-                    :day-class="getDayClass"
-                    month-name-format="long"
-                    inline
-                    auto-apply
-                    :enable-time-picker="false"
-                    dark
-                />
+    <!-- main content wrapper  -->
+    <div
+      class="border border-secondary bg-[#202020]/[0.9] rounded-2xl p-7 max-w-none flex gap-4"
+    >
+      <!-- left sidebar -->
+      <aside class="flex flex-col gap-5">
+        <Datepicker
+          class="calendar-date-picker"
+          menu-class-name="!bg-transparent !border-none"
+          :day-class="getDayClass"
+          month-name-format="long"
+          inline
+          auto-apply
+          :enable-time-picker="false"
+          dark
+        />
 
-                <CalendarMenu :calendars="calendarsList" />
-                <ReportsStatistics />
-            </aside>
+        <CalendarMenu :calendars="calendarsList" />
+        <ReportsStatistics />
+      </aside>
 
-            <section class="w-full">
-                <!-- main section heading area -->
-                <div class="flex justify-between items-center w-full">
-                    <h1 class="text-3xl">January 2088</h1>
-                    <!-- filters/page actions -->
-                    <div class="flex gap-2">
-                        <button
-                            class="bg-secondary py-1 px-2 rounded-md border-2 border-transparent flex items-center gap-2 text-[0.8rem]"
-                        >
-                            <span> Add New </span>
-                            <span class="w-4 fill-white">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"
-                                >
-                                    <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                    <path
-                                        d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
-                                    />
-                                </svg>
-                            </span>
-                        </button>
-                        <button
-                            class="bg-neutral py-1 px-2 rounded-md border-secondary border-2 flex items-center gap-2 text-[0.8rem]"
-                        >
-                            <span> All Bookings </span>
-                            <span class="w-4 p-1 fill-white">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 320 512"
-                                >
-                                    <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                    <path
-                                        d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"
-                                    />
-                                </svg>
-                            </span>
-                        </button>
-                        <input
-                            placeholder="Search"
-                            class="text-black py-1 p-2 rounded-md border-2 border-transparent text-[0.8rem]"
-                            type="text"
-                        />
-                    </div>
-                </div>
-                <FullCalendar :options="calendarOptions" ref="calendar" />
-            </section>
+      <section class="w-full">
+        <!-- main section heading area -->
+        <div class="flex justify-between items-center w-full">
+          <h1 class="text-3xl">January 2088</h1>
+          <!-- filters/page actions -->
+          <div class="flex gap-2">
+            <button
+              class="bg-secondary py-1 px-2 rounded-md border-2 border-transparent flex items-center gap-2 text-[0.8rem]"
+            >
+              <span> Add New </span>
+              <span class="w-4 fill-white">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                  <path
+                    d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
+                  />
+                </svg>
+              </span>
+            </button>
+            <button
+              class="bg-neutral py-1 px-2 rounded-md border-secondary border-2 flex items-center gap-2 text-[0.8rem]"
+            >
+              <span> All Bookings </span>
+              <span class="w-4 p-1 fill-white">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                  <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                  <path
+                    d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"
+                  />
+                </svg>
+              </span>
+            </button>
+            <input
+              placeholder="Search"
+              class="text-black py-1 p-2 rounded-md border-2 border-transparent text-[0.8rem]"
+              type="text"
+            />
+          </div>
         </div>
+        <FullCalendar :options="calendarOptions" ref="calendar" />
+      </section>
     </div>
+  </div>
 </template>
 <script setup>
 import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
@@ -152,6 +147,7 @@ const calendarEventVisibility = ref(false);
 
 const eventDetails = ref(null); // selected event information we need to pass into the details & event panels
 const eventDetailsVisibibility = ref(false);
+const eventInformationVisibibility = ref(false);
 
 const handleChangeView = (value) => {
   calenderView.value = value;
@@ -207,29 +203,30 @@ const calendarOptions = ref({
       nowIndicator: true,
     },
     timeAxis: {
-        slotDuration: "01:00:00",
+      slotDuration: "01:00:00",
     },
     views: {
-        timeGridDay: {
-            dayHeaderFormat: {
-                month: "long",
-                day: "numeric",
-                omitCommas: "false",
-            },
-            nowIndicator: true,
+      timeGridDay: {
+        dayHeaderFormat: {
+          month: "long",
+          day: "numeric",
+          omitCommas: "false",
         },
-        timeGridWeek: {
-            dayHeaderFormat: {
-                month: "short",
-                day: "2-digit",
-            },
-            nowIndicator: true,
+        nowIndicator: true,
+      },
+      timeGridWeek: {
+        dayHeaderFormat: {
+          month: "short",
+          day: "2-digit",
         },
+        nowIndicator: true,
+      },
     },
     viewDidMount: function (info) {
-        onViewChanged();
+      onViewChanged();
     },
     //eventContent: { html: '<i>some html</i>' }
+  },
 });
 
 const monthCalendarOptions = ref({
@@ -325,50 +322,48 @@ onMounted(async () => {
 });
 </script>
 
-<style>
+<style lang="postcss">
 .calendar-date-picker {
-    .dp__theme_dark {
-        --dp-background-color: #000000;
-        --dp-menu-border-color: #191919;
-    }
-    .dp__calendar_header {
-        @apply text-secondary;
-    }
-    .dp__month_year_row {
-        @apply border-none;
-        .dp__month_year_col_nav {
-            @apply bg-secondary rounded;
-            .dp__inner_nav {
-                @apply text-base-content;
-                &:hover {
-                    @apply bg-secondary;
-                }
-            }
+  .dp__theme_dark {
+    --dp-background-color: #000000;
+    --dp-menu-border-color: #191919;
+  }
+  .dp__calendar_header {
+    @apply text-secondary;
+  }
+  .dp__month_year_row {
+    @apply border-none;
+    .dp__month_year_col_nav {
+      @apply bg-secondary rounded;
+      .dp__inner_nav {
+        @apply text-base-content;
+        &:hover {
+          @apply bg-secondary;
         }
       }
     }
-    .dp__calendar {
-        @apply bg-transparent text-[0.8rem];
-        .dp__calendar_wrap {
-            @apply bg-neutral border border-secondary rounded;
-            .dp__calendar_header_separator {
-                @apply h-0;
-            }
-        }
+  }
+}
+.dp__calendar {
+  @apply bg-transparent text-[0.8rem];
+  .dp__calendar_wrap {
+    @apply bg-neutral border border-secondary rounded;
+    .dp__calendar_header_separator {
+      @apply h-0;
     }
   }
 }
 
 .dp__cell_inner {
-    @apply !p-0 !h-[25px];
+  @apply !p-0 !h-[25px];
 }
 
 .dp__month_year_select {
-    @apply flex-row !py-0 !h-auto;
+  @apply flex-row !py-0 !h-auto;
 }
 
 .dp__month_year_select {
-    @apply flex-row !py-0 !h-auto;
+  @apply flex-row !py-0 !h-auto;
 }
 
 .fc .fc-list-sticky .fc-list-day > *,
@@ -416,7 +411,7 @@ onMounted(async () => {
 }
 
 th.fc-day-today {
-    @apply !bg-[#191919]/[0.4];
+  @apply !bg-[#191919]/[0.4];
 }
 
 .fc-event-main-frame {
@@ -461,25 +456,25 @@ th.fc-day-today {
   @apply bg-blend-darken;
 }
 .fc-col-header-cell-cushion {
-    @apply !font-normal !capitalize;
+  @apply !font-normal !capitalize;
 }
 
 .fc-timegrid-axis-cushion {
-    @apply capitalize text-[0.7rem];
+  @apply capitalize text-[0.7rem];
 }
 
 .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
-    @apply !my-4;
+  @apply !my-4;
 }
 .fc-scrollgrid.fc-scrollgrid-liquid {
-    @apply !max-h-[66vh] !overflow-scroll;
+  @apply !max-h-[66vh] !overflow-scroll;
 }
 .fc-timegrid th,
 .fc-timegrid td {
-    @apply !text-[0.8rem];
+  @apply !text-[0.8rem];
 }
 .fc-timegrid,
 .fc-view-harness {
-    @apply !max-h-[66vh];
+  @apply !max-h-[66vh];
 }
 </style>
