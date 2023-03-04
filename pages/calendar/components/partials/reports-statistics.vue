@@ -1,7 +1,7 @@
 <template>
     <section>
         <!-- widget label / mod -->
-        <div class="flex justify-between mb-4">
+        <div class="flex justify-between mb-3">
             <span class="text-[1.2rem] font-semibold">Reports</span>
             <button class="w-[0.3125rem] fill-white">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">

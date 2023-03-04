@@ -19,8 +19,6 @@ const formatRandomEventTime = (offsets = {}, date = new Date()) => {
         );
     }
 
-    console.log(dateTimeString, "baal");
-
     return dateTimeString;
 };
 
@@ -30,7 +28,7 @@ export const calendarEvents = [
     {
         title: "Priority One",
         start: formatRandomEventTime({ day: -1, hour: -3 }),
-        backgroundColor: "red",
+        backgroundColor: "#123456",
         extendedProps: {
             department: "BioChemistry",
         },
@@ -43,7 +41,7 @@ export const calendarEvents = [
     {
         title: "Priority One",
         start: formatRandomEventTime({ day: 1, hour: 3 }),
-        backgroundColor: "pink",
+        backgroundColor: "#12345",
         extendedProps: {
             department: "BioChemistry",
         },
@@ -56,7 +54,7 @@ export const calendarEvents = [
     {
         title: "To Do Two",
         start: formatRandomEventTime({ day: 2, hour: 2 }),
-        backgroundColor: "blue",
+        backgroundColor: "#123456",
     },
     {
         title: "To Do Three",
@@ -64,7 +62,7 @@ export const calendarEvents = [
         extendedProps: {
             status: "done",
         },
-        backgroundColor: "lime",
+        backgroundColor: "#123456",
     },
     {
         title: "Birthday Party",

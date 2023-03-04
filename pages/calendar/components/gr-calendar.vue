@@ -4,24 +4,16 @@
 
 <script setup>
 import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
-import { ArrowIcon } from "~~/components/icons";
 import { isEqual, set } from "date-fns";
-import { fakeCalendars } from "./components/fakedata";
-import CalendarMenu from "./components/partials/calendar-menu.vue";
-import ReportsStatistics from "./components/partials/reports-statistics.vue";
-import EventDetails from "./components/partials/event-details.vue";
-import EventInformation from "./components/partials/event-information.vue";
-import Datepicker from "@vuepic/vue-datepicker";
 
 /** FullCalendar component & plugins */
 import FullCalendar from "@fullcalendar/vue3";
-import EventPopup from "./components/event-popup.vue";
 import listPlugin from "@fullcalendar/list";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { calendarEvents as events } from "./helpers/calendar-events";
+import { calendarEvents as events } from "../helpers/calendar-events";
 
 const calenderView = ref("timeGridWeek");
 
@@ -36,16 +28,8 @@ const start = ref(null);
 const end = ref(null);
 const currentView = ref("timeGridWeek");
 const selectedDate = ref(null);
-const isMobile = computed(() => window.innerWidth <= 480);
 const monthCalendar = ref(null);
 const listCalendar = ref(null);
-
-/** Component State */
-const calendarsList = ref(fakeCalendars);
-const calendarEventVisibility = ref(false);
-
-const eventDetails = ref(null); // selected event information we need to pass into the details & event panels
-const eventDetailsVisibibility = ref(false);
 
 const handleChangeView = (value) => {
     calenderView.value = value;
@@ -251,7 +235,7 @@ onMounted(async () => {
     background-color: transparent !important;
 }
 .fc-button {
-    @apply !bg-transparent !border-0 !rounded-lg !py-[2px] !capitalize !text-sm transition-all duration-150 ease-linear;
+    @apply !bg-transparent !border-0 !rounded-md !py-[2px] !capitalize !text-sm transition-all duration-150 ease-linear;
 }
 /* fc-dayGridMonth-button fc-button fc-button-primary */
 .fc-button.fc-button-active {
@@ -261,22 +245,17 @@ onMounted(async () => {
     @apply !flex !flex-row !gap-5;
 }
 .fc-toolbar-chunk .fc-button-group {
-    @apply bg-[#18203A] border-[2px] border-[#073A76] p-[6px] rounded-xl;
+    @apply last:bg-[#18203A] last:border-[2px] last:border-[#073A76] first:py-[6px] last:p-[6px] rounded-lg !flex !flex-row first:gap-4 last:!gap-2;
 }
-.fc-prev-button.fc-button.fc-button-primary,
-.fc-today-button.fc-button.fc-button-primary,
-.fc-next-button.fc-button.fc-button-primary {
-    @apply !bg-secondary;
-}
-.fc-button-group {
-    @apply !flex !flex-row !gap-2;
+.fc-today-button.fc-button.fc-button-primary {
+    @apply !bg-secondary px-5;
 }
 .fc-prev-button,
 .fc-next-button {
-    @apply !px-[2px];
+    @apply !px-2 !bg-[#073A76];
 }
 .fc-event-main {
-    @apply !border-l-8 border-white border-opacity-20 pl-2;
+    @apply !border-l-[6px] border-white border-opacity-20 text-[0.7rem];
 }
 
 .fc {
@@ -292,9 +271,12 @@ th.fc-day-today {
 }
 
 .fc-event-main-frame {
-    @apply !pl-2;
+    @apply !pl-1 !flex-col-reverse !justify-end;
 }
 
+.fc-event-title-container {
+    @apply !flex-grow-0;
+}
 .fc .fc-scrollgrid-section.fc-scrollgrid-section-body:first-child {
     * {
         @apply border-b-secondary;
@@ -306,6 +288,10 @@ th.fc-day-today {
     div {
         @apply h-full flex items-center justify-center uppercase;
     }
+}
+
+.fc-event-time {
+    /* @apply bg-[#191919]/[0.4] contrast-200 rounded-l-full pl-2; */
 }
 
 .fc .fc-scrollgrid-section:nth-child(2) {
@@ -337,21 +323,28 @@ th.fc-day-today {
 }
 
 .fc-timegrid-axis-cushion {
-    @apply capitalize text-[0.7rem];
+    @apply capitalize;
 }
 
 .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
     @apply !my-4;
 }
-.fc-scrollgrid.fc-scrollgrid-liquid {
-    @apply !max-h-[66vh] !overflow-scroll;
+.fc-timegrid th {
+    @apply text-[0.8rem];
 }
-.fc-timegrid th,
 .fc-timegrid td {
-    @apply !text-[0.8rem];
+    @apply !text-[0.6rem];
 }
-.fc-timegrid,
-.fc-view-harness {
-    @apply !max-h-[66vh];
+
+.fc-timegrid tr {
+    @apply h-[65px] first:!h-[30px];
+}
+
+.fc.fc-media-screen.fc-direction-ltr.fc-theme-standard {
+    @apply !max-h-[72.5vh] !min-h-[65.8vh];
+}
+
+.fc-view table {
+    @apply !rounded-tl-xl;
 }
 </style>
