@@ -11,6 +11,7 @@
       :key="btn"
     >
       <button
+        type="button"
         class="capitalize text-sm"
         @click="
           {

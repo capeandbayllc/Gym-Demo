@@ -19,6 +19,13 @@
       <EventInformation />
     </div>
 
+    <div
+      class="z-50 fixed h-screen w-screen flex items-center justify-center pointer-events-none"
+      v-if="eventFormVisibility"
+    >
+      <EventForm />
+    </div>
+
     <!-- sidebar date selector popup -->
     <!-- <daisy-modal
       ref="dateSelect"
@@ -113,6 +120,7 @@ import ReportsStatistics from "./components/partials/reports-statistics.vue";
 import EventDetails from "./components/partials/event-details.vue";
 import EventInformation from "./components/partials/event-information.vue";
 import Datepicker from "@vuepic/vue-datepicker";
+import EventForm from "./components/event-form.vue";
 
 /** FullCalendar component & plugins */
 import FullCalendar from "@fullcalendar/vue3";
@@ -143,11 +151,13 @@ const listCalendar = ref(null);
 
 /** Component State */
 const calendarsList = ref(fakeCalendars);
-const calendarEventVisibility = ref(false);
-
 const eventDetails = ref(null); // selected event information we need to pass into the details & event panels
+
+/** Component Visibility State */
+const calendarEventVisibility = ref(false);
 const eventDetailsVisibibility = ref(false);
 const eventInformationVisibibility = ref(false);
+const eventFormVisibility = ref(true);
 
 const handleChangeView = (value) => {
   calenderView.value = value;
