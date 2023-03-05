@@ -62,8 +62,8 @@
 } */
 </style>
 <script setup>
+import { AddIcon, SearchIcon } from '@/components/icons';
 import MemberTableRow from './components/member-table-row.vue';
-import { SearchIcon, AddIcon } from '@/components/icons'
 
 const isSearchEnable = ref(false)
 const filterBy = [

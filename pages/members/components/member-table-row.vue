@@ -26,12 +26,17 @@
                     <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1">Edit</div>
                     <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1">Trash</div>
                     <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1">Contact Lead</div>
-                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1">Add a Note</div>
+                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1" @click.stop="openNoteModal">Add a Note</div>
                     <!-- <Button outline size="sm" class="my-1 border-primary">Preview</Button>
                     <Button outline size="sm" class="my-1 border-primary">Edit</Button>
                     <Button outline size="sm" class="my-1 border-primary">Trash</Button>
                     <Button outline size="sm" class="my-1 border-primary">Contact Lead</Button>
                     <Button outline size="sm" class="my-1 border-primary">Add a Note</Button> -->
+
+
+                    <daisy-modal ref="addNoteModalRef">
+                        <addNoteModel @saveNote="saveNote" @deleteNote="deleteNote"></addNoteModel>
+                    </daisy-modal>
                 </div>
             </div> 
         </td>
@@ -65,15 +70,27 @@
 }
 </style>
 <script setup>
-import MembershipBtn from '~~/components/buttons/membership-btn.vue';
-import AddonBtn from '~~/components/buttons/addon-btn.vue';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import AddonBtn from '~~/components/buttons/addon-btn.vue';
+import MembershipBtn from '~~/components/buttons/membership-btn.vue';
+import addNoteModel from './add-note-modal.vue';
 
 library.add(faEllipsisH);
 const props = defineProps({
     data: Object
 })
+
+const addNoteModalRef = ref(null);
+
+const openNoteModal = ()=>{
+    addNoteModalRef.value.open();
+}
+const deleteNote = ()=>{
+    addNoteModalRef.value.close();
+}
+const saveNote = () => {
+    addNoteModalRef.value.close();
+};
 </script>
