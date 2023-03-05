@@ -7,15 +7,15 @@ import { createServer } from "miragejs";
 import { createGraphQLHandler } from "@miragejs/graphql";
 import graphQLSchema from "../api/schema.gql?raw";
 import { UserFactory } from "../api/data/users/UserFactory";
-import { LocationFactory } from "../api/data/locations/LocationFactory";
 import { UUIDManager } from "../api/utils/UUIDManager";
 import { getPageInfo } from "../api/utils/getPageInfo";
+import data from "../api/data/data";
 
 // Mirage GraphQL README:
 // https://github.com/miragejs/graphql
 
 // queries that are paginated via the @paginate directive
-const paginatedQueries = ["users", "locations"];
+const paginatedQueries = ["users", "members", "locations"];
 
 //setup object to hold resolvers
 const resolvers = {
@@ -37,7 +37,7 @@ paginatedQueries.forEach((query) => {
     const allRecords = context.mirageSchema[collectionName].where(args).models;
 
     // limit records at first X elements
-    const records = [...allRecords].splice(0, first);
+    const records = [...allRecords].splice(0, first); //TODO: fix for other pages
     // TODO: the rest of the Laravel pagination params
 
     return {
@@ -55,9 +55,9 @@ const server = createServer({
 
     this.post("/graphql", graphQLHandler);
   },
+  fixtures: data,
   factories: {
     user: UserFactory,
-    location: LocationFactory,
   },
   identityManagers: {
     application: UUIDManager,
@@ -65,6 +65,7 @@ const server = createServer({
   seeds(server) {
     server.createList("user", 25);
     server.createList("location", 25);
+    server.loadFixtures(); //loads our json data
   },
 });
 

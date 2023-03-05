@@ -712,7 +712,6 @@ type Location {
   poc_first: String
   poc_last: String
   poc_phone: String
-  details: [LocationDetails]
 }
 
 type LocationDetails {
@@ -2021,6 +2020,7 @@ type User {
   city: String
   state: String
   homeLocation: Location
+  location: Location
   teams: [Team]
   contact_preference: String
   emergency_contact: EmergencyContact
