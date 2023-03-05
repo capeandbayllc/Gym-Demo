@@ -58,7 +58,7 @@
                         :id="'cal_' + cal.id"
                     />
                     <label
-                        class="!text-[0.9rem] !font-normal"
+                        class="!text-[0.8rem] !font-normal"
                         :for="'cal_' + cal.id"
                         >{{ cal.title }}</label
                     >
@@ -115,7 +115,7 @@ const disableDropdown = () => {
 
 <style scoped>
 input[type="checkbox"] {
-    @apply rounded bg-white appearance-none m-0 h-5 w-5 border border-[#C0BDCC] outline-none;
+    @apply rounded bg-white appearance-none m-0 h-4 w-4 border border-[#C0BDCC] outline-none;
     @apply focus:border;
 }
 

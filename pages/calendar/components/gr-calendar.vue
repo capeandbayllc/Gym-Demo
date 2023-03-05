@@ -51,7 +51,7 @@ const calendarOptions = ref({
     dateClick: handleDateClick,
     headerToolbar: {
         left: "",
-        center: "prev,today,next timeGridWeek,dayGridMonth,timeGridDay",
+        center: "prev,today,next timeGridDay,timeGridWeek,dayGridMonth",
         right: "",
     },
     events,
@@ -245,7 +245,7 @@ onMounted(async () => {
     @apply !flex !flex-row !gap-5;
 }
 .fc-toolbar-chunk .fc-button-group {
-    @apply last:bg-[#18203A] last:border-[2px] last:border-[#073A76] first:py-[6px] last:p-[6px] rounded-lg !flex !flex-row first:gap-4 last:!gap-2;
+    @apply last:bg-[#18203A] last:border-[2px] last:border-[#073A76] first:py-[2px] last:p-[2px] rounded-lg !flex !flex-row first:gap-4 last:!gap-2;
 }
 .fc-today-button.fc-button.fc-button-primary {
     @apply !bg-secondary px-5;
@@ -346,5 +346,11 @@ th.fc-day-today {
 
 .fc-view table {
     @apply !rounded-tl-xl;
+}
+
+.fc-timeGridDay-button,
+.fc-timeGridWeek-button,
+.fc-dayGridMonth-button {
+    @apply w-[80px];
 }
 </style>

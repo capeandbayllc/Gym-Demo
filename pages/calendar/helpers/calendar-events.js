@@ -58,7 +58,7 @@ export const calendarEvents = [
     },
     {
         title: "To Do Three",
-        start: formatRandomEventTime({ day: -3, hour: -1 }),
+        start: formatRandomEventTime({ day: 3, hour: -1 }),
         extendedProps: {
             status: "done",
         },
@@ -66,7 +66,8 @@ export const calendarEvents = [
     },
     {
         title: "Birthday Party",
-        start: formatRandomEventTime({ day: -5 }),
-        backgroundColor: "green",
+        start: formatRandomEventTime({ day: -1 }),
+        end: formatRandomEventTime({ day: 1 }),
+        backgroundColor: "#6E40CF",
     },
 ];
