@@ -30,7 +30,7 @@
                 :selected="item.value === value"
                 :onClick="onChange"
             />
-            <p class="select-box-clear-btn" :onClick="toggleCollapsed">Clear List</p>
+            <p class="select-box-clear-btn" :onClick="clearList">Clear List</p>
         </select-box-content>
     </div>
 </template>
@@ -92,6 +92,11 @@ const props = defineProps({
 const isCollapsed = ref(true);
 const toggleCollapsed = () => {
     isCollapsed.value = !isCollapsed.value;
+};
+
+const clearList = () => {
+    toggleCollapsed();
+    props.onChange('');
 };
 const onChange = (value) => {
     toggleCollapsed();

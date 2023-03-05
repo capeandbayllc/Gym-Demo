@@ -7,17 +7,21 @@
                         <div class="location-filter-options">
                             <select-box
                                 :items="states"
-                                label="State"
+                                :label="'State'+(selectedState?': '+selectedState:'')"
+                                v-model="selectedState"
+                                :onChange="filterState"
                                 placeholderSearch="Search State"
                                 class="w-36"
                                 secondary
                             />
                             <select-box
                                 :items="cities"
-                                label="City"
+                                :onChange="filterCity"
+                                :label="'City'+(selectedCity?': '+selectedCity:'')"
                                 placeholderSearch="Search City"
                                 class="w-36"
                                 secondary
+                                v-if="cities.length"
                             />
                         </div>
                         <search-input
@@ -29,7 +33,7 @@
                     <data-table
                         class="club-table"
                         :columns="columns"
-                        :data="mock"
+                        :data="locations"
                         :row-component="ClubTableRow"
                     />
                 </div>
@@ -69,53 +73,157 @@
     }
 }
 </style>
-<script setup>
-import ClubTableRow from './components/club-table-row.vue';
-const states = [
-    {
-        value: 1,
-        label: 'State 1',
-    },
-    {
-        value: 2,
-        label: 'State 2',
-    },
-    {
-        value: 3,
-        label: 'State 3',
-    },
-    {
-        value: 4,
-        label: 'State 4',
-    },
-    {
-        value: 5,
-        label: 'State 5',
-    },
-];
-const cities = [
-    {
-        value: 1,
-        label: 'City 1',
-    },
-    {
-        value: 2,
-        label: 'City 2',
-    },
-    {
-        value: 3,
-        label: 'City 3',
-    },
-    {
-        value: 4,
-        label: 'City 4',
-    },
-    {
-        value: 5,
-        label: 'City 5',
-    },
-];
 
-const columns = ['Club Number', 'Address', 'Phone', 'Email', ''];
-const mock = new Array(10).fill({id: 0}).map((item, ndx) => ({id: ndx}));
+<script setup>
+import gql from "graphql-tag";
+import { useQuery } from "@vue/apollo-composable";
+import ClubTableRow from './components/club-table-row.vue';
+
+function getAllLocations(){
+    const query = gql`
+      query AllLocations{
+        locations(first: 100){
+          data {
+            id
+            name
+            state
+            city
+            zip
+            address1
+            phone
+          }
+          paginatorInfo {
+            count
+            perPage
+            total
+          }
+        }
+      }
+    `;
+    
+    const { result, errors } = useQuery(query);
+    
+    watch(() => {
+        if(result.value?.locations?.data){
+            locations.value = result.value?.locations.data
+            loadCities(result.value?.locations.data)
+            loadStates(result.value?.locations.data)
+        }
+    })
+}
+getAllLocations()
+const locations = ref([]);
+
+function filterLocations(){
+    let state = selectedState.value
+    let city = selectedCity.value
+    if(state && city){
+        const query = gql(` 
+            query {
+                locationsByStateAndCity(state: "${state}", city: "${city}") {
+                    id
+                    name
+                    state
+                    city
+                    zip
+                    address1
+                    phone
+                }
+            }
+        `);
+        const { result, errors } = useQuery(query);
+        watch(() => {
+            if(result.value){
+                locations.value = result.value?.locationsByStateAndCity
+            }
+        })
+        
+    }else if(state){
+        const query = gql(` 
+            query {
+                locationsByState(state: "${state}") {
+                    id
+                    name
+                    state
+                    city
+                    zip
+                    address1
+                    phone
+                }
+            }
+        `);
+        const { result, errors } = useQuery(query);
+        watch(() => {
+            if(result.value){
+                locations.value = result.value?.locationsByState
+            }
+        })
+    }else if(city){
+        const query = gql(` 
+            query {
+                locationsByCity(city: "${city}") {
+                    id
+                    name
+                    state
+                    city
+                    zip
+                    address1
+                    phone
+                }
+            }
+        `);
+        const { result, errors } = useQuery(query);
+        watch(() => {
+            if(result.value){
+                locations.value = result.value?.locationsByCity
+            }
+        })
+    }else{
+        getAllLocations()
+    }
+}
+
+const selectedCity = ref('');
+const filterCity = (value) => {
+    selectedCity.value = value
+    filterLocations()
+};
+
+const selectedState = ref('');
+const filterState = (value) => {
+    selectedState.value = value
+    filterLocations()
+};
+
+const cities = ref([]);
+function loadCities(data){
+    const uniqueCities = [];
+    data.forEach(location => {
+    const city = location.city;
+    if (!uniqueCities.some(item => item.value === city)) {
+        uniqueCities.push({
+            value: city,
+            label: city
+        });
+    }
+    });
+    cities.value = uniqueCities;
+}
+
+const states = ref([]);
+function loadStates(data){
+    const uniqueStates = [];
+    data.forEach(location => {
+    const state = location.state;
+    if (!uniqueStates.some(item => item.value === state)) {
+        uniqueStates.push({
+            value: state,
+            label: state
+        });
+    }
+    });
+    states.value = uniqueStates;
+}
+
+const columns = ['Club Name', 'Address', 'Phone', 'Email', ''];
 </script>

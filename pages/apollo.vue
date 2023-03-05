@@ -60,7 +60,6 @@ library.add(faUser);
 //     }
 //   }
 // `;
-
 const query = gql`
   query AllUsers {
     users(first: 100) {
@@ -79,8 +78,14 @@ const query = gql`
     }
   }
 `;
-
 const { result } = useQuery(query);
+
+watch(() => {
+    console.log('data')
+    console.log(result)
+
+})
+
 
 const mutation = gql`
   mutation CreateUser($input: UserInput!) {

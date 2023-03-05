@@ -3,11 +3,12 @@ import { Factory } from "miragejs";
 
 // https://miragejs.com/docs/main-concepts/factories/
 export const LocationFactory = Factory.extend({
-  name: faker.company.name(),
-  state: faker.address.stateAbbr,
-  city: faker.address.city(),
-  zip: faker.address.zipCode(),
+  name(){ return  faker.company.name() },
+  state(){ return ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT'][Math.floor(Math.random() * 7)] },
+  // state: faker.address.stateAbbr,
+  city(){ return ['Seattle', 'New York', 'Los Angeles', 'London'][Math.floor(Math.random() * 4)] },
+  zip(){ return  faker.address.zipCode() },
   address1: faker.address.street,
-  phone: faker.phone.number("###-###-###"),
+  phone(){ return  faker.phone.number("###-###-###") },
   // created_at: faker.date.past, //DISABLED BC IT BREAKS MUTATIONS.
 });

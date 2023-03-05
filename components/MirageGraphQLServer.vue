@@ -15,11 +15,12 @@ import { getPageInfo } from "../api/utils/getPageInfo";
 // https://github.com/miragejs/graphql
 
 // queries that are paginated via the @paginate directive
-const paginatedQueries = ["users"];
+const paginatedQueries = ["users", "locations"];
 
 //setup object to hold resolvers
 const resolvers = {
-  Query: {},
+  Query: {
+  }
 };
 
 // create a resolver for each paginated query
@@ -63,7 +64,7 @@ const server = createServer({
   },
   seeds(server) {
     server.createList("user", 25);
-    server.createList("location", 7);
+    server.createList("location", 25);
   },
 });
 
