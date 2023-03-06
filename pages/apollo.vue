@@ -83,13 +83,6 @@ const query = gql`
 `;
 const { result } = useQuery(query);
 
-watch(() => {
-    console.log('data')
-    console.log(result)
-
-})
-
-
 const mutation = gql`
   mutation CreateUser($input: UserInput!) {
     createUser(input: $input) {

@@ -85,7 +85,6 @@ function filterLocations(){
         if(selectedCity.value != '' && selectedState.value != ''){
             return e.state == selectedState.value && e.city == selectedCity.value
         }else if(selectedState.value != ''){
-            console.log('here')
             return e.state == selectedState.value
         }else if(selectedCity.value != ''){
             return e.city == selectedCity.value
