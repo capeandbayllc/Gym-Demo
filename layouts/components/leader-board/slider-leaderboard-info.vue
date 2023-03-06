@@ -3,8 +3,8 @@
     Place Card
   </div>
   <div>
-    <div> Name </div>
-    <div> Stars </div>
+    <div> {{ leader.name }} </div>
+    <div> {{ leader.stars }} </div>
     <div> Points </div>
   </div>
   <div>
