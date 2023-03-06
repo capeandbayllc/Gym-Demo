@@ -1,5 +1,5 @@
 <template>
-    <div class="search-input">
+    <div class="search-input-wrapper">
         <input
             :class="{
                 'search-input': true,
@@ -21,7 +21,7 @@
 </template>
 <style scoped>
 .search-input {
-    @apply w-full  border overflow-hidden pr-2 text-right;
+    @apply w-full rounded border overflow-hidden px-2 text-right;
 }
 .search-input-lg {
 	height: 34px;
@@ -33,7 +33,7 @@
 }
 
 .search-input-wrapper {
-	@apply flex items-center relative w-fit;
+	@apply flex items-center relative w-full pb-1;
 }
 
 .search-submit {
