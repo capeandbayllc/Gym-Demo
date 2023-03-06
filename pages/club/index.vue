@@ -75,112 +75,24 @@
 </style>
 
 <script setup>
-import gql from "graphql-tag";
-import { useQuery } from "@vue/apollo-composable";
 import ClubTableRow from './components/club-table-row.vue';
+import data from '../../api/data/data.json'
 
-function getAllLocations(){
-    const query = gql`
-      query AllLocations{
-        locations(first: 100){
-          data {
-            id
-            name
-            state
-            city
-            zip
-            address1
-            phone
-          }
-          paginatorInfo {
-            count
-            perPage
-            total
-          }
-        }
-      }
-    `;
-    
-    const { result, errors } = useQuery(query);
-    
-    watch(() => {
-        if(result.value?.locations?.data){
-            locations.value = result.value?.locations.data
-            loadCities(result.value?.locations.data)
-            loadStates(result.value?.locations.data)
-        }
-    })
-}
-getAllLocations()
-const locations = ref([]);
+const locations = ref(data.locations);
 
 function filterLocations(){
-    let state = selectedState.value
-    let city = selectedCity.value
-    if(state && city){
-        const query = gql(` 
-            query {
-                locationsByStateAndCity(state: "${state}", city: "${city}") {
-                    id
-                    name
-                    state
-                    city
-                    zip
-                    address1
-                    phone
-                }
-            }
-        `);
-        const { result, errors } = useQuery(query);
-        watch(() => {
-            if(result.value){
-                locations.value = result.value?.locationsByStateAndCity
-            }
-        })
-        
-    }else if(state){
-        const query = gql(` 
-            query {
-                locationsByState(state: "${state}") {
-                    id
-                    name
-                    state
-                    city
-                    zip
-                    address1
-                    phone
-                }
-            }
-        `);
-        const { result, errors } = useQuery(query);
-        watch(() => {
-            if(result.value){
-                locations.value = result.value?.locationsByState
-            }
-        })
-    }else if(city){
-        const query = gql(` 
-            query {
-                locationsByCity(city: "${city}") {
-                    id
-                    name
-                    state
-                    city
-                    zip
-                    address1
-                    phone
-                }
-            }
-        `);
-        const { result, errors } = useQuery(query);
-        watch(() => {
-            if(result.value){
-                locations.value = result.value?.locationsByCity
-            }
-        })
-    }else{
-        getAllLocations()
-    }
+    locations.value = data.locations.filter((e)=>{
+        if(selectedCity.value != '' && selectedState.value != ''){
+            return e.state == selectedState.value && e.city == selectedCity.value
+        }else if(selectedState.value != ''){
+            console.log('here')
+            return e.state == selectedState.value
+        }else if(selectedCity.value != ''){
+            return e.city == selectedCity.value
+        }else{
+            return true
+        }
+    })
 }
 
 const selectedCity = ref('');
@@ -195,10 +107,10 @@ const filterState = (value) => {
     filterLocations()
 };
 
+// Load cities
 const cities = ref([]);
-function loadCities(data){
-    const uniqueCities = [];
-    data.forEach(location => {
+const uniqueCities = [];
+data.locations.forEach(location => {
     const city = location.city;
     if (!uniqueCities.some(item => item.value === city)) {
         uniqueCities.push({
@@ -206,14 +118,13 @@ function loadCities(data){
             label: city
         });
     }
-    });
-    cities.value = uniqueCities;
-}
+});
+cities.value = uniqueCities;
 
+// Load states
 const states = ref([]);
-function loadStates(data){
-    const uniqueStates = [];
-    data.forEach(location => {
+const uniqueStates = [];
+data.locations.forEach(location => {
     const state = location.state;
     if (!uniqueStates.some(item => item.value === state)) {
         uniqueStates.push({
@@ -221,9 +132,8 @@ function loadStates(data){
             label: state
         });
     }
-    });
-    states.value = uniqueStates;
-}
+});
+states.value = uniqueStates;
 
 const columns = ['Club Name', 'Address', 'Phone', 'Email', ''];
 </script>
