@@ -11,7 +11,7 @@
 </template>
 <style scoped>
     .membership-btn {
-        @apply flex items-center justify-center rounded-full font-semibold cursor-pointer capitalize h-full px-3 text-sm relative;
+        @apply flex items-center justify-center rounded-full font-semibold cursor-pointer capitalize h-full px-3 text-sm relative w-full;
         
         .edit-icon {
             @apply absolute h-5 w-5 invisible;
@@ -33,14 +33,17 @@
     .type-p {
         @apply bg-accent;
     }
-    .type-premium {
-        @apply bg-amber-400;
+    .type-bronze {
+        @apply bg-gradient-to-b from-amber-600;
     }
-    .type-basic {
-        @apply border-2;
+    .type-silver {
+        @apply bg-gradient-to-b from-slate-100;
     }
     .type-gold {
-        @apply bg-warning/80;
+        @apply bg-gradient-to-b from-amber-200 to-amber-700;
+    }
+    .type-platinum {
+        @apply bg-amber-400;
     }
 </style>
 <script setup>

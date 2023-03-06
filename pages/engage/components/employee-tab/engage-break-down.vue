@@ -25,7 +25,7 @@ const data = [{
     id: 1,
     avatar: "/account.png",
     name: "Sandy Lin",
-    membership: "premimum",
+    membership: "platinum",
     event_type: "Yoga",
     time: "0:00 PM",
     phone: "(123) 456-7890",
@@ -38,7 +38,7 @@ const data = [{
     time: "0:00 PM",
     phone: "(123) 456-7890",
     email: "email@email.com",
-    membership: "basic",
+    membership: "bronze",
 }, {
     id: 3,
     avatar: "/account.png",

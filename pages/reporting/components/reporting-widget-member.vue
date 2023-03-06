@@ -44,14 +44,17 @@
     .filter-list{
         cursor: pointer;
     }
-    .type-premium {
-        @apply bg-accent;
-    }
-    .type-basic {
+    .type-bronze {
         @apply border-2;
+    }
+    .type-silver {
+        @apply bg-accent;
     }
     .type-gold {
         @apply bg-warning/80;
+    }
+    .type-platinum {
+        @apply bg-accent;
     }
 </style>
 <style>
@@ -93,7 +96,7 @@ const data = ref([
     {
         id: 2,
         name: "Nathan Sipes",
-        type: "basic",
+        type: "silver",
         date: "12.06.22",
         avatar: '/checkin/kevin.png'
     },
@@ -107,14 +110,14 @@ const data = ref([
     {
         id: 4,
         name: "Anita Greenholt",
-        type: "premium",
+        type: "platinum",
         date: "12.06.22",
         avatar: '/checkin/kevin.png'
     },
     {
         id: 5,
         name: "Cassie Herman",
-        type: "basic",
+        type: "bronze",
         date: "12.06.22",
         avatar: '/checkin/kevin.png'
     },
@@ -133,7 +136,7 @@ const membersList = [
             {
                 id: 2,
                 name: "Nathan Sipes",
-                type: "basic",
+                type: "bronze",
                 date: "12.06.22",
                 avatar: '/checkin/kevin.png'
             },
@@ -147,14 +150,14 @@ const membersList = [
             {
                 id: 4,
                 name: "Anita Greenholt",
-                type: "premium",
+                type: "platinum",
                 date: "12.06.22",
                 avatar: '/checkin/kevin.png'
             },
             {
                 id: 5,
                 name: "Cassie Herman",
-                type: "basic",
+                type: "bronze",
                 date: "12.06.22",
                 avatar: '/checkin/kevin.png'
             },
@@ -166,14 +169,14 @@ const membersList = [
             {
                 id: 1,
                 name: "Halima Kuphal",
-                type: "basic",
+                type: "bronze",
                 date: "12.06.22",
                 avatar: '/checkin/kevin.png'
             },
             {
                 id: 2,
                 name: "Nathan Sipes",
-                type: "basic",
+                type: "bronze",
                 date: "12.06.22",
                 avatar: '/checkin/kevin.png'
             },
@@ -187,14 +190,14 @@ const membersList = [
             {
                 id: 4,
                 name: "Anita Greenholt",
-                type: "premium",
+                type: "platinum",
                 date: "12.06.22",
                 avatar: '/checkin/kevin.png'
             },
             {
                 id: 5,
                 name: "Cassie Herman",
-                type: "basic",
+                type: "bronze",
                 date: "12.06.22",
                 avatar: '/checkin/kevin.png'
             },
@@ -207,7 +210,7 @@ const membersList = [
             {
                 id: 1,
                 name: "Halima Kuphal",
-                type: "basic",
+                type: "bronze",
                 date: "12.06.22",
                 avatar: '/checkin/kevin.png'
             },
@@ -228,14 +231,14 @@ const membersList = [
             {
                 id: 4,
                 name: "Anita Greenholt",
-                type: "premium",
+                type: "platinum",
                 date: "12.06.22",
                 avatar: '/checkin/kevin.png'
             },
             {
                 id: 5,
                 name: "Cassie Herman",
-                type: "basic",
+                type: "bronze",
                 date: "12.06.22",
                 avatar: '/checkin/kevin.png'
             },

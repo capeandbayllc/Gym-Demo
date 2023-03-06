@@ -1,15 +1,22 @@
 <template>
-    <context-menu ref="userMenu" class="user-menu">
+    <context-menu v-show="!isPageView" ref="userMenu" class="user-menu">
         <div class="border border-white inline-block rounded py-1 px-2 w-max cursor-pointer hover:bg-white hover:text-black transition uppercase font-semibold">+ Member</div>
         <div class="border border-white inline-block rounded py-1 px-2 w-max cursor-pointer hover:bg-white hover:text-black transition uppercase font-semibold" @click.prevent="openAddMemberPopUp">+ Lead</div>
         <div class="border border-white inline-block rounded py-1 px-2 w-max cursor-pointer hover:bg-white hover:text-black transition uppercase font-semibold">+ Guest Pass</div>
     </context-menu>
-    <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit" @close="addMemberScreenIndex=0" :class="addMemberScreenIndex == 7 ? 'h-full' : ''">
+    <daisy-modal
+        id="addMemberPopUp"
+        ref="addMemberPopUp"
+        class="w-fit"
+        @close="addMemberScreenIndex=0"
+        :class="addMemberScreenIndex == 7 ? 'h-full' : ''"
+        :closable="mode !== 'page'"
+    >
       <div class="bg-black rounded-md p-6 border border-secondary h-full overflow-auto">
         <component :is="addMemberScreens[addMemberScreenIndex]"></component>
         <div class="flex justify-end mt-6">
           <button class="normal-case mx-2" ghost @click="prevScreen" v-if="addMemberScreenIndex > 0"><NextIcon/></button>
-          <Button size="sm" class="normal-case mx-2 ml-auto" ghost @click="closeAddMemberPopUp">Cancel</Button>
+          <Button v-show="!isPageView" size="sm" class="normal-case mx-2 ml-auto" ghost @click="closeAddMemberPopUp">Cancel</Button>
           <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue ></Button>
         </div>
       </div>
@@ -33,6 +40,17 @@ import BroughtToday from '../../../pages/check-in/profile-card/add-member/brough
 import MembershipType from '../../../pages/check-in/new-agreement/membership-type.vue';
 import { NextIcon } from "@/components/icons";
 
+const props = defineProps({
+  mode: {
+    type: String,
+    require: true,
+    default: 'modal',
+    validator(value) {
+      return ['modal', 'page'].includes(value)
+    }
+  }
+})
+
 const userMenu = ref(null)
 const open = () => {
     userMenu.value.open()
@@ -44,6 +62,13 @@ const close = () => {
 const addMemberPopUp = ref(null)
 const addMemberScreens = ref([Welcome,JoinTour,Infomrmation,PersonalInformation,Interests,EmergencyInfo,BroughtToday,MembershipType]);
 const addMemberScreenIndex = ref(0);
+const isPageView = props.mode === 'page';
+
+onMounted(() => {
+  if (props.mode === 'page') {
+    openAddMemberPopUp();
+  }
+})
 
 const openAddMemberPopUp =()=>{
   addMemberPopUp.value.open()
@@ -60,5 +85,6 @@ const prevScreen = ()=>{
 }
 
 defineExpose({ open, close })
+
 
 </script>
