@@ -16,7 +16,7 @@
           <th>Email</th>
           <th>First Name</th>
           <th>Last Name</th>
-          <th>Phone</th>
+          <th>Location ID</th>
         </tr>
       </thead>
       <tbody>
@@ -35,7 +35,7 @@
           <td>{{ user.email }}</td>
           <td>{{ user.first_name }}</td>
           <td>{{ user.last_name }}</td>
-          <td>{{ user.phone }}</td>
+          <td>{{ user?.homeLocation?.id }}</td>
         </tr>
       </tbody>
     </table>
@@ -70,6 +70,9 @@ const query = gql`
         last_name
         email
         phone
+        homeLocation {
+          id
+        }
       }
       paginatorInfo {
         count
