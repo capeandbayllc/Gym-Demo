@@ -79,7 +79,7 @@
     </div>
 
     <div class="float-right m-2">
-      <button class="text-xs" @click="showSlideout, $emit('close')">View More</button>
+      <button class="text-xs" @click="showSlideout">View More</button>
     </div>
   </div>
 </template>
@@ -357,13 +357,15 @@ const breakpoints = ref({
   },
 });
 const showLeaderSlide = ref(false);
+const showLeaderBoardSlideout = ref(false);
 const toggle = () => {
   showLeaderSlide.value = !showLeaderSlide.value;
   console.log("showLeaderSlide");
 };
 const showSlideout = () => {
-  showLeaderSlide.value = true;
-  console.log(showLeaderSlide);
+  showLeaderBoardSlideout.value = true;
+
+  console.log(showLeaderBoardSlideout);
 }
 let leaderBoardData = trainerData;
 </script>

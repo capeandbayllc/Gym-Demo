@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <leader-board-slideout
+      :class="{ 'right-0': sidebarVisible, 'right-[20rem]': !sidebarVisible }"
+  >
     <div>
       Leaderboard Slideout
     </div>
@@ -33,7 +35,7 @@
         <td class="p-2"><div class="px-1 arrow-down"></div></td>
       </tr>
     </div>
-  </div>
+  </leader-board-slideout>
 </template>
 <style>
 .solid {
@@ -70,6 +72,13 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import SideBarLeaderboardCard from "~/layouts/components/leader-board/side-bar-leaderboard-card.vue";
+const showLeaderBoardSlideout = ref (false);
+
+const sidebarVisible = () => {
+  showLeaderBoardSlideout.value = !showLeaderBoardSlideout.value;
+  console.log(showLeaderBoardSlideout);
+}
+
 const trainerData = ref([
   {
     name: "Caleb Grill",
