@@ -42,6 +42,8 @@
 
 <script setup>
 import CallerCard from './caller-card.vue';
+
+defineEmits(['call-now'])
 const userCallSetting = {
     type: 'outgoing-call',
     callType: 'Outgoing Call',
