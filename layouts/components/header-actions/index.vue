@@ -98,12 +98,7 @@
 <script setup>
 import { ref } from "vue";
 import {
-  PosIcon,
-  PeopleIcon,
   PersonAddIcon,
-  SettingIcon,
-  QuestionRoundIcon, EmployeeIcon,
-
 } from "@/components/icons";
 import AlarmBtn from "./alarm-btn.vue";
 import AccountBtn from "./account-btn.vue";
@@ -131,5 +126,5 @@ const openPop = () => {
 }
 
 const showUserMenu = () => userMenu.value.open();
-const user = useCookie("auth");
+const user = useState('auth');
 </script>

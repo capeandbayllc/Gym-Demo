@@ -1,7 +1,7 @@
 <template>
     <div class="profile-info-container">
         <div class="profile-avatar">
-            <div class="alert-badge">3</div>
+            <div class="alert-badge">{{ user.notifications.length }}</div>
             <img :src="mock.img" />
         </div>
         <div class="profile-name">{{ mock.name }}</div>
@@ -168,6 +168,7 @@ import {
     MessageIcon,
     EditIcon,
 } from "~~/components/icons";
+const user = useState('auth');
 const mock = {
     img: "/checkin/kevin.png",
     name: "Kevin Buchanan",

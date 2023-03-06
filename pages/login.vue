@@ -151,6 +151,7 @@
 import {request} from "~/api/utils/request";
 import user from "~/api/queries/user";
 import {KIOSK_EMAIL} from "~/api/data/users/UserFactory";
+import {useLazyQuery, useQuery} from "@vue/apollo-composable";
 
 const username = ref();
 const password = ref();
@@ -186,7 +187,8 @@ const authenticate = async (username, password) => {
   }
 
   return Object.assign(result.data.data.user, {
-    isKioskUser: result.data.data.user.email === KIOSK_EMAIL
+    isKioskUser: result.data.data.user.email === KIOSK_EMAIL,
+    notifications: [],
   });
 };
 </script>

@@ -5,18 +5,18 @@
 <script setup>
 import { createServer } from "miragejs";
 import { createGraphQLHandler } from "@miragejs/graphql";
-import graphQLSchema from "../api/schema.gql?raw";
-import { UserFactory } from "../api/data/users/UserFactory";
-import { LocationFactory } from "../api/data/locations/LocationFactory";
-import { NotificationFactory } from "../api/data/notifications/NotificationFactory";
-import { UUIDManager } from "../api/utils/UUIDManager";
-import { getPageInfo } from "../api/utils/getPageInfo";
+import graphQLSchema from "~/api/schema.gql?raw";
+import { UUIDManager } from "~/api/utils/UUIDManager";
+import { getPageInfo } from "~/api/utils/getPageInfo";
+import data from "~/api/data/data";
+import {NotificationFactory} from "~/api/data/notifications/NotificationFactory";
+import {getRandomInt} from "~/api/utils/number";
 
 // Mirage GraphQL README:
 // https://github.com/miragejs/graphql
 
 // queries that are paginated via the @paginate directive
-const paginatedQueries = ["users"];
+const paginatedQueries = ["users", "members", "locations", "locations", "notifications"];
 
 //setup object to hold resolvers
 const resolvers = {
@@ -37,7 +37,7 @@ paginatedQueries.forEach((query) => {
     const allRecords = context.mirageSchema[collectionName].where(args).models;
 
     // limit records at first X elements
-    const records = [...allRecords].splice(0, first);
+    const records = [...allRecords].splice(0, first); //TODO: fix for other pages
     // TODO: the rest of the Laravel pagination params
 
     return {
@@ -55,17 +55,16 @@ const server = createServer({
 
     this.post("/graphql", graphQLHandler);
   },
+  fixtures: data,
   factories: {
-    user: UserFactory,
-    location: LocationFactory,
     notification: NotificationFactory,
   },
   identityManagers: {
     application: UUIDManager,
   },
   seeds(server) {
-    server.createList("user", 25);
-    server.createList("location", 7);
+    server.loadFixtures(); //loads our json data
+    server.db.users.forEach(u => server.createList("notification", getRandomInt(10), { user_id: u.id }));
   },
 });
 

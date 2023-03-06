@@ -712,7 +712,6 @@ type Location {
   poc_first: String
   poc_last: String
   poc_phone: String
-  details: [LocationDetails]
 }
 
 type LocationDetails {
@@ -1604,6 +1603,12 @@ type Query {
     """
     page: Int
   ): RolePaginator
+  notifications(
+    user_id: String!
+    orderBy: [OrderByClause!]
+    first: Int = 10
+    page: Int
+  ): NotificationPaginator
 }
 
 type Reminder {
@@ -2004,7 +2009,7 @@ type User {
   city: String
   state: String
   homeLocation: Location
-  notifications: [Notification]
+  location: Location
   teams: [Team]
   contact_preference: String
   emergency_contact: EmergencyContact
@@ -2079,10 +2084,14 @@ type Notification {
   text: String
   entity_type: String
   entity_id: String
-  type: String
   entity: String
   misc: String
   created_at: DateTime
   updated_at: DateTime
   deleted_at: DateTime
+}
+
+type NotificationPaginator {
+  paginatorInfo: PaginatorInfo!
+  data: [Notification!]!
 }

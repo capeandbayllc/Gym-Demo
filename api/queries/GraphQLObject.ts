@@ -1,4 +1,4 @@
-export interface GraphQLObject {
-    query: object,
-    mutation: object
+export interface GraphQLObject<Q, M> {
+    query: Q,
+    mutation: M
 }
