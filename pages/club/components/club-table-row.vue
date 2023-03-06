@@ -1,8 +1,8 @@
 <template>
     <tr class="club-table-row">
-        <td><div class="text-lg font-bold">Club #1234</div></td>
-        <td><div class="w-36 px-4">1234 Street St. City, ST 56789</div></td>
-        <td><div class="px-3">(123) 456-7890</div></td>
+        <td><div class="text-lg font-bold">{{data.name}}</div></td>
+        <td><div class="w-36 px-4">{{data.city}}, {{data.address1}}, {{data.state}} {{data.zip}}</div></td>
+        <td><div class="px-3">{{data.phone}}</div></td>
         <td><div class="px-3">emailaddress@email.com</div></td>
         <td>
             <div class="px-8">
