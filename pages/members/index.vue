@@ -4,7 +4,7 @@
       <AddIcon
         class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold cursor-pointer"
       />
-      <p class="text-xs mt-1">Update Lead</p>
+      <p class="text-xs mt-1">Update Member</p>
     </div>
     <div class="page-members-center-container">
       <div class="custom-page-content-header">

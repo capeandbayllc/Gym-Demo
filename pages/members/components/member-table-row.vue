@@ -48,9 +48,13 @@
           </div>
           <div
             class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary"
-            tabindex="-1"
+            tabindex="-1" @click.stop="openMemberContactModal"
           >
-            Contact Lead
+            Contact Member
+
+            <daisy-modal ref="memberContactModalRef">
+              <member-contact-modal @close="closeMemberContactModal"/>
+            </daisy-modal>
           </div>
           <div
             class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary"
@@ -100,11 +104,20 @@ import MembershipBtn from "~~/components/buttons/membership-btn.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import MemberContactModal from "./member-contact.vue";
 
 library.add(faEllipsisH);
 const props = defineProps({
   data: Object,
 });
+
+const memberContactModalRef = ref(null);
+
+const openMemberContactModal = () => {
+  memberContactModalRef.value.open();
+}
+const closeMemberContactModal = () => {
+  memberContactModalRef.value.close();
+}
 </script>
