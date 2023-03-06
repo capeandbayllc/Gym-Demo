@@ -31,8 +31,14 @@ export const calendarEvents = [
         backgroundColor: "#123456",
         extendedProps: {
             department: "BioChemistry",
+            users: [
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+            ],
+            description: "Lecture",
         },
-        description: "Lecture",
         parth: "jasani",
         data: {
             foo: "bar",
@@ -44,8 +50,12 @@ export const calendarEvents = [
         backgroundColor: "#12345",
         extendedProps: {
             department: "BioChemistry",
+            users: [
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+            ],
+            description: "Lecture",
         },
-        description: "Lecture",
         parth: "jasani",
         data: {
             foo: "bar",
@@ -54,7 +64,7 @@ export const calendarEvents = [
     {
         title: "To Do Two",
         start: formatRandomEventTime({ day: 2, hour: 2 }),
-        backgroundColor: "#123456",
+        backgroundColor: "#123456", baal: 'baal',
     },
     {
         title: "To Do Three",
@@ -63,11 +73,34 @@ export const calendarEvents = [
             status: "done",
         },
         backgroundColor: "#123456",
+        extendedProps: {
+            foo: "bar",
+            users: [
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+            ],
+        },
     },
     {
         title: "Birthday Party",
         start: formatRandomEventTime({ day: -1 }),
-        end: formatRandomEventTime({ day: 1 }),
+        end: formatRandomEventTime({ day: -1, hour: 2 }),
         backgroundColor: "#6E40CF",
+        extendedProps: {
+            users: [
+                { name: "lalala", image: "" },
+                { name: "lalala", image: "" },
+            ],
+            foo: "bar",
+        },
     },
 ];

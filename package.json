@@ -10,6 +10,7 @@
     "@faker-js/faker": "^7.6.0",
     "@miragejs/graphql": "^0.1.13",
     "@nuxtjs/tailwindcss": "^6.4.1",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@vue/apollo-composable": "^4.0.0-beta.4",
     "daisyui": "^2.33.0",
     "miragejs": "^0.1.47",

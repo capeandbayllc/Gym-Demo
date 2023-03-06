@@ -1,5 +1,22 @@
 <template>
-    <FullCalendar :options="calendarOptions" ref="calendar" />
+    <FullCalendar :options="calendarOptions" ref="calendar">
+        <template v-slot:eventContent="arg">
+            <div class="flex flex-col justify-between h-full py-1">
+                <div class="flex flex-col gap-1 justify-between">
+                    <div class="!line-clamp-2">
+                        {{ arg.event.title }}
+                    </div>
+                    <EventTime :start="arg.event.start" :end="arg.event.end" />
+                    <EventDescription
+                        :start="arg.event.start"
+                        :end="arg.event.end"
+                        :description="arg.event.extendedProps.description"
+                    />
+                </div>
+                <EventUsers :users="arg.event.extendedProps.users" />
+            </div>
+        </template>
+    </FullCalendar>
 </template>
 
 <script setup>
@@ -14,6 +31,10 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { calendarEvents as events } from "../helpers/calendar-events";
+import { calendarTopLeftComponent } from "./calendar-top-left-component";
+import EventUsers from "./partials/event-users.vue";
+import EventTime from "./partials/event-time.vue";
+import EventDescription from "./partials/event-description.vue";
 
 const calenderView = ref("timeGridWeek");
 
@@ -44,13 +65,18 @@ const eventClick = (info) => {
 };
 
 const calendarOptions = ref({
-    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+    plugins: [
+        dayGridPlugin,
+        timeGridPlugin,
+        interactionPlugin,
+        calendarTopLeftComponent,
+    ],
     schedulerLicenseKey: "0157232768-fcs-1652392378",
     initialView: "timeGridWeek",
     slotDuration: "01:00",
     dateClick: handleDateClick,
     headerToolbar: {
-        left: "",
+        left: "calendarTopLeftComponent",
         center: "prev,today,next timeGridDay,timeGridWeek,dayGridMonth",
         right: "",
     },
@@ -323,7 +349,7 @@ th.fc-day-today {
 }
 
 .fc-timegrid-axis-cushion {
-    @apply capitalize;
+    @apply text-[0rem];
 }
 
 .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
