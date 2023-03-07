@@ -1,22 +1,9 @@
 <template>
-  <FullCalendar :options="calendarOptions" ref="calendar">
-    <template v-slot:eventContent="arg">
-      <div class="flex flex-col justify-between h-full py-1">
-        <div class="flex flex-col gap-1 justify-between">
-          <div class="!line-clamp-2">
-            {{ arg.event.title }}
-          </div>
-          <EventTime :start="arg.event.start" :end="arg.event.end" />
-          <EventDescription
-            :start="arg.event.start"
-            :end="arg.event.end"
-            :description="arg.event.extendedProps.description"
-          />
-        </div>
-        <EventUsers :users="arg.event.extendedProps.users" />
-      </div>
-    </template>
-  </FullCalendar>
+    <FullCalendar :options="calendarOptions" ref="calendar">
+        <template v-slot:eventContent="arg">
+            <CalendarEvent :arg="arg" />
+        </template>
+    </FullCalendar>
 </template>
 
 <script setup>
@@ -31,10 +18,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { calendarEvents as events } from "../helpers/calendar-events";
-// import { calendarTopLeftComponent } from "./calendar-top-left-component";
-import EventUsers from "./partials/event-users.vue";
-import EventTime from "./partials/event-time.vue";
-import EventDescription from "./partials/event-description.vue";
+import CalendarEvent from "./partials/calendar-event.vue";
 
 const calenderView = ref("timeGridWeek");
 
@@ -383,5 +367,8 @@ th.fc-day-today {
 .fc-timeGridWeek-button,
 .fc-dayGridMonth-button {
   @apply w-[80px];
+}
+.fc-daygrid-day-top {
+    @apply !flex !flex-row !justify-start text-[0.7rem];
 }
 </style>
