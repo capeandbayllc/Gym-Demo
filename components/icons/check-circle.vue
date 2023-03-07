@@ -4,4 +4,3 @@
         <path id="Path_5002" data-name="Path 5002" d="M-6194.916-6115.836l4.447,3.945,7.506-10.466" transform="translate(6199.616 6127.799)" fill="none" stroke="black" stroke-width="2"/>
     </svg>
 </template>
-  

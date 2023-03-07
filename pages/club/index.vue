@@ -7,13 +7,21 @@
                         <div class="location-filter-options">
                             <select-box
                                 :items="states"
-                                label="State"
+                                :label="'State'+(selectedState?': '+selectedState:'')"
+                                v-model="selectedState"
+                                :onChange="filterState"
+                                placeholderSearch="Search State"
                                 class="w-36"
+                                secondary
                             />
                             <select-box
                                 :items="cities"
-                                label="City"
+                                :onChange="filterCity"
+                                :label="'City'+(selectedCity?': '+selectedCity:'')"
+                                placeholderSearch="Search City"
                                 class="w-36"
+                                secondary
+                                v-if="cities.length"
                             />
                         </div>
                         <search-input
@@ -25,7 +33,7 @@
                     <data-table
                         class="club-table"
                         :columns="columns"
-                        :data="mock"
+                        :data="locations"
                         :row-component="ClubTableRow"
                     />
                 </div>
@@ -65,53 +73,66 @@
     }
 }
 </style>
+
 <script setup>
 import ClubTableRow from './components/club-table-row.vue';
-const states = [
-    {
-        value: 1,
-        label: 'State 1',
-    },
-    {
-        value: 2,
-        label: 'State 2',
-    },
-    {
-        value: 3,
-        label: 'State 3',
-    },
-    {
-        value: 4,
-        label: 'State 4',
-    },
-    {
-        value: 5,
-        label: 'State 5',
-    },
-];
-const cities = [
-    {
-        value: 1,
-        label: 'City 1',
-    },
-    {
-        value: 2,
-        label: 'City 2',
-    },
-    {
-        value: 3,
-        label: 'City 3',
-    },
-    {
-        value: 4,
-        label: 'City 4',
-    },
-    {
-        value: 5,
-        label: 'City 5',
-    },
-];
+import data from '../../api/data/data.json'
 
-const columns = ['Club Number', 'Address', 'Phone', 'Email', ''];
-const mock = new Array(10).fill({id: 0}).map((item, ndx) => ({id: ndx}));
+const locations = ref(data.locations);
+
+function filterLocations(){
+    locations.value = data.locations.filter((e)=>{
+        if(selectedCity.value != '' && selectedState.value != ''){
+            return e.state == selectedState.value && e.city == selectedCity.value
+        }else if(selectedState.value != ''){
+            return e.state == selectedState.value
+        }else if(selectedCity.value != ''){
+            return e.city == selectedCity.value
+        }else{
+            return true
+        }
+    })
+}
+
+const selectedCity = ref('');
+const filterCity = (value) => {
+    selectedCity.value = value
+    filterLocations()
+};
+
+const selectedState = ref('');
+const filterState = (value) => {
+    selectedState.value = value
+    filterLocations()
+};
+
+// Load cities
+const cities = ref([]);
+const uniqueCities = [];
+data.locations.forEach(location => {
+    const city = location.city;
+    if (!uniqueCities.some(item => item.value === city)) {
+        uniqueCities.push({
+            value: city,
+            label: city
+        });
+    }
+});
+cities.value = uniqueCities;
+
+// Load states
+const states = ref([]);
+const uniqueStates = [];
+data.locations.forEach(location => {
+    const state = location.state;
+    if (!uniqueStates.some(item => item.value === state)) {
+        uniqueStates.push({
+            value: state,
+            label: state
+        });
+    }
+});
+states.value = uniqueStates;
+
+const columns = ['Club Name', 'Address', 'Phone', 'Email', ''];
 </script>

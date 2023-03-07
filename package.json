@@ -8,6 +8,12 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
+    "@fortawesome/fontawesome-pro": "^6.3.0",
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/pro-duotone-svg-icons": "^6.3.0",
+    "@fortawesome/pro-light-svg-icons": "^6.3.0",
+    "@fortawesome/pro-regular-svg-icons": "^6.3.0",
+    "@fortawesome/pro-solid-svg-icons": "^6.3.0",
     "@miragejs/graphql": "^0.1.13",
     "@nuxtjs/tailwindcss": "^6.4.1",
     "@tailwindcss/line-clamp": "^0.4.2",
@@ -19,7 +25,6 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.9",
-    "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/vue-fontawesome": "^3.0.2",
     "@fullcalendar/core": "^5.11.0",

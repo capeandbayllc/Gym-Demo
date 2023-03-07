@@ -712,7 +712,6 @@ type Location {
   poc_first: String
   poc_last: String
   poc_phone: String
-  details: [LocationDetails]
 }
 
 type LocationDetails {
@@ -1144,6 +1143,10 @@ input PositionFilter {
   state: String
 }
 
+input LocationFilter {
+  state: String
+}
+
 """
 A paginated list of Position items.
 """
@@ -1172,6 +1175,8 @@ type Query {
   ): ID!
   dashboardQuery: DashboardProps
   globalSearch(term: String, pagination: PaginationInput): GlobalSearchResult
+
+  
 
   """
   Find a single reminder by an identifying attribute.
@@ -1217,10 +1222,10 @@ type Query {
   folders(filter: Filter, orderBy: [OrderByClause!]): [Folder!]!
   folder(id: ID): Folder
 
-  """
-  Find a single location by ID
-  """
-  location(id: ID): Location
+  # """
+  # Find a single location by ID
+  # """
+  # location(id: ID): Location
 
   """
   Get Location Types
@@ -1422,6 +1427,17 @@ type Query {
     """
     page: Int
   ): LocationPaginator
+
+  # allLocation(filter: LocationFilter): [Location]
+  locationsByState(state: String!): [Location]
+  locationsByCity(city: String!): [Location]
+  locationsByStateAndCity(state: String!, city: String!): [Location]
+  # location(state: String): Location
+
+  # Note: `people` cannot automatically be resolved if the `sortBy` argument is
+  # supplied to the query. We will need to implement a resolver for this.
+  # locationes(state: String): [Location]
+
   notes(
     filter: Filter
     orderBy: [OrderByClause!]
@@ -2004,6 +2020,7 @@ type User {
   city: String
   state: String
   homeLocation: Location
+  location: Location
   teams: [Team]
   contact_preference: String
   emergency_contact: EmergencyContact
