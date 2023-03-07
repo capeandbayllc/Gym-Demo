@@ -180,7 +180,6 @@ const handleClickLogin = async () => {
 
 const authenticate = async (username, password) => {
   const result = await request(queries.user.findByMail, { email: username });
-  console.log(result)
   // Password: "Hello123!"
   if (! result.data.data.user || (btoa(password) !== "SGVsbG8xMjMh")) {
     return null;
