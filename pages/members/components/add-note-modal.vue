@@ -1,15 +1,14 @@
 <template>
     <simple-card title="Notes">
-        <div class="note-modal-container flex justify-between overflow-y-auto h-[750px]">
-            <div class="w-48 mx-2">
+        <div class="note-modal-container bg-gradient-to-r from-[#042137] to-[#042137]  flex flex-col md:flex-row justify-between overflow-y-auto h-[750px] scroll-py-8">
+            
+            <div class="md:w-48 mx-2">
                <div class="flex flex-col items-center mb-10">
                     <NewAgreementIcon class="h-[50px] mb-2 cursor-pointer"/>
                     <p>Create a New Note</p>    
                </div>
                
-               
-               <Shared />
-              
+               <Folder :shared="true" />              
                <Folder />
                <Folder />
                <Folder />
@@ -19,56 +18,46 @@
                <Folder />
               
             </div>
-            <div class="w-80 mx-5 items-center">
+
+            <div class="mt-10 mb-5 md:w-80 mx-5 items-center">
                 
-                <div class="flex items-center space-x-4">
+                <div class="md:flex items-center space-x-4">
                     <button class="bg-[#0074c8] p-2 px-10 rounded-md border-2 border-transparent hover:border-[#CBCBCB]">Recent</button>
                     <button class="bg-[#052F61] p-2 px-10 rounded-md border-2 border-[#CBCBCB] hover:bg-[#0074c8]">Completed</button>
                 </div>
 
-                <div class="mt-[75px]">
+                <div class="mt-5 md:mt-[75px]">
                     <p class="mb-2">Today</p>
                     
-                    <Note title="Note#17" :alert="false" />
-                    <Note title="Note#16" :alert="true" />
-                    <Note title="Note#15" :alert="false" />
-                    <Note title="Note#14" :alert="true" />
-                    <Note title="Note#13" :alert="false" />
-                    <Note title="Note#11" :alert="true" />
+                    <Note 
+                        v-for="membersNote in result?.membersNotes.data"
+                        :title="membersNote.title"
+                        :month="membersNote.month"
+                        :time="membersNote.time"
+                        :userName="membersNote.userName"
+                        :alert="membersNote.alert"
+                    />
 
+                    
                     <p class="mb-2">Previous 30 Days</p>
-                    <Note title="Note#10" :alert="false" />
-                    <Note title="Note#09" :alert="true" />
+                    <Note 
+                        v-for="membersNote in result?.membersNotes.data"
+                        :title="membersNote.title"
+                        :month="membersNote.month"
+                        :time="membersNote.time"
+                        :userName="membersNote.userName"
+                        :alert="membersNote.alert"
+                    />
                     
                 </div>
                 
             </div>
-            <div class="content w-auto">
-                <div class="call-inner-content m-5 col-span-3 mb-8">
-                    <caller-card :user-call-setting="userCallSetting"></caller-card>
-                </div>
-                <div class="flex justify-between m-5">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. ti cupiditate maxime reiciendis .</p>
-                    <div class="float-right">
-                        <button
-                            type="button"
-                            class="btn w-max rounded btn-sm font-medium ml-32 mr-3"
-                            error
-                            outline
-                            @click="$emit('deleteNote')"
-                        >
-                            Delete
-                        </button>
-                       
-                        <button
-                            class="btn w-max bg-success border-success rounded text-base-content btn-sm font-medium"
-                            @click="$emit('saveNote')"
-                        >
-                            Save
-                        </button>
-                    </div>
-                </div>
+
+            <div class="content px-4">
+                <!-- <NoteForm  @saveNote="$emit('saveNote')"   @deleteNote="$emit('deleteNote')"/> -->
+                <NoteForm  @saveNote="addRandomMembersNote"   @deleteNote="$emit('deleteNote')"/>
             </div>
+
         </div>
     </simple-card>
 </template>
@@ -76,46 +65,75 @@
 <script setup>
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { useMutation, useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+import { MembersNoteFactory } from "~~/api/data/membersNote/MembersNoteFactory";
 import { NewAgreementIcon } from '~~/components/icons';
 import Folder from "./folder.vue";
+import NoteForm from "./note-form.vue";
 import Note from "./note.vue";
-import Shared from "./shared.vue";
-
 library.add(faCheck);
 
+const props = defineProps({
+    saveNoteStatus: Boolean
+})
+const emit = defineEmits(['saveNote']);
 
+const query = gql`
+    query MembersNotes {
+        membersNotes(first: 100) {
+        data {
+          id
+          title
+          month
+          time
+          userName
+          alert
+        }
+        paginatorInfo {
+          count
+          perPage
+          total
+        }
+      }
+    }
+  `;
+ 
+  const { result } = useQuery(query);
+  console.log("potentialLeadsResult", result)
+  const mutation = gql`
+    mutation CreateMemberNote($input: MembersNoteInput!) {
+        createMemberNote(input: $input) {
+        id
+        title
+        userName
+      }
+    }
+  `;
+  
+  
+  const addRandomMembersNote = async () => {
+    const variables = new MembersNoteFactory().build("test");
+    const { mutate } = useMutation(mutation, {
+      refetchQueries: [
+        { query },
+        "MembersNotes", 
+      ],
+    });
+  
+    const response = await mutate({ input: variables });
+    
+    emit('saveNote');
 
-const userCallSetting = {
-    type: 'outgoing-call',
-    callType: 'Outgoing Call',
-    userName: 'Mona Parksdale',
-    phone: '+1 (123) 456-7890',
-    callIcon: '/phone.png',
-    callerProfileImage: '/user-caller.png',
-};
-const callType = [
-    {
-        value: "1",
-        label: "Introduction"
-    }, 
-    {
-        value: "2",
-        label: "New Membership"
-    }, 
-    {
-        value: "3",
-        label: "Follow Up"
-    },
-    {
-        value: "4",
-        label: "Returning Call"
-    },
-];
+  };
+
+ 
+
 </script>
 
 <style scoped>
 .note-modal-container {
-	@apply pl-8 pr-8 pt-8 pb-8 bg-neutral;
+	@apply pl-8 pr-8 pt-8 pb-8;
     .card-title {
         @apply border-b pb-2 border-base-content/50;
     }

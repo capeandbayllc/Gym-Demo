@@ -10,9 +10,9 @@
             <button class="bg-white text-black text-sm font-semibold rounded-2xl px-2" v-else>Create Alert</button>                
         </div>
         <div class="flex space-x-4 text-sm">
-            <p>Month 1, 2022</p>
-            <p>0.00PM</p>
-            <p>Cecil Eilington</p>
+            <p>{{ month }}</p>
+            <p>{{ time }}</p>
+            <p>{{ userName }}</p>
         </div>
     </div>
 </template>
@@ -25,8 +25,22 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 library.add(faCheck);
 
 const props = defineProps({
-    title: String,
-    alert: Boolean,
+    title: {
+        type:String,
+    },
+    alert: {
+        type: Boolean,
+        default: false
+    },
+    month: {
+        type:String,
+    },
+    time: {
+        type:String,
+    },
+    userName: {
+        type:String,
+    },
 });
 
 
