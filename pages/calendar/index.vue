@@ -25,7 +25,7 @@
       v-if="eventInformationVisibibility"
       class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16 pointer-events-none"
     >
-      <EventInformation @outclick="resetState" />
+      <EventInformation :event="eventDetails" @outclick="resetState" />
     </div>
 
     <div
@@ -165,7 +165,7 @@ const listCalendar = ref(null);
 
 /** Component State */
 const calendarsList = ref(fakeCalendars);
-const eventDetails = ref(null); // selected event information we need to pass into the details & event panels
+const eventDetails = ref(null); // Currently selected event context
 
 /** Component Visibility State */
 const eventDetailsVisibibility = ref(false);

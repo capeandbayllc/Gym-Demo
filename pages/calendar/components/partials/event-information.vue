@@ -3,10 +3,14 @@
     ref="eventInfoElement"
     class="max-w-3xl w-full bg-neutral border-2 border-secondary p-4 h-full rounded-md pointer-events-auto"
   >
-    <SectionHeader title="Event Title">
+    <SectionHeader :title="event.title">
       <template #subtitle>
         <div class="mt-2 flex gap-4 items-center">
-          <span>Thursday, January 5</span>
+          <span
+            >{{ weekdays[new Date(event.start).getDay()] }},
+            {{ months[new Date(event.start).getMonth()] }}
+            {{ new Date(event.start).getDate() }}</span
+          >
           <span class="h-2 w-2 bg-white rounded-full"></span>
           <span>00:00 AM - 00:00 AM</span>
         </div>
@@ -136,6 +140,7 @@
 import SectionHeader from "./section-header.vue";
 import BtnGroup from "./btn-group.vue";
 import AttendeeListItem from "./attendee-list-item.vue";
+import { weekdays, months } from "../../helpers/calendar-events";
 
 const emit = defineEmits(["outclick"]);
 

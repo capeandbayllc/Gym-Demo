@@ -8,10 +8,16 @@
         <div class="mt-2 flex gap-4 items-center">
           <span class="capitalize"
             >{{ weekdays[new Date(event.start).getDay()] }},
-            {{ months[new Date(event.start).getMonth()] }} 5</span
+            {{ months[new Date(event.start).getMonth()] }}
+            {{ new Date(event.start).getDate() }}</span
           >
           <span class="h-2 w-2 bg-white rounded-full"></span>
-          <span>00:00 AM - 00:00 AM</span>
+          <span
+            >{{ new Date(event.start).getHours() }}:{{
+              new Date(event.start).getMinutes()
+            }}
+            - 00:00 AM</span
+          >
         </div>
       </template>
     </SectionHeader>
