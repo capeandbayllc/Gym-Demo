@@ -8,11 +8,9 @@ import { createGraphQLHandler } from "@miragejs/graphql";
 import graphQLSchema from "~/api/schema.gql?raw";
 import { UUIDManager } from "~/api/utils/UUIDManager";
 import data from "~/api/data/data";
-import {NotificationFactory} from "~/api/data/notifications/NotificationFactory";
-import {getRandomInt} from "~/api/utils/number";
-import notification from "~/api/queries/notification";
 import {parse} from "graphql/language";
 import registerResolver from "~/api/queries/utils/resolver";
+import {UserFactory} from "~/api/data/users/UserFactory";
 // Mirage GraphQL README:
 // https://github.com/miragejs/graphql
 
@@ -34,7 +32,6 @@ const server = createServer({
     application: UUIDManager,
   },
   seeds(server) {
-    server.createList("user", 2);
     server.loadFixtures(); //loads our json data
   },
 });

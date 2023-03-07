@@ -75,8 +75,9 @@ class Resolvers {
 
     protected getRecords(context: object, name: string): Collection<any> {
         // @ts-ignore
-        let schema: DbCollection = context.mirageSchema[name];
+        let schema: DbCollection = context.mirageSchema.db[context.mirageSchema.toCollectionName(name)];
         const condition: Array<object> = Object.assign({}, ...this.conditions.map((c: Condition) => c.condition));
+
         if (Object.keys(condition).length > 0) {
             return schema.where(condition).models;
         } else {
@@ -92,10 +93,13 @@ class Resolvers {
 
         // Add additional resolver calls here....
 
-
         // this should always be called last.
         if (this.isPaginatable) {
             return this.paginator(args, context, info);
+        }
+
+        if (Object.keys(args).length > 0) {
+            this.conditions.push(new Condition(args));
         }
 
         return this.getRecords(context, info.fieldName);
@@ -115,10 +119,12 @@ export default function registerResolver(node: DocumentNode, server: Server) {
         const type: TypeNode = query.type;
         const name: string = query.name.value;
         const isPaginatable: boolean = (type.kind === Kind.NAMED_TYPE && type.name.value.endsWith('Paginator'));
-        const resolver = new Resolvers(server, isFilterable, isPaginatable);
 
-        // @ts-ignore
-        resolvers.Query[name] = resolver.make.bind(resolver);
+        if (isPaginatable || isFilterable) {
+            const resolver = new Resolvers(server, isFilterable, isPaginatable);
+            // @ts-ignore
+            resolvers.Query[name] = resolver.make.bind(resolver);
+        }
     });
 
     return resolvers;
