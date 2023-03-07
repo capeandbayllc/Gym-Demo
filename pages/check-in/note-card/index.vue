@@ -132,21 +132,16 @@
 }
 </style>
 <script setup>
-import NoteItem from './note-item.vue';
 import { NewAgreementIcon, NewAgreementHoverIcon, ArrowIcon } from "@/components/icons";
 import AlertButton from './alert-button.vue'
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import listPlugin from "@fullcalendar/list";
 
 const noteModal = ref(null);
-
 const notesType = ref("recent");
-
 const activeNote = ref({title: ""});
-
 const notes = ref([{
     id: 1,
     title: "Note #16",

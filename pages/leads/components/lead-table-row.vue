@@ -40,6 +40,7 @@
             </div>
           </div>
           <div class="dropdown-item" tabindex="-1">Add a Note</div>
+          <div class="dropdown-item" tabindex="-1">Notes</div>
         </div>
       </div>
 
