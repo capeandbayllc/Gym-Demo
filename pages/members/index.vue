@@ -24,6 +24,11 @@
       <div class="-md:px-4 custom-page-content flex-col">
         <div class="flex flex-row justify-between space-x-4 mb-4">
           <div class="flex gap-4">
+<!--            <select-box-search-input-->
+<!--                :secondary="false"-->
+<!--                :placeholder="Filter"-->
+<!--                size="xs"-->
+<!--            ></select-box-search-input>-->
             <select-box
               :items="filterBy"
               value=""
@@ -35,6 +40,7 @@
           </div>
         </div>
         <div>
+<!--          {{ result }}-->
           <data-table
             :columns="columns"
             :data="result?.members?.data"

@@ -11,6 +11,8 @@
 </template>
 <style scoped>
 .add-ons {
+    background-color: #5bc600;
+
     @apply w-fit border flex flex-row items-center justify-center rounded-full cursor-pointer;
     &:hover {
         .add-ons-text {
