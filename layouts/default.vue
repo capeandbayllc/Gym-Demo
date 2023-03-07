@@ -42,9 +42,7 @@
     >
         <slot />
     </div>
-  <leader-board-slideout  :isLeaderBoardVisible="isLeaderBoardVisible">
-
-  </leader-board-slideout>
+    <leader-board-slideout :isLeaderBoardVisible="isLeaderBoardVisible" />
 </template>
 <style scoped>
 .app-layout {
@@ -84,13 +82,10 @@ const toggleCircularMenu = () => {
 const helpBot = ref(null);
 const showBot = () => helpBot.value.open();
 
-let isLeaderBoardVisible = false;
+const isLeaderBoardVisible = ref(false);
 const showLeaderBoard = () => {
-  console.log('showLeaderBoard in Default.vue');
-  console.log(isLeaderBoardVisible);
-  isLeaderBoardVisible = !isLeaderBoardVisible;
-
-}
+    isLeaderBoardVisible.value = !isLeaderBoardVisible.value;
+};
 
 const profileMenu = ref(null);
 const showProfileMenu = () => {
