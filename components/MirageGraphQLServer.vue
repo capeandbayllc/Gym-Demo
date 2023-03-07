@@ -17,9 +17,8 @@ import {UserFactory} from "~/api/data/users/UserFactory";
 const server = createServer({
   routes() {
     const parsed = parse(graphQLSchema);
-    const resolvers = registerResolver(parsed, this);
     const graphQLHandler = createGraphQLHandler(parsed, this.schema, {
-      resolvers,
+      resolvers: registerResolver(parsed, this),
     });
 
     this.post("/graphql", graphQLHandler);

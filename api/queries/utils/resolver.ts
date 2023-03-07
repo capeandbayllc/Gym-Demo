@@ -5,7 +5,13 @@ import {
     ObjectTypeDefinitionNode,
     TypeNode
 } from "graphql/language";
-import {Condition, Filterable, Paginator} from "~/api/queries/filters/FilterInterfaces";
+import {
+    Filter,
+    Filterable,
+    Paginator,
+    PaginatorArgs,
+    PaginatorOrderByClause
+} from "~/api/queries/filters/FilterInterfaces";
 import {Collection} from "miragejs";
 import {getPageInfo} from "~/api/utils/getPageInfo";
 import {Server} from "miragejs/server";
@@ -14,8 +20,8 @@ import {GraphQLResolveInfo} from "graphql/type/definition";
 
 
 class Resolvers {
+    protected schema?: DbCollection;
     protected server?: Server;
-    protected conditions: Array<Condition> = [];
     protected isFilterable: boolean;
     protected isPaginatable: boolean;
 
@@ -25,47 +31,28 @@ class Resolvers {
         this.isPaginatable = isPaginatable;
     }
 
-    protected async filter(args: object, context: object, info: GraphQLResolveInfo) {
-        // @ts-ignore
-        const filter = args.filter;
+    protected async filter(records: Collection<any>, filter: Filter, args: object, context: object, info: GraphQLResolveInfo): Promise<Collection<any> | null> {
         const name = info.fieldName;
         let module: Filterable;
-
-        if (! filter) {
-            return;
-        }
 
         try {
             module = await import(`~/api/queries/filters/${name}.ts`);
         } catch (e) {
             console.warn(`No filter defined for "${name}" at ~/api/queries/filters`);
-            return;
+            return null;
         }
 
         try {
-            // @ts-ignore
-            const filter = args.filter;
-            // @ts-ignore
-            delete args.filter;
-            // @ts-ignore
-            this.conditions.push(module.apply(context.mirageSchema[name], filter, name, args));
+            return module.apply(records, filter, name, args);
         } catch (e) {
-            console.error(e);
+            throw e;
         }
     }
 
-    protected paginator(args: object, context: object, info: GraphQLResolveInfo): Paginator {
-        // @ts-ignore grab pagination params
-        const first = args.first;
+    protected paginator(records: Collection<any>, page: number, first: number, orderBy?: PaginatorOrderByClause): Paginator {
+        // TODO implement orderBy
         // @ts-ignore
-        delete args.first;
-        this.conditions.push(new Condition(args));
-
-        // limit records at first X elements
-        // @ts-ignore
-        const records = [...this.getRecords(context, info.fieldName)].splice(0, first);
-        // TODO: fix for other pages
-        // TODO: the rest of the Laravel pagination params
+        records = records.splice(page, first + page);
 
         return {
             data: records,
@@ -73,36 +60,32 @@ class Resolvers {
         };
     }
 
-    protected getRecords(context: object, name: string): Collection<any> {
+    public async make(_: null, args: PaginatorArgs, context: object, info: GraphQLResolveInfo) {
         // @ts-ignore
-        let schema: DbCollection = context.mirageSchema.db[context.mirageSchema.toCollectionName(name)];
-        const condition: Array<object> = Object.assign({}, ...this.conditions.map((c: Condition) => c.condition));
+        const schema = context.mirageSchema[context.mirageSchema.toCollectionName(info.fieldName)];
+        let { first = 0, page = 0, orderBy, filter } = args;
 
-        if (Object.keys(condition).length > 0) {
-            return schema.where(condition).models;
-        } else {
-            // @ts-ignore
-            return schema.all().models;
+        if (this.isPaginatable) {
+            delete args.first;
+            delete args.page;
+            delete args.orderBy;
         }
-    }
 
-    public async make(_: null, args: object, context: object, info: GraphQLResolveInfo) {
         if (this.isFilterable) {
-            await this.filter(args, context, info);
+            delete args.filter;
         }
 
-        // Add additional resolver calls here....
+        let records = (Object.keys(args).length > 0) ? schema.where(args).models : schema.all().models;
+        if (filter) {
+            records = await this.filter(records, filter, args, context, info);
+        }
 
         // this should always be called last.
         if (this.isPaginatable) {
-            return this.paginator(args, context, info);
+            return this.paginator(records, page, first, orderBy);
         }
 
-        if (Object.keys(args).length > 0) {
-            this.conditions.push(new Condition(args));
-        }
-
-        return this.getRecords(context, info.fieldName);
+        return records;
     }
 
 }
