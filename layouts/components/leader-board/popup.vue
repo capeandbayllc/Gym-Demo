@@ -134,6 +134,7 @@ import { CrossIcon } from "~~/components/icons";
 import TrophyIcon from "~/components/icons/trophy-circle.vue";
 
 
+
 const selected = ref('trainers')
 
 const locationData = ref([

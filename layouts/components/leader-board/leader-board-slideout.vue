@@ -1,5 +1,5 @@
 <template>
-  <leader-board-slideout
+  <div
       :class="{ 'right-0': sidebarVisible, 'right-[20rem]': !sidebarVisible }"
   >
     <div>
@@ -35,7 +35,7 @@
         <td class="p-2"><div class="px-1 arrow-down"></div></td>
       </tr>
     </div>
-  </leader-board-slideout>
+  </div>
 </template>
 <style>
 .solid {

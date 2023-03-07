@@ -41,6 +41,9 @@
     >
         <slot />
     </div>
+  <leader-board-slideout>
+
+  </leader-board-slideout>
 </template>
 <style scoped>
 .app-layout {
@@ -65,12 +68,11 @@ import NavBar from "./components/nav-bar/index.vue";
 import SideBar from "./components/side-bar.vue";
 import CircularMenu from "./components/circular-menu/index.vue";
 import HelpBot from "./components/help-bot/index.vue";
-// import LeaderBoard from "./components/leader-board/index.vue";
-// import LeaderBoardPop from "./components/leader-board/popup.vue";
 import ProfileMenu from "./components/profile-menu/index.vue";
 
 import ChatConversation from "./components/chat-conversation/index.vue";
 import { KIOSK_ROUTE, LOGIN_ROUTE } from "~/middleware/auth.global";
+import LeaderBoardSlideout from "~/layouts/components/leader-board/leader-board-slideout.vue";
 
 const showCircularMenu = ref(false);
 
