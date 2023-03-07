@@ -32,7 +32,11 @@
       class="z-50 fixed h-screen w-screen flex items-center justify-center pointer-events-none"
       v-if="eventFormVisibility"
     >
-      <EventForm @cancel="resetState" @createEvent="handleCreateEvent" />
+      <EventForm
+        @cancel="resetState"
+        @createEvent="handleCreateEvent"
+        :members="result.members.data"
+      />
     </div>
 
     <!-- sidebar date selector popup -->
@@ -136,9 +140,8 @@ import Datepicker from "@vuepic/vue-datepicker";
 import EventForm from "./components/event-form.vue";
 
 /** GQL/Mock API */
-// import gql from "graphql-tag";
-// import { useQuery, useMutation } from "@vue/apollo-composable";
-// import { UserFactory } from "~~/api/data/users/UserFactory";
+import gql from "graphql-tag";
+import { useQuery } from "@vue/apollo-composable";
 
 /** FullCalendar component & plugins */
 import FullCalendar from "@fullcalendar/vue3";
@@ -324,16 +327,6 @@ const onViewChanged = () => {
   });
 };
 
-const calendarTitle = computed(() => {
-  let option = {
-    year: "numeric",
-    month: "long",
-  };
-  if (currentView.value === "timeGridDay") {
-    option["day"] = "numeric";
-  }
-  return start.value?.toLocaleString("default", option);
-});
 const dateSelect = ref();
 const showDateSelectModal = () => {
   if (calenderView.value !== "timeGridWeek") {
@@ -367,6 +360,36 @@ const getDayClass = (date) => {
     return "!rounded-full bg-secondary";
   return "";
 };
+
+/** GQL */
+const query = gql`
+  query AllMembers {
+    members(first: 100) {
+      data {
+        id
+        first_name
+        last_name
+        email
+        primary_phone
+        locations {
+          id
+          name
+        }
+        homeLocation {
+          name
+        }
+        created_at
+      }
+      paginatorInfo {
+        count
+        perPage
+        total
+      }
+    }
+  }
+`;
+
+const { result } = useQuery(query);
 
 watch(calenderView, () => {
   setTimeout(() => {

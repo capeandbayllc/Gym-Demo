@@ -28,7 +28,9 @@
         v-model="form.member"
         class="w-full p-2 rounded-md text-black mt-2"
       >
-        <option>Steve</option>
+        <option v-for="mem in members" :key="mem.id">
+          {{ mem.first_name }} {{ mem.last_name }}
+        </option>
       </select>
     </div>
     <div class="form-group-pair">
