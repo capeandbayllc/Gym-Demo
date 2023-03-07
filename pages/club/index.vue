@@ -11,7 +11,7 @@
                                 v-model="selectedState"
                                 :onChange="filterState"
                                 placeholderSearch="Search State"
-                                class="w-36 z-50"
+                                class="w-36 z-[23]"
                                 secondary
                             />
                             <select-box
