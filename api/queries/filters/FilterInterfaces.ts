@@ -1,4 +1,4 @@
-import DbCollection from "miragejs/db-collection";
+import {Collection} from "miragejs";
 
 export interface Filter {
     search: String
@@ -7,7 +7,7 @@ export interface Filter {
 }
 
 export interface Filterable {
-    apply: (mirageSchemaElement: DbCollection, filter: Filter, name: string, args: object) => Condition
+    apply: (records: Collection<any>, filter: Filter, name: string, args: object) => Collection<any>
 }
 
 export interface PaginatorInfo {
@@ -23,12 +23,22 @@ export interface PaginatorInfo {
 
 export interface Paginator {
     paginatorInfo: PaginatorInfo,
-    data: Array<object>
+    data: Collection<any>
 }
 
-export class Condition {
-    public condition: object;
-    public constructor(condition: object) {
-        this.condition = condition;
-    }
+export interface PaginatorOrderSortOrder {
+    ASC: string
+    DESC: string
+}
+
+export interface PaginatorOrderByClause {
+    column: string,
+    order: PaginatorOrderSortOrder,
+}
+export interface PaginatorArgs {
+    orderBy?: PaginatorOrderByClause
+    first?: number,
+    page?: number,
+
+    filter?: Filter,
 }
