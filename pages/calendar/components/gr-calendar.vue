@@ -1,9 +1,9 @@
 <template>
-    <FullCalendar :options="calendarOptions" ref="calendar">
-        <template v-slot:eventContent="arg">
-            <CalendarEvent :arg="arg" />
-        </template>
-    </FullCalendar>
+  <FullCalendar :options="calendarOptions" ref="calendar">
+    <template v-slot:eventContent="arg">
+      <CalendarEvent :arg="arg" />
+    </template>
+  </FullCalendar>
 </template>
 
 <script setup>
@@ -17,16 +17,24 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { calendarEvents as events } from "../helpers/calendar-events";
+// import { calendarEvents as events } from "../helpers/calendar-events";
 import CalendarEvent from "./partials/calendar-event.vue";
 
 const calenderView = ref("timeGridWeek");
 
-const emit = defineEmits(["clickCalEvent"]);
+const emit = defineEmits(["clickCalEvent", "clickEmptyNode"]);
+
+const props = defineProps({
+  events: {
+    type: Array,
+    default: [],
+  },
+});
 
 const handleDateClick = (arg) => {
-  console.log("date click! " + arg.dateStr);
-  emit("clickCalEvent", arg);
+  //   console.log("date click! " + arg.dateStr);
+  console.log("empty node click:", arg);
+  emit("clickEmptyNode", arg);
 };
 
 /** DOM References */
@@ -47,10 +55,7 @@ const handleChangeView = (value) => {
 };
 
 const eventClick = (info) => {
-  let ev = info.event;
-  //   eventModal.value.open();
-  //   console.log("date click! " + arg.dateStr);
-  emit("clickCalEvent", ev);
+  emit("clickCalEvent", info.event);
 };
 
 const calendarOptions = ref({
@@ -69,7 +74,7 @@ const calendarOptions = ref({
     center: "prev,today,next timeGridDay,timeGridWeek,dayGridMonth",
     right: "",
   },
-  events,
+  events: props.events,
   editable: true,
   selectable: true,
   dayMaxEvents: true,
@@ -110,7 +115,7 @@ const monthCalendarOptions = ref({
   plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
   initialView: "dayGridMonth",
   headerToolbar: false,
-  events,
+  events: props.events,
   eventClick,
   editable: true,
   selectable: true,
@@ -128,7 +133,7 @@ const listCalendarOptions = ref({
     slotDuration: "01:00:00",
   },
   headerToolbar: false,
-  events,
+  events: props.events,
   eventClick,
 });
 
@@ -369,6 +374,6 @@ th.fc-day-today {
   @apply w-[80px];
 }
 .fc-daygrid-day-top {
-    @apply !flex !flex-row !justify-start text-[0.7rem];
+  @apply !flex !flex-row !justify-start text-[0.7rem];
 }
 </style>

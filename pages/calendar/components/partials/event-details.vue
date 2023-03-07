@@ -3,10 +3,13 @@
     ref="eventDetailsElement"
     class="bg-neutral py-4 px-8 rounded-md border-2 border-secondary max-w-2xl w-full pointer-events-auto"
   >
-    <SectionHeader title="Body by Bryan">
+    <SectionHeader :title="event.title">
       <template #subtitle>
         <div class="mt-2 flex gap-4 items-center">
-          <span>Thursday, January 5</span>
+          <span class="capitalize"
+            >{{ weekdays[new Date(event.start).getDay()] }},
+            {{ months[new Date(event.start).getMonth()] }} 5</span
+          >
           <span class="h-2 w-2 bg-white rounded-full"></span>
           <span>00:00 AM - 00:00 AM</span>
         </div>
@@ -42,15 +45,21 @@
 
 <script setup>
 import SectionHeader from "./section-header.vue";
+import { weekdays, months } from "../../helpers/calendar-events";
 
-const emit = defineEmits(["outclick"]);
+const emit = defineEmits(["outclick", "seemore"]);
+
+const props = defineProps({
+  event: {
+    type: [Object, null],
+    default: null,
+  },
+});
+
 const eventDetailsElement = ref(null);
 
 const ensureClickBoundary = (e) => {
-  if (!eventDetailsElement.value.contains(e.target)) {
-    console.log("EMIT!");
-    emit("outclick");
-  }
+  if (!eventDetailsElement.value.contains(e.target)) emit("outclick");
 };
 
 onMounted(() => {

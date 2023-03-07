@@ -10,6 +10,7 @@
       class="z-50 fixed h-screen w-screen flex items-center justify-center pointer-events-none"
     >
       <EventDetails
+        :event="eventDetails"
         @outclick="resetState"
         @seemore="
           () => {
@@ -114,7 +115,11 @@
             />
           </div>
         </div>
-        <GrCalendar @click-cal-event="handleCalendarEvent" />
+        <GrCalendar
+          :events="events"
+          @click-cal-event="handleCalendarEvent"
+          @clickEmptyNode="handleAddNew"
+        />
       </section>
     </div>
   </div>
@@ -165,7 +170,7 @@ const eventDetails = ref(null); // selected event information we need to pass in
 /** Component Visibility State */
 const eventDetailsVisibibility = ref(false);
 const eventInformationVisibibility = ref(false);
-const eventFormVisibility = ref(true);
+const eventFormVisibility = ref(false);
 
 const resetState = () => {
   eventDetailsVisibibility.value = false;
@@ -174,8 +179,9 @@ const resetState = () => {
 };
 
 /** sets up state for form entry */
-const handleAddNew = () => {
+const handleAddNew = (node) => {
   resetState();
+  console.log("node", node);
   eventFormVisibility.value = true;
 };
 
@@ -189,9 +195,18 @@ const handleCreateEvent = (form) => {
 //   onViewChanged();
 // };
 
+/** handles clicking calendar event */
 const handleCalendarEvent = (e) => {
-  console.log("event received:", e);
-  if (eventFormVisibility.value) return;
+  if (eventFormVisibility.value) return; // means they clicked while in the middle of creating new event
+  let eventInfo = {
+    ...e._def,
+    start: e._instance.range.start,
+    end: e._instance.range.end,
+  };
+  console.log("event info", eventInfo);
+  console.log("ev", e);
+  eventDetails.value = eventInfo;
+
   eventDetailsVisibibility.value = true;
 };
 
