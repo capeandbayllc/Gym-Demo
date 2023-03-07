@@ -16,6 +16,7 @@
                         <div class="inline-block place-self-center pl-2 ml-2 p-y">
                             <div class="text-xl -lg:text-lg font-semibold pt-2">Kevin Buchanam</div>
                             <div class="text-sm text-accent-focus/80">Online</div>
+                            <i class="fa-solid fa-check-square"></i>
                         </div>
                     </div>
                     <div class=" justify-start bg-black rounded-md grid flex mt-4 ">
@@ -26,8 +27,10 @@
                             <div class="flex">
                                 <div class="relative cursor-pointer mx-2" v-for="(item, index) in chatItems" :key="index" >
                                     <div  class="p-2 inline">
-                                        <div class="chat-icons">
-                                            <img class="w-12 h-12 -lg:w-10 -lg:h-10 m-auto border rounded-full p-2 " :src="item.image" alt="" @click="toggleChatOpen"/>
+                                        <div class="chat-icons m-1">
+                                            <font-awesome-icon class="w-6 h-6 -lg:w-10 -lg:h-10 m-auto border rounded-full p-2 " :icon="item.icon" />
+                                            <!-- <font-awesome-icon class="w-6 h-6 -lg:w-10 -lg:h-10 m-auto border rounded-full p-2 " :icon="['far', 'fa-window-maximize']" /> -->
+                                            <!-- <img class="w-12 h-12 -lg:w-10 -lg:h-10 m-auto border rounded-full p-2 " :src="item.image" alt="" @click="toggleChatOpen"/> -->
                                         </div>
                                         <div class="text-min -xs:text-xs pt-1 pr-2">
                                             {{item.name}}
@@ -43,14 +46,17 @@
                             <div class="flex">
                                 <div class="relative cursor-pointer mx-2" v-for="(item, index) in onlineMembers" :key="index" >
                                     <div class="inline">
-                                        <div class="p-2 ">
-                                            <img class="w-12 h-12 -lg:w-10 -lg:h-10" :src="item.profile" alt="" @click="toggleChatOpen"/>
-                                            <div v-if="index==1" class="rounded-full w-3 h-3 bg-red-700 absolute  right-3 bottom-7"></div>
-                                            <div v-else class="rounded-full w-3 h-3 bg-accent-focus/80 absolute right-3 bottom-7"></div>
+                                        <div class="p-2 relative">
+                                            <img v-if="index!=3" class="w-12 h-12 -lg:w-10 -lg:h-10 m-auto" :src="item.profile" alt="" @click="toggleChatOpen"/>
+                                            <img v-else class="w-12 h-12 -lg:w-10 -lg:h-10 m-auto border rounded-full p-2 m-auto" src="/chat-conversation/plus.png" alt="" @click="toggleChatOpen"/>
+                                            <div v-if="index==1" class="rounded-full w-3 h-3 bg-red-700 absolute  right-3 bottom-2"></div>
+                                            <div v-else-if="index==3" class=""></div>
+                                            <div v-else class="rounded-full w-3 h-3 bg-accent-focus/80 absolute right-3 bottom-2"></div>
                                         </div>
                                         <div class="text-min -xs:text-xs pt  pr-2 justify-center">
                                             {{ item.name }}
                                         </div> 
+                                        
                                     </div>    
                                 </div>
                             </div>
@@ -94,20 +100,20 @@
                         <img v-else-if="index!==2" class="w-12 h-12 -lg:w-10 -lg:h-10 opacity-40" :src="item.profile" alt="" @click="toggleChatOpen"/>
                         <div  v-else class="inline relative" >
                             <div class="chat-pill absolute text-sm whitespace-nowrap bg-blue-700 rounded-l-full px-2">
-                                Stacy Caldonia
+                               {{item.name}}
                             </div>
-                            <img class="w-12 h-12 -lg:w-10 -lg:h-10 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
+                            <img class="sticky w-12 h-12 -lg:w-10 -lg:h-10 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
                             
                         </div>
                     </div>
                     <hr class="mx-2 mt-2">
-                    <div class="m-auto px-2" v-for="(item, index) in onlineMembers" :key="index" >
-                        <img class="w-12 h-12 -lg:w-10 -lg:h-10 opacity-40" :src="item.profile" alt="" @click="toggleChatOpen"/>
+                    <div class="m-auto px-2" v-for="(item, index) in messages" :key="index" >
+                        <img v-if="index<4" class="w-12 h-12 -lg:w-10 -lg:h-10 opacity-40" :src="item.avatar" alt="" @click="toggleChatOpen"/>
                     </div>
                 </div>
             </div>
             <div class="inline ml-2 gradient-bg border rounded-lg">
-                <div class="flex bg-black m-1">
+                <div class="flex bg-black m-2">
                     <div class="relative p-1">
                         <img src="/chat-conversation/group-chat.svg" class="w-16 h-16 -lg:w-14 -lg:h-14" @click="toggleChatOpen"/>
                     </div>
@@ -184,9 +190,9 @@
         }
     }
     @media (max-width:820px) {
-        .chat-conversation-container .chat-content .right-side-chat-container{
+     /*    .chat-conversation-container .chat-content .right-side-chat-container{
             min-width: 100px !important;
-        }
+        } */
     }
 
     .scroll-chat{
@@ -216,30 +222,38 @@
 </style>
 <script setup>
 import {ref} from 'vue'
-import UserMessagesCard from './components/user-messages-card.vue'
 import ChatMessagesCard from './components/chat-messages-card.vue'
 import DropdownCard from './components/dropdown-card.vue';
-import { TrainerIcon } from '@/components/icons';
+import {FontAwesomeIcon}  from '@fortawesome/vue-fontawesome'
+import {far} from '@fortawesome/pro-regular-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {fas} from '@fortawesome/pro-solid-svg-icons'
+
+library.add(far,fas)
 const chatOpen = ref(false)
 const showDropDown= ref(false)
 const onlineMembers = [
     {
         id: '1',
         name: 'Stacy Caldania',
-        profile: '/chat-conversation/1.png'
+        profile: '/chat-conversation/1.png',
+       
     },
     {
         id: '2',
         name: 'Al wanter',
-        profile: '/chat-conversation/2.png'
+        profile: '/chat-conversation/catherine.png',
+       
     },
     {   name: 'Dan Cuckens',
         id: '3',
-        profile: '/chat-conversation/3.png'
+        profile: '/chat-conversation/3.png',
+       
     },
-    {   name: 'Derrick  B. Bad',
+    {   name: 'New Favorite',
         id: '4',
-        profile: '/chat-conversation/4.png'
+        profile: '/chat-conversation/4.png',
+       
     },
     
 ];
@@ -248,18 +262,22 @@ const chatItems = [
     {
         name:"Trainers Forum",
         image:"/chat-conversation/trainer.png",
+        icon:['fas', 'fa-window-maximize']
     },
     {
         name:"New Members",
         image:"/chat-conversation/member.png",
+        icon:['fas', 'fa-user-plus']
     },
     {
         name:"Club #1234",
         image:"/chat-conversation/club.png",
+        icon:['fas', 'fa-warehouse-alt']
     },
     {
         name:"New Channel",
         image:"/chat-conversation/plus.png",
+        icon:['fas', 'fa-plus-circle']
     }
 ];
 
