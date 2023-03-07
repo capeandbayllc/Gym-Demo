@@ -22,7 +22,7 @@ import CalendarEvent from "./partials/calendar-event.vue";
 
 const calenderView = ref("timeGridWeek");
 
-const emit = defineEmits(["clickCalEvent", "clickEmptyNode"]);
+const emit = defineEmits(["clickEventNode", "clickEmptyNode"]);
 
 const props = defineProps({
   events: {
@@ -55,7 +55,7 @@ const handleChangeView = (value) => {
 };
 
 const eventClick = (info) => {
-  emit("clickCalEvent", info.event);
+  emit("clickEventNode", info.event);
 };
 
 const calendarOptions = ref({

@@ -1,9 +1,9 @@
 <template>
   <div class="py-4 px-12 w-full h-fit">
     <!-- modal -->
-    <daisy-modal class="w-fit" id="eventModal" ref="eventModal">
+    <!-- <daisy-modal class="w-fit" id="eventModal" ref="eventModal">
       <event-popup></event-popup>
-    </daisy-modal>
+    </daisy-modal> -->
     <!-- event details -->
     <div
       v-if="eventDetailsVisibibility"
@@ -121,7 +121,7 @@
         </div>
         <GrCalendar
           :events="events"
-          @click-cal-event="handleCalendarEvent"
+          @clickEventNode="handleCalendarEvent"
           @clickEmptyNode="handleAddNew"
         />
       </section>
@@ -161,15 +161,15 @@ const handleDateClick = (arg) => {
 };
 
 /** DOM References */
-const calendar = ref(null);
-const eventModal = ref(null);
-const start = ref(null);
-const end = ref(null);
-const currentView = ref("timeGridWeek");
-const selectedDate = ref(null);
-const isMobile = computed(() => window.innerWidth <= 480);
-const monthCalendar = ref(null);
-const listCalendar = ref(null);
+// const calendar = ref(null);
+// const eventModal = ref(null);
+// const start = ref(null);
+// const end = ref(null);
+// const currentView = ref("timeGridWeek");
+// const selectedDate = ref(null);
+// const isMobile = computed(() => window.innerWidth <= 480);
+// const monthCalendar = ref(null);
+// const listCalendar = ref(null);
 
 /** Component State */
 const calendarsList = ref(fakeCalendars);
@@ -188,9 +188,18 @@ const resetState = () => {
 
 /** sets up state for form entry */
 const handleAddNew = (node) => {
-  resetState();
-  console.log("node", node);
-  eventFormVisibility.value = true;
+  if (
+    eventDetailsVisibibility.value === true ||
+    eventInformationVisibibility.value === true
+  ) {
+    console.log("node", node);
+    return;
+  } else {
+    resetState();
+
+    console.log("node", node);
+    eventFormVisibility.value = true;
+  }
 };
 
 const handleCreateEvent = (form) => {
@@ -205,7 +214,7 @@ const handleCreateEvent = (form) => {
 
 /** handles clicking calendar event */
 const handleCalendarEvent = (e) => {
-  if (eventFormVisibility.value) return; // means they clicked while in the middle of creating new event
+  if (eventFormVisibility.value) return; // don't proceed if something else is in context
   let eventInfo = {
     ...e._def,
     start: e._instance.range.start,
@@ -317,33 +326,33 @@ const handleCalendarEvent = (e) => {
 //     eventClick,
 // });
 
-const onViewChanged = () => {
-  start.value = calendar.value.getApi().view.activeStart;
-  start.end = calendar.value.getApi().view.activeEnd;
-  console.log({
-    start,
-    end,
-    calendarView: calendar.value.getApi().view,
-  });
-};
+// const onViewChanged = () => {
+//   start.value = calendar.value.getApi().view.activeStart;
+//   start.end = calendar.value.getApi().view.activeEnd;
+//   console.log({
+//     start,
+//     end,
+//     calendarView: calendar.value.getApi().view,
+//   });
+// };
 
-const dateSelect = ref();
-const showDateSelectModal = () => {
-  if (calenderView.value !== "timeGridWeek") {
-    selectedDate.value = start.value;
-  }
-  dateSelect.value.open();
-};
-const onSelectDate = (modelData) => {
-  selectedDate.value = modelData;
-  if (calenderView.value !== "timeGridWeek") {
-    start.value = modelData;
-    calendar.value.getApi().gotoDate(start.value);
-  } else {
-    start.value = modelData[0];
-    calendar.value.getApi().gotoDate(start.value);
-  }
-};
+// const dateSelect = ref();
+// const showDateSelectModal = () => {
+//   if (calenderView.value !== "timeGridWeek") {
+//     selectedDate.value = start.value;
+//   }
+//   dateSelect.value.open();
+// };
+// const onSelectDate = (modelData) => {
+//   selectedDate.value = modelData;
+//   if (calenderView.value !== "timeGridWeek") {
+//     start.value = modelData;
+//     calendar.value.getApi().gotoDate(start.value);
+//   } else {
+//     start.value = modelData[0];
+//     calendar.value.getApi().gotoDate(start.value);
+//   }
+// };
 
 const getDayClass = (date) => {
   if (
@@ -363,7 +372,7 @@ const getDayClass = (date) => {
 
 /** GQL */
 const query = gql`
-  query AllMembers {
+  query CalendarData {
     members(first: 100) {
       data {
         id
@@ -386,20 +395,63 @@ const query = gql`
         total
       }
     }
+    calendarEvents {
+      id
+      title
+      description
+      full_day_event
+      start
+      end
+      #   color
+      #   options
+      #   eventTypeId
+      #   ownerId
+      event_completion
+      #   locationId
+      #   overdue_reminder_sent
+      editable
+      call_task
+      #   deleted_at
+      #   created_at
+      #   updated_at
+    }
+  }
+`;
+
+const queryEvents = gql`
+  query CalendarEvents {
+    calendarEvents(first: 100) {
+      id
+      title
+      description
+    }
   }
 `;
 
 const { result } = useQuery(query);
+// const { result: calEvents } = useQuery(queryEvents);
 
-watch(calenderView, () => {
-  setTimeout(() => {
-    calendar.value.getApi().render();
-    console.log("huh");
-  });
-});
+// watch(calenderView, () => {
+//   setTimeout(() => {
+//     calendar.value.getApi().render();
+//     console.log("huh");
+//   });
+// });
+
+let testInterval = null;
 
 onMounted(async () => {
-  await nextTick();
-  window.dispatchEvent(new Event("resize"));
+  //   await nextTick();
+  //   window.dispatchEvent(new Event("resize"));
+
+  if (!testInterval) {
+    testInterval = setInterval(() => {
+      console.log("query result:", result);
+    }, 2500);
+  }
+});
+
+onUnmounted(() => {
+  clearInterval(testInterval);
 });
 </script>

@@ -19,8 +19,7 @@ const paginatedQueries = ["users", "members", "locations"];
 
 //setup object to hold resolvers
 const resolvers = {
-  Query: {
-  }
+  Query: {},
 };
 
 // create a resolver for each paginated query
