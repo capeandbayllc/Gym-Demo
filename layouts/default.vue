@@ -4,6 +4,7 @@
             @show-circular-menu="toggleCircularMenu"
             @show-help="showBot"
             @show-profile-menu="showProfileMenu"
+            @show-leader-board="showLeaderBoard"
             class="sticky top-0 z-[22]"
         />
         <circular-menu v-if="showCircularMenu" @close="toggleCircularMenu" />
@@ -41,7 +42,7 @@
     >
         <slot />
     </div>
-  <leader-board-slideout>
+  <leader-board-slideout  :isLeaderBoardVisible="isLeaderBoardVisible">
 
   </leader-board-slideout>
 </template>
@@ -83,11 +84,13 @@ const toggleCircularMenu = () => {
 const helpBot = ref(null);
 const showBot = () => helpBot.value.open();
 
-// const leaderBoard = ref(null);
-// const showLeaderBoard = () => leaderBoard.value.open();
-//
-// const leaderBoardPop = ref(null);
-// const showLeaderPop = () => leaderBoardPop.value.open();
+let isLeaderBoardVisible = false;
+const showLeaderBoard = () => {
+  console.log('showLeaderBoard in Default.vue');
+  console.log(isLeaderBoardVisible);
+  isLeaderBoardVisible = !isLeaderBoardVisible;
+
+}
 
 const profileMenu = ref(null);
 const showProfileMenu = () => {

@@ -81,6 +81,7 @@
     <div class="float-right m-2">
       <button class="text-xs" @click="showSlideout">View More</button>
     </div>
+
   </div>
 </template>
 <style scoped>
@@ -132,7 +133,6 @@
 import { ref } from "vue";
 import { CrossIcon } from "~~/components/icons";
 import TrophyIcon from "~/components/icons/trophy-circle.vue";
-
 
 
 const selected = ref('trainers')
@@ -357,16 +357,16 @@ const breakpoints = ref({
     snapAlign: "start",
   },
 });
-const showLeaderSlide = ref(false);
-const showLeaderBoardSlideout = ref(false);
-const toggle = () => {
-  showLeaderSlide.value = !showLeaderSlide.value;
-  console.log("showLeaderSlide");
-};
-const showSlideout = () => {
-  showLeaderBoardSlideout.value = true;
 
-  console.log(showLeaderBoardSlideout);
+// const showLeaderBoardSlideout = ref(false);
+const emit = defineEmits(["show-leader-board"])
+const showSlideout = () => {
+  // this.$root.$emit('leader-board-slideout');
+  // showLeaderBoardSlideout.value = true;
+
+  emit('show-leader-board')
+  console.log('showSlideout in popup.vue');
+  // console.log(showLeaderBoardSlideout);
 }
 let leaderBoardData = trainerData;
 </script>

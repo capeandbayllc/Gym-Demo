@@ -33,7 +33,7 @@
       <button class="w-6">
         <TrophyIcon @mouseover="openPop" @click="$router.push('/leaderboard')"/>
       </button>
-        <LeaderPop v-if="showLeaderPop" @close="toggle" class="leader-pop" />
+        <LeaderPop v-if="showLeaderPop" @close="toggle" @show-leader-board="showLeaderBoard" class="leader-pop" />
     </div>
     <div class="!ml-[-40px]">
       <account-btn @click="$emit('show-profile-menu')" />
@@ -118,6 +118,12 @@ const showFocus = () => {
   globalSearchInput.value.style = "";
   globalSearchInput.value.focus();
 };
+
+const emit = defineEmits(["show-leader-board"])
+const showLeaderBoard = () => {
+  emit('show-leader-board');
+  console.log('showLeaderBoard in header-actions/index.vue');
+}
 const hideFocus = () => {
   globalSearchInput.value.blur();
 };
