@@ -39,6 +39,7 @@ const emit = defineEmits(['update:selected', 'update:check-in'])
 const props = defineProps({
     selected: String,
 });
+const user = useState("auth");
 
 const options = [
     {
@@ -55,12 +56,12 @@ const options = [
         label: "Calendar",
         key: "calendar",
         selected: false,
-        unread: 3,
     },
     {
         label: "Notifications",
         key: "notification",
         selected: false,
+        unread: user.value.notifications.length,
     },
     {
         label: "Add a Guest",
