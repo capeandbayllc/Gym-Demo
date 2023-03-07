@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { createServer } from "miragejs";
+import { createServer, JSONAPISerializer, Serializer } from "miragejs";
 import { createGraphQLHandler } from "@miragejs/graphql";
 import graphQLSchema from "../api/schema.gql?raw";
 import { UserFactory } from "../api/data/users/UserFactory";
@@ -48,6 +48,7 @@ paginatedQueries.forEach((query) => {
 
 const server = createServer({
   routes() {
+    console.log("Mirage Schema", this.schema);
     const graphQLHandler = createGraphQLHandler(graphQLSchema, this.schema, {
       resolvers,
     });
