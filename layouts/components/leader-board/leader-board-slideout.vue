@@ -1,28 +1,39 @@
 <template>
     <div
-        class="overflow-hidden absolute h-[calc(100vh-65px)] top-[62px] right-0 z-10 bg-[#191919] border-2 border-secondary p-3 transition-all duration-300 ease-linear"
+        class="overflow-hidden absolute h-[calc(100vh-65px)] top-[62px] right-0 z-10 bg-[#191919] border-2 border-secondary transition-all duration-300 ease-linear"
         :class="{
-            'w-[600px] text-[0.9rem]': isLeaderBoardVisible === true,
+            'w-[800px] text-[0.9rem]': isLeaderBoardVisible === true,
             'w-[0px] text-[0rem]': isLeaderBoardVisible === false,
         }"
     >
-        <div>Leaderboard Slideout</div>
+        <div class="p-4">
+          <div class="float-left w-[180px] text-2xl">Leaderboard for </div>
+          <div class="float-left w-[150px] "><select-box :items="items" ></select-box></div>
+          <div>
+            <div class="float-right close-btn" @click="closeSlider"> <cross-icon /></div>
+          </div>
+        </div>
+        <div class="m-6 p-4 w-[100%]">
+            <side-bar-leaderboard-card :trainerData="trainerData" class="float-left "/>
+        </div>
         <div v-for="(leader, index) in trainerData" :key="leader.name">
             <side-bar-leaderboard-card v-if="index <= 3" />
         </div>
-        <div>
+        <div class="w-[100%] m-10 p-4">
+          <table>
             <tr>
                 <td>Place</td>
-                <td class="pr-4"></td>
-                <td>name</td>
+                <td class="pr-16"></td>
+                <td>Name</td>
                 <td>Points</td>
-                <td class="p-2"></td>
+                <td class="p-4"></td>
             </tr>
-            <tr v-for="leader in trainerData" :key="leader.name">
-                <td>
+            <tr class="border-t-2 border-[#FFF]"></tr>
+            <tr v-for="leader in trainerData" :key="leader.name" class="tableborder">
+                <td >
                     <div class="px-1 m-1">{{ leader.rank }}</div>
                 </td>
-                <td class="pr-4">
+                <td class="pr-16">
                     <div
                         v-if="leader.trending === 'up'"
                         class="trend-arrow-up"
@@ -40,8 +51,25 @@
                     <div class="px-1 text-right">{{ leader.unitSold }}</div>
                 </td>
                 <td><div class="px-1">PTS</div></td>
-                <td class="p-2"><div class="px-1 arrow-down"></div></td>
+                <button
+                    class="select-box-btn"
+                    :class="{
+                  'bg-secondary': secondary,
+                  'bg-transparent border-secondary': transparent && !secondary
+              }"
+                    :onClick="toggleCollapsed"
+                >
+                  {{ value ? selected : label }}
+                  <select-box-icon
+                      :isCollapsed="isCollapsed"
+                      :color="color"
+                  />
+                </button>
             </tr>
+            <tr v-if="isCollapsed == false">
+              <slider-leaderboard-info></slider-leaderboard-info>
+            </tr>
+          </table>
         </div>
     </div>
 </template>
@@ -67,19 +95,22 @@
     padding-bottom: 1px;
     border-top: 5px solid #ff0000;
 }
-
-.arrow-down {
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    padding-bottom: 1px;
-    /*border-top: 5px solid #ff0000;*/
+.select-box-btn {
+  @apply flex flex-row px-2 py-1 items-center justify-between w-full;
+}
+.tableborder{
+  @apply border-t border-[#CBCBCB];
+}
+.close-btn {
+  @apply absolute top-4 right-4 cursor-pointer hover:text-blue-600 pr-4;
 }
 </style>
 <script setup lang="ts">
-import { ref } from "vue";
+import {computed, ref} from "vue";
 import SideBarLeaderboardCard from "~/layouts/components/leader-board/side-bar-leaderboard-card.vue";
+import SliderLeaderboardInfo from "~/layouts/components/leader-board/slider-leaderboard-info.vue";
+import SelectBoxIcon from "~/components/select-box/select-box-icon.vue";
+import { CrossIcon } from "~~/components/icons";
 
 // const showLeaderBoardSlideout = ref (false);
 const props = defineProps({
@@ -228,4 +259,15 @@ const trainerData = ref([
         stars: "5",
     },
 ]);
+const items = ['Week', 'Month', 'Year'];
+const isCollapsed = ref(true);
+const toggleCollapsed = () => {
+  isCollapsed.value = !isCollapsed.value;
+};
+const onChange = () => {
+  toggleCollapsed();
+
+};
+
+
 </script>

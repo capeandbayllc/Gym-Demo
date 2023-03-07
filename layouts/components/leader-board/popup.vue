@@ -361,12 +361,8 @@ const breakpoints = ref({
 // const showLeaderBoardSlideout = ref(false);
 const emit = defineEmits(["show-leader-board"])
 const showSlideout = () => {
-  // this.$root.$emit('leader-board-slideout');
-  // showLeaderBoardSlideout.value = true;
-
   emit('show-leader-board')
-  console.log('showSlideout in popup.vue');
-  // console.log(showLeaderBoardSlideout);
+  emit('close')
 }
 let leaderBoardData = trainerData;
 </script>
