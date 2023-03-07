@@ -1,6 +1,7 @@
 <template>
   <section
-    class="bg-neutral py-4 px-8 rounded-md border-2 border-secondary max-w-2xl w-full"
+    ref="eventDetailsElement"
+    class="bg-neutral py-4 px-8 rounded-md border-2 border-secondary max-w-2xl w-full pointer-events-auto"
   >
     <SectionHeader title="Body by Bryan">
       <template #subtitle>
@@ -28,11 +29,35 @@
         architecto. Pariatur optio perferendis molestiae ad, tempora animi ipsa
         voluptas tempore saepe asperiores ducimus nihil voluptatum.</span
       >
-      <button class="underline self-end">See more</button>
+      <button
+        type="button"
+        @click="$emit('seemore')"
+        class="underline self-end"
+      >
+        See more
+      </button>
     </div>
   </section>
 </template>
 
 <script setup>
 import SectionHeader from "./section-header.vue";
+
+const emit = defineEmits(["outclick"]);
+const eventDetailsElement = ref(null);
+
+const ensureClickBoundary = (e) => {
+  if (!eventDetailsElement.value.contains(e.target)) {
+    console.log("EMIT!");
+    emit("outclick");
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("click", ensureClickBoundary, true);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("click", ensureClickBoundary, true);
+});
 </script>

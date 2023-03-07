@@ -1,5 +1,6 @@
 <template>
   <section
+    ref="eventInfoElement"
     class="max-w-3xl w-full bg-neutral border-2 border-secondary p-4 h-full rounded-md pointer-events-auto"
   >
     <SectionHeader title="Event Title">
@@ -136,11 +137,29 @@ import SectionHeader from "./section-header.vue";
 import BtnGroup from "./btn-group.vue";
 import AttendeeListItem from "./attendee-list-item.vue";
 
+const emit = defineEmits(["outclick"]);
+
 const props = defineProps({
   event: {
     type: [Object, null],
     default: null,
   },
+});
+
+const eventInfoElement = ref(null);
+
+const ensureClickBoundary = (e) => {
+  if (!eventInfoElement.value.contains(e.target)) {
+    emit("outclick");
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("click", ensureClickBoundary, true);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("click", ensureClickBoundary, true);
 });
 
 const buttonChoices = ["is_over", "show", "personal", "physical"];
