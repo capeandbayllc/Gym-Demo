@@ -135,6 +135,11 @@ import EventInformation from "./components/partials/event-information.vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import EventForm from "./components/event-form.vue";
 
+/** GQL/Mock API */
+// import gql from "graphql-tag";
+// import { useQuery, useMutation } from "@vue/apollo-composable";
+// import { UserFactory } from "~~/api/data/users/UserFactory";
+
 /** FullCalendar component & plugins */
 import FullCalendar from "@fullcalendar/vue3";
 import EventPopup from "./components/event-popup.vue";

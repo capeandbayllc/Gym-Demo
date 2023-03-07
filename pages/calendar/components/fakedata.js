@@ -50,3 +50,21 @@ function getTimeCouple() {
 
   return { start, end };
 }
+
+export const fullNames = [
+  "George Hansley",
+  "Jeff Raven",
+  "Steve Thatcher",
+  "Chris Monroe",
+  "Carlos West",
+  "Joe Ellis",
+  "Nick Cassidy",
+  "Nate Lopez",
+];
+
+export const eventTypes = [
+  { id: 0, title: "event" },
+  { id: 1, title: "task" },
+  { id: 2, title: "service" },
+  { id: 3, title: "prospect" },
+];

@@ -49,9 +49,22 @@ export const months = [
   "december",
 ];
 
+/** keeps track of ids, if you assign an id with an auto-increment they will all be unique */
+let idStore = 1;
+
+/**
+ * Returns a random number between the minimum and maximum
+ * @param {Number=0} min lower threshold
+ * @param {Number=8} max upper threshold
+ * @returns {Number} random number between thresholds
+ */
+const randomNumberBetween = (min = 0, max = 8) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
 export const calendarEvents = [
   {
-    title: "Priority One",
+    title: "Class",
     start: formatRandomEventTime({ day: -1, hour: -3 }),
     end: formatRandomEventTime({ day: -1, hour: -2 }),
     backgroundColor: "#123456",
