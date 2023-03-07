@@ -19,8 +19,7 @@ const paginatedQueries = ["users", "members", "locations"];
 
 //setup object to hold resolvers
 const resolvers = {
-  Query: {
-  }
+  Query: {},
 };
 
 // create a resolver for each paginated query
@@ -63,8 +62,7 @@ const server = createServer({
     application: UUIDManager,
   },
   seeds(server) {
-    server.createList("user", 25);
-    server.createList("location", 25);
+    server.createList("user", 2);
     server.loadFixtures(); //loads our json data
   },
 });
