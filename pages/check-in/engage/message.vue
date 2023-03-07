@@ -7,7 +7,7 @@
                         <img src="/user-caller.png" class="w-12 border border-secondary rounded-full mr-4"/>
                         <div>
                             <p class="text-xl">Mona Parksdale</p>
-                            <p class="text-sm text-slate-500">Outgoing E-mail</p>
+                            <p class="text-sm text-slate-500">Outgoing SMS Text</p>
                         </div>
                         <div class="ml-auto border border-secondary rounded-full p-3 h-[60px] w-[60px]">
                             <MessageIcon class="h-full w-full"/>
@@ -24,9 +24,9 @@
                         :items="smsType"
                         value=""
                         :label="'SMS type'" 
-                        class="w-40">
+                        class="">
                     </select-box>
-                    <div class="float-right">
+                    <div class="">
                         <button
                             type="button"
                             class="btn w-max rounded btn-sm font-medium ml-32 mr-3"
@@ -43,7 +43,7 @@
                         </button>
                         <button
                             class="btn w-max bg-success border-success rounded text-base-content btn-sm font-medium"
-                            @click="$emit('email-now')"
+                            @click="$emit('sms-now')"
                         >
                             Send Now
                         </button>
