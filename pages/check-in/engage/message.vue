@@ -24,9 +24,9 @@
                         :items="smsType"
                         value=""
                         :label="'SMS type'" 
-                        class="w-40">
+                        class="">
                     </select-box>
-                    <div class="float-right">
+                    <div class="">
                         <button
                             type="button"
                             class="btn w-max rounded btn-sm font-medium ml-32 mr-3"
