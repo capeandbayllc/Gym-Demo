@@ -1,7 +1,7 @@
 <template>
     <div class="page-club-container">
         <div class="page-content">
-            <simple-card title="Location Search">
+            <simple-card title="Location Search X">
                 <div class="px-4 md:px-12 py-7 bg-neutral">
                     <div class="location-filter">
                         <div class="location-filter-options">
@@ -11,7 +11,7 @@
                                 v-model="selectedState"
                                 :onChange="filterState"
                                 placeholderSearch="Search State"
-                                class="w-36 z-50"
+                                class="w-36 z-[23]"
                                 secondary
                             />
                             <select-box
