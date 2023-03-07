@@ -2003,7 +2003,6 @@ type User {
   city: String
   state: String
   homeLocation: Location
-  location: Location
   teams: [Team]
   contact_preference: String
   emergency_contact: EmergencyContact
