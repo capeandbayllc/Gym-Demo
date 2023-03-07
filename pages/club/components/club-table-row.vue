@@ -28,6 +28,34 @@
             @apply border-none;
         }
     }
+    @apply bg-base-100 h-14;
+    
+    td {
+        @apply border-y-2 border-secondary px-3;
+    }
+    /* td:first-child {
+        @apply border-l-2 rounded-l text-accent-focus;
+    } */
+    td:last-child {
+        @apply border-r-2 rounded-r capitalize;
+    }
+    .membership-btn {
+        @apply flex items-center justify-center rounded text-sm cursor-pointer h-full px-2 py-1;
+    }
+    .type-warning {
+        @apply bg-orange-400;
+    }
+    .type-secondary {
+        @apply bg-secondary;
+    }
+}
+</style>
+<style>
+.club-search-tbl-content thead{
+    @apply top-0 sticky bg-neutral h-10;
+}
+.club-search-tbl-content th{
+    @apply font-normal;
 }
 </style>
 <script setup>
