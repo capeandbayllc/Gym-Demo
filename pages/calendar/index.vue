@@ -31,7 +31,7 @@
       class="z-50 fixed h-screen w-screen flex items-center justify-center pointer-events-none"
       v-if="eventFormVisibility"
     >
-      <!-- <EventForm /> -->
+      <EventForm @cancel="resetState" @createEvent="handleCreateEvent" />
     </div>
 
     <!-- sidebar date selector popup -->
@@ -81,6 +81,7 @@
           <!-- filters/page actions -->
           <div class="flex gap-2">
             <button
+              @click="handleAddNew"
               class="bg-secondary py-1 px-2 rounded-md border-2 border-transparent flex items-center gap-2 text-[0.8rem]"
             >
               <span> Add New </span>
@@ -166,14 +167,20 @@ const eventDetailsVisibibility = ref(false);
 const eventInformationVisibibility = ref(false);
 const eventFormVisibility = ref(true);
 
-const handleModalOutclicks = () => {
-  console.log("received outclick");
-};
-
 const resetState = () => {
   eventDetailsVisibibility.value = false;
   eventInformationVisibibility.value = false;
   eventFormVisibility.value = false;
+};
+
+/** sets up state for form entry */
+const handleAddNew = () => {
+  resetState();
+  eventFormVisibility.value = true;
+};
+
+const handleCreateEvent = (form) => {
+  console.log("create new event with info:", form);
 };
 // const handleChangeView = (value) => {
 //   calenderView.value = value;
@@ -184,6 +191,7 @@ const resetState = () => {
 
 const handleCalendarEvent = (e) => {
   console.log("event received:", e);
+  if (eventFormVisibility.value) return;
   eventDetailsVisibibility.value = true;
 };
 

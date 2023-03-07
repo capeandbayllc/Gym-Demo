@@ -1,12 +1,27 @@
 <template>
   <form
-    class="p-4 bg-neutral border-2 rounded-md border-secondary pointer-events-auto"
+    class="p-4 bg-neutral border-2 rounded-md border-secondary pointer-events-auto relative"
   >
-    <BtnGroup :choices="btnChoices" v-model="form.eventType" />
-    <div class="form-group-pair">
+    <button
+      @click="emit('cancel')"
+      type="button"
+      class="absolute top-4 right-4"
+    >
+      <span class="block fill-white w-4 h-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+          <path
+            d="M292.6 166.6L315.3 144 270 98.7l-22.6 22.6L158 210.7 68.6 121.4 46 98.7 .7 144l22.6 22.6L112.7 256 23.4 345.4 .7 368 46 413.3l22.6-22.6L158 301.3l89.4 89.4L270 413.3 315.3 368l-22.6-22.6L203.3 256l89.4-89.4z"
+          />
+        </svg>
+      </span>
+    </button>
+
+    <div class="form-group-pair mb-8">
       <label>Title</label>
       <input type="text" />
     </div>
+    <BtnGroup :choices="btnChoices" v-model="form.eventType" />
     <div class="form-group-pair">
       <label>Member</label>
       <select
@@ -64,8 +79,12 @@
     </div>
 
     <div class="flex mt-8 mb-4 justify-end items-center gap-4">
-      <button type="button">Cancel</button>
-      <button class="bg-secondary py-1 px-4 rounded-md" type="button">
+      <button type="button" @click="emit('cancel')">Cancel</button>
+      <button
+        @click="handleNewEvent"
+        class="bg-secondary py-1 px-4 rounded-md"
+        type="button"
+      >
         Add
       </button>
     </div>
@@ -74,8 +93,6 @@
 
 <script setup>
 import BtnGroup from "./partials/btn-group.vue";
-
-const btnChoices = ["event", "task", "service", "prospect"];
 
 const props = defineProps({
   members: {
@@ -88,6 +105,9 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(["createEvent", "cancel"]);
+
+const btnChoices = ["event", "task", "service", "prospect"];
 const form = ref({
   eventType: "event",
   title: "",
@@ -101,6 +121,10 @@ const form = ref({
   recurring: false,
   notify: false,
 });
+
+const handleNewEvent = () => {
+  emit("createEvent", form.value);
+};
 </script>
 
 <style scoped lang="postcss">
