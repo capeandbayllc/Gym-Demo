@@ -1,7 +1,7 @@
 <template>
     <div class="page-club-container">
         <div class="page-content">
-            <simple-card title="Location Search">
+            <simple-card title="Location Search X">
                 <div class="px-4 md:px-12 py-7 bg-neutral">
                     <div class="location-filter">
                         <div class="location-filter-options">
