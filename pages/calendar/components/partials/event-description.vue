@@ -1,8 +1,5 @@
 <template>
-    <div
-        class="line-clamp-3 text-[0.5rem]"
-        v-if="shouldDisplayDescription(start, end)"
-    >
+    <div class="line-clamp-3 text-[0.5rem]" v-if="end - start > 5.4e6">
         {{ description }}
     </div>
 </template>
@@ -19,17 +16,4 @@ const props = defineProps({
         type: Date,
     },
 });
-
-const shouldDisplayDescription = (start, end) => {
-    if (end) {
-        const diffInMs = end - start;
-        const diffInMinutes = Math.round(
-            ((diffInMs % 86400000) % 3600000) / 60000
-        );
-
-        return diffInMinutes >= 90;
-    }
-
-    return false;
-};
 </script>

@@ -2,28 +2,28 @@
     <div class="flex flex-row justify-end mt-auto">
         <div class="pr-1" v-if="users.length > 0">
             <div
-                class="bg-white flex flex-row gap-[1px] rounded-full h-[20px] px-[2px] py-[1px]"
-                v-if="users.length <= 3"
+                class="bg-white flex flex-row gap-[1px] rounded-full h-[16px] px-[2px] py-[1px]"
+                v-if="users.length <= 4"
             >
                 <span
-                    class="rounded-full w-[16px] h-[16px] p-[2px] border-2 border-[#191919] inline-block my-auto"
+                    class="rounded-full w-[12px] h-[12px] p-[2px] border-[1px] border-[#191919] inline-block my-auto"
                     v-for="user in users"
                 >
                     <UserIcon />
                 </span>
             </div>
             <div
-                class="bg-white flex flex-row gap-[1px] rounded-full h-[20px] px-[2px] py-[1px]"
+                class="bg-white flex flex-row gap-[1px] rounded-full h-[16px] px-[2px] py-[1px]"
                 v-else
             >
                 <span
-                    class="rounded-full w-[16px] h-[16px] p-[2px] border-2 border-[#191919] inline-block my-auto"
-                    v-for="i in [0, 1, 2]"
+                    class="rounded-full w-[12px] h-[12px] p-[2px] border-[1px] border-[#191919] inline-block my-auto"
+                    v-for="i in [0, 1, 2, 3]"
                 >
                     <UserIcon />
                 </span>
-                <span class="text-[#123456] my-auto mr-1"
-                    >+{{ users.length - 3 }}</span
+                <span class="text-[#123456] inline-block my-auto mr-1"
+                    >+{{ users.length - 4 }}</span
                 >
             </div>
         </div>
