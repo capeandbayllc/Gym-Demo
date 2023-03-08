@@ -8,7 +8,7 @@
         </td>
         <td>{{data.last_name}}</td>
         <td>{{data.phone}}</td>
-        <td>{{data.email}}</td>
+        <td class="whitespace-nowrap">{{data.email}}</td>
         <td>{{data.location}}</td>
         <td>
             <membership-btn :membership="data.type"/>
