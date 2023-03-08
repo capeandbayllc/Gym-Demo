@@ -38,7 +38,16 @@
             class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary"
             tabindex="-1"
           >
-            Edit
+          <NuxtLink 
+            :to="{ path: '/check-in/' +  data.id, 
+            query: { data: JSON.stringify({
+                      id: data.id, 
+                      firstName: data.first_name, 
+                      lastName: data.last_name,
+                      email: data.email,
+                      homeLocation: data.homeLocation.name,
+              }) } }" 
+          >Edit</NuxtLink>
           </div>
           <div
             class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary"
@@ -96,10 +105,10 @@
 }
 </style>
 <script setup>
-import MembershipBtn from "~~/components/buttons/membership-btn.vue";
-import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import AddonBtn from "~~/components/buttons/addon-btn.vue";
+import MembershipBtn from "~~/components/buttons/membership-btn.vue";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 

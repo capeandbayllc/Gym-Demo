@@ -8,7 +8,7 @@
                 
                 <div v-for="item in memberInformation" :key="item.key" class="col-span-1 -lg:col-span-1 -md:col-span-2 -md:col-auto mx-auto w-full mb-4">
                     <div class="mb-2">{{item.label}}</div>
-                    <input :class="item.class" class="w-full p-1 rounded-sm" v-model="memberInfo[item.key]"/>
+                    <input :class="item.class" class="w-full p-1 rounded-sm" v-model="memberInfo[item.key]"  />
                 </div>
             </div>
             <div class="profile-section">
@@ -19,6 +19,11 @@
                     <input :class="item.class" class="w-full p-1 rounded-sm" v-model="demographicsObj[item.key]"/>
                 </div>
             </div>
+
+            <div class="text-center bg-black mx-5 mb-2 rounded-md p-2">
+                <NuxtLink to="/members" class="text-center">Update Profile</NuxtLink> 
+            </div>
+            
     </simple-card>
 </div>
 </template>
@@ -26,16 +31,32 @@
 
 const isActiveMember = ref(false);
 const memberInfo = ref({});
+const demographicsObj = ref({})
+
+const route = useRoute()
+const profileObject = ref(JSON.parse(route.query.data))
+
+ 
+onMounted( () => {
+    if(profileObject){
+        memberInfo.value.firstName = profileObject.value.firstName;
+        memberInfo.value.lastName = profileObject.value.lastName;
+        demographicsObj.value.streetAddress = profileObject.value.homeLocation;
+        demographicsObj.value.emailAddress = profileObject.value.email;
+    }
+})
+
+
 const memberInformation = [{
-    key: "first-name",
+    key: "firstName",
     label: "First Name",
     class: "secondary-input"
 }, {
-    key: "middle-name",
+    key: "middleName",
     label: "Middle Name",
     class: "secondary-input"
 }, {
-    key: "last-name",
+    key: "lastName",
     label: "Last Name",
     class: "secondary-input"
 }, {
@@ -47,7 +68,7 @@ const memberInformation = [{
     label: "Gender",
     class: "neutral-input"
 }, {
-    key: "social-security-number",
+    key: "socialSecurityNumber",
     label: "Social Security Number",
     class: "neutral-input"
 }, {
@@ -63,15 +84,15 @@ const memberInformation = [{
     label: "Barcode",
     class: "neutral-input"
 }, {
-    key: "previous-agreement-number",
+    key: "previousAgreementNumber",
     label: "Previous Agreement Number",
     class: "neutral-input"
 }, {
-    key: "wellness-program-id",
+    key: "wellnessProgramId",
     label: "Wellness Program ID",
     class: "neutral-input"
 },{
-    key: "membership-type",
+    key: "membershipType",
     label: "Membership Type",
     class: "neutral-input"
 },{
@@ -79,18 +100,18 @@ const memberInformation = [{
     label: "Group",
     class: "neutral-input"
 },{
-    key: "member-misc-1",
+    key: "memberMisc1",
     label: "Member Misc. 1",
     class: "neutral-input"
 },{
-    key: "member-misc-2",
+    key: "memberMisc2",
     label: "Member Misc. 2",
     class: "neutral-input"
 }];
 
-const demographicsObj = ref({})
+
 const demographics = ref([{
-    key: "street-address",
+    key: "streetAddress",
     label: "Street Address",
     class: "col-span-3 neutral-input"
 },{
@@ -106,7 +127,7 @@ const demographics = ref([{
     label: "Zip Code",
     class: "neutral-input"
 },{
-    key: "email-address",
+    key: "emailAddress",
     label: "Email Address",
     class: "neutral-input"
 },{

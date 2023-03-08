@@ -71,10 +71,10 @@
 } */
 </style>
 <script setup>
-import MemberTableRow from "./components/member-table-row.vue";
-import { SearchIcon, AddIcon } from "@/components/icons";
-import gql from "graphql-tag";
+import { AddIcon, SearchIcon } from "@/components/icons";
 import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+import MemberTableRow from "./components/member-table-row.vue";
 
 const query = gql`
   query AllMembers {
@@ -104,7 +104,7 @@ const query = gql`
 `;
 
 const { result } = useQuery(query);
-
+console.log("members data", result)
 const isSearchEnable = ref(false);
 const filterBy = [
   {
