@@ -1,7 +1,7 @@
 import {Server} from "miragejs/server";
 
 export const KIOSK_EMAIL: string = 'kiosk@gymrevenue.com';
-
+export const UserFactory = () => {}; // Temp Fix
 export default function createAdminAndKioskUser(server: Server): void {
     server.db.createCollection("users", [
         {
