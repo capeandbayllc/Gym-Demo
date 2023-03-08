@@ -16,16 +16,42 @@
             >
             </select-box>
         </div>
-        <div class="pos-products-pane">
-            <div class="" v-for="category in inventoryCategories">
+        <div
+            class="pos-product-items-pane"
+            :class="{
+                'h-[60vh]': showProducts,
+                'h-[0vh]': !showProducts,
+            }"
+        >
+            <span
+                class="ml-auto text-[0.7rem] hover:text-secondary cursor-pointer pos-style-transition mr-1"
+                @click="collapseProductItemsPane()"
+            >
+                Collapse
+            </span>
+            <div class="bg-[#191919] h-full">
+                <PosProductItems :items="selectedSubcategory.items" />
+            </div>
+        </div>
+        <div
+            class="pos-products-pane"
+            :class="{
+                'h-[60vh]': !showProducts,
+                'h-[0vh]': showProducts,
+            }"
+        >
+            <div class="" v-for="(category, catIndex) in inventoryCategories">
                 <h3 class="text-[1.2rem] my-3 font-light tracking-wider">
                     {{ category.title }}
                 </h3>
                 <div class="pos-product-category">
                     <PosSubcategory
-                        v-for="subcategory in category.subcategories"
+                        v-for="(
+                            subcategory, subIndex
+                        ) in category.subcategories"
                         :title="subcategory.title"
                         :icon="subcategory.icon"
+                        @click="showProductItemsPane(catIndex, subIndex)"
                     />
                 </div>
             </div>
@@ -35,97 +61,31 @@
 
 <script setup>
 import PosSubcategory from "./pos-subcategory.vue";
-import {
-    ShortSleeveShirtIcon,
-    LongSleeveShirtIcon,
-    AnkleSocksIcon,
-    HatsIcon,
-    TankTopIcon,
-    GlovesIcon,
-    WaterBottleIcon,
-    SodaIcon,
-    SportsDrinkIcon,
-    UpgradeMembershipIcon,
-    AddPTIcon,
-} from "~~/components/icons";
+import PosProductItems from "./pos-product-items.vue";
+import { inventoryCategories } from "../helpers/pos-items";
 
-const inventoryCategories = [
-    {
-        title: "Apparel",
-        subcategories: [
-            {
-                title: "Short Sleeve T-Shirt",
-                icon: ShortSleeveShirtIcon,
-                items: [],
-            },
-            {
-                title: "Long Sleeve T-Shirt",
-                icon: LongSleeveShirtIcon,
-                items: [],
-            },
-            {
-                title: "Ankle Socks",
-                icon: AnkleSocksIcon,
-                items: [],
-            },
-            {
-                title: "Hats",
-                icon: HatsIcon,
-                items: [],
-            },
-            {
-                title: "Tank Tops",
-                icon: TankTopIcon,
-                items: [],
-            },
-            {
-                title: "Gloves",
-                icon: GlovesIcon,
-                items: [],
-            },
-        ],
-    },
-    {
-        title: "Beverage",
-        subcategories: [
-            {
-                title: "Water",
-                icon: WaterBottleIcon,
-                items: [],
-            },
-            {
-                title: "Soda",
-                icon: SodaIcon,
-                items: [],
-            },
-            {
-                title: "Caffeine Free Soda",
-                icon: SodaIcon,
-                items: [],
-            },
-            {
-                title: "Sports Drink",
-                icon: SportsDrinkIcon,
-                items: [],
-            },
-        ],
-    },
-    {
-        title: "Membership",
-        subcategories: [
-            {
-                title: "Upgrade Membership",
-                icon: UpgradeMembershipIcon,
-                items: [],
-            },
-            {
-                title: "Add PT",
-                icon: AddPTIcon,
-                items: [],
-            },
-        ],
-    },
-];
+const showProducts = ref(false);
+const selectedSubcategory = ref({
+    items: [],
+    categoryIndex: null,
+    subcategoryIndex: null,
+});
+
+const collapseProductItemsPane = () => {
+    showProducts.value = false;
+};
+
+const showProductItemsPane = (categoryIndex, subcategoryIndex) => {
+    selectedSubcategory.value = {
+        items: inventoryCategories[categoryIndex].subcategories[
+            subcategoryIndex
+        ].items,
+        categoryIndex,
+        subcategoryIndex,
+    };
+    showProducts.value = true;
+};
+
 const categoriesFilter = [
     {
         value: "0",
@@ -151,12 +111,24 @@ const categoriesFilter = [
     @apply w-[calc(50%-1.25rem)] flex flex-col gap-5;
 }
 .pos-products-pane {
-    @apply overflow-y-scroll h-[60vh];
+    @apply overflow-y-scroll relative pos-style-transition;
 }
 .pos-product-category {
     @apply w-full flex flex-row gap-4 flex-wrap mb-6;
 }
 .pos-style-transition {
     @apply transition-all duration-300 ease-linear;
+}
+.pos-product-items-pane {
+    @apply w-full overflow-y-scroll flex flex-col gap-1 scrollbar-hide z-30 pos-style-transition;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 </style>
