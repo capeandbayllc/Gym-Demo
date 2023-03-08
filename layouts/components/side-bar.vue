@@ -24,10 +24,11 @@
 </template>
 <style scoped>
 .side-bar {
-    @apply relative right-0 z-20 h-full transition-all duration-200 ease-linear;
+    @apply absolute right-0 z-20 h-full transition-all duration-200 ease-linear;
+    
     /* height: calc(100vh - 6rem); */
     &.collapsed {
-        @apply w-5 hover:w-7 bg-secondary;
+        @apply w-7 flex bg-secondary;
         @screen 3xl {
             @apply hover:w-80;
         }
@@ -36,9 +37,7 @@
         @apply w-80 border border-secondary bg-neutral;
     }
 }
-.side-bar:hover .side-bar-toggler {
-    @apply flex;
-}
+
 .side-bar-text {
     @apply align-top w-max absolute text-sm font-semibold;
     transform: translate(0, 100%) rotate(-90deg);
@@ -49,7 +48,7 @@
     @apply pl-1;
 }
 .side-bar-toggler {
-    @apply hidden cursor-pointer h-full w-fit;
+    @apply flex cursor-pointer h-full w-fit;
 }
 </style>
 <script setup>
