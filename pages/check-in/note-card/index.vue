@@ -4,29 +4,36 @@
         class="note-card"
         closable
     >
-    <div class="flex w-full gap-6 p-6 card-gradient-bg">
-        <div class="w-[140px]">
-            <button class="create-note-btn" @click="createNote">
-                <div class="btn-normal">
-                    <NewAgreementIcon class="mb-2"/>
-                    <span>Create a new note</span>
+    <div class="flex flex-col w-full p-6 card-gradient-bg">
+        <div class="flex flex-row w-full gap-6">
+            <div class="w-[140px]">
+                <button class="create-note-btn" @click="createNote">
+                    <div class="btn-normal">
+                        <NewAgreementIcon class="mb-2"/>
+                        <span>Create a new note</span>
+                    </div>
+                    <div class="btn-hover">
+                        <NewAgreementHoverIcon/>
+                    </div>
+                </button>    
+            </div>
+            <div class="flex-auto">
+                <div class="flex w-[270px]">
+                    <Button size="sm" outline class="flex-1 normal-case mr-2" :class="[{'!bg-secondary !border-secondary':notesType == 'recent'},{'border-slate-400 text-slate-400':notesType !== 'recent'}]" @click="notesType='recent'">Recent</Button>
+                    <Button size="sm" outline class="flex-1 normal-case ml-2" :class="[{'!bg-secondary !border-secondary':notesType == 'completed'},{'border-slate-400 text-slate-400':notesType !== 'completed'}]" @click="notesType='completed'">Completed</Button>
                 </div>
-                <div class="btn-hover">
-                    <NewAgreementHoverIcon/>
-                </div>
-            </button>
-            <Button secondary size="sm" class="w-full mb-6 normal-case flex justify-between"> <span> Shared </span> <span>21</span></Button>
-            <Button secondary size="sm" class="w-full mb-6 normal-case flex justify-between"> <span> Admin Notes </span> <span>3</span></Button>
-            <Button v-for="folder in folders" :key="folder.id" outline size="sm" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>{{folder.name}}</span></Button>
+            </div>
         </div>
-        <div>
-            <div class="w-fit">
-                <div class="flex mb-8">
-                    <Button size="sm" outline class="w-[120px] normal-case mx-3" :class="[{'!bg-secondary !border-secondary':notesType == 'recent'},{'border-slate-400 text-slate-400':notesType !== 'recent'}]" @click="notesType='recent'">Recent</Button>
-                    <Button size="sm" outline class="w-[120px] normal-case mx-3" :class="[{'!bg-secondary !border-secondary':notesType == 'completed'},{'border-slate-400 text-slate-400':notesType !== 'completed'}]" @click="notesType='completed'">Completed</Button>
-                </div>
+        <div class="flex flex-row w-full gap-6 mt-2">
+            <div class="w-[140px]">
+                <p class="text-xs mb-2">Folders and Segments</p>
+                <Button secondary size="sm" :maxWidth="false" class="w-full mb-6 normal-case flex justify-between"> <span> Shared </span> <span>21</span></Button>
+                <Button secondary size="sm" :maxWidth="false" class="w-full mb-6 normal-case flex justify-between"> <span> Admin Notes </span> <span>3</span></Button>
+                <Button v-for="folder in folders" :key="folder.id" outline size="sm" :maxWidth="false" class="bg-black w-full mb-2 normal-case flex justify-between"> <span> Folder </span> <span>{{folder.name}}</span></Button>
+            </div>
+            <div class="w-fit max-h-min overflow-auto">
                 <div class="w-full">
-                    <p class="mb-2">Today</p>
+                    <p class="text-xs mb-2">Today</p>
                     <div class="bg-black border border-white rounded-md p-1 mb-4" :class="{'!bg-secondary !border-slate-400':note.completed}" v-for="note in notes.filter(n=> notesType== 'completed' ? n.completed : !n.completed )" :key="note.id">
                         <div class="flex justify-between">
                             <span>{{note.title}}</span>
@@ -40,13 +47,13 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="w-[600px]">
-            <div class="relative border border-secondary rounded-lg overflow-hidden">
-                <h2 class="calendar-title" @click="showDateSelectModal">
-                    {{ calendarTitle }} <arrow-icon direction="right" class="h-9 items-center" />
-                </h2>
-                <FullCalendar :options="calendarOptions" ref="calendar"/>
+            <div class="w-[600px] pt-5">
+                <div class="relative border border-secondary rounded-lg overflow-hidden">
+                    <h2 class="calendar-title" @click="showDateSelectModal">
+                        {{ calendarTitle }} <arrow-icon direction="right" class="h-9 items-center" />
+                    </h2>
+                    <FullCalendar :options="calendarOptions" ref="calendar"/>
+                </div>
             </div>
         </div>
     </div>
@@ -132,21 +139,16 @@
 }
 </style>
 <script setup>
-import NoteItem from './note-item.vue';
 import { NewAgreementIcon, NewAgreementHoverIcon, ArrowIcon } from "@/components/icons";
 import AlertButton from './alert-button.vue'
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import listPlugin from "@fullcalendar/list";
 
 const noteModal = ref(null);
-
 const notesType = ref("recent");
-
 const activeNote = ref({title: ""});
-
 const notes = ref([{
     id: 1,
     title: "Note #16",
@@ -181,12 +183,60 @@ const notes = ref([{
     alert: true
 }, {
     id: 5,
-    title: "Note #19",
+    title: "Note #20",
     date: "Month 1, 2022",
     time: "0:00 PM",
     content: "Cecil Ellington",
     completed:true,
     alert: true
+}, {
+    id: 6,
+    title: "Note #21",
+    date: "Month 1, 2022",
+    time: "0:00 PM",
+    content: "Cecil Ellington",
+    completed:true,
+    alert: true
+}, {
+    id: 7,
+    title: "Note #22",
+    date: "Month 1, 2022",
+    time: "0:00 PM",
+    content: "Cecil Ellington",
+    completed:true,
+    alert: true
+}, {
+    id: 8,
+    title: "Note #23",
+    date: "Month 1, 2022",
+    time: "0:00 PM",
+    content: "Cecil Ellington",
+    completed:true,
+    alert: true
+}, {
+    id: 9,
+    title: "Note #25",
+    date: "Month 1, 2022",
+    time: "0:00 PM",
+    content: "Cecil Ellington",
+    completed:true,
+    alert: true
+}, {
+    id: 10,
+    title: "Note #26",
+    date: "Month 1, 2022",
+    time: "0:00 PM",
+    content: "Cecil Ellington",
+    completed:true,
+    alert: true
+}, {
+    id: 11,
+    title: "Note #27",
+    date: "Month 1, 2022",
+    time: "0:00 PM",
+    content: "Cecil Ellington",
+    completed: true,
+    alert: false
 }]);
 
 const today = computed(() => {
