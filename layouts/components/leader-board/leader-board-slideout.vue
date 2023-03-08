@@ -81,12 +81,9 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import SideBarLeaderboardCard from "~/layouts/components/leader-board/side-bar-leaderboard-card.vue";
-import SliderLeaderboardInfo from "~/layouts/components/leader-board/slider-leaderboard-info.vue";
-import SelectBoxIcon from "~/components/select-box/select-box-icon.vue";
 import { CrossIcon } from "~~/components/icons";
 import LeaderRowDetails from "./partials/leader-row-details.vue";
 
-// const showLeaderBoardSlideout = ref (false);
 const props = defineProps({
   isLeaderBoardVisible: { type: Boolean, default: false },
 });
@@ -233,7 +230,22 @@ const trainerData = ref([
     stars: "5",
   },
 ]);
-const items = ["Week", "Month", "Year"];
+const items = [
+  {
+    value: '1',
+    label: "Week"
+  },
+  {
+    value: '2',
+    label: "Month"
+  },
+  {
+    value: '3',
+    label: "Year"
+  },
+
+];
+
 const isCollapsed = ref(true);
 
 const currentListItemContext = ref(null);
@@ -251,7 +263,14 @@ const onChange = () => {
   toggleCollapsed();
 };
 const closeSlider = () => {
-
+  // showLeaderBoard()
 }
+//
+// let isLeaderBoardVisible = props.isLeaderBoardVisible;
+// const showLeaderBoard = () => {
+//   console.log(isLeaderBoardVisible);
+//   isLeaderBoardVisible = !isLeaderBoardVisible;
+//   // isLeaderBoardVisible.value = !isLeaderBoardVisible.value;
+// };
 
 </script>
