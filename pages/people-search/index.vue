@@ -22,12 +22,11 @@
     }
 }
 </style>
-<style>
-</style>
+<style></style>
 <script setup>
-import PeopleSearchAction from './components/people-search-action.vue';
-import SearchList from './components/search-list.vue';
-const searchInput = ref('Kev');
+import PeopleSearchAction from "./components/people-search-action.vue";
+import SearchList from "./components/search-list.vue";
+const searchInput = ref("Kev");
 const tblFilter = ref(null);
 const filterSelected = (value) => {
     tblFilter.value = value;
