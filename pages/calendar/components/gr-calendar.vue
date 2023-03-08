@@ -46,15 +46,15 @@ const calenderView = ref("timeGridWeek");
 const emit = defineEmits(["clickEventNode", "clickEmptyNode"]);
 
 const props = defineProps({
-  events: {
-    type: Array,
-    default: [],
-  },
+    events: {
+        type: Array,
+        default: [],
+    },
 });
 
 /** empty node on calendar click handler */
 const handleDateClick = (arg) => {
-  emit("clickEmptyNode", arg);
+    emit("clickEmptyNode", arg);
 };
 
 /** DOM References */
@@ -75,49 +75,26 @@ const handleChangeView = (value) => {
 
 /** existing event click handler */
 const eventClick = (info) => {
-  emit("clickEventNode", info.event);
+    emit("clickEventNode", info.event);
 };
 
 const calendarOptions = ref({
-  plugins: [
-    dayGridPlugin,
-    timeGridPlugin,
-    interactionPlugin,
-    // calendarTopLeftComponent,
-  ],
-  schedulerLicenseKey: "0157232768-fcs-1652392378",
-  initialView: "timeGridWeek",
-  slotDuration: "01:00",
-  dateClick: handleDateClick,
-  headerToolbar: {
-    // left: "calendarTopLeftComponent",
-    center: "prev,today,next timeGridDay,timeGridWeek,dayGridMonth",
-    right: "",
-  },
-  events: props.events,
-  editable: true,
-  selectable: true,
-  dayMaxEvents: true,
-  eventClick,
-  datesSet: (params) => {
-    listCalendar?.value?.getApi()?.gotoDate(params.start);
-    monthCalendar?.value?.getApi()?.gotoDate(params.start);
-    monthCalendar?.value?.getApi()?.select(params.start);
-    //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
-  },
-  timeAxis: {
-    slotDuration: "01:00:00",
-  },
-  views: {
-    timeGridDay: {
-      dayHeaderFormat: {
-        month: "long",
-        day: "numeric",
-        omitCommas: "false",
-      },
-      nowIndicator: true,
+    plugins: [
+        dayGridPlugin,
+        timeGridPlugin,
+        interactionPlugin,
+        // calendarTopLeftComponent,
+    ],
+    schedulerLicenseKey: "0157232768-fcs-1652392378",
+    initialView: "timeGridWeek",
+    slotDuration: "01:00",
+    dateClick: handleDateClick,
+    headerToolbar: {
+        // left: "calendarTopLeftComponent",
+        center: "prev,today,next timeGridDay,timeGridWeek,dayGridMonth",
+        right: "",
     },
-    events,
+    events: props.events,
     editable: true,
     selectable: true,
     dayMaxEvents: true,
@@ -140,44 +117,68 @@ const calendarOptions = ref({
             },
             nowIndicator: true,
         },
-        timeGridWeek: {
-            dayHeaderFormat: {
-                month: "short",
-                day: "2-digit",
-            },
-            nowIndicator: true,
+        events,
+        editable: true,
+        selectable: true,
+        dayMaxEvents: true,
+        eventClick,
+        datesSet: (params) => {
+            listCalendar?.value?.getApi()?.gotoDate(params.start);
+            monthCalendar?.value?.getApi()?.gotoDate(params.start);
+            monthCalendar?.value?.getApi()?.select(params.start);
+            //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
         },
+        timeAxis: {
+            slotDuration: "01:00:00",
+        },
+        views: {
+            timeGridDay: {
+                dayHeaderFormat: {
+                    month: "long",
+                    day: "numeric",
+                    omitCommas: "false",
+                },
+                nowIndicator: true,
+            },
+            timeGridWeek: {
+                dayHeaderFormat: {
+                    month: "short",
+                    day: "2-digit",
+                },
+                nowIndicator: true,
+            },
+        },
+        viewDidMount: function (info) {
+            onViewChanged();
+        },
+        //eventContent: { html: '<i>some html</i>' }
     },
-    viewDidMount: function (info) {
-        onViewChanged();
-    },
-    //eventContent: { html: '<i>some html</i>' }
 });
 
 const monthCalendarOptions = ref({
-  plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-  initialView: "dayGridMonth",
-  headerToolbar: false,
-  events: props.events,
-  eventClick,
-  editable: true,
-  selectable: true,
-  dayMaxEvents: true,
-  dateClick: function (params) {
-    console.log("🚀 ~ file: index.vue ~ line 123 ~ params", params);
-    calendar?.value?.getApi()?.gotoDate(params.date);
-  },
+    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+    initialView: "dayGridMonth",
+    headerToolbar: false,
+    events: props.events,
+    eventClick,
+    editable: true,
+    selectable: true,
+    dayMaxEvents: true,
+    dateClick: function (params) {
+        console.log("🚀 ~ file: index.vue ~ line 123 ~ params", params);
+        calendar?.value?.getApi()?.gotoDate(params.date);
+    },
 });
 
 const listCalendarOptions = ref({
-  plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
-  initialView: "listDay",
-  timeAxis: {
-    slotDuration: "01:00:00",
-  },
-  headerToolbar: false,
-  events: props.events,
-  eventClick,
+    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
+    initialView: "listDay",
+    timeAxis: {
+        slotDuration: "01:00:00",
+    },
+    headerToolbar: false,
+    events: props.events,
+    eventClick,
 });
 
 const onViewChanged = () => {
@@ -417,7 +418,7 @@ th.fc-day-today {
     @apply w-[80px];
 }
 .fc-daygrid-day-top {
-  @apply !flex !flex-row !justify-start text-[0.7rem];
+    @apply !flex !flex-row !justify-start text-[0.7rem];
 }
 
 .fc-daygrid-more-link.fc-more-link {
