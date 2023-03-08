@@ -47,37 +47,7 @@
   </div>
 </template>
 <style>
-.solid {
-  border-top: 1px solid #bbb;
-  padding-bottom: 4px;
-}
 
-tr {
-  @apply border-b border-white border-opacity-50;
-}
-
-.trend-arrow-up {
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-
-  border-bottom: 5px solid #5bc600;
-}
-.trend-arrow-down {
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  padding-bottom: 1px;
-  border-top: 5px solid #ff0000;
-}
-.select-box-btn {
-  @apply flex flex-row px-2 py-1 items-center justify-between w-full;
-}
-.tableborder {
-  @apply border-t border-[#CBCBCB];
-}
 .close-btn {
   @apply absolute top-4 right-4 cursor-pointer hover:text-blue-600 pr-4;
 }

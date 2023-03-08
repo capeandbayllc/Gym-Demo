@@ -1,5 +1,5 @@
 <template>
-  <tr class="py-2 h-10">
+  <tr class="py-2 h-10 border-b border-white border-opacity-50">
     <!-- rank & trend -->
     <td>
       <div class="flex gap-4">
