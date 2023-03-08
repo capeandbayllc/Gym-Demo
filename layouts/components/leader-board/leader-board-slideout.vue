@@ -92,6 +92,11 @@ const props = defineProps({
   isLeaderBoardVisible: { type: Boolean, default: false },
 });
 
+const emit = defineEmits(["show-leader-board"]);
+const toggleLeaderBoard = () => {
+    emit("show-leader-board");
+};
+
 const trainerData = ref([
   {
     name: "Caleb Grill",

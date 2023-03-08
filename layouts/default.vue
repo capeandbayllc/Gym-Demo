@@ -42,7 +42,10 @@
     >
         <slot />
     </div>
-    <leader-board-slideout :isLeaderBoardVisible="isLeaderBoardVisible" />
+    <leader-board-slideout
+        :isLeaderBoardVisible="isLeaderBoardVisible"
+        @show-leader-board="showLeaderBoard"
+    />
 </template>
 <style scoped>
 .app-layout {
