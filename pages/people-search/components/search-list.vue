@@ -1,17 +1,7 @@
 <template>
-    <div class="mt-5 people-search-tbl-content">
+    <div class="mt-5 club-search-tbl-content">
         <simple-card title="Members" class="mb-5" v-if="!filter || filter === 'members'">
-            <people-search-table :columns="columns" :items="membersData" :filter="filter" class="p-6"/>
-        </simple-card>
-        <simple-card title="Leads" class="mb-5" v-if="!filter || filter === 'leads'">
-            <people-search-table :columns="columns" :items="leadsData" :filter="filter" class="p-6"/>
-        </simple-card>
-        <simple-card title="Employees" class="mb-5" v-if="!filter || filter === 'employees'">
-            <people-search-table v-if="employeeData.length > 0" :columns="columns" :items="employeeData" :filter="filter" class="p-6"/>
-            <data-table v-else />
-        </simple-card>
-        <simple-card title="Segments" class="mb-5" v-if="!filter || filter === 'segments'">
-            <people-search-table :columns="columns" :items="leadsData" :filter="filter" class="p-6"/>
+            <people-search-table :columns="columns" :items="membersData" filter="id" class="p-6"/>
         </simple-card>
     </div>
 </template>

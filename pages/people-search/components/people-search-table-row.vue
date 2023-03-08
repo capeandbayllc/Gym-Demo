@@ -1,5 +1,5 @@
 <template>
-    <tr class="people-lead-tbl-row">
+    <tr class="people-lead-tbl-row text-sm">
         <td>{{data.segment}}</td>
         <td>
             <div class="flex items-center">
@@ -8,12 +8,12 @@
         </td>
         <td>{{data.last_name}}</td>
         <td>{{data.phone}}</td>
-        <td>{{data.email}}</td>
+        <td class="whitespace-nowrap">{{data.email}}</td>
         <td>{{data.location}}</td>
         <td>
             <membership-btn :membership="data.type"/>
         </td>
-        <td>{{data.created}}</td>
+        <td>{{ data.created.replace(/:\d{2}(AM|PM)$/, ' $1') }}</td>
     </tr>
 </template>
 <style scoped>

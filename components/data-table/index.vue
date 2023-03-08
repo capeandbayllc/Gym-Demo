@@ -1,5 +1,5 @@
 <template>
-    <div class="overflow-y-auto max-w-[90vw]">
+    <div class="overflow-y-auto max-w-[90vw] mx-auto">
         <table class="border-separate">
             <table-header :columns="columns"/>
             <table-body v-if="!rowComponent"/>

@@ -60,7 +60,6 @@ library.add(faUser);
 //     }
 //   }
 // `;
-
 const query = gql`
   query AllUsers {
     users(first: 100) {
@@ -82,7 +81,6 @@ const query = gql`
     }
   }
 `;
-
 const { result } = useQuery(query);
 
 const mutation = gql`

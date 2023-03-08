@@ -20673,7 +20673,7 @@
       "agreementId": null
     }
   ],
-  "calendar_event_types": [
+  "calendarEventTypes": [
     {
       "id": "00bc5c68-f235-451e-865c-a0f197431411",
       "clientId": "cedb1892-9bc2-4e40-9dca-831741944e48",
@@ -21115,7 +21115,7 @@
       "updated_at": "2023-03-03 22:30:49"
     }
   ],
-  "calendar_events": [
+  "calendarEvents": [
     {
       "id": "0082a9b7-a02c-42c1-94b1-819c59700115",
       "clientId": "cedb1892-9bc2-4e40-9dca-831741944e48",
@@ -22776,7 +22776,7 @@
       "updated_at": "2023-03-03 22:30:49"
     }
   ],
-  "scheduled_campaigns": [
+  "scheduledCampaigns": [
     {
       "id": "16dbe4c9-6799-4bb1-aa91-abf412ccf348",
       "clientId": "a0051936-fa4c-480d-abb0-75f361bc8731",

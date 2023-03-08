@@ -10,9 +10,9 @@
                         :items="callType"
                         value=""
                         :label="'Call type'" 
-                        class="w-40">
+                        class="">
                     </select-box>
-                    <div class="float-right">
+                    <div class="">
                         <button
                             type="button"
                             class="btn w-max rounded btn-sm font-medium ml-32 mr-3"
@@ -42,6 +42,8 @@
 
 <script setup>
 import CallerCard from './caller-card.vue';
+
+defineEmits(['call-now'])
 const userCallSetting = {
     type: 'outgoing-call',
     callType: 'Outgoing Call',

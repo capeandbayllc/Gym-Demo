@@ -6,24 +6,24 @@
 		>
 			<people-icon />People
 		</Button> -->
-        <div @mouseover="showFocus" @mouseleave="hideFocus">
-            <input
-                ref="globalSearchInput"
-                type="text"
-                placeholder="Search"
-                class="input global-search-input w-80 -xl:w-40 -lg:w-80 -md:w-40 -lg:mr-0 mr-9 bg-base-content rounded text-black text-lg h-9"
-                @click="$emit('show-global-search')"
-            />
-        </div>
-        <div class="relative">
-            <person-add-icon @click="showUserMenu" />
-            <user-add-menu ref="userMenu" />
-        </div>
-        <div class="alert-container mt-1">
-            <alarm-btn @click="$emit('show-alert-modal')" />
-            <alert-list class="alert-list" />
-        </div>
-        <!-- <div class="setting-icon">
+    <div @mouseover="showFocus" @mouseleave="hideFocus">
+      <input
+        ref="globalSearchInput"
+        type="text"
+        placeholder="Search"
+        class="input global-search-input w-80 -xl:w-40 -lg:w-80 -md:w-40 -lg:mr-0 mr-9 bg-base-content rounded text-black text-lg h-9"
+        @click="$emit('show-global-search')"
+      />
+    </div>
+    <div class="relative">
+      <person-add-icon @click="showUserMenu" />
+      <user-add-menu ref="userMenu" />
+    </div>
+    <div class="alert-container mt-1">
+      <alarm-btn :count="user.notifications.length" @click="$emit('show-alert-modal')" />
+      <alert-list :list="user.notifications" class="alert-list" />
+    </div>
+    <!-- <div class="setting-icon">
 			<setting-icon />
 		</div> -->
         <!--    <div class="relative z-10">-->
@@ -50,13 +50,13 @@
 </template>
 <style>
 .alert-container:hover svg {
-    @apply rotate-12;
+  @apply rotate-12;
 }
 .alert-container:hover .notification {
-    @apply -right-2 left-auto z-10 ease-linear;
+  @apply -right-2 left-auto z-10 ease-linear;
 }
 .person-add-icon:hover path {
-    @apply opacity-100;
+  @apply opacity-100;
 }
 /* .setting-icon:hover{
 		animation: spin 1s linear 0.5; opacity: 0.5;
@@ -70,30 +70,30 @@
 </style>
 <style scoped>
 .header-actions {
-    @apply flex items-center justify-end space-x-9 mx-8 -lg:space-x-4 -xl:space-x-3;
-    > button svg {
-        @apply mr-1;
-    }
-    svg {
-        @apply cursor-pointer;
-    }
-    .global-search-input:hover {
-        cursor: pointer;
-    }
+  @apply flex items-center justify-end space-x-9 mx-8 -lg:space-x-4 -xl:space-x-3;
+  > button svg {
+    @apply mr-1;
+  }
+  svg {
+    @apply cursor-pointer;
+  }
+  .global-search-input:hover {
+    cursor: pointer;
+  }
 }
 .alert-container:hover .alert-list {
-    @apply block;
+  @apply block;
 }
 
 .leader-board-container:hover .leader-pop {
     @apply block;
 }
 .alert-container {
-    @apply relative -sm:!ml-4;
-    .alert-list {
-        @apply absolute z-20 hidden;
-        right: -8rem;
-    }
+  @apply relative -sm:!ml-4;
+  .alert-list {
+    @apply absolute z-20 hidden;
+    right: -8rem;
+  }
 }
 .leader-board-container {
     @apply relative -sm:!ml-4;
@@ -106,12 +106,7 @@
 <script setup>
 import { ref } from "vue";
 import {
-    PosIcon,
-    PeopleIcon,
-    PersonAddIcon,
-    SettingIcon,
-    QuestionRoundIcon,
-    EmployeeIcon,
+  PersonAddIcon,
 } from "@/components/icons";
 import AlarmBtn from "./alarm-btn.vue";
 import AccountBtn from "./account-btn.vue";
@@ -123,8 +118,8 @@ import TrophyIcon from "~/components/icons/trophy.vue";
 const userMenu = ref(null);
 const globalSearchInput = ref("");
 const showFocus = () => {
-    globalSearchInput.value.style = "";
-    globalSearchInput.value.focus();
+  globalSearchInput.value.style = "";
+  globalSearchInput.value.focus();
 };
 
 const emit = defineEmits(["show-leader-board"]);
@@ -132,7 +127,7 @@ const showLeaderBoard = () => {
     emit("show-leader-board");
 };
 const hideFocus = () => {
-    globalSearchInput.value.blur();
+  globalSearchInput.value.blur();
 };
 const showLeaderPop = ref(false);
 const toggle = () => {
@@ -144,4 +139,5 @@ const openPop = () => {
 };
 
 const showUserMenu = () => userMenu.value.open();
+const user = useState('auth');
 </script>
