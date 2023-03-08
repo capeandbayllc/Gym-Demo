@@ -1,12 +1,14 @@
 <template>
     <div class="page-people-search-center-container">
         <div class="-md:px-4 page-content flex-col">
-            <input
-                type="text"
-                placeholder="Search"
-                class="input w-full bg-base-content text-black text-lg"
-                v-model="searchInput"
-            />
+            <div class="text-center">
+              <input
+                  type="text"
+                  placeholder="Search"
+                  class="input w-2/4 bg-base-content text-black text-lg"
+                  v-model="searchInput"
+              />
+            </div>
             <people-search-action
                 @peopleSearchActionSelected="filterSelected"
             ></people-search-action>
