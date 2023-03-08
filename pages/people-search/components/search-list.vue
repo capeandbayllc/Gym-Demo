@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-5 people-search-tbl-content">
+    <div class="mt-5 club-search-tbl-content">
         <simple-card title="Members" class="mb-5" v-if="!filter || filter === 'members'">
             <people-search-table :columns="columns" :items="membersData" :filter="filter" class="p-6"/>
         </simple-card>

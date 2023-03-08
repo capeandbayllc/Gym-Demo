@@ -21,7 +21,16 @@
 </template>
 <style scoped>
 .search-input {
-    @apply w-full rounded border overflow-hidden px-2 text-right;
+    @apply bg-neutral-700 w-full rounded border overflow-hidden px-2 md:ml-10 transition-all;
+    height: 29px;
+}
+.search-input::placeholder {
+    @apply left-full absolute transition-all;
+    top: 2px;
+    margin-left: -55px;
+}
+.search-input:hover::placeholder, .search-input:focus::placeholder {
+    @apply left-2 pl-0 ml-0;
 }
 .search-input-lg {
 	height: 34px;
@@ -29,7 +38,7 @@
 
 .search-input:hover,
 .search-input:focus {
-    @apply text-left outline-0 bg-transparent;
+    @apply outline-0 bg-transparent;
 }
 
 .search-input-wrapper {

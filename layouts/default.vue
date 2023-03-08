@@ -4,7 +4,7 @@
             @show-circular-menu="toggleCircularMenu"
             @show-help="showBot"
             @show-profile-menu="showProfileMenu"
-            class="sticky top-0 z-[22]"
+            class="sticky top-0 z-[25]"
         />
         <circular-menu v-if="showCircularMenu" @close="toggleCircularMenu" />
         <help-bot ref="helpBot" />
