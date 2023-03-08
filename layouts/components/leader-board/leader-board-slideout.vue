@@ -28,7 +28,7 @@
     </div>
     <div class="m-10 p-4">
       <table class="w-full">
-        <tr>
+        <tr class="text-opacity-50 text-white">
           <td>Place</td>
           <td>Name</td>
           <td>Points</td>
@@ -50,6 +50,10 @@
 .solid {
   border-top: 1px solid #bbb;
   padding-bottom: 4px;
+}
+
+tr {
+  @apply border-b border-white border-opacity-50;
 }
 
 .trend-arrow-up {
@@ -105,6 +109,7 @@ const trainerData = ref([
     attendance: "90%",
     overall: "4.9",
     stars: "5",
+    avatar: "/account-lg.png",
   },
   {
     name: "Gabe Kalsheur",
@@ -119,6 +124,7 @@ const trainerData = ref([
     attendance: "90%",
     overall: "4.9",
     stars: "5",
+    avatar: "/account-lg.png",
   },
   {
     name: "Aljaz Kunc",
@@ -133,6 +139,7 @@ const trainerData = ref([
     attendance: "90%",
     overall: "4.9",
     stars: "5",
+    avatar: "/account-lg.png",
   },
   {
     name: "Osun Osunniyi",
@@ -147,6 +154,7 @@ const trainerData = ref([
     attendance: "90%",
     overall: "4.9",
     stars: "5",
+    avatar: "/account-lg.png",
   },
   {
     name: "Jaren Holmes",
@@ -161,6 +169,7 @@ const trainerData = ref([
     attendance: "90%",
     overall: "4.9",
     stars: "5",
+    avatar: "/account-lg.png",
   },
   {
     name: "Tre King",
@@ -175,6 +184,7 @@ const trainerData = ref([
     attendance: "90%",
     overall: "4.9",
     stars: "5",
+    avatar: "/account-lg.png",
   },
   {
     name: "Tamin Lipsey",
@@ -189,6 +199,7 @@ const trainerData = ref([
     attendance: "90%",
     overall: "4.9",
     stars: "5",
+    avatar: "/account-lg.png",
   },
   {
     name: "Rob Jones",
@@ -203,6 +214,7 @@ const trainerData = ref([
     attendance: "90%",
     overall: "4.9",
     stars: "5",
+    avatar: "/account-lg.png",
   },
   {
     name: "Demarion Watson",
@@ -217,6 +229,7 @@ const trainerData = ref([
     attendance: "90%",
     overall: "4.9",
     stars: "5",
+    avatar: "/account-lg.png",
   },
   {
     name: "Hason Ward",
@@ -231,6 +244,7 @@ const trainerData = ref([
     attendance: "90%",
     overall: "4.9",
     stars: "5",
+    avatar: "/account-lg.png",
   },
 ]);
 const items = ["Week", "Month", "Year"];
@@ -250,8 +264,5 @@ const toggleCollapsed = () => {
 const onChange = () => {
   toggleCollapsed();
 };
-const closeSlider = () => {
-
-}
-
+const closeSlider = () => {};
 </script>
