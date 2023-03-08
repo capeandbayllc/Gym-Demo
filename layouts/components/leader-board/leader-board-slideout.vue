@@ -13,7 +13,7 @@
       </div>
       <div>
         <div class="float-right close-btn" @click="closeSlider">
-          <cross-icon />
+          <cross-icon @click="toggleLeaderBoard()" />
         </div>
       </div>
     </div>
@@ -91,6 +91,11 @@ import LeaderRowDetails from "./partials/leader-row-details.vue";
 const props = defineProps({
   isLeaderBoardVisible: { type: Boolean, default: false },
 });
+
+const emit = defineEmits(["show-leader-board"]);
+const toggleLeaderBoard = () => {
+  emit("show-leader-board");
+};
 
 const trainerData = ref([
   {
@@ -273,7 +278,6 @@ const handleListItemClick = (ctx = null) => {
   }
 
   currentListItemContext.value = ctx;
-  console.log("context clicked:", ctx);
 };
 
 const toggleCollapsed = () => {
