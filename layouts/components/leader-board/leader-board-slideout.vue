@@ -250,4 +250,8 @@ const toggleCollapsed = () => {
 const onChange = () => {
   toggleCollapsed();
 };
+const closeSlider = () => {
+
+}
+
 </script>

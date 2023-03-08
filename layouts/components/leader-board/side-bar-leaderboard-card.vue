@@ -1,25 +1,24 @@
 <template>
   <div v-for="(leader, index) in trainerData" :key="leader.name">
     <div class="border-container">
-      <div class="side-bar-leaderboard-card w-[25%] float-left border border-secondary rounded p-4 m-4"  @mouseenter="addCircleColor" @mouseleave="addCircleColor" v-if="index < 3">
+      <div class="side-bar-leaderboard-card w-[25%] relative float-left border-2 border-secondary rounded p-2 m-3"  @mouseenter="addCircleColor" @mouseleave="addCircleColor" v-if="index < 3">
         <div class="relative">
           <img :src="avatar" class="relative" />
-          <div v-if="isHovering == false" class="dot ">{{leader.rank}}</div>
-          <div v-if="isHovering == true" class="dothover ">{{leader.rank}}</div>
+          <div class="dot" v-bind:class="{isHovering: 'dothover'}" >{{leader.rank}}</div>
         </div>
-        <div class="leaderboard-name">{{leader.name}}</div>
-        <div class="points">{{leader.unitSold}} PTS</div>
-        <div class="bg-[#0074C8]"> </div>
-        <div class="bg-secondary rounded text-[7px] p-4">
-          <tr>
-            <td class="p-1">Classes</td>
-            <td class="p-1">Attendance</td>
-            <td class="p-1">Overall</td>
+        <div class="leaderboard-name relative">{{leader.name}}</div>
+        <div class="points ">{{leader.unitSold}} PTS</div>
+        <div class="bg-[#0074C8] relative"> </div>
+        <div class="bg-secondary text-[9px] border-[#0074C8] relative pr-3 pl-3 -bottom-2 ">
+          <tr class="flex">
+            <td class="flex flex-col pt-2 pb-1 pr-2 pl-2 relative">Classes</td>
+            <td class="flex flex-col pt-2 pb-1 pr-2 pl-2 relative">Attendance</td>
+            <td class="flex flex-col pt-2 pb-1 pr-2 pl-2 relative">Overall</td>
           </tr>
-          <tr>
-            <td class="p-1">{{leader.classes}}</td>
-            <td class="p-1 justify-center">{{leader.attendance}}</td>
-            <td class="p-1">{{leader.overall}}</td>
+          <tr class="flex">
+            <td class="flex flex-col pr-5 pl-5 pb-2 relative">{{leader.classes}}</td>
+            <td class="flex flex-col pr-5 pl-5 pb-2 relative">{{leader.attendance}}</td>
+            <td class="flex flex-col pr-5 pl-5 pb-2 relative">{{leader.overall}}</td>
           </tr>
         </div>
       </div>
@@ -31,7 +30,7 @@
   @apply border-transparent hover:border-0;
 }
 .side-bar-leaderboard-card {
-  @apply flex flex-col items-center self-start relative hover:border-2;
+  @apply flex flex-col items-center self-start relative hover:border-4;
   img {
     @apply w-16 h-16 rounded-full mr-3;
   }
@@ -42,14 +41,13 @@
     @apply flex flex-col justify-center items-center h-[2rem] w-[2rem] rounded-full bottom-0 right-2 text-black bg-[#FFD800] absolute;
   }
   .points {
-    @apply bg-[#FFD800] rounded-full m-3 pl-2 pr-2 pb-1 pt-1 text-black text-xs;
+    @apply bg-[#FFD800] relative rounded-full m-3 pl-2 pr-2 pb-1 pt-1 text-black text-xs;
   }
 
   .leaderboard-name {
     @apply text-lg cursor-pointer p-2;
   }
 }
-
 
 </style>
 <script setup>
@@ -63,9 +61,10 @@ const props = defineProps({
 
     }
 });
-let isHovering = ref(false)
+let isHovering = false
 
 const addCircleColor = () => {
   isHovering = !isHovering;
+  console.log(isHovering);
 }
 </script>
