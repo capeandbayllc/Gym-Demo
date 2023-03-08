@@ -31,15 +31,13 @@ const props = defineProps({
   },
 });
 
+/** empty node on calendar click handler */
 const handleDateClick = (arg) => {
-  //   console.log("date click! " + arg.dateStr);
-  console.log("empty node click:", arg);
   emit("clickEmptyNode", arg);
 };
 
 /** DOM References */
 const calendar = ref(null);
-const eventModal = ref(null);
 const start = ref(null);
 const end = ref(null);
 const currentView = ref("timeGridWeek");
@@ -54,6 +52,7 @@ const handleChangeView = (value) => {
   onViewChanged();
 };
 
+/** existing event click handler */
 const eventClick = (info) => {
   emit("clickEventNode", info.event);
 };

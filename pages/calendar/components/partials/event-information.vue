@@ -28,7 +28,7 @@
         <div class="w-12 h-12 bg-white rounded-full"></div>
         <div class="flex flex-col">
           <span class="text-xs text-opacity-50 text-white">Instructor</span>
-          <span class="text-xl">Bryan Andrews</span>
+          <span class="text-xl">{{ event.extendedProps.instructor }}</span>
         </div>
       </div>
       <div class="flex gap-4">

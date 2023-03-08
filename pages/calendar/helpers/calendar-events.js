@@ -1,11 +1,18 @@
-const formatRandomEventTime = (offsets = {}, date = new Date()) => {
+/** TIME CONSTANTS */
+const MS_IN_SECONDS = 1000;
+const SECONDS_IN_MINUTE = 60;
+const MINUTES_IN_HOUR = 60;
+const MS_IN_MINUTE = MS_IN_SECONDS * SECONDS_IN_MINUTE;
+const MS_IN_HOUR = MS_IN_MINUTE * MINUTES_IN_HOUR;
+
+export const formatRandomEventTime = (offsets = {}, date = new Date()) => {
   let dateTimeString = "year-month-dayThour:00:00";
   const dateTimeStringObject = {
     year: date.getFullYear(),
     month: date.getMonth() + 1,
     day: date.getDate(),
     hour: date.getHours(),
-    // minute: date.getMinutes(),
+    minute: date.getMinutes(),
   };
 
   for (let part in offsets) {
@@ -49,17 +56,43 @@ export const months = [
   "december",
 ];
 
-/** keeps track of ids, if you assign an id with an auto-increment they will all be unique */
-let idStore = 1;
-
 /**
  * Returns a random number between the minimum and maximum
  * @param {Number=0} min lower threshold
  * @param {Number=8} max upper threshold
  * @returns {Number} random number between thresholds
  */
-const randomNumberBetween = (min = 0, max = 8) => {
+export const randomNumberBetween = (min = 0, max = 8) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+/**
+ * Adds the specified number of minutes to the passed date
+ * @param {Date} date operator
+ * @param {Number} minutes amount of minutes to add
+ * @returns {Date} with specified minutes added
+ */
+export const addMinutesToDate = (date = new Date(), minutes = 30) => {
+  return new Date(date.getTime() + minutes * MS_IN_MINUTE);
+};
+
+/**
+ *  Format date to a standard format - all arguments are optional
+ * @param {Date} date date to format
+ * @param {String|Number} deliminator delimination character
+ * @returns {String} formatted YYYY-MM-DD but with specified deliminator instead of dash (if specified)
+ */
+export const formatYYYYMMDD = (date = new Date(), deliminator = "-") => {
+  let year = parseInt(date.getFullYear());
+  let month = parseInt(date.getMonth() + 1);
+  let day = parseInt(date.getDate());
+  return [year, month, day].join(deliminator);
+};
+
+export const formatHHMM = (date = new Date(), deliminator = ":") => {
+  let hour = date.getHours();
+  let minute = date.getMinutes();
+  return [hour, minute].join(deliminator);
 };
 
 export const calendarEvents = [

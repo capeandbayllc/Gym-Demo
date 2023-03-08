@@ -19,7 +19,7 @@
 
     <div class="form-group-pair mb-8">
       <label>Title</label>
-      <input type="text" />
+      <input v-model="form.title" type="text" />
     </div>
     <BtnGroup :choices="btnChoices" v-model="form.eventType" />
     <div class="form-group-pair">
@@ -39,23 +39,29 @@
         v-model="form.instructor"
         class="w-full p-2 rounded-md text-black mt-2"
       >
-        <option>Jeff</option>
+        <option v-for="employee in employees" :key="employee.id">
+          {{ employee.first_name }} {{ employee.last_name }}
+        </option>
       </select>
     </div>
 
     <div class="form-group-pair">
-      <label>time</label>
       <div class="flex w-full gap-4 mt-2">
-        <select
+        <!-- <select
           class="w-full p-2 rounded-md text-black"
           name="start"
           id="start"
         >
           <option>start</option>
-        </select>
-        <select class="w-full p-2 rounded-md text-black" name="end" id="end">
-          <option>end</option>
-        </select>
+        </select> -->
+        <div class="w-full flex flex-col">
+          <label for="start_time">Start</label>
+          <input v-model="form.time.start" id="start_time" type="date" />
+        </div>
+        <div class="w-full flex flex-col">
+          <label for="end_time">End</label>
+          <input v-model="form.time.end" id="end_time" type="time" />
+        </div>
       </div>
     </div>
 
@@ -95,19 +101,28 @@
 
 <script setup>
 import BtnGroup from "./partials/btn-group.vue";
+import {
+  addMinutesToDate,
+  formatRandomEventTime,
+} from "../helpers/calendar-events";
 
 const props = defineProps({
   members: {
     type: Array,
     default: [],
   },
-  instructors: {
+  employees: {
     type: Array,
     default: [],
+  },
+  nodeContext: {
+    type: [Object, null],
+    default: null,
   },
 });
 
 const emit = defineEmits(["createEvent", "cancel"]);
+const currentDate = ref(new Date());
 
 const btnChoices = ["event", "task", "service", "prospect"];
 const form = ref({
@@ -116,8 +131,10 @@ const form = ref({
   member: null,
   instructor: null,
   time: {
-    start: new Date(),
-    end: new Date(),
+    start: props.nodeContext?.start ? props.nodeContext.start : new Date(),
+    end: props.nodeContext?.start
+      ? formatRandomEventTime({ minute: -60 }, props.nodeContext.start)
+      : formatRandomEventTime({ minute: -60 }, new Date()),
   },
   description: "",
   recurring: false,

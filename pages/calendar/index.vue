@@ -36,6 +36,8 @@
         @cancel="resetState"
         @createEvent="handleCreateEvent"
         :members="result.members.data"
+        :employees="result.members.data"
+        :nodeContext="emptyNodeContext"
       />
     </div>
 
@@ -75,7 +77,7 @@
           dark
         />
 
-        <CalendarMenu :calendars="calendarsList" />
+        <CalendarMenu :calendars="activeEventsList" />
         <ReportsStatistics />
       </aside>
 
@@ -120,7 +122,7 @@
           </div>
         </div>
         <GrCalendar
-          :events="events"
+          :events="activeEventsList"
           @clickEventNode="handleCalendarEvent"
           @clickEmptyNode="handleAddNew"
         />
@@ -131,7 +133,7 @@
 <script setup>
 import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
 import { isEqual, set } from "date-fns";
-import { fakeCalendars } from "./components/fakedata";
+
 import CalendarMenu from "./components/partials/calendar-menu.vue";
 import ReportsStatistics from "./components/partials/reports-statistics.vue";
 import EventDetails from "./components/partials/event-details.vue";
@@ -160,20 +162,10 @@ const handleDateClick = (arg) => {
   console.log("date click! " + arg.dateStr);
 };
 
-/** DOM References */
-// const calendar = ref(null);
-// const eventModal = ref(null);
-// const start = ref(null);
-// const end = ref(null);
-// const currentView = ref("timeGridWeek");
-// const selectedDate = ref(null);
-// const isMobile = computed(() => window.innerWidth <= 480);
-// const monthCalendar = ref(null);
-// const listCalendar = ref(null);
-
 /** Component State */
-const calendarsList = ref(fakeCalendars);
+const activeEventsList = ref(events);
 const eventDetails = ref(null); // Currently selected event context
+const emptyNodeContext = ref(null); // information about the empty node that was most recently clicked
 
 /** Component Visibility State */
 const eventDetailsVisibibility = ref(false);
@@ -188,22 +180,43 @@ const resetState = () => {
 
 /** sets up state for form entry */
 const handleAddNew = (node) => {
-  if (
-    eventDetailsVisibibility.value === true ||
-    eventInformationVisibibility.value === true
-  ) {
-    console.log("node", node);
+  if (eventDetailsVisibibility.value || eventInformationVisibibility.value) {
     return;
   } else {
+    const startTime = new Date(node.date);
+    emptyNodeContext.value = {
+      start: startTime,
+      dateStr: node.dateStr,
+      allDay: node.allDay,
+      dayEl: node.dayEl,
+      jsEvent: node.jsEvent,
+      view: node.view,
+    };
     resetState();
-
-    console.log("node", node);
     eventFormVisibility.value = true;
+    console.log("node context", emptyNodeContext.value);
   }
 };
 
 const handleCreateEvent = (form) => {
   console.log("create new event with info:", form);
+  console.log("current events", activeEventsList.value);
+  // activeEventsList.value = [...activeEventsList.value, { ...form }];
+  const newEventObj = {
+    title: form.title,
+    description: form.description,
+    start: form.time.start,
+    end: form.time.end,
+    backgroundColor: "##123456",
+    eventType: form.eventType,
+    instructor: form.instructor,
+    member: form.member,
+    notify: form.notify,
+    recurring: form.recurring,
+  };
+  console.log("new event", newEventObj);
+  activeEventsList.value.push(newEventObj);
+  eventFormVisibility.value = false;
 };
 // const handleChangeView = (value) => {
 //   calenderView.value = value;
@@ -221,139 +234,11 @@ const handleCalendarEvent = (e) => {
     end: e._instance.range.end,
   };
   console.log("event info", eventInfo);
-  console.log("ev", e);
   eventDetails.value = eventInfo;
-
   eventDetailsVisibibility.value = true;
 };
 
-// const eventClick = (info) => {
-//     var eventObj = info.event;
-//     eventModal.value.open();
-// };
-
-// const calendarOptions = ref({
-//     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-//     schedulerLicenseKey: "0157232768-fcs-1652392378",
-//     initialView: "timeGridWeek",
-//     slotDuration: "01:00",
-//     dateClick: handleDateClick,
-//     headerToolbar: {
-//         left: "",
-//         center: "prev,today,next timeGridWeek,dayGridMonth,timeGridDay",
-//         right: "",
-//     },
-//     events,
-//     editable: true,
-//     selectable: true,
-//     dayMaxEvents: true,
-//     eventClick,
-//     datesSet: (params) => {
-//         listCalendar?.value?.getApi()?.gotoDate(params.start);
-//         monthCalendar?.value?.getApi()?.gotoDate(params.start);
-//         monthCalendar?.value?.getApi()?.select(params.start);
-//         //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
-//     },
-//     timeAxis: {
-//         slotDuration: "01:00:00",
-//     },
-//     views: {
-//         timeGridDay: {
-//             dayHeaderFormat: {
-//                 month: "long",
-//                 day: "numeric",
-//                 omitCommas: "false",
-//             },
-//             nowIndicator: true,
-//         },
-//         timeGridWeek: {
-//             dayHeaderFormat: {
-//                 month: "short",
-//                 day: "numeric",
-//             },
-//             nowIndicator: true,
-//         },
-//         timeAxis: {
-//             slotDuration: "01:00:00",
-//         },
-//         views: {
-//             timeGridDay: {
-//                 dayHeaderFormat: {
-//                     month: "long",
-//                     day: "numeric",
-//                     omitCommas: "false",
-//                 },
-//                 nowIndicator: true,
-//             },
-//             timeGridWeek: {
-//                 dayHeaderFormat: {
-//                     month: "short",
-//                     day: "2-digit",
-//                 },
-//                 nowIndicator: true,
-//             },
-//         },
-//         viewDidMount: function (info) {
-//             onViewChanged();
-//         },
-//         //eventContent: { html: '<i>some html</i>' }
-//     },
-// });
-
-// const monthCalendarOptions = ref({
-//     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-//     initialView: "dayGridMonth",
-//     headerToolbar: false,
-//     events,
-//     eventClick,
-//     editable: true,
-//     selectable: true,
-//     dayMaxEvents: true,
-//     dateClick: function (params) {
-//         console.log("🚀 ~ file: index.vue ~ line 123 ~ params", params);
-//         calendar?.value?.getApi()?.gotoDate(params.date);
-//     },
-// });
-
-// const listCalendarOptions = ref({
-//     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
-//     initialView: "listDay",
-//     timeAxis: {
-//         slotDuration: "01:00:00",
-//     },
-//     headerToolbar: false,
-//     events,
-//     eventClick,
-// });
-
-// const onViewChanged = () => {
-//   start.value = calendar.value.getApi().view.activeStart;
-//   start.end = calendar.value.getApi().view.activeEnd;
-//   console.log({
-//     start,
-//     end,
-//     calendarView: calendar.value.getApi().view,
-//   });
-// };
-
-// const dateSelect = ref();
-// const showDateSelectModal = () => {
-//   if (calenderView.value !== "timeGridWeek") {
-//     selectedDate.value = start.value;
-//   }
-//   dateSelect.value.open();
-// };
-// const onSelectDate = (modelData) => {
-//   selectedDate.value = modelData;
-//   if (calenderView.value !== "timeGridWeek") {
-//     start.value = modelData;
-//     calendar.value.getApi().gotoDate(start.value);
-//   } else {
-//     start.value = modelData[0];
-//     calendar.value.getApi().gotoDate(start.value);
-//   }
-// };
-
+/** differentiate today's date from other dates on the sidebar calendar */
 const getDayClass = (date) => {
   if (
     isEqual(
@@ -373,7 +258,7 @@ const getDayClass = (date) => {
 /** GQL */
 const query = gql`
   query CalendarData {
-    members(first: 100) {
+    members(first: 15) {
       data {
         id
         first_name
@@ -402,25 +287,16 @@ const query = gql`
       full_day_event
       start
       end
-      #   color
-      #   options
-      #   eventTypeId
-      #   ownerId
       event_completion
-      #   locationId
-      #   overdue_reminder_sent
       editable
       call_task
-      #   deleted_at
-      #   created_at
-      #   updated_at
     }
   }
 `;
 
 const queryEvents = gql`
   query CalendarEvents {
-    calendarEvents(first: 100) {
+    calendarEvents(first: 15) {
       id
       title
       description
@@ -429,29 +305,20 @@ const queryEvents = gql`
 `;
 
 const { result } = useQuery(query);
-// const { result: calEvents } = useQuery(queryEvents);
+const { result: evquery } = useQuery(queryEvents);
 
-// watch(calenderView, () => {
-//   setTimeout(() => {
-//     calendar.value.getApi().render();
-//     console.log("huh");
-//   });
-// });
-
-let testInterval = null;
+let timeout = null;
 
 onMounted(async () => {
+  if (!timeout) {
+    timeout = setTimeout(() => {
+      console.log("GQL Result:", result);
+      console.log("evenst query?", evquery);
+    }, 3000);
+  }
   //   await nextTick();
   //   window.dispatchEvent(new Event("resize"));
-
-  if (!testInterval) {
-    testInterval = setInterval(() => {
-      console.log("query result:", result);
-    }, 2500);
-  }
 });
 
-onUnmounted(() => {
-  clearInterval(testInterval);
-});
+onUnmounted(() => clearTimeout(timeout));
 </script>

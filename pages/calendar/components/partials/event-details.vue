@@ -25,7 +25,7 @@
     <ul class="mt-8 flex flex-col justify-center gap-4">
       <li class="flex gap-6 text-xl">
         <div class="w-6 h-6 rounded-full bg-white"></div>
-        <span>Bryan Andrews</span>
+        <span>{{ event.extendedProps.instructor }}</span>
       </li>
       <li class="flex gap-6 text-xl">
         <div class="w-6 h-6 rounded-full bg-white"></div>
@@ -33,11 +33,7 @@
       </li>
     </ul>
     <div class="flex flex-col gap-2 mt-4">
-      <span
-        >Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur,
-        architecto. Pariatur optio perferendis molestiae ad, tempora animi ipsa
-        voluptas tempore saepe asperiores ducimus nihil voluptatum.</span
-      >
+      <span>{{ event.extendedProps.description }}</span>
       <button
         type="button"
         @click="$emit('seemore')"
