@@ -1,7 +1,7 @@
 <template>
     <div class="profile-info-container">
         <div class="profile-avatar">
-            <div class="alert-badge">{{ user.notifications.length }}</div>
+            <div class="alert-badge" v-if="user.notifications.length > 0">{{ user.notifications.length }}</div>
             <img :src="mock.img" />
         </div>
         <div class="profile-name">{{ mock.name }}</div>

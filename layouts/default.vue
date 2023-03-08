@@ -4,7 +4,7 @@
             @show-circular-menu="toggleCircularMenu"
             @show-help="showBot"
             @show-profile-menu="showProfileMenu"
-            class="sticky top-0 z-[22]"
+            class="sticky top-0 z-[25]"
         />
         <circular-menu v-if="showCircularMenu" @close="toggleCircularMenu" />
         <help-bot ref="helpBot" />
@@ -73,6 +73,7 @@ import ChatConversation from "./components/chat-conversation/index.vue";
 import { KIOSK_ROUTE, LOGIN_ROUTE } from "~/middleware/auth.global";
 import {useQuery} from "@vue/apollo-composable";
 import notification from "~/api/queries/notification";
+import {request} from "~/api/utils/request";
 
 const showCircularMenu = ref(false);
 
@@ -125,9 +126,9 @@ watchEffect(() => {
 function getNotifications(user) {
   if (!user.value) return;
 
-  const { result, loading } = useQuery(notification.query.browse, { user_id: user.value.id });
-  watch(loading, () => {
-    user.value.notifications = result.value.notifications.data;
+  request(notification.query.browse, { user_id: user.value.id }).then(({data}) => {
+    user.value.notifications = data.data.notifications.data;
+    console.log(1111);
   });
 }
 </script>

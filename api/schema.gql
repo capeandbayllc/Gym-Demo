@@ -34,18 +34,12 @@ input AudienceFiltersInput {
   membership_type_id: [ID]
 }
 
-"""
-A paginated list of Audience items.
-"""
+"""A paginated list of Audience items."""
 type AudiencePaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Audience items.
-  """
+  """A list of Audience items."""
   data: [Audience!]!
 }
 
@@ -95,18 +89,12 @@ type CalendarEventType {
   updated_at: DateTime
 }
 
-"""
-A paginated list of CalendarEventType items.
-"""
+"""A paginated list of CalendarEventType items."""
 type CalendarEventTypePaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of CalendarEventType items.
-  """
+  """A list of CalendarEventType items."""
   data: [CalendarEventType!]!
 }
 
@@ -124,18 +112,12 @@ type CallScriptTemplate {
   use_once: Boolean
 }
 
-"""
-A paginated list of CallScriptTemplate items.
-"""
+"""A paginated list of CallScriptTemplate items."""
 type CallScriptTemplatePaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of CallScriptTemplate items.
-  """
+  """A list of CallScriptTemplate items."""
   data: [CallScriptTemplate!]!
 }
 
@@ -313,18 +295,12 @@ type Customer {
   notes: [Note]
 }
 
-"""
-A paginated list of Customer items.
-"""
+"""A paginated list of Customer items."""
 type CustomerPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Customer items.
-  """
+  """A list of Customer items."""
   data: [Customer!]!
 }
 
@@ -355,18 +331,12 @@ input DepartmentFilter {
   state: String
 }
 
-"""
-A paginated list of Department items.
-"""
+"""A paginated list of Department items."""
 type DepartmentPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Department items.
-  """
+  """A list of Department items."""
   data: [Department!]!
 }
 
@@ -401,18 +371,12 @@ type DripCampaignDay {
   deleted_at: DateTime
 }
 
-"""
-A paginated list of DripCampaign items.
-"""
+"""A paginated list of DripCampaign items."""
 type DripCampaignPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of DripCampaign items.
-  """
+  """A list of DripCampaign items."""
   data: [DripCampaign!]!
 }
 
@@ -432,18 +396,12 @@ type EmailTemplate {
   updated_at: DateTime
 }
 
-"""
-A paginated list of EmailTemplate items.
-"""
+"""A paginated list of EmailTemplate items."""
 type EmailTemplatePaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of EmailTemplate items.
-  """
+  """A list of EmailTemplate items."""
   data: [EmailTemplate!]!
 }
 
@@ -479,24 +437,16 @@ type Employee {
   notes: [Note]
 }
 
-"""
-A paginated list of Employee items.
-"""
+"""A paginated list of Employee items."""
 type EmployeePaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Employee items.
-  """
+  """A list of Employee items."""
   data: [Employee!]!
 }
 
-"""
-EndUsers
-"""
+"""EndUsers"""
 type EndUser {
   id: ID!
   name: String!
@@ -525,43 +475,27 @@ type EndUser {
   locations: [Location]
 }
 
-"""
-A paginated list of EndUser items.
-"""
+"""A paginated list of EndUser items."""
 type EndUserPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of EndUser items.
-  """
+  """A list of EndUser items."""
   data: [EndUser!]!
 }
 
-"""
-Entry Sources
-"""
+"""Entry Sources"""
 type EntrySource {
-  """
-  Unique primary key.
-  """
+  """Unique primary key."""
   id: ID!
 
-  """
-  Non-unique name.
-  """
+  """Non-unique name."""
   name: String!
 
-  """
-  When the account was created.
-  """
+  """When the account was created."""
   created_at: DateTime!
 
-  """
-  When the account was last updated.
-  """
+  """When the account was last updated."""
   updated_at: DateTime!
 }
 
@@ -634,9 +568,7 @@ type InteractionCount {
   smsCount: Int
 }
 
-"""
-Leads
-"""
+"""Leads"""
 type Lead {
   id: ID!
   name: String!
@@ -665,18 +597,12 @@ type Lead {
   user_type: String
 }
 
-"""
-A paginated list of Lead items.
-"""
+"""A paginated list of Lead items."""
 type LeadPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Lead items.
-  """
+  """A list of Lead items."""
   data: [Lead!]!
 }
 
@@ -720,38 +646,24 @@ type LocationDetails {
   value: String
 }
 
-"""
-A paginated list of Location items.
-"""
+"""A paginated list of Location items."""
 type LocationPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Location items.
-  """
+  """A list of Location items."""
   data: [Location!]!
 }
 
-"""
-Available Location Types
-"""
+"""Available Location Types"""
 enum LocationType {
-  """
-  Locations that are available to the public
-  """
+  """Locations that are available to the public"""
   STORE
 
-  """
-  Locations that are not generally available to the public
-  """
+  """Locations that are not generally available to the public"""
   OFFICE
 
-  """
-  Locations that are considered corporate headquarter offices
-  """
+  """Locations that are considered corporate headquarter offices"""
   HQ
 }
 
@@ -777,91 +689,53 @@ type Member {
   notes: [Note]
 }
 
-"""
-A paginated list of Member items.
-"""
+"""A paginated list of Member items."""
 type MemberPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Member items.
-  """
+  """A list of Member items."""
   data: [Member!]!
 }
 
 type Mutation {
-  """
-  Create an Audience
-  """
+  """Create an Audience"""
   createAudience(input: CreateAudienceInput): Audience
 
-  """
-  Update an Audience
-  """
+  """Update an Audience"""
   updateAudience(input: UpdateAudienceInput): Audience
 
-  """
-  Creates a Calendar Event
-  """
+  """Creates a Calendar Event"""
   createCalendarEvent(input: CreateCalendarEventInput!): CalendarEvent!
   updateCalendarEvent(input: PatchCalendarEventInput!): CalendarEvent!
 
-  """
-  Creates a calandar event type
-  """
-  createCalandarEventType(
-    input: CreateCalendarEventTypeInput!
-  ): CalendarEventType!
+  """Creates a calandar event type"""
+  createCalandarEventType(input: CreateCalendarEventTypeInput!): CalendarEventType!
 
-  """
-  Updates a calendar event type
-  """
-  updateCalendarEventType(
-    input: UpdateCalendarEventTypeInput!
-  ): CalendarEventType!
+  """Updates a calendar event type"""
+  updateCalendarEventType(input: UpdateCalendarEventTypeInput!): CalendarEventType!
 
-  """
-  Creates a CallTemplate
-  """
-  createCallScriptTemplate(
-    input: CreateCallScriptTemplateInput
-  ): CallScriptTemplate!
+  """Creates a CallTemplate"""
+  createCallScriptTemplate(input: CreateCallScriptTemplateInput): CallScriptTemplate!
 
-  """
-  Updates a CallTemplate
-  """
-  updateCallScriptTemplate(
-    input: UpdateCallScriptTemplateInput
-  ): CallScriptTemplate!
+  """Updates a CallTemplate"""
+  updateCallScriptTemplate(input: UpdateCallScriptTemplateInput): CallScriptTemplate!
   createDepartment(name: String, positions: [ID]): Department!
   updateDepartment(id: ID, name: String, positions: [ID]): Department!
 
-  """
-  Creates a Drip Campaign
-  """
+  """Creates a Drip Campaign"""
   createDripCampaign(campaign: CreateDripCampaignInput): DripCampaign
 
-  """
-  Updates a Drip Campaign
-  """
+  """Updates a Drip Campaign"""
   updateDripCampaign(campaign: UpdateDripCampaignInput): DripCampaign
 
-  """
-  Duplicate an existing drip campaign
-  """
+  """Duplicate an existing drip campaign"""
   duplicateDripCampaign(id: ID): DripCampaign
 
-  """
-  Creates a EmailTemplate
-  """
+  """Creates a EmailTemplate"""
   createEmailTemplate(input: CreateEmailTemplateInput): EmailTemplate!
 
-  """
-  Updates a EmailTemplate
-  """
+  """Updates a EmailTemplate"""
   updateEmailTemplate(input: UpdateEmailTemplateInput): EmailTemplate!
   createFile(file: CreateFileInput): File!
   renameFile(input: RenameFileInput): File!
@@ -877,55 +751,33 @@ type Mutation {
   updateFolder(id: ID!, name: String): Folder!
   updateFolderSharing(input: FolderSharingInput): Folder!
 
-  """
-  Creates a Location
-  """
+  """Creates a Location"""
   createLocation(location: CreateLocationInput!): Location!
 
-  """
-  Updates a location
-  """
+  """Updates a location"""
   updateLocation(location: UpdateLocationInput!): Location!
   createNote(input: CreateNoteInput): Note!
   updateNote(input: UpdateNoteInput): Note!
 
-  """
-  Creates a Position
-  """
+  """Creates a Position"""
   createPosition(input: CreatePositionInput): Position!
 
-  """
-  Updates a Position
-  """
+  """Updates a Position"""
   updatePosition(input: UpdatePositionInput): Position!
 
-  """
-  Creates a Scheduled Campaign
-  """
-  createScheduledCampaign(
-    campaign: CreateScheduledCampaignInput
-  ): ScheduledCampaign!
+  """Creates a Scheduled Campaign"""
+  createScheduledCampaign(campaign: CreateScheduledCampaignInput): ScheduledCampaign!
 
-  """
-  Updates a Scheduled Campaign
-  """
-  updateScheduledCampaign(
-    campaign: UpdateScheduledCampaignInput
-  ): ScheduledCampaign!
+  """Updates a Scheduled Campaign"""
+  updateScheduledCampaign(campaign: UpdateScheduledCampaignInput): ScheduledCampaign!
 
-  """
-  Duplicate an existing scheduled campaign
-  """
+  """Duplicate an existing scheduled campaign"""
   duplicateScheduledCampaign(id: ID): ScheduledCampaign
 
-  """
-  Creates a SmsTemplate
-  """
+  """Creates a SmsTemplate"""
   createSmsTemplate(input: CreateSmsTemplateInput): SmsTemplate!
 
-  """
-  Updates a SmsTemplate
-  """
+  """Updates a SmsTemplate"""
   updateSmsTemplate(input: UpdateSmsTemplateInput): SmsTemplate!
   createTeam(name: String, positions: [ID]): Team!
   updateTeam(id: ID, name: String, positions: [ID]): Team!
@@ -950,33 +802,44 @@ input NoteInput {
   title: String
 }
 
-"""
-A paginated list of Note items.
-"""
+"""A paginated list of Note items."""
 type NotePaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Note items.
-  """
+  """A list of Note items."""
   data: [Note!]!
 }
 
-"""
-Allows ordering a list of records.
-"""
+type Notification {
+  id: ID
+  user_id: String
+  state: String
+  text: String
+  name: String
+  entity_type: String
+  entity_id: String
+  entity: String
+  misc: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+"""A paginated list of Notification items."""
+type NotificationPaginator {
+  """Pagination information about the list of items."""
+  paginatorInfo: PaginatorInfo!
+
+  """A list of Notification items."""
+  data: [Notification!]!
+}
+
+"""Allows ordering a list of records."""
 input OrderByClause {
-  """
-  The column that is used for ordering.
-  """
+  """The column that is used for ordering."""
   column: String!
 
-  """
-  The direction that is used for ordering.
-  """
+  """The direction that is used for ordering."""
   order: SortOrder!
 }
 
@@ -984,9 +847,7 @@ input OrderByClause {
 Aggregate functions when ordering by a relation without specifying a column.
 """
 enum OrderByRelationAggregateFunction {
-  """
-  Amount of items.
-  """
+  """Amount of items."""
   COUNT
 }
 
@@ -994,74 +855,46 @@ enum OrderByRelationAggregateFunction {
 Aggregate functions when ordering by a relation that may specify a column.
 """
 enum OrderByRelationWithColumnAggregateFunction {
-  """
-  Average.
-  """
+  """Average."""
   AVG
 
-  """
-  Minimum.
-  """
+  """Minimum."""
   MIN
 
-  """
-  Maximum.
-  """
+  """Maximum."""
   MAX
 
-  """
-  Sum.
-  """
+  """Sum."""
   SUM
 
-  """
-  Amount of items.
-  """
+  """Amount of items."""
   COUNT
 }
 
-"""
-Information about pagination using a Relay style cursor connection.
-"""
+"""Information about pagination using a Relay style cursor connection."""
 type PageInfo {
-  """
-  When paginating forwards, are there more items?
-  """
+  """When paginating forwards, are there more items?"""
   hasNextPage: Boolean!
 
-  """
-  When paginating backwards, are there more items?
-  """
+  """When paginating backwards, are there more items?"""
   hasPreviousPage: Boolean!
 
-  """
-  The cursor to continue paginating backwards.
-  """
+  """The cursor to continue paginating backwards."""
   startCursor: String
 
-  """
-  The cursor to continue paginating forwards.
-  """
+  """The cursor to continue paginating forwards."""
   endCursor: String
 
-  """
-  Total number of nodes in the paginated connection.
-  """
+  """Total number of nodes in the paginated connection."""
   total: Int!
 
-  """
-  Number of nodes in the current page.
-  """
+  """Number of nodes in the current page."""
   count: Int!
 
-  """
-  Index of the current page.
-  """
+  """Index of the current page."""
   currentPage: Int!
 
-  """
-  Index of the last available page.
-  """
+  """Index of the last available page."""
   lastPage: Int!
 }
 
@@ -1070,48 +903,30 @@ input PaginationInput {
   limit: Int = 10
 }
 
-"""
-Information about pagination using a fully featured paginator.
-"""
+"""Information about pagination using a fully featured paginator."""
 type PaginatorInfo {
-  """
-  Number of items in the current page.
-  """
+  """Number of items in the current page."""
   count: Int!
 
-  """
-  Index of the current page.
-  """
+  """Index of the current page."""
   currentPage: Int!
 
-  """
-  Index of the first item in the current page.
-  """
+  """Index of the first item in the current page."""
   firstItem: Int
 
-  """
-  Are there more pages after this one?
-  """
+  """Are there more pages after this one?"""
   hasMorePages: Boolean!
 
-  """
-  Index of the last item in the current page.
-  """
+  """Index of the last item in the current page."""
   lastItem: Int
 
-  """
-  Index of the last available page.
-  """
+  """Index of the last available page."""
   lastPage: Int!
 
-  """
-  Number of items per page.
-  """
+  """Number of items per page."""
   perPage: Int!
 
-  """
-  Number of total available items.
-  """
+  """Number of total available items."""
   total: Int!
 }
 
@@ -1143,18 +958,12 @@ input PositionFilter {
   state: String
 }
 
-"""
-A paginated list of Position items.
-"""
+"""A paginated list of Position items."""
 type PositionPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Position items.
-  """
+  """A list of Position items."""
   data: [Position!]!
 }
 
@@ -1164,17 +973,13 @@ type ProfileProps {
 
 type Query {
   clientId(
-    """
-    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
-    """
+    """Filters by name. Accepts SQL LIKE wildcards `%` and `_`."""
     id: ID
   ): ID!
   dashboardQuery: DashboardProps
   globalSearch(term: String, pagination: PaginationInput): GlobalSearchResult
 
-  """
-  Find a single reminder by an identifying attribute.
-  """
+  """Find a single reminder by an identifying attribute."""
   reminder(id: ID): Reminder
   tasksQuery(param: TaskParam, pagination: PaginationInput): Tasks
   widgetsQuery: [Widget]!
@@ -1182,433 +987,307 @@ type Query {
   calendarEvents(param: CalendarEventInput): [CalendarEvent!]!
   calendarEventById(id: ID): CalendarEvent
 
-  """
-  Queries Calendar Event Types without pagination
-  """
+  """Queries Calendar Event Types without pagination"""
   allCalendarEventTypes: [CalendarEventType!]!
 
-  """
-  Queries Calendar Event Type by ID
-  """
+  """Queries Calendar Event Type by ID"""
   calendarEventType(id: ID): CalendarEventType
 
-  """
-  Find a single Call Template by an identifying attribute.
-  """
+  """Find a single Call Template by an identifying attribute."""
   callTemplate(id: ID): CallScriptTemplate
   department(id: ID): Department
 
-  """
-  Finds a single drip campaign by ID
-  """
+  """Finds a single drip campaign by ID"""
   dripCampaign(id: ID): DripCampaign
 
-  """
-  Get the Topol API Key
-  """
+  """Get the Topol API Key"""
   topolApiKey: String!
 
-  """
-  Find a single Email Template by an identifying attribute.
-  """
+  """Find a single Email Template by an identifying attribute."""
   emailTemplate(id: ID): EmailTemplate
   files(filter: Filter, orderBy: [OrderByClause!]): [File!]!
   folders(filter: Filter, orderBy: [OrderByClause!]): [Folder!]!
   folder(id: ID): Folder
 
-  """
-  Find a single location by ID
-  """
+  """Find a single location by ID"""
   location(id: ID): Location
 
-  """
-  Get Location Types
-  """
+  """Get Location Types"""
   locationTypes: [Enum!]!
   note(id: ID): Note
+
+  """Find a single notification by ID and User ID"""
+  notification(id: ID, user_id: String!): Location
   position(id: ID): Position
 
-  """
-  Finds a single scheduled campaign by ID
-  """
+  """Finds a single scheduled campaign by ID"""
   scheduledCampaign(id: ID): ScheduledCampaign
 
-  """
-  Find a single SMS Template by an identifying attribute.
-  """
+  """Find a single SMS Template by an identifying attribute."""
   smsTemplate(id: ID): SmsTemplate
   team(id: ID): Team
   user(
-    """
-    Find a single user by an identifying attribute.
-    """
+    """Find a single user by an identifying attribute."""
     id: ID
 
-    """
-    Search by email address.
-    """
+    """Search by email address."""
     email: String
   ): User
   me: User
 
-  """
-  Find a single user by an identifying attribute.
-  """
+  """Find a single user by an identifying attribute."""
   leadOwners: [TeamUser]!
   lead_statuses: [LeadStatus!]!
 
-  """
-  Find a single user by an identifying attribute.
-  """
+  """Find a single user by an identifying attribute."""
   lead(id: ID): Lead
   lead_types(filter: Filter, orderBy: [OrderByClause!]): [LeadType!]!
   entry_sources: [EntrySource!]!
   isClientUser(
-    """
-    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
-    """
+    """Filters by name. Accepts SQL LIKE wildcards `%` and `_`."""
     id: ID
   ): Boolean!
 
-  """
-  Find a single user by an identifying attribute.
-  """
+  """Find a single user by an identifying attribute."""
   customer(id: ID): Customer
 
-  """
-  Find a single user by an identifying attribute.
-  """
+  """Find a single user by an identifying attribute."""
   member(id: ID): Member
   role(id: ID): Role
   availableAbilities: [Ability]!
   securityGroups: [SecurityGroups]!
   profileQuery: ProfileProps
   reminders(
-    """
-    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
-    """
+    """Filters by name. Accepts SQL LIKE wildcards `%` and `_`."""
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): ReminderPaginator
   audiences(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 50
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): AudiencePaginator
 
-  """
-  Queries Calendar Event Types
-  """
+  """Queries Calendar Event Types"""
   calendarEventTypes(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): CalendarEventTypePaginator
 
-  """
-  Queries Call Templates according to optional input filters
-  """
+  """Queries Call Templates according to optional input filters"""
   callTemplates(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): CallScriptTemplatePaginator
   departments(
-    """
-    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
-    """
+    """Filters by name. Accepts SQL LIKE wildcards `%` and `_`."""
     filter: DepartmentFilter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): DepartmentPaginator
 
-  """
-  Queries drip campaigns according to optional input filter
-  """
+  """Queries drip campaigns according to optional input filter"""
   dripCampaigns(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): DripCampaignPaginator
 
-  """
-  Queries Email Templates according to optional input filters
-  """
+  """Queries Email Templates according to optional input filters"""
   emailTemplates(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): EmailTemplatePaginator
 
-  """
-  Queries locations according to optional input filters
-  """
+  """Queries locations according to optional input filters"""
   locations(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): LocationPaginator
   notes(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): NotePaginator
+
+  """Queries notifications according to optional input filters"""
+  notifications(
+    user_id: String!
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """Limits number of fetched items."""
+    first: Int = 10
+
+    """The offset from which items are returned."""
+    page: Int
+  ): NotificationPaginator
   positions(
-    """
-    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
-    """
+    """Filters by name. Accepts SQL LIKE wildcards `%` and `_`."""
     filter: PositionFilter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): PositionPaginator
 
-  """
-  Queries scheduled campaigns according to optional input filter
-  """
+  """Queries scheduled campaigns according to optional input filter"""
   scheduledCampaigns(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): ScheduledCampaignPaginator
 
-  """
-  Queries SMS Templates according to optional input filters
-  """
+  """Queries SMS Templates according to optional input filters"""
   smsTemplates(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): SmsTemplatePaginator
   teams(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): TeamPaginator
   users(
-    """
-    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
-    """
+    """Filters by name. Accepts SQL LIKE wildcards `%` and `_`."""
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): UserPaginator
   employee(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): EmployeePaginator
   leads(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): LeadPaginator
   customers(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): CustomerPaginator
   endUsers(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): EndUserPaginator
   members(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): MemberPaginator
   roles(
     filter: Filter
     orderBy: [OrderByClause!]
 
-    """
-    Limits number of fetched items.
-    """
+    """Limits number of fetched items."""
     first: Int = 10
 
-    """
-    The offset from which items are returned.
-    """
+    """The offset from which items are returned."""
     page: Int
   ): RolePaginator
-  notifications(
-    user_id: String!
-    orderBy: [OrderByClause!]
-    first: Int = 10
-    page: Int
-  ): NotificationPaginator
 }
 
 type Reminder {
@@ -1619,18 +1298,12 @@ type Reminder {
   triggered_at: DateTime
 }
 
-"""
-A paginated list of Reminder items.
-"""
+"""A paginated list of Reminder items."""
 type ReminderPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Reminder items.
-  """
+  """A list of Reminder items."""
   data: [Reminder!]!
 }
 
@@ -1650,18 +1323,12 @@ type Role {
   group: Int
 }
 
-"""
-A paginated list of Role items.
-"""
+"""A paginated list of Role items."""
 type RolePaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Role items.
-  """
+  """A list of Role items."""
   data: [Role!]!
 }
 
@@ -1680,18 +1347,12 @@ type ScheduledCampaign {
   deleted_at: DateTime
 }
 
-"""
-A paginated list of ScheduledCampaign items.
-"""
+"""A paginated list of ScheduledCampaign items."""
 type ScheduledCampaignPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of ScheduledCampaign items.
-  """
+  """A list of ScheduledCampaign items."""
   data: [ScheduledCampaign!]!
 }
 
@@ -1700,38 +1361,24 @@ type SecurityGroups {
   name: String
 }
 
-"""
-Information about pagination using a simple paginator.
-"""
+"""Information about pagination using a simple paginator."""
 type SimplePaginatorInfo {
-  """
-  Number of items in the current page.
-  """
+  """Number of items in the current page."""
   count: Int!
 
-  """
-  Index of the current page.
-  """
+  """Index of the current page."""
   currentPage: Int!
 
-  """
-  Index of the first item in the current page.
-  """
+  """Index of the first item in the current page."""
   firstItem: Int
 
-  """
-  Index of the last item in the current page.
-  """
+  """Index of the last item in the current page."""
   lastItem: Int
 
-  """
-  Number of items per page.
-  """
+  """Number of items per page."""
   perPage: Int!
 
-  """
-  Are there more pages after this one?
-  """
+  """Are there more pages after this one?"""
   hasMorePages: Boolean!
 }
 
@@ -1755,18 +1402,12 @@ type SmsTemplateDetails {
   value: String
 }
 
-"""
-A paginated list of SmsTemplate items.
-"""
+"""A paginated list of SmsTemplate items."""
 type SmsTemplatePaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of SmsTemplate items.
-  """
+  """A list of SmsTemplate items."""
   data: [SmsTemplate!]!
 }
 
@@ -1775,18 +1416,12 @@ input SortInput {
   direction: String = "asc"
 }
 
-"""
-Directions for ordering a list of records.
-"""
+"""Directions for ordering a list of records."""
 enum SortOrder {
-  """
-  Sort records in ascending order.
-  """
+  """Sort records in ascending order."""
   ASC
 
-  """
-  Sort records in descending order.
-  """
+  """Sort records in descending order."""
   DESC
 }
 
@@ -1819,18 +1454,12 @@ type Team {
   locations: [Location]
 }
 
-"""
-A paginated list of Team items.
-"""
+"""A paginated list of Team items."""
 type TeamPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of Team items.
-  """
+  """A list of Team items."""
   data: [Team!]!
 }
 
@@ -1847,19 +1476,13 @@ type Thumbnail {
 Specify if you want to include or exclude trashed results from a query.
 """
 enum Trashed {
-  """
-  Only return trashed results.
-  """
+  """Only return trashed results."""
   ONLY
 
-  """
-  Return both trashed and non-trashed results.
-  """
+  """Return both trashed and non-trashed results."""
   WITH
 
-  """
-  Only return non-trashed results.
-  """
+  """Only return non-trashed results."""
   WITHOUT
 }
 
@@ -1982,9 +1605,7 @@ input UpdateSmsTemplateInput {
   details: [CreateSmsTemplateDetailsInput]
 }
 
-"""
-Account of a person who utilizes this application.
-"""
+"""Account of a person who utilizes this application."""
 type User {
   id: ID!
   name: String!
@@ -2009,7 +1630,6 @@ type User {
   city: String
   state: String
   homeLocation: Location
-  location: Location
   teams: [Team]
   contact_preference: String
   emergency_contact: EmergencyContact
@@ -2052,18 +1672,12 @@ input UserInput {
   positions: [ID]
 }
 
-"""
-A paginated list of User items.
-"""
+"""A paginated list of User items."""
 type UserPaginator {
-  """
-  Pagination information about the list of items.
-  """
+  """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
 
-  """
-  A list of User items.
-  """
+  """A list of User items."""
   data: [User!]!
 }
 
@@ -2072,26 +1686,4 @@ type Widget {
   value: String
   type: String
   icon: String
-}
-
-"""
-Account user's notification.
-"""
-type Notification {
-  id: ID!
-  user_id: ID!
-  state: String!
-  text: String
-  entity_type: String
-  entity_id: String
-  entity: String
-  misc: String
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
-}
-
-type NotificationPaginator {
-  paginatorInfo: PaginatorInfo!
-  data: [Notification!]!
 }

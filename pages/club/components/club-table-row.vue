@@ -1,8 +1,8 @@
 <template>
     <tr class="club-table-row">
-        <td><div class="text-lg font-bold">Club #1234</div></td>
-        <td><div class="w-36 px-4">1234 Street St. City, ST 56789</div></td>
-        <td><div class="px-3">(123) 456-7890</div></td>
+        <td><div class="text-lg font-bold">{{data.name}}</div></td>
+        <td><div class="w-36 px-4">{{data.city}}, {{data.address1}}, {{data.state}} {{data.zip}}</div></td>
+        <td><div class="px-3">{{data.phone}}</div></td>
         <td><div class="px-3">emailaddress@email.com</div></td>
         <td>
             <div class="px-8">
@@ -28,6 +28,34 @@
             @apply border-none;
         }
     }
+    @apply bg-base-100 h-14;
+    
+    td {
+        @apply border-y-2 border-secondary px-3;
+    }
+    /* td:first-child {
+        @apply border-l-2 rounded-l text-accent-focus;
+    } */
+    td:last-child {
+        @apply border-r-2 rounded-r capitalize;
+    }
+    .membership-btn {
+        @apply flex items-center justify-center rounded text-sm cursor-pointer h-full px-2 py-1;
+    }
+    .type-warning {
+        @apply bg-orange-400;
+    }
+    .type-secondary {
+        @apply bg-secondary;
+    }
+}
+</style>
+<style>
+.club-search-tbl-content thead{
+    @apply top-0 sticky bg-neutral h-10;
+}
+.club-search-tbl-content th{
+    @apply font-normal;
 }
 </style>
 <script setup>
