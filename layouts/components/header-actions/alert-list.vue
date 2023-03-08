@@ -4,12 +4,8 @@
 			Alerts
 		</div>
 		<div class="alet-list-body">
-			<div
-				v-for="item in data"
-				:key="item.key"
-				class="alert-list-item"
-			>
-				<div>{{item.label}}</div>
+			<div v-for="(item, i) in list" :key="i" class="alert-list-item">
+				<div>{{ item.text }}</div>
 				<Button error size="sm">View</Button>
 			</div>
 		</div>		
@@ -33,11 +29,10 @@
 }
 </style>
 <script setup>
-const data = [{
-	label: "Member Name",
-	key: "mem_name"
-}, {
-	label: "Calendar Alert",
-	key: "calendar"
-}]
+defineProps({
+  list: {
+    type: Array,
+    required: true,
+  }
+});
 </script>
