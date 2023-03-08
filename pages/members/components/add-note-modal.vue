@@ -54,7 +54,6 @@
             </div>
 
             <div class="content px-4">
-                <!-- <NoteForm  @saveNote="$emit('saveNote')"   @deleteNote="$emit('deleteNote')"/> -->
                 <NoteForm  @saveNote="addRandomMembersNote"   @deleteNote="$emit('deleteNote')"/>
             </div>
 

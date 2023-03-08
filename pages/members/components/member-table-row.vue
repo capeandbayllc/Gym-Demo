@@ -28,54 +28,45 @@
         <div
           class="dropdown-content menu p-2 shadow bg-black rounded w-52 items-start"
         >
-          <div
-            class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary"
-            tabindex="-1"
-          >
-            Preview
+          <div class="dropdown-item" tabindex="-1">Preview</div>
+          <div class="dropdown-item" tabindex="-1">Edit</div>
+          <div class="dropdown-item" tabindex="-1">Trash</div>
+          <div class="" tabindex="-1">
+            <div class="dropdown dropdown-left dropdown-end dropdown-hover contact-menu">
+              <div class="dropdown-item" tabindex="0" @click.prevent.stop>
+                Contact Member
+              </div>
+              <div class="dropdown-content menu p-2 shadow bg-black rounded w-40 items-start hidden">
+                <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'text'">Text</Button>
+                <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'email'">Email</Button>
+                <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'call'">Call</Button>
+              </div>
+            </div>
           </div>
           <div
-            class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary"
-            tabindex="-1"
-          >
-            Edit
-          </div>
-          <div
-            class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary"
-            tabindex="-1"
-          >
-            Trash
-          </div>
-          <div
-            class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary"
-            tabindex="-1"
-          >
-            Contact Lead
-          </div>
-          <div
-            class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary"
-            tabindex="-1" @click.stop="openNoteModal"
-          >
+              class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary"
+              tabindex="-1" @click.stop="openNoteModal"
+            >
             Add a Note
           </div>
+        </div>
+      </div>
 
-          <!-- <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1" @click.stop="openNoteModal">Add a Note</div> -->
-          <!-- <Button outline size="sm" class="my-1 border-primary">Preview</Button>
-                    <Button outline size="sm" class="my-1 border-primary">Edit</Button>
-                    <Button outline size="sm" class="my-1 border-primary">Trash</Button>
-                    <Button outline size="sm" class="my-1 border-primary">Contact Lead</Button>
-                    <Button outline size="sm" class="my-1 border-primary">Add a Note</Button> -->
+      <daisy-modal ref="addNoteModalRef">
+        <addNoteModel @saveNote="saveNote" @deleteNote="deleteNote"></addNoteModel>
+      </daisy-modal>
 
-
-                    <daisy-modal ref="addNoteModalRef">
-                        <addNoteModel @saveNote="saveNote" @deleteNote="deleteNote"></addNoteModel>
-                    </daisy-modal>
-                </div>
-            </div> 
-        </td>
-    </tr>
+      <Options :show="contactOption" @on:close="contactOption = null" />
+    </td>
+  </tr>
 </template>
 <style scoped>
+.dropdown-item {
+  @apply hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary
+}
+.contact-menu:hover .dropdown-content {
+  display: inline-grid !important;
+}
 .people-member-tbl-row {
   @apply bg-base-100 h-14;
 
@@ -103,16 +94,19 @@
 }
 </style>
 <script setup>
+import MembershipBtn from "~~/components/buttons/membership-btn.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import Options from "~/pages/components/contact/Options.vue";
 import addNoteModel from './add-note-modal.vue';
 
 library.add(faEllipsisH);
 const props = defineProps({
   data: Object,
 });
+const contactOption = ref(null);
 
 const addNoteModalRef = ref(null);
 

@@ -4,7 +4,7 @@
       <AddIcon
         class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold cursor-pointer"
       />
-      <p class="text-xs mt-1">Update Lead</p>
+      <p class="text-xs mt-1">Update Member</p>
     </div>
     <div class="page-members-center-container">
       <div class="custom-page-content-header">
@@ -24,6 +24,11 @@
       <div class="-md:px-4 custom-page-content flex-col">
         <div class="flex flex-row justify-between space-x-4 mb-4">
           <div class="flex gap-4">
+<!--            <select-box-search-input-->
+<!--                :secondary="false"-->
+<!--                :placeholder="Filter"-->
+<!--                size="xs"-->
+<!--            ></select-box-search-input>-->
             <select-box
               :items="filterBy"
               value=""
@@ -35,6 +40,7 @@
           </div>
         </div>
         <div>
+<!--          {{ result }}-->
           <data-table
             :columns="columns"
             :data="result?.members?.data"
@@ -78,7 +84,7 @@ import { useQuery } from "@vue/apollo-composable";
 
 const query = gql`
   query AllMembers {
-    members(first: 100) {
+    members(first: 10) {
       data {
         id
         first_name
