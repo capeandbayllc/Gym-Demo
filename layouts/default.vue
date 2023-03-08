@@ -128,7 +128,6 @@ function getNotifications(user) {
 
   request(notification.query.browse, { user_id: user.value.id }).then(({data}) => {
     user.value.notifications = data.data.notifications.data;
-    console.log(1111);
   });
 }
 </script>
