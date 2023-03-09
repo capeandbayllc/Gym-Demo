@@ -12,6 +12,8 @@ import { parse } from "graphql/language";
 import registerResolver from "~/api/queries/utils/resolver";
 import createAdminAndKioskUser from "~/api/data/users/UserFactory";
 import { MembersNoteFactory } from "../api/data/membersNote/MembersNoteFactory";
+import {NotificationFactory} from "~/api/data/notifications/NotificationFactory";
+import {getRandomInt} from "~/api/utils/number";
 // Mirage GraphQL README:
 // https://github.com/miragejs/graphql
 
@@ -30,11 +32,13 @@ const server = createServer({
   },
   factories: {
     membersNote: MembersNoteFactory,
+    notification: NotificationFactory,
   },
   seeds(server) {
     createAdminAndKioskUser(server);
     server.loadFixtures(); //loads our json data
     server.createList("membersNote", 10);
+    server.db.users.forEach(u => server.createList("notification", getRandomInt(10), { user_id: u.id }));
   },
 });
 
