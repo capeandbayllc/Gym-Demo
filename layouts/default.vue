@@ -71,6 +71,9 @@ import ProfileMenu from "./components/profile-menu/index.vue";
 
 import ChatConversation from "./components/chat-conversation/index.vue";
 import { KIOSK_ROUTE, LOGIN_ROUTE } from "~/middleware/auth.global";
+import {useQuery} from "@vue/apollo-composable";
+import notification from "~/api/queries/notification";
+import {request} from "~/api/utils/request";
 
 const showCircularMenu = ref(false);
 
@@ -109,7 +112,7 @@ watchEffect(() => {
 
 const showHeader = ref(false);
 const route = useRoute();
-const authCookie = useCookie("token", { watch: true });
+getNotifications(useState('auth'));
 
 watchEffect(() => {
     if ([LOGIN_ROUTE, KIOSK_ROUTE].includes(route.path)) {
@@ -119,4 +122,12 @@ watchEffect(() => {
 
     showHeader.value = true;
 });
+
+function getNotifications(user) {
+  if (!user.value) return;
+
+  request(notification.query.browse, { user_id: user.value.id }).then(({data}) => {
+    user.value.notifications = data.data.notifications.data;
+  });
+}
 </script>

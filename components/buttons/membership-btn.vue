@@ -6,44 +6,34 @@
         <span class="membership-status">
             {{membership}}
         </span>
-        <span class="edit-icon"><edit-icon class="mb-2" /></span>
+        <span class="edit-icon hidden"><edit-icon class="mb-2" /></span>
     </button>
 </template>
 <style scoped>
     .membership-btn {
-        @apply flex items-center justify-center rounded-full font-semibold cursor-pointer capitalize h-full px-3 text-sm relative w-full;
-        
+        @apply flex items-center justify-center capitalize btn btn-sm w-full;
+
         .edit-icon {
-            @apply absolute h-5 w-5 invisible;
+            @apply absolute h-5 w-5;
             svg {
                 @apply h-full w-full;
             }
         }
-        
-    }
-    .membership-btn.edit-hover-icon:hover {
-        .membership-status {
-            font-size:0;
-        }
-        @apply px-4;
-        .edit-icon{
-            @apply visible;
-        }
     }
     .type-p {
-        @apply bg-accent;
+        @apply bg-warning;
     }
     .type-bronze {
-        @apply bg-gradient-to-b from-amber-600;
+        @apply bg-amber-600 text-white hover:bg-amber-600 border-amber-600;
     }
     .type-silver {
-        @apply bg-gradient-to-b from-slate-100;
+        @apply bg-slate-200 text-zinc-800 hover:bg-slate-200 border-slate-200;
     }
     .type-gold {
-        @apply bg-gradient-to-b from-amber-200 to-amber-700;
+        @apply bg-amber-200 text-amber-900 hover:bg-amber-200 border-amber-200;
     }
     .type-platinum {
-        @apply bg-amber-400;
+        @apply text-white bg-amber-500 hover:bg-amber-500 border-amber-500;
     }
 </style>
 <script setup>

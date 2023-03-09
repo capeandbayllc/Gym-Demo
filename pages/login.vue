@@ -149,8 +149,9 @@
 
 <script setup>
 import {request} from "~/api/utils/request";
-import queries from "~/api/queries/user";
+import user from "~/api/queries/user";
 import {KIOSK_EMAIL} from "~/api/data/users/UserFactory";
+import {useLazyQuery, useQuery} from "@vue/apollo-composable";
 
 const username = ref();
 const password = ref();
@@ -179,14 +180,15 @@ const handleClickLogin = async () => {
 };
 
 const authenticate = async (username, password) => {
-  const result = await request(queries.user.findByMail, { email: username });
+  const result = await request(user.query.findByMail, { email: username });
   // Password: "Hello123!"
   if (! result.data.data.user || (btoa(password) !== "SGVsbG8xMjMh")) {
     return null;
   }
 
   return Object.assign(result.data.data.user, {
-    isKioskUser: result.data.data.user.email === KIOSK_EMAIL
+    isKioskUser: result.data.data.user.email === KIOSK_EMAIL,
+    notifications: [],
   });
 };
 </script>
