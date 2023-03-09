@@ -24,7 +24,7 @@
 </template>
 <style scoped>
 .side-bar {
-    @apply absolute right-0 z-20 h-full transition-all duration-200 ease-linear;
+    @apply relative right-0 z-20 h-full transition-all duration-200 ease-linear;
     
     /* height: calc(100vh - 6rem); */
     &.collapsed {
