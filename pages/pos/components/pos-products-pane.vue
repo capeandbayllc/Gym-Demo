@@ -17,7 +17,7 @@
             </select-box>
         </div>
         <div
-            class="pos-product-items-pane"
+            class="w-full flex flex-col gap-1 scrollbar-hide z-30 pos-style-transition"
             :class="{
                 'h-[60vh]': showProducts,
                 'h-[0vh]': !showProducts,
@@ -25,6 +25,10 @@
         >
             <span
                 class="ml-auto text-[0.7rem] hover:text-secondary cursor-pointer pos-style-transition mr-1"
+                :class="{
+                    'text-[0.7rem]': showProducts,
+                    'text-[0rem]': !showProducts,
+                }"
                 @click="collapseProductItemsPane()"
             >
                 Collapse
