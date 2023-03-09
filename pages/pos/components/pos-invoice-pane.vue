@@ -26,17 +26,57 @@
                 <div
                     class="bg-[#0074C8]/[0.7] w-[90%] py-2 px-4 ml-auto rounded-md text-[2rem] text-right"
                 >
-                    $2.00
+                    ${{ calculateCartTotal().toFixed(2) }}
                 </div>
             </div>
         </div>
         <div class="pos-invoice-items-table">
             <div class="flex flex-row justify-between border-b-[1px] px-6 py-2">
                 <span class="w-[30%]">Item</span>
-                <span class="w-[20%]">Quantity</span>
-                <span class="w-[15%]">Taxable</span>
-                <span class="w-[15%]">Price</span>
-                <span class="w-[20%]">Total</span>
+                <span class="w-[20%] text-center">Quantity</span>
+                <span class="w-[15%] text-center">Taxable</span>
+                <span class="w-[15%] text-center">Price</span>
+                <span class="w-[15%]">Total</span>
+                <span class="w-[5%]"></span>
+            </div>
+            <div class="flex flex-col h-[30vh] overflow-scroll scrollbar-hide">
+                <div
+                    class="flex flex-row justify-between px-6 py-[2px] text-[0.8rem]"
+                    v-for="item in cart"
+                >
+                    <span class="w-[30%]">
+                        {{ item.name }}
+                    </span>
+                    <span class="w-[20%] flex flex-row gap-3 justify-center">
+                        <span class="my-auto">{{ item.quantity }}</span>
+                        <div class="flex flex-row gap-1">
+                            <PlusIcon
+                                class="pos-ivoice-items-quantity-button"
+                                @click="incrementProductQuantity(item)"
+                            />
+                            <MinusIcon
+                                class="pos-ivoice-items-quantity-button"
+                                @click="decrementProductQuantity(item)"
+                            />
+                        </div>
+                    </span>
+                    <span class="w-[15%] text-center">
+                        {{ item.tax }}
+                    </span>
+                    <span class="w-[15%] text-center">
+                        {{ item.price }}
+                    </span>
+                    <span class="w-[15%]">
+                        {{
+                            (
+                                (parseFloat(item.price) +
+                                    parseFloat(item.tax)) *
+                                item.quantity
+                            ).toFixed(2)
+                        }}
+                    </span>
+                    <span class="w-[5%]"></span>
+                </div>
             </div>
         </div>
         <div
@@ -44,27 +84,76 @@
         >
             <div class="flex flex-row justify-between w-full">
                 <span>Item Total</span>
-                <span>$1.50</span>
+                <span>${{ calculateCartItemTotal().toFixed(2) }}</span>
             </div>
             <div class="flex flex-row justify-between w-full">
                 <span>Sub Total</span>
-                <span>$1.50</span>
+                <span>${{ calculateCartItemTotal().toFixed(2) }}</span>
             </div>
             <div class="flex flex-row justify-between w-full">
                 <span>Sales Tax</span>
-                <span>$0.50</span>
+                <span>${{ calculateCartTaxTotal().toFixed(2) }}</span>
             </div>
             <hr class="my-1" />
             <div class="flex flex-row justify-between w-full text-[1rem]">
                 <span>Total</span>
-                <span>$2.00</span>
+                <span>${{ calculateCartTotal().toFixed(2) }}</span>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { PersonIcon } from "~~/components/icons";
+import { PersonIcon, PlusIcon, MinusIcon } from "~~/components/icons";
+
+const props = defineProps({
+    cart: {
+        type: Array,
+    },
+});
+
+const emit = defineEmits([
+    "increment-product-quantity",
+    "decrement-product-quantity",
+]);
+
+const calculateCartTotal = () => {
+    let sum = 0;
+
+    props.cart.forEach((item) => {
+        sum += (parseFloat(item.price) + parseFloat(item.tax)) * item.quantity;
+    });
+
+    return sum;
+};
+
+const calculateCartTaxTotal = () => {
+    let sum = 0;
+
+    props.cart.forEach((item) => {
+        sum += item.tax * item.quantity;
+    });
+
+    return sum;
+};
+
+const calculateCartItemTotal = () => {
+    let sum = 0;
+
+    props.cart.forEach((item) => {
+        sum += item.price * item.quantity;
+    });
+
+    return sum;
+};
+
+const incrementProductQuantity = (item) => {
+    emit("increment-product-quantity", item);
+};
+
+const decrementProductQuantity = (item) => {
+    emit("decrement-product-quantity", item);
+};
 </script>
 
 <style scoped>
@@ -102,5 +191,18 @@ import { PersonIcon } from "~~/components/icons";
 
 .pos-invoice-items-table {
     @apply w-full rounded-md border-[1px] bg-[#191919] text-[0.8rem] flex flex-col gap-2 min-h-[30vh] font-light tracking-wide;
+}
+
+.pos-ivoice-items-quantity-button {
+    @apply fill-white w-[1rem] h-[1rem] rounded-full border-[1px] my-auto p-[1.5px] hover:fill-secondary hover:border-secondary pos-style-transition cursor-pointer;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 </style>

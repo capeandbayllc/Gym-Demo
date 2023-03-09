@@ -30,7 +30,11 @@
                 Collapse
             </span>
             <div class="bg-[#191919] h-full">
-                <PosProductItems :items="selectedSubcategory.items" />
+                <PosProductItems
+                    :items="selectedSubcategory.items"
+                    :cart="cart"
+                    @add-product-item-to-cart="addProductToCart"
+                />
             </div>
         </div>
         <div
@@ -64,6 +68,12 @@ import PosSubcategory from "./pos-subcategory.vue";
 import PosProductItems from "./pos-product-items.vue";
 import { inventoryCategories } from "../helpers/pos-items";
 
+const props = defineProps({
+    cart: {},
+});
+
+const emit = defineEmits(["add-product-item-to-cart"]);
+
 const showProducts = ref(false);
 const selectedSubcategory = ref({
     items: [],
@@ -72,6 +82,11 @@ const selectedSubcategory = ref({
 });
 
 const collapseProductItemsPane = () => {
+    selectedSubcategory.value = {
+        items: [],
+        categoryIndex: null,
+        subcategoryIndex: null,
+    };
     showProducts.value = false;
 };
 
@@ -84,6 +99,27 @@ const showProductItemsPane = (categoryIndex, subcategoryIndex) => {
         subcategoryIndex,
     };
     showProducts.value = true;
+};
+
+const addProductToCart = (itemIndex) => {
+    if (
+        selectedSubcategory.value.categoryIndex !== null &&
+        selectedSubcategory.value.subcategoryIndex !== null
+    ) {
+        const item =
+            inventoryCategories[selectedSubcategory.value.categoryIndex]
+                .subcategories[selectedSubcategory.value.subcategoryIndex]
+                .items[itemIndex];
+
+        if (
+            item.available > 0 &&
+            props.cart.find((product) => {
+                return product.id === item.id;
+            }) === undefined
+        ) {
+            emit("add-product-item-to-cart", item);
+        }
+    }
 };
 
 const categoriesFilter = [

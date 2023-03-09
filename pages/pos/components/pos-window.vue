@@ -3,8 +3,16 @@
         <div class="pos-window">
             <PosWindowHeader />
             <div class="flex flex-row gap-5 justify-between">
-                <PosProductsPane />
-                <PosInvoicePane />
+                <PosProductsPane
+                    :cart="cart"
+                    @add-product-item-to-cart="addProductToCart"
+                />
+                <PosInvoicePane
+                    :cart="cart"
+                    @remove-product-item-from-cart="removeProductFromCart"
+                    @increment-product-quantity="incrementProductQuantity"
+                    @decrement-product-quantity="decrementProductQuantity"
+                />
             </div>
         </div>
     </div>
@@ -14,6 +22,31 @@
 import PosWindowHeader from "./pos-window-header.vue";
 import PosProductsPane from "./pos-products-pane.vue";
 import PosInvoicePane from "./pos-invoice-pane.vue";
+
+const cart = ref([]);
+
+const addProductToCart = (item) => {
+    cart.value.push({
+        quantity: 1,
+        ...item,
+    });
+};
+
+const removeProductFromCart = (item) => {
+    cart.value.splice(cart.value.indexOf(item), 1);
+};
+
+const incrementProductQuantity = (item) => {
+    if (item.available > item.quantity) {
+        item.quantity += 1;
+    }
+};
+
+const decrementProductQuantity = (item) => {
+    item.quantity -= 1;
+
+    if (item.quantity <= 0) removeProductFromCart(item);
+};
 </script>
 
 <style scoped>

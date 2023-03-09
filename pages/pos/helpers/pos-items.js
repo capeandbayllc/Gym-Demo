@@ -36,10 +36,11 @@ const generatePosItems = (prepend, brands = [], category) => {
         for (let index = 0; index < numBrandItem; index++) {
             const price = (Math.random() * multiplier).toFixed(2);
             items.push({
+                id: `${prepend} - ${brand} ${index + 1}`,
                 name: `${prepend} - ${brand} ${index + 1}`,
                 price: price,
                 image: placeholderImage,
-                quantity: Math.floor(Math.random() * 10),
+                available: Math.floor(Math.random() * 10),
                 tax: (parseFloat(price) * taxRate / 100).toFixed(2),
                 category
             });

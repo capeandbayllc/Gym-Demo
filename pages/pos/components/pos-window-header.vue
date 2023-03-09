@@ -3,7 +3,7 @@
         <div class="flex flex-row gap-10">
             <h3 class="text-[1.8rem] font-light tracking-wider">Purchase</h3>
             <button class="pos-admin-button">
-                <PersonAdminIcon />
+                <PersonAdminIcon class="my-auto" />
                 <span class="my-auto">Admin</span>
             </button>
         </div>
