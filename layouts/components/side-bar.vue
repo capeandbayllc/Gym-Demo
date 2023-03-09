@@ -3,13 +3,13 @@
         class="side-bar"
         :class="{
             collapsed: collapsed,
-            expanded: !collapsed || windowWidth >= 1920,
+            expanded: !collapsed,
         }"
     >
         <div
             class="side-bar-toggler"
             @click="toggleCollapsed"
-            v-if="collapsed && windowWidth < 1920"
+            v-if="collapsed "
         >
             <div class="side-bar-arrow">
                 <arrow-icon
@@ -29,9 +29,6 @@
     /* height: calc(100vh - 6rem); */
     &.collapsed {
         @apply w-7 flex bg-secondary;
-        @screen 3xl {
-            @apply hover:w-80;
-        }
     }
     &.expanded {
         @apply w-80 border border-secondary bg-neutral;
