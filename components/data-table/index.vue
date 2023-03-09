@@ -8,6 +8,7 @@
                     v-for="item in data"
                     :key="item.id"
                     :is="rowComponent"
+                    @handle="eventHandle"
                     :data="item"
                 />
             </tbody>
@@ -34,4 +35,10 @@ const props = defineProps({
     },
     rowComponent: Object
 });
+
+const emit = defineEmits(['handle']);
+
+const eventHandle = (event)=>{
+    emit('handle', event)
+};
 </script>

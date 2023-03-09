@@ -3,7 +3,12 @@
         <td>{{data.name}}</td>
         <td>{{data.agreement_type}}</td>
         <td>{{data.schedule_type}}</td>
-        <td> <input type="checkbox" class="toggle toggle-info align-middle mr-2" v-model="status" :checked="data.status == 'Active'"/> <span class="align-middle">{{data.status}}</span></td>
+        <td>
+            <div class="relative">
+                <button class="absolute top-0 left-0 w-12 h-full opacity-0" @click="changeStatus('checkboxStatus'+data.id)"></button>
+                <input type="checkbox" class="toggle toggle-info align-middle mr-2" :id="'checkboxStatus'+data.id" :ref="'checkboxStatus'+data.id" v-model="status"/> <span class="align-middle">{{status?'Active':'Inactive'}}</span>
+            </div>
+        </td>
         <td>{{data.created_by}}</td>
         <td>{{data.availability}}</td>
         <td><AddAgreementIcon class="inline-block align-middle mr-2 cursor-pointer"/> <EditAgreementIcon class="inline-block align-middle cursor-pointer"/></td>
@@ -38,6 +43,16 @@ import { AddAgreementIcon, EditAgreementIcon } from "@/components/icons";
 const props = defineProps({
     data: Object
 });
+
+const emit = defineEmits(['handle']);
+
 const status =  ref(props.data.status=='Active');
 
+const changeStatus = (id)=>{
+    if(status.value == true){
+        emit('handle', id);
+    }else{
+        document.getElementById(id).click()
+    }
+};
 </script>

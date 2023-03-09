@@ -7,19 +7,23 @@
                     <NewAgreementIcon class="h-[50px] mb-2"/>
                     <span>Start a New Agreement</span>
                 </button>
+                <button class="flex flex-col items-center mr-[20px]">
+                    <CreatePreSaleIcon class="h-[50px] mb-2"/>
+                    <span>Create a Pre-Sale</span>
+                </button>
                 <button class="flex flex-col items-center">
-                    <AddIcon class="w-[150px] h-[50px] mb-2"/>
+                    <AddIcon class="w-[150px] h-[50px] mb-2" @click="openNewTemplateModal"/>
                     <span>Pick up Template</span>
                 </button>
             </div>
             <input type="text" placeholder="Search" class="input w-full bg-base-content text-black text-lg mb-6"  v-model="searchInput"/>
             <FilterActions class="mb-6"/>
             <simple-card title="Agreement Templates">
-                <agreement-search-table :columns="columns" :items="data" class="p-6"/>
+                <agreement-search-table @showConfirmStatusModal="showConfirmStatusModal" :columns="columns" :items="data" class="p-6"/>
             </simple-card>
         </div>
     </div>
-    <daisy-modal ref="statusChangedModal" id="statusChangedModal">
+    <daisy-modal ref="confirmStatusModal" id="confirmStatusModal">
         <simple-card class="p-4">
             <p class="font-semibold w-full text-center mb-4">Are you sure you want to make this inactive?</p>
             <div class="text-center">
@@ -30,38 +34,81 @@
     </daisy-modal>
     <daisy-modal ref="newAgreementModal" id="newAgreementModal">
         <simple-card class="p-4">
-            <component :is="newAgreementScreens[newAgreementScreenIndex]" @change-type="changeType"></component>
+            <component :is="newAgreementScreens[newAgreementScreenIndex]" @change-type="changeType" @next="nextScreenAgreementModal"></component>
             <div class="flex justify-end mt-6 mb-2">
-                <Button size="sm" class="normal-case mx-2" ghost @click="prevScreen" v-if="newAgreementScreenIndex > 0">Back</Button>
+                <Button size="sm" class="normal-case mx-2" ghost @click="prevScreenAgreementModal" v-if="newAgreementScreenIndex > 0">Back</Button>
                 <Button size="sm" class="normal-case mx-2 ml-auto" ghost @click="closeNewAgreementModal">Cancel</Button>
-                <Button v-if="showButtons" size="sm" class="normal-case mx-2" secondary>Save as a Draft</Button>
-                <Button v-if="showButtons" size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue ></Button>
+                <Button v-if="showButtonsAgreement" size="sm" class="normal-case mx-2" secondary>Save as a Draft</Button>
+                <Button v-if="showButtonsAgreement" size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreenAgreementModal">Continue</Button>
+            </div>
+        </simple-card>
+    </daisy-modal>
+    <daisy-modal ref="newTemplateModal" id="newTemplateModal">
+        <simple-card class="p-4">
+            <component :open="newTemplateIsOpen" :is="newTemplateScreens[newTempalteScreenIndex]" @change-type="changeType" @next="nextScreenTemplateModal" ref="newTemplateComponent"></component>
+            <div class="flex justify-end mt-6 mb-2">
+                <Button size="sm" class="normal-case mx-2" ghost @click="prevScreenTemplateModal" v-if="newTempalteScreenIndex > 1">Back</Button>
+                <Button size="sm" class="normal-case mx-2 ml-auto" ghost @click="closeNewTemplateModal">Cancel</Button>
+                <Button size="sm" class="normal-case mx-2" secondary>Save as a Draft</Button>
+                <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreenTemplateModal">Continue</Button>
             </div>
         </simple-card>
     </daisy-modal>
 </template>
 
 <script setup>
-import { NewAgreementIcon, AddIcon } from "@/components/icons";
+import { NewAgreementIcon, AddIcon, CreatePreSaleIcon } from "@/components/icons";
 import FilterActions from './components/filter-actions.vue';
 import AgreementSearchTable from './components/agreement-search-table.vue';
 import AgreementModal from './components/agreement-modal.vue';
 import AgreementTemplate from './components/agreement-template.vue';
+import AgreementPickTemplate from './components/agreement-pick-template.vue';
 import PaymentSchedule from './components/payment-schedule.vue';
+import PosPaymentAmounts from './components/paos-payment-amounts.vue';
 
 const searchInput =  ref("");
-const showButtons = ref(false)
+const showButtonsAgreement = ref(false);
+const actualCheckboxConfirmId = ref(null);
+
+
+
+
+const newTemplateComponent = ref(null);
+const newTemplateScreens = ref([AgreementPickTemplate, AgreementTemplate, PaymentSchedule, PosPaymentAmounts]);
+const newTempalteScreenIndex = ref(0);
+const newTemplateModal = ref(null);
 
 const newAgreementScreens = ref([AgreementModal, AgreementTemplate, PaymentSchedule]);
 const newAgreementScreenIndex = ref(0);
-const nextScreen = ()=>{
+const newAgreementModal = ref(null);
+
+const showConfirmStatusModal = (event)=>{
+    actualCheckboxConfirmId.value = event;
+    confirmStatusModal.value.open()
+};
+
+const nextScreenAgreementModal = ()=>{
     newAgreementScreenIndex.value = newAgreementScreenIndex.value < (newAgreementScreens.value.length - 1) ? newAgreementScreenIndex.value + 1 : newAgreementScreenIndex.value;
     console.log("newAgreementScreenIndex",newAgreementScreenIndex.value)
 }
-const prevScreen = ()=>{
+
+const prevScreenAgreementModal = ()=>{
     newAgreementScreenIndex.value = newAgreementScreenIndex.value > 0 ? newAgreementScreenIndex.value - 1 : newAgreementScreenIndex.value
 }
-const newAgreementModal = ref(null);
+
+const nextScreenTemplateModal = ()=>{
+    newTemplateModal.value.open()
+    newTempalteScreenIndex.value = newTempalteScreenIndex.value < (newTemplateScreens.value.length - 1) ? newTempalteScreenIndex.value + 1 : newTempalteScreenIndex.value;
+    console.log("newTempalteScreenIndex",newTempalteScreenIndex.value)
+}
+
+const prevScreenTemplateModal = ()=>{
+    newTempalteScreenIndex.value = newTempalteScreenIndex.value > 0 ? newTempalteScreenIndex.value - 1 : newTempalteScreenIndex.value
+}
+
+
+
+
 
 const columns = [
     {
@@ -171,17 +218,26 @@ const data = [
     }
 ];
 
-const statusChangedModal = ref(null);
+const confirmStatusModal = ref(null);
 
 const cancel =()=>{
-    statusChangedModal.value.close()
+    confirmStatusModal.value.close()
 }
 const confirm =()=>{
-    statusChangedModal.value.close()
+    document.getElementById(actualCheckboxConfirmId.value).click()
+    confirmStatusModal.value.close()
 }
 
 const openNewAgreementModal =()=>{
     newAgreementModal.value.open()
+}
+
+const openNewTemplateModal = () =>{
+    if(newTempalteScreenIndex.value == 0){
+        newTemplateComponent.value.open()
+    }else{
+        newTemplateModal.value.open()
+    }
 }
 
 const closeNewAgreementModal =()=>{
@@ -189,15 +245,20 @@ const closeNewAgreementModal =()=>{
     newAgreementModal.value.close()
 }
 
+const closeNewTemplateModal =()=>{
+    newTempalteScreenIndex.value = 0;
+    newTemplateModal.value.close()
+}
+
 const changeType = (type)=>{
-    showButtons.value =  type ? true : false;
+    showButtonsAgreement.value =  type ? true : false;
 }
 
 </script>
 
 <style scoped>
 .agreement-container {
-    @apply py-4 pr-5 w-full h-fit;
+    @apply py-4 pr-5 px-7 w-full h-fit;
     .page-title {
         @apply text-lg font-light pb-3 pl-5;
     }

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex gap-3 justify-end mb-2 -lg:flex -lg:text-xs">
+    <div class="flex flex-wrap gap-2 md:gap-5">
         <select-box
             :items="nameList"
             value=""
