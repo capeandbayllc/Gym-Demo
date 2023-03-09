@@ -1,10 +1,10 @@
 <template>
-    <div class="chat-conversation-container " v-if="chatOpen==false" >
+    <div class="chat-conversation-container" v-if="chatOpen==false" >
         <div class="chat-content border-2 gradient-bg bg-white m-1 p-4 z-22 rounded-md">
             <div class=" left-side-chat-container border-black-700  h-10 rounded-md">
                 <div class="justify-center bg-transparent">
                     <chat-search-input
-                    transparent size="lg"
+                    transparent size="xs"
                     border="1px solid #fff"
                     />
                 </div>
@@ -13,24 +13,22 @@
                         <div class=" pl-4 inline-block py-2 justify-start">
                             <img src="/account.png" class="w-16 h-16"/>
                         </div>
-                        <div class="inline-block place-self-center pl-2 ml-2 p-y">
-                            <div class="text-xl -lg:text-lg font-semibold pt-2">Kevin Buchanam</div>
+                        <div class="inline-block place-self-center pl-8 ml-2 ">
+                            <div class="text-xl -lg:text-lg font-semibold ">Kevin Buchanam</div>
                             <div class="text-sm text-accent-focus/80">Online</div>
                             <i class="fa-solid fa-check-square"></i>
                         </div>
                     </div>
                     <div class=" justify-start bg-black rounded-md grid flex mt-4 ">
-                        <div class=" pl-4 inline-block py-2 justify-start">
+                        <div class=" pl-4 inline-block pt-2 justify-start">
                             <div class="text-xl -lg:text-lg font-semibold pt-2">
                                 Chat Channels
                             </div>
                             <div class="flex">
-                                <div class="relative cursor-pointer mx-2" v-for="(item, index) in chatItems" :key="index" >
+                                <div class="relative cursor-pointer pl-2" v-for="(item, index) in chatItems" :key="index" >
                                     <div  class="p-2 inline">
                                         <div class="chat-icons m-1">
-                                            <font-awesome-icon class="w-6 h-6 -lg:w-10 -lg:h-10 m-auto border rounded-full p-2 " :icon="item.icon" />
-                                            <!-- <font-awesome-icon class="w-6 h-6 -lg:w-10 -lg:h-10 m-auto border rounded-full p-2 " :icon="['far', 'fa-window-maximize']" /> -->
-                                            <!-- <img class="w-12 h-12 -lg:w-10 -lg:h-10 m-auto border rounded-full p-2 " :src="item.image" alt="" @click="toggleChatOpen"/> -->
+                                            <font-awesome-icon class="w-4 h-4 -lg:w-4 -lg:h-4 m-auto border rounded-full p-3 " :icon="item.icon" />
                                         </div>
                                         <div class="text-min -xs:text-xs pt-1 pr-2">
                                             {{item.name}}
@@ -40,15 +38,15 @@
                             </div>
                         </div>
                         <div class=" pl-4 inline-block pb-2 justify-start">
-                            <div class="text-xl -lg:text-lg font-semibold pt-2">
+                            <div class="text-xl -lg:text-lg font-semibold">
                                 Favorites
                             </div>
                             <div class="flex">
-                                <div class="relative cursor-pointer mx-2" v-for="(item, index) in onlineMembers" :key="index" >
+                                <div class="relative cursor-pointer ml-1" v-for="(item, index) in onlineMembers" :key="index" >
                                     <div class="inline">
-                                        <div class="p-2 relative">
+                                        <div class="p-2 m-1 relative">
                                             <img v-if="index!=3" class="w-12 h-12 -lg:w-10 -lg:h-10 m-auto" :src="item.profile" alt="" @click="toggleChatOpen"/>
-                                            <img v-else class="w-12 h-12 -lg:w-10 -lg:h-10 m-auto border rounded-full p-2 m-auto" src="/chat-conversation/plus.png" alt="" @click="toggleChatOpen"/>
+                                            <font-awesome-icon v-else class="w-4 h-4 -lg:w-4 -lg:h-4 m-auto border rounded-full p-3 " :icon="['fas', 'fa-plus-circle']" />
                                             <div v-if="index==1" class="rounded-full w-3 h-3 bg-red-700 absolute  right-3 bottom-2"></div>
                                             <div v-else-if="index==3" class=""></div>
                                             <div v-else class="rounded-full w-3 h-3 bg-accent-focus/80 absolute right-3 bottom-2"></div>
@@ -72,15 +70,23 @@
                             </div>
                             
                             <div class="grid p-2">
-                                <div class="text-xs -xs:text-xs text-black font-semibold inline">
+                                <div class="flex">
+                                    <div class="text-sm -xs:text-xs text-black font-semibold inline">
                                             {{chat.name}}
+                                    </div>
+                                    <div v-if="index==1" class="text-extra-small text-white bg-blue-500 rounded-full ml-1 font-semibold">
+                                        +2
+                                    </div>
                                 </div>
-                                <div class="flex ">
-                                    <div class="text-xs -xs:text-xs text-black inline">
+                                <div class="flex text-end w-64 ">
+                                    <div class="text-xs -xs:text-xs items-start text-start text-black justify-start  inline w-2/3 ">
                                             {{ chat.message }}
                                     </div>
-                                    <div class="text-xs -xs:text-xs items-end flex text-black justify-end">
-                                        yesterday
+                                    <div v-if="index==3||index==4" class="text-xs -xs:text-xs text-end items-end text-black justify-end w-1/3">
+                                       yesterday
+                                    </div>
+                                    <div v-else class="text-xs -xs:text-xs text-end items-end text-black justify-end w-1/3">
+                                        {{new Date().toJSON().slice(12,16).replace(/-/g,'/')}} pm
                                     </div>
                                 </div>
                             </div>
@@ -93,25 +99,53 @@
 
     <div class="chat-conversation-container " v-if="chatOpen==true" >
         <div class="chat-message-block flex">
-            <div class="grid w-1/16 bg-black relative border-white-800 rounded-lg border rounded-t-full rounded-b-full">
-                <div class="grid py-2">
+            <!-- <div class="grid w-1/16 bg-black relative border-white-800 rounded-lg border rounded-t-full rounded-b-full">
+                <font-awesome-icon  class="w-4 h-4 -lg:w-4 -lg:h-4 mx-auto mt-3 border rounded-full p-3 " :icon="['fas', 'fa-plus-circle']" />
+                <div class="grid py-2 max-h-80 overflow-y-scroll overflow-x-visible no-scrollbar ">
                     <div class="m-auto px-2" v-for="(item, index) in onlineMembers" :key="index" >
-                        <img v-if="index==0" class="w-12 h-12 border-2 rounded-full p-2 -lg:w-10 -lg:h-10" src="/chat-conversation/plus.png" alt="" @click="toggleChatOpen"/>
-                        <img v-else-if="index!==2" class="w-12 h-12 -lg:w-10 -lg:h-10 opacity-40" :src="item.profile" alt="" @click="toggleChatOpen"/>
+                        <img v-if="index!==2" class="w-12 h-12 -lg:w-10 -lg:h-10 opacity-40" :src="item.profile" alt="" @click="toggleChatOpen"/>
                         <div  v-else class="inline relative" >
-                            <div class="chat-pill absolute text-sm whitespace-nowrap bg-blue-700 rounded-l-full px-2">
+                            <div class="chat-pill absolute text-sm whitespace-nowrap bg-blue-700 rounded-l-full pl-2 py-1 pr-3">
                                {{item.name}}
                             </div>
                             <img class="sticky w-12 h-12 -lg:w-10 -lg:h-10 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
-                            
                         </div>
                     </div>
                     <hr class="mx-2 mt-2">
                     <div class="m-auto px-2" v-for="(item, index) in messages" :key="index" >
-                        <img v-if="index<4" class="w-12 h-12 -lg:w-10 -lg:h-10 opacity-40" :src="item.avatar" alt="" @click="toggleChatOpen"/>
+                        <img v-if="index<4 && index!==1" class="w-12 h-12 -lg:w-10 -lg:h-10 opacity-40" :src="item.avatar" alt="" @click="toggleChatOpen"/>
+                        <div v-else-if="index==1 && index<4" class="flex">
+                            <img class="w-12 h-12 -lg:w-10 -lg:h-10 border-2 rounded-full" :src="item.avatar" alt="" @click="toggleChatOpen"/>
+                            <div  class="text-extra-small text-white bg-blue-500 rounded-full absolute right-0 font-semibold z-1">
+                                +2
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class=" border-2 rounded-full pr-2 pl-1">
+                <div class="">
+                    <font-awesome-icon  class="w-4 h-4 -lg:w-4 -lg:h-4 mx-auto mt-3 border rounded-full p-3 " :icon="['fas', 'fa-plus-circle']" />
+                </div>
+                <div class="relative max-h-80  overflow-y-scroll overflow-x-visible no-scrollbar" >
+                    <div class="object-center" v-for="(item, index) in onlineMembers" :key="index">
+                        <img v-if="index!=2" class="sticky w-12 h-12 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
+                        <div  v-else class="" >
+                            <div class="chat-pill absolute text-sm whitespace-nowrap bg-blue-700 rounded-l-full pl-2 object-center pr-3">
+                               {{item.name}}
+                            </div>
+                            <img class="w-12 h-12 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
+                        </div>
+                    </div>
+                    <div class="object-center" v-for="(item, index) in onlineMembers" :key="index">
+                        <img class="w-12 h-12 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
+                    </div>
+                    <div class="object-center" v-for="(item, index) in onlineMembers" :key="index">
+                        <img class="w-12 h-12 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
                     </div>
                 </div>
             </div>
+
             <div class="inline ml-2 gradient-bg border rounded-lg">
                 <div class="flex bg-black m-2">
                     <div class="relative p-1">
@@ -121,16 +155,16 @@
                         <div class="text-xl -lg:text-sm font-semibold pt-2 text-ellipsis">Mona Parksdale, Geor…</div>
                         <div class="text-accent-focus/80 text-xs">Online Now</div>
                     </div>
-                    <div class="align-middle ml-auto justify-end mt-3 p-1">
-                        <div class="flex justify-between gap-8 -lg:gap-4 ">
-                            <img src="/chat-conversation/call.svg"  class="-lg:w-4 -lg:h-4"/>
-                                <img src="/chat-conversation/video.svg" class="-lg:w-4 -lg:h-4"  @click="toggleDropdown"  />
-                            <img src="/chat-conversation/menu.svg" class="-lg:w-4 -lg:h-4" @click="toggleDropdown" />
+                    <div class="align-middle ml-auto justify-end mt-3 pt-4 px-2">
+                        <div class="flex justify-between gap-4 -lg:gap-4 ">
+                            <img src="/chat-conversation/call.svg"  class="w-4 h-4 -lg:w-4 -lg:h-4"/>
+                                <img src="/chat-conversation/video.svg" class="w-4 h-4 -lg:w-4 -lg:h-4"  @click="toggleDropdown"  />
+                            <img src="/chat-conversation/menu.svg" class="w-4 h-4 -lg:w-4 -lg:h-4" @click="toggleDropdown" />
                         </div>
                     </div>
                     <DropdownCard v-if="showDropDown" @closeDropdown="toggleDropdown"/>
                 </div>
-                <div class="message-body px-10 py-4 -lg:px-2 -lg:py-2 -lg:pr-6 overflow-auto">
+                <div class="message-body px-7 pb-4 -lg:px-2 -lg:py-2 -lg:pr-6 overflow-auto">
                     <div>
                         <ChatMessagesCard />
                     </div>
@@ -149,24 +183,8 @@
     </div>
 </template>
 <style scoped>
-
-.chat-icon{
-         line-height: 50px;
-        &:hover{
-            background-color: #0074C8;
-            .hover-chat-icon-none{
-                display: none;
-            }
-            .hover-chat-icon-display{
-                display: block; cursor: pointer;
-            }
-        }
-        .hover-chat-icon-display{
-            display: none;
-        }
-    }
     .chat-conversation-container {
-        @apply bg-black fixed z-20 rounded-md;
+        @apply bg-black fixed z-20 rounded-xl border-sky-700 border-2;
         position: relative; 
         padding: 6px;
         .chat-content{
@@ -190,9 +208,9 @@
         }
     }
     @media (max-width:820px) {
-     /*    .chat-conversation-container .chat-content .right-side-chat-container{
+        .chat-conversation-container .chat-content .right-side-chat-container{
             min-width: 100px !important;
-        } */
+        }
     }
 
     .scroll-chat{
@@ -204,7 +222,6 @@
     }
     .message-body{
                     height: calc(106vh - 380px);
-                    background: linear-gradient(0deg, rgba(0,116,200,1) 0%, rgba(0,0,0,1) 100%);
                 }
     .chat-icons{
         height: 3em;
@@ -216,8 +233,20 @@
         text-align: -webkit-center;
     }
     .chat-pill{
-        bottom: 0.7em;
+        bottom: 0.8em;
         right: 2.7em;
+    }
+    @media (max-width:1024px) {
+            .chat-pill{
+            bottom: 0.4em;
+            right: 2.3em;
+        }
+    }
+    .text-extra-small{
+        font-size: 10px;
+        height: 2.2em;
+        padding:0.35em;
+        width: 2.2em;
     }
 </style>
 <script setup>

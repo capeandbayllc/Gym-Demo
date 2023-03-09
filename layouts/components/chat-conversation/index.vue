@@ -1,5 +1,5 @@
 <template>
-       <daisy-modal :overlay="true" id="chatModal" ref="chatModal" style="padding:0.5rem; width:auto; height: auto;">
+       <daisy-modal :overlay="true" id="chatModal" ref="chatModal" style=" width:auto; height: auto;">
 			<chat-modal />
 		</daisy-modal>
     <div>

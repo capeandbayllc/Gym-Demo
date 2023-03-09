@@ -21,7 +21,8 @@
 </template>
 <style scoped>
 .search-input {
-    @apply w-full rounded border overflow-hidden px-2 text-right;
+    @apply pr-3 w-full py-1 rounded border overflow-hidden px-2 text-right;
+    
 }
 .search-input-lg {
 	height: 34px;
@@ -33,7 +34,7 @@
 }
 
 .search-input-wrapper {
-	@apply flex items-center relative w-full pb-1;
+	@apply flex items-center relative pb-1;
 }
 
 .search-submit {
