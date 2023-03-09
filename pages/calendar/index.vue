@@ -1,9 +1,5 @@
 <template>
   <div class="py-4 px-12 w-full h-fit">
-    <!-- modal -->
-    <!-- <daisy-modal class="w-fit" id="eventModal" ref="eventModal">
-      <event-popup></event-popup>
-    </daisy-modal> -->
     <!-- event details -->
     <div
       v-if="eventDetailsVisibibility"
@@ -27,6 +23,13 @@
     >
       <EventInformation :event="eventDetails" @outclick="resetState" />
     </div>
+    <!-- offer-up panel -->
+    <div
+      v-if="offerUpVisibibility"
+      class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16 pointer-events-none"
+    >
+      <OfferUp :event="eventDetails" @outclick="resetState" />
+    </div>
 
     <div
       class="z-50 fixed h-screen w-screen flex items-center justify-center pointer-events-none"
@@ -40,25 +43,6 @@
         :nodeContext="emptyNodeContext"
       />
     </div>
-
-    <!-- sidebar date selector popup -->
-    <!-- <daisy-modal
-      ref="dateSelect"
-      id="dateSelect"
-      class="bg-base-300 w-fit rounded-lg"
-    >
-      <div class="flex flex-col space-y-4 p-5">
-        <h1 class="text text-base-content text-xl pb-2">Pick a Date</h1>
-        <date-picker
-          dark
-          :weekPicker="calenderView === 'timeGridWeek'"
-          :monthPicker="calenderView === 'dayGridMonth'"
-          :auto-apply="true"
-          :modelValue="selectedDate"
-          @update:modelValue="onSelectDate"
-        />
-      </div>
-    </daisy-modal> -->
 
     <!-- main content wrapper  -->
     <div
@@ -145,22 +129,10 @@ import EventForm from "./components/event-form.vue";
 import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
 
-/** FullCalendar component & plugins */
-import FullCalendar from "@fullcalendar/vue3";
-import EventPopup from "./components/event-popup.vue";
-import listPlugin from "@fullcalendar/list";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import "@vuepic/vue-datepicker/dist/main.css";
+// import "@vuepic/vue-datepicker/dist/main.css";
 import { calendarEvents as events } from "./helpers/calendar-events";
 import GrCalendar from "./components/gr-calendar.vue";
-
-const calenderView = ref("timeGridWeek");
-
-const handleDateClick = (arg) => {
-  console.log("date click! " + arg.dateStr);
-};
+import OfferUp from "./components/partials/offer-up.vue";
 
 /** Component State */
 const activeEventsList = ref(events);
@@ -170,11 +142,13 @@ const emptyNodeContext = ref(null); // information about the empty node that was
 /** Component Visibility State */
 const eventDetailsVisibibility = ref(false);
 const eventInformationVisibibility = ref(false);
+const offerUpVisibibility = ref(false);
 const eventFormVisibility = ref(false);
 
 const resetState = () => {
   eventDetailsVisibibility.value = false;
   eventInformationVisibibility.value = false;
+  offerUpVisibibility.value = false;
   eventFormVisibility.value = false;
 };
 
@@ -218,12 +192,6 @@ const handleCreateEvent = (form) => {
   activeEventsList.value.push(newEventObj);
   eventFormVisibility.value = false;
 };
-// const handleChangeView = (value) => {
-//   calenderView.value = value;
-//   console.log("calenderView", calenderView.value);
-//   calendar.value.getApi().changeView(value);
-//   onViewChanged();
-// };
 
 /** handles clicking calendar event */
 const handleCalendarEvent = (e) => {

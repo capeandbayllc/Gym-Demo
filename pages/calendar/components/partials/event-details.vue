@@ -34,13 +34,20 @@
     </ul>
     <div class="flex flex-col gap-2 mt-4">
       <span>{{ event.extendedProps.description }}</span>
-      <button
-        type="button"
-        @click="$emit('seemore')"
-        class="underline self-end"
-      >
-        See more
-      </button>
+
+      <div class="flex justify-between items-center mt-8">
+        <button
+          class="bg-secondary px-2 py-1"
+          type="button"
+          @click="$emit('offerup')"
+        >
+          Offer Up
+        </button>
+
+        <button type="button" @click="$emit('seemore')" class="underline">
+          See more
+        </button>
+      </div>
     </div>
   </section>
 </template>

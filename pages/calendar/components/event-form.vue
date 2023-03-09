@@ -46,7 +46,7 @@
     </div>
 
     <div class="form-group-pair">
-      <div class="flex w-full gap-4 mt-2">
+      <div class="flex w-full gap-4 mt-2 flex-col">
         <!-- <select
           class="w-full p-2 rounded-md text-black"
           name="start"
@@ -54,13 +54,14 @@
         >
           <option>start</option>
         </select> -->
-        <div class="w-full flex flex-col">
-          <label for="start_time">Start</label>
-          <input v-model="form.time.start" id="start_time" type="date" />
-        </div>
-        <div class="w-full flex flex-col">
-          <label for="end_time">End</label>
-          <input v-model="form.time.end" id="end_time" type="time" />
+        <p class="block">Time</p>
+        <div class="flex gap-4">
+          <div class="w-full flex flex-col">
+            <input v-model="form.time.start" id="start_time" type="date" />
+          </div>
+          <div class="w-full flex flex-col">
+            <input v-model="form.time.end" id="end_time" type="time" />
+          </div>
         </div>
       </div>
     </div>
