@@ -259,7 +259,11 @@ const query = gql`
       event_completion
       editable
       call_task
-      event_type_id
+      # event_type_id
+      location {
+        id
+        name
+      }
       type {
         id
         name
