@@ -130,12 +130,13 @@ import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
 
 // import "@vuepic/vue-datepicker/dist/main.css";
-import { calendarEvents as events } from "./helpers/calendar-events";
+// import { calendarEvents as events } from "./helpers/calendar-events";
 import GrCalendar from "./components/gr-calendar.vue";
 import OfferUp from "./components/partials/offer-up.vue";
 
 /** Component State */
-const activeEventsList = ref(events);
+const activeEventsList = ref([]);
+const initialized = ref(false);
 const eventDetails = ref(null); // Currently selected event context
 const emptyNodeContext = ref(null); // information about the empty node that was most recently clicked
 
@@ -258,22 +259,23 @@ const query = gql`
       event_completion
       editable
       call_task
-    }
-  }
-`;
-
-const queryEvents = gql`
-  query CalendarEvents {
-    calendarEvents(first: 15) {
-      id
-      title
-      description
+      event_type_id
+      type {
+        id
+        name
+      }
     }
   }
 `;
 
 const { result } = useQuery(query);
-const { result: evquery } = useQuery(queryEvents);
+
+watch(result, (ov, nv) => {
+  if (initialized.value) return;
+  initialized.value = true;
+  let { calendarEvents } = result.value;
+  activeEventsList.value.push(...calendarEvents);
+});
 
 let timeout = null;
 
@@ -281,7 +283,6 @@ onMounted(async () => {
   if (!timeout) {
     timeout = setTimeout(() => {
       console.log("GQL Result:", result);
-      console.log("evenst query?", evquery);
     }, 3000);
   }
   //   await nextTick();
