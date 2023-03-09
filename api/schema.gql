@@ -61,6 +61,7 @@ type CalendarEvent {
   full_day_event: Int
   event_type_id: ID
   type: CalendarEventType
+  location: Location
   owner: User!
   owner_id: ID
   start: DateTime

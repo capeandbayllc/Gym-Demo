@@ -40,10 +40,15 @@
             </div>
           </div>
           <div class="dropdown-item" tabindex="-1">Add a Note</div>
+          <div class="dropdown-item" tabindex="-1" @click.prevent.stop="openNoteCardModal">Notes</div>
         </div>
       </div>
 
       <Options :show="contactOption" @on:close="contactOption = null" />
+
+      <daisy-modal ref="noteCardModalRef" :closable="false">
+        <NoteCardModal @close="closeNoteCardModal"/>
+      </daisy-modal>
     </td>
   </tr>
 </template>
@@ -121,6 +126,7 @@ import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
 
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
+import NoteCardModal from "~/pages/check-in/note-card/index.vue";
 import {Ref} from "vue";
 
 export type Type = 'text' | 'email' | 'call' | null;
@@ -131,4 +137,12 @@ const props = defineProps<{
 }>()
 
 const contactOption: Ref<Type> = ref(null);
+const noteCardModalRef: Ref<any> = ref(null);
+
+const openNoteCardModal = () => {
+  noteCardModalRef.value.open();
+};
+const closeNoteCardModal = () => {
+  noteCardModalRef.value.close();
+};
 </script>

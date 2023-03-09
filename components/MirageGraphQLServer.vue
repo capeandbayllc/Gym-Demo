@@ -3,70 +3,39 @@
 </template>
 
 <script setup>
-import { createServer, JSONAPISerializer, Serializer } from "miragejs";
+import {createServer } from "miragejs";
 import { createGraphQLHandler } from "@miragejs/graphql";
-import graphQLSchema from "../api/schema.gql?raw";
-import { UserFactory } from "../api/data/users/UserFactory";
-import { UUIDManager } from "../api/utils/UUIDManager";
-import { getPageInfo } from "../api/utils/getPageInfo";
-import data from "../api/data/data";
-
+import graphQLSchema from "~/api/schema.gql?raw";
+import { UUIDManager } from "~/api/utils/UUIDManager";
+import data from "~/api/data/data";
+import { parse } from "graphql/language";
+import registerResolver from "~/api/queries/utils/resolver";
+import createAdminAndKioskUser from "~/api/data/users/UserFactory";
+import {NotificationFactory} from "~/api/data/notifications/NotificationFactory";
+import {getRandomInt} from "~/api/utils/number";
 // Mirage GraphQL README:
 // https://github.com/miragejs/graphql
 
-// queries that are paginated via the @paginate directive
-const paginatedQueries = ["users", "members", "locations"];
-
-//setup object to hold resolvers
-const resolvers = {
-  Query: {
-  }
-};
-
-// create a resolver for each paginated query
-paginatedQueries.forEach((query) => {
-  resolvers.Query[query] = (obj, args, context, info) => {
-    //grab pagination params
-    const { first } = args;
-    // delete pagination params from args so it doesnt get added to where clause
-    delete args.first;
-
-    // seems unnecessary but it's how the miragejs graphql package does it
-    const collectionName = context.mirageSchema.toCollectionName(query);
-
-    const allRecords = context.mirageSchema[collectionName].where(args).models;
-
-    // limit records at first X elements
-    const records = [...allRecords].splice(0, first); //TODO: fix for other pages
-    // TODO: the rest of the Laravel pagination params
-
-    return {
-      data: records,
-      paginatorInfo: getPageInfo(server, records, { first }),
-    };
-  };
-});
-
 const server = createServer({
   routes() {
-    console.log("Mirage Schema", this.schema);
-    const graphQLHandler = createGraphQLHandler(graphQLSchema, this.schema, {
-      resolvers,
+    const parsed = parse(graphQLSchema);
+    const graphQLHandler = createGraphQLHandler(parsed, this.schema, {
+      resolvers: registerResolver(parsed, this),
     });
 
     this.post("/graphql", graphQLHandler);
   },
   fixtures: data,
-  factories: {
-    user: UserFactory,
-  },
   identityManagers: {
     application: UUIDManager,
   },
+  factories: {
+    notification: NotificationFactory,
+  },
   seeds(server) {
-    server.createList("user", 25);
-    server.createList("location", 25);
+    createAdminAndKioskUser(server);
     server.loadFixtures(); //loads our json data
+    server.db.users.forEach(u => server.createList("notification", getRandomInt(10), { user_id: u.id }));
   },
 });
 
