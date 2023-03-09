@@ -39,48 +39,53 @@ const emit = defineEmits(['update:selected', 'update:check-in'])
 const props = defineProps({
     selected: String,
 });
+const user = useState('auth');
+const notificationCount = ref(user.value.notifications.length);
 
-const options = [
-    {
-        label: "Profile",
-        key: "profile",
-        selected: false,
-    },
-    {
-        label: "POS",
-        key: "pos",
-        selected: false,
-    },
-    {
-        label: "Calendar",
-        key: "calendar",
-        selected: false,
-        unread: 3,
-    },
-    {
-        label: "Notifications",
-        key: "notification",
-        selected: false,
-    },
-    {
-        label: "Add a Guest",
-        key: "guest-pass",
-        selected: false,
-    },
-    {
-        label: "Note Pad",
-        key: "note",
-        selected: false,
-    },
-    {
-        label: "New Agreement",
-        key: "newAgreement",
-        selected: false,
-    },
-];
+const options = reactive([
+  {
+    label: "Profile",
+    key: "profile",
+    selected: false,
+  },
+  {
+    label: "POS",
+    key: "pos",
+    selected: false,
+  },
+  {
+    label: "Calendar",
+    key: "calendar",
+    selected: false,
+  },
+  {
+    label: "Notifications",
+    key: "notification",
+    selected: false,
+    unread: notificationCount,
+  },
+  {
+    label: "Add a Guest",
+    key: "guest-pass",
+    selected: false,
+  },
+  {
+    label: "Note Pad",
+    key: "note",
+    selected: false,
+  },
+  {
+    label: "New Agreement",
+    key: "newAgreement",
+    selected: false,
+  },
+]);
 
 const checkIn = ref(false);
 
+watch(() => user.value.notifications, (notifications) => {
+  notificationCount.value = notifications.length;
+});
 
 watch(checkIn, (value) => emit('update:check-in', value));
 

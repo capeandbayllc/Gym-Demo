@@ -1,8 +1,9 @@
 <template>
     <button
         :type="type"
-        class="btn w-max rounded"
+        class="btn rounded"
         :class="{
+			'w-max': maxWidth,
             'btn-outline': outline,
             'btn-ghost': ghost,
             'btn-circle': circle,
@@ -30,6 +31,10 @@ const props = defineProps({
    type: {
 		type: String,
 		default: "submit",
+	},
+	maxWidth: {
+		type: Boolean,
+		default: true
 	},
 	ghost: {
 		type: Boolean,
