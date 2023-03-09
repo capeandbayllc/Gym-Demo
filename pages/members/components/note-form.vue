@@ -1,7 +1,8 @@
 <template>
         <p class="text-center mt-1">December 10, 2022</p>
         <div>
-            <textarea name="" id="" class="w-full h-[585px] rounded-md text-black p-3 text-gray-800"> </textarea>
+            <input type="text" placeholder="New Note Name" class="w-full rounded-t-md px-3 text-gray-800 font-medium text-lg py-3">
+            <textarea name="" id="" class="w-full h-[545px] rounded-b-md text-black p-3 text-gray-800" placeholder="Paragraph Notes"></textarea>
         </div>
         <div class=" md:flex justify-between  m-2 justify-items-center space-x-14">
             <div class="flex justify-between mb-5 md:flex text-sm  space-x-3 items-center">

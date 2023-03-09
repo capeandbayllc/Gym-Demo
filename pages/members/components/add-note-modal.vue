@@ -39,16 +39,7 @@
                     />
 
                     
-                    <p class="mb-2">Previous 30 Days</p>
-                    <Note 
-                        v-for="membersNote in result?.membersNotes.data"
-                        :title="membersNote.title"
-                        :month="membersNote.month"
-                        :time="membersNote.time"
-                        :userName="membersNote.userName"
-                        :alert="membersNote.alert"
-                    />
-                    
+                                       
                 </div>
                 
             </div>
