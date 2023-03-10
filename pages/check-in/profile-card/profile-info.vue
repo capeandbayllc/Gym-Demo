@@ -2,9 +2,9 @@
     <div class="profile-info-container">
         <div class="profile-avatar">
             <div class="alert-badge" v-if="user.notifications.length > 0">{{ user.notifications.length }}</div>
-            <img :src="mock.img" />
+            <img :src="user.profile_photo_path"  alt="profile image"/>
         </div>
-        <div class="profile-name">{{ mock.name }}</div>
+        <div class="profile-name">{{ user.first_name }} {{ user.last_name }}</div>
         <div class="pb-5">
             Member since {{ mock.joined }}
             <br />
@@ -94,9 +94,9 @@
 .profile-info-container {
     @apply flex flex-col flex-1 items-center text-lg text-center;
     .profile-avatar {
-        @apply relative rounded-full border-4 p-1.5;
+        @apply relative rounded-full border-4 p-1.5 overflow-hidden ;
         img {
-            @apply w-36 h-36;
+            @apply w-36 h-36 rounded-full;
         }
         .alert-badge {
             @apply absolute flex items-center justify-center w-12 h-12 rounded-full bg-error text-3xl font-semibold;
@@ -170,8 +170,6 @@ import {
 } from "~~/components/icons";
 const user = useState('auth');
 const mock = {
-    img: "/checkin/kevin.png",
-    name: "Kevin Buchanan",
     joined: 2020,
     club_id: 1234567890,
     membership: "p",
