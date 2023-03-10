@@ -11,7 +11,7 @@
             <td
                 v-for="(column, col_ndx) in columns"
                 :key="column.field + (item?.id || col_ndx)"
-                class="border-b"
+
                 :class="{
                     'border-secondary': border === 'secondary',
                     'border-neutral': border !== 'secondary',

@@ -21,7 +21,7 @@
 <script setup>
 import CallListItem from './call-list-item.vue';
 
-const columns = ["Name", "Location", "Date Upgraded", "Contacted", "Membership Type", ""]
+const columns = ["Name", "Location", "Contacted", "Membership Type", "Date Upgraded", ""]
 const data = [{
     id: 1,
     avatar: "/account.png",
