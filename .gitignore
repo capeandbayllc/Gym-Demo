@@ -8,5 +8,3 @@ node_modules
 dist
 .idea
 /public/images/profile/
-/api/schema.gql
-/api/data/data.json

@@ -39,11 +39,10 @@ run_migration () {
 
 copy_schema_data () {
     echo "Importing schema with data"
-    mv "$storagePath/data.json" "./api/data"
-    mv "$storagePath/lighthouse-schema.graphql" "./api/schema.gql"
-    echo "GC"
-    mkdir "./public/images"
-    mv "$storagePath/profile-images" "./public/images/profile"
+    mv "$storagePath/data.json" ./api/data
+    mv "$storagePath/lighthouse-schema.graphql" ./api/schema.gql
+    mkdir -p ./public/images/profile
+    mv "$storagePath/profile-images"/* ./public/images/profile
 }
 
 run_migration
