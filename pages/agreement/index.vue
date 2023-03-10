@@ -65,6 +65,7 @@ import AgreementTemplate from './components/agreement-template.vue';
 import AgreementPickTemplate from './components/agreement-pick-template.vue';
 import PaymentSchedule from './components/payment-schedule.vue';
 import PosPaymentAmounts from './components/paos-payment-amounts.vue';
+import ScheduledBilling from './components/scheduled-billing.vue';
 
 const searchInput =  ref("");
 const showButtonsAgreement = ref(false);
@@ -74,7 +75,7 @@ const actualCheckboxConfirmId = ref(null);
 
 
 const newTemplateComponent = ref(null);
-const newTemplateScreens = ref([AgreementPickTemplate, AgreementTemplate, PaymentSchedule, PosPaymentAmounts]);
+const newTemplateScreens = ref([AgreementPickTemplate, AgreementTemplate, PaymentSchedule, PosPaymentAmounts, ScheduledBilling]);
 const newTempalteScreenIndex = ref(0);
 const newTemplateModal = ref(null);
 

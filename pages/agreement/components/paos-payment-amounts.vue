@@ -1,119 +1,102 @@
 <template>
-    <simple-card class="gradient-bg grid grid-cols-2 p-4 gap-4 w-[650px] text-sm max-h-[75vh] overflow-auto">
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
+    <div class="grid grid-cols-12 p-4 gap-x-4 gap-y-8 w-[650px] text-sm max-h-[75vh] overflow-auto">
+        <div class="col-span-12 w-full">
             <div class="mb-2 font-semibold text-lg">POS Payment Amounts</div>
         </div>
-        <!-- <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full" />
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
-            <div class="mb-2">Billing Schedule Type</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.billingScheduleType">
-                <option value="fulltime">Paid in Full</option>
+        <div class="col-span-3 w-full">
+            <div class="mb-2">Name</div>
+        </div>
+        <div class="col-span-3 w-full">
+            <div class="mb-2">Preffered Price</div>
+        </div>
+        <div class="col-span-6 w-full">
+            <div class="mb-2">Maximum / Minimum</div>
+        </div>
+        <!-- 1 Initialition fee -->
+        <div class="col-span-3 w-full flex">
+            <p class="pl-4" :class="{'text-gray-400':!activeInitiationFee}">1. Initialition Fee</p>
+        </div>
+        <div class="col-span-3 mx-auto w-full">
+            <input :disabled="!activeInitiationFee" type="number" class="white-input w-full p-1 rounded-sm" v-model="posPaymentAmounts.initialitionFeePrice" />
+        </div>
+        <div class="col-span-3 mx-auto w-full">
+            <input :disabled="!activeInitiationFee" type="number" class="white-input w-full p-1 rounded-sm" v-model="posPaymentAmounts.initialitionFeePriceMaximum" />
+            <input :disabled="!activeInitiationFee" type="number" class="white-input w-full p-1 rounded-sm mt-3" v-model="posPaymentAmounts.initialitionFeePriceMinimum" />
+        </div>
+        <div class="col-span-3 w-full flex justify-center">
+            <div>
+                <button v-if="activeInitiationFee" @click="buttonActiveInitiationFee.click()" class="pt-1">Remove</button>
+                <button :class="{'text-gray-400':!activeInitiationFee}" v-else class="pt-1" @click="buttonActiveInitiationFee.click()">Add</button>
+            </div>
+        </div>
+        <!-- 2 First months dues -->
+        <div class="col-span-1 w-full flex">
+            <p class="pl-4" :class="{'text-gray-400':!activeFirstMonthsDues}">2. First Months Dues</p>
+        </div>
+        <div class="col-span-1 mx-auto w-full">
+            <input :disabled="!activeFirstMonthsDues" value="Pro Rate Monthly PTM" class="white-input w-full p-1 rounded-sm" />
+        </div>
+        <div class="col-span-1 w-full flex">
+            <p class="pt-1" :class="{'text-gray-400':!activeFirstMonthsDues}">First Month Only</p>
+        </div>
+        <div class="col-span-1 w-full flex justify-center">
+            <div>
+                <button v-if="activeFirstMonthsDues" @click="buttonActiveFirstMonthsDues.click()" class="pt-1">Remove</button>
+                <button :class="{'text-gray-400':!activeFirstMonthsDues}" v-else class="pt-1" @click="buttonActiveFirstMonthsDues.click()">Add</button>
+            </div>
+        </div>
+        <!-- 3 Total Amount Paid Today -->
+        <div class="col-span-1 w-full flex">
+            <p class="pl-4" :class="{'text-gray-400':!activeTotalAmountPaid}">3. *Total Amount Paid Today</p>
+        </div>
+        <div class="col-span-2  mx-auto w-full">
+            <select :disabled="!activeTotalAmountPaid" class="white-input w-full p-1 rounded-sm" v-model="posPaymentAmounts.totalAmountPaidToday">
+                <option value="post_total">POS Total</option>
             </select>
         </div>
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
-            <div class="mb-2">Allow Edits to Amounts</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.editsAmount"/>
+        <div class="col-span-1 w-full flex justify-center">
+            <div>
+                <button v-if="activeTotalAmountPaid" @click="buttonActiveTotalAmountPaid.click()" class="pt-1">Remove</button>
+                <button v-else :class="{'text-gray-400':!activeTotalAmountPaid}" class="pt-1" @click="buttonActiveTotalAmountPaid.click()">Add</button>
+            </div>
         </div>
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
-            <div class="mb-2">Billing Frequency</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.billingFrequency">
-                <option value="onetime">One Time</option>
-            </select>
-        </div>
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
-            <div>Availability</div>
+        <div class="col-span-4 flex justify-center">
             <div class="flex items-center mt-3">
-                <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked />Instore</div>
-                <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked />Online</div>
-                <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked />In App</div>
+                <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" ref="buttonActiveInitiationFee" v-model="activeInitiationFee" />Initiation Fee</div>
+                <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" ref="buttonActiveFirstMonthsDues" v-model="activeFirstMonthsDues" />First Months Dues</div>
+                <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" ref="buttonActiveTotalAmountPaid" v-model="activeTotalAmountPaid" />Last Months Dues</div>
             </div>
         </div>
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
-            <div class="mb-2">*Term in Months</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.terms">
-                <option value="3">3 Months</option>
-                <option value="6">6 Months</option>
-                <option value="9">9 Months</option>
-                <option value="12">12 Months</option>
-            </select>
-        </div>
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full flex">
-            <div class="mr-4 min-w-[35%]">
-                <div class="mb-2">Auto Renew</div>
-                <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.autoRenew">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-            </select>
-            </div>
-            <div>
-                <div class="mb-2">Introductory Offer</div>
-                <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.introductoryOffer">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto mt-5 w-full">
-            <div class="mb-2 text-lg">Preferred First Due Date</div>
-        </div>
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full" />
-        <div class="col-span-2 -lg:col-span-2 -md:col-auto mx-auto w-full flex">
-            <div class="mr-4 min-w-[70%]">
-                <div class="mb-2">Choose how the preferred due day will be determined</div>
-                <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.chooesePreferredDueDay">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-            </div>
-            <div>
-                <div class="mb-2">Date</div>
-                <Datepicker class="custom-date-input" v-model="paymentSchedule.planDate" :enable-time-picker="false" auto-apply></Datepicker>
-            </div>
-        </div>
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto mt-5 w-full">
-            <div class="mb-2 text-lg">Last Payment</div>
-        </div>
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full" />
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
-            <div class="mb-2">Member pays last payment at Signing</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.memberPaySigning">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
-        </div>
-        <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full" /> -->
-    </simple-card>
-    
+    </div>
 </template>
 <script setup>
-import Datepicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
-
-const paymentSchedule = ref({
-    billingScheduleType:"fulltime",
-    editsAmount:"",
-    billingFrequency: "onetime",
-    inStore: "",
-    online: "",
-    inApp: "",
-    terms: "12",
-    introductoryOffer: "yes",
-    autoRenew: "no",
-    chooesePreferredDueDay: "yes",
-    planDate: "",
-    memberPaySigning: "yes"
+const posPaymentAmounts= ref({
+    initialitionFeePrice: 50.00,
+    initialitionFeePriceMinimum: 50.00,
+    initialitionFeePriceMaximum: 50.00,
+    firstMonthsDuesProRate: "Pro Rate Monthly PTM",
+    totalAmountPaidToday: "post_total",
 })
+
+const buttonActiveInitiationFee = ref(null);
+const activeInitiationFee = ref(true);
+
+const buttonActiveFirstMonthsDues = ref(null);
+const activeFirstMonthsDues = ref(true);
+
+const buttonActiveTotalAmountPaid = ref(null);
+const activeTotalAmountPaid = ref(false);
+
 
 </script>
 <style scoped>
     .white-input {
         @apply bg-white text-black;
     }
-</style>
-<style>
-    .custom-date-input {
-        .dp__input {
-            height: 28px;
-        }
+
+    .white-input:disabled{
+        @apply bg-gray-400;
     }
+
+
 </style>
