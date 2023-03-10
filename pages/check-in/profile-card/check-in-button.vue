@@ -1,16 +1,16 @@
 <template>
   <button
     @click="$emit('click')"
-    class="relative z-[1] w-full max-h-[4rem] h-full rounded-2xl border-2 border-secondary group"
+    class="relative z-[1] w-full max-h-[4rem] h-full rounded-3xl border-2 border-secondary group"
   >
     <!-- green back -->
     <div
-      class="bg-lime-500 absolute h-full w-full -z-[1] top-0 left-0 right-0 bottom-0 rounded-2xl"
+      class="bg-lime-500 absolute h-full w-full -z-[1] top-0 left-0 right-0 bottom-0 rounded-3xl"
     ></div>
 
     <!-- blue back -->
     <div
-      class="bg-secondary rounded-2xl absolute h-full w-full -z-[0] scale-x-0 group-hover:scale-x-100 transition-all duration-300 top-0 left-0 right-0 bottom-0"
+      class="bg-secondary rounded-3xl absolute h-full w-full -z-[0] scale-x-0 group-hover:scale-x-100 transition-all duration-300 ease-in-out top-0 left-0 right-0 bottom-0"
     ></div>
 
     <div class="relative">

@@ -3,7 +3,7 @@
     <!-- <div class="flex flex-row gap-2 relative"> -->
     <CheckInButton @click="handleCheckIn" />
     <!-- </div> -->
-    <div class="profile-options card-gradient-bg">
+    <div class="profile-options to-secondary/25 bg-gradient-to-t from-black/50">
       <profile-option-item
         v-for="item in options"
         :key="item.key"
@@ -19,13 +19,7 @@
 .profile-options-container {
   @apply flex flex-col space-y-6 items-center;
   .profile-options {
-    @apply flex flex-col min-w-[220px] justify-between mt-5 text-xs h-[500px] border-2 border-secondary rounded-lg p-5 w-full bg-secondary/20;
-  }
-  .btn-close-selection {
-    @apply cursor-pointer bg-base-content rounded p-2 text-sm text-black;
-  }
-  .btn-check-in {
-    @apply px-4 flex items-center rounded cursor-pointer bg-accent-focus/60 uppercase text-black font-medium;
+    @apply flex flex-col min-w-[14rem] justify-between mt-5 text-xs h-full border-2 border-secondary rounded-3xl p-5 w-full bg-secondary/20;
   }
 }
 </style>
