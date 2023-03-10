@@ -28,7 +28,7 @@
                                 <div class="relative cursor-pointer pl-2" v-for="(item, index) in chatItems" :key="index" >
                                     <div  class="p-2 inline">
                                         <div class="chat-icons m-1">
-                                            <font-awesome-icon class="w-4 h-4 -lg:w-4 -lg:h-4 m-auto border rounded-full p-3 " :icon="item.icon" />
+                                            <font-awesome-icon :class="['w-4 h-4 -lg:w-4 -lg:h-4 m-auto border rounded-full p-3',item.name=='New Channel'?'bg-blue-700':'']" :icon="item.icon" />
                                         </div>
                                         <div class="text-min -xs:text-xs pt-1 pr-2">
                                             {{item.name}}
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-xl -lg:text-lg font-semibold pt-2">conversation</div>
+                    <div class="text-xl -lg:text-lg font-semibold pt-2">Conversations</div>
                     <div class="inline">
                         <div  class="justify-start bg-white rounded-md flex mt-4 " v-for="(chat, index) in messages" :key="index" >
                             <div class="relative flex p-2">
@@ -97,56 +97,14 @@
         </div>
     </div>
 
-    <div class="chat-conversation-container " v-if="chatOpen==true" >
+    <div class="chat-conversation-container max-h-screen" v-if="chatOpen==true" >
         <div class="chat-message-block flex">
-            <!-- <div class="grid w-1/16 bg-black relative border-white-800 rounded-lg border rounded-t-full rounded-b-full">
+            <div  class="grid w-1/16 bg-black relative border-white-800 rounded-lg border rounded-t-full rounded-b-full">
                 <font-awesome-icon  class="w-4 h-4 -lg:w-4 -lg:h-4 mx-auto mt-3 border rounded-full p-3 " :icon="['fas', 'fa-plus-circle']" />
-                <div class="grid py-2 max-h-80 overflow-y-scroll overflow-x-visible no-scrollbar ">
-                    <div class="m-auto px-2" v-for="(item, index) in onlineMembers" :key="index" >
-                        <img v-if="index!==2" class="w-12 h-12 -lg:w-10 -lg:h-10 opacity-40" :src="item.profile" alt="" @click="toggleChatOpen"/>
-                        <div  v-else class="inline relative" >
-                            <div class="chat-pill absolute text-sm whitespace-nowrap bg-blue-700 rounded-l-full pl-2 py-1 pr-3">
-                               {{item.name}}
-                            </div>
-                            <img class="sticky w-12 h-12 -lg:w-10 -lg:h-10 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
-                        </div>
-                    </div>
-                    <hr class="mx-2 mt-2">
-                    <div class="m-auto px-2" v-for="(item, index) in messages" :key="index" >
-                        <img v-if="index<4 && index!==1" class="w-12 h-12 -lg:w-10 -lg:h-10 opacity-40" :src="item.avatar" alt="" @click="toggleChatOpen"/>
-                        <div v-else-if="index==1 && index<4" class="flex">
-                            <img class="w-12 h-12 -lg:w-10 -lg:h-10 border-2 rounded-full" :src="item.avatar" alt="" @click="toggleChatOpen"/>
-                            <div  class="text-extra-small text-white bg-blue-500 rounded-full absolute right-0 font-semibold z-1">
-                                +2
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <div class=" border-2 rounded-full pr-2 pl-1">
-                <div class="">
-                    <font-awesome-icon  class="w-4 h-4 -lg:w-4 -lg:h-4 mx-auto mt-3 border rounded-full p-3 " :icon="['fas', 'fa-plus-circle']" />
-                </div>
-                <div class="relative max-h-80  overflow-y-scroll overflow-x-visible no-scrollbar" >
-                    <div class="object-center" v-for="(item, index) in onlineMembers" :key="index">
-                        <img v-if="index!=2" class="sticky w-12 h-12 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
-                        <div  v-else class="" >
-                            <div class="chat-pill absolute text-sm whitespace-nowrap bg-blue-700 rounded-l-full pl-2 object-center pr-3">
-                               {{item.name}}
-                            </div>
-                            <img class="w-12 h-12 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
-                        </div>
-                    </div>
-                    <div class="object-center" v-for="(item, index) in onlineMembers" :key="index">
-                        <img class="w-12 h-12 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
-                    </div>
-                    <div class="object-center" v-for="(item, index) in onlineMembers" :key="index">
-                        <img class="w-12 h-12 border-blue-700 border-2 rounded-full z-2" :src="item.profile" alt="" @click="toggleChatOpen"/>
-                    </div>
-                </div>
+                
             </div>
 
-            <div class="inline ml-2 gradient-bg border rounded-lg">
+            <div class="inline ml-2 gradient-bg border rounded-lg max-h-auto h-auto">
                 <div class="flex bg-black m-2">
                     <div class="relative p-1">
                         <img src="/chat-conversation/group-chat.svg" class="w-16 h-16 -lg:w-14 -lg:h-14" @click="toggleChatOpen"/>
@@ -165,7 +123,7 @@
                     <DropdownCard v-if="showDropDown" @closeDropdown="toggleDropdown"/>
                 </div>
                 <div class="message-body px-7 pb-4 -lg:px-2 -lg:py-2 -lg:pr-6 overflow-auto">
-                    <div>
+                    <div class="relative">
                         <ChatMessagesCard />
                     </div>
                 </div>
@@ -220,9 +178,9 @@
     .chat-message-block{
         width: auto;
     }
-    .message-body{
+   /*  .message-body{
                     height: calc(106vh - 380px);
-                }
+                } */
     .chat-icons{
         height: 3em;
         width:3em;
@@ -261,6 +219,16 @@ import {fas} from '@fortawesome/pro-solid-svg-icons'
 library.add(far,fas)
 const chatOpen = ref(false)
 const showDropDown= ref(false)
+
+/* div1.addEventListener('scroll', function() {
+  
+}); */
+const handleScroll=()=>{
+    let div2 = document.getElementById('first');
+    let div1 = document.getElementById('second');
+    div2.scrollTop = div1.scrollTop;
+}
+
 const onlineMembers = [
     {
         id: '1',
