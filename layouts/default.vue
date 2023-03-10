@@ -5,6 +5,7 @@
             @show-help="showBot"
             @show-profile-menu="showProfileMenu"
             class="sticky top-0 z-[25]"
+            @show-leader-board="showLeaderBoard"
         />
         <circular-menu v-if="showCircularMenu" @close="toggleCircularMenu" />
         <help-bot ref="helpBot" />
@@ -41,6 +42,10 @@
     >
         <slot />
     </div>
+    <leader-board-slideout
+        :isLeaderBoardVisible="isLeaderBoardVisible"
+        @show-leader-board="showLeaderBoard"
+    />
 </template>
 <style scoped>
 .app-layout {
@@ -65,8 +70,6 @@ import NavBar from "./components/nav-bar/index.vue";
 import SideBar from "./components/side-bar.vue";
 import CircularMenu from "./components/circular-menu/index.vue";
 import HelpBot from "./components/help-bot/index.vue";
-// import LeaderBoard from "./components/leader-board/index.vue";
-// import LeaderBoardPop from "./components/leader-board/popup.vue";
 import ProfileMenu from "./components/profile-menu/index.vue";
 
 import ChatConversation from "./components/chat-conversation/index.vue";
@@ -74,6 +77,7 @@ import { KIOSK_ROUTE, LOGIN_ROUTE } from "~/middleware/auth.global";
 import {useQuery} from "@vue/apollo-composable";
 import notification from "~/api/queries/notification";
 import {request} from "~/api/utils/request";
+import LeaderBoardSlideout from "~/layouts/components/leader-board/leader-board-slideout.vue";
 
 const showCircularMenu = ref(false);
 
@@ -84,11 +88,10 @@ const toggleCircularMenu = () => {
 const helpBot = ref(null);
 const showBot = () => helpBot.value.open();
 
-// const leaderBoard = ref(null);
-// const showLeaderBoard = () => leaderBoard.value.open();
-//
-// const leaderBoardPop = ref(null);
-// const showLeaderPop = () => leaderBoardPop.value.open();
+const isLeaderBoardVisible = ref(false);
+const showLeaderBoard = () => {
+    isLeaderBoardVisible.value = !isLeaderBoardVisible.value;
+};
 
 const profileMenu = ref(null);
 const showProfileMenu = () => {
