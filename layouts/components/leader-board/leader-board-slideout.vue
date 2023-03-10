@@ -1,6 +1,6 @@
 <template>
   <div
-    class="overflow-hidden absolute h-[calc(100vh-65px)] top-[62px] right-0 z-10 bg-[#191919] border-2 border-secondary transition-all duration-300 ease-linear"
+    class="overflow-y-auto overflow-hidden absolute h-[calc(100vh-65px)] top-[62px] right-0 z-10 bg-[#191919] border-2 border-secondary transition-all duration-300 ease-linear"
     :class="{
       'w-[700px] text-[0.9rem]': isLeaderBoardVisible === true,
       'w-[0px] text-[0rem]': isLeaderBoardVisible === false,
