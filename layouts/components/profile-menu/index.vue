@@ -13,6 +13,7 @@
               class="submenu-items"
               v-for="(child, sub_ndx) in item.children"
               :key="sub_ndx"
+              @click="handleProfileMenuNavigate(child.url)"
             >
               {{ child.label }}
             </li>
@@ -25,6 +26,7 @@
     </div>
   </context-menu>
 </template>
+
 <style scoped>
 .profile-menu-container {
   @apply z-[22] absolute right-4 p-3 text-sm border-8 rounded-xl border-secondary;
@@ -59,9 +61,11 @@ const profileMenu = ref(null);
 const open = () => {
   profileMenu.value.open();
 };
+
 const close = () => {
   profileMenu.value.close();
 };
+
 const emit = defineEmits(["isProfileMenuOpen"]);
 const isProfileMenuOpenFn = (data) => {
   emit("isProfileMenuOpen", data);
@@ -77,6 +81,7 @@ const menu = [
       },
       {
         label: "Settings",
+        url: '/mass-com',
       },
       {
         label: "User Management",
@@ -108,5 +113,9 @@ const handleClickLogout = () => {
   authToken.value = null;
   console.log("logout", document.cookie, authToken);
   navigateTo("/login");
+};
+
+const handleProfileMenuNavigate = url => {
+  navigateTo(url);
 };
 </script>
