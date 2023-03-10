@@ -14,42 +14,58 @@
       <br />
       Club ID# {{ mock.club_id }}
     </div>
-    <div class="profile-status">
-      <membership-btn
+    <div class="flex items-center justify-between w-full mb-4">
+      <div class="profile-status">
+        <!-- <membership-btn
         editIconOnHover
         :membership="mock.membership"
         class="profile-membership-btn"
         @click="$emit('toggle-detail', true)"
-      />
-      <addon-btn
-        :value="true"
-        class="profile-membership-btn"
-        @click="$emit('toggle-detail', true)"
-      />
-      <button
-        size="sm"
-        class="profile-membership-btn rounded-full px-1.5 femily-member"
-        secondary
-        @click="$emit('toggle-detail', true)"
-      >
-        FM
-        <span class="edit-icon"><edit-icon class="mb-2" /></span>
-      </button>
+      /> -->
+        <button
+          class="bg-amber-500 text-xl w-10 h-10 text-center justify-center font-bold rounded-xl px-1.5 relative flex items-center hover:text-[0px] group/p-btn"
+          @click="$emit('toggle-detail', true)"
+        >
+          P
+          <span class="edit-icon"
+            ><edit-icon class="mb-2 group-hover/p-btn:visible"
+          /></span>
+        </button>
+        <addon-btn
+          :value="true"
+          class="profile-membership-btn"
+          @click="$emit('toggle-detail', true)"
+        />
+        <button
+          class="profile-membership-btn rounded-xl px-1.5 femily-member"
+          secondary
+          @click="$emit('toggle-detail', true)"
+        >
+          FM
+          <span class="edit-icon"><edit-icon class="mb-2" /></span>
+        </button>
+      </div>
+      <OfferUpBtn />
     </div>
-    <div class="grid">
-      <button class="profile-contact-methods" @click="$emit('open-engage')">
-        <span class="mr-14 font-bold text-2xl">Engage</span>
+    <div class="grid w-full">
+      <div
+        class="flex group/container justify-between items-center px-8 py-3 relative border-2 border-secondary rounded-2xl mb-4 z-[1]"
+      >
         <div
+          class="absolute group-hover/container:opacity-100 opacity-0 h-full -z-[1] w-full transition-all duration-200 ease-in top-0 left-0 rounded-2xl bg-gradient-to-b from-secondary to-secondary/30"
+        ></div>
+        <button
           v-for="({ icon }, ndx) in engageOptions"
           :key="ndx"
-          class="-sm:!ml-2"
+          class="border-2 border-white rounded-xl bg-secondary h-full p-2 hover:border-gray-200/50 transition-all duration-300"
+          @click="$emit('open-engage')"
         >
           <component :is="icon" />
-        </div>
-      </button>
-      <div class="guest-pass-container">
-        <h6>Guest Pass:</h6>
-        <ul class="no-scrollbar">
+        </button>
+      </div>
+      <div class="border-secondary border-2 bg-neutral rounded-2xl py-2">
+        <h6 class="text-sm mb-2 font-semibold">Guest Pass:</h6>
+        <ul class="no-scrollbar max-h-20 overflow-y-scroll font-semibold px-4">
           <li
             class="flex my-4 items-center"
             v-for="guest in guests"
@@ -57,7 +73,7 @@
           >
             <div class="mr-2">
               <div
-                class="w-full rounded-md bg-base-content text-base-300 text-xs h-full p-2"
+                class="w-full rounded-xl bg-secondary text-primary-content text-xs h-full p-2"
               >
                 Issued {{ guest.date }}
               </div>
@@ -65,7 +81,7 @@
             <span class="text-xs ml-2 flex whitespace-nowrap items-center"
               >Day Left:
               <b
-                class="text-md bg-black border-2 border-secondary py-2 px-3 rounded-full ml-2"
+                class="text-md bg-black/20 border-2 border-secondary py-2 px-3 rounded-xl ml-2"
                 >{{ guest.dat_left }}</b
               ></span
             >
@@ -108,9 +124,9 @@
     @apply text-3xl font-semibold pt-4 pb-2;
   }
   .profile-status {
-    @apply flex flex-row space-x-4 pb-3;
+    @apply flex flex-row space-x-4;
     .profile-membership-btn {
-      @apply text-xl w-10 h-10 text-center justify-center font-bold;
+      @apply text-xl w-10 h-10 text-center justify-center font-bold text-white;
     }
     > div > button {
       @apply relative;
@@ -133,12 +149,12 @@
     }
   }
 
-  .profile-contact-methods {
+  /* .profile-contact-methods {
     @apply flex flex-row space-x-7 px-4 py-2 mb-4 border-2 border-secondary rounded-md items-center hover:bg-secondary;
     button {
       @apply text-base-content text-base xl:text-lg font-semibold;
     }
-  }
+  } */
   .guest-pass {
     @apply border border-secondary rounded p-5;
   }
@@ -148,20 +164,12 @@
       @apply text-base-content text-sm font-semibold;
     }
   }
-  .guest-pass-container {
-    @apply px-4 py-2 border-2 border-secondary bg-neutral-content/40 rounded-md -xl:mb-2;
-    h6 {
-      @apply text-sm mb-2 font-semibold;
-    }
-    ul {
-      @apply max-h-[80px] overflow-auto px-4;
-    }
-  }
 }
 </style>
 <script setup>
 import MembershipBtn from "~~/components/buttons/membership-btn.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
+import OfferUpBtn from "~~/components/buttons/offer-up-btn.vue";
 import {
   CallIcon,
   EmailIcon,

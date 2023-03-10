@@ -3,7 +3,7 @@
     <!-- <div class="flex flex-row gap-2 relative"> -->
     <CheckInButton @click="handleCheckIn" />
     <!-- </div> -->
-    <div class="profile-options to-secondary/25 bg-gradient-to-t from-black/50">
+    <div class="profile-options to-primary/75 bg-gradient-to-t from-black/80">
       <profile-option-item
         v-for="item in options"
         :key="item.key"
@@ -23,6 +23,7 @@
   }
 }
 </style>
+
 <script setup>
 import { ref } from "vue";
 import ProfileOptionItem from "./profile-option-item.vue";
