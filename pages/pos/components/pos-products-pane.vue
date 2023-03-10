@@ -36,7 +36,7 @@
                 >
                     Collapse
                 </span>
-                <div class="bg-[#191919] h-full">
+                <div class="bg-[#191919]/[0.9] h-full rounded-t-xl">
                     <PosProductItems
                         :items="selectedSubcategory.items"
                         :cart="cart"

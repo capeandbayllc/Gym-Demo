@@ -34,18 +34,54 @@
                 >
                 </select-box>
                 <div>
-                    <input
+                    <!-- <input
                         placeholder="Search Member"
                         class="text-[0.8rem] w-60 rounded-md px-3 text-black py-2"
+                    /> -->
+                    <input
+                        ref="globalSearchInput"
+                        type="text"
+                        placeholder="Search"
+                        class="text-[0.8rem] w-60 rounded-md px-3 text-black py-2 pos-style-transition"
+                        @click="showGlobalSearchModal"
+                        @mouseover="showFocus"
+                        @mouseleave="hideFocus"
                     />
                 </div>
             </div>
         </div>
     </div>
+    <daisy-modal :overlay="true" id="globalSearchModal" ref="globalSearchModal">
+        <GlobalSearchModal @row-clicked="selectPerson" />
+    </daisy-modal>
 </template>
 
 <script setup>
+import GlobalSearchModal from "~~/layouts/components/global-search-modal.vue";
 import { PersonAdminIcon, BarcodeScanIcon } from "~~/components/icons";
+
+const emit = defineEmits(["person-selected"]);
+
+const globalSearchInput = ref("");
+const globalSearchModal = ref(null);
+
+const showFocus = () => {
+    globalSearchInput.value.style = "";
+    globalSearchInput.value.focus();
+};
+
+const hideFocus = () => {
+    globalSearchInput.value.blur();
+};
+
+const showGlobalSearchModal = () => {
+    globalSearchModal.value.open();
+};
+
+const selectPerson = (data) => {
+    emit("person-selected", data);
+    globalSearchModal.value.close();
+};
 
 const locationsFilter = [
     {

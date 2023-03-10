@@ -1,7 +1,7 @@
 <template>
     <div class="pos-invoice-pane">
         <div class="flex flex-row gap-5 justify-between">
-            <div class="flex flex-row gap-4 w-full">
+            <div class="flex flex-row gap-4 w-full min-h-[120px]">
                 <div
                     class="group pos-member-image-container"
                     v-if="purchaser"
@@ -14,21 +14,26 @@
                 </div>
                 <div class="my-auto flex flex-col gap-1" v-if="purchaser">
                     <h5 class="text-[1.2rem] tracking-wide font-light">
-                        {{ purchaser.name }}
+                        {{ purchaser.first_name }} {{ purchaser.last_name }}
                     </h5>
                     <div>
-                        <div class="text-[0.7rem]">Member since 1700</div>
-                        <div class="text-[0.8rem]">Club #1234567890</div>
+                        <div class="text-[0.7rem]">Member since 2020</div>
+                        <div class="text-[0.8rem]">
+                            Club ID# {{ purchaser.location }}
+                        </div>
                     </div>
                     <span class="pos-view-member">View Profile</span>
                 </div>
             </div>
             <div class="flex flex-col gap-3 justify-between w-[calc(50%-20px)]">
-                <button class="pos-return-item-button !ml-auto">
+                <button
+                    class="pos-return-item-button !ml-auto"
+                    v-if="purchaser"
+                >
                     Return an Item
                 </button>
                 <div
-                    class="bg-[#0074C8]/[0.7] w-[90%] py-2 px-4 ml-auto rounded-md text-[2rem] text-right"
+                    class="bg-[#0074C8]/[0.7] w-[90%] py-2 px-4 ml-auto mt-auto rounded-md text-[2rem] text-right"
                 >
                     ${{ calculateCartTotal().toFixed(2) }}
                 </div>
@@ -47,8 +52,11 @@
                 class="flex flex-col h-[15vh] lg:h-[25vh] overflow-scroll scrollbar-hide"
             >
                 <div
-                    class="flex flex-row justify-between px-6 py-[2px] text-[0.8rem]"
-                    v-for="item in cart"
+                    v-for="(item, itemIndex) in cart"
+                    class="flex flex-row justify-between px-6 py-1 text-[0.8rem]"
+                    :class="{
+                        'bg-[#292929]': itemIndex % 2 === 1,
+                    }"
                 >
                     <span class="w-[30%]">
                         {{ item.name }}
@@ -210,7 +218,7 @@ const cancelSale = () => {
 }
 
 .pos-invoice-items-table {
-    @apply w-full rounded-md border-[1px] bg-[#191919] text-[0.8rem] flex flex-col gap-2 max-h-[15vh] lg:min-h-[25vh] font-light tracking-wide;
+    @apply w-full rounded-md border-[1px] bg-[#191919]/[0.9] text-[0.8rem] flex flex-col gap-2 max-h-[15vh] lg:min-h-[25vh] font-light tracking-wide overflow-hidden;
 }
 
 .pos-ivoice-items-quantity-button {

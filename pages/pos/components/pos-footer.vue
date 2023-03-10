@@ -2,19 +2,19 @@
     <div class="pos-footer">
         <div class="pos-button-item group">
             <PlusIcon class="pos-add-icon" />
-            <span class="pos-add-text">Add New Product</span>
+            <span class="pos-add-text">Product</span>
         </div>
         <div class="pos-button-item group">
             <PlusIcon class="pos-add-icon" />
-            <span class="pos-add-text">Add New Category</span>
+            <span class="pos-add-text">Category</span>
         </div>
         <div class="pos-button-item group">
             <MinusIcon class="pos-remove-icon" />
-            <span class="pos-remove-text">Remove Product</span>
+            <span class="pos-remove-text">Product</span>
         </div>
         <div class="pos-button-item group">
             <MinusIcon class="pos-remove-icon" />
-            <span class="pos-remove-text">Remove Category</span>
+            <span class="pos-remove-text">Category</span>
         </div>
     </div>
 </template>
@@ -23,7 +23,7 @@ import { PlusIcon, MinusIcon } from "~~/components/icons";
 </script>
 <style scoped>
 .pos-footer {
-    @apply flex flex-row gap-8 px-10 py-[7px] h-[3rem] w-[80%] bg-[#191919]/[0.6] mx-auto rounded-b-full;
+    @apply flex flex-col md:flex-row gap-8 px-10 py-[7px] md:h-[3rem] w-[80%] bg-[#191919]/[0.6] mx-auto rounded-xl md:rounded-b-full;
 }
 .pos-button-item {
     @apply flex flex-row gap-2 text-[0.7rem] lg:text-[0.9rem] cursor-pointer;

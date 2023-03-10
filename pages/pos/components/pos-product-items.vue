@@ -14,18 +14,20 @@
                     <img class="w-[64px] h-auto" :src="item.image" />
                 </div>
                 <div class="flex flex-col my-auto">
-                    <h4 class="mb-1">{{ item.name }}</h4>
-                    <span class="text-[0.7rem]">Price: ${{ item.price }}</span>
-                    <span class="text-[0.7rem]"
+                    <h4 class="mb-1 line-clamp-1">{{ item.name }}</h4>
+                    <span class="text-[0.7rem] line-clamp-1"
+                        >Price: ${{ item.price }}</span
+                    >
+                    <span class="text-[0.7rem] line-clamp-1"
                         >Category: {{ item.category }}</span
                     >
                 </div>
             </div>
             <div
-                class="w-[64px] h-[64px] bg-secondary flex flex-col justify-center"
+                class="w-[64px] h-[64px] bg-secondary flex flex-col justify-center rounded-lg"
                 :class="{
                     'bg-secondary': item.available > 0,
-                    'bg-[#888]': item.available === 0,
+                    '!bg-[#888]': item.available === 0,
                 }"
             >
                 <span class="text-[#ccc] tracking-tight text-[0.5rem] mx-auto"
@@ -89,7 +91,7 @@ const isItemInCart = (item) =>
     @apply flex flex-col gap-5 h-full p-8 font-light tracking-wider overflow-y-scroll scrollbar-hide;
 }
 .item-container {
-    @apply border-2 border-secondary flex flex-row gap-5 justify-between p-5 relative;
+    @apply border-2 border-secondary flex flex-row gap-5 justify-between p-5 relative bg-[#292929] rounded-lg;
 }
 
 .item-select-button {

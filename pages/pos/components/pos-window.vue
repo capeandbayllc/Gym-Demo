@@ -1,7 +1,7 @@
 <template>
     <div class="pos-window-container">
         <div class="pos-window">
-            <PosWindowHeader />
+            <PosWindowHeader @person-selected="selectPurchaser" />
             <div
                 class="flex flex-col lg:flex-row gap-10 lg:gap-5 justify-between"
             >
@@ -21,6 +21,7 @@
         </div>
     </div>
     <PosFooter />
+    <!-- <PosMemberSearch /> -->
 </template>
 
 <script setup>
@@ -28,14 +29,12 @@ import PosWindowHeader from "./pos-window-header.vue";
 import PosProductsPane from "./pos-products-pane.vue";
 import PosInvoicePane from "./pos-invoice-pane.vue";
 import PosFooter from "./pos-footer.vue";
+import PosMemberSearch from "./pos-member-search.vue";
 
 const props = defineProps({
     member: {
         type: Object,
-        // default: null,
-        default: {
-            name: "Member Name",
-        },
+        default: null,
     },
 });
 
@@ -68,6 +67,11 @@ const decrementProductQuantity = (item) => {
 const cancelSale = () => {
     cart.value = [];
     purchaser.value = null;
+};
+
+const selectPurchaser = (data) => {
+    console.log(Date.parse(data.created), data);
+    purchaser.value = data;
 };
 </script>
 
