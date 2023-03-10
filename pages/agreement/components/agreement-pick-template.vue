@@ -10,7 +10,6 @@ export default defineComponent({
     setup(props, { emit }) {
 
         const selectFile = (e)=>{
-            console.clear()
             console.log(e)
             emit("next")
         };
