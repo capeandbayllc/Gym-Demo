@@ -9,14 +9,15 @@
                     class="text-[0.8rem] w-60 rounded-md py-2 px-3 text-black"
                 />
             </div>
-            <select-box
+            <select-box-radio
                 :items="categoriesFilter"
-                value="0"
+                :value="selectedCatgoryOption"
                 :label="'Categories'"
                 :secondary="true"
+                :onChange="onSelectedCategoryChange"
                 class="w-40 text-[0.9rem] my-auto"
             >
-            </select-box>
+            </select-box-radio>
         </div>
         <div class="max-h-[20vh] lg:max-h-full h-full">
             <div
@@ -85,6 +86,7 @@ const props = defineProps({
 
 const emit = defineEmits(["add-product-item-to-cart"]);
 
+const selectedCatgoryOption = ref("0");
 const showProducts = ref(false);
 const selectedSubcategory = ref({
     items: [],
@@ -131,6 +133,10 @@ const addProductToCart = (itemIndex) => {
             emit("add-product-item-to-cart", item);
         }
     }
+};
+
+const onSelectedCategoryChange = (value) => {
+    selectedCatgoryOption.value = value;
 };
 
 const categoriesFilter = [

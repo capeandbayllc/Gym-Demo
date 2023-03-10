@@ -20,8 +20,30 @@
             </div>
         </div>
     </div>
-    <PosFooter />
-    <!-- <PosMemberSearch /> -->
+    <PosFooter
+        @add-product-modal="showAddProductModal"
+        @add-category-modal="showAddCategoryModal"
+        @remove-product-modal="showRemoveProductModal"
+        @remove-category-modal="showRemoveCategoryModal"
+    />
+    <daisy-modal :overlay="true" id="addProductModal" ref="addProductModal">
+        <PosAddProduct />
+    </daisy-modal>
+    <daisy-modal
+        :overlay="true"
+        id="addCategoryModal"
+        ref="addCategoryModal"
+    ></daisy-modal>
+    <daisy-modal
+        :overlay="true"
+        id="removeProductModal"
+        ref="removeProductModal"
+    ></daisy-modal>
+    <daisy-modal
+        :overlay="true"
+        id="removeCategoryModal"
+        ref="removeCategoryModal"
+    ></daisy-modal>
 </template>
 
 <script setup>
@@ -29,7 +51,7 @@ import PosWindowHeader from "./pos-window-header.vue";
 import PosProductsPane from "./pos-products-pane.vue";
 import PosInvoicePane from "./pos-invoice-pane.vue";
 import PosFooter from "./pos-footer.vue";
-import PosMemberSearch from "./pos-member-search.vue";
+import PosAddProduct from "./pos-add-product.vue";
 
 const props = defineProps({
     member: {
@@ -40,6 +62,10 @@ const props = defineProps({
 
 const cart = ref([]);
 const purchaser = ref(props.member);
+const addProductModal = ref(null);
+const addCategoryModal = ref(null);
+const removeProductModal = ref(null);
+const removeCategoryModal = ref(null);
 
 const addProductToCart = (item) => {
     cart.value.push({
@@ -72,6 +98,19 @@ const cancelSale = () => {
 const selectPurchaser = (data) => {
     console.log(Date.parse(data.created), data);
     purchaser.value = data;
+};
+
+const showAddProductModal = () => {
+    addProductModal.value.open();
+};
+const showAddCategoryModal = () => {
+    addCategoryModal.value.open();
+};
+const showRemoveProductModal = () => {
+    removeProductModal.value.open();
+};
+const showRemoveCategoryModal = () => {
+    removeCategoryModal.value.open();
 };
 </script>
 

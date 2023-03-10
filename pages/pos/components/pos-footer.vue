@@ -1,26 +1,48 @@
 <template>
     <div class="pos-footer">
-        <div class="pos-button-item group">
+        <div class="pos-button-item group" @click="showAddProductModal">
             <PlusIcon class="pos-add-icon" />
             <span class="pos-add-text">Product</span>
         </div>
-        <div class="pos-button-item group">
+        <div class="pos-button-item group" @click="showAddCategoryModal">
             <PlusIcon class="pos-add-icon" />
             <span class="pos-add-text">Category</span>
         </div>
-        <div class="pos-button-item group">
+        <div class="pos-button-item group" @click="showRemoveProductModal">
             <MinusIcon class="pos-remove-icon" />
             <span class="pos-remove-text">Product</span>
         </div>
-        <div class="pos-button-item group">
+        <div class="pos-button-item group" @click="showRemoveCategoryModal">
             <MinusIcon class="pos-remove-icon" />
             <span class="pos-remove-text">Category</span>
         </div>
     </div>
 </template>
+
 <script setup>
 import { PlusIcon, MinusIcon } from "~~/components/icons";
+
+const emit = defineEmits([
+    "add-product-modal",
+    "add-category-modal",
+    "remove-product-modal",
+    "remove-category-modal",
+]);
+
+const showAddProductModal = () => {
+    emit("add-product-modal");
+};
+const showAddCategoryModal = () => {
+    emit("add-category-modal");
+};
+const showRemoveProductModal = () => {
+    emit("remove-product-modal");
+};
+const showRemoveCategoryModal = () => {
+    emit("remove-category-modal");
+};
 </script>
+
 <style scoped>
 .pos-footer {
     @apply flex flex-col md:flex-row gap-8 px-10 py-[7px] md:h-[3rem] w-[80%] bg-[#191919]/[0.6] mx-auto rounded-xl md:rounded-b-full;
