@@ -1,8 +1,10 @@
 <template>
-    <div class="overflow-y-auto max-w-[90vw] mx-auto">
+    <div class="max-w-[90vw] mx-auto">
         <table class="border-separate">
-            <table-header :columns="columns"/>
+          <div class="overflow-y-auto">
+            <table-header :columns="columns" :stickyHeader="stickyHeader"/>
             <table-body v-if="!rowComponent"/>
+
             <tbody>
                 <component
                     v-for="item in data"
@@ -11,6 +13,7 @@
                     :data="item"
                 />
             </tbody>
+          </div>
         </table>
     </div>
 </template>
@@ -32,6 +35,10 @@ const props = defineProps({
         type: Array,
         default: [],
     },
-    rowComponent: Object
+    rowComponent: Object,
+    stickyHeader:{
+      type: Boolean,
+      default: false
+    }
 });
 </script>

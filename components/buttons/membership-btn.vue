@@ -11,7 +11,7 @@
 </template>
 <style scoped>
     .membership-btn {
-        @apply flex items-center justify-center capitalize btn btn-sm w-full;
+        @apply flex items-center justify-center capitalize btn btn-xs w-full rounded-xl;
 
         .edit-icon {
             @apply absolute h-5 w-5;

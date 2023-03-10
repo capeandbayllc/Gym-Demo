@@ -2,12 +2,15 @@
     <div class="engage-call-list-container">
         <!-- <h3>Call List</h3> -->
         <h3 class="text-secondary">Upgrades:</h3>
+
         <data-table
             :columns="columns"
             :data="data"
             :row-component="CallListItem"
-            class="h-80 overflow-y-auto text-xs"
+            :stickyHeader="true"
+            class="h-80 text-xs "
         />
+
     </div>
 </template>
 <style scoped>
@@ -21,28 +24,28 @@
 <script setup>
 import CallListItem from './call-list-item.vue';
 
-const columns = ["Name", "Location", "Contacted", "Membership Type", "Date Upgraded", ""]
+const columns = ["","Name", "Location", "", "Membership Type", "Date Upgraded", ""]
 const data = [{
     id: 1,
     avatar: "/account.png",
     name: "Sandy Lin",
-    location: "Location",
+    location: "Tru Fit Ware Road",
     date: "1.02.22",
-    membership: "platinum",
+    membership: "silver",
     call_type: 'Call'
 }, {
     id: 2,
     avatar: "/account.png",
     name: "Randy Portis",
-    location: "Location",
+    location: "Tru Fit San Angelo",
     date: "1.02.22",
-    membership: "platinum",
+    membership: "gold",
     call_type: 'Email'
 }, {
     id: 3,
     avatar: "/account.png",
     name: "Tess Hightower",
-    location: "Location",
+    location: "Tru Fit University",
     date: "1.02.22",
     membership: "platinum",
     call_type: 'In-Club'
@@ -50,15 +53,15 @@ const data = [{
     id: 4,
     avatar: "/account.png",
     name: "Sandy Lin",
-    location: "Location",
+    location: "Tru Fit Lubbock 4Th Street",
     date: "1.02.22",
-    membership: "platinum",
+    membership: "bronze",
     call_type: 'Call'
 }, {
     id: 5,
     avatar: "/account.png",
     name: "Randy Portis",
-    location: "Location",
+    location: "Tru Fit Sa Bandera",
     date: "1.02.22",
     membership: "platinum",
     call_type: 'Email'
@@ -66,9 +69,9 @@ const data = [{
     id: 6,
     avatar: "/account.png",
     name: "Tess Hightower",
-    location: "Location",
+    location: "Tru Fit Harlingen",
     date: "1.02.22",
-    membership: "platinum",
+    membership: "gold",
     call_type: 'In-Club'
 }]
 </script>
