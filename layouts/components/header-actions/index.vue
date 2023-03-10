@@ -1,6 +1,6 @@
 <template>
-  <div class="header-actions">
-    <!-- <Button outline size="sm" class="hover:text-secondary"><pos-icon />POS</Button>
+    <div class="header-actions">
+        <!-- <Button outline size="sm" class="hover:text-secondary"><pos-icon />POS</Button>
 		<Button outline size="sm" class="hover:text-secondary"
 			@click="$emit('show-people-search')"
 		>
@@ -26,19 +26,27 @@
     <!-- <div class="setting-icon">
 			<setting-icon />
 		</div> -->
-<!--    <div class="relative z-10">-->
-<!--      <question-round-icon @click="$emit('show-help')" />-->
-<!--    </div>-->
-    <div class="leader-board-container relative z-10">
-      <button class="w-6">
-        <TrophyIcon @mouseover="openPop" @click="$router.push('/leaderboard')"/>
-      </button>
-        <LeaderPop v-if="showLeaderPop" @close="toggle" class="leader-pop" />
+        <!--    <div class="relative z-10">-->
+        <!--      <question-round-icon @click="$emit('show-help')" />-->
+        <!--    </div>-->
+        <div class="leader-board-container relative z-10">
+            <button class="w-6">
+                <TrophyIcon
+                    @mouseover="openPop"
+                    @click="$router.push('/leaderboard')"
+                />
+            </button>
+            <LeaderPop
+                v-if="showLeaderPop"
+                @close="toggle"
+                @show-leader-board="showLeaderBoard"
+                class="leader-pop"
+            />
+        </div>
+        <div class="!ml-[-40px]">
+            <account-btn @click="$emit('show-profile-menu')" />
+        </div>
     </div>
-    <div class="!ml-[-40px]">
-      <account-btn @click="$emit('show-profile-menu')" />
-    </div>
-  </div>
 </template>
 <style>
 .alert-container:hover svg {
@@ -57,7 +65,7 @@
 /*  @apply rotate-12;*/
 /*}*/
 .leader-board-container:hover .notification {
-  @apply -right-2 left-auto z-10 ease-linear;
+    @apply -right-2 left-auto z-10 ease-linear;
 }
 </style>
 <style scoped>
@@ -78,7 +86,7 @@
 }
 
 .leader-board-container:hover .leader-pop {
-  @apply block;
+    @apply block;
 }
 .alert-container {
   @apply relative -sm:!ml-4;
@@ -88,11 +96,11 @@
   }
 }
 .leader-board-container {
-  @apply relative -sm:!ml-4;
-  .leader-pop {
-    @apply block;
-    right: -8rem;
-  }
+    @apply relative -sm:!ml-4;
+    .leader-pop {
+        @apply block;
+        right: -8rem;
+    }
 }
 </style>
 <script setup>
@@ -105,7 +113,7 @@ import AccountBtn from "./account-btn.vue";
 import AlertList from "./alert-list.vue";
 import LeaderPop from "~/layouts/components/leader-board/popup.vue";
 import UserAddMenu from "./user-add-menu.vue";
-import TrophyIcon from "~/components/icons/trophy.vue"
+import TrophyIcon from "~/components/icons/trophy.vue";
 
 const userMenu = ref(null);
 const globalSearchInput = ref("");
@@ -113,17 +121,22 @@ const showFocus = () => {
   globalSearchInput.value.style = "";
   globalSearchInput.value.focus();
 };
+
+const emit = defineEmits(["show-leader-board"]);
+const showLeaderBoard = () => {
+    emit("show-leader-board");
+};
 const hideFocus = () => {
   globalSearchInput.value.blur();
 };
 const showLeaderPop = ref(false);
 const toggle = () => {
-  showLeaderPop.value = !showLeaderPop.value;
-  console.log("toggle");
+    showLeaderPop.value = !showLeaderPop.value;
+    console.log("toggle");
 };
 const openPop = () => {
-  showLeaderPop.value = true;
-}
+    showLeaderPop.value = true;
+};
 
 const showUserMenu = () => userMenu.value.open();
 const user = useState('auth');

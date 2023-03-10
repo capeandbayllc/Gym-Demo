@@ -38,9 +38,6 @@
     @apply flex flex-col px-4 pt-6 items-center;
     .collapse-icon {
         @apply scale-150 self-end cursor-pointer;
-        @screen 3xl {
-            @apply hidden;
-        }
     }
     .mem-checkin-btn {
         @apply w-fit px-4 py-2 my-4 font-semibold border border-accent-focus hover:bg-accent-focus/80 rounded cursor-pointer;
