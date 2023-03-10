@@ -26,7 +26,7 @@ import { PlusIcon, MinusIcon } from "~~/components/icons";
     @apply flex flex-row gap-8 px-10 py-[7px] h-[3rem] w-[80%] bg-[#191919]/[0.6] mx-auto rounded-b-full;
 }
 .pos-button-item {
-    @apply flex flex-row gap-2 text-[0.9rem] cursor-pointer;
+    @apply flex flex-row gap-2 text-[0.7rem] lg:text-[0.9rem] cursor-pointer;
 }
 .pos-button-transition {
     @apply transition-all duration-300 rounded-full;

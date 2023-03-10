@@ -2,15 +2,19 @@
     <div class="pos-invoice-pane">
         <div class="flex flex-row gap-5 justify-between">
             <div class="flex flex-row gap-4 w-full">
-                <div class="group pos-member-image-container">
+                <div
+                    class="group pos-member-image-container"
+                    v-if="purchaser"
+                    @click="cancelSale"
+                >
                     <PersonIcon class="pos-member-image" />
                     <div class="pos-sale-cancel-container">
                         <span class="pos-sale-cancel-text">Cancel Sale</span>
                     </div>
                 </div>
-                <div class="my-auto flex flex-col gap-1">
+                <div class="my-auto flex flex-col gap-1" v-if="purchaser">
                     <h5 class="text-[1.2rem] tracking-wide font-light">
-                        Some member
+                        {{ purchaser.name }}
                     </h5>
                     <div>
                         <div class="text-[0.7rem]">Member since 1700</div>
@@ -39,7 +43,9 @@
                 <span class="w-[15%]">Total</span>
                 <span class="w-[5%]"></span>
             </div>
-            <div class="flex flex-col h-[30vh] overflow-scroll scrollbar-hide">
+            <div
+                class="flex flex-col h-[15vh] lg:h-[25vh] overflow-scroll scrollbar-hide"
+            >
                 <div
                     class="flex flex-row justify-between px-6 py-[2px] text-[0.8rem]"
                     v-for="item in cart"
@@ -75,7 +81,13 @@
                             ).toFixed(2)
                         }}
                     </span>
-                    <span class="w-[5%]"></span>
+                    <span class="w-[5%]">
+                        <span
+                            class="flex flex-row w-5 h-5 rounded-full bg-secondary border-secondary justify-center"
+                        >
+                            <span class="mx-auto">%</span>
+                        </span>
+                    </span>
                 </div>
             </div>
         </div>
@@ -110,11 +122,15 @@ const props = defineProps({
     cart: {
         type: Array,
     },
+    purchaser: {
+        type: Object,
+    },
 });
 
 const emit = defineEmits([
     "increment-product-quantity",
     "decrement-product-quantity",
+    "cancel-sale",
 ]);
 
 const calculateCartTotal = () => {
@@ -154,11 +170,15 @@ const incrementProductQuantity = (item) => {
 const decrementProductQuantity = (item) => {
     emit("decrement-product-quantity", item);
 };
+
+const cancelSale = () => {
+    emit("cancel-sale");
+};
 </script>
 
 <style scoped>
 .pos-invoice-pane {
-    @apply w-[calc(50%-1.25rem)] flex flex-col gap-5;
+    @apply lg:w-[calc(50%-1.25rem)] flex flex-col gap-5;
 }
 
 .pos-member-image-container {
@@ -190,7 +210,7 @@ const decrementProductQuantity = (item) => {
 }
 
 .pos-invoice-items-table {
-    @apply w-full rounded-md border-[1px] bg-[#191919] text-[0.8rem] flex flex-col gap-2 min-h-[30vh] font-light tracking-wide;
+    @apply w-full rounded-md border-[1px] bg-[#191919] text-[0.8rem] flex flex-col gap-2 max-h-[15vh] lg:min-h-[25vh] font-light tracking-wide;
 }
 
 .pos-ivoice-items-quantity-button {

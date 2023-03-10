@@ -1,6 +1,8 @@
 <template>
     <div class="pos-products-pane-container">
-        <div class="flex flex-row gap-5">
+        <div
+            class="flex flex-row-reverse lg:flex-row gap-5 w-full justify-between lg:w-auto"
+        >
             <div>
                 <input
                     placeholder="Search Products"
@@ -16,51 +18,56 @@
             >
             </select-box>
         </div>
-        <div
-            class="w-full flex flex-col gap-1 scrollbar-hide z-30 pos-style-transition"
-            :class="{
-                'h-[60vh]': showProducts,
-                'h-[0vh]': !showProducts,
-            }"
-        >
-            <span
-                class="ml-auto text-[0.7rem] hover:text-secondary cursor-pointer pos-style-transition mr-1"
+        <div class="max-h-[20vh] lg:max-h-full h-full">
+            <div
+                class="w-full flex flex-col gap-1 scrollbar-hide z-30 pos-style-transition"
                 :class="{
-                    'text-[0.7rem]': showProducts,
-                    'text-[0rem]': !showProducts,
+                    'h-full lg:h-[60vh]': showProducts,
+                    'h-[0vh]': !showProducts,
                 }"
-                @click="collapseProductItemsPane()"
             >
-                Collapse
-            </span>
-            <div class="bg-[#191919] h-full">
-                <PosProductItems
-                    :items="selectedSubcategory.items"
-                    :cart="cart"
-                    @add-product-item-to-cart="addProductToCart"
-                />
-            </div>
-        </div>
-        <div
-            class="pos-products-pane"
-            :class="{
-                'h-[60vh]': !showProducts,
-                'h-[0vh]': showProducts,
-            }"
-        >
-            <div class="" v-for="(category, catIndex) in inventoryCategories">
-                <h3 class="text-[1.2rem] my-3 font-light tracking-wider">
-                    {{ category.title }}
-                </h3>
-                <div class="pos-product-category">
-                    <PosSubcategory
-                        v-for="(
-                            subcategory, subIndex
-                        ) in category.subcategories"
-                        :title="subcategory.title"
-                        :icon="subcategory.icon"
-                        @click="showProductItemsPane(catIndex, subIndex)"
+                <span
+                    class="ml-auto text-[0.7rem] hover:text-secondary cursor-pointer pos-style-transition mr-1"
+                    :class="{
+                        'text-[0.7rem]': showProducts,
+                        'text-[0rem]': !showProducts,
+                    }"
+                    @click="collapseProductItemsPane()"
+                >
+                    Collapse
+                </span>
+                <div class="bg-[#191919] h-full">
+                    <PosProductItems
+                        :items="selectedSubcategory.items"
+                        :cart="cart"
+                        @add-product-item-to-cart="addProductToCart"
                     />
+                </div>
+            </div>
+            <div
+                class="pos-products-pane"
+                :class="{
+                    'h-full lg:h-[60vh]': !showProducts,
+                    'h-[0vh]': showProducts,
+                }"
+            >
+                <div
+                    class=""
+                    v-for="(category, catIndex) in inventoryCategories"
+                >
+                    <h3 class="text-[1.2rem] my-3 font-light tracking-wider">
+                        {{ category.title }}
+                    </h3>
+                    <div class="pos-product-category">
+                        <PosSubcategory
+                            v-for="(
+                                subcategory, subIndex
+                            ) in category.subcategories"
+                            :title="subcategory.title"
+                            :icon="subcategory.icon"
+                            @click="showProductItemsPane(catIndex, subIndex)"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -148,7 +155,7 @@ const categoriesFilter = [
 
 <style scoped>
 .pos-products-pane-container {
-    @apply w-[calc(50%-1.25rem)] flex flex-col gap-5;
+    @apply lg:w-[calc(50%-1.25rem)] flex flex-col gap-5;
 }
 .pos-products-pane {
     @apply overflow-y-scroll relative pos-style-transition;

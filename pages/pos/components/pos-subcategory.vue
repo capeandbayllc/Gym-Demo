@@ -30,7 +30,7 @@ const props = defineProps({
     @apply w-[calc(100%-2px)] h-[67px] absolute top-[1px] left-[1px] flex flex-col justify-center  pos-style-transition;
 }
 .pos-subcategory-title {
-    @apply mx-auto text-[0.9rem] w-[50%] text-center group-hover:text-secondary pos-style-transition relative font-[300] tracking-wider;
+    @apply mx-auto text-[0.9rem] w-[50%] line-clamp-2 text-center group-hover:text-secondary pos-style-transition relative font-[300] tracking-wider;
 }
 .pos-style-transition {
     @apply transition-all duration-300 ease-linear;
