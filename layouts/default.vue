@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="transition-all duration-200 ease-linear">
-                <side-bar />
+               <side-bar />
             </div>
         </div>
         <ChatConversation />
