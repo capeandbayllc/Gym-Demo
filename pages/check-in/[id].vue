@@ -29,7 +29,7 @@
               </ul>
               <UserInfo v-if="detailView == 'memberinfo'"/>
               <Setting v-if="detailView == 'setting'"/>
-              <button v-if="detailView !== null" class="mx-auto p-4 w-full" @click="backToTop">Back to Top</button>
+              
             </div>
           </div>
         </div>
@@ -118,19 +118,18 @@ watch(option,()=>{
   
 })
 
-onMounted(()=>{
+onMounted(() => {
   if(profileId){
-    detailView.value = 'profile';
-   
-    //For Scroll 
-    const script = document.createElement('script')
-    script.src = 'https://code.jquery.com/jquery-3.6.0.min.js'
-    script.onload = () => {
-    $('html, body').animate({ scrollTop: '550px' }, 800)
-    }
-    document.head.appendChild(script)
+  detailView.value = 'profile';
+    setTimeout(() => {
+      window.scroll({
+        top: 600,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }, 0);
   }
-})
+});
 
 
 const showEngageModal = () => {
@@ -148,14 +147,7 @@ const changeDetailView = (view)=> {
   }
 };
 
-const backToTop = ()=>{
-  const appLayout = document.querySelector(".app-layout");
-  appLayout.scroll({
-    top: 0,         
-    left: 0, 
-    behavior: 'smooth' 
-  });
-}
+
 
 const subSections = [
   { key: "profile", component: Profile },

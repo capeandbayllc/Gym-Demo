@@ -29,22 +29,51 @@
 </template>
 <script setup>
 
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+
 const isActiveMember = ref(false);
 const memberInfo = ref({});
 const demographicsObj = ref({})
 
 const route = useRoute()
-const profileObject = ref(JSON.parse(route.query.data))
+const profileId = ref(route.params.id)
+const profileObjectData = ref({});
 
- 
-onMounted( () => {
-    if(profileObject){
-        memberInfo.value.firstName = profileObject.value.firstName;
-        memberInfo.value.lastName = profileObject.value.lastName;
-        demographicsObj.value.streetAddress = profileObject.value.homeLocation;
-        demographicsObj.value.emailAddress = profileObject.value.email;
+const query = gql`
+  query SingleMember($id: ID) {
+    member(id: $id) {
+      id
+      first_name
+      last_name
+      email
+      primary_phone
+      locations {
+        id
+        name
+      }
+      homeLocation {
+        name
+      }
+      created_at
     }
-})
+  }
+`;
+
+const { result } = useQuery(query, {
+    variables: { id: profileId },
+  });
+
+
+watchEffect(() => {
+    if (result.value) {
+        profileObjectData.value = result.value
+        memberInfo.value.firstName = profileObjectData.value.member.first_name;
+        memberInfo.value.lastName = profileObjectData.value.member.last_name;
+        demographicsObj.value.streetAddress = profileObjectData.value.member.homeLocation.name;
+        demographicsObj.value.emailAddress = profileObjectData.value.member.email;
+    }
+});
 
 
 const memberInformation = [{

@@ -29,7 +29,9 @@
           class="dropdown-content menu p-2 shadow bg-black rounded w-52 items-start"
         >
           <div class="dropdown-item" tabindex="-1">Preview</div>
-          <div class="dropdown-item" tabindex="-1">Edit</div>
+          <div class="dropdown-item" tabindex="-1">
+            <NuxtLink :to="{ path: '/check-in/' +  data.id }" >Edit</NuxtLink>
+          </div>
           <div class="dropdown-item" tabindex="-1">Trash</div>
           <div class="" tabindex="-1">
             <div class="dropdown dropdown-left dropdown-end dropdown-hover contact-menu">

@@ -84,7 +84,7 @@ import MemberTableRow from "./components/member-table-row.vue";
 
 const query = gql`
   query AllMembers {
-    members(first: 100) {
+    members(first: 10) {
       data {
         id
         first_name
@@ -110,7 +110,6 @@ const query = gql`
 `;
 
 const { result } = useQuery(query);
-console.log("members data", result)
 const isSearchEnable = ref(false);
 const filterBy = [
   {
