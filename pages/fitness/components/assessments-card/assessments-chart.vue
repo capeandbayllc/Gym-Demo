@@ -44,10 +44,12 @@ const options = {
             expandOnClick: false,
             donut: {
                 background: '#0074c863',
+                
                 labels: {
                     show: true,
                     name: {
                         show: true,
+                        offsetY: 15,
                     },
                     value: {
                         show: false,

@@ -13,7 +13,7 @@
 .page-fitness-container {
     @apply py-4 pr-5 w-full h-fit;
     .page-content {
-        @apply text-center text-secondary p-6 border-[#1b70b1] border-2 rounded-[] bg-[#054171] ;
+        @apply text-center text-secondary p-6 border-[#1b70b1] border-2 rounded-[26px] bg-[#054171] ;
     }
 }
 </style>
