@@ -7,7 +7,11 @@
         <td>
             <div class="campaign-view">
                 <diagram-icon class="text-accent-focus/80"/>
-                <Button secondary class="text-base-content" size="xs">View</Button>
+                <Button secondary class="text-base-content" size="xs" @click.stop="openCampaignDetailModal">View</Button>
+
+                <DaisyModal ref="campaignDetailModalRef">
+                    <CampaignDetailsModal @close="closeCampaignDetailModal"></CampaignDetailsModal>
+                </DaisyModal>
             </div>
         </td>
         <td>
@@ -64,6 +68,7 @@
 </style>
 <script setup>
 import DiagramIcon from "./diagram-icon.vue"
+import CampaignDetailsModal from "../campaign-details/index.vue";
 
 const props = defineProps({
     data: Object
@@ -76,4 +81,13 @@ const items = [{
     value: 'completed',
     label: 'Completed'
 }]
+
+const campaignDetailModalRef = ref(null);
+
+const openCampaignDetailModal = () => {
+    campaignDetailModalRef.value.open();
+}
+const closeCampaignDetailModal = () => {
+    campaignDetailModalRef.value.close();
+}
 </script>
