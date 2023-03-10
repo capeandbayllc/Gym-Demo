@@ -103,7 +103,7 @@ const props = defineProps({
 
 
 const route = useRoute()
-const profileId = ref(route.params.id)
+const profileId = (route.params.id)
 
 watch(option,()=>{
   const appLayout = document.querySelector(".app-layout");
@@ -120,6 +120,7 @@ watch(option,()=>{
 
 onMounted(() => {
   if(profileId){
+
   detailView.value = 'profile';
     setTimeout(() => {
       window.scroll({

@@ -37,8 +37,10 @@ const memberInfo = ref({});
 const demographicsObj = ref({})
 
 const route = useRoute()
-const profileId = ref(route.params.id)
+const profileId = (route.params.id)
 const profileObjectData = ref({});
+
+console.log("Profile ID: ", profileId);
 
 const query = gql`
   query SingleMember($id: ID) {
