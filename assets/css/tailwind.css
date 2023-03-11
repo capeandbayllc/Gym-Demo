@@ -54,6 +54,20 @@
     background: linear-gradient(to bottom, rgba(0, 116, 200, 0.75) 0%, rgba(0, 0, 0, 0.2) 100%) rgba(0, 0, 0, 0.35);
     background-blend-mode: multiply;
 }
+
 .page-content {
     @apply mx-auto w-full max-w-[1120px]
+}
+
+.profile-setting-gradient-bg{
+    background: -webkit-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+    background: -o-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+    background: -ms-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+    background: -moz-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+    background: linear-gradient(to bottom, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+    background-blend-mode: multiply;
+}
+
+.border-12 {
+    border-width: 12px;
 }
