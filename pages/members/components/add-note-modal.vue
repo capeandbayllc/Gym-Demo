@@ -30,12 +30,12 @@
                     <p class="mb-2">Today</p>
                     
                     <Note 
-                        v-for="membersNote in result?.membersNotes.data"
-                        :title="membersNote.title"
-                        :month="membersNote.month"
-                        :time="membersNote.time"
-                        :userName="membersNote.userName"
-                        :alert="membersNote.alert"
+                        v-for="Note in result?.notes.data"
+                        :title="Note.note"
+                        month="March 2022"
+                        time="08 PM"
+                        userName="Jone Doe"
+                        :alert="Note.active"
                     />
 
                     
@@ -57,7 +57,6 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useMutation, useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-import { MembersNoteFactory } from "~~/api/data/membersNote/MembersNoteFactory";
 import { NewAgreementIcon } from '~~/components/icons';
 import Folder from "./folder.vue";
 import NoteForm from "./note-form.vue";
@@ -70,15 +69,14 @@ const props = defineProps({
 const emit = defineEmits(['saveNote']);
 
 const query = gql`
-    query MembersNotes {
-        membersNotes(first: 100) {
+    query Notes {
+      notes(first: 10) {
         data {
           id
-          title
-          month
-          time
-          userName
-          alert
+          note
+          active
+          read
+          entity_type
         }
         paginatorInfo {
           count
@@ -90,31 +88,26 @@ const query = gql`
   `;
  
   const { result } = useQuery(query);
-  console.log("potentialLeadsResult", result)
   const mutation = gql`
-    mutation CreateMemberNote($input: MembersNoteInput!) {
-        createMemberNote(input: $input) {
-        id
-        title
-        userName
+    mutation CreateNote($input: CreateNoteInput!) {
+      createNote(input: $input) {
+        note
+        active
+        read
       }
     }
   `;
   
   
   const addRandomMembersNote = async () => {
-    const variables = new MembersNoteFactory().build("test");
-    const { mutate } = useMutation(mutation, {
+   const { mutate } = useMutation(mutation, {
       refetchQueries: [
         { query },
-        "MembersNotes", 
+        "Notes", 
       ],
     });
   
-    const response = await mutate({ input: variables });
-    
-    emit('saveNote');
-
+   emit('saveNote');
   };
 
  

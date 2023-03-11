@@ -44,7 +44,7 @@
             </div>
           </div>
           <div
-              class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary"
+              class="dropdown-item"
               tabindex="-1" @click.stop="openNoteModal"
             >
             Add a Note
@@ -94,12 +94,12 @@
 }
 </style>
 <script setup>
-import MembershipBtn from "~~/components/buttons/membership-btn.vue";
-import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
+import AddonBtn from "~~/components/buttons/addon-btn.vue";
+import MembershipBtn from "~~/components/buttons/membership-btn.vue";
 import addNoteModel from './add-note-modal.vue';
 
 library.add(faEllipsisH);
