@@ -23,7 +23,7 @@
             <div
                 class="w-full flex flex-col gap-1 scrollbar-hide z-30 pos-style-transition"
                 :class="{
-                    'h-full lg:h-[60vh]': showProducts,
+                    'h-full lg:h-[62vh]': showProducts,
                     'h-[0vh]': !showProducts,
                 }"
             >
@@ -48,7 +48,7 @@
             <div
                 class="pos-products-pane"
                 :class="{
-                    'h-full lg:h-[60vh]': !showProducts,
+                    'h-full lg:h-[62vh]': !showProducts,
                     'h-[0vh]': showProducts,
                 }"
             >
@@ -56,7 +56,7 @@
                     class=""
                     v-for="(category, catIndex) in inventoryCategories"
                 >
-                    <h3 class="text-[1.2rem] my-3 font-light tracking-wider">
+                    <h3 class="text-[1.1rem] my-3 font-light tracking-wider">
                         {{ category.title }}
                     </h3>
                     <div class="pos-product-category">
@@ -78,10 +78,11 @@
 <script setup>
 import PosSubcategory from "./pos-subcategory.vue";
 import PosProductItems from "./pos-product-items.vue";
-import { inventoryCategories } from "../helpers/pos-items";
 
 const props = defineProps({
-    cart: {},
+    cart: { type: Array },
+    inventory: { type: Array },
+    inventoryCategories: { type: Array },
 });
 
 const emit = defineEmits(["add-product-item-to-cart"]);
@@ -104,10 +105,16 @@ const collapseProductItemsPane = () => {
 };
 
 const showProductItemsPane = (categoryIndex, subcategoryIndex) => {
+    const category = props.inventoryCategories[categoryIndex].title;
+    const subcategory =
+        props.inventoryCategories[categoryIndex].subcategories[subcategoryIndex]
+            .title;
+
     selectedSubcategory.value = {
-        items: inventoryCategories[categoryIndex].subcategories[
-            subcategoryIndex
-        ].items,
+        items: props.inventory.filter(
+            (item) =>
+                item.category === category && item.subcategory === subcategory
+        ),
         categoryIndex,
         subcategoryIndex,
     };
@@ -119,10 +126,17 @@ const addProductToCart = (itemIndex) => {
         selectedSubcategory.value.categoryIndex !== null &&
         selectedSubcategory.value.subcategoryIndex !== null
     ) {
-        const item =
-            inventoryCategories[selectedSubcategory.value.categoryIndex]
+        const category =
+            props.inventoryCategories[selectedSubcategory.value.categoryIndex]
+                .title;
+        const subcategory =
+            props.inventoryCategories[selectedSubcategory.value.categoryIndex]
                 .subcategories[selectedSubcategory.value.subcategoryIndex]
-                .items[itemIndex];
+                .title;
+        const item = props.inventory.filter(
+            (item) =>
+                item.category === category && item.subcategory === subcategory
+        )[itemIndex];
 
         if (
             item.available > 0 &&

@@ -8,11 +8,11 @@
             <PlusIcon class="pos-add-icon" />
             <span class="pos-add-text">Category</span>
         </div>
-        <div class="pos-button-item group" @click="showRemoveProductModal">
+        <div class="pos-button-item group" @click="removeProductModal">
             <MinusIcon class="pos-remove-icon" />
             <span class="pos-remove-text">Product</span>
         </div>
-        <div class="pos-button-item group" @click="showRemoveCategoryModal">
+        <div class="pos-button-item group" @click="removeCategoryModal">
             <MinusIcon class="pos-remove-icon" />
             <span class="pos-remove-text">Category</span>
         </div>
@@ -35,10 +35,10 @@ const showAddProductModal = () => {
 const showAddCategoryModal = () => {
     emit("add-category-modal");
 };
-const showRemoveProductModal = () => {
+const removeProductModal = () => {
     emit("remove-product-modal");
 };
-const showRemoveCategoryModal = () => {
+const removeCategoryModal = () => {
     emit("remove-category-modal");
 };
 </script>

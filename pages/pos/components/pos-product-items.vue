@@ -14,11 +14,13 @@
                     <img class="w-[64px] h-auto" :src="item.image" />
                 </div>
                 <div class="flex flex-col my-auto">
-                    <h4 class="mb-1 line-clamp-1">{{ item.name }}</h4>
-                    <span class="text-[0.7rem] line-clamp-1"
+                    <h4 class="mb-1 text-[0.9rem] line-clamp-1">
+                        {{ item.name }}
+                    </h4>
+                    <span class="text-[0.6rem] line-clamp-1"
                         >Price: ${{ item.price }}</span
                     >
-                    <span class="text-[0.7rem] line-clamp-1"
+                    <span class="text-[0.6rem] line-clamp-1"
                         >Category: {{ item.category }}</span
                     >
                 </div>
@@ -95,7 +97,7 @@ const isItemInCart = (item) =>
 }
 
 .item-select-button {
-    @apply border-[1px] rounded my-auto px-2 py-1 text-[0.9rem] hover:bg-secondary pos-style-transition w-[59px];
+    @apply border-[1px] rounded my-auto px-2 py-1 text-[0.8rem] hover:bg-secondary pos-style-transition w-[59px];
 }
 
 .item-select-slider {

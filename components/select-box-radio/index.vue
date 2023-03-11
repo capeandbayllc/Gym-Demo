@@ -7,7 +7,7 @@
                 'bg-white text-[#292929]': !secondary,
                 'rounded-t-md': !isCollapsed,
                 'rounded-md': isCollapsed,
-                'font-light tracking-wide !py-[18px] text-black w-full !border-[0px]':
+                'font-light tracking-wide !py-[17px] text-black w-full !border-[0px] text-[0.9rem]':
                     formInput,
                 'py-1 border ': !formInput,
             }"
