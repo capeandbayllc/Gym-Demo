@@ -81,7 +81,7 @@ const menu = [
       },
       {
         label: "Settings",
-        url: '/mass-com',
+        url: '/profile-setting',
       },
       {
         label: "User Management",

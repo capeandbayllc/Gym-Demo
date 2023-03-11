@@ -71,6 +71,54 @@ const toggleCollapse = () => {
 
 let navItems = shallowRef([]);
 
+const reporting = [
+    {
+      label: "Financial Reporting",
+      icon: ReportIcon,
+      url: "/#",
+    },
+    {
+      label: "Communications",
+      url: "/#",
+      icon: MassComIcon,
+    },
+    {
+      label: "Favorites",
+      url: "/#",
+      icon: FavoriteCircleIcon,
+    },
+    {
+      label: "Point Of Sale",
+      url: "/#",
+      icon: PosIcon,
+    },
+    {
+      label: "Fitness",
+      url: "/#",
+      icon: FitnessIcon,
+    },
+    {
+      label: "KPIS",
+      url: "/#",
+      icon: SpeedMeterIcon,
+    },
+    {
+      label: "Employee Tracking",
+      url: "/#",
+      icon: LocationIcon,
+    },
+    {
+      label: "Company Inbox",
+      url: "/#",
+      icon: DownloadIcon,
+    },
+    {
+      label: "Marketing",
+      url: "/#",
+      icon: MarketingIcon,
+    },
+];
+
 const navList = [
     {
         type: "reporting",
@@ -79,51 +127,7 @@ const navList = [
                 icon: WidgetIcon,
                 url: "/#",
             },
-            {
-                label: "Financial Reporting",
-                icon: ReportIcon,
-                url: "/#",
-            },
-            {
-                label: "Communications",
-                url: "/#",
-                icon: MassComIcon,
-            },
-            {
-                label: "Favorites",
-                url: "/#",
-                icon: FavoriteCircleIcon,
-            },
-            {
-                label: "Point Of Sale",
-                url: "/#",
-                icon: PosIcon,
-            },
-            {
-                label: "Fitness",
-                url: "/#",
-                icon: FitnessIcon,
-            },
-            {
-                label: "KPIS",
-                url: "/#",
-                icon: SpeedMeterIcon,
-            },
-            {
-                label: "Employee Tracking",
-                url: "/#",
-                icon: LocationIcon,
-            },
-            {
-                label: "Company Inbox",
-                url: "/#",
-                icon: DownloadIcon,
-            },
-            {
-                label: "Marketing",
-                url: "/#",
-                icon: MarketingIcon,
-            },
+            ...reporting
         ],
     },
     {
@@ -521,51 +525,7 @@ const navList = [
     {
         type: "mass-com",
         navigation: [
-            {
-                label: "Financial Reporting",
-                icon: ReportIcon,
-                url: "/#",
-            },
-            {
-                label: "Communications",
-                url: "/#",
-                icon: MassComIcon,
-            },
-            {
-                label: "Favorites",
-                url: "/#",
-                icon: FavoriteCircleIcon,
-            },
-            {
-                label: "Point Of Sale",
-                url: "/#",
-                icon: PosIcon,
-            },
-            {
-                label: "Fitness",
-                url: "/#",
-                icon: FitnessIcon,
-            },
-            {
-                label: "KPIS",
-                url: "/#",
-                icon: SpeedMeterIcon,
-            },
-            {
-                label: "Employee Tracking",
-                url: "/#",
-                icon: LocationIcon,
-            },
-            {
-                label: "Company Inbox",
-                url: "/#",
-                icon: DownloadIcon,
-            },
-            {
-                label: "Marketing",
-                url: "/#",
-                icon: MarketingIcon,
-            },
+            ...reporting
         ],
     },
     {
@@ -597,6 +557,16 @@ const navList = [
                 url: "/#",
             },
         ],
+    },
+    {
+      type: "profile-setting",
+      navigation: [
+        {
+          icon: WidgetIcon,
+          url: "/#",
+        },
+        ...reporting
+      ],
     },
 ];
 
