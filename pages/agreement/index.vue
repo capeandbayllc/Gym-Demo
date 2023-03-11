@@ -12,7 +12,7 @@
                     <span>Create a Pre-Sale</span>
                 </button>
                 <button class="flex flex-col items-center">
-                    <AddIcon class="w-[150px] h-[50px] mb-2" @click="openNewTemplateModal"/>
+                    <AddIcon class="w-[150px] h-[50px] mb-2" />
                     <span>Pick up Template</span>
                 </button>
             </div>
@@ -34,7 +34,7 @@
     </daisy-modal>
     <daisy-modal ref="newAgreementModal" id="newAgreementModal">
         <simple-card class="p-4">
-            <component :is="newAgreementScreens[newAgreementScreenIndex]" @change-type="changeType" @next="nextScreenAgreementModal"></component>
+            <component :is="newAgreementScreens[newAgreementScreenIndex]" @change-type="changeType" @next="nextScreenAgreementModal" ref="newAgreementComponent"></component>
             <div class="flex justify-end mt-6 mb-2">
                 <Button size="sm" class="normal-case mx-2" ghost @click="prevScreenAgreementModal" v-if="newAgreementScreenIndex > 0">Back</Button>
                 <Button size="sm" class="normal-case mx-2 ml-auto" ghost @click="closeNewAgreementModal">Cancel</Button>
@@ -43,7 +43,7 @@
             </div>
         </simple-card>
     </daisy-modal>
-    <daisy-modal ref="newTemplateModal" id="newTemplateModal">
+    <!-- <daisy-modal ref="newTemplateModal" id="newTemplateModal">
         <simple-card class="p-4">
             <component :open="newTemplateIsOpen" :is="newTemplateScreens[newTempalteScreenIndex]" @change-type="changeType" @next="nextScreenTemplateModal" ref="newTemplateComponent"></component>
             <div class="flex justify-end mt-6 mb-2">
@@ -53,7 +53,7 @@
                 <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreenTemplateModal">Continue</Button>
             </div>
         </simple-card>
-    </daisy-modal>
+    </daisy-modal> -->
 </template>
 
 <script setup>
@@ -62,50 +62,80 @@ import FilterActions from './components/filter-actions.vue';
 import AgreementSearchTable from './components/agreement-search-table.vue';
 import AgreementModal from './components/agreement-modal.vue';
 import AgreementTemplate from './components/agreement-template.vue';
-import AgreementPickTemplate from './components/agreement-pick-template.vue';
+import AgreementFileTemplate from './components/agreement-file-template.vue';
 import PaymentSchedule from './components/payment-schedule.vue';
 import PosPaymentAmounts from './components/paos-payment-amounts.vue';
 import ScheduledBilling from './components/scheduled-billing.vue';
+import ContractModal from './components/contract-modal.vue';
+import EditPaymentPlan from './components/edit-payment-plan-modal.vue';
+import AgreementType from './components/agreement-type.vue';
+import SaveModal from './components/save-modal.vue';
+
 
 const searchInput =  ref("");
 const showButtonsAgreement = ref(false);
 const actualCheckboxConfirmId = ref(null);
 
 
+// const newTemplateComponent = ref(null);
+// const newTemplateScreens = ref([AgreementFileTemplate, AgreementTemplate, PaymentSchedule, PosPaymentAmounts, ScheduledBilling]);
+// const newTempalteScreenIndex = ref(0);
+// const newTemplateModal = ref(null);
 
-
-const newTemplateComponent = ref(null);
-const newTemplateScreens = ref([AgreementPickTemplate, AgreementTemplate, PaymentSchedule, PosPaymentAmounts, ScheduledBilling]);
-const newTempalteScreenIndex = ref(0);
-const newTemplateModal = ref(null);
-
-const newAgreementScreens = ref([AgreementModal, AgreementTemplate, PaymentSchedule]);
+const newAgreementComponent = ref(null);
+const newAgreementScreens = ref([AgreementModal, AgreementFileTemplate, AgreementTemplate, PaymentSchedule, PosPaymentAmounts, ScheduledBilling, ContractModal, EditPaymentPlan, AgreementType, SaveModal]);
 const newAgreementScreenIndex = ref(0);
 const newAgreementModal = ref(null);
 
-const showConfirmStatusModal = (event)=>{
-    actualCheckboxConfirmId.value = event;
-    confirmStatusModal.value.open()
-};
 
 const nextScreenAgreementModal = ()=>{
-    newAgreementScreenIndex.value = newAgreementScreenIndex.value < (newAgreementScreens.value.length - 1) ? newAgreementScreenIndex.value + 1 : newAgreementScreenIndex.value;
-    console.log("newAgreementScreenIndex",newAgreementScreenIndex.value)
+    
+    let index = newAgreementScreenIndex.value < (newAgreementScreens.value.length - 1) ? newAgreementScreenIndex.value + 1 : newAgreementScreenIndex.value;
+    if(index == 1){
+        newAgreementModal.value.close()
+    }else{
+        newAgreementModal.value.open()
+    }
+    newAgreementScreenIndex.value = index
 }
 
 const prevScreenAgreementModal = ()=>{
-    newAgreementScreenIndex.value = newAgreementScreenIndex.value > 0 ? newAgreementScreenIndex.value - 1 : newAgreementScreenIndex.value
+    let index = newAgreementScreenIndex.value > 0 ? newAgreementScreenIndex.value - 1 : newAgreementScreenIndex.value
+    if(index == 1){
+        newAgreementModal.value.close()
+    }else{
+        newAgreementModal.value.open()
+    }
+    newAgreementScreenIndex.value = index
 }
 
-const nextScreenTemplateModal = ()=>{
-    newTemplateModal.value.open()
-    newTempalteScreenIndex.value = newTempalteScreenIndex.value < (newTemplateScreens.value.length - 1) ? newTempalteScreenIndex.value + 1 : newTempalteScreenIndex.value;
-    console.log("newTempalteScreenIndex",newTempalteScreenIndex.value)
+const openNewAgreementModal =()=>{
+    if(newAgreementScreenIndex.value == 1){
+        newAgreementComponent.value.openFileInput()
+    }else{
+        newAgreementModal.value.open()
+    }
 }
 
-const prevScreenTemplateModal = ()=>{
-    newTempalteScreenIndex.value = newTempalteScreenIndex.value > 0 ? newTempalteScreenIndex.value - 1 : newTempalteScreenIndex.value
+    
+const closeNewAgreementModal =()=>{
+    newAgreementScreenIndex.value = 0;
+    newAgreementModal.value.close()
 }
+
+const changeType = (type)=>{
+    showButtonsAgreement.value =  type ? true : false;
+}
+
+// const nextScreenTemplateModal = ()=>{
+//     newTemplateModal.value.open()
+//     newTempalteScreenIndex.value = newTempalteScreenIndex.value < (newTemplateScreens.value.length - 1) ? newTempalteScreenIndex.value + 1 : newTempalteScreenIndex.value;
+//     console.log("newTempalteScreenIndex",newTempalteScreenIndex.value)
+// }
+
+// const prevScreenTemplateModal = ()=>{
+//     newTempalteScreenIndex.value = newTempalteScreenIndex.value > 0 ? newTempalteScreenIndex.value - 1 : newTempalteScreenIndex.value
+// }
 
 
 
@@ -219,7 +249,14 @@ const data = [
     }
 ];
 
+// Confirm status modal
+
 const confirmStatusModal = ref(null);
+
+const showConfirmStatusModal = (event)=>{
+    actualCheckboxConfirmId.value = event;
+    confirmStatusModal.value.open()
+};
 
 const cancel =()=>{
     confirmStatusModal.value.close()
@@ -229,31 +266,20 @@ const confirm =()=>{
     confirmStatusModal.value.close()
 }
 
-const openNewAgreementModal =()=>{
-    newAgreementModal.value.open()
-}
 
-const openNewTemplateModal = () =>{
-    if(newTempalteScreenIndex.value == 0){
-        newTemplateComponent.value.open()
-    }else{
-        newTemplateModal.value.open()
-    }
-}
 
-const closeNewAgreementModal =()=>{
-    newAgreementScreenIndex.value = 0;
-    newAgreementModal.value.close()
-}
+// const openNewTemplateModal = () =>{
+//     if(newTempalteScreenIndex.value == 0){
+//         newTemplateComponent.value.open()
+//     }else{
+//         newTemplateModal.value.open()
+//     }
+// }
 
-const closeNewTemplateModal =()=>{
-    newTempalteScreenIndex.value = 0;
-    newTemplateModal.value.close()
-}
-
-const changeType = (type)=>{
-    showButtonsAgreement.value =  type ? true : false;
-}
+// const closeNewTemplateModal =()=>{
+//     newTempalteScreenIndex.value = 0;
+//     newTemplateModal.value.close()
+// }
 
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-12 p-4 gap-x-4 gap-y-8 w-[650px] text-sm max-h-[75vh] overflow-auto">
+    <div class="grid grid-cols-12 p-4 gap-x-4 gap-y-8 w-[700px] text-sm max-h-[75vh] overflow-auto">
         <div class="col-span-12 w-full">
             <div class="mb-2 font-semibold text-lg">POS Payment Amounts</div>
         </div>
@@ -30,37 +30,40 @@
             </div>
         </div>
         <!-- 2 First months dues -->
-        <div class="col-span-1 w-full flex">
+        <div class="col-span-3 w-full flex">
             <p class="pl-4" :class="{'text-gray-400':!activeFirstMonthsDues}">2. First Months Dues</p>
         </div>
-        <div class="col-span-1 mx-auto w-full">
+        <div class="col-span-4 mx-auto w-full">
             <input :disabled="!activeFirstMonthsDues" value="Pro Rate Monthly PTM" class="white-input w-full p-1 rounded-sm" />
         </div>
-        <div class="col-span-1 w-full flex">
+        <div class="col-span-2 w-full flex">
             <p class="pt-1" :class="{'text-gray-400':!activeFirstMonthsDues}">First Month Only</p>
         </div>
-        <div class="col-span-1 w-full flex justify-center">
+        <div class="col-span-3 w-full flex justify-center">
             <div>
                 <button v-if="activeFirstMonthsDues" @click="buttonActiveFirstMonthsDues.click()" class="pt-1">Remove</button>
                 <button :class="{'text-gray-400':!activeFirstMonthsDues}" v-else class="pt-1" @click="buttonActiveFirstMonthsDues.click()">Add</button>
             </div>
         </div>
         <!-- 3 Total Amount Paid Today -->
-        <div class="col-span-1 w-full flex">
+        <div class="col-span-3 w-full flex">
             <p class="pl-4" :class="{'text-gray-400':!activeTotalAmountPaid}">3. *Total Amount Paid Today</p>
         </div>
-        <div class="col-span-2  mx-auto w-full">
-            <select :disabled="!activeTotalAmountPaid" class="white-input w-full p-1 rounded-sm" v-model="posPaymentAmounts.totalAmountPaidToday">
+        <div class="col-span-6  mx-auto w-full">
+            <select :disabled="!activeTotalAmountPaid" placeholder="POS Total" class="white-input w-full p-1 rounded-sm" v-model="posPaymentAmounts.totalAmountPaidToday">
+                <option value="" disabled selected hidden>POS Total</option>
                 <option value="post_total">POS Total</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
             </select>
         </div>
-        <div class="col-span-1 w-full flex justify-center">
+        <div class="col-span-3 w-full flex justify-center">
             <div>
                 <button v-if="activeTotalAmountPaid" @click="buttonActiveTotalAmountPaid.click()" class="pt-1">Remove</button>
                 <button v-else :class="{'text-gray-400':!activeTotalAmountPaid}" class="pt-1" @click="buttonActiveTotalAmountPaid.click()">Add</button>
             </div>
         </div>
-        <div class="col-span-4 flex justify-center">
+        <div class="col-span-12 flex justify-center">
             <div class="flex items-center mt-3">
                 <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" ref="buttonActiveInitiationFee" v-model="activeInitiationFee" />Initiation Fee</div>
                 <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" ref="buttonActiveFirstMonthsDues" v-model="activeFirstMonthsDues" />First Months Dues</div>
@@ -75,7 +78,7 @@ const posPaymentAmounts= ref({
     initialitionFeePriceMinimum: 50.00,
     initialitionFeePriceMaximum: 50.00,
     firstMonthsDuesProRate: "Pro Rate Monthly PTM",
-    totalAmountPaidToday: "post_total",
+    totalAmountPaidToday: "",
 })
 
 const buttonActiveInitiationFee = ref(null);
