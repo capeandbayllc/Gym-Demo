@@ -34,27 +34,7 @@ input AudienceFiltersInput {
   membership_type_id: [ID]
 }
 
-type MembersNote {
-  id: ID
-  title: String
-  month: String
-  time: String
-  userName: String
-  alert: Boolean
-}
-
-input MembersNoteInput {
-  id: ID
-  title: String
-  month: String
-  time: String
-  alert: Boolean
-  userName: String
-}
-
-"""
-A paginated list of Audience items.
-"""
+"""A paginated list of Audience items."""
 type AudiencePaginator {
   """Pagination information about the list of items."""
   paginatorInfo: PaginatorInfo!
@@ -75,6 +55,7 @@ type CalendarEvent {
   full_day_event: Int
   event_type_id: ID
   type: CalendarEventType
+  location: Location
   owner: User!
   owner_id: ID
   start: DateTime
@@ -163,66 +144,6 @@ type ContactPreference {
   updated_at: DateTime
   user_id: String
   value: String
-}
-
-
-type PotentialLead {
-  id: ID!
-  name: String!
-  first_name: String
-  middle_name: String
-  last_name: String
-  email: String!
-  alternate_email: String
-  address1: String
-  address2: String
-  email_verified_at: DateTime
-  created_at: DateTime!
-  updated_at: DateTime!
-  start_date: DateTime
-  end_date: DateTime
-  termination_date: DateTime
-  manager: String
-  zip: String
-  defaultTeam: Team
-  roles: [Role]
-  phone: String
-  city: String
-  state: String
-  homeLocation: Location
-  teams: [Team]
-  contact_preference: String
-  emergency_contact: EmergencyContact
-  departments: [Department]
-  positions: [Position]
-  gender: String
-  isClientUser: Boolean
-  files: [File]!
-  status: Boolean
-}
-
-input PotentialLeadInput {
-  id: ID
-  name: String
-  first_name: String
-  middle_name: String
-  last_name: String
-  email: String
-  alternate_email: String
-  address1: String
-  address2: String
-  start_date: DateTime
-  end_date: DateTime
-  termination_date: DateTime
-  manager: String
-  zip: String
-  phone: String
-  city: String
-  state: String
-  contact_preference: String
-  gender: String
-  isClientUser: Boolean
-  status: Boolean
 }
 
 input CreateAudienceInput {
@@ -362,6 +283,7 @@ type Customer {
   state: String
   gender: String
   date_of_birth: DateTime
+  profile_photo_path: String
   created_at: DateTime!
   updated_at: DateTime!
   gr_location_id: ID
@@ -375,6 +297,30 @@ type Customer {
   notes: [Note]
 }
 
+input CustomerInput {
+  id: ID!
+  first_name: String
+  last_name: String
+  middle_name: String
+  email: String
+  phone: String
+  alternate_phone: String
+  address1: String
+  zip: String
+  city: String
+  state: String
+  gender: String
+  date_of_birth: DateTime
+  profile_photo_path: String
+  created_at: DateTime!
+  updated_at: DateTime!
+  gr_location_id: ID
+  user_type: String
+  agreement_number: String
+  external_id: String
+  misc: String
+}
+
 """A paginated list of Customer items."""
 type CustomerPaginator {
   """Pagination information about the list of items."""
@@ -382,19 +328,6 @@ type CustomerPaginator {
 
   """A list of Customer items."""
   data: [Customer!]!
-}
-
-
-type MemberNotePaginator {
-  """
-  Pagination information about the list of items.
-  """
-  paginatorInfo: PaginatorInfo!
-
-  """
-  A list of Customer items.
-  """
-  data: [MembersNote!]!
 }
 
 type DashboardProps {
@@ -518,6 +451,7 @@ type Employee {
   state: String
   gender: String
   date_of_birth: DateTime
+  profile_photo_path: String
   created_at: DateTime!
   updated_at: DateTime!
   gr_location_id: ID
@@ -528,6 +462,30 @@ type Employee {
   external_id: String
   misc: String
   notes: [Note]
+}
+
+input EmployeeInput {
+  id: ID
+  first_name: String
+  last_name: String
+  middle_name: String
+  email: String
+  phone: String
+  alternate_phone: String
+  address1: String
+  zip: String
+  city: String
+  state: String
+  gender: String
+  date_of_birth: DateTime
+  profile_photo_path: String
+  created_at: DateTime!
+  updated_at: DateTime!
+  gr_location_id: ID
+  user_type: String
+  agreement_number: String
+  external_id: String
+  misc: String
 }
 
 """A paginated list of Employee items."""
@@ -555,6 +513,7 @@ type EndUser {
   alternate_phone: String
   gender: Boolean
   date_of_birth: DateTime!
+  profile_photo_path: String
   interaction_count: InteractionCount!
   preview_note: [String]!
   club_location: Location
@@ -677,6 +636,7 @@ type Lead {
   alternate_phone: String
   gender: Boolean
   date_of_birth: DateTime
+  profile_photo_path: String
   interaction_count: InteractionCount!
   homeLocation: Location
   locations: [Location]
@@ -766,10 +726,12 @@ type Member {
   last_name: String
   middle_name: String
   email: String
+  phone: String
   primary_phone: String
   alternate_phone: String
   gender: String
   date_of_birth: DateTime
+  profile_photo_path: String
   created_at: DateTime
   updated_at: DateTime
   gr_location_id: ID
@@ -780,6 +742,53 @@ type Member {
   external_id: String
   misc: String
   notes: [Note]
+}
+
+input MemberInput {
+  id: ID!
+  first_name: String
+  last_name: String
+  middle_name: String
+  email: String
+  phone: String
+  primary_phone: String
+  alternate_phone: String
+  gender: String
+  date_of_birth: DateTime
+  profile_photo_path: String
+  created_at: DateTime
+  updated_at: DateTime
+  gr_location_id: ID
+  agreement_number: String
+  external_id: String
+  misc: String
+}
+
+type MemberNote {
+  id: ID!
+  title: String
+  month: String
+  time: String
+  userName: String
+  alert: Boolean
+}
+
+input MemberNoteInput {
+  id: ID
+  title: String
+  month: String
+  time: String
+  alert: Boolean
+  userName: String
+}
+
+"""A paginated list of MemberNote items."""
+type MemberNotePaginator {
+  """Pagination information about the list of items."""
+  paginatorInfo: PaginatorInfo!
+
+  """A list of MemberNote items."""
+  data: [MemberNote!]!
 }
 
 """A paginated list of Member items."""
@@ -813,6 +822,7 @@ type Mutation {
 
   """Updates a CallTemplate"""
   updateCallScriptTemplate(input: UpdateCallScriptTemplateInput): CallScriptTemplate!
+  createCustomer(input: CustomerInput): Customer!
   createDepartment(name: String, positions: [ID]): Department!
   updateDepartment(id: ID, name: String, positions: [ID]): Department!
 
@@ -830,6 +840,7 @@ type Mutation {
 
   """Updates a EmailTemplate"""
   updateEmailTemplate(input: UpdateEmailTemplateInput): EmailTemplate!
+  createEmployee(input: EmployeeInput): Employee!
   createFile(file: CreateFileInput): File!
   renameFile(input: RenameFileInput): File!
   updateFileFolder(input: UpdateFileFolderInput): File!
@@ -849,6 +860,8 @@ type Mutation {
 
   """Updates a location"""
   updateLocation(location: UpdateLocationInput!): Location!
+  createMember(input: MemberInput): Member!
+  createMemberNote(input: MemberNoteInput): MemberNote!
   createNote(input: CreateNoteInput): Note!
   updateNote(input: UpdateNoteInput): Note!
 
@@ -879,7 +892,6 @@ type Mutation {
   createRole(input: CreateRoleInput): Role!
   updateRole(input: UpdateRoleInput): Role!
   deleteRole(id: ID!): Role!
-  createMemberNote(input: MembersNoteInput): MembersNote!
 }
 
 type Note {
@@ -1243,6 +1255,16 @@ type Query {
     """The offset from which items are returned."""
     page: Int
   ): LocationPaginator
+  memberNote(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """Limits number of fetched items."""
+    first: Int = 10
+
+    """The offset from which items are returned."""
+    page: Int
+  ): MemberNotePaginator
   notes(
     filter: Filter
     orderBy: [OrderByClause!]
@@ -1322,7 +1344,7 @@ type Query {
     """The offset from which items are returned."""
     page: Int
   ): UserPaginator
-  employee(
+  employees(
     filter: Filter
     orderBy: [OrderByClause!]
 
@@ -1382,20 +1404,6 @@ type Query {
     """The offset from which items are returned."""
     page: Int
   ): RolePaginator
-  membersNotes(
-    filter: Filter
-    orderBy: [OrderByClause!]
-
-    """
-    Limits number of fetched items.
-    """
-    first: Int = 10
-
-    """
-    The offset from which items are returned.
-    """
-    page: Int
-  ): MemberNotePaginator
 }
 
 type Reminder {
@@ -1744,6 +1752,7 @@ type User {
   departments: [Department]
   positions: [Position]
   gender: String
+  profile_photo_path: String
   isClientUser: Boolean
   files: [File]!
 }
