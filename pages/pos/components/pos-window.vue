@@ -1,5 +1,8 @@
 <template>
     <div class="pos-window-container">
+        <!-- <span class="w-full bg-white" @click="showPaymentApproveModal"
+            >baal</span
+        > -->
         <div class="pos-window">
             <PosWindowHeader @person-selected="selectPurchaser" />
             <div
@@ -18,6 +21,8 @@
                     @increment-product-quantity="incrementProductQuantity"
                     @decrement-product-quantity="decrementProductQuantity"
                     @cancel-sale="cancelSale"
+                    @make-pos-invoice-payment="showPaymentApproveModal"
+                    @add-payment-method="showPaymentMethodsModal"
                 />
             </div>
         </div>
@@ -53,6 +58,20 @@
         id="removeCategoryModal"
         ref="removeCategoryModal"
     ></daisy-modal>
+    <daisy-modal
+        :overlay="true"
+        id="paymentApproveModal"
+        ref="paymentApproveModal"
+    >
+        <PosPaymentApprove :amount="calculateCartTotal()" />
+    </daisy-modal>
+    <daisy-modal
+        :overlay="true"
+        id="paymentMethodsModal"
+        ref="paymentMethodsModal"
+    >
+        <PosPaymentMethodAdd />
+    </daisy-modal>
 </template>
 
 <script setup>
@@ -62,10 +81,13 @@ import PosInvoicePane from "./pos-invoice-pane.vue";
 import PosFooter from "./pos-footer.vue";
 import PosAddProduct from "./pos-add-product.vue";
 import PosAddCateory from "./pos-add-category.vue";
+import PosPaymentApprove from "./pos-payment-approve.vue";
+import PosPaymentMethodAdd from "./pos-payment-method-add.vue";
 import {
     inventoryCategories as staticInventoryCategories,
     inventory as initInv,
 } from "../helpers/pos-items";
+import { cartTotal } from "../helpers/pos-cart-functions";
 
 const props = defineProps({
     member: {
@@ -81,6 +103,8 @@ const addProductModal = ref(null);
 const addCategoryModal = ref(null);
 const removeProductModal = ref(null);
 const removeCategoryModal = ref(null);
+const paymentApproveModal = ref(null);
+const paymentMethodsModal = ref(null);
 const inventoryCategories = ref(staticInventoryCategories);
 
 const addProductToCart = (item) => {
@@ -128,6 +152,13 @@ const showRemoveProductModal = () => {
 const showRemoveCategoryModal = () => {
     removeCategoryModal.value.open();
 };
+const showPaymentApproveModal = () => {
+    paymentApproveModal.value.open();
+};
+
+const showPaymentMethodsModal = () => {
+    paymentMethodsModal.value.open();
+};
 
 const addProductToList = (product) => {
     inventory.value.push({
@@ -168,6 +199,8 @@ const closeProductModal = () => {
 const closeCategoryModal = () => {
     addCategoryModal.value.close();
 };
+
+const calculateCartTotal = () => cartTotal(cart.value).toFixed(2);
 </script>
 
 <style scoped>

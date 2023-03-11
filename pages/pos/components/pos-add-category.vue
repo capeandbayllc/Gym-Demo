@@ -3,7 +3,11 @@
         <h3 class="text-[1.2rem]">Add New Category</h3>
         <div class="flex flex-col gap-5">
             <div class="flex flex-row gap-5 justify-between w-full">
-                <PosInput :name="'Category Name'" :required="true">
+                <PosInput
+                    :name="'Category Name'"
+                    :required="true"
+                    width="w-[calc(50%-1.25rem/2)]"
+                >
                     <input
                         class="pos-input"
                         placeholder="Category Name"
@@ -13,7 +17,11 @@
                         v-model="category.name"
                     />
                 </PosInput>
-                <PosInput :name="'Category Title'" :required="true">
+                <PosInput
+                    :name="'Category Title'"
+                    :required="true"
+                    width="w-[calc(50%-1.25rem/2)]"
+                >
                     <input
                         class="pos-input"
                         placeholder="Category Title"

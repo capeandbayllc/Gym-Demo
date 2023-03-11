@@ -7,7 +7,11 @@
         </div>
         <div class="max-h-[40vh] overflow-y-scroll flex flex-col gap-5 pr-5">
             <div class="flex flex-row gap-5 justify-between w-full">
-                <PosInput :name="'Product Name'" :required="true">
+                <PosInput
+                    :name="'Product Name'"
+                    :required="true"
+                    width="w-[calc(50%-1.25rem/2)]"
+                >
                     <input
                         class="pos-input"
                         placeholder="Product Name"
@@ -18,7 +22,11 @@
                         @keydown="resetFormErrorState"
                     />
                 </PosInput>
-                <PosInput :name="'Inventory Number'" :required="true">
+                <PosInput
+                    :name="'Inventory Number'"
+                    :required="true"
+                    width="w-[calc(50%-1.25rem/2)]"
+                >
                     <input
                         class="pos-input"
                         placeholder="Inventory Number"
@@ -31,7 +39,11 @@
                 </PosInput>
             </div>
             <div class="flex flex-row gap-5 justify-between w-full">
-                <PosInput :name="'Select Category'" :required="true">
+                <PosInput
+                    :name="'Select Category'"
+                    :required="true"
+                    width="w-[calc(50%-1.25rem/2)]"
+                >
                     <select-box-radio
                         :items="getProductSubCategories()"
                         :value="product.category"
@@ -43,7 +55,11 @@
                     >
                     </select-box-radio>
                 </PosInput>
-                <PosInput :name="'Available'" :required="true">
+                <PosInput
+                    :name="'Available'"
+                    :required="true"
+                    width="w-[calc(50%-1.25rem/2)]"
+                >
                     <input
                         class="pos-input"
                         placeholder="Available"
@@ -56,7 +72,11 @@
                 </PosInput>
             </div>
             <div class="flex flex-row gap-5 justify-between w-full">
-                <PosInput :name="'Product Price ($)'" :required="true">
+                <PosInput
+                    :name="'Product Price ($)'"
+                    :required="true"
+                    width="w-[calc(50%-1.25rem/2)]"
+                >
                     <input
                         class="pos-input"
                         placeholder="Product Price ($)"
@@ -67,7 +87,11 @@
                         @keydown="resetFormErrorState"
                     />
                 </PosInput>
-                <PosInput :name="'Tax Rate (%)'" :required="true">
+                <PosInput
+                    :name="'Tax Rate (%)'"
+                    :required="true"
+                    width="w-[calc(50%-1.25rem/2)]"
+                >
                     <input
                         class="pos-input"
                         placeholder="Tax Rate (%)"

@@ -101,6 +101,7 @@
         </div>
         <div
             class="flex flex-col text-[0.8rem] w-[40%] min-w-[300px] ml-auto gap-2"
+            v-if="cart.length"
         >
             <div class="flex flex-row justify-between w-full">
                 <span>Item Total</span>
@@ -120,11 +121,33 @@
                 <span>${{ calculateCartTotal().toFixed(2) }}</span>
             </div>
         </div>
+        <div
+            class="mt-auto flex flex-row justify-end gap-5 text-[0.9rem] tracking-wide font-light"
+            v-if="cart.length"
+        >
+            <button
+                class="border px-4 py-1 rounded-md hover:bg-secondary hover:border-[#fff]/[0] pos-style-transition"
+                @click="() => emit('add-payment-method')"
+            >
+                Payment Methods
+            </button>
+            <button
+                class="bg-[#01CA00] px-4 py-1 rounded-md hover:bg-secondary pos-style-transition"
+                @click="makePayment"
+            >
+                Pay
+            </button>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { PersonIcon, PlusIcon, MinusIcon } from "~~/components/icons";
+import {
+    cartItemTotal,
+    cartTaxTotal,
+    cartTotal,
+} from "../helpers/pos-cart-functions";
 
 const props = defineProps({
     cart: {
@@ -139,37 +162,15 @@ const emit = defineEmits([
     "increment-product-quantity",
     "decrement-product-quantity",
     "cancel-sale",
+    "make-pos-invoice-payment",
+    "add-payment-method",
 ]);
 
-const calculateCartTotal = () => {
-    let sum = 0;
+const calculateCartTotal = () => cartTotal(props.cart);
 
-    props.cart.forEach((item) => {
-        sum += (parseFloat(item.price) + parseFloat(item.tax)) * item.quantity;
-    });
+const calculateCartTaxTotal = () => cartTaxTotal(props.cart);
 
-    return sum;
-};
-
-const calculateCartTaxTotal = () => {
-    let sum = 0;
-
-    props.cart.forEach((item) => {
-        sum += item.tax * item.quantity;
-    });
-
-    return sum;
-};
-
-const calculateCartItemTotal = () => {
-    let sum = 0;
-
-    props.cart.forEach((item) => {
-        sum += item.price * item.quantity;
-    });
-
-    return sum;
-};
+const calculateCartItemTotal = () => cartItemTotal(props.cart);
 
 const incrementProductQuantity = (item) => {
     emit("increment-product-quantity", item);
@@ -181,6 +182,10 @@ const decrementProductQuantity = (item) => {
 
 const cancelSale = () => {
     emit("cancel-sale");
+};
+
+const makePayment = () => {
+    emit("make-pos-invoice-payment");
 };
 </script>
 
