@@ -7,6 +7,7 @@ import { createGraphQLHandler } from "@miragejs/graphql";
 import { parse } from "graphql/language";
 import { createServer } from "miragejs";
 import data from "~/api/data/data";
+import { NoteFactory } from "~/api/data/notes/NoteFactory";
 import { NotificationFactory } from "~/api/data/notifications/NotificationFactory";
 import createAdminAndKioskUser from "~/api/data/users/UserFactory";
 import registerResolver from "~/api/queries/utils/resolver";
@@ -31,11 +32,13 @@ const server = createServer({
   },
   factories: {
     notification: NotificationFactory,
+    note: NoteFactory,
   },
   seeds(server) {
     createAdminAndKioskUser(server);
     server.loadFixtures(); //loads our json data
    server.db.users.forEach(u => server.createList("notification", getRandomInt(10), { user_id: u.id }));
+   server.createList("note", 5);
   },
 });
 

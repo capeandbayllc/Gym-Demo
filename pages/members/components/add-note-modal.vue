@@ -31,15 +31,12 @@
                     
                     <Note 
                         v-for="Note in result?.notes.data"
-                        :title="Note.note"
+                        :title="Note.title"
                         month="March 2022"
                         time="08 PM"
                         userName="Jone Doe"
                         :alert="Note.active"
                     />
-
-                    
-                                       
                 </div>
                 
             </div>
@@ -57,6 +54,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useMutation, useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
+import { NoteFactory } from "~~/api/data/notes/NoteFactory";
 import { NewAgreementIcon } from '~~/components/icons';
 import Folder from "./folder.vue";
 import NoteForm from "./note-form.vue";
@@ -73,6 +71,7 @@ const query = gql`
       notes(first: 10) {
         data {
           id
+          title
           note
           active
           read
@@ -92,22 +91,23 @@ const query = gql`
     mutation CreateNote($input: CreateNoteInput!) {
       createNote(input: $input) {
         note
-        active
-        read
+        title
       }
     }
   `;
   
   
   const addRandomMembersNote = async () => {
-   const { mutate } = useMutation(mutation, {
+    const variables = new NoteFactory().build("test");
+    const { mutate } = useMutation(mutation, {
       refetchQueries: [
         { query },
         "Notes", 
       ],
     });
   
-   emit('saveNote');
+    const response = await mutate({ input: variables });
+    emit('saveNote');
   };
 
  
