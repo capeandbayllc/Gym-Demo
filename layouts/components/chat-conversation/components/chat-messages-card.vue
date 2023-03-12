@@ -1,5 +1,5 @@
 <template>
-    <div class="grid gap-10">
+    <div class="grid gap-5">
         <div class="message-from">
             <div class="text-center text-lg -lg:text-xs relative chat-heading text-base-content/70">
                Today

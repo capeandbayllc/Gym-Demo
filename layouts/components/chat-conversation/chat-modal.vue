@@ -28,7 +28,7 @@
                                 <div class="relative cursor-pointer pl-2" v-for="(item, index) in chatItems" :key="index" >
                                     <div  class="p-2 inline">
                                         <div class="chat-icons m-1">
-                                            <font-awesome-icon :class="['w-4 h-4 -lg:w-4 -lg:h-4 m-auto border rounded-full p-3',item.name=='New Channel'?'bg-blue-700':'']" :icon="item.icon" />
+                                            <font-awesome-icon :class="['w-4 h-4 -lg:w-4 -lg:h-4 m-auto border rounded-full p-3',item.name=='New Channel'?'hover-icon':'']" :icon="item.icon" />
                                         </div>
                                         <div class="text-min -xs:text-xs pt-1 pr-2">
                                             {{item.name}}
@@ -45,13 +45,13 @@
                                 <div class="relative cursor-pointer ml-1" v-for="(item, index) in onlineMembers" :key="index" >
                                     <div class="inline">
                                         <div class="p-2 m-1 relative">
-                                            <img v-if="index!=3" class="w-12 h-12 -lg:w-10 -lg:h-10 m-auto" :src="item.profile" alt="" @click="toggleChatOpen"/>
-                                            <font-awesome-icon v-else class="w-4 h-4 -lg:w-4 -lg:h-4 m-auto border rounded-full p-3 " :icon="['fas', 'fa-plus-circle']" />
+                                            <img v-if="index!=3" class="w-12 h-12 -lg:w-12 -lg:h-12 m-auto" :src="item.profile" alt="" @click="toggleChatOpen"/>
+                                            <font-awesome-icon v-else class="hover-icon w-5 h-5 -lg:w-5 -lg:h-5 m-auto border rounded-full p-3 " :icon="['fas', 'fa-plus-circle']" />
                                             <div v-if="index==1" class="rounded-full w-3 h-3 bg-red-700 absolute  right-3 bottom-2"></div>
                                             <div v-else-if="index==3" class=""></div>
                                             <div v-else class="rounded-full w-3 h-3 bg-accent-focus/80 absolute right-3 bottom-2"></div>
                                         </div>
-                                        <div class="text-min -xs:text-xs pt  pr-2 justify-center">
+                                        <div class="text-min -xs:text-xs pr-1 h-auto justify-center">
                                             {{ item.name }}
                                         </div> 
                                         
@@ -62,7 +62,7 @@
                     </div>
                     <div class="text-xl -lg:text-lg font-semibold pt-2">Conversations</div>
                     <div class="inline">
-                        <div  class="justify-start bg-white rounded-md flex mt-4 " v-for="(chat, index) in messages" :key="index" >
+                        <div  class="conversation-block justify-start bg-white rounded-md flex mt-4 " v-for="(chat, index) in messages" :key="index" >
                             <div class="relative flex p-2">
                                 <img :src="chat.avatar" alt=""/>
                                 <div v-if="index==1 || index==4" class="rounded-full w-2 h-2 bg-red-700 absolute right-2 bottom-3"></div>
@@ -99,12 +99,47 @@
 
     <div class="chat-conversation-container max-h-screen" v-if="chatOpen==true" >
         <div class="chat-message-block flex">
-            <div  class="grid w-1/16 bg-black relative border-white-800 rounded-lg border rounded-t-full rounded-b-full">
-                <font-awesome-icon  class="w-4 h-4 -lg:w-4 -lg:h-4 mx-auto mt-3 border rounded-full p-3 " :icon="['fas', 'fa-plus-circle']" />
-                
+            <div  class="pills-body grid w-1/16 bg-black relative border-white-800 border rounded-t-full rounded-b-full">
+                <div class=" mx-auto mt-3 max-h-1/6">
+                    <font-awesome-icon  class="hover-icon w-4 h-4 -lg:w-4 -lg:h-4 border rounded-full p-3 " :icon="['fas', 'fa-plus-circle']" />
+                </div>
+                <div class="mx-2 max-h-5/6 pb-2 mb-3 overflow-x-visible overflow-y-auto no-scrollbar overscroll-true">
+                    <div class="py-2" v-for="(item, index) in onlineMembers" :key="index">
+                        <img id="chat-head" :class="['sticky w-12 h-12 -lg:w-12 -lg:h-12 border-blue-700 border-2 rounded-full z-20 opacity-40']" :src="item.profile" alt="" @click="toggleChatOpen"/>
+                        <div class="relative">
+                            <div class="chat-names absolute bg-blue-800 whitespace-nowrap right-10 bottom-3 z-10 w-100 invisible">
+                            {{ item.name }}
+                            </div>
+                        </div> 
+                    </div>
+                    <hr class="mx-1 my-2">
+                    <div class="py-2" v-for="(item, index) in onlineMembers" :key="index">
+                        <img  id="chat-head" :class="['sticky w-12 h-12 -lg:w-12 -lg:h-12 border-blue-700 border-2 rounded-full opacity-40 z-10']" :src="item.profile" alt="" @click="toggleChatOpen"/>
+                        <div  class="relative">
+                            <div v-if="index==2" class="text-extra-small text-white bg-blue-500 rounded-full absolute right-0 font-semibold z-20">
+                                +2
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="py-2" v-for="(item, index) in onlineMembers" :key="index">
+                        <img id="chat-head" :class="['pill-image sticky w-12 h-12 -lg:w-12 -lg:h-12 border-blue-700 border-2 opacity-40 rounded-full z-10']" :src="item.profile" alt="" @click="toggleChatOpen"/>
+                        <div  class="relative">
+                            <div v-if="index==1" class="text-extra-small text-white bg-blue-500 rounded-full absolute right-0 font-semibold z-20">
+                                +2
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="inline ml-2 gradient-bg border rounded-lg max-h-auto h-auto">
+
+
+
+
+
+
+            <div class=" inline ml-2 gradient-bg border rounded-lg max-h-auto h-auto">
                 <div class="flex bg-black m-2">
                     <div class="relative p-1">
                         <img src="/chat-conversation/group-chat.svg" class="w-16 h-16 -lg:w-14 -lg:h-14" @click="toggleChatOpen"/>
@@ -127,9 +162,9 @@
                         <ChatMessagesCard />
                     </div>
                 </div>
-                <div class="bg-base-content p-4 py-2 -lg:p-2 ">
+                <div class="bg-base-content p-4 py-2 -lg:p-2 rounded-b-md">
                     <div class="flex justify-between">
-                        <input type="text" placeholder="Type here" class="input w-full max-w-md -lg:max-w-max bg-base-content text-base-300" />
+                        <input type="text" placeholder="Type here" class="input w-full max-w-md -lg:max-w-max bg-base-content text-base-300 " />
                         <div class="gap-5 flex">
                             <img src="/chat-conversation/image.svg" class="w-5"/>
                             <img src="/chat-conversation/send.svg" class="w-5"/>
@@ -178,9 +213,12 @@
     .chat-message-block{
         width: auto;
     }
-   /*  .message-body{
+    .message-body{
                     height: calc(106vh - 380px);
-                } */
+                }
+    .pills-body{
+        height: calc(106vh - 228px);
+    }
     .chat-icons{
         height: 3em;
         width:3em;
@@ -206,6 +244,31 @@
         padding:0.35em;
         width: 2.2em;
     }
+    #chat-head:hover{
+        cursor: pointer;
+        opacity: 1;
+        .relative{
+            .chat-names{
+                visibility: visible;
+            }
+        }
+    }
+    .hover-icon:hover{
+        cursor: pointer;
+        color:#007FD5;
+        border:1px solid #007FD5;
+    }
+    .conversation-block:hover{
+        background-color: #007FD5;
+        cursor: pointer;
+        .grid{
+            .flex{
+                .text-black{
+                    color:white;
+                }
+            }
+        }
+    }
 </style>
 <script setup>
 import {ref} from 'vue'
@@ -220,14 +283,7 @@ library.add(far,fas)
 const chatOpen = ref(false)
 const showDropDown= ref(false)
 
-/* div1.addEventListener('scroll', function() {
-  
-}); */
-const handleScroll=()=>{
-    let div2 = document.getElementById('first');
-    let div1 = document.getElementById('second');
-    div2.scrollTop = div1.scrollTop;
-}
+
 
 const onlineMembers = [
     {
