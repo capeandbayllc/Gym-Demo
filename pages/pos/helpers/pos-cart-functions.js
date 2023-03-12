@@ -1,5 +1,4 @@
 const cartTotal = (cart) => {
-    console.log(cart);
     let sum = 0;
 
     cart.forEach((item) => {
@@ -10,7 +9,6 @@ const cartTotal = (cart) => {
 };
 
 const cartTaxTotal = (cart) => {
-    console.log(cart);
     let sum = 0;
 
     cart.forEach((item) => {
@@ -21,7 +19,6 @@ const cartTaxTotal = (cart) => {
 };
 
 const cartItemTotal = (cart) => {
-    console.log(cart);
     let sum = 0;
 
     cart.forEach((item) => {

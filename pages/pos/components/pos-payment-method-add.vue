@@ -40,6 +40,7 @@
                             name="price"
                             id="price"
                             type="text"
+                            v-model="paymentMethodForm.name"
                         />
                     </PosInput>
                     <PosInput :name="'Card Number'" :required="false">
@@ -49,6 +50,7 @@
                             name="price"
                             id="price"
                             type="number"
+                            v-model="paymentMethodForm.number"
                         />
                     </PosInput>
                     <div class="flex flex-row gap-5">
@@ -63,6 +65,7 @@
                                 name="price"
                                 id="price"
                                 type="text"
+                                v-model="paymentMethodForm.expiration"
                             />
                         </PosInput>
                         <PosInput
@@ -76,6 +79,7 @@
                                 name="price"
                                 id="price"
                                 type="number"
+                                v-model="paymentMethodForm.cvv"
                             />
                         </PosInput>
                     </div>
@@ -86,6 +90,7 @@
                             name="price"
                             id="price"
                             type="number"
+                            v-model="paymentMethodForm.postal_code"
                         />
                     </PosInput>
                 </div>
@@ -108,8 +113,27 @@ import PosInput from "./pos-input.vue";
 const paymentMethodOptions = ["Card", "Cash", "ACH", "Membership Credit"];
 const paymentMethodCardOptions = ["Credit", "Debit", "Gift"];
 
+const emit = defineEmits(["cancel-payment-method-add"]);
 const paymentMethod = ref("Card");
 const secondaryOption = ref("Credit");
+const paymentMethodForm = ref({
+    name: null,
+    number: null,
+    expiration: null,
+    cvv: null,
+    postal_code: null,
+});
+
+const resetInputState = () => {
+    paymentMethodForm.value = {
+        name: null,
+        number: null,
+        expiration: null,
+        cvv: null,
+        postal_code: null,
+    };
+    emit("cancel-payment-method-add");
+};
 </script>
 
 <style scoped>

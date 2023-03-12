@@ -52,31 +52,17 @@
                     'h-[0vh]': showProducts,
                 }"
             >
-                <div
-                    class=""
-                    v-for="(category, catIndex) in inventoryCategories"
-                >
-                    <h3 class="text-[1.1rem] my-3 font-light tracking-wider">
-                        {{ category.title }}
-                    </h3>
-                    <div class="pos-product-category">
-                        <PosSubcategory
-                            v-for="(
-                                subcategory, subIndex
-                            ) in category.subcategories"
-                            :title="subcategory.title"
-                            :icon="subcategory.icon"
-                            @click="showProductItemsPane(catIndex, subIndex)"
-                        />
-                    </div>
-                </div>
+                <PosProducts
+                    :inventoryCategories="inventoryCategories"
+                    :showProductItemsPane="showProductItemsPane"
+                />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import PosSubcategory from "./pos-subcategory.vue";
+import PosProducts from "./partials/pos-products.vue";
 import PosProductItems from "./pos-product-items.vue";
 
 const props = defineProps({
@@ -180,9 +166,7 @@ const categoriesFilter = [
 .pos-products-pane {
     @apply overflow-y-scroll relative pos-style-transition;
 }
-.pos-product-category {
-    @apply w-full flex flex-row gap-4 flex-wrap mb-6;
-}
+
 .pos-style-transition {
     @apply transition-all duration-300 ease-linear;
 }

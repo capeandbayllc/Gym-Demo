@@ -37,7 +37,7 @@
         <PosAddProduct
             :inventoryCategories="inventoryCategories"
             @add-product-to-list="addProductToList"
-            @cancel-product-add="closeProductModal"
+            @cancel-product-add="closeAllModals"
         />
     </daisy-modal>
     <daisy-modal :overlay="true" id="addCategoryModal" ref="addCategoryModal">
@@ -45,19 +45,31 @@
             :inventoryCategories="inventoryCategories"
             :inventory="inventory"
             @add-category-to-list="addCategoryToList"
-            @cancel-category-add="closeCategoryModal"
+            @cancel-category-add="closeAllModals"
         />
     </daisy-modal>
     <daisy-modal
         :overlay="true"
         id="removeProductModal"
         ref="removeProductModal"
-    ></daisy-modal>
+    >
+        <PosProductRemove
+            :inventoryCategories="inventoryCategories"
+            @remove-products-from-list="removeProductsFromList"
+            @cancel-remove-product="closeAllModals"
+        />
+    </daisy-modal>
     <daisy-modal
         :overlay="true"
         id="removeCategoryModal"
         ref="removeCategoryModal"
-    ></daisy-modal>
+    >
+        <PosCategoryRemove
+            :inventoryCategories="inventoryCategories"
+            @cancel-remove-product="closeAllModals"
+            @remove-categories-from-list="removeCategoriesFromList"
+        />
+    </daisy-modal>
     <daisy-modal
         :overlay="true"
         id="paymentApproveModal"
@@ -70,7 +82,7 @@
         id="paymentMethodsModal"
         ref="paymentMethodsModal"
     >
-        <PosPaymentMethodAdd />
+        <PosPaymentMethodAdd @cancel-payment-method-add="closeAllModals" />
     </daisy-modal>
 </template>
 
@@ -83,6 +95,8 @@ import PosAddProduct from "./pos-add-product.vue";
 import PosAddCateory from "./pos-add-category.vue";
 import PosPaymentApprove from "./pos-payment-approve.vue";
 import PosPaymentMethodAdd from "./pos-payment-method-add.vue";
+import PosProductRemove from "./pos-product-remove.vue";
+import PosCategoryRemove from "./pos-category-remove.vue";
 import {
     inventoryCategories as staticInventoryCategories,
     inventory as initInv,
@@ -136,7 +150,6 @@ const cancelSale = () => {
 };
 
 const selectPurchaser = (data) => {
-    console.log(Date.parse(data.created), data);
     purchaser.value = data;
 };
 
@@ -192,12 +205,29 @@ const addCategoryToList = (category, subcategory) => {
     closeCategoryModal();
 };
 
-const closeProductModal = () => {
-    addProductModal.value.close();
+const removeProductsFromList = (products) => {
+    for (let i in products) {
+        const product = products[i];
+        inventoryCategories.value[product.catIndex].subcategories.splice(
+            product.subIndex,
+            1
+        );
+    }
 };
 
-const closeCategoryModal = () => {
+const removeCategoriesFromList = (categories) => {
+    for (let i in categories) {
+        inventoryCategories.value.splice(categories[i], 1);
+    }
+};
+
+const closeAllModals = () => {
+    addProductModal.value.close();
     addCategoryModal.value.close();
+    removeProductModal.value.close();
+    removeCategoryModal.value.close();
+    paymentApproveModal.value.close();
+    paymentMethodsModal.value.close();
 };
 
 const calculateCartTotal = () => cartTotal(cart.value).toFixed(2);

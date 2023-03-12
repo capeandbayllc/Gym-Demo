@@ -7,7 +7,18 @@
                     v-if="purchaser"
                     @click="cancelSale"
                 >
-                    <PersonIcon class="pos-member-image" />
+                    <PersonIcon
+                        class="pos-member-image"
+                        v-if="
+                            purchaser.profile_photo_path === null ||
+                            purchaser.profile_photo_path === ''
+                        "
+                    />
+                    <img
+                        v-else
+                        class="pos-member-image"
+                        :src="purchaser.profile_photo_path"
+                    />
                     <div class="pos-sale-cancel-container">
                         <span class="pos-sale-cancel-text">Cancel Sale</span>
                     </div>
@@ -17,9 +28,12 @@
                         {{ purchaser.first_name }} {{ purchaser.last_name }}
                     </h5>
                     <div>
-                        <div class="text-[0.7rem]">Member since 2020</div>
-                        <div class="text-[0.8rem]">
-                            Club ID# {{ purchaser.location }}
+                        <div class="text-[0.7rem]">
+                            Member since
+                            {{ new Date(purchaser.created_at).getFullYear() }}
+                        </div>
+                        <div class="text-[0.7rem]">
+                            {{ purchaser.homeLocation.name }}
                         </div>
                     </div>
                     <span class="pos-view-member">View Profile</span>
@@ -33,7 +47,7 @@
                     Return an Item
                 </button>
                 <div
-                    class="bg-[#0074C8]/[0.7] w-[90%] py-2 px-4 ml-auto mt-auto rounded-md text-[2rem] text-right"
+                    class="bg-[#0074C8]/[0.7] w-[90%] py-2 px-4 ml-auto mt-auto rounded-md text-[1.5rem] xl:text-[2rem] text-right"
                 >
                     ${{ calculateCartTotal().toFixed(2) }}
                 </div>
