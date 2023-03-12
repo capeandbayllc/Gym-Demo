@@ -10,7 +10,7 @@
                 />
             </div>
             <select-box-radio
-                :items="categoriesFilter"
+                :items="getCategoryFilterOptions()"
                 :value="selectedCatgoryOption"
                 :label="'Categories'"
                 :secondary="true"
@@ -53,7 +53,7 @@
                 }"
             >
                 <PosProducts
-                    :inventoryCategories="inventoryCategories"
+                    :inventoryCategories="getFilteredCategories()"
                     :showProductItemsPane="showProductItemsPane"
                 />
             </div>
@@ -91,6 +91,9 @@ const collapseProductItemsPane = () => {
 };
 
 const showProductItemsPane = (categoryIndex, subcategoryIndex) => {
+    categoryIndex = props.inventoryCategories.indexOf(
+        props.inventoryCategories.find((inv) => inv.id === categoryIndex)
+    );
     const category = props.inventoryCategories[categoryIndex].title;
     const subcategory =
         props.inventoryCategories[categoryIndex].subcategories[subcategoryIndex]
@@ -139,24 +142,30 @@ const onSelectedCategoryChange = (value) => {
     selectedCatgoryOption.value = value;
 };
 
-const categoriesFilter = [
-    {
-        value: "0",
-        label: "View All",
-    },
-    {
-        value: "1",
-        label: "Apparel",
-    },
-    {
-        value: "2",
-        label: "Beverage",
-    },
-    {
-        value: "3",
-        label: "Membership",
-    },
-];
+const getCategoryFilterOptions = () => {
+    let options = [{ value: "0", label: "View All" }];
+
+    for (let i in props.inventoryCategories) {
+        options.push({
+            value: props.inventoryCategories[i].id,
+            label: props.inventoryCategories[i].title,
+        });
+    }
+
+    return options;
+};
+
+const getFilteredCategories = () => {
+    if (selectedCatgoryOption.value === "0") {
+        return props.inventoryCategories;
+    }
+
+    return [
+        props.inventoryCategories.find(
+            (inv) => inv.id === selectedCatgoryOption.value
+        ),
+    ];
+};
 </script>
 
 <style scoped>

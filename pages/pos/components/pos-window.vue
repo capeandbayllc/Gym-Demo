@@ -4,7 +4,10 @@
             >baal</span
         > -->
         <div class="pos-window">
-            <PosWindowHeader @person-selected="selectPurchaser" />
+            <PosWindowHeader
+                @person-selected="selectPurchaser"
+                :showPosAdminModal="showPosAdminModal"
+            />
             <div
                 class="flex flex-col lg:flex-row gap-10 lg:gap-5 justify-between"
             >
@@ -84,6 +87,9 @@
     >
         <PosPaymentMethodAdd @cancel-payment-method-add="closeAllModals" />
     </daisy-modal>
+    <daisy-modal :overlay="true" id="posAdminModal" ref="posAdminModal">
+        <PosAdmin />
+    </daisy-modal>
 </template>
 
 <script setup>
@@ -97,6 +103,7 @@ import PosPaymentApprove from "./pos-payment-approve.vue";
 import PosPaymentMethodAdd from "./pos-payment-method-add.vue";
 import PosProductRemove from "./pos-product-remove.vue";
 import PosCategoryRemove from "./pos-category-remove.vue";
+import PosAdmin from "./pos-admin.vue";
 import {
     inventoryCategories as staticInventoryCategories,
     inventory as initInv,
@@ -119,6 +126,7 @@ const removeProductModal = ref(null);
 const removeCategoryModal = ref(null);
 const paymentApproveModal = ref(null);
 const paymentMethodsModal = ref(null);
+const posAdminModal = ref(null);
 const inventoryCategories = ref(staticInventoryCategories);
 
 const addProductToCart = (item) => {
@@ -173,6 +181,10 @@ const showPaymentMethodsModal = () => {
     paymentMethodsModal.value.open();
 };
 
+const showPosAdminModal = () => {
+    posAdminModal.value.open();
+};
+
 const addProductToList = (product) => {
     inventory.value.push({
         ...product,
@@ -217,7 +229,16 @@ const removeProductsFromList = (products) => {
 
 const removeCategoriesFromList = (categories) => {
     for (let i in categories) {
-        inventoryCategories.value.splice(categories[i], 1);
+        const cat = inventoryCategories.value.find(
+            (inv) => inv.id === categories[i]
+        );
+
+        if (cat) {
+            inventoryCategories.value.splice(
+                inventoryCategories.value.indexOf(cat),
+                1
+            );
+        }
     }
 };
 

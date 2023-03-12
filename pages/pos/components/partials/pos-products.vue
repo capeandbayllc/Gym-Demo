@@ -4,9 +4,9 @@
         :class="{
             'border px-5 mb-5 border-red-500 hover:border-red-800 hover:bg-red-500/[0.3] rounded-lg cursor-pointer group':
                 categoryRemoveMode,
-            'bg-red-500/[0.7]': isCategoryMarkedForRemove(catIndex),
+            'bg-red-500/[0.7]': isCategoryMarkedForRemove(category.id),
         }"
-        @click="markCategoryForRemove(catIndex)"
+        @click="markCategoryForRemove(category.id)"
         v-for="(category, catIndex) in inventoryCategories"
     >
         <span
@@ -59,9 +59,11 @@ const props = defineProps({
 
 const triggerClickEvent = (catIndex, subIndex) => {
     if (!props.removeMode && !props.categoryRemoveMode) {
-        props.showProductItemsPane(catIndex, subIndex);
+        props.showProductItemsPane(
+            props.inventoryCategories[catIndex].id,
+            subIndex
+        );
     } else if (props.removeMode) {
-        alert("baal");
         props.markForRemove(catIndex, subIndex);
     }
 };

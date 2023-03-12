@@ -72,7 +72,7 @@
                         'bg-[#292929]': itemIndex % 2 === 1,
                     }"
                 >
-                    <span class="w-[30%]">
+                    <span class="w-[30%] my-auto">
                         {{ item.name }}
                     </span>
                     <span class="w-[20%] flex flex-row gap-3 justify-center">
@@ -88,13 +88,13 @@
                             />
                         </div>
                     </span>
-                    <span class="w-[15%] text-center">
+                    <span class="w-[15%] text-center my-auto">
                         {{ item.tax }}
                     </span>
-                    <span class="w-[15%] text-center">
+                    <span class="w-[15%] text-center my-auto">
                         {{ item.price }}
                     </span>
-                    <span class="w-[15%]">
+                    <span class="w-[15%] my-auto">
                         {{
                             (
                                 (parseFloat(item.price) +
@@ -103,7 +103,7 @@
                             ).toFixed(2)
                         }}
                     </span>
-                    <span class="w-[5%]">
+                    <span class="w-[5%] my-auto">
                         <span
                             class="flex flex-row w-5 h-5 rounded-full bg-secondary border-secondary justify-center"
                         >

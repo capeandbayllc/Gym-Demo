@@ -9,7 +9,7 @@
                 >
                 <BarcodeScanIcon class="pos-barcode-scan-icon" />
             </div>
-            <button class="pos-admin-button">
+            <button class="pos-admin-button" @click="showPosAdminModal">
                 <PersonAdminIcon class="my-auto" />
                 <span class="my-auto">Admin</span>
             </button>
@@ -61,7 +61,7 @@ import GlobalSearchModal from "~~/layouts/components/global-search-modal.vue";
 import { PersonAdminIcon, BarcodeScanIcon } from "~~/components/icons";
 
 const emit = defineEmits(["person-selected"]);
-
+const props = defineProps({ showPosAdminModal: { type: Function } });
 const globalSearchInput = ref("");
 const globalSearchModal = ref(null);
 
