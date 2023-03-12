@@ -9,6 +9,7 @@ const FIND_BY_MAIL: DocumentNode = gql`
             first_name
             last_name
             email
+            profile_photo_path
             phone
         }
     }

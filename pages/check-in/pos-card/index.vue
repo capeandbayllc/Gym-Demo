@@ -4,7 +4,7 @@
             <div class="flex flex-col flex-1">
                 <div class="profile-info" v-if="viewMode === 'profile'">
                     <div class="profile-avatar">
-                        <img :src="mock.img"/>
+                        <img :src="mock.img"  alt="profile image"/>
                     </div>
                     <div class="flex flex-col items-center">
                         <div class="profile-name">{{mock.name}}</div>
