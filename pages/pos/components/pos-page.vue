@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col relative">
+    <div class="flex flex-col relative w-[80%] mx-auto">
         <PosWindow />
     </div>
 </template>

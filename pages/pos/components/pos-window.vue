@@ -1,8 +1,5 @@
 <template>
     <div class="pos-window-container">
-        <!-- <span class="w-full bg-white" @click="showPaymentApproveModal"
-            >baal</span
-        > -->
         <div class="pos-window">
             <PosWindowHeader
                 @person-selected="selectPurchaser"
@@ -256,7 +253,7 @@ const calculateCartTotal = () => cartTotal(cart.value).toFixed(2);
 
 <style scoped>
 .pos-window-container {
-    @apply bg-[#191919] rounded-t-2xl h-[85vh] lg:h-[81vh] w-[80%] mx-auto;
+    @apply bg-[#191919] rounded-t-2xl h-[85vh] lg:h-[81vh] mx-auto w-full;
 }
 .pos-window {
     @apply border-2 p-5 rounded-2xl h-[85vh] lg:h-[81vh] w-full mx-auto bg-gradient-to-b from-[#2f72c4]/[0.4] to-[#191919] flex flex-col gap-5;
