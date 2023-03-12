@@ -56,6 +56,7 @@ import { useMutation, useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { NoteFactory } from "~~/api/data/notes/NoteFactory";
 import { NewAgreementIcon } from '~~/components/icons';
+import { GET_NOTES } from "../../../api/queries/note";
 import Folder from "./folder.vue";
 import NoteForm from "./note-form.vue";
 import Note from "./note.vue";
@@ -66,27 +67,10 @@ const props = defineProps({
 })
 const emit = defineEmits(['saveNote']);
 
-const query = gql`
-    query Notes {
-      notes(first: 10) {
-        data {
-          id
-          title
-          note
-          active
-          read
-          entity_type
-        }
-        paginatorInfo {
-          count
-          perPage
-          total
-        }
-      }
-    }
-  `;
+
  
-  const { result } = useQuery(query);
+  const { result } = useQuery(GET_NOTES);
+    
   const mutation = gql`
     mutation CreateNote($input: CreateNoteInput!) {
       createNote(input: $input) {
@@ -98,16 +82,17 @@ const query = gql`
   
   
   const addRandomMembersNote = async () => {
-    const variables = new NoteFactory().build("test");
-    const { mutate } = useMutation(mutation, {
-      refetchQueries: [
-        { query },
-        "Notes", 
-      ],
-    });
+  const variables = new NoteFactory().build("test");
+  const { mutate } = useMutation(mutation, {
+  onCompleted: () => {
+    refetchData(); // refetch data after mutation is completed
+  },
+});
   
     const response = await mutate({ input: variables });
+    
     emit('saveNote');
+
   };
 
  

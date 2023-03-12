@@ -37,8 +37,8 @@ const server = createServer({
   seeds(server) {
     createAdminAndKioskUser(server);
     server.loadFixtures(); //loads our json data
-   server.db.users.forEach(u => server.createList("notification", getRandomInt(10), { user_id: u.id }));
-   server.createList("note", 5);
+    server.db.users.forEach(u => server.createList("notification", getRandomInt(10), { user_id: u.id }));
+    server.db.members.forEach(m => server.createList("note", getRandomInt(10), { entity_id: m.id }));
   },
 });
 
