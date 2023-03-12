@@ -13,8 +13,13 @@
               class="submenu-items"
               v-for="(child, sub_ndx) in item.children"
               :key="sub_ndx"
-            >
-              {{ child.label }}
+              >
+              <div v-if="child.label=='Help'" @click="handleClickActions">
+                {{ child.label }}
+              </div>
+              <div v-else>
+                {{ child.label }}
+              </div>
             </li>
           </ul>
         </li>
@@ -24,6 +29,10 @@
       </div>
     </div>
   </context-menu>
+
+  <daisy-modal :overlay="true" id="pulseModal" ref="pulseModal">
+            <help-modal />
+        </daisy-modal>
 </template>
 <style scoped>
 .profile-menu-container {
@@ -53,7 +62,8 @@
 </style>
 <script setup>
 import { ref } from "vue";
-
+import HelpModal from "../help-modal/index.vue";
+const pulseModal = ref(null);
 const profileMenu = ref(null);
 
 const open = () => {
@@ -108,5 +118,8 @@ const handleClickLogout = () => {
   authToken.value = null;
   console.log("logout", document.cookie, authToken);
   navigateTo("/login");
+};
+const handleClickActions = () => {
+  pulseModal.value.open();
 };
 </script>
