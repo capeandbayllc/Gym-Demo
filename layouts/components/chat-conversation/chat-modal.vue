@@ -132,13 +132,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
             <div class=" inline ml-2 gradient-bg border rounded-lg max-h-auto h-auto">
                 <div class="flex bg-black m-2">
                     <div class="relative p-1">
