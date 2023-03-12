@@ -50,12 +50,23 @@
             <p class="pl-4" :class="{'text-gray-400':!activeTotalAmountPaid}">3. *Total Amount Paid Today</p>
         </div>
         <div class="col-span-6  mx-auto w-full">
-            <select :disabled="!activeTotalAmountPaid" placeholder="POS Total" class="white-input w-full p-1 rounded-sm" v-model="posPaymentAmounts.totalAmountPaidToday">
+            <select-box
+                :items="[
+                    { id: true, label: 'Yes' },
+                    { id: false, label: 'No' }
+                ]"
+                value=""
+                label="Pos Total" 
+                labelOpened="Limited Availability"
+                :showSearch="false"
+                :showClearList="false"
+                class="bg-white text-black rounded border border-white w-full">
+            </select-box>
+            <!-- <select :disabled="!activeTotalAmountPaid" placeholder="POS Total" class="white-input w-full p-1 rounded-sm" v-model="posPaymentAmounts.totalAmountPaidToday">
                 <option value="" disabled selected hidden>POS Total</option>
-                <option value="post_total">POS Total</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
-            </select>
+            </select> -->
         </div>
         <div class="col-span-3 w-full flex justify-center">
             <div>

@@ -17,9 +17,18 @@
       <p class="pl-4">Primary</p>
     </div>
     <div class="col-span-5 mx-auto w-full">
-      <select class="white-input w-full p-1 rounded-sm" v-model="posPaymentAmounts.primary.grProfitCenter">
-        <option value="dues">Dues</option>
-      </select>
+      <select-box
+          :items="[
+              { value: 'yes', label: 'Yes' },
+              { value: 'no', label: 'No' }
+          ]"
+          label="Dues" 
+          labelOpened="Limited Availability"
+          :showSearch="false"
+          :showClearList="false"
+          @onChange="posPaymentAmounts.primary.grProfitCenter = $event"
+          class="bg-white text-black rounded border border-white w-full">
+      </select-box>
     </div>
     <div class="col-span-4 w-full flex items-center">
       <p class="mr-2">$</p>
@@ -31,9 +40,18 @@
         <p class="pl-4">Add On</p>
       </div>
       <div class="col-span-5 mx-auto w-full">
-        <select class="white-input w-full p-1 rounded-sm" v-model="posPaymentAmounts[`addOn${n}`].grProfitCenter">
-          <option value="" selected>Select One</option>
-        </select>
+        <select-box
+            :items="[
+                { value: 'yes', label: 'Yes' },
+                { value: 'no', label: 'No' }
+            ]"
+            :label="posPaymentAmounts[`addOn${n}`].grProfitCenter == '' ? 'Select One' : (posPaymentAmounts[`addOn${n}`].grProfitCenter == 'yes' ? 'Yes' : 'No')" 
+            :labelOpened="posPaymentAmounts[`addOn${n}`].grProfitCenter == '' ? 'Select One' : (posPaymentAmounts[`addOn${n}`].grProfitCenter == 'yes' ? 'Yes' : 'No')"
+            :showSearch="false"
+            :showClearList="false"
+            @onChange="posPaymentAmounts[`addOn${n}`].grProfitCenter= $event"
+            class="bg-white text-black rounded border border-white w-full">
+        </select-box>
       </div>
       <div class="col-span-4 w-full flex items-center">
         <p class="mr-2">$</p>

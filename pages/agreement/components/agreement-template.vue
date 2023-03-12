@@ -28,17 +28,33 @@
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Limited Availability (Membership Segment)</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="agreementInfoForm.limitedAvailability">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
+            <select-box
+                :items="[
+                    { value: 'yes', label: 'Yes' },
+                    { value: 'no', label: 'No' }
+                ]"
+                :label="agreementInfoForm.limitedAvailability == '' ? 'Select' : (agreementInfoForm.limitedAvailability == 'yes' ? 'Yes' : 'No')" 
+                labelOpened="Limited Availability"
+                :showSearch="false"
+                :showClearList="false"
+                @onChange="agreementInfoForm.limitedAvailability = $event"
+                class="bg-white text-black rounded border border-white w-full">
+            </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Introductory Offer</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="agreementInfoForm.introductoryOffer">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
+            <select-box
+                :items="[
+                    { value: 'yes', label: 'Yes' },
+                    { value: 'no', label: 'No' }
+                ]"
+                :label="agreementInfoForm.introductoryOffer == '' ? 'Select' : (agreementInfoForm.introductoryOffer == 'yes' ? 'Yes' : 'No')" 
+                labelOpened="Limited Availability"
+                :showSearch="false"
+                :showClearList="false"
+                @onChange="agreementInfoForm.introductoryOffer = $event"
+                class="bg-white text-black rounded border border-white w-full">
+            </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Membership Type</div>
@@ -46,10 +62,18 @@
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Promotion Segment</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="agreementInfoForm.promotionSegment">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
+            <select-box
+                :items="[
+                    { value: 'yes', label: 'Yes' },
+                    { value: 'no', label: 'No' }
+                ]"
+                :label="agreementInfoForm.promotionSegment == '' ? 'Select' : (agreementInfoForm.promotionSegment == 'yes' ? 'Yes' : 'No')" 
+                labelOpened="Limited Availability"
+                :showSearch="false"
+                :showClearList="false"
+                @onChange="agreementInfoForm.promotionSegment = $event"
+                class="bg-white text-black rounded border border-white w-full">
+            </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Agreement Template</div>
@@ -57,10 +81,18 @@
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Available for Presale</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="agreementInfoForm.availableForPresale">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
+            <select-box
+                :items="[
+                    { value: 'yes', label: 'Yes' },
+                    { value: 'no', label: 'No' }
+                ]"
+                :label="agreementInfoForm.availableForPresale == '' ? 'Select' : (agreementInfoForm.availableForPresale == 'yes' ? 'Yes' : 'No')" 
+                labelOpened="Limited Availability"
+                :showSearch="false"
+                :showClearList="false"
+                @onChange="agreementInfoForm.availableForPresale = $event"
+                class="bg-white text-black rounded border border-white w-full">
+            </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Billing System Type</div>

@@ -6,9 +6,18 @@
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full" />
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Billing Schedule Type</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.billingScheduleType">
-                <option value="fulltime">Paid in Full</option>
-            </select>
+            <select-box
+                :items="[
+                    { value: 'fulltime', label: 'Paid in full' },
+                    { value: 'term', label: 'Term' }
+                ]"
+                :label="paymentSchedule.billingScheduleType == '' ? 'Select' : (paymentSchedule.billingScheduleType == 'fulltime' ? 'Paid in full' : 'Term')" 
+                labelOpened="Open"
+                :showSearch="false"
+                :showClearList="false"
+                @onChange="paymentSchedule.billingScheduleType = $event"
+                class="bg-white text-black rounded border border-white w-full">
+            </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Allow Edits to Amounts</div>
@@ -16,9 +25,15 @@
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Billing Frequency</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.billingFrequency">
-                <option value="onetime">One Time</option>
-            </select>
+            <select-box
+                :items="billingFrequencyItems"
+                :label="billingFrequencyLabel" 
+                labelOpened="Open"
+                :showSearch="false"
+                :showClearList="false"
+                @onChange="paymentSchedule.billingFrequency = $event"
+                class="bg-white text-black rounded border border-white w-full">
+            </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div>Availability</div>
@@ -30,27 +45,46 @@
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">*Term in Months</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.terms">
-                <option value="3">3 Months</option>
-                <option value="6">6 Months</option>
-                <option value="9">9 Months</option>
-                <option value="12">12 Months</option>
-            </select>
+            <select-box
+                :items="termsItems"
+                :label="termsLabel" 
+                labelOpened="Open"
+                :showSearch="false"
+                :showClearList="false"
+                @onChange="paymentSchedule.terms = $event"
+                class="bg-white text-black rounded border border-white w-full">
+            </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full flex">
             <div class="mr-4 min-w-[35%]">
                 <div class="mb-2">Auto Renew</div>
-                <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.autoRenew">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-            </select>
+                <select-box
+                    :items="[
+                        { value: 'yes', label: 'Yes' },
+                        { value: 'no', label: 'No' }
+                    ]"
+                    :label="paymentSchedule.autoRenew == '' ? 'Select' : (paymentSchedule.autoRenew == 'yes' ? 'Yes' : 'No')" 
+                    labelOpened="Limited Availability"
+                    :showSearch="false"
+                    :showClearList="false"
+                    @onChange="paymentSchedule.autoRenew = $event"
+                    class="bg-white text-black rounded border border-white w-full">
+                </select-box>
             </div>
             <div>
                 <div class="mb-2">Introductory Offer</div>
-                <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.introductoryOffer">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
+                <select-box
+                    :items="[
+                        { value: 'yes', label: 'Yes' },
+                        { value: 'no', label: 'No' }
+                    ]"
+                    :label="paymentSchedule.introductoryOffer == '' ? 'Select' : (paymentSchedule.introductoryOffer == 'yes' ? 'Yes' : 'No')" 
+                    labelOpened="Limited Availability"
+                    :showSearch="false"
+                    :showClearList="false"
+                    @onChange="paymentSchedule.introductoryOffer = $event"
+                    class="bg-white text-black rounded border border-white w-full">
+                </select-box>
             </div>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto mt-5 w-full">
@@ -60,10 +94,18 @@
         <div class="col-span-2 -lg:col-span-2 -md:col-auto mx-auto w-full flex">
             <div class="mr-4 min-w-[70%]">
                 <div class="mb-2">Choose how the preferred due day will be determined</div>
-                <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.chooesePreferredDueDay">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
+                <select-box
+                    :items="[
+                        { value: 'yes', label: 'Yes' },
+                        { value: 'no', label: 'No' }
+                    ]"
+                    label="Anniversary Day (Day agreement is sold)" 
+                    labelOpened="Limited Availability"
+                    :showSearch="false"
+                    :showClearList="false"
+                    @onChange="paymentSchedule.chooesePreferredDueDay = $event"
+                    class="bg-white text-black rounded border border-white w-full">
+                </select-box>
             </div>
             <div>
                 <div class="mb-2">Date</div>
@@ -76,10 +118,18 @@
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full" />
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Member pays last payment at Signing</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.memberPaySigning">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-            </select>
+            <select-box
+                :items="[
+                    { value: 'yes', label: 'Yes' },
+                    { value: 'no', label: 'No' }
+                ]"
+                :label="paymentSchedule.memberPaySigning == '' ? 'Select' : (paymentSchedule.memberPaySigning == 'yes' ? 'Yes' : 'No')" 
+                labelOpened="Limited Availability"
+                :showSearch="false"
+                :showClearList="false"
+                @onChange="paymentSchedule.memberPaySigning = $event"
+                class="bg-white text-black rounded border border-white w-full">
+            </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full" />
     </simple-card>
@@ -103,6 +153,30 @@ const paymentSchedule = ref({
     planDate: "",
     memberPaySigning: "yes"
 })
+
+const billingFrequencyItems = ref([
+    { value: 'onetime', label: 'One time' },
+    { value: 'monthly', label: 'Monthly' },
+    { value: 'annually', label: 'Annually' }
+]);
+
+const billingFrequencyLabel = computed(()=>{
+    return paymentSchedule.value.billingFrequency == '' ? 'Select'
+    : billingFrequencyItems.value.find(item => item.value == paymentSchedule.value.billingFrequency)?.label
+});
+
+const termsItems = ref([
+    { value: '3', label: '3 Months' },
+    { value: '6', label: '6 Months' },
+    { value: '9', label: '9 Months' },
+    { value: '12', label: '12 Months' },
+]);
+
+const termsLabel = computed(()=>{
+    return paymentSchedule.value.terms == '' ? 'Select'
+    : termsItems.value.find(item => item.value == paymentSchedule.value.terms)?.label
+});
+
 
 </script>
 <style scoped>

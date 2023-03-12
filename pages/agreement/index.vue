@@ -67,7 +67,7 @@ import PaymentSchedule from './components/payment-schedule.vue';
 import PosPaymentAmounts from './components/paos-payment-amounts.vue';
 import ScheduledBilling from './components/scheduled-billing.vue';
 import ContractModal from './components/contract-modal.vue';
-import EditPaymentPlan from './components/edit-payment-plan-modal.vue';
+import EditPaymentPlan from './components/edit-payment-plan.vue';
 import AgreementType from './components/agreement-type.vue';
 import SaveModal from './components/save-modal.vue';
 

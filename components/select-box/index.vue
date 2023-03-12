@@ -1,16 +1,17 @@
 <template>
-    <div :class="className">
+    <div :class="className" class="flex items-center w-full">
         <button
 			class="select-box-btn"
             :class="{
                 'bg-secondary': secondary,
-                'bg-transparent border-secondary': transparent && !secondary,
+                'bg-transparent': transparent && !secondary,
                 'rounded-t': !isCollapsed,
-                'rounded': isCollapsed
+                'rounded': isCollapsed,
+                'select-box-btn-primary': !isCollapsed
             }"
             :onClick="toggleCollapsed"
         >
-            {{ value ? selected : label }}
+            {{ value ? selected : (!isCollapsed && labelOpened ? labelOpened : label)  }}
             <select-box-icon
                 :isCollapsed="isCollapsed"
                 :color="color"
@@ -18,7 +19,7 @@
         </button>
         <transition name="fade">
             <select-box-content v-if="!isCollapsed">
-                <select-box-search-input 
+                <select-box-search-input v-if="showSearch" 
                     :secondary="false"
                     :placeholder="placeholderSearch" 
                     size="xs" 
@@ -31,7 +32,7 @@
                     :selected="item.value === value"
                     :onClick="onChange"
                 />
-                <p class="select-box-clear-btn" :onClick="clearList">Clear List</p>
+                <p class="select-box-clear-btn" v-if="showClearList" :onClick="clearList">Clear List</p>
             </select-box-content>
         </transition>
 
@@ -42,12 +43,19 @@
     @apply relative min-w-fit;
 }
 .select-box-btn {
-	@apply flex flex-row border px-2 py-1 items-center justify-between;
-    width: 165px;
-    height: 29px;
+	@apply flex px-2 py-1 items-center h-full w-full justify-between transition-colors duration-300;
 }
+
+.select-box-filter-size{
+    @apply w-[165px] h-[29px];
+}
+
 .select-box-clear-btn {
 	@apply text-right font-medium mr-3 text-sm cursor-pointer;
+}
+
+.select-box-btn-primary {
+    @apply bg-secondary text-white;
 }
 
 .fade-enter-active,
@@ -66,6 +74,8 @@ import { ref, computed } from "vue";
 import SelectBoxIcon from "./select-box-icon.vue";
 import SelectBoxContent from "./SelectBoxContent.vue";
 import SelectBoxItem from "./SelectBoxItem.vue";
+
+const emit = defineEmits(['onChange']);
 
 const props = defineProps({
     label: {
@@ -86,10 +96,6 @@ const props = defineProps({
     color: {
         type: String,
     },
-    onChange: {
-        type: Function,
-        default: () => null,
-    },
     class: {
         type: String,
         default: "",
@@ -101,6 +107,22 @@ const props = defineProps({
     transparent: {
         type: Boolean,
         default: true
+    },
+    classOpened: {
+        type: String,
+        default: "",
+    },
+    labelOpened: {
+        type: String,
+        default: "",
+    },
+    showSearch:{
+        type: Boolean,
+        default: true,
+    },
+    showClearList:{
+        type: Boolean,
+        default: true,
     }
 
 });
@@ -111,11 +133,11 @@ const toggleCollapsed = () => {
 
 const clearList = () => {
     toggleCollapsed();
-    props.onChange('');
+    emit('onChange', '');
 };
 const onChange = (value) => {
     toggleCollapsed();
-    props.onChange(value);
+    emit('onChange', value);
 };
 
 const className = computed({

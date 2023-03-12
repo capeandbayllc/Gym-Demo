@@ -6,11 +6,15 @@
         <div class="col-span-3 w-2/4">
             <div class="mb-2 text-lg">Commisions</div>
             <div class="mb-2">Total Contract Value</div>
-            <select class="white-input w-full p-1 rounded-sm" v-model="agreementInfoForm.limitedAvailability">
-                <option value="yes">None</option>
-                <option value="yes">Initiation Fee</option>
-                <option value="no">First Months Dues</option>
-            </select>
+            <select-box
+                :items="limitedAvailabilityItems"
+                :label="limitedAvailabilityLabel" 
+                labelOpened="Open"
+                :showSearch="false"
+                :showClearList="false"
+                @onChange="agreementInfoForm.limitedAvailability = $event"
+                class="bg-white text-black rounded border border-white w-full">
+            </select-box>
         </div>
         <div class="col-span-1 mx-auto w-full">
             <div class="mb-2">Name (1)</div>
@@ -44,7 +48,7 @@ const agreementInfoForm = ref({
     inStore: "",
     online: "",
     inApp: "",
-    limitedAvailability: "yes",
+    limitedAvailability: "",
     introductoryOffer: "yes",
     membershipType: "",
     promotionSegment: "",
@@ -54,6 +58,17 @@ const agreementInfoForm = ref({
     planStartDate: "",
     planEndDate: "",
 })
+
+const limitedAvailabilityItems = ref([
+    { value: '', label: 'None' },
+    { value: 'initiation', label: 'Initiation Fee' },
+    { value: 'dues', label: 'First Months Dues' }
+]);
+
+const limitedAvailabilityLabel = computed(()=>{
+    return agreementInfoForm.value.limitedAvailability == '' ? 'Select'
+    : limitedAvailabilityItems.value.find(item => item.value == agreementInfoForm.value.limitedAvailability)?.label
+});
 
 </script>
 <style scoped>
