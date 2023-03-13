@@ -1,5 +1,5 @@
 <template>
-    <div class="py-4 px-12 w-full h-fit">
+    <div class="py-4 px-8 w-full h-fit">
         <!-- event details -->
         <div
             v-if="eventDetailsVisibibility"
@@ -38,8 +38,8 @@
             <EventForm
                 @cancel="resetState"
                 @createEvent="handleCreateEvent"
-                :members="result.members.data"
-                :employees="result.members.data"
+                :members="result.members?.data"
+                :employees="result.members?.data"
                 :nodeContext="emptyNodeContext"
             />
         </div>
@@ -124,14 +124,6 @@
 import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
 import { isEqual, set } from "date-fns";
 import "@fullcalendar/core/vdom"; // solves problem with Vite
-import { ArrowIcon } from "~~/components/icons";
-import FullCalendar from "@fullcalendar/vue3";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import listPlugin from "@fullcalendar/list";
-import EventPopup from "./components/event-popup.vue";
-import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
@@ -199,146 +191,14 @@ const query = gql`
             description
             full_day_event
             event_type_id
+            user_attendees
+            lead_attendees
+            member_attendees
         }
     }
 `;
 
 const { result } = useQuery(query);
-console.log(result);
-
-const calendar = ref(null);
-const currentView = ref("timeGridWeek");
-const start = ref(null);
-const end = ref(null);
-const selectedDate = ref(null);
-const isMobile = computed(() => window.innerWidth <= 480);
-const monthCalendar = ref(null);
-const listCalendar = ref(null);
-
-const eventModal = ref(null);
-
-const events = [
-    {
-        title: "Priority One",
-        start: "2022-12-01T06:00:00",
-        backgroundColor: "red",
-        extendedProps: {
-            department: "BioChemistry",
-        },
-        description: "Lecture",
-        parth: "jasani",
-        data: {
-            foo: "bar",
-        },
-    },
-    {
-        title: "To Do Two",
-        start: "2022-12-01T07:00:00",
-        backgroundColor: "blue",
-    },
-    {
-        title: "To Do Three",
-        start: "2022-12-01T08:30:00",
-        extendedProps: {
-            status: "done",
-        },
-        backgroundColor: "lime",
-    },
-    {
-        title: "Birthday Party",
-        start: "2022-12-01T10:00:00",
-        backgroundColor: "green",
-    },
-];
-
-const eventClick = (info) => {
-    var eventObj = info.event;
-    eventModal.value.open();
-};
-
-const calendarOptions = ref({
-    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-    initialView: "timeGridWeek",
-    dateClick: handleDateClick,
-    headerToolbar: {
-        left: "",
-        center: "",
-        right: "prev,next today",
-        // center: "title",
-        // right: "prev,next today",
-    },
-    events,
-    editable: true,
-    selectable: true,
-    dayMaxEvents: true,
-    eventClick,
-    datesSet: (params) => {
-        console.log("params-->", params);
-        listCalendar?.value?.getApi()?.gotoDate(params.start);
-        monthCalendar?.value?.getApi()?.gotoDate(params.start);
-        monthCalendar?.value?.getApi()?.select(params.start);
-        //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
-    },
-    views: {
-        timeGridDay: {
-            dayHeaderFormat: {
-                month: "long",
-                day: "numeric",
-                omitCommas: "false",
-            },
-            nowIndicator: true,
-        },
-    },
-    viewDidMount: function (info) {
-        console.log("viewDidMount");
-        onViewChanged();
-    },
-    //eventContent: { html: '<i>some html</i>' }
-});
-
-const monthCalendarOptions = ref({
-    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-    initialView: "dayGridMonth",
-    headerToolbar: false,
-    events,
-    eventClick,
-    editable: true,
-    selectable: true,
-    dayMaxEvents: true,
-    dateClick: function (params) {
-        console.log("🚀 ~ file: index.vue ~ line 123 ~ params", params);
-        calendar?.value?.getApi()?.gotoDate(params.date);
-    },
-});
-
-const listCalendarOptions = ref({
-    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
-    initialView: "listDay",
-    headerToolbar: false,
-    events,
-    eventClick,
-});
-
-const onViewChanged = () => {
-    start.value = calendar.value.getApi().view.activeStart;
-    start.end = calendar.value.getApi().view.activeEnd;
-    console.log({
-        start,
-        end,
-        calendarView: calendar.value.getApi().view,
-    });
-};
-
-const calendarTitle = computed(() => {
-    let option = {
-        year: "numeric",
-        month: "long",
-    };
-    if (currentView.value === "timeGridDay") {
-        option["day"] = "numeric";
-    }
-    return start.value?.toLocaleString("default", option);
-});
 
 const handleCreateEvent = (form) => {
     console.log("create new event with info:", form);
@@ -446,6 +306,7 @@ watch(result, (ov, nv) => {
     initialized.value = true;
     let { calendarEvents } = result.value;
     activeEventsList.value.push(...calendarEvents);
+    console.log(result.value);
 });
 
 let timeout = null;
@@ -453,7 +314,7 @@ let timeout = null;
 onMounted(async () => {
     if (!timeout) {
         timeout = setTimeout(() => {
-            console.log("GQL Result:", result);
+            console.log("GQL Result:", result.value);
         }, 3000);
     }
     //   await nextTick();
