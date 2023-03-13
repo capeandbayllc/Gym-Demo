@@ -38,9 +38,7 @@
                         :alert="Note.active"
                     />
                 </div>
-                
             </div>
-
             <div class="content px-4">
                 <NoteForm  @saveNote="addRandomMembersNote"   @deleteNote="$emit('deleteNote')"/>
             </div>
@@ -50,69 +48,50 @@
 </template>
 
 <script setup>
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { useMutation, useQuery } from "@vue/apollo-composable";
-import gql from "graphql-tag";
-import { NoteFactory } from "~~/api/data/notes/NoteFactory";
-import { NewAgreementIcon } from '~~/components/icons';
-import { GET_NOTES } from "../../../api/queries/note";
-import Folder from "./folder.vue";
-import NoteForm from "./note-form.vue";
-import Note from "./note.vue";
-library.add(faCheck);
+    import { library } from "@fortawesome/fontawesome-svg-core";
+    import { faCheck } from "@fortawesome/free-solid-svg-icons";
+    import { useMutation, useQuery } from "@vue/apollo-composable";
+    import { NoteFactory } from "~~/api/data/notes/NoteFactory";
+    import { NewAgreementIcon } from '~~/components/icons';
+    import { ADD_NOTE, GET_NOTES } from "../../../api/queries/note";
+    import Folder from "./folder.vue";
+    import NoteForm from "./note-form.vue";
+    import Note from "./note.vue";
+    library.add(faCheck);
 
-const props = defineProps({
-    saveNoteStatus: Boolean
-})
-const emit = defineEmits(['saveNote']);
+    const props = defineProps({
+        saveNoteStatus: Boolean
+    })
+    const emit = defineEmits(['saveNote']);
 
+    const { result } = useQuery(GET_NOTES);    
+    const addRandomMembersNote = async () => {
+    const variables = new NoteFactory().build("test");
+    const { mutate } = useMutation(ADD_NOTE, {
+    refetchQueries: [{ query: GET_NOTES }], 
+    });
 
- 
-  const { result } = useQuery(GET_NOTES);
     
-  const mutation = gql`
-    mutation CreateNote($input: CreateNoteInput!) {
-      createNote(input: $input) {
-        note
-        title
-      }
-    }
-  `;
-  
-  
-  const addRandomMembersNote = async () => {
-  const variables = new NoteFactory().build("test");
-  const { mutate } = useMutation(mutation, {
-  onCompleted: () => {
-    refetchData(); // refetch data after mutation is completed
-  },
-});
-  
     const response = await mutate({ input: variables });
+        emit('saveNote');
+    };
     
-    emit('saveNote');
-
-  };
-
- 
-
 </script>
 
 <style scoped>
-.note-modal-container {
-	@apply pl-8 pr-8 pt-8 pb-8;
-    .card-title {
-        @apply border-b pb-2 border-base-content/50;
-    }
-    .content {
-        @apply border border-secondary bg-black;
-        .call-inner-content {
-            @apply border border-gray-50
+    .note-modal-container {
+        @apply pl-8 pr-8 pt-8 pb-8;
+        .card-title {
+            @apply border-b pb-2 border-base-content/50;
         }
-        .btn.bg-success:hover {
-            @apply border-success;
+        .content {
+            @apply border border-secondary bg-black;
+            .call-inner-content {
+                @apply border border-gray-50
+            }
+            .btn.bg-success:hover {
+                @apply border-success;
+            }
         }
     }
-}
 </style>

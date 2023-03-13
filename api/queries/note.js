@@ -1,8 +1,9 @@
 import gql from "graphql-tag";
 
+
 export const GET_NOTES = gql`
     query Notes {
-      notes(first: 10) {
+      notes(first: 5) {
         data {
           id
           title
@@ -19,3 +20,16 @@ export const GET_NOTES = gql`
       }
     }
   `;
+
+export const ADD_NOTE = gql`
+    mutation CreateNote($input: CreateNoteInput) {
+      createNote(input: $input) {
+          id
+          title
+          note
+          active
+          read
+          entity_type
+      }
+    }
+  `;  
