@@ -1,6 +1,6 @@
 <template>
-    <simple-card title="Notes">
-        <div class="note-modal-container bg-gradient-to-r from-[#042137] to-[#042137]  flex flex-col md:flex-row justify-between overflow-y-auto h-[750px] scroll-py-8">
+    <simple-card title="Notes" class="mb-4">
+        <div class="note-modal-container bg-gradient-to-r from-[#042137] to-[#042137]  flex flex-col md:flex-row justify-between overflow-y-scroll max-h-[40vw]">
             
             <div class="md:w-48 mx-2">
                <div class="flex flex-col items-center mb-10">
