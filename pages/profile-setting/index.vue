@@ -1,3 +1,24 @@
+<!-- TODO: Remains:-->
+<!-- TODO: 1. i) TOP IMAGE: MAY BE POSITIONING (from left side): need more specific image-->
+<!-- TODO: ii) toggle image-->
+<!-- TODO: iii) if possible upload-->
+
+<!-- TODO: 2. basic info-->
+<!-- TODO: i) responsive checking for ipad screen -->
+<!-- TODO: ii) Search manager (have some questions here????) (how will it work):-->
+<!-- TODO: iii) Add connection: responsive check-->
+<!-- TODO: iv) Address: later responsive check -->
+<!-- TODO: v) Social media handles-->
+<!-- TODO: vi) Dropdowns: how many max will be there??-->
+<!-- TODO: vii) Calendar: right now, default time, later from DB : What will happen if I click new???-->
+<!-- TODO: viii) Notes-->
+<!-- TODO: ix) Cancel / Save hover???-->
+
+<!-- TODO: 3. Update password-->
+<!-- TODO: 4. Login related-->
+<!-- TODO: 5. Attachment-->
+<!-- TODO: 6. Salary-->
+<!-- TODO: 7. Hierchy-->
 <template>
   <div class="page-setting-container">
     <!--    PROFILE IMAGE SECTION-->
@@ -48,7 +69,7 @@
                 <span>{{ item.label }} </span>
                 <span v-if="item.required" class="text-blue-400">* </span>
               </div>
-              <input :class="item.class" class="focus-within:hover:bg-blue-600"
+              <input :class="item.class"
                      v-model="form[item.key]"
                      :placeholder="item.placeholder"/>
             </div>
@@ -56,22 +77,17 @@
         </div>
 
         <!--    ADD CONNECTION SECTION-->
-<!--        // grid-cols-8 gap-3 py-2 mt-4 :style="{width: '80%', marginLeft: '4rem'}"-->
         <div class="grid grid-cols-6 gap-4 py-2 mt-4">
-<!--        // <div class="col-start-2 col-span-5 border-2 border-secondary rounded-2xl">-->
           <div class="col-start-2 col-span-4 border-2 border-secondary rounded-2xl">
 
-            <div class="mt-4 mr-5 float-right w-12 p-2.5 pl-2 rounded-2xl bg-blue-600">
+            <div class="mt-4 mr-5 float-right w-12 p-2.5 pl-2 rounded-2xl bg-blue-500">
               <MembersIcon  />
             </div>
-            <div class="">
+
               <div class="grid grid-cols-9 justify-items-center py-2">
-                <div class="mb-5 col-span-4">
-                  <!--  // todo: font size-->
+                <div class="mb-5 col-span-5">
                   <h6 class="pt-5 mb-3 font-bold text-lg">Add Connection</h6>
-                  <div class="-mb-1.5 mt-4">
-                    Lead Member to Connect
-                  </div>
+                  <div class="-mb-1.5 mt-4">Lead Member to Connect</div>
                   <!-- TODO:  Search key -->
                   <input class="neutral-input rounded-xl"
                          v-model="form['lead-member']"
@@ -79,99 +95,107 @@
                 </div>
 
                 <div class="mb-5 col-span-3 mt-16">
-                  <div class="-mb-1.5">
-                    Relationship:
-                  </div>
-                  <!-- TODO:  Dropdown -->
-                  <input class="neutral-input rounded-xl"
-                         v-model="form['relationship']"
-                         placeholder="Relationship"/>
+                  <div class="-mb-1.5">Relationship:</div>
+                  <select id="relationship" class="neutral-input rounded-xl"
+                          v-model="form['relationship']">
+                    <option selected value="0" key="0">Relationship</option>
+                    <option
+                            v-for="item in relationships"
+                            :key="item.id"
+                            value="item.id">
+                      {{ item.name }}
+                    </option>
+                  </select>
                 </div>
               </div>
-            </div>
 
           </div>
         </div>
 
-        <div class="divider w-5/6 ml-auto mr-auto mt-10"></div>
+        <divider />
+
+        <!--   Address SECTION-->
+        <profile-address-setting :formAddress="form.address" @update-form-address="updateAddress" />
+
+        <divider />
 
       </div>
 
-<!--          <profile-relation/>-->
-<!--          <div>-->
-<!--            <h4 class="mb-4 inline-block">-->
-<!--              Calendar Access-->
-<!--              <LockIcon class="inline-block"/>-->
-<!--            </h4>-->
-<!--            <multi-select-->
-<!--                :options="departments"-->
-<!--                label="Department(s)"-->
-<!--                v-model="form.departments"-->
-<!--            />-->
-<!--          </div>-->
-<!--          <div class="col-span-2 3xl:col-span-3 -lg:col-span-1 -md:col-auto">-->
-<!--            <div-->
-<!--                class="border border-secondary rounded p-4 w-full mb-4 bg-transparent"-->
-<!--            >-->
-<!--              <h4 class="mb-1 inline-block font-bold w-full">-->
-<!--                Availability-->
-<!--              </h4>-->
-<!--              <label class="mr-3">Daily Times Set:</label>-->
-<!--              <span class="mx-2 inline-block">-->
-<!--                        <ClockIcon class="inline-block mr-1"/> 10:20 am-->
-<!--                    </span>-->
-<!--              <span class="mx-2 inline-block">-->
-<!--                        <ClockIcon class="inline-block mr-1"/> 1:00 pm-->
-<!--                    </span>-->
-<!--              <span class="mx-2 inline-block">-->
-<!--                        <ClockIcon class="inline-block mr-1"/> 3:00 pm-->
-<!--                    </span>-->
-<!--            </div>-->
-<!--            <Button-->
-<!--                secondary-->
-<!--                size="sm"-->
-<!--                class="float-right capitalize"-->
-<!--            >+ New-->
-<!--            </Button-->
-<!--            >-->
-<!--            <Button-->
-<!--                ghost-->
-<!--                size="sm"-->
-<!--                class="float-right mr-2 capitalize"-->
-<!--            >Edit-->
-<!--            </Button-->
-<!--            >-->
-<!--          </div>-->
-<!--          <div class="divider"></div>-->
-<!--          <div-->
-<!--              class="col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-span-1"-->
-<!--          >-->
-<!--            <h4 class="mb-4 inline-block w-full">Notes</h4>-->
-<!--            <textarea-->
-<!--                name="notes"-->
-<!--                rows="6"-->
-<!--                class="neutral-input rounded w-full mb-4"-->
-<!--            ></textarea>-->
-<!--            <div class="text-center">-->
-<!--              <Button-->
-<!--                  ghost-->
-<!--                  size="sm"-->
-<!--                  class="mr-2 capitalize"-->
-<!--              >Cancel-->
-<!--              </Button-->
-<!--              >-->
-<!--              <Button-->
-<!--                  secondary-->
-<!--                  size="sm"-->
-<!--                  class="capitalize"-->
-<!--              >Save-->
-<!--              </Button-->
-<!--              >-->
-<!--            </div>-->
-<!--          </div>-->
+<!--          <profile-relation/>
+          <div>
+            <h4 class="mb-4 inline-block">
+              Calendar Access
+              <LockIcon class="inline-block"/>
+            </h4>
+            <multi-select
+                :options="departments"
+                label="Department(s)"
+                v-model="form.departments"
+            />
+          </div>
+          <div class="col-span-2 3xl:col-span-3 -lg:col-span-1 -md:col-auto">
+            <div
+                class="border border-secondary rounded p-4 w-full mb-4 bg-transparent"
+            >
+              <h4 class="mb-1 inline-block font-bold w-full">
+                Availability
+              </h4>
+              <label class="mr-3">Daily Times Set:</label>
+              <span class="mx-2 inline-block">
+                        <ClockIcon class="inline-block mr-1"/> 10:20 am
+                    </span>
+              <span class="mx-2 inline-block">
+                        <ClockIcon class="inline-block mr-1"/> 1:00 pm
+                    </span>
+              <span class="mx-2 inline-block">
+                        <ClockIcon class="inline-block mr-1"/> 3:00 pm
+                    </span>
+            </div>
+            <Button
+                secondary
+                size="sm"
+                class="float-right capitalize"
+            >+ New
+            </Button
+            >
+            <Button
+                ghost
+                size="sm"
+                class="float-right mr-2 capitalize"
+            >Edit
+            </Button
+            >
+          </div>
+          <div class="divider"></div>
+          <div
+              class="col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-span-1"
+          >
+            <h4 class="mb-4 inline-block w-full">Notes</h4>
+            <textarea
+                name="notes"
+                rows="6"
+                class="neutral-input rounded w-full mb-4"
+            ></textarea>
+            <div class="text-center">
+              <Button
+                  ghost
+                  size="sm"
+                  class="mr-2 capitalize"
+              >Cancel
+              </Button
+              >
+              <Button
+                  secondary
+                  size="sm"
+                  class="capitalize"
+              >Save
+              </Button
+              >
+            </div>
+          </div>
 
-<!--        </div>-->
-<!--      </div>-->
+        </div>
+      </div>-->
 
     </div>
   </div>
@@ -193,9 +217,18 @@ export default {
   @apply border border-secondary rounded-2xl;
 }
 
-input {
+input, select, option {
   @apply h-9 rounded mt-3 w-full pl-2;
   min-width: 16rem;
+}
+
+
+#relationship option {
+  background-color: #333;
+}
+
+#relationship option:hover {
+  background-color: #333
 }
 
 input:focus {
@@ -218,8 +251,8 @@ input:focus {
   @apply bg-transparent border border-secondary;
 }
 
-.divider {
-  @apply border-b-2 h-0 border-secondary col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-auto;
+input:hover {
+  background-color: #0075C9;
 }
 
 /*}*/
@@ -228,9 +261,19 @@ input:focus {
 <script setup>
 import {ref} from 'vue';
 import {MembersIcon} from "@/components/icons";
+// import Options from "../components/contact/Options";
+import ProfileAddressSetting from "./components/address";
+import Divider from "./components/divider";
 
 const form = ref({
   username: 'kevinbuchanan@email.com',
+  relationship: 0,
+  address: {
+    address: '',
+    city: '',
+    state: '',
+    zipcode: '',
+  }
 });
 const profileBasic = [
   {
@@ -336,6 +379,26 @@ const sections = [
   //   data: location,
   // },
 ];
+
+const relationships = [
+  {
+    id: 1,
+    name: 'Relationship 1',
+  },
+  {
+    id: 2,
+    name: 'Relationship 2',
+  },
+  {
+    id: 3,
+    name: 'Relationship 3',
+  },
+  {
+    id: 4,
+    name: 'Relationship 4',
+  },
+];
+
 const departments = [
   {
     value: 1,
@@ -351,5 +414,11 @@ const departments = [
   },
 ];
 const uploadPopUp = ref(false);
+
+const updateAddress = formData => {
+  form.address = formData;
+  console.log('detals form: ', form);
+}
+
 </script>
 
