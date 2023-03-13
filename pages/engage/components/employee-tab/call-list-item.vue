@@ -102,7 +102,7 @@ import {CallIcon, EmailIcon, MessageIcon, CrossIcon} from "~/components/icons";
 import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
-import moment from "moment";
+
 library.add(faEllipsisH);
 
 

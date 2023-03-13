@@ -5,7 +5,7 @@
 
         <data-table
             :columns="columns"
-            :data="result?.members?.data"
+            :data="itemsWithMembershipTypes"
             :row-component="CallListItem"
             :stickyHeader="true"
             class="h-80 text-xs overflow-y-auto"
@@ -56,20 +56,32 @@ const query = gql`
     }
   }
 `;
-const memberType = () =>
-{
-  const membershipType = ['platinum', 'gold', 'silver', 'bronze']
-  let randomNumber = Math.floor(Math.random() * membershipType.length);
-  this.name = membershipType[randomNumber];
+
+
+
+const { result } = useQuery(query);
+
+const members = ref([]);
+watch(result, (nv, ov) => {
+  if (result) {
+    members.value = result._value.members.data;
+  }
+})
+
+const membershipTypes = ['platinum', 'gold', 'silver', 'bronze'];
+
+const getRandomMembershipType = () => {
+  return membershipTypes[Math.floor(Math.random() * membershipTypes.length)];
 };
 
-const { result } = () => {
-  memberType();
-  let data = useQuery(query);
+const itemsWithMembershipTypes = members.value.map(item => ({
+  ...item,
+  membership_type: getRandomMembershipType()
+}));
 
-}
+
 console.log('test');
-console.log(result);
+console.log(members);
 
 const columns = ["","Name", "Location", "", "Membership Type", "Date Upgraded", ""]
 const data = [{
