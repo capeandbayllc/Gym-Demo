@@ -1,122 +1,140 @@
 <template>
-  <div class="py-4 px-12 w-full h-fit">
-    <!-- event details -->
-    <div
-      v-if="eventDetailsVisibibility"
-      class="z-50 fixed h-screen w-screen flex items-center justify-center pointer-events-none"
-    >
-      <EventDetails
-        :event="eventDetails"
-        @outclick="resetState"
-        @seemore="
-          () => {
-            eventDetailsVisibibility = false;
-            eventInformationVisibibility = true;
-          }
-        "
-      />
-    </div>
-    <!-- more in depth event information -->
-    <div
-      v-if="eventInformationVisibibility"
-      class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16 pointer-events-none"
-    >
-      <EventInformation :event="eventDetails" @outclick="resetState" />
-    </div>
-    <!-- offer-up panel -->
-    <div
-      v-if="offerUpVisibibility"
-      class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16 pointer-events-none"
-    >
-      <OfferUp :event="eventDetails" @outclick="resetState" />
-    </div>
-
-    <div
-      class="z-50 fixed h-screen w-screen flex items-center justify-center pointer-events-none"
-      v-if="eventFormVisibility"
-    >
-      <EventForm
-        @cancel="resetState"
-        @createEvent="handleCreateEvent"
-        :members="result.members.data"
-        :employees="result.members.data"
-        :nodeContext="emptyNodeContext"
-      />
-    </div>
-
-    <!-- main content wrapper  -->
-    <div
-      class="border border-secondary bg-[#202020]/[0.9] rounded-2xl p-7 max-w-none flex gap-4"
-    >
-      <!-- left sidebar -->
-      <aside class="flex flex-col gap-5">
-        <Datepicker
-          class="calendar-date-picker"
-          menu-class-name="!bg-transparent !border-none"
-          :day-class="getDayClass"
-          month-name-format="long"
-          inline
-          auto-apply
-          :enable-time-picker="false"
-          dark
-        />
-
-        <CalendarMenu :calendars="activeEventsList" />
-        <ReportsStatistics />
-      </aside>
-
-      <section class="w-full">
-        <!-- main section heading area -->
-        <div class="flex justify-between items-center w-full">
-          <h1 class="text-3xl">January 2088</h1>
-          <!-- filters/page actions -->
-          <div class="flex gap-2">
-            <button
-              @click="handleAddNew"
-              class="bg-secondary py-1 px-2 rounded-md border-2 border-transparent flex items-center gap-2 text-[0.8rem]"
-            >
-              <span> Add New </span>
-              <span class="w-4 fill-white">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                  <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                  <path
-                    d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
-                  />
-                </svg>
-              </span>
-            </button>
-            <button
-              class="bg-neutral py-1 px-2 rounded-md border-secondary border-2 flex items-center gap-2 text-[0.8rem]"
-            >
-              <span> All Bookings </span>
-              <span class="w-4 p-1 fill-white">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                  <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                  <path
-                    d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"
-                  />
-                </svg>
-              </span>
-            </button>
-            <input
-              placeholder="Search"
-              class="text-black py-1 p-2 rounded-md border-2 border-transparent text-[0.8rem]"
-              type="text"
+    <div class="py-4 px-12 w-full h-fit">
+        <!-- event details -->
+        <div
+            v-if="eventDetailsVisibibility"
+            class="z-50 fixed h-screen w-screen flex items-center justify-center pointer-events-none"
+        >
+            <EventDetails
+                :event="eventDetails"
+                @outclick="resetState"
+                @seemore="
+                    () => {
+                        eventDetailsVisibibility = false;
+                        eventInformationVisibibility = true;
+                    }
+                "
             />
-          </div>
         </div>
-        <GrCalendar
-          :events="activeEventsList"
-          @clickEventNode="handleCalendarEvent"
-          @clickEmptyNode="handleAddNew"
-        />
-      </section>
+        <!-- more in depth event information -->
+        <div
+            v-if="eventInformationVisibibility"
+            class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16 pointer-events-none"
+        >
+            <EventInformation :event="eventDetails" @outclick="resetState" />
+        </div>
+        <!-- offer-up panel -->
+        <div
+            v-if="offerUpVisibibility"
+            class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16 pointer-events-none"
+        >
+            <OfferUp :event="eventDetails" @outclick="resetState" />
+        </div>
+
+        <div
+            class="z-50 fixed h-screen w-screen flex items-center justify-center pointer-events-none"
+            v-if="eventFormVisibility"
+        >
+            <EventForm
+                @cancel="resetState"
+                @createEvent="handleCreateEvent"
+                :members="result.members.data"
+                :employees="result.members.data"
+                :nodeContext="emptyNodeContext"
+            />
+        </div>
+
+        <!-- main content wrapper  -->
+        <div
+            class="border border-secondary bg-[#202020]/[0.9] rounded-2xl p-7 max-w-none flex gap-4"
+        >
+            <!-- left sidebar -->
+            <aside class="flex flex-col gap-5">
+                <Datepicker
+                    class="calendar-date-picker"
+                    menu-class-name="!bg-transparent !border-none"
+                    :day-class="getDayClass"
+                    month-name-format="long"
+                    inline
+                    auto-apply
+                    :enable-time-picker="false"
+                    dark
+                />
+
+                <CalendarMenu :calendars="activeEventsList" />
+                <ReportsStatistics />
+            </aside>
+
+            <section class="w-full">
+                <!-- main section heading area -->
+                <div class="flex justify-between items-center w-full">
+                    <h1 class="text-3xl">January 2088</h1>
+                    <!-- filters/page actions -->
+                    <div class="flex gap-2">
+                        <button
+                            @click="handleAddNew"
+                            class="bg-secondary py-1 px-2 rounded-md border-2 border-transparent flex items-center gap-2 text-[0.8rem]"
+                        >
+                            <span> Add New </span>
+                            <span class="w-4 fill-white">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512"
+                                >
+                                    <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
+                                    />
+                                </svg>
+                            </span>
+                        </button>
+                        <button
+                            class="bg-neutral py-1 px-2 rounded-md border-secondary border-2 flex items-center gap-2 text-[0.8rem]"
+                        >
+                            <span> All Bookings </span>
+                            <span class="w-4 p-1 fill-white">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 320 512"
+                                >
+                                    <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"
+                                    />
+                                </svg>
+                            </span>
+                        </button>
+                        <input
+                            placeholder="Search"
+                            class="text-black py-1 p-2 rounded-md border-2 border-transparent text-[0.8rem]"
+                            type="text"
+                        />
+                    </div>
+                </div>
+                <GrCalendar
+                    :events="activeEventsList"
+                    @clickEventNode="handleCalendarEvent"
+                    @clickEmptyNode="handleAddNew"
+                />
+            </section>
+        </div>
     </div>
-  </div>
 </template>
 <script setup>
 import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
 import { isEqual, set } from "date-fns";
+import "@fullcalendar/core/vdom"; // solves problem with Vite
+import { ArrowIcon } from "~~/components/icons";
+import FullCalendar from "@fullcalendar/vue3";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import listPlugin from "@fullcalendar/list";
+import EventPopup from "./components/event-popup.vue";
+import DatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+import gql from "graphql-tag";
+import { useQuery } from "@vue/apollo-composable";
 
 import CalendarMenu from "./components/partials/calendar-menu.vue";
 import ReportsStatistics from "./components/partials/reports-statistics.vue";
@@ -124,10 +142,6 @@ import EventDetails from "./components/partials/event-details.vue";
 import EventInformation from "./components/partials/event-information.vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import EventForm from "./components/event-form.vue";
-
-/** GQL/Mock API */
-import gql from "graphql-tag";
-import { useQuery } from "@vue/apollo-composable";
 
 // import "@vuepic/vue-datepicker/dist/main.css";
 // import { calendarEvents as events } from "./helpers/calendar-events";
@@ -147,150 +161,303 @@ const offerUpVisibibility = ref(false);
 const eventFormVisibility = ref(false);
 
 const resetState = () => {
-  eventDetailsVisibibility.value = false;
-  eventInformationVisibibility.value = false;
-  offerUpVisibibility.value = false;
-  eventFormVisibility.value = false;
+    eventDetailsVisibibility.value = false;
+    eventInformationVisibibility.value = false;
+    offerUpVisibibility.value = false;
+    eventFormVisibility.value = false;
 };
 
 /** sets up state for form entry */
 const handleAddNew = (node) => {
-  if (eventDetailsVisibibility.value || eventInformationVisibibility.value) {
-    return;
-  } else {
-    const startTime = new Date(node.date);
-    emptyNodeContext.value = {
-      start: startTime,
-      dateStr: node.dateStr,
-      allDay: node.allDay,
-      dayEl: node.dayEl,
-      jsEvent: node.jsEvent,
-      view: node.view,
-    };
-    resetState();
-    eventFormVisibility.value = true;
-    console.log("node context", emptyNodeContext.value);
-  }
+    if (eventDetailsVisibibility.value || eventInformationVisibibility.value) {
+        return;
+    } else {
+        const startTime = new Date(node.date);
+        emptyNodeContext.value = {
+            start: startTime,
+            dateStr: node.dateStr,
+            allDay: node.allDay,
+            dayEl: node.dayEl,
+            jsEvent: node.jsEvent,
+            view: node.view,
+        };
+        resetState();
+        eventFormVisibility.value = true;
+        console.log("node context", emptyNodeContext.value);
+    }
 };
 
+const query = gql`
+    query CalendarEventsQuery {
+        calendarEvents {
+            id
+            title
+            owner_id
+            start
+            end
+            title
+            description
+            full_day_event
+            event_type_id
+        }
+    }
+`;
+
+const { result } = useQuery(query);
+console.log(result);
+
+const calendar = ref(null);
+const currentView = ref("timeGridWeek");
+const start = ref(null);
+const end = ref(null);
+const selectedDate = ref(null);
+const isMobile = computed(() => window.innerWidth <= 480);
+const monthCalendar = ref(null);
+const listCalendar = ref(null);
+
+const eventModal = ref(null);
+
+const events = [
+    {
+        title: "Priority One",
+        start: "2022-12-01T06:00:00",
+        backgroundColor: "red",
+        extendedProps: {
+            department: "BioChemistry",
+        },
+        description: "Lecture",
+        parth: "jasani",
+        data: {
+            foo: "bar",
+        },
+    },
+    {
+        title: "To Do Two",
+        start: "2022-12-01T07:00:00",
+        backgroundColor: "blue",
+    },
+    {
+        title: "To Do Three",
+        start: "2022-12-01T08:30:00",
+        extendedProps: {
+            status: "done",
+        },
+        backgroundColor: "lime",
+    },
+    {
+        title: "Birthday Party",
+        start: "2022-12-01T10:00:00",
+        backgroundColor: "green",
+    },
+];
+
+const eventClick = (info) => {
+    var eventObj = info.event;
+    eventModal.value.open();
+};
+
+const calendarOptions = ref({
+    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+    initialView: "timeGridWeek",
+    dateClick: handleDateClick,
+    headerToolbar: {
+        left: "",
+        center: "",
+        right: "prev,next today",
+        // center: "title",
+        // right: "prev,next today",
+    },
+    events,
+    editable: true,
+    selectable: true,
+    dayMaxEvents: true,
+    eventClick,
+    datesSet: (params) => {
+        console.log("params-->", params);
+        listCalendar?.value?.getApi()?.gotoDate(params.start);
+        monthCalendar?.value?.getApi()?.gotoDate(params.start);
+        monthCalendar?.value?.getApi()?.select(params.start);
+        //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
+    },
+    views: {
+        timeGridDay: {
+            dayHeaderFormat: {
+                month: "long",
+                day: "numeric",
+                omitCommas: "false",
+            },
+            nowIndicator: true,
+        },
+    },
+    viewDidMount: function (info) {
+        console.log("viewDidMount");
+        onViewChanged();
+    },
+    //eventContent: { html: '<i>some html</i>' }
+});
+
+const monthCalendarOptions = ref({
+    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+    initialView: "dayGridMonth",
+    headerToolbar: false,
+    events,
+    eventClick,
+    editable: true,
+    selectable: true,
+    dayMaxEvents: true,
+    dateClick: function (params) {
+        console.log("🚀 ~ file: index.vue ~ line 123 ~ params", params);
+        calendar?.value?.getApi()?.gotoDate(params.date);
+    },
+});
+
+const listCalendarOptions = ref({
+    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
+    initialView: "listDay",
+    headerToolbar: false,
+    events,
+    eventClick,
+});
+
+const onViewChanged = () => {
+    start.value = calendar.value.getApi().view.activeStart;
+    start.end = calendar.value.getApi().view.activeEnd;
+    console.log({
+        start,
+        end,
+        calendarView: calendar.value.getApi().view,
+    });
+};
+
+const calendarTitle = computed(() => {
+    let option = {
+        year: "numeric",
+        month: "long",
+    };
+    if (currentView.value === "timeGridDay") {
+        option["day"] = "numeric";
+    }
+    return start.value?.toLocaleString("default", option);
+});
+
 const handleCreateEvent = (form) => {
-  console.log("create new event with info:", form);
-  console.log("current events", activeEventsList.value);
-  // activeEventsList.value = [...activeEventsList.value, { ...form }];
-  const newEventObj = {
-    title: form.title,
-    description: form.description,
-    start: form.time.start,
-    end: form.time.end,
-    backgroundColor: "##123456",
-    eventType: form.eventType,
-    instructor: form.instructor,
-    member: form.member,
-    notify: form.notify,
-    recurring: form.recurring,
-  };
-  console.log("new event", newEventObj);
-  activeEventsList.value.push(newEventObj);
-  eventFormVisibility.value = false;
+    console.log("create new event with info:", form);
+    console.log("current events", activeEventsList.value);
+    // activeEventsList.value = [...activeEventsList.value, { ...form }];
+    const newEventObj = {
+        title: form.title,
+        description: form.description,
+        start: form.time.start,
+        end: form.time.end,
+        backgroundColor: "##123456",
+        eventType: form.eventType,
+        instructor: form.instructor,
+        member: form.member,
+        notify: form.notify,
+        recurring: form.recurring,
+    };
+    console.log("new event", newEventObj);
+    activeEventsList.value.push(newEventObj);
+    eventFormVisibility.value = false;
 };
 
 /** handles clicking calendar event */
 const handleCalendarEvent = (e) => {
-  if (eventFormVisibility.value) return; // don't proceed if something else is in context
-  let eventInfo = {
-    ...e._def,
-    start: e._instance.range.start,
-    end: e._instance.range.end,
-  };
-  console.log("event info", eventInfo);
-  eventDetails.value = eventInfo;
-  eventDetailsVisibibility.value = true;
+    if (eventFormVisibility.value) return; // don't proceed if something else is in context
+    let eventInfo = {
+        ...e._def,
+        start: e._instance.range.start,
+        end: e._instance.range.end,
+    };
+    console.log("event info", eventInfo);
+    eventDetails.value = eventInfo;
+    eventDetailsVisibibility.value = true;
 };
 
 /** differentiate today's date from other dates on the sidebar calendar */
 const getDayClass = (date) => {
-  if (
-    isEqual(
-      date,
-      set(new Date(), {
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-        milliseconds: 0,
-      })
+    if (
+        isEqual(
+            date,
+            set(new Date(), {
+                hours: 0,
+                minutes: 0,
+                seconds: 0,
+                milliseconds: 0,
+            })
+        )
     )
-  )
-    return "!rounded-full bg-secondary";
-  return "";
+        return "!rounded-full bg-secondary";
+    return "";
 };
 
-/** GQL */
-const query = gql`
-  query CalendarData {
-    members(first: 15) {
-      data {
-        id
-        first_name
-        last_name
-        email
-        primary_phone
-        locations {
-          id
-          name
-        }
-        homeLocation {
-          name
-        }
-        created_at
-      }
-      paginatorInfo {
-        count
-        perPage
-        total
-      }
-    }
-    calendarEvents {
-      id
-      title
-      description
-      full_day_event
-      start
-      end
-      event_completion
-      editable
-      call_task
-      # event_type_id
-      location {
-        id
-        name
-      }
-      type {
-        id
-        name
-      }
-    }
-  }
-`;
+// /** GQL */
+// const query = gql`
+//   query CalendarData {
+//     members(first: 15) {
+//       data {
+//         id
+//         first_name
+//         last_name
+//         email
+//         primary_phone
+//         locations {
+//           id
+//           name
+//         }
+//         homeLocation {
+//           name
+//         }
+//         created_at
+//       }
+//       paginatorInfo {
+//         count
+//         perPage
+//         total
+//       }
+//     }
+//     calendarEvents {
+//       id
+//       title
+//       description
+//       full_day_event
+//       start
+//       end
+//       event_completion
+//       editable
+//       call_task
+//       # event_type_id
+//       location {
+//         id
+//         name
+//       }
+//       type {
+//         id
+//         name
+//       }
+//     }
+//   }
+// `;
 
-const { result } = useQuery(query);
+// const { result } = useQuery(query);
 
 watch(result, (ov, nv) => {
-  if (initialized.value) return;
-  initialized.value = true;
-  let { calendarEvents } = result.value;
-  activeEventsList.value.push(...calendarEvents);
+    if (initialized.value) return;
+    initialized.value = true;
+    let { calendarEvents } = result.value;
+    activeEventsList.value.push(...calendarEvents);
 });
 
 let timeout = null;
 
 onMounted(async () => {
-  if (!timeout) {
-    timeout = setTimeout(() => {
-      console.log("GQL Result:", result);
-    }, 3000);
-  }
-  //   await nextTick();
-  //   window.dispatchEvent(new Event("resize"));
+    if (!timeout) {
+        timeout = setTimeout(() => {
+            console.log("GQL Result:", result);
+        }, 3000);
+    }
+    //   await nextTick();
+    //   window.dispatchEvent(new Event("resize"));
 });
 
 onUnmounted(() => clearTimeout(timeout));

@@ -97,11 +97,39 @@ import PersonalInformation from '~/pages/check-in/user-info/personal-information
 import Interests from '~/pages/check-in/profile-card/add-member/interests.vue'
 import EmergencyInfo from '~/pages/check-in/profile-card/add-member/emergency-info.vue'
 import BroughtToday from '~/pages/check-in/profile-card/add-member/brought-today.vue';
+import gql from "graphql-tag";
+import {useQuery} from "@vue/apollo-composable";
 
 const isSearchEnable = ref(false)
 const addMemberPopUp = ref(null)
 const addMemberScreens = ref([Welcome,JoinTour,Infomrmation,PersonalInformation,Interests,EmergencyInfo,BroughtToday]);
 const addMemberScreenIndex = ref(0);
+
+
+const query = gql`
+  query AllLeads {
+    leads(first: 100) {
+      data {
+        id
+        first_name
+        last_name
+        locations {
+          name
+        }
+        opportunity
+        created_at
+      }
+      paginatorInfo {
+        count
+        perPage
+        total
+      }
+    }
+  }
+`;
+
+const { result } = useQuery(query);
+console.log(result);
 
 const openAddMemberPopUp =()=>{
   addMemberPopUp.value.open()
