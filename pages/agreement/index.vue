@@ -28,8 +28,26 @@
         <simple-card class="p-4">
             <p class="font-semibold w-full text-center mb-4">Are you sure you want to make this inactive?</p>
             <div class="text-center">
-                <button class="text-gray-500 mr-4" @click="cancel">Cancel</button>
-                <button class="text-secondary" @click="confirm">Confirm</button>
+                <button class="text-gray-500 mr-4" @click="cancelConfirmStatus">Cancel</button>
+                <button class="text-secondary" @click="confirmConfirmStatus">Confirm</button>
+            </div>
+        </simple-card>
+    </daisy-modal>
+    <daisy-modal ref="confirmCreateAgreementModal" id="confirmCreateAgreementModal">
+        <simple-card class="p-4">
+            <p class="font-semibold w-full text-center mb-4">Are you sure you want to create this agreement?</p>
+            <div class="text-center">
+                <button class="text-gray-500 mr-4" @click="cancelSaveAgreement">Cancel</button>
+                <button class="text-secondary" @click="saveAgreement">Confirm</button>
+            </div>
+        </simple-card>
+    </daisy-modal>
+    <daisy-modal ref="nameIsAlreadyInUseModal" id="nameIsAlreadyInUseModal">
+        <simple-card class="p-4">
+            <p class="font-semibold w-full text-center mb-4">This name is already in use. Please choose another name.</p>
+            <div class="text-center">
+                <button class="text-gray-500 mr-4" @click="closeNameIsAlreadyInUseModal">Cancel</button>
+                <button class="text-secondary" @click="closeNameIsAlreadyInUseModal">Rename</button>
             </div>
         </simple-card>
     </daisy-modal>
@@ -49,17 +67,6 @@
         </simple-card>
     </daisy-modal>
     <button @click="saveAgreement">Execute</button>
-    <!-- <daisy-modal ref="newTemplateModal" id="newTemplateModal">
-        <simple-card class="p-4">
-            <component :open="newTemplateIsOpen" :is="newTemplateScreens[newTempalteScreenIndex]" @change-type="changeType" @next="nextScreenTemplateModal" ref="newTemplateComponent"></component>
-            <div class="flex justify-end mt-6 mb-2">
-                <Button size="sm" class="normal-case mx-2" ghost @click="prevScreenTemplateModal" v-if="newTempalteScreenIndex > 1">Back</Button>
-                <Button size="sm" class="normal-case mx-2 ml-auto" ghost @click="closeNewTemplateModal">Cancel</Button>
-                <Button size="sm" class="normal-case mx-2" secondary>Save as a Draft</Button>
-                <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreenTemplateModal">Continue</Button>
-            </div>
-        </simple-card>
-    </daisy-modal> -->
 </template>
 
 <script setup>
@@ -223,7 +230,7 @@ const newAgreementDataReset = ref({});
 
 onMounted(() => {
     newAgreementData.value.createdBy = authToken.value.first_name
-    newAgreementDataReset.value = newAgreementData.value;
+    newAgreementDataReset.value = {...newAgreementData.value};
 })
 
 const searchInput = ref("");
@@ -239,23 +246,53 @@ const newAgreementComponent = ref(null);
 const newAgreementScreens = ref([AgreementModal, AgreementFileTemplate, AgreementTemplate, PaymentSchedule, PosPaymentAmounts, ScheduledBilling, ContractModal, EditPaymentPlan, AgreementType, SaveModal]);
 const newAgreementScreenIndex = ref(0);
 const newAgreementModal = ref(null);
+const nameIsAlreadyInUseModal = ref(null);
+
+const checkNameIsAlreadyInUse = ()=>{
+    let exists = agreements.value.findIndex(e => e.agreementName == newAgreementData.value.agreementName);
+    if(exists != -1){
+        newAgreementModal.value.close();
+        nameIsAlreadyInUseModal.value.open();
+    }
+    return exists;
+
+};
+const closeNameIsAlreadyInUseModal = (event) => {
+    newAgreementModal.value.open()
+    nameIsAlreadyInUseModal.value.close()
+};
+
+const confirmCreateAgreementModal = ref(null);
+
+const showSaveAgreementModal = (event) => {
+    newAgreementModal.value.close()
+    confirmCreateAgreementModal.value.open()
+};
+
+const cancelSaveAgreement = ()=>{
+    newAgreementModal.value.open()
+    confirmCreateAgreementModal.value.close()
+};
 
 const saveAgreement = () => {
+    confirmCreateAgreementModal.value.close()
     let currentDate = new Date();
     let formattedDate = currentDate.toLocaleDateString('en-US') + ', ' + currentDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
     newAgreementData.value.dateCreated = formattedDate;
     newAgreementData.value.id = agreements.value[agreements.value.length-1].id + 1;
     agreements.value.push(newAgreementData.value);
-    newAgreementData.value = newAgreementDataReset.value
+    newAgreementData.value = {...newAgreementDataReset.value}
     closeNewAgreementModal();
 };
 
 
 const nextScreenAgreementModal = () => {
     if (newAgreementScreenIndex.value == ((newAgreementScreens.value.length) - 1)) {
-        alert('Save agreement?');
-        saveAgreement();
-        exit();
+        if(checkNameIsAlreadyInUse() != -1){
+            return null;
+        }
+        showSaveAgreementModal();
+        return null;
     }
     let index = newAgreementScreenIndex.value < (newAgreementScreens.value.length - 1) ? newAgreementScreenIndex.value + 1 : newAgreementScreenIndex.value;
     if (index == 1) {
@@ -294,19 +331,6 @@ const closeNewAgreementModal = () => {
 const changeType = (type) => {
     showButtonsAgreement.value = type ? true : false;
 }
-
-// const nextScreenTemplateModal = ()=>{
-//     newTemplateModal.value.open()
-//     newTempalteScreenIndex.value = newTempalteScreenIndex.value < (newTemplateScreens.value.length - 1) ? newTempalteScreenIndex.value + 1 : newTempalteScreenIndex.value;
-//     console.log("newTempalteScreenIndex",newTempalteScreenIndex.value)
-// }
-
-// const prevScreenTemplateModal = ()=>{
-//     newTempalteScreenIndex.value = newTempalteScreenIndex.value > 0 ? newTempalteScreenIndex.value - 1 : newTempalteScreenIndex.value
-// }
-
-
-
 
 
 const columns = ref([
@@ -350,7 +374,7 @@ const agreements = ref([
         type: 'Membership',
         file: null,
         status: 'Active',
-        agreementName: 'Agreement File Name',
+        agreementName: 'Example Name 1',
         createdBy: 'Paul Siglioni',
         dateCreated: '5/5/2002, 12:24:44 PM',
         contract: '',
@@ -434,16 +458,6 @@ const agreements = ref([
         },
         
     },
-    // {
-    //     id: 1,
-    //     name: 'Agreement File Name',
-    //     agreement_type: 'Membership',
-    //     schedule_type: 'Term',
-    //     status: "Active",
-    //     created_by: "Paul Siglioni",
-    //     availability: "Instore",
-    //     date_created: "5/5/2002, 12:24:44 PM"
-    // }
 ]);
 
 
@@ -456,28 +470,13 @@ const showConfirmStatusModal = (event) => {
     confirmStatusModal.value.open()
 };
 
-const cancel = () => {
+const cancelConfirmStatus = () => {
     confirmStatusModal.value.close()
 }
-const confirm = () => {
+const confirmConfirmStatus = () => {
     document.getElementById(actualCheckboxConfirmId.value).click()
     confirmStatusModal.value.close()
 }
-
-
-
-// const openNewTemplateModal = () =>{
-//     if(newTempalteScreenIndex.value == 0){
-//         newTemplateComponent.value.open()
-//     }else{
-//         newTemplateModal.value.open()
-//     }
-// }
-
-// const closeNewTemplateModal =()=>{
-//     newTempalteScreenIndex.value = 0;
-//     newTemplateModal.value.close()
-// }
 
 </script>
 
