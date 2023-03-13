@@ -8,15 +8,15 @@
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Plan Name</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="agreementInfoForm.planName"/>
+            <input class="white-input w-full p-1 rounded-sm" v-model="data.planName"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Allow Edits to Amounts</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="agreementInfoForm.editsAmount"/>
+            <input class="white-input w-full p-1 rounded-sm" v-model="data.editsAmount"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Display Name</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="agreementInfoForm.displayName"/>
+            <input class="white-input w-full p-1 rounded-sm" v-model="data.displayName"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div>Web Service Plan</div>
@@ -33,11 +33,11 @@
                     { value: 'yes', label: 'Yes' },
                     { value: 'no', label: 'No' }
                 ]"
-                :label="agreementInfoForm.limitedAvailability == '' ? 'Select' : (agreementInfoForm.limitedAvailability == 'yes' ? 'Yes' : 'No')" 
+                :label="data.limitedAvailability == '' ? 'Select' : (data.limitedAvailability == 'yes' ? 'Yes' : 'No')" 
                 labelOpened="Limited Availability"
                 :showSearch="false"
                 :showClearList="false"
-                @onChange="agreementInfoForm.limitedAvailability = $event"
+                @onChange="data.limitedAvailability = $event"
                 class="bg-white text-black rounded border border-white w-full">
             </select-box>
         </div>
@@ -48,17 +48,17 @@
                     { value: 'yes', label: 'Yes' },
                     { value: 'no', label: 'No' }
                 ]"
-                :label="agreementInfoForm.introductoryOffer == '' ? 'Select' : (agreementInfoForm.introductoryOffer == 'yes' ? 'Yes' : 'No')" 
+                :label="data.introductoryOffer == '' ? 'Select' : (data.introductoryOffer == 'yes' ? 'Yes' : 'No')" 
                 labelOpened="Limited Availability"
                 :showSearch="false"
                 :showClearList="false"
-                @onChange="agreementInfoForm.introductoryOffer = $event"
+                @onChange="data.introductoryOffer = $event"
                 class="bg-white text-black rounded border border-white w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Membership Type</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="agreementInfoForm.membershipType"/>
+            <input class="white-input w-full p-1 rounded-sm" v-model="data.membershipType"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Promotion Segment</div>
@@ -67,17 +67,17 @@
                     { value: 'yes', label: 'Yes' },
                     { value: 'no', label: 'No' }
                 ]"
-                :label="agreementInfoForm.promotionSegment == '' ? 'Select' : (agreementInfoForm.promotionSegment == 'yes' ? 'Yes' : 'No')" 
+                :label="data.promotionSegment == '' ? 'Select' : (data.promotionSegment == 'yes' ? 'Yes' : 'No')" 
                 labelOpened="Limited Availability"
                 :showSearch="false"
                 :showClearList="false"
-                @onChange="agreementInfoForm.promotionSegment = $event"
+                @onChange="data.promotionSegment = $event"
                 class="bg-white text-black rounded border border-white w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Agreement Template</div>
-                <input class="white-input w-full p-1 rounded-sm" v-model="agreementInfoForm.agreementTemplate"/>
+                <input class="white-input w-full p-1 rounded-sm" v-model="data.agreementTemplate"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Available for Presale</div>
@@ -86,26 +86,26 @@
                     { value: 'yes', label: 'Yes' },
                     { value: 'no', label: 'No' }
                 ]"
-                :label="agreementInfoForm.availableForPresale == '' ? 'Select' : (agreementInfoForm.availableForPresale == 'yes' ? 'Yes' : 'No')" 
+                :label="data.availableForPresale == '' ? 'Select' : (data.availableForPresale == 'yes' ? 'Yes' : 'No')" 
                 labelOpened="Limited Availability"
                 :showSearch="false"
                 :showClearList="false"
-                @onChange="agreementInfoForm.availableForPresale = $event"
+                @onChange="data.availableForPresale = $event"
                 class="bg-white text-black rounded border border-white w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Billing System Type</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="agreementInfoForm.billingSystemType"/>
+            <input class="white-input w-full p-1 rounded-sm" v-model="data.billingSystemType"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full flex">
             <div class="mr-4 min-w-[45%]">
                 <div class="mb-2">Plan Start Date</div>
-                <Datepicker class="custom-date-input" v-model="agreementInfoForm.planStartDate" :enable-time-picker="false" auto-apply></Datepicker>
+                <Datepicker class="custom-date-input" v-model="data.planStartDate" :enable-time-picker="false" auto-apply></Datepicker>
             </div>
             <div>
                 <div class="mb-2">Plan End Date</div>
-                <Datepicker class="custom-date-input" v-model="agreementInfoForm.planEndDate" :enable-time-picker="false" auto-apply></Datepicker>
+                <Datepicker class="custom-date-input" v-model="data.planEndDate" :enable-time-picker="false" auto-apply></Datepicker>
             </div>
         </div>
     </simple-card>
@@ -115,7 +115,16 @@
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
-const agreementInfoForm = ref({
+
+const props = defineProps({
+    newAgreementData: {
+		type: Object,
+		default: null,
+	}
+})
+const emit = defineEmits(['changeNewAgreementData']);
+
+const data = ref({
     planName:"",
     editsAmount:"",
     displayName: "",
@@ -132,6 +141,22 @@ const agreementInfoForm = ref({
     planStartDate: "",
     planEndDate: "",
 })
+
+onMounted(() => {
+  if (props.newAgreementData.agreementTemplate !== null) {
+    data.value =  props.newAgreementData.agreementTemplate;
+  }
+});
+
+const changeNewAgreementData = ()=>{
+    let changeNewAgreementData = props.newAgreementData;
+    changeNewAgreementData.agreementTemplate = data.value;
+    emit('changeNewAgreementData', changeNewAgreementData)
+};
+
+watch(data, () => {
+    changeNewAgreementData()
+});
 
 </script>
 <style scoped>

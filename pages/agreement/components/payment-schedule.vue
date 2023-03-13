@@ -11,17 +11,17 @@
                     { value: 'fulltime', label: 'Paid in full' },
                     { value: 'term', label: 'Term' }
                 ]"
-                :label="paymentSchedule.billingScheduleType == '' ? 'Select' : (paymentSchedule.billingScheduleType == 'fulltime' ? 'Paid in full' : 'Term')" 
+                :label="data.billingScheduleType == '' ? 'Select' : (data.billingScheduleType == 'fulltime' ? 'Paid in full' : 'Term')" 
                 labelOpened="Open"
                 :showSearch="false"
                 :showClearList="false"
-                @onChange="paymentSchedule.billingScheduleType = $event"
+                @onChange="data.billingScheduleType = $event"
                 class="bg-white text-black rounded border border-white w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Allow Edits to Amounts</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="paymentSchedule.editsAmount"/>
+            <input class="white-input w-full p-1 rounded-sm" v-model="data.editsAmount"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Billing Frequency</div>
@@ -31,7 +31,7 @@
                 labelOpened="Open"
                 :showSearch="false"
                 :showClearList="false"
-                @onChange="paymentSchedule.billingFrequency = $event"
+                @onChange="data.billingFrequency = $event"
                 class="bg-white text-black rounded border border-white w-full">
             </select-box>
         </div>
@@ -51,7 +51,7 @@
                 labelOpened="Open"
                 :showSearch="false"
                 :showClearList="false"
-                @onChange="paymentSchedule.terms = $event"
+                @onChange="data.terms = $event"
                 class="bg-white text-black rounded border border-white w-full">
             </select-box>
         </div>
@@ -63,11 +63,11 @@
                         { value: 'yes', label: 'Yes' },
                         { value: 'no', label: 'No' }
                     ]"
-                    :label="paymentSchedule.autoRenew == '' ? 'Select' : (paymentSchedule.autoRenew == 'yes' ? 'Yes' : 'No')" 
+                    :label="data.autoRenew == '' ? 'Select' : (data.autoRenew == 'yes' ? 'Yes' : 'No')" 
                     labelOpened="Limited Availability"
                     :showSearch="false"
                     :showClearList="false"
-                    @onChange="paymentSchedule.autoRenew = $event"
+                    @onChange="data.autoRenew = $event"
                     class="bg-white text-black rounded border border-white w-full">
                 </select-box>
             </div>
@@ -78,11 +78,11 @@
                         { value: 'yes', label: 'Yes' },
                         { value: 'no', label: 'No' }
                     ]"
-                    :label="paymentSchedule.introductoryOffer == '' ? 'Select' : (paymentSchedule.introductoryOffer == 'yes' ? 'Yes' : 'No')" 
+                    :label="data.introductoryOffer == '' ? 'Select' : (data.introductoryOffer == 'yes' ? 'Yes' : 'No')" 
                     labelOpened="Limited Availability"
                     :showSearch="false"
                     :showClearList="false"
-                    @onChange="paymentSchedule.introductoryOffer = $event"
+                    @onChange="data.introductoryOffer = $event"
                     class="bg-white text-black rounded border border-white w-full">
                 </select-box>
             </div>
@@ -103,13 +103,13 @@
                     labelOpened="Limited Availability"
                     :showSearch="false"
                     :showClearList="false"
-                    @onChange="paymentSchedule.chooesePreferredDueDay = $event"
+                    @onChange="data.chooesePreferredDueDay = $event"
                     class="bg-white text-black rounded border border-white w-full">
                 </select-box>
             </div>
             <div>
                 <div class="mb-2">Date</div>
-                <Datepicker class="custom-date-input" v-model="paymentSchedule.planDate" :enable-time-picker="false" auto-apply></Datepicker>
+                <Datepicker class="custom-date-input" v-model="data.planDate" :enable-time-picker="false" auto-apply></Datepicker>
             </div>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto mt-5 w-full">
@@ -123,11 +123,11 @@
                     { value: 'yes', label: 'Yes' },
                     { value: 'no', label: 'No' }
                 ]"
-                :label="paymentSchedule.memberPaySigning == '' ? 'Select' : (paymentSchedule.memberPaySigning == 'yes' ? 'Yes' : 'No')" 
+                :label="data.memberPaySigning == '' ? 'Select' : (data.memberPaySigning == 'yes' ? 'Yes' : 'No')" 
                 labelOpened="Limited Availability"
                 :showSearch="false"
                 :showClearList="false"
-                @onChange="paymentSchedule.memberPaySigning = $event"
+                @onChange="data.memberPaySigning = $event"
                 class="bg-white text-black rounded border border-white w-full">
             </select-box>
         </div>
@@ -139,7 +139,16 @@
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
-const paymentSchedule = ref({
+const props = defineProps({
+    newAgreementData: {
+		type: Object,
+		default: null,
+	}
+})
+const emit = defineEmits(['changeNewAgreementData']);
+
+
+const data = ref({
     billingScheduleType:"fulltime",
     editsAmount:"",
     billingFrequency: "onetime",
@@ -154,6 +163,22 @@ const paymentSchedule = ref({
     memberPaySigning: "yes"
 })
 
+onMounted(() => {
+  if (props.newAgreementData.paymentSchedule !== null) {
+    data.value =  props.newAgreementData.paymentSchedule;
+  }
+});
+
+const changeNewAgreementData = ()=>{
+    let changeNewAgreementData = props.newAgreementData;
+    changeNewAgreementData.paymentSchedule = data.value;
+    emit('changeNewAgreementData', changeNewAgreementData)
+};
+
+watch(data, () => {
+    changeNewAgreementData()
+});
+
 const billingFrequencyItems = ref([
     { value: 'onetime', label: 'One time' },
     { value: 'monthly', label: 'Monthly' },
@@ -161,8 +186,8 @@ const billingFrequencyItems = ref([
 ]);
 
 const billingFrequencyLabel = computed(()=>{
-    return paymentSchedule.value.billingFrequency == '' ? 'Select'
-    : billingFrequencyItems.value.find(item => item.value == paymentSchedule.value.billingFrequency)?.label
+    return data.value.billingFrequency == '' ? 'Select'
+    : billingFrequencyItems.value.find(item => item.value == data.value.billingFrequency)?.label
 });
 
 const termsItems = ref([
@@ -173,8 +198,8 @@ const termsItems = ref([
 ]);
 
 const termsLabel = computed(()=>{
-    return paymentSchedule.value.terms == '' ? 'Select'
-    : termsItems.value.find(item => item.value == paymentSchedule.value.terms)?.label
+    return data.value.terms == '' ? 'Select'
+    : termsItems.value.find(item => item.value == data.value.terms)?.label
 });
 
 

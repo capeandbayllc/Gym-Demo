@@ -26,13 +26,13 @@
           labelOpened="Limited Availability"
           :showSearch="false"
           :showClearList="false"
-          @onChange="posPaymentAmounts.primary.grProfitCenter = $event"
+          @onChange="data.primary.grProfitCenter = $event"
           class="bg-white text-black rounded border border-white w-full">
       </select-box>
     </div>
     <div class="col-span-4 w-full flex items-center">
       <p class="mr-2">$</p>
-      <input type="number" class="white-input w-full p-1 rounded-sm" v-model="posPaymentAmounts.primary.preTaxAmount" />
+      <input type="number" class="white-input w-full p-1 rounded-sm" v-model="data.primary.preTaxAmount" />
     </div>
     <!-- More items -->
     <template v-for="(n, i) in 5">
@@ -45,24 +45,33 @@
                 { value: 'yes', label: 'Yes' },
                 { value: 'no', label: 'No' }
             ]"
-            :label="posPaymentAmounts[`addOn${n}`].grProfitCenter == '' ? 'Select One' : (posPaymentAmounts[`addOn${n}`].grProfitCenter == 'yes' ? 'Yes' : 'No')" 
-            :labelOpened="posPaymentAmounts[`addOn${n}`].grProfitCenter == '' ? 'Select One' : (posPaymentAmounts[`addOn${n}`].grProfitCenter == 'yes' ? 'Yes' : 'No')"
+            :label="data[`addOn${n}`].grProfitCenter == '' ? 'Select One' : (data[`addOn${n}`].grProfitCenter == 'yes' ? 'Yes' : 'No')" 
+            :labelOpened="data[`addOn${n}`].grProfitCenter == '' ? 'Select One' : (data[`addOn${n}`].grProfitCenter == 'yes' ? 'Yes' : 'No')"
             :showSearch="false"
             :showClearList="false"
-            @onChange="posPaymentAmounts[`addOn${n}`].grProfitCenter= $event"
+            @onChange="data[`addOn${n}`].grProfitCenter= $event"
             class="bg-white text-black rounded border border-white w-full">
         </select-box>
       </div>
       <div class="col-span-4 w-full flex items-center">
         <p class="mr-2">$</p>
-        <input type="number" class="white-input w-full p-1 rounded-sm" v-model="posPaymentAmounts[`addOn${n}`].preTaxAmount" />
+        <input type="number" class="white-input w-full p-1 rounded-sm" v-model="data[`addOn${n}`].preTaxAmount" />
       </div>
     </template>
   </simple-card>
 </template>
 
 <script setup>
-const posPaymentAmounts = ref({
+const props = defineProps({
+    newAgreementData: {
+		type: Object,
+		default: null,
+	}
+})
+const emit = defineEmits(['changeNewAgreementData']);
+
+
+const data = ref({
   primary: {
     grProfitCenter: 'dues',
     preTaxAmount: 15.0,
@@ -88,6 +97,23 @@ const posPaymentAmounts = ref({
     preTaxAmount: 0.0,
   },
 })
+
+onMounted(() => {
+  if (props.newAgreementData.scheduledBilling !== null) {
+    data.value =  props.newAgreementData.scheduledBilling;
+  }
+});
+
+const changeNewAgreementData = ()=>{
+    let changeNewAgreementData = props.newAgreementData;
+    changeNewAgreementData.scheduledBilling = data.value;
+    emit('changeNewAgreementData', changeNewAgreementData)
+};
+
+watch(data, () => {
+    changeNewAgreementData()
+});
+
 </script>
 <style scoped>
     .white-input {

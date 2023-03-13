@@ -7,14 +7,30 @@
 </template>
 <script>
 export default defineComponent({
+    props: {
+        newAgreementData: {
+            type: Object,
+            default: null,
+        }
+    },
     setup(props, { emit }) {
-
+        
         const selectFile = (e)=>{
             console.log(e)
             emit("next")
         };
 
         const fileInput = ref(null);
+
+        const changeNewAgreementData = ()=>{
+            let changeNewAgreementData = props.newAgreementData;
+            changeNewAgreementData.file = fileInput.value
+            emit('changeNewAgreementData', changeNewAgreementData)
+        };
+
+        watch(fileInput, () => {
+            changeNewAgreementData()
+        });
 
         const openFileInput = () => {
             fileInput.value.value = "";

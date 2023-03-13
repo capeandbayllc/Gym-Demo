@@ -7,12 +7,12 @@
             <div class="mb-2 text-lg">Commisions</div>
             <div class="mb-2">Total Contract Value</div>
             <select-box
-                :items="limitedAvailabilityItems"
-                :label="limitedAvailabilityLabel" 
+                :items="totalContractValueItems"
+                :label="totalContractValueLabel" 
                 labelOpened="Open"
                 :showSearch="false"
                 :showClearList="false"
-                @onChange="agreementInfoForm.limitedAvailability = $event"
+                @onChange="data.totalContractValue = $event"
                 class="bg-white text-black rounded border border-white w-full">
             </select-box>
         </div>
@@ -33,41 +33,50 @@
                 <div class="mb-2">$53.49</div>
             </div>
             <div class="col-span-1 mx-auto w-full">
-                <textarea class="border border-black rounded p-1 w-full resize-none" rows="5">#668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668</textarea>
+                <textarea class="border border-black rounded p-1 w-full resize-none" rows="5" readonly>#668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668</textarea>
             </div>
         </div>
     </simple-card>
     
 </template>
 <script setup>
+const props = defineProps({
+    newAgreementData: {
+		type: Object,
+		default: null,
+	}
+})
+const emit = defineEmits(['changeNewAgreementData']);
 
-const agreementInfoForm = ref({
-    planName:"",
-    editsAmount:"",
-    displayName: "",
-    inStore: "",
-    online: "",
-    inApp: "",
-    limitedAvailability: "",
-    introductoryOffer: "yes",
-    membershipType: "",
-    promotionSegment: "",
-    agreementTemplate: "",
-    availableForPresale: "yes",
-    billingSystemType: "",
-    planStartDate: "",
-    planEndDate: "",
+const data = ref({
+    totalContractValue: ""
 })
 
-const limitedAvailabilityItems = ref([
+const totalContractValueItems = ref([
     { value: '', label: 'None' },
     { value: 'initiation', label: 'Initiation Fee' },
     { value: 'dues', label: 'First Months Dues' }
 ]);
 
-const limitedAvailabilityLabel = computed(()=>{
-    return agreementInfoForm.value.limitedAvailability == '' ? 'Select'
-    : limitedAvailabilityItems.value.find(item => item.value == agreementInfoForm.value.limitedAvailability)?.label
+const totalContractValueLabel = computed(()=>{
+    return data.value.totalContractValue == '' ? 'Select'
+    : totalContractValueItems.value.find(item => item.value == data.value.totalContractValue)?.label
+});
+
+onMounted(() => {
+  if (props.newAgreementData.editPaymentPlan !== null) {
+    data.value =  props.newAgreementData.editPaymentPlan;
+  }
+});
+
+const changeNewAgreementData = ()=>{
+    let changeNewAgreementData = props.newAgreementData;
+    changeNewAgreementData.editPaymentPlan = data.value;
+    emit('changeNewAgreementData', changeNewAgreementData)
+};
+
+watch(data, () => {
+    changeNewAgreementData()
 });
 
 </script>

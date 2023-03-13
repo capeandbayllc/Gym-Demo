@@ -42,10 +42,31 @@
 
 <script setup>
 import { EmptyFileIcon } from '~~/components/icons';
-const emit = defineEmits(['close']);
+
+const props = defineProps({
+    newAgreementData: {
+		type: Object,
+		default: null,
+	}
+})
 
 const activeTab = ref(null);
+
+const changeNewAgreementData = ()=>{
+    let changeNewAgreementData = props.newAgreementData;
+    changeNewAgreementData.type = filesTypes[activeTab.value]
+    emit('changeNewAgreementData', changeNewAgreementData)
+};
+
+watch(activeTab, () => {
+    changeNewAgreementData()
+});
+
 const filesTypes = [ "Membership", "Personal Training", "FLA. PIF" ];
+
+
+const emit = defineEmits(['close', 'changeNewAgreementData']);
+
 
 watch(activeTab,()=>{
     emit("changeType",filesTypes[activeTab.value])
