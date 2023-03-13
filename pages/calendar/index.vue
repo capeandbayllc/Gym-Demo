@@ -138,6 +138,8 @@ import listPlugin from '@fullcalendar/list';
 import EventPopup from './components/event-popup.vue';
 import DatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import gql from "graphql-tag";
+import {useQuery} from "@vue/apollo-composable";
 
 const calenderView = ref('timeGridWeek');
 watch(calenderView, () => {
@@ -155,6 +157,26 @@ const handleChangeView = (value) => {
     calendar.value.getApi().changeView(value);
     onViewChanged();
 };
+
+
+const query = gql`
+    query CalendarEventsQuery {
+        calendarEvents {
+            id
+            title
+            owner_id
+            start
+            end
+            title
+            description
+            full_day_event
+            event_type_id
+        }
+    }
+`;
+
+const { result } = useQuery(query);
+console.log(result);
 
 const calendar = ref(null);
 const currentView = ref('timeGridWeek');
