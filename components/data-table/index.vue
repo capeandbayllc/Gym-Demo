@@ -11,6 +11,7 @@
                     :key="item.id"
                     :is="rowComponent"
                     :data="item"
+                    @click="rowClicked(item)"
                 />
             </tbody>
           </div>
@@ -41,4 +42,10 @@ const props = defineProps({
       default: false
     }
 });
+
+const emit = defineEmits(["row-clicked"]);
+
+const rowClicked = (data) => {
+    emit("row-clicked", data);
+};
 </script>
