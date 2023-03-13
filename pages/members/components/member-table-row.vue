@@ -30,7 +30,7 @@
         >
           <div class="dropdown-item" tabindex="-1">Preview</div>
           <div class="dropdown-item" tabindex="-1">
-            <NuxtLink :to="{ path: '/check-in/' +  data.id }" >Edit</NuxtLink>
+             <span @click="navigateToCheckIn" >Edit</span>
           </div>
           <div class="dropdown-item" tabindex="-1">Trash</div>
           <div class="" tabindex="-1">
@@ -87,16 +87,26 @@
 }
 </style>
 <script setup>
-import MembershipBtn from "~~/components/buttons/membership-btn.vue";
-import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
+import AddonBtn from "~~/components/buttons/addon-btn.vue";
+import MembershipBtn from "~~/components/buttons/membership-btn.vue";
 
 library.add(faEllipsisH);
+
+const router = useRouter()
+
 const props = defineProps({
   data: Object,
 });
 const contactOption = ref(null);
+
+const navigateToCheckIn = ()=>{
+  router.push({
+    name:'check-in', 
+    query: { id: props.data.id }
+  })
+}
 </script>
