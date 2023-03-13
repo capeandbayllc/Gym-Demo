@@ -1,5 +1,6 @@
 <template>
   <div class="page-setting-container">
+    <!--    PROFILE IMAGE SECTION-->
     <div class="col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-span-1 relative flex justify-center">
       <img
           src="/user_profile_page_icon.png"
@@ -36,28 +37,67 @@
 <!--      </div>-->
     </div>
 
-<!--    <div class="bg-gradient-to-b from-purple-500 to-blue-500 p-4 rounded-lg mt-10">-->
-<!--    </div>-->
-
+    <!--    FIRST SECTION -->
     <div class="mx-auto mt-10 gradient-bg p-4 page-border w-5/6 ">
       <div class="bg-black page-border">
+        <!--    BASIC INFO SECTION-->
         <div class="grid grid-cols-1 py-2">
-            <div class="grid grid-cols-3 justify-items-center py-2">
-              <div v-for="item in profileBasic" :key="item.key">
-                <div>{{ item.label }}</div>
-                <input :class="item.class"
-                       v-model="form[item.key]"
-                       :placeholder="item.placeholder"/>
+          <div class="grid grid-cols-3 justify-items-center py-2">
+            <div v-for="item in profileBasic" :key="item.key" class="mb-5">
+              <div class="-mb-1.5">
+                <span>{{ item.label }} </span>
+                <span v-if="item.required" class="text-blue-400">* </span>
+              </div>
+              <input :class="item.class" class="focus-within:hover:bg-blue-600"
+                     v-model="form[item.key]"
+                     :placeholder="item.placeholder"/>
+            </div>
+          </div>
+        </div>
+
+        <!--    ADD CONNECTION SECTION-->
+<!--        // grid-cols-8 gap-3 py-2 mt-4 :style="{width: '80%', marginLeft: '4rem'}"-->
+        <div class="grid grid-cols-6 gap-4 py-2 mt-4">
+<!--        // <div class="col-start-2 col-span-5 border-2 border-secondary rounded-2xl">-->
+          <div class="col-start-2 col-span-4 border-2 border-secondary rounded-2xl">
+
+            <div class="mt-4 mr-5 float-right w-12 p-2.5 pl-2 rounded-2xl bg-blue-600">
+              <MembersIcon  />
+            </div>
+            <div class="">
+              <div class="grid grid-cols-9 justify-items-center py-2">
+                <div class="mb-5 col-span-4">
+                  <!--  // todo: font size-->
+                  <h6 class="pt-5 mb-3 font-bold text-lg">Add Connection</h6>
+                  <div class="-mb-1.5 mt-4">
+                    Lead Member to Connect
+                  </div>
+                  <!-- TODO:  Search key -->
+                  <input class="neutral-input rounded-xl"
+                         v-model="form['lead-member']"
+                         placeholder="Search by last name or email"/>
+                </div>
+
+                <div class="mb-5 col-span-3 mt-16">
+                  <div class="-mb-1.5">
+                    Relationship:
+                  </div>
+                  <!-- TODO:  Dropdown -->
+                  <input class="neutral-input rounded-xl"
+                         v-model="form['relationship']"
+                         placeholder="Relationship"/>
+                </div>
               </div>
             </div>
+
+          </div>
         </div>
+
+        <div class="divider w-5/6 ml-auto mr-auto mt-10"></div>
+
       </div>
 
-      <!--&lt;!&ndash;              <div class="divider"></div>&ndash;&gt;-->
-
-
 <!--          <profile-relation/>-->
-<!--          <div class="divider"></div>-->
 <!--          <div>-->
 <!--            <h4 class="mb-4 inline-block">-->
 <!--              Calendar Access-->
@@ -179,7 +219,7 @@ input:focus {
 }
 
 .divider {
-  @apply border-b h-0 border-secondary col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-auto;
+  @apply border-b-2 h-0 border-secondary col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-auto;
 }
 
 /*}*/
@@ -187,8 +227,7 @@ input:focus {
 
 <script setup>
 import {ref} from 'vue';
-import ProfilefRelation from './components/profile-relation.vue';
-import {ClockIcon, LockIcon, UploadIcon} from '~~/components/icons';
+import {MembersIcon} from "@/components/icons";
 
 const form = ref({
   username: 'kevinbuchanan@email.com',
@@ -197,68 +236,68 @@ const profileBasic = [
   {
     key: 'first_name',
     label: 'First Name',
-    class: 'neutral-input',
+    class: 'neutral-input rounded-xl',
     required: true
   },
   {
     key: 'middle_name',
     label: 'Middle Name',
-    class: 'neutral-input',
+    class: 'neutral-input rounded-xl',
     required: false,
   },
   {
     key: 'last_name',
     label: 'Last Name',
-    class: 'neutral-input',
+    class: 'neutral-input rounded-xl',
     required: false,
   },
   {
     key: 'birthday',
     label: 'Date of Birth',
-    class: 'neutral-input',
+    class: 'neutral-input rounded-xl',
     required: false,
   },
   {
     key: 'gender',
     label: 'Gender',
-    class: 'neutral-input',
+    class: 'neutral-input rounded-xl',
     required: false,
   },
   {
     key: 'username',
     label: 'Username',
-    class: 'readonly-input',
+    class: 'readonly-input rounded-xl',
     required: false,
   },
   {
     key: 'email',
     label: 'Email',
-    class: 'neutral-input',
+    class: 'neutral-input rounded-xl',
     required: false,
   },
   {
     key: 'altenrate_email',
     label: 'Personal Email',
-    class: 'neutral-input',
+    class: 'neutral-input rounded-xl',
     required: false,
   },
   {
     key: 'phone',
     label: 'Mobile',
-    class: 'neutral-input',
+    class: 'neutral-input rounded-xl',
     required: false,
   },
   {
     key: 'employee_id',
     label: 'Employee I.D. Number',
-    class: 'neutral-input',
+    class: 'neutral-input rounded-xl',
     required: false,
   },
   {
     key: 'manager',
     label: 'Manager',
-    class: 'outline-input',
-    placeholder: 'Session Manager',
+    class: 'neutral-input rounded-xl',
+    placeholder: 'Search Manager',
     required: false,
   },
 ];
