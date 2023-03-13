@@ -1,5 +1,5 @@
 <template>
-  <div class="app-layout gradient-bg" v-if="showHeader">
+  <div class="app-layout gradient-bg" v-if="showHeader" ref="layoutRef">
     <app-header
       @show-circular-menu="toggleCircularMenu"
       @show-help="showBot"
@@ -78,6 +78,8 @@ import { useQuery } from "@vue/apollo-composable";
 import notification from "~/api/queries/notification";
 import { request } from "~/api/utils/request";
 import LeaderBoardSlideout from "~/layouts/components/leader-board/leader-board-slideout.vue";
+
+const layoutRef = useLayoutElement();
 
 const showCircularMenu = ref(false);
 
