@@ -5,24 +5,31 @@
             :data="items"
             :row-component="PeopleSearchTableRow"
             class="overflow-y-auto"
-            :class="{'h-56': !filter}"
+            :class="{ 'h-56': !filter }"
+            @row-clicked="clickRow"
         />
     </div>
 </template>
 <script setup>
-import PeopleSearchTableRow from './people-search-table-row.vue';
+import PeopleSearchTableRow from "./people-search-table-row.vue";
 const props = defineProps({
     columns: {
         type: Array,
-        default: []
+        default: [],
     },
     items: {
         type: Array,
-        default: []
+        default: [],
     },
     filter: {
         type: String,
-        default: null
-    }
+        default: null,
+    },
 });
+
+const emit = defineEmits(["row-clicked"]);
+
+const clickRow = (data) => {
+    emit("row-clicked", data);
+};
 </script>
