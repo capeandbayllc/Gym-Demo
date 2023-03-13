@@ -6,7 +6,10 @@
                 'bg-secondary': secondary,
                 'bg-transparent border-secondary': transparent && !secondary,
                 'rounded-t': !isCollapsed,
-                'rounded': isCollapsed
+                'rounded': isCollapsed,
+                'btn-xs': size === 'xs',
+                'btn-sm': size === 'sm',
+                'btn-lg': size === 'lg',
             }"
             :onClick="toggleCollapsed"
         >
@@ -44,10 +47,13 @@
 .select-box-btn {
 	@apply flex flex-row border px-2 py-1 items-center justify-between;
     width: 165px;
-    height: 29px;
+    /* height: 29px; */
 }
 .select-box-clear-btn {
 	@apply text-right font-medium mr-3 text-sm cursor-pointer;
+}
+.select-box-btn.bg-secondary {
+    @apply border-0;
 }
 
 .fade-enter-active,
@@ -101,8 +107,10 @@ const props = defineProps({
     transparent: {
         type: Boolean,
         default: true
-    }
-
+    },
+    size: {
+		type: String,
+	},
 });
 const isCollapsed = ref(true);
 const toggleCollapsed = () => {

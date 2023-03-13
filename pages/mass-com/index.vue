@@ -13,6 +13,8 @@
             <h2 class="mb-4">Recent campaigns</h2>
             <new-member-campaigns class="mb-4" />
             <marketing />
+
+            <!-- <RecentCampaignDetails :data="recentCampaign" /> -->
         </div>
     </div>
 </template>
@@ -41,6 +43,16 @@ import BuildCampaignCard from './components/build-campaign-card/index';
 import CampaignCard from './components/campaign-card/index.vue';
 import newMemberCampaigns from './components/new-member-campaigns.vue';
 import marketing from './components/marketing.vue';
+/* import RecentCampaignDetails from './components/campaign-details/index.vue'; */
+
+const recentCampaign = {
+    id: 1,
+    title: "Fourth of July Fitness",
+    started: 44,
+    in_progress: 43,
+    completed: 88,
+    status: "in_progress"
+};
 
 onMounted(async () => {
     await nextTick();

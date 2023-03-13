@@ -7,10 +7,10 @@
         <td>
             <div class="campaign-view">
                 <diagram-icon class="text-accent-focus/80"/>
-                <Button secondary class="text-base-content" size="xs" @click.stop="openCampaignDetailModal">View</Button>
+                <Button secondary class="text-base-content" size="xs" @click.stop="openCampaignDetailModal(data)">View</Button>
 
                 <DaisyModal ref="campaignDetailModalRef">
-                    <CampaignDetailsModal @close="closeCampaignDetailModal"></CampaignDetailsModal>
+                    <CampaignDetailsModal @close="closeCampaignDetailModal" :data="data"></CampaignDetailsModal>
                 </DaisyModal>
             </div>
         </td>
@@ -84,7 +84,8 @@ const items = [{
 
 const campaignDetailModalRef = ref(null);
 
-const openCampaignDetailModal = () => {
+const openCampaignDetailModal = (data) => {
+    campaignDetailModalRef.data = data;
     campaignDetailModalRef.value.open();
 }
 const closeCampaignDetailModal = () => {

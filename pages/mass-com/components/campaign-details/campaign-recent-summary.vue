@@ -1,8 +1,12 @@
 <template>
     <div class="recent-campaign-wrapper">
-        <div class="recent-campaign-title">Campaign Name-Title</div>
+        <div class="recent-campaign-title">Campaign Name - {{data.title}}</div>
         <div class="recent-campaign-content">
             <div>
+                <div class="recent-campaign-item">
+                    <div>Start Date</div>
+                    <div>2022-07-01</div>
+                </div>
                 <div class="recent-campaign-item">
                     <div>Open Rate</div>
                     <div>12.3%</div>
@@ -21,6 +25,10 @@
                 </div>
             </div>
             <div>
+                <div class="recent-campaign-item">
+                    <div>End Date</div>
+                    <div>2023-07-31</div>
+                </div>
                 <div class="recent-campaign-item">
                     <div>Total clicks</div>
                     <div>2156</div>

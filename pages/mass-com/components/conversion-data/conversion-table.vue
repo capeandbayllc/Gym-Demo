@@ -3,26 +3,23 @@
         :collapsed="true"
         :columns="columns"
         :data="data"
-        noHeader
+        :rowComponent="ConversionTableRow"
         class="conversion-table"
-    ></data-table>
+    />
 </template>
 
 <style>
 .conversion-table {
-    @apply h-80 overflow-x-auto;
+    @apply h-80 overflow-x-auto w-full;
     table {
         @apply w-max md:w-full;
-    }
-}
-@media only screen and (max-width: 768px) {
-    .conversion-table {
-        width: calc(100vw - 96px);
     }
 }
 </style>
 
 <script setup>
+import ConversionTableRow from "./conversion-table-row.vue";
+
 const columns = [
     {
         field: "id",
@@ -53,6 +50,7 @@ const data = [
         unit: "Unit #",
         membership: "Membership",
         revenue: "$0.00",
+        src: '/chat-conversation/1.png'
     },
     {
         id: 2,
@@ -60,6 +58,7 @@ const data = [
         unit: "Unit #",
         membership: "Membership",
         revenue: "$0.00",
+        src: '/chat-conversation/1.png'
     },
     {
         id: 3,
@@ -67,6 +66,7 @@ const data = [
         unit: "Unit #",
         membership: "Membership",
         revenue: "$0.00",
+        src: '/chat-conversation/1.png'
     },
     {
         id: 4,
@@ -74,6 +74,7 @@ const data = [
         unit: "Unit #",
         membership: "Membership",
         revenue: "$0.00",
+        src: '/chat-conversation/1.png'
     },
     {
         id: 5,
@@ -81,6 +82,7 @@ const data = [
         unit: "Unit #",
         membership: "Membership",
         revenue: "$0.00",
+        src: '/chat-conversation/1.png'
     },
 ];
 </script>

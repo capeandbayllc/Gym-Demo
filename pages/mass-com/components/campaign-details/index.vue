@@ -1,17 +1,34 @@
 <template>
-    <simple-card title="Campaign Details">
-        <div class="flex flex-row justify-between">
-            <div class="recent-campaign-title">July 2020</div>
-            
-            <CampaignFilter />
+    <simple-card title="Campaign Details" class="mb-4">
+        <div class="campaign-content-details">
+            <div class="flex flex-row justify-between px-6">
+                <div class="campaign-title">July 2020</div>
+
+                <CampaignFilter :data="data" />
+            </div>
+            <CampaignRecentSummary :data="data" />
+            <ConversionData :data="data" />
         </div>
-        <CampaignRecentSummary />
-        <ConversionData />
     </simple-card>
 </template>
+
+<style scoped>
+.campaign-content-details {
+    @apply pt-4 px-4 bg-transparent items-center w-full;
+
+    .campaign-title {
+        @apply: texr-lg;
+    }
+}
+</style>
 
 <script setup>
 import CampaignFilter from "./campaign-filter.vue"
 import CampaignRecentSummary from "./campaign-recent-summary.vue"
 import ConversionData from "./../conversion-data/index.vue"
+
+const props = defineProps({
+    data: Object
+})
+
 </script>
