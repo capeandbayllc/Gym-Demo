@@ -16,7 +16,7 @@
                                         onUploadDragoverEvent($event)
                                     "
                                     @drop.prevent="onUploadDropEvent($event)"
-                                    class="w-full flex justify-center items-center px-6 pt-5 pb-6 border-2 border-gray-500 border-dashed rounded-md h-128 transition-colors"
+                                    class="w-full flex justify-center items-center px-6 pt-5 pb-6 bg-[#292929] rounded-lg h-128 transition-colors"
                                     :class="{
                                         'bg-base-100': uploadDragoverTracking,
                                     }"
@@ -30,7 +30,8 @@
                                         </p>
                                         <p class="py-2 text-gray-500">OR</p>
                                         <p class="mt-2 text-sm text-gray-600">
-                                            <label class="btn btn-primary"
+                                            <label
+                                                class="py-2 px-3 rounded-md text-white bg-secondary hover:bg-secondary/[0] hover:border-2 border-secondary font-light tracking-widest text-[0.8rem] transition-all duration-300 ease-linear cursor-pointer"
                                                 ><span>Browse Files</span
                                                 ><input
                                                     @input="
@@ -72,7 +73,10 @@
                 </div>
                 <jet-input-error :message="''" class="mt-2" />
 
-                <div class="flex justify-between px-4 sm:px-6 lg:px-8 mb-3">
+                <div
+                    class="flex justify-between px-4 sm:px-6 lg:px-8 mb-3"
+                    v-show="!hideSaveOptions"
+                >
                     <div
                         class="col-span-6 sm:col-span-4 form-control flex-row items-center gap-4"
                     >
@@ -119,16 +123,14 @@ import JetLabel from "./jetstream/label.vue";
 import FileUploadForm from "./file-upload-form.vue";
 import UploadIcon from "./upload-icon.vue";
 
-
 const props = defineProps({
     user: { type: Object },
     formSubmitOptions: { type: Object },
     handleCancel: { type: Function },
+    hideSaveOptions: { type: Boolean, default: false },
 });
 
-const defaultHandleCancel = () => {
-    
-};
+const defaultHandleCancel = () => {};
 const resolvedHandleCancel = props.handleCancel || defaultHandleCancel;
 
 const emit = defineEmits(["submitted"]);
@@ -137,7 +139,7 @@ const uploadDragoverTracking = ref(false);
 const uploadDragoverEvent = ref(false);
 const uploadProgress = ref(null);
 
-const form = ref({files: []});
+const form = ref({ files: [] });
 
 const onUploadDragoverEvent = (e) => {
     uploadDragoverEvent.value = true;
@@ -202,10 +204,5 @@ const allFiles = computed(() =>
 
 const formSubmitOptions = props?.formSubmitOptions || {};
 
-const handleSubmit = () => {
-    
-};
-
-
-
+const handleSubmit = () => {};
 </script>
