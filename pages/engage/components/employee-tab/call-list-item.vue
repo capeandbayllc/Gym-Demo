@@ -27,7 +27,7 @@
         </td>
         <td>
             <div class="w-[6rem]">
-                <membership-btn :membership="data.membership"/>
+                <membership-btn :membership="data.membership_type"/>
             </div>
         </td>
         <td >

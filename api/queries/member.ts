@@ -14,6 +14,7 @@ const GET_MEMBERS: DocumentNode = gql`
                 gender
                 profile_photo_path
                 created_at
+                updated_at
                 homeLocation {
                     name
                 }

@@ -24,39 +24,11 @@
 import CallListItem from "./call-list-item.vue";
 import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
+import member from "~/api/queries/member";
+import {request} from "~/api/utils/request";
 
-const query = gql`
-  query AllMembers {
-    members(first: 100) {
-      data {
-        id
-        first_name
-        last_name
-        email
-        primary_phone
-        locations {
-          id
-          name
-        }
-        member_type {
-          name
-        }
-        homeLocation {
-          name
-        }
-        updated_at
-        created_at
-      }
-      paginatorInfo {
-        count
-        perPage
-        total
-      }
-    }
-  }
-`;
 
-const { result } = useQuery(query);
+const { result } = useQuery(member.query.browse);
 
 const members = ref([]);
 
@@ -78,12 +50,10 @@ const members2 = computed(() => {
     return {
       ...item,
       membership_type: getRandomMembershipType(),
+      updated_at: new Date(item.updated_at).toLocaleDateString().replaceAll('/', '.'),
     };
   });
 });
-
-console.log("test");
-console.log(members);
 
 const columns = [
   "",
@@ -93,61 +63,5 @@ const columns = [
   "Membership Type",
   "Date Upgraded",
   "",
-];
-const data = [
-  {
-    id: 1,
-    avatar: "/account.png",
-    name: "Sandy Lin",
-    location: "Tru Fit Ware Road",
-    date: "1.02.22",
-    membership: "silver",
-    call_type: "Call",
-  },
-  {
-    id: 2,
-    avatar: "/account.png",
-    name: "Randy Portis",
-    location: "Tru Fit San Angelo",
-    date: "1.02.22",
-    membership: "gold",
-    call_type: "Email",
-  },
-  {
-    id: 3,
-    avatar: "/account.png",
-    name: "Tess Hightower",
-    location: "Tru Fit University",
-    date: "1.02.22",
-    membership: "platinum",
-    call_type: "In-Club",
-  },
-  {
-    id: 4,
-    avatar: "/account.png",
-    name: "Sandy Lin",
-    location: "Tru Fit Lubbock 4Th Street",
-    date: "1.02.22",
-    membership: "bronze",
-    call_type: "Call",
-  },
-  {
-    id: 5,
-    avatar: "/account.png",
-    name: "Randy Portis",
-    location: "Tru Fit Sa Bandera",
-    date: "1.02.22",
-    membership: "platinum",
-    call_type: "Email",
-  },
-  {
-    id: 6,
-    avatar: "/account.png",
-    name: "Tess Hightower",
-    location: "Tru Fit Harlingen",
-    date: "1.02.22",
-    membership: "gold",
-    call_type: "In-Club",
-  },
 ];
 </script>

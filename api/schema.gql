@@ -688,17 +688,12 @@ type Member {
   updated_at: DateTime
   gr_location_id: ID
   interaction_count: InteractionCount
-  member_type: MemberType
   homeLocation: Location
   locations: [Location]
   agreement_number: String
   external_id: String
   misc: String
   notes: [Note]
-}
-
-type MemberType {
-  name: String
 }
 
 """A paginated list of Member items."""
