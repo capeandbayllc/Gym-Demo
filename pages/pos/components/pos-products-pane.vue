@@ -21,9 +21,9 @@
         </div>
         <div class="max-h-[20vh] lg:max-h-full h-full">
             <div
-                class="w-full flex flex-col gap-1 scrollbar-hide z-30 pos-style-transition"
+                class="w-full flex flex-col gap-1 scrollbar-hide pos-style-transition"
                 :class="{
-                    'h-full lg:h-[62vh]': showProducts,
+                    'h-full lg:h-[60vh]': showProducts,
                     'h-[0vh]': !showProducts,
                 }"
             >
@@ -37,7 +37,7 @@
                 >
                     Collapse
                 </span>
-                <div class="bg-[#191919]/[0.9] h-full rounded-t-xl">
+                <div class="bg-[#191919]/[0.9] h-full rounded-xl">
                     <PosProductItems
                         :items="selectedSubcategory.items"
                         :cart="cart"
@@ -48,7 +48,7 @@
             <div
                 class="pos-products-pane"
                 :class="{
-                    'h-full lg:h-[62vh]': !showProducts,
+                    'h-full lg:h-[60vh]': !showProducts,
                     'h-[0vh]': showProducts,
                 }"
             >
