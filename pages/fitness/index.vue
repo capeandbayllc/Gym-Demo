@@ -1,10 +1,10 @@
 <template>
     <div class="page-fitness-container">
-        <div class="page-content grid grid-cols-1 gap-5">
-            <assessments-card/>
-            <waivers-card />
-            <questionnaires-card />
-            <reportings-card />
+        <div class="page-content grid grid-cols-2 gap-5">
+            <assessments-card class="col-span-2"/>
+            <waivers-card class="col-span-1 -lg:col-span-2"/>
+            <questionnaires-card class="col-span-1 -lg:col-span-2"/>
+            <reportings-card class="col-span-2"/>
 
         </div>
     </div>
@@ -13,7 +13,7 @@
 .page-fitness-container {
     @apply py-4 pr-5 w-full h-fit;
     .page-content {
-        @apply text-center text-secondary p-6 border-[#1b70b1] border-2 rounded-[26px] bg-[#054171] ;
+        @apply text-center text-secondary p-6 border-[#1b70b1] border-2 rounded-[26px] bg-[#054171] max-w-[85vw];
     }
 }
 </style>
