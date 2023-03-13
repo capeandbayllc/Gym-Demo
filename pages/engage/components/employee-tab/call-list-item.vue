@@ -1,5 +1,5 @@
 <template>
-    <tr class="call-list-item bg-[#1A1A1A] hover:bg-secondary hover:bg-opacity-30">
+    <tr class="relative call-list-item bg-[#1A1A1A] hover:bg-secondary hover:bg-opacity-30">
       <td>
         <div class="flex items-center min-h-[28px] ">
           <input type="checkbox" class="h-5 ml-2 mr-2 w-5 rounded "/>

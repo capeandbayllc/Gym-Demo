@@ -8,7 +8,7 @@
             :data="data"
             :row-component="CallListItem"
             :stickyHeader="true"
-            class="h-80 text-xs "
+            class="h-80 text-xs overflow-y-auto"
         />
 
     </div>
