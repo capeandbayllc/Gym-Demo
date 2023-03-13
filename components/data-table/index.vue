@@ -1,7 +1,7 @@
 <template>
     <div class="max-w-[90vw] mx-auto">
         <table class="border-separate">
-          <div class="">
+          <div>
             <table-header :columns="columns" :stickyHeader="stickyHeader"/>
             <table-body v-if="!rowComponent"/>
 

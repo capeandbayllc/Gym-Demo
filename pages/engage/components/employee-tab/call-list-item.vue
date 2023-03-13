@@ -7,11 +7,11 @@
       </td>
         <td>
             <div class="flex text-left min-h-[28px]">
-                <img :src="data.avatar" class="h-7 mr-2"/>{{data.name}}
+                <img :src="data.avatar" class="h-7 mr-2"/>{{data.first_name}} {{data.last_name}}
             </div>
         </td>
         <td class="text-left">
-            <div class="min-h-[28px] text-left">{{data.location}}</div>
+            <div class="min-h-[28px] text-left">{{data.homeLocation.name}}</div>
         </td>
 
         <td class="w-[7rem]">
@@ -31,7 +31,7 @@
             </div>
         </td>
         <td >
-          <div class="min-h-[28px] ml-[1rem]">{{data.date}}</div>
+          <div class="min-h-[28px] ml-[1rem]">{{data.updated_at}}</div>
         </td>
         <td>
           <div class="dropdown dropdown-end">
@@ -102,7 +102,17 @@ import {CallIcon, EmailIcon, MessageIcon, CrossIcon} from "~/components/icons";
 import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
+import moment from "moment";
 library.add(faEllipsisH);
+
+
+const format_date = (value) => (function() {
+    if (value) {
+      return moment(String(value)).format('YYYY.MM.DD')
+    }
+  });
+
+
 
 const contactOption = ref(null);
 

@@ -5,7 +5,7 @@
 
         <data-table
             :columns="columns"
-            :data="data"
+            :data="result?.members?.data"
             :row-component="CallListItem"
             :stickyHeader="true"
             class="h-80 text-xs overflow-y-auto"
@@ -23,6 +23,53 @@
 </style>
 <script setup>
 import CallListItem from './call-list-item.vue';
+import gql from "graphql-tag";
+import {useQuery} from "@vue/apollo-composable";
+
+const query = gql`
+  query AllMembers {
+    members(first: 100) {
+      data {
+        id
+        first_name
+        last_name
+        email
+        primary_phone
+        locations {
+          id
+          name
+        }
+        member_type {
+            name
+        }
+        homeLocation {
+          name
+        }
+        updated_at
+        created_at
+      }
+      paginatorInfo {
+        count
+        perPage
+        total
+      }
+    }
+  }
+`;
+const memberType = () =>
+{
+  const membershipType = ['platinum', 'gold', 'silver', 'bronze']
+  let randomNumber = Math.floor(Math.random() * membershipType.length);
+  this.name = membershipType[randomNumber];
+};
+
+const { result } = () => {
+  memberType();
+  let data = useQuery(query);
+
+}
+console.log('test');
+console.log(result);
 
 const columns = ["","Name", "Location", "", "Membership Type", "Date Upgraded", ""]
 const data = [{
