@@ -301,6 +301,7 @@ type Customer {
   state: String
   gender: String
   date_of_birth: DateTime
+  profile_photo_path: String
   created_at: DateTime!
   updated_at: DateTime!
   gr_location_id: ID
@@ -468,6 +469,7 @@ type Employee {
   state: String
   gender: String
   date_of_birth: DateTime
+  profile_photo_path: String
   created_at: DateTime!
   updated_at: DateTime!
   gr_location_id: ID
@@ -513,6 +515,7 @@ type EndUser {
   alternate_phone: String
   gender: Boolean
   date_of_birth: DateTime!
+  profile_photo_path: String
   interaction_count: InteractionCount!
   preview_note: [String]!
   club_location: Location
@@ -653,6 +656,7 @@ type Lead {
   alternate_phone: String
   gender: Boolean
   date_of_birth: DateTime
+  profile_photo_path: String
   interaction_count: InteractionCount!
   homeLocation: Location
   locations: [Location]
@@ -762,10 +766,12 @@ type Member {
   last_name: String
   middle_name: String
   email: String
+  phone: String
   primary_phone: String
   alternate_phone: String
   gender: String
   date_of_birth: DateTime
+  profile_photo_path: String
   created_at: DateTime
   updated_at: DateTime
   gr_location_id: ID
@@ -2010,6 +2016,7 @@ type User {
   departments: [Department]
   positions: [Position]
   gender: String
+  profile_photo_path: String
   isClientUser: Boolean
   files: [File]!
 }
