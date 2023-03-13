@@ -1,6 +1,6 @@
 <template>
     <simple-card title="Campaign Details" class="mb-4">
-        <div class="campaign-content-details">
+        <div class="campaign-content-details overflow-y-scroll max-h-[40vw]">
             <div class="flex flex-row justify-between px-6">
                 <div class="campaign-title">July 2020</div>
 
