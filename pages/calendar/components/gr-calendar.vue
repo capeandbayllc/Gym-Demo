@@ -46,7 +46,6 @@ import { UserIcon, ArrowIcon } from "~~/components/icons";
 const calenderView = ref("timeGridWeek");
 
 const emit = defineEmits(["clickEventNode", "clickEmptyNode"]);
-
 const props = defineProps({
     events: {
         type: Array,
@@ -67,13 +66,6 @@ const currentView = ref("timeGridWeek");
 const selectedDate = ref(null);
 const monthCalendar = ref(null);
 const listCalendar = ref(null);
-
-const handleChangeView = (value) => {
-    calenderView.value = value;
-    console.log("calenderView", calenderView.value);
-    calendar.value.getApi().changeView(value);
-    onViewChanged();
-};
 
 /** existing event click handler */
 const eventClick = (info) => {
@@ -152,32 +144,6 @@ const calendarOptions = ref({
     },
 });
 
-const monthCalendarOptions = ref({
-    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-    initialView: "dayGridMonth",
-    headerToolbar: false,
-    events: props.events,
-    eventClick,
-    editable: true,
-    selectable: true,
-    dayMaxEvents: true,
-    dateClick: function (params) {
-        console.log("🚀 ~ file: index.vue ~ line 123 ~ params", params);
-        calendar?.value?.getApi()?.gotoDate(params.date);
-    },
-});
-
-const listCalendarOptions = ref({
-    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin],
-    initialView: "listDay",
-    timeAxis: {
-        slotDuration: "01:00:00",
-    },
-    headerToolbar: false,
-    events: props.events,
-    eventClick,
-});
-
 const onViewChanged = () => {
     start.value = calendar.value.getApi().view.activeStart;
     start.end = calendar.value.getApi().view.activeEnd;
@@ -188,23 +154,7 @@ const onViewChanged = () => {
     });
 };
 
-const calendarTitle = computed(() => {
-    let option = {
-        year: "numeric",
-        month: "long",
-    };
-    if (currentView.value === "timeGridDay") {
-        option["day"] = "numeric";
-    }
-    return start.value?.toLocaleString("default", option);
-});
 const dateSelect = ref();
-const showDateSelectModal = () => {
-    if (calenderView.value !== "timeGridWeek") {
-        selectedDate.value = start.value;
-    }
-    dateSelect.value.open();
-};
 const onSelectDate = (modelData) => {
     selectedDate.value = modelData;
     if (calenderView.value !== "timeGridWeek") {
@@ -214,22 +164,6 @@ const onSelectDate = (modelData) => {
         start.value = modelData[0];
         calendar.value.getApi().gotoDate(start.value);
     }
-};
-
-const getDayClass = (date) => {
-    if (
-        isEqual(
-            date,
-            set(new Date(), {
-                hours: 0,
-                minutes: 0,
-                seconds: 0,
-                milliseconds: 0,
-            })
-        )
-    )
-        return "!rounded-full bg-secondary";
-    return "";
 };
 
 watch(calenderView, () => {
@@ -251,7 +185,7 @@ onMounted(async () => {
         --dp-menu-border-color: #191919;
     }
     .dp__calendar_header {
-        @apply text-secondary;
+        @apply text-secondary !font-normal;
     }
     .dp__month_year_row {
         @apply border-none;
@@ -277,7 +211,7 @@ onMounted(async () => {
 }
 
 .dp__cell_inner {
-    @apply !p-0 !h-[25px];
+    @apply !p-0 !h-[25px] text-[0.8rem] !font-light;
 }
 
 .dp__month_year_select {

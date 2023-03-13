@@ -49,7 +49,7 @@
             class="border border-secondary bg-[#202020]/[0.9] rounded-2xl p-7 max-w-none flex gap-4"
         >
             <!-- left sidebar -->
-            <aside class="flex flex-col gap-5">
+            <aside class="flex flex-col gap-5 font-light !text-[0.8rem]">
                 <Datepicker
                     class="calendar-date-picker"
                     menu-class-name="!bg-transparent !border-none"
@@ -68,12 +68,12 @@
             <section class="w-full">
                 <!-- main section heading area -->
                 <div class="flex justify-between items-center w-full">
-                    <h1 class="text-3xl">January 2088</h1>
+                    <h1 class="font-light text-3xl">January 2088</h1>
                     <!-- filters/page actions -->
                     <div class="flex gap-2">
                         <button
                             @click="handleAddNew"
-                            class="bg-secondary py-1 px-2 rounded-md border-2 border-transparent flex items-center gap-2 text-[0.8rem]"
+                            class="bg-secondary py-1 px-2 rounded-md border-2 border-transparent flex items-center gap-2 font-light text-[0.8rem]"
                         >
                             <span> Add New </span>
                             <span class="w-4 fill-white">
@@ -89,7 +89,7 @@
                             </span>
                         </button>
                         <button
-                            class="bg-neutral py-1 px-2 rounded-md border-secondary border-2 flex items-center gap-2 text-[0.8rem]"
+                            class="bg-neutral py-1 px-2 rounded-md border-secondary border-2 flex items-center gap-2 font-light text-[0.8rem]"
                         >
                             <span> All Bookings </span>
                             <span class="w-4 p-1 fill-white">
@@ -161,6 +161,7 @@ const resetState = () => {
 
 /** sets up state for form entry */
 const handleAddNew = (node) => {
+    console.log(node);
     if (eventDetailsVisibibility.value || eventInformationVisibibility.value) {
         return;
     } else {
@@ -181,6 +182,39 @@ const handleAddNew = (node) => {
 
 const query = gql`
     query CalendarEventsQuery {
+        locations {
+            data {
+                id
+                name
+            }
+        }
+        members {
+            data {
+                id
+                first_name
+                last_name
+                email
+                profile_photo_path
+            }
+        }
+        employee {
+            data {
+                id
+                first_name
+                last_name
+                email
+                profile_photo_path
+            }
+        }
+        leads {
+            data {
+                id
+                first_name
+                last_name
+                email
+                profile_photo_path
+            }
+        }
         calendarEvents {
             id
             title
@@ -191,9 +225,30 @@ const query = gql`
             description
             full_day_event
             event_type_id
-            user_attendees
-            lead_attendees
-            member_attendees
+            user_attendees {
+                id
+                entity_data {
+                    name
+                    profile_photo_url
+                    email
+                }
+            }
+            lead_attendees {
+                id
+                entity_data {
+                    name
+                    profile_photo_url
+                    email
+                }
+            }
+            member_attendees {
+                id
+                entity_data {
+                    name
+                    profile_photo_url
+                    email
+                }
+            }
         }
     }
 `;
@@ -250,56 +305,6 @@ const getDayClass = (date) => {
         return "!rounded-full bg-secondary";
     return "";
 };
-
-// /** GQL */
-// const query = gql`
-//   query CalendarData {
-//     members(first: 15) {
-//       data {
-//         id
-//         first_name
-//         last_name
-//         email
-//         primary_phone
-//         locations {
-//           id
-//           name
-//         }
-//         homeLocation {
-//           name
-//         }
-//         created_at
-//       }
-//       paginatorInfo {
-//         count
-//         perPage
-//         total
-//       }
-//     }
-//     calendarEvents {
-//       id
-//       title
-//       description
-//       full_day_event
-//       start
-//       end
-//       event_completion
-//       editable
-//       call_task
-//       # event_type_id
-//       location {
-//         id
-//         name
-//       }
-//       type {
-//         id
-//         name
-//       }
-//     }
-//   }
-// `;
-
-// const { result } = useQuery(query);
 
 watch(result, (ov, nv) => {
     if (initialized.value) return;
