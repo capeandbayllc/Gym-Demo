@@ -1,5 +1,5 @@
 <template>
-    <div class="py-4 px-8 w-full h-fit">
+    <div class="px-8 w-full h-fit">
         <!-- event details -->
         <div
             v-if="eventDetailsVisibibility"
@@ -60,9 +60,33 @@
                     :enable-time-picker="false"
                     dark
                 />
-
-                <CalendarMenu :calendars="activeEventsList" />
-                <ReportsStatistics />
+                <CalendarFilterLayout
+                    :title="'Locations'"
+                    :isOpen="filterOptions.locations.isOpen"
+                    :selected="filterOptions.locations.selected"
+                    :filter_id="`locations`"
+                    :options="locations"
+                    :selectOption="selectOption"
+                    :toggleFilterOption="toggleFilterOption"
+                />
+                <CalendarFilterLayout
+                    :title="'Employees'"
+                    :isOpen="filterOptions.employees.isOpen"
+                    :selected="filterOptions.employees.selected"
+                    :filter_id="`employees`"
+                    :options="employees"
+                    :selectOption="selectOption"
+                    :toggleFilterOption="toggleFilterOption"
+                />
+                <CalendarFilterLayout
+                    :title="'Events'"
+                    :isOpen="filterOptions.event_types.isOpen"
+                    :selected="filterOptions.event_types.selected"
+                    :filter_id="`event_types`"
+                    :options="event_types"
+                    :selectOption="selectOption"
+                    :toggleFilterOption="toggleFilterOption"
+                />
             </aside>
 
             <section class="w-full">
@@ -76,33 +100,13 @@
                             class="bg-secondary py-1 px-2 rounded-md border-2 border-transparent flex items-center gap-2 font-light text-[0.8rem]"
                         >
                             <span> Add New </span>
-                            <span class="w-4 fill-white">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 448 512"
-                                >
-                                    <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                    <path
-                                        d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
-                                    />
-                                </svg>
-                            </span>
+                            <PlusIcon class="w-4 fill-white" />
                         </button>
                         <button
                             class="bg-neutral py-1 px-2 rounded-md border-secondary border-2 flex items-center gap-2 font-light text-[0.8rem]"
                         >
                             <span> All Bookings </span>
-                            <span class="w-4 p-1 fill-white">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 320 512"
-                                >
-                                    <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                    <path
-                                        d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"
-                                    />
-                                </svg>
-                            </span>
+                            <BiCaretIcon class="w-4 p-1 fill-white" />
                         </button>
                         <input
                             placeholder="Search"
@@ -121,15 +125,15 @@
     </div>
 </template>
 <script setup>
+import { PlusIcon, BiCaretIcon } from "~~/components/icons";
 import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
 import { isEqual, set } from "date-fns";
 import "@fullcalendar/core/vdom"; // solves problem with Vite
 import "@vuepic/vue-datepicker/dist/main.css";
 import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
+import CalendarFilterLayout from "./components/partials/calendar-filter-layout.vue";
 
-import CalendarMenu from "./components/partials/calendar-menu.vue";
-import ReportsStatistics from "./components/partials/reports-statistics.vue";
 import EventDetails from "./components/partials/event-details.vue";
 import EventInformation from "./components/partials/event-information.vue";
 import Datepicker from "@vuepic/vue-datepicker";
@@ -152,6 +156,28 @@ const eventInformationVisibibility = ref(false);
 const offerUpVisibibility = ref(false);
 const eventFormVisibility = ref(false);
 
+const filterOptions = ref({
+    employees: {
+        isOpen: false,
+        selected: [],
+    },
+    locations: {
+        isOpen: false,
+        selected: [],
+    },
+    event_types: {
+        isOpen: false,
+        selected: [],
+    },
+});
+
+const eventTypes = ref([]);
+const employees = ref([]);
+const members = ref([]);
+const leads = ref([]);
+const locations = ref([]);
+const event_types = ref([]);
+
 const resetState = () => {
     eventDetailsVisibibility.value = false;
     eventInformationVisibibility.value = false;
@@ -161,7 +187,6 @@ const resetState = () => {
 
 /** sets up state for form entry */
 const handleAddNew = (node) => {
-    console.log(node);
     if (eventDetailsVisibibility.value || eventInformationVisibibility.value) {
         return;
     } else {
@@ -182,13 +207,22 @@ const handleAddNew = (node) => {
 
 const query = gql`
     query CalendarEventsQuery {
+        calendarEventTypes {
+            data {
+                id
+                name
+                description
+                color
+                type
+            }
+        }
         locations {
             data {
                 id
                 name
             }
         }
-        members {
+        users {
             data {
                 id
                 first_name
@@ -197,7 +231,7 @@ const query = gql`
                 profile_photo_path
             }
         }
-        employee {
+        members {
             data {
                 id
                 first_name
@@ -264,7 +298,7 @@ const handleCreateEvent = (form) => {
         description: form.description,
         start: form.time.start,
         end: form.time.end,
-        backgroundColor: "##123456",
+        backgroundColor: "#123456",
         eventType: form.eventType,
         instructor: form.instructor,
         member: form.member,
@@ -316,10 +350,34 @@ watch(result, (ov, nv) => {
 
 let timeout = null;
 
+const selectOption = (filter_id, option) => {
+    if (filterOptions.value[filter_id].selected.includes(option)) {
+        filterOptions.value[filter_id].selected.splice(
+            filterOptions.value[filter_id].selected.indexOf(option),
+            1
+        );
+    } else {
+        filterOptions.value[filter_id].selected.push(option);
+    }
+};
+
+const toggleFilterOption = (filter_id) => {
+    filterOptions.value[filter_id].isOpen =
+        !filterOptions.value[filter_id].isOpen;
+};
+
 onMounted(async () => {
     if (!timeout) {
         timeout = setTimeout(() => {
             console.log("GQL Result:", result.value);
+            eventTypes.value = result.value.calendarEvents.data;
+            employees.value = result.value.users.data.filter(
+                (user) => user.user_type === "employee"
+            );
+            members.value = result.value.members.data;
+            leads.value = result.value.leads.data;
+            locations.value = result.value.locations.data;
+            event_types.value = result.value.calendarEventTypes.data;
         }, 3000);
     }
     //   await nextTick();

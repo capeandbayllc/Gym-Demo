@@ -185,10 +185,10 @@ onMounted(async () => {
         --dp-menu-border-color: #191919;
     }
     .dp__calendar_header {
-        @apply text-secondary !font-normal;
+        @apply text-secondary !font-normal !h-[25px] text-[0.8rem] pb-0;
     }
     .dp__month_year_row {
-        @apply border-none;
+        @apply border-none flex flex-row !gap-1;
         .dp__month_year_col_nav {
             @apply bg-secondary rounded;
             .dp__inner_nav {
@@ -202,7 +202,7 @@ onMounted(async () => {
     .dp__calendar {
         @apply bg-transparent;
         .dp__calendar_wrap {
-            @apply bg-neutral border border-secondary rounded;
+            @apply bg-neutral border-2 border-secondary rounded-2xl;
             .dp__calendar_header_separator {
                 @apply h-0;
             }
@@ -336,7 +336,7 @@ th.fc-day-today {
 }
 
 .fc.fc-media-screen.fc-direction-ltr.fc-theme-standard {
-    @apply !max-h-[72.5vh] !min-h-[65.8vh];
+    @apply !max-h-[76vh] !min-h-[65.8vh];
 }
 
 .fc-timeGridDay-button,

@@ -1,9 +1,9 @@
 <template>
     <!-- <ul> -->
     <!-- list header -->
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-1">
         <div class="flex justify-between items-center">
-            <h3 class="text-[1.2rem] font-semibold">
+            <h3 class="text-[1rem] font-light">
                 Calendars ({{ calendars.length }})
             </h3>
 
