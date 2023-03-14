@@ -15,12 +15,7 @@
       :key="idx"
     >
       <span
-        :class="{
-          'bg-secondary/40 text-secondary': idx % 4 === 0,
-          'bg-orange-500/40 text-orange-500': idx % 4 === 1,
-          'bg-purple-500/40 text-purple-500': idx % 4 === 2,
-          'bg-red-500/40 text-red-400': idx % 4 === 3,
-        }"
+        :class="getColor(idx)"
         class="flex flex-col items-center justify-center aspect-square w-12 text-xl font-bold rounded-lg"
         >{{ idx }}</span
       >
@@ -64,6 +59,7 @@ const props = defineProps({
       { title: "Appointments", amount: 23 },
       { title: "Sold Amount ($)", amount: 430.25 },
       { title: "Sold Amount (%)", amount: 85 },
+      { title: "Percentage to Goal", amount: 75 },
     ],
   },
   indexColors: {
@@ -72,18 +68,12 @@ const props = defineProps({
   },
 });
 
-// doesn't seem to work and I don't know why so it's a static 4 colors for now.
-// const itemColorClasses = ref([]);
+const className = "bg-red-500";
 
-// onMounted(() => {
-//   const ixLen = props.indexColors.length;
-//   const rowCount = props.data.length;
-
-//   for (let i = 0; i < rowCount; i++) {
-//     let colorIx = i % ixLen;
-//     itemColorClasses.value.push(
-//       `bg-${props.indexColors[colorIx]}-500/50 text-${props.indexColors[colorIx]}`
-//     );
-//   }
-// });
+function getColor(ix = 0) {
+  let colorIx = ix % props.indexColors.length;
+  if (props.indexColors[colorIx] === "secondary")
+    return `bg-secondary/50 text-secondary`;
+  return `bg-${props.indexColors[colorIx]}-500/50 text-${props.indexColors[colorIx]}-500`;
+}
 </script>
