@@ -1,5 +1,5 @@
 <template>
-    <div class="grid gap-10">
+    <div class="grid gap-5">
         <div class="message-from">
             <div class="text-center text-lg -lg:text-xs relative chat-heading text-base-content/70">
                Today
@@ -7,7 +7,7 @@
         </div>
         <div v-for="chat in chats" :key="chat.id" class="flex" :class="{'justify-end': chat.isMe}">
             <div class="relative">
-                <div class="text-neutral w-96 -lg:w-52 -lg:h-auto p-4 py-3 h-28 rounded rounded-bl-none bg-base-content text-base" :class="{'rounded-bl rounded-br-none' : chat.isMe}">
+                <div class="text-neutral w-52 -lg:w-52 -lg:h-auto p-4 py-3 h-28 rounded rounded-bl-none bg-base-content text-base" :class="{'rounded-bl rounded-br-none' : chat.isMe}">
                     {{chat.message}}
                 </div>
                 <div class="rounded-full bg-base-content p-0.5  absolute -top-5 -right-5">
