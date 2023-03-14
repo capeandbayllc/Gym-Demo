@@ -1,14 +1,15 @@
 <template>
     <div class="overflow-y-auto max-w-[90vw] mx-auto">
         <table class="border-separate">
-            <table-header :columns="columns"/>
-            <table-body v-if="!rowComponent"/>
+            <table-header :columns="columns" />
+            <table-body v-if="!rowComponent" />
             <tbody>
                 <component
                     v-for="item in data"
                     :key="item.id"
                     :is="rowComponent"
                     :data="item"
+                    @click="rowClicked(item)"
                 />
             </tbody>
         </table>
@@ -32,6 +33,12 @@ const props = defineProps({
         type: Array,
         default: [],
     },
-    rowComponent: Object
+    rowComponent: Object,
 });
+
+const emit = defineEmits(["row-clicked"]);
+
+const rowClicked = (data) => {
+    emit("row-clicked", data);
+};
 </script>
