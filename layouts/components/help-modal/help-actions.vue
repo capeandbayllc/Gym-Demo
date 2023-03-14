@@ -1,7 +1,9 @@
 <template>
-   <div class="p-1">
-        <font-awesome-icon class="hover-icon w-4 h-4 -lg:w-4 -lg:h-4 border rounded-full p-3 " :icon="['fas', 'fa-message-bot']" />
-        <div class="text-xl text-center">
+   <div class="inline">
+        <div class="flex m-auto w-full pt-4 items-center justify-center">
+            <font-awesome-icon class=" action-icon  " :icon="icon" />
+        </div>
+        <div class="text-sm text-center py-2">
             {{title}}
         </div>
         <div class="text-extra-small">
@@ -17,7 +19,10 @@ import {fas} from '@fortawesome/pro-solid-svg-icons'
 import {ref} from 'vue'
 library.add(far,fas)
 const props = defineProps(
-        {   id:Number,
+
+        {   
+            icon:[String],
+            id:Number,
             title: String,
             description: String,
         }
@@ -25,8 +30,12 @@ const props = defineProps(
 </script>
 <style scoped>
 .text-extra-small{
-    @apply h-20 px-10;
+    @apply h-20 px-6 text-center;
     font-size: 0.438rem;
 
+}
+.action-icon{
+    @apply w-6 h-6 -lg:w-5 -lg:h-5 border rounded-full p-3 bg-white;
+    color: #0075C9;
 }
 </style>

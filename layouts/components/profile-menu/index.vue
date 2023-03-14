@@ -30,7 +30,7 @@
     </div>
   </context-menu>
 
-  <daisy-modal :overlay="true" id="pulseModal" ref="pulseModal">
+  <daisy-modal :overlay="true" id="helpModal" ref="helpModal">
             <help-modal />
         </daisy-modal>
 </template>
@@ -63,7 +63,7 @@
 <script setup>
 import { ref } from "vue";
 import HelpModal from "../help-modal/index.vue";
-const pulseModal = ref(null);
+const helpModal = ref(null);
 const profileMenu = ref(null);
 
 const open = () => {
@@ -120,6 +120,6 @@ const handleClickLogout = () => {
   navigateTo("/login");
 };
 const handleClickActions = () => {
-  pulseModal.value.open();
+  helpModal.value.open();
 };
 </script>

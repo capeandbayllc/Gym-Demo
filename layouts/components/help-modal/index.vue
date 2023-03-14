@@ -1,27 +1,36 @@
 <template>
 	<div class="helpbot-container gradient-bg ">
 		<div class="flex flex-col">
-            <div class="m-auto">
-				<font-awesome-icon  class="hover-icon w-4 h-4 -lg:w-4 -lg:h-4 border rounded-full p-3  " :icon="['fas', 'fa-message-bot']" />
-				
+            <div class="m-auto mt-4">
+				<font-awesome-icon  class="action-icon " :icon="['fas', 'fa-message-bot']" />
 			</div>
 			<div class="text-center">
 				HelpBot
 			</div>
-			<input type="text" placeholder="search" class="help-search ">
+			<div class="flex" style="height:38px"  >
+				<input type="text" :placeholder="search" class="help-search " @mouseenter="replacePlaceholder" @mouseleave="getBackSearch">
+			</div>
         </div>
-		<div class="action-block">
+		<div class="text-sm pl-5 pt-4 pb-2">
+			Recommended Topics
+		</div>
+		<div class="action-block pt-4">
 			<div class="action-part" v-for="(item,index) in actionFirstRowData" :key="index">
-				<div :class="[item.id==2?'border-r-2 border-l-2 px-2 action-border border-b-2':'border-b-2 action-border',item.id==1?'ml-2':'',item.id==3?'mr-2':'']">
-					<help-actions :id="item.id" :title="item.title" :description="item.description"/>
+				<div :class="[item.id==2?'border-r border-l px-2 action-border border-b':'border-b action-border',item.id==1?'ml-4':'',item.id==3?'mr-4':'']">
+					<help-actions :id="item.id" :title="item.title" :description="item.description" :icon="item.icon"/>
 				</div>
 			</div>
 		</div>
-		<div class="action-block">
+		<div class="action-block pb-4">
 			<div class="action-part" v-for="(item,index) in actionSecondRowData" :key="index">
-				<div :class="[index==1?'border-r-2 border-l-2 px-2 action-border':'',index==0?'ml-2':'',index==2?'mr-2':'']">
-					<help-actions :id="item.id" :title="item.title" :description="item.description"/>
+				<div :class="[index==1?'border-r border-l px-2 action-border':'',index==0?'ml-4':'',index==2?'mr-4':'']">
+					<help-actions :id="item.id" :title="item.title" :description="item.description" :icon="item.icon"/>
 				</div>
+			</div>
+		</div>
+		<div class="justify-end flex items-end  w-full mb-4">
+			<div class="action-button">
+				Contact Us
 			</div>
 		</div>
 	</div>
@@ -37,62 +46,68 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {fas} from '@fortawesome/pro-solid-svg-icons'
 import {ref} from 'vue'
 import HelpActions from './help-actions.vue'
-
+let search=ref('search');
 const actionFirstRowData=[       //first row data
 	{
 		id:1,
 		title:"Getting Started",
 		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-		icon:['fas', 'fa-message-bot']
+		icon:['far', 'fa-person-running']
 	},
 	{	id:2,
 		title:"Profile Preferences",
 		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-		icon:['fas', 'fa-message-bot']
+		icon:['fas', 'fa-circle-user']
 	},
 	{	id:3,
 		title:"Username & Password",
 		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-		icon:['fas', 'fa-message-bot']
+		icon:['fas', 'fa-unlock-keyhole']
 	},
 ];
 const actionSecondRowData=[        //second row data
 	{	id:1,
-		title:"Getting Started",
+		title:"Calendar",
 		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-		icon:['fas', 'fa-message-bot']
+		icon:['fas', 'fa-calendar-days']
 	},
 	{	id:2,
-		title:"Profile Preferences",
+		title:"Billing & Subscription",
 		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-		icon:['fas', 'fa-message-bot']
+		icon:['fas', 'fa-dollar-sign']
 	},
 	{	id:3,
-		title:"Username & Password",
+		title:"Tips & Tricks",
 		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-		icon:['fas', 'fa-message-bot']
+		icon:['fas', 'fa-lightbulb']
 	},
 ]
 
 library.add(far,fas)
-
+const replacePlaceholder = ()=>{
+	search.value ='';
+}
+const getBackSearch=()=>{
+	search.value='search';
+}
 </script>
 <style scoped>
 .helpbot-container{
 	@apply fixed z-20 rounded-xl border-sky-700 border-2;
         position: relative; 
         padding: 6px;
+		cursor: pointer;
 }
 .action-block{
 	@apply flex flex-row;
-	width: 40rem;
+	width: 32rem;
 	border-color:#0075C9;
 }
 .action-part{
 	@apply inline justify-center items-center m-auto;
 }
 .help-search{
-	@apply rounded-md w-1/2 m-auto hover:text-sm hover:h-5 pl-3 hover:placeholder-opacity-0;
+	@apply rounded-md w-1/2 m-auto text-base  hover:text-sm hover:h-5 pl-3 hover:placeholder-opacity-0 mt-2;
 	background-color: #0075C9;
 }
 .action-border{
@@ -100,5 +115,19 @@ library.add(far,fas)
 }
 .help-search:hover{
 	placeholder-opacity: 0;
+	cursor: pointer;
+}
+.action-icon{
+    @apply w-6 h-6 -lg:w-5 -lg:h-5 border rounded-full p-3 bg-white;
+    color: #0075C9;
+}
+.action-button{
+	@apply text-sm text-center px-2 py-1 rounded-lg mr-4;
+	background-color: #0075C9;
+	border: 1px solid #0075C9;
+}
+.action-button:hover{
+	cursor: pointer;
+	@apply text-white bg-black border-white border;
 }
 </style>
