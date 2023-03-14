@@ -1,29 +1,25 @@
 <template>
-  <ul
-    class="flex gap-4 bg-[#18203A] py-2 px-6 w-fit rounded-md border-2 border-[#073A76]"
-  >
-    <li
-      :class="{
-        'selected-button': currentValue === btn,
-      }"
-      class="px-4 rounded-md border-2 border-transparent font-bold"
-      v-for="btn in choices"
-      :key="btn"
+    <div
+        class="inline-block bg-[#18203A] py-1 px-2 border-2 border-[#073A76] rounded-xl mx-auto"
     >
-      <button
-        type="button"
-        class="capitalize text-sm"
-        @click="
-          {
-            currentValue = btn;
-            if (emitEvents) $emit(btn);
-          }
-        "
-      >
-        {{ String(btn).replaceAll("_", " ") }}
-      </button>
-    </li>
-  </ul>
+        <button
+            type="button"
+            class="capitalize px-4 rounded-lg border-2 border-transparent font-light text-[0.8rem]"
+            :class="{
+                'selected-button': currentValue === btn,
+            }"
+            v-for="btn in choices"
+            :key="btn"
+            @click="
+                {
+                    currentValue = btn;
+                    if (emitEvents) $emit(btn);
+                }
+            "
+        >
+            {{ String(btn).replaceAll("_", " ") }}
+        </button>
+    </div>
 </template>
 
 <script setup>
@@ -41,18 +37,18 @@
  */
 
 const props = defineProps({
-  choices: {
-    type: Array,
-    default: [],
-  },
-  modelValue: {
-    type: String,
-    default: "",
-  },
-  emitEvents: {
-    type: Boolean,
-    default: false,
-  },
+    choices: {
+        type: Array,
+        default: [],
+    },
+    modelValue: {
+        type: String,
+        default: "",
+    },
+    emitEvents: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 /** Component State */
@@ -64,6 +60,6 @@ watch(currentValue, (nv, ov) => emit("update:modelValue", nv));
 
 <style scoped>
 .selected-button {
-  @apply bg-[#0074C8] border-2 border-[#073A76];
+    @apply bg-[#0074C8] border-2 border-[#073A76] !rounded-lg;
 }
 </style>

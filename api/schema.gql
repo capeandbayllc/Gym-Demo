@@ -53,11 +53,13 @@ type CalendarEvent {
   title: String!
   description: String
   full_day_event: Int
-  event_type_id: ID
+  event_type_id: String
+  eventTypeId: String
   type: CalendarEventType
   location: Location
   owner: User!
-  owner_id: ID
+  owner_id: String
+  ownerId: String
   start: DateTime
   end: DateTime
   created_at: DateTime
@@ -67,7 +69,8 @@ type CalendarEvent {
   lead_attendees: [EventAttendee]
   member_attendees: [EventAttendee]
   attendees: [EventAttendee]
-  location_id: ID
+  location_id: String
+  locationId: String
   call_task: Int
   im_attending: Boolean
   my_reminder: Reminder
@@ -1628,6 +1631,7 @@ type User {
   updated_at: DateTime!
   start_date: DateTime
   end_date: DateTime
+  user_type: String
   termination_date: DateTime
   manager: String
   zip: String

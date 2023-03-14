@@ -112,10 +112,20 @@
                     </div>
                 </div>
                 <GrCalendar
-                    :events="activeEventsList"
+                    :events="getFormattedEvents"
                     @clickEventNode="handleCalendarEvent"
                     @clickEmptyNode="handleAddNew"
+                    v-if="
+                        (getFormattedEvents.length || events.length) &&
+                        showCalendar
+                    "
                 />
+                <div
+                    class="h-[76vh] flex flex-col justify-center"
+                    v-if="events.length === 0"
+                >
+                    <spinner />
+                </div>
             </section>
         </div>
     </div>
@@ -167,12 +177,14 @@ const filterOptions = ref({
     },
 });
 
+const showCalendar = ref(true);
 const eventTypes = ref([]);
 const employees = ref([]);
 const members = ref([]);
 const leads = ref([]);
 const locations = ref([]);
 const event_types = ref([]);
+const events = ref([]);
 
 const resetState = () => {
     eventDetailsVisibibility.value = false;
@@ -212,10 +224,18 @@ const query = gql`
                 type
             }
         }
-        locations {
+        locations(page: 0) {
             data {
                 id
                 name
+            }
+        }
+        employee {
+            data {
+                id
+                first_name
+                last_name
+                email
             }
         }
         users {
@@ -248,31 +268,28 @@ const query = gql`
         calendarEvents {
             id
             title
-            owner_id
+            ownerId
             start
             end
             title
             description
             full_day_event
-            event_type_id
-            user_attendees {
+            eventTypeId
+            locationId
+            location {
                 id
-                entity_data {
-                    name
-                    profile_photo_url
-                    email
-                }
+                name
             }
-            lead_attendees {
+            type {
                 id
-                entity_data {
-                    name
-                    profile_photo_url
-                    email
-                }
+                name
+                description
+                color
+                type
             }
-            member_attendees {
+            attendees {
                 id
+                entity_type
                 entity_data {
                     name
                     profile_photo_url
@@ -347,6 +364,8 @@ watch(result, (ov, nv) => {
 let timeout = null;
 
 const selectOption = (filter_id, option) => {
+    showCalendar.value = false;
+
     if (filterOptions.value[filter_id].selected.includes(option)) {
         filterOptions.value[filter_id].selected.splice(
             filterOptions.value[filter_id].selected.indexOf(option),
@@ -355,6 +374,10 @@ const selectOption = (filter_id, option) => {
     } else {
         filterOptions.value[filter_id].selected.push(option);
     }
+
+    setTimeout(() => {
+        showCalendar.value = true;
+    }, 100);
 };
 
 const toggleFilterOption = (filter_id) => {
@@ -362,19 +385,63 @@ const toggleFilterOption = (filter_id) => {
         !filterOptions.value[filter_id].isOpen;
 };
 
+const getFormattedEvents = computed(() => {
+    const colors = ["#E4463C", "#4E3474", "#004570", "#5D5D5D"];
+    let formattedEvents = [];
+    for (let event of getFilteredEvents.value) {
+        formattedEvents.push({
+            title: event.title,
+            start: event.start,
+            end: event.end,
+            backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+            extendedProps: {
+                users: [...event.attendees],
+                description: event.description,
+            },
+        });
+    }
+
+    return formattedEvents;
+});
+
+const getFilteredEvents = computed(() => {
+    if (
+        filterOptions.value.employees.selected.length === 0 &&
+        filterOptions.value.locations.selected.length === 0 &&
+        filterOptions.value.event_types.selected.length === 0
+    ) {
+        return events.value;
+    }
+
+    let filteredEvents = [];
+
+    for (let event of events.value) {
+        if (
+            filterOptions.value.employees.selected.includes(
+                event.eventTypeId
+            ) ||
+            filterOptions.value.locations.selected.includes(event.ownerId) ||
+            filterOptions.value.event_types.selected.includes(event.locationId)
+        ) {
+            filteredEvents.push(event);
+        }
+    }
+
+    return filteredEvents;
+});
+
 onMounted(async () => {
     if (!timeout) {
         timeout = setTimeout(() => {
             console.log("GQL Result:", result.value);
             eventTypes.value = result.value.calendarEvents.data;
-            employees.value = result.value.users.data.filter(
-                (user) => user.user_type === "employee"
-            );
+            employees.value = result.value.employee.data;
             members.value = result.value.members.data;
             leads.value = result.value.leads.data;
             locations.value = result.value.locations.data;
             event_types.value = result.value.calendarEventTypes.data;
-        }, 3000);
+            events.value = result.value.calendarEvents;
+        }, 6000);
     }
     //   await nextTick();
     //   window.dispatchEvent(new Event("resize"));

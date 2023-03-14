@@ -18,10 +18,10 @@
             </div>
         </div>
         <div
-            class="flex flex-col gap-1 scrollbar-hide overflow-y-scroll h-auto max-h-[6.5rem] calendar-style-transition"
+            class="flex flex-col gap-1 scrollbar-hide h-auto max-h-[6.5rem] calendar-style-transition"
             :class="{
-                'h-[6.5rem] opacity-100 mt-2': isOpen,
-                'h-[0rem] opacity-0 mt-0': !isOpen,
+                'h-[10vh] opacity-100 mt-2 overflow-y-scroll': isOpen,
+                '!h-[0vh] opacity-0 mt-0 overflow-hidden': !isOpen,
             }"
         >
             <div
@@ -61,29 +61,20 @@ import {
 const props = defineProps({
     title: {
         type: String,
-        default: "Some Title",
     },
     options: {
         type: Array,
-        default: [
-            { id: "1", name: "Name 1" },
-            { id: "2", name: "Name 2" },
-            { id: "3", name: "Name 3" },
-            { id: "4", name: "Name 4" },
-            { id: "5", name: "Name 5" },
-        ],
     },
     selected: {
         type: Array,
-        default: ["1", "2", "5"],
     },
-    selectOption: Function,
-    toggleFilterOption: Function,
+    selectOption: { type: Function },
+    toggleFilterOption: { type: Function },
     isOpen: {
         type: Boolean,
         default: false,
     },
-    filter_id: String,
+    filter_id: { type: String },
 });
 </script>
 
