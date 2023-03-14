@@ -1,7 +1,13 @@
 <template>
     <div class="page-mass-com-container">
         <div class="page-content">
-            <h2>Overall/Trends</h2>
+            <div class="flex flex-1">
+                <h2 class="flex flex-auto">Overall/Trends</h2>
+                <div class="flex gap-2 items-end pb-2">
+                    <Button secondary size="xs">Drip Campaigns</Button>
+                    <Button outline size="xs" @click.stop="$router.push('/mass-com/scheduled')">Scheduled Campaigns</Button>
+                </div>
+            </div>
             <div class="overall-trends">
                 <sales-show-ratio class="min-h-96 col-span-2 h-full" />
                 <sales-draft-related class="min-h-96 col-span-2 h-full" />
