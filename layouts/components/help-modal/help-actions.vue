@@ -3,7 +3,7 @@
         <div class="flex m-auto w-full pt-4 items-center justify-center">
             <font-awesome-icon class=" action-icon  " :icon="icon" />
         </div>
-        <div class="text-sm text-center py-2">
+        <div class="title-text">
             {{title}}
         </div>
         <div class="text-extra-small">
@@ -29,9 +29,14 @@ const props = defineProps(
     )
 </script>
 <style scoped>
+.title-text{
+    @apply text-sm text-center py-2 px-5 leading-tight;
+    height: 3rem;
+}
 .text-extra-small{
-    @apply h-20 px-6 text-center;
+    @apply px-6 text-center mb-2;
     font-size: 0.438rem;
+    height: 3rem;
 
 }
 .action-icon{

@@ -21,14 +21,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="action-block pb-4">
+		<div class="action-block ">
 			<div class="action-part" v-for="(item,index) in actionSecondRowData" :key="index">
 				<div :class="[index==1?'border-r border-l px-2 action-border':'',index==0?'ml-4':'',index==2?'mr-4':'']">
 					<help-actions :id="item.id" :title="item.title" :description="item.description" :icon="item.icon"/>
 				</div>
 			</div>
 		</div>
-		<div class="justify-end flex items-end  w-full mb-4">
+		<div class="justify-end flex items-end  w-full my-4">
 			<div class="action-button">
 				Contact Us
 			</div>
@@ -107,7 +107,7 @@ const getBackSearch=()=>{
 	@apply inline justify-center items-center m-auto;
 }
 .help-search{
-	@apply rounded-md w-1/2 m-auto text-base  hover:text-sm hover:h-5 pl-3 hover:placeholder-opacity-0 mt-2;
+	@apply rounded-md w-1/2 m-auto text-base pl-3 hover:placeholder-opacity-0 mt-2;
 	background-color: #0075C9;
 }
 .action-border{
