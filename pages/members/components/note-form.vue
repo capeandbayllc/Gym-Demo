@@ -6,9 +6,9 @@
         </div>
         <div class=" md:flex justify-between  m-2 justify-items-center space-x-14">
             <div class="flex justify-between mb-5 md:flex text-sm  space-x-3 items-center">
-                <button class="border-2 border-white p-1 px-2 rounded-md"> Creatre on Alert</button>
+                <button class="border-2 border-white p-1 px-2 rounded-md"> Create an alert</button>
                 <div>
-                    make Complete
+                    Mark as complete
                     <input type="checkbox" class="toggle toggle-info align-middle mr-2" /> 
                 </div>
             </div>

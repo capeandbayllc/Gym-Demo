@@ -18,7 +18,7 @@
                <Folder />
               
             </div>
-            
+
 
             <div class="mt-10 mb-5 md:w-80 mx-5 items-center">
                 
@@ -40,7 +40,7 @@
                     />
                 </div>
             </div>
-            <div class="content px-4">
+            <div class="h-[680px] bg-black px-4">
                 <NoteForm  @saveNote="addRandomMembersNote"   @deleteNote="$emit('deleteNote')"/>
             </div>
 
