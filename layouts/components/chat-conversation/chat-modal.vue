@@ -139,27 +139,43 @@
           </div>
         </div>
         <div class="mx-2 max-h-5/6 pb-2 mb-3 overflow-x-visible overflow-y-auto no-scrollbar overscroll-true">
-          <div class="py-2" v-for="(item, index) in onlineMembers" :key="index">
-            <img
-                id="chat-head"
-                :class="['sticky w-12 h-12 -lg:w-12 -lg:h-12 border-blue-700 border-2 rounded-full z-20 opacity-40']"
-                :src="item.avatar" alt=""
-                @click="viewChat = item"
-            />
-            <div class="relative">
-              <div class="chat-names absolute bg-blue-800 whitespace-nowrap right-10 bottom-3 z-10 w-100 invisible">
-                {{ item.name }}
-              </div>
+          <div
+              class="py-2 floating-tooltip"
+              v-for="(item, index) in onlineMembers"
+              :key="index"
+              :data-name="item.name"
+              @mouseover="showName"
+              @mouseleave="hideName"
+          >
+            <div class="relative chat-imag-container">
+              <img
+                  id="chat-head"
+                  :class="['sticky w-12 h-12 -lg:w-12 -lg:h-12 border-blue-700 border-2 rounded-full z-20 opacity-40']"
+                  :src="item.avatar" alt=""
+                  @click="viewChat = item"
+              />
             </div>
           </div>
-          <hr v-if="offlineMembers.length > 0" class="mx-1 my-2">
-          <div class="py-2" v-for="(item, index) in offlineMembers" :key="index">
-            <img
-                id="chat-head"
-                :class="['sticky w-12 h-12 -lg:w-12 -lg:h-12 border-blue-700 border-2 rounded-full opacity-40 z-10']"
-                :src="item.avatar" alt=""
-                @click="chatItems = item"
-            />
+          <hr v-if="offlineMembers.length > 0 && onlineMembers.length > 0" class="mx-1 my-2">
+          <div
+              class="py-2"
+              v-for="(item, index) in offlineMembers"
+              :key="index"
+              :data-name="item.name"
+              @mouseover="showName"
+              @mouseleave="hideName"
+          >
+            <div class="relative chat-imag-container">
+              <img
+                  id="chat-head"
+                  :class="['sticky w-12 h-12 -lg:w-12 -lg:h-12 border-blue-700 border-2 rounded-full opacity-40 z-10']"
+                  :src="item.avatar" alt=""
+                  @click="chatItems = item"
+              />
+            </div>
+            <div class="chat-names invisible">
+              {{ item.name }}
+            </div>
             <div class="relative">
               <div
                   v-if="index === 2"
@@ -293,17 +309,13 @@
   width: 2.2em;
 }
 
+.chat-names {
+  @apply text-sm rounded px-3 py-1 fixed bg-blue-800 whitespace-nowrap z-10
+}
+
 #chat-head:hover {
   cursor: pointer;
   opacity: 1;
-
-.relative {
-
-.chat-names {
-  visibility: visible;
-}
-
-}
 }
 .hover-icon:hover {
   cursor: pointer;
@@ -370,10 +382,10 @@ const chatItems = [
 ];
 
 const user = useState('auth');
-
+const floatingTooltip = inject('floating-modal')
 const status = ['online', 'offline'];
 
-request(member.query.browse, {first: 10}).then(({data}) => {
+request(member.query.browse, {first: 50}).then(({data}) => {
   data.data.members.data.forEach((member) => {
     members.value.push({
       name: `${member.first_name} ${member.last_name}`,
@@ -382,7 +394,7 @@ request(member.query.browse, {first: 10}).then(({data}) => {
       active: getRandomInt(50) > 15,
       status: status[getRandomInt(status.length - 1)],
       conversationAt: getRandomInt(12, 1) + ':' + getRandomInt(59, 1)
-    },)
+    })
   });
 });
 
@@ -399,6 +411,19 @@ const toggleDropdown = () => {
 }
 const toggleChatOpen = () => {
   viewChat.value = !viewChat.value;
+}
+
+
+function showName(e) {
+  const imageContainer = e.currentTarget.querySelector('.chat-imag-container').getBoundingClientRect();
+  floatingTooltip(e.currentTarget.getAttribute('data-name'), {
+    left: (container) => (imageContainer.left - container.offsetWidth - 2) + 'px',
+    top: (imageContainer.top + 10) + 'px',
+  });
+}
+
+function hideName(e) {
+  floatingTooltip('');
 }
 
 
