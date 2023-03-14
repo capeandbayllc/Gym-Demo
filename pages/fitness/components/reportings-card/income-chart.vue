@@ -103,9 +103,12 @@ const options ={
     tooltip: {
         enabled: true,
         custom: function({series, seriesIndex, dataPointIndex, w}) {
-            return '<div class="arrow_box">' +
-            '<span>' + series[seriesIndex][dataPointIndex] + '</span>' +
-            '</div>'
+            return (
+                `<div class="arrow_box p-2">
+                    <span style="color: grey;">Earning</span>
+                    <p>$ ${series[seriesIndex][dataPointIndex]}</p>
+                </div>`
+            );
         }
     },
 
