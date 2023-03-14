@@ -46,7 +46,7 @@
 
         <!-- main content wrapper  -->
         <div
-            class="border border-secondary bg-[#202020]/[0.9] rounded-2xl p-7 max-w-none flex gap-4"
+            class="border border-secondary bg-[#202020]/[0.9] rounded-3xl p-7 max-w-none flex gap-4"
         >
             <!-- left sidebar -->
             <aside class="flex flex-col gap-5 font-light !text-[0.8rem]">
@@ -89,28 +89,24 @@
                 />
             </aside>
 
-            <section class="w-full">
+            <section class="w-full !font-light !tracking-wider">
                 <!-- main section heading area -->
                 <div class="flex justify-between items-center w-full">
-                    <h1 class="font-light text-3xl">January 2088</h1>
+                    <h1 class="font-light text-3xl w-full">January 2088</h1>
                     <!-- filters/page actions -->
-                    <div class="flex gap-2">
+                    <div class="flex gap-2 w-full justify-end">
                         <button
                             @click="handleAddNew"
-                            class="bg-secondary py-1 px-2 rounded-md border-2 border-transparent flex items-center gap-2 font-light text-[0.8rem]"
+                            class="hover:bg-secondary px-5 py-1.5 rounded-xl border-2 border-secondary flex items-center gap-2 font-light text-[0.8rem] calendar-style-transition"
                         >
-                            <span> Add New </span>
+                            <span class="!font-light !tracking-wider"
+                                >Add New
+                            </span>
                             <PlusIcon class="w-4 fill-white" />
-                        </button>
-                        <button
-                            class="bg-neutral py-1 px-2 rounded-md border-secondary border-2 flex items-center gap-2 font-light text-[0.8rem]"
-                        >
-                            <span> All Bookings </span>
-                            <BiCaretIcon class="w-4 p-1 fill-white" />
                         </button>
                         <input
                             placeholder="Search"
-                            class="text-black py-1 p-2 rounded-md border-2 border-transparent text-[0.8rem]"
+                            class="search-input"
                             type="text"
                         />
                     </div>
@@ -386,3 +382,13 @@ onMounted(async () => {
 
 onUnmounted(() => clearTimeout(timeout));
 </script>
+
+<style scoped>
+.search-input {
+    @apply !text-white py-1 p-2 rounded-xl border-2 border-transparent text-[0.8rem] !font-light !tracking-wider w-[50%] bg-secondary/[0.4] placeholder:!text-white/[0.8] calendar-style-transition;
+}
+
+.calendar-style-transition {
+    @apply transition-all duration-300 ease-linear;
+}
+</style>

@@ -1,15 +1,15 @@
 <template>
     <div class="relative">
-        <div class="absolute w-[18%] h-[34px] top-[16px] left-0">
+        <div class="absolute w-[18%] h-[50px] top-[10px] left-0">
             <div
-                class="relative flex flex-row gap-2 h-[34px] hover:bg-secondary/[0.3] rounded-lg px-2 transition-all duration-200 cursor-pointer"
+                class="relative flex flex-row gap-2 h-[40px] hover:bg-secondary/[0.3] rounded-lg px-2 transition-all duration-200 cursor-pointer"
             >
                 <span
-                    class="h-[24px] w-[24px] my-auto bg-white rounded-full overflow-hidden"
+                    class="h-[34px] w-[34px] my-auto bg-white rounded-xl overflow-hidden border-2 border-secondary"
                 >
-                    <UserIcon class="w-[24px] h-[24px]" />
+                    <UserIcon class="w-[30px] h-[30px]" />
                 </span>
-                <span class="my-auto line-clamp-1 text-[0.7rem]">
+                <span class="my-auto line-clamp-1 text-[0.8rem]">
                     John Doe
                 </span>
                 <span class="my-auto rotate-90 ml-auto">
@@ -17,9 +17,17 @@
                 </span>
             </div>
         </div>
-        <div
-            class="absolute bg-red-400 w-[15%] h-[34px] top-[16px] right-0"
-        ></div>
+        <div class="absolute w-[18%] h-[50px] top-[10px] right-0">
+            <div
+                class="relative flex flex-row gap-2 h-[40px] hover:bg-secondary/[0.3] rounded-lg px-2 transition-all duration-200 cursor-pointer justify-end"
+            >
+                <span
+                    class="h-[34px] w-[34px] my-auto bg-white rounded-xl overflow-hidden border-2 border-secondary"
+                >
+                    <UserIcon class="w-[30px] h-[30px]" />
+                </span>
+            </div>
+        </div>
         <FullCalendar :options="calendarOptions" ref="calendar">
             <template v-slot:eventContent="arg">
                 <CalendarEvent :arg="arg" />
@@ -230,7 +238,7 @@ onMounted(async () => {
     background-color: transparent !important;
 }
 .fc-button {
-    @apply !bg-transparent !border-0 !rounded-md !py-[2px] !capitalize transition-all duration-150 ease-linear;
+    @apply !bg-transparent !border-0 !rounded-lg !py-[2px] !capitalize transition-all duration-150 ease-linear;
 }
 /* fc-dayGridMonth-button fc-button fc-button-primary */
 .fc-button.fc-button-active {

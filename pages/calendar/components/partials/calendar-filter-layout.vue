@@ -1,9 +1,9 @@
 <template>
     <div
-        class="flex flex-col p-3 border-2 border-secondary rounded-xl bg-neutral"
+        class="flex flex-col p-3 border-2 border-secondary rounded-xl bg-neutral font-light"
     >
         <div class="flex flex-row justify-between font-light">
-            <h3 class="text-[1rem] my-auto">
+            <h3 class="text-[0.95rem] my-auto font-light tracking-wide">
                 {{ title }} ({{ options.length }})
             </h3>
             <div class="flex flex-row gap-2">
@@ -12,10 +12,7 @@
                 </button>
                 <ArrowIcon
                     class="fill-white w-[10px] h-[10px] my-auto calendar-style-transition cursor-pointer"
-                    :class="{
-                        '-rotate-0': isOpen,
-                        '-rotate-270': !isOpen,
-                    }"
+                    :direction="isOpen ? 'up' : 'down'"
                     @click="toggleFilterOption(filter_id)"
                 />
             </div>
