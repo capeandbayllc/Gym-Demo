@@ -7,8 +7,16 @@
 			</div>
 		</div>
 	</div> -->
-  <div>
+  <div
+    class="border-4 border-white rounded-3xl z-10 p-8 outline-[1rem] outline-secondary outline relative bg-black"
+  >
     <pulse-summary />
+    <div class="">
+      <img src="/pulse-logo.svg" alt="" class="m-auto" />
+    </div>
+    <div
+      class="absolute h-full w-full bg-gradient-to-t from-secondary/10 to-secondary/50 top-0 left-0 rounded-3xl -z-[1]"
+    ></div>
   </div>
 </template>
 <style scoped>

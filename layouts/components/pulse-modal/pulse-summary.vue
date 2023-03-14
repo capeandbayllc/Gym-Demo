@@ -14,11 +14,17 @@
 			<pulse-check-history />
 		</div> -->
     <!-- scrolling side container (no container title, component titles) -->
-    <section class="max-h-[50vh] h-full flex">
-      <div class="overflow-y-scroll">
-        <ul>
+    <section
+      class="max-h-[50vh] h-full flex gap-4 justify-center pb-8 px-24 overscroll-contain"
+    >
+      <div class="overflow-y-scroll w-full pr-12">
+        <ul class="w-full">
           <li>
-            <h4>Club Membership Details</h4>
+            <PulseItemCard title="Club Membership Details">
+              <template #card-content>
+                <ItemGridList />
+              </template>
+            </PulseItemCard>
           </li>
           <li>
             <h4>Membership Draft Breakdown</h4>
@@ -43,13 +49,37 @@
           </li>
         </ul>
       </div>
-      <div>
+      <div class="w-full">
         <h4>Club History & details</h4>
       </div>
     </section>
   </div>
 </template>
+
+<script setup>
+import PulseMemberSummary from "./pulse-member-summary.vue";
+import PulseClubEvents from "./pulse-club-events.vue";
+import PulseCheckHistory from "./pulse-check-history.vue";
+import PulseItemCard from "./partials/pulse-item-card.vue";
+import ItemGridList from "./partials/item-grid-list.vue";
+</script>
+
 <style scoped>
+::-webkit-scrollbar {
+  @apply w-2 py-4;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-400/10;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-secondary outline-secondary outline-4 outline;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-secondary/60 outline-secondary/60;
+}
 /* .pulse-summary {
   @apply flex flex-col xl:flex-row xl:space-x-5 -xl:space-y-5 overflow-y-auto max-h-[100vw];
 }
@@ -60,8 +90,3 @@ h4 {
   @apply text-xl font-semibold;
 }
 </style>
-<script setup>
-import PulseMemberSummary from "./pulse-member-summary.vue";
-import PulseClubEvents from "./pulse-club-events.vue";
-import PulseCheckHistory from "./pulse-check-history.vue";
-</script>
