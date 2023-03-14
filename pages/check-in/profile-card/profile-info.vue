@@ -6,9 +6,9 @@
       <div class="alert-badge" v-if="user.notifications.length > 0">
         {{ user.notifications.length }}
       </div>
-      <img :src="mock.img" />
+      <img :src="user.profile_photo_path" alt="profile image" />
     </div>
-    <div class="profile-name">{{ mock.name }}</div>
+    <div class="profile-name">{{ user.first_name }} {{ user.last_name }}</div>
     <div class="pb-5">
       Member since {{ mock.joined }}
       <br />
@@ -110,9 +110,9 @@
 .profile-info-container {
   @apply flex flex-col flex-1 items-center text-lg text-center;
   .profile-avatar {
-    @apply relative rounded-[2.5rem] border-4 p-1.5;
+    @apply relative rounded-full border-4 p-1.5 overflow-hidden;
     img {
-      @apply w-36 h-36;
+      @apply w-36 h-36 rounded-full;
     }
     .alert-badge {
       @apply absolute flex items-center justify-center w-12 h-12 rounded-full bg-error text-3xl font-semibold;
@@ -120,49 +120,54 @@
       top: -0.375rem;
     }
   }
-  .profile-name {
-    @apply text-3xl font-semibold pt-4 pb-2;
+  .alert-badge {
+    @apply absolute flex items-center justify-center w-12 h-12 rounded-full bg-error text-3xl font-semibold;
+    left: -0.5rem;
+    top: -0.375rem;
   }
-  .profile-status {
-    @apply flex flex-row space-x-4;
-    .profile-membership-btn {
-      @apply text-xl w-10 h-10 text-center justify-center font-bold text-white;
-    }
-    > div > button {
-      @apply relative;
+}
+.profile-name {
+  @apply text-3xl font-semibold pt-4 pb-2;
+}
+.profile-status {
+  @apply flex flex-row space-x-4;
+  .profile-membership-btn {
+    @apply text-xl w-10 h-10 text-center justify-center font-bold text-white;
+  }
+  > div > button {
+    @apply relative;
+  }
+}
+.femily-member {
+  @apply relative bg-secondary flex items-center justify-center;
+  &:hover {
+    font-size: 0;
+    @apply px-4;
+    .edit-icon {
+      @apply visible;
     }
   }
-  .femily-member {
-    @apply relative bg-secondary flex items-center justify-center;
-    &:hover {
-      font-size: 0;
-      @apply px-4;
-      .edit-icon {
-        @apply visible;
-      }
-    }
+}
+.edit-icon {
+  @apply absolute h-5 w-5 invisible mx-auto left-0 right-0;
+  svg {
+    @apply h-full w-full;
   }
-  .edit-icon {
-    @apply absolute h-5 w-5 invisible mx-auto left-0 right-0;
-    svg {
-      @apply h-full w-full;
-    }
-  }
+}
 
-  /* .profile-contact-methods {
+/* .profile-contact-methods {
     @apply flex flex-row space-x-7 px-4 py-2 mb-4 border-2 border-secondary rounded-md items-center hover:bg-secondary;
     button {
       @apply text-base-content text-base xl:text-lg font-semibold;
     }
   } */
-  .guest-pass {
-    @apply border border-secondary rounded p-5;
-  }
-  .profile-actions {
-    @apply flex flex-row space-x-12 pb-5 text-center;
-    .btn {
-      @apply text-base-content text-sm font-semibold;
-    }
+.guest-pass {
+  @apply border border-secondary rounded p-5;
+}
+.profile-actions {
+  @apply flex flex-row space-x-12 pb-5 text-center;
+  .btn {
+    @apply text-base-content text-sm font-semibold;
   }
 }
 </style>
