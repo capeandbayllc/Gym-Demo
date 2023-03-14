@@ -10,18 +10,12 @@
     </div>
     <div class="profile-name">{{ user.first_name }} {{ user.last_name }}</div>
     <div class="pb-5">
-      Member since {{ mock.joined }}
+      Member since 2022
       <br />
-      Club ID# {{ mock.club_id }}
+      Club ID# 123456789
     </div>
     <div class="flex items-center justify-between w-full mb-4">
       <div class="profile-status">
-        <!-- <membership-btn
-        editIconOnHover
-        :membership="mock.membership"
-        class="profile-membership-btn"
-        @click="$emit('toggle-detail', true)"
-      /> -->
         <button
           class="bg-amber-500 text-xl w-10 h-10 text-center justify-center font-bold rounded-xl px-1.5 relative flex items-center hover:text-[0px] group/p-btn"
           @click="$emit('toggle-detail', true)"
@@ -155,12 +149,6 @@
   }
 }
 
-/* .profile-contact-methods {
-    @apply flex flex-row space-x-7 px-4 py-2 mb-4 border-2 border-secondary rounded-md items-center hover:bg-secondary;
-    button {
-      @apply text-base-content text-base xl:text-lg font-semibold;
-    }
-  } */
 .guest-pass {
   @apply border border-secondary rounded p-5;
 }
@@ -175,6 +163,8 @@
 import MembershipBtn from "~~/components/buttons/membership-btn.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import OfferUpBtn from "~~/components/buttons/offer-up-btn.vue";
+import gql from "graphql-tag";
+import { useQuery } from "@vue/apollo-composable";
 import {
   CallIcon,
   EmailIcon,
@@ -182,15 +172,6 @@ import {
   EditIcon,
 } from "~~/components/icons";
 const user = useState("auth");
-const mock = {
-  img: "/checkin/kevin.png",
-  name: "Kevin Buchanan",
-  joined: 2020,
-  club_id: 1234567890,
-  membership: "p",
-  addOns: "pt",
-  notifications: 3,
-};
 
 const guests = [
   {
