@@ -106,7 +106,7 @@ const options ={
             return (
                 `<div class="arrow_box p-2">
                     <span style="color: grey;">Earning</span>
-                    <p>$ ${series[seriesIndex][dataPointIndex]}</p>
+                    <p>$${series[seriesIndex][dataPointIndex]}</p>
                 </div>`
             );
         }
