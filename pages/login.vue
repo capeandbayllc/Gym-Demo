@@ -1,10 +1,9 @@
 <template>
-  <div class="py-5 h-screen w-screen" :class="{ 'bg-black': transitionScreen == 3 }">
-
+  <div class="py-5 h-screen w-full bg-gradient" :class="{ 'bg-black-animated': transitionScreen == 3 }">
 
     <div id="logo" class="logo" :class="{
       'logo-screen2': transitionScreen == 2,
-      'logo-screen3': transitionScreen == 3,
+      'logo-screen3': transitionScreen == 3
     }">
       <svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none" xmlns:xlink="http://www.w3.org/1999/xlink"
         width="full" height="48" viewBox="0 0 482 48">
@@ -89,40 +88,45 @@
     </Transition>
 
     <Transition>
-      <div v-if="transitionScreen == 2" class="bars">
-        <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="255" viewBox="0 0 299 279">
-          <rect id="bg" width="299" height="55" rx="22" fill="#0075C9" />
+      <div class="bars" v-if="transitionScreen == 2">
+        <div class="bar bar-1"></div>
+        <div class="bar bar-2"></div>
+        <div class="bar bar-3"></div>
+      </div>
+    </Transition>
+    
+    <Transition>
+      <div v-if="transitionScreen == 3" class="bars-image">
+
+        <div class="logo_mask">
+          <div class="video_holder">
+            <video loop muted autoplay>
+              <source src="/video-background.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <!-- <svg class="mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:ev="http://www.w3.org/2001/xml-events" version="1.1" width="299px" height="auto" viewBox="0 0 299 279">
+          
+          <rect id="bg" y="0" width="299" height="55" rx="22" fill="#fff" />
+          <rect id="bg" y="112" width="299" height="55" rx="22" fill="#fff" />
+          <rect id="bg" y="225" width="299" height="55" rx="22" fill="#fff" />
+
+        </svg> -->
+
+
+        <!-- <svg class="mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:ev="http://www.w3.org/2001/xml-events" version="1.1" baseProfile="full" width="299px" height="auto" viewBox="0 0 299 279">
+          
+          <rect id="bg" y="0" width="299" height="55" rx="22" fill="#0075C9" />
           <rect id="bg" y="112" width="299" height="55" rx="22" fill="#0075C9" />
           <rect id="bg" y="225" width="299" height="55" rx="22" fill="#0075C9" />
-        </svg>
-      </div>
-    </Transition>
-    <Transition>
-      <div v-if="transitionScreen == 3" class="bars">
 
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-          xmlns:ev="http://www.w3.org/2001/xml-events" version="1.1" baseProfile="full" width="auto" height="255" viewBox="0 0 299 279">
-          <title>Text Pattern Fill Example</title>
-          <defs>
-            <pattern id="img1" patternUnits="userSpaceOnUse" width="289" height="324">
-              <image xlink:href="/image_480.png" x="" y="-23" width="289" height="324" />
-            </pattern>
-          </defs>
-          
-          <rect id="bg" y="0" width="299" height="55" rx="22" fill="url(#img1)" />
-          <rect id="bg" y="112" width="299" height="55" rx="22" fill="url(#img1)" />
-          <rect id="bg" y="225" width="299" height="55" rx="22" fill="url(#img1)" />
-
-        </svg>
+        </svg> -->
       </div>
     </Transition>
 
-
-
-
-
-    <!-- {{ transitionScreen }}
-    <button @click="reset">reset</button> -->
   </div>
 </template>
 
@@ -133,7 +137,7 @@
 }
 
 .v-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.3s ease;
 }
 
 .v-leave-to {
@@ -148,12 +152,12 @@ import { KIOSK_EMAIL } from "~/api/data/users/UserFactory";
 import { useLazyQuery, useQuery } from "@vue/apollo-composable";
 import { exit } from "process";
 
-// const reset = () => {
-//   transitionScreen.value = 1
-// };
+const reset = () => {
+  transitionScreen.value = 1
+};
 
-const username = ref('admin@gymrevenue.com');
-const password = ref('Hello123!');
+const username = ref('');
+const password = ref('');
 const remember = ref();
 const passwordInputType = ref("password");
 const error = ref();
@@ -188,7 +192,7 @@ const handleClickLogin = async () => {
       transitionScreen.value = screen;
     }
 
-  }, 700);
+  }, 500);
 };
 
 const authenticate = async (username, password) => {
@@ -207,21 +211,114 @@ const authenticate = async (username, password) => {
 <!-- #C0BDCC -->
 <style scoped lang="postcss">
 .logo {
-  @apply absolute w-72 w-96 left-0 right-0 ml-auto mr-auto;
+  @apply absolute w-96 left-0 right-0 ml-auto mr-auto bottom-[89%] z-10;
+}
+
+@keyframes logo-screen2-animation {
+  from {@apply bottom-[89%] w-96;}
+  to {@apply bottom-[90px] w-[299px];}
 }
 
 .logo-screen2 {
-  @apply bottom-[90px]
+  animation-name: logo-screen2-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
 }
 
+@keyframes logo-screen3-animation {
+  from {@apply bottom-[90px] opacity-100 w-[299px];}
+  to {@apply bottom-[300px] opacity-0 w-96;}
+}
 .logo-screen3 {
-  @apply hidden;
+  animation-name: logo-screen3-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes bg-black-animation {
+  from {background-color:rgba(0, 0, 0, 0);}
+  to {background-color:rgba(0, 0, 0, 1);}
+}
+
+.bg-black-animated{
+  animation-name: bg-black-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
 }
 
 .bars {
-  @apply absolute left-0 right-0 ml-auto mr-auto bottom-[190px];
+  @apply absolute left-0 right-0 ml-auto mr-auto bottom-[190px] w-[299px];
 }
 
+.bar {
+  @apply rounded-[22px] w-full rounded-[22px] h-[55px];
+  background-color: #0075C9;
+}
+
+@keyframes bar-1-animation {
+  from {@apply bottom-[0px] opacity-0;}
+  to {@apply bottom-[115px] opacity-100;}
+}
+
+.bar-1{
+  @apply relative;
+  animation-name: bar-1-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+
+@keyframes bar-2-animation {
+  from {@apply bottom-[0px] opacity-0;}
+  to {@apply bottom-[57px] opacity-100;}
+}
+
+.bar-2{
+  @apply relative;
+  animation-name: bar-2-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes bar-3-animation {
+  from {@apply bottom-[-20px] opacity-0;}
+  to {@apply bottom-[0px] opacity-100;}
+}
+
+.bar-3{
+  @apply relative;
+  animation-name: bar-3-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.bars-image{
+  @apply absolute left-0 right-0 ml-auto mr-auto bottom-[190px] w-[299px];
+}
+.video_holder {
+  width: 370px;
+  height: 280px;
+  overflow: hidden;
+}
+
+.video_holder video {
+  position: relative;
+  top: -80px;
+}
+
+.logo_mask {
+  -webkit-mask-image: url('/humberg-mask.svg');
+  mask-image: url('/humberg-mask.svg');
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: 100%;
+  mask-size: 100%;
+}
 
 input {
   @apply bg-base-300 outline-none;
