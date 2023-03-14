@@ -12,7 +12,7 @@ use="php"
 for var in "$@"
 do
     args=(${var//=/ })
-    if [ "${args[0]}" = "-build" ]; then
+    if [ "${args[0]}" = "-b" ]; then
          canBuild=1
     elif [ "${args[0]}" = "--path" ]; then
         path=${args[1]}
