@@ -36,7 +36,11 @@
             <h4>Membership Calls and Mass Comms</h4>
           </li>
           <li>
-            <h4>Personal Training Details</h4>
+            <PulseItemCard title="Personal Training Details">
+              <template #card-content>
+                <ItemGridList :data="personalTrainingDetailData" />
+              </template>
+            </PulseItemCard>
           </li>
           <li>
             <h4>Personal Training Draft Breakdown</h4>
@@ -62,6 +66,13 @@ import PulseClubEvents from "./pulse-club-events.vue";
 import PulseCheckHistory from "./pulse-check-history.vue";
 import PulseItemCard from "./partials/pulse-item-card.vue";
 import ItemGridList from "./partials/item-grid-list.vue";
+
+const personalTrainingDetailData = ref([
+  { title: "Appointments Completed", amount: 23 },
+  { title: "Sold Amount ($)", amount: 430.25 },
+  { title: "Sold Amount (%)", amount: 85 },
+  { title: "Percentage to Goal", amount: 75 },
+]);
 </script>
 
 <style scoped>
