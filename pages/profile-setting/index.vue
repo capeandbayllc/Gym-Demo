@@ -7,8 +7,8 @@
 <!-- TODO: i) responsive checking for ipad screen -->
 <!-- TODO: ii) Search manager (have some questions here????) (how will it work):-->
 <!-- TODO: iii) Add connection: responsive check-->
-<!-- TODO: iv) Address: later responsive check -->
-<!-- TODO: v) Social media handles-->
+<!-- TODO: iv) Address: later responsive check; there is a gap problem in city state zip -->
+<!-- TODO: v) Social media handles: LATER responsive check-->
 <!-- TODO: vi) Dropdowns: how many max will be there??-->
 <!-- TODO: vii) Calendar: right now, default time, later from DB : What will happen if I click new???-->
 <!-- TODO: viii) Notes-->
@@ -28,34 +28,34 @@
           class="w-60 cursor-pointer"
           @click="uploadPopUp = true"
       />
-<!--      <div-->
-<!--          v-if="uploadPopUp"-->
-<!--          class="bg-white absolute p-4 w-[300px] text-right rounded border border-secondary"-->
-<!--      >-->
-<!--        <label class="mb-4 block">-->
-<!--          <UploadIcon-->
-<!--              class="bg-secondary rounded-full text-center relative z-10 text-secondary block mx-auto cursor-pointer"-->
-<!--          />-->
-<!--          <input-->
-<!--              type="file"-->
-<!--              class="absolute z-0 top-0 left-0 hidden"-->
-<!--          />-->
-<!--        </label>-->
-<!--        <Button-->
-<!--            ghost-->
-<!--            size="sm"-->
-<!--            class="text-black"-->
-<!--            @click="uploadPopUp = false"-->
-<!--        >Cancel-->
-<!--        </Button>-->
-<!--        <Button-->
-<!--            secondary-->
-<!--            size="sm"-->
-<!--            @click="uploadPopUp = false"-->
-<!--        >Save-->
-<!--        </Button-->
-<!--        >-->
-<!--      </div>-->
+<!--      <div
+          v-if="uploadPopUp"
+          class="bg-white absolute p-4 w-[300px] text-right rounded border border-secondary"
+      >
+        <label class="mb-4 block">
+          <UploadIcon
+              class="bg-secondary rounded-full text-center relative z-10 text-secondary block mx-auto cursor-pointer"
+          />
+          <input
+              type="file"
+              class="absolute z-0 top-0 left-0 hidden"
+          />
+        </label>
+        <Button
+            ghost
+            size="sm"
+            class="text-black"
+            @click="uploadPopUp = false"
+        >Cancel
+        </Button>
+        <Button
+            secondary
+            size="sm"
+            @click="uploadPopUp = false"
+        >Save
+        </Button
+        >
+      </div>-->
     </div>
 
     <!--    FIRST SECTION -->
@@ -69,7 +69,7 @@
                 <span>{{ item.label }} </span>
                 <span v-if="item.required" class="text-blue-400">* </span>
               </div>
-              <input :class="item.class"
+              <input :class="item.class" class="mt-3"
                      v-model="form[item.key]"
                      :placeholder="item.placeholder"/>
             </div>
@@ -89,7 +89,7 @@
                   <h6 class="pt-5 mb-3 font-bold text-lg">Add Connection</h6>
                   <div class="-mb-1.5 mt-4">Lead Member to Connect</div>
                   <!-- TODO:  Search key -->
-                  <input class="neutral-input rounded-xl"
+                  <input class="neutral-input rounded-xl mt-3"
                          v-model="form['lead-member']"
                          placeholder="Search by last name or email"/>
                 </div>
@@ -116,6 +116,77 @@
 
         <!--   Address SECTION-->
         <profile-address-setting :formAddress="form.address" @update-form-address="updateAddress" />
+
+        <divider />
+
+        <!--    SOCIAL MEDIA SECTION-->
+        <div class="grid grid-cols-12 gap-4 py-2 mt-4">
+          <div class="col-start-3 col-span-8 border-2 border-secondary rounded-2xl">
+
+            <div class="grid grid-cols-12 p-2 -my-3 mt-3 mb-3">
+              <div class="col-start-2 col-span-10">
+                <h6 class="pt-5 font-normal text-lg">Social Media Handles</h6>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-12 p-2 mb-5 -mt-3">
+              <div class="col-start-2 col-span-10">
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="mb-5 rounded-lg overflow-hidden">
+                    <input class="neutral-input ml-8" v-model="form.social.instagram"/>
+                    <div class="w-9 h-9 mr-3 -mt-9">
+                      <img src="/social-icon/instagram.png" class="w-60 cursor-pointer" alt="instagram">
+                    </div>
+                  </div>
+
+                  <div class="mb-5 rounded-lg overflow-hidden">
+                    <input class="neutral-input ml-8" v-model="form.social.twitter"/>
+                    <div class="w-9 h-9 mr-3 -mt-9">
+                      <img src="/social-icon/twitter.png" class="w-60 cursor-pointer" alt="twitter">
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="mb-5 rounded-lg overflow-hidden">
+                    <input class="neutral-input ml-8" v-model="form.social.tiktok"/>
+                    <div class="w-9 h-9 mr-3 bg-blue-500 -mt-9">
+                      <img src="/social-icon/tiktok.png" class="w-60 cursor-pointer" alt="tiktok">
+                    </div>
+                  </div>
+
+                  <div class="mb-5 rounded-lg overflow-hidden">
+                    <input class="neutral-input ml-8" v-model="form.social.youtube"/>
+                    <div class="w-9 h-9 mr-3 bg-blue-500 -mt-9">
+                      <img src="/social-icon/youtube.png" class="w-60 cursor-pointer" alt="youtube">
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="mb-5 rounded-lg overflow-hidden">
+                    <input class="neutral-input ml-8" v-model="form.social.snapchat"/>
+                    <div class="w-9 h-9 mr-3 bg-blue-500 -mt-9">
+                      <img src="/social-icon/snapchat.png" class="w-60 cursor-pointer" alt="snapchat">
+                    </div>
+                  </div>
+
+                  <div class="mb-5 rounded-lg overflow-hidden">
+                    <input class="neutral-input ml-8" v-model="form.social.facebook"/>
+                    <div class="w-9 h-9 mr-3 bg-blue-500 -mt-9">
+                      <img src="/social-icon/facebook.png" class="w-60 cursor-pointer" alt="Icon">
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
 
         <divider />
 
@@ -218,7 +289,7 @@ export default {
 }
 
 input, select, option {
-  @apply h-9 rounded mt-3 w-full pl-2;
+  @apply h-9 rounded w-full pl-2;
   min-width: 16rem;
 }
 
@@ -273,8 +344,17 @@ const form = ref({
     city: '',
     state: '',
     zipcode: '',
+  },
+  social: {
+    instagram: '',
+    twitter: '',
+    tiktok: '',
+    youtube: '',
+    snapchat: '',
+    facebook: ''
   }
 });
+
 const profileBasic = [
   {
     key: 'first_name',
@@ -413,6 +493,7 @@ const departments = [
     label: 'Group Fitness',
   },
 ];
+
 const uploadPopUp = ref(false);
 
 const updateAddress = formData => {
