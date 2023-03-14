@@ -32,6 +32,7 @@
     <!-- <daisy-modal id="globalSearchModal" ref="globalSearchModal" :show-close-button="false">
 			<global-search-modal />
 		</daisy-modal> -->
+    <div ref="floatingTooltip" class="floating-tooltip"></div>
   </div>
   <div
     class="gradient-bg min-h-screen w-screen flex flex-col items-center justify-center"
@@ -50,6 +51,13 @@
 <style scoped>
 .app-layout {
   @apply w-screen /* overflow-x-hidden */;
+}
+.floating-tooltip {
+  @apply text-sm rounded-full px-3 py-1 bg-blue-800 whitespace-nowrap absolute top-0 left-0;
+  z-index: 10000;
+  &:empty {
+    @apply hidden;
+   }
 }
 .app-content {
   @apply flex flex-row relative;
@@ -82,6 +90,14 @@ import LeaderBoardSlideout from "~/layouts/components/leader-board/leader-board-
 const layoutRef = useLayoutElement();
 
 const showCircularMenu = ref(false);
+const floatingTooltip = ref();
+
+provide('floating-modal', (text, style = {}) => {
+  floatingTooltip.value.textContent = text;
+  for (const [key, value] of Object.entries(style)) {
+    floatingTooltip.value.style[key] = typeof value === 'function' ? value(floatingTooltip.value) : value;
+  }
+});
 
 const toggleCircularMenu = () => {
   showCircularMenu.value = !showCircularMenu.value;
