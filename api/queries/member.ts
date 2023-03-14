@@ -3,8 +3,8 @@ import {DocumentNode} from "graphql/language";
 import {GraphQLObject} from "~/api/queries/GraphQLObject";
 
 const GET_MEMBERS: DocumentNode = gql`
-    query Members($page: Int, $filter: Filter) {
-        members(page: $page, filter: $filter) {
+    query Members($page: Int, $first: Int, $filter: Filter) {
+        members(page: $page, first: $first, filter: $filter) {
             data {
                 id
                 first_name
