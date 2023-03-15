@@ -9,11 +9,11 @@
     </div>
     <li
       class="grid grid-cols-[5rem_1fr_5rem] py-4 items-center"
-      v-for="(row, idx) in data"
+      v-for="(row, idx) in items"
       :key="idx"
     >
       <span
-        :class="`item-${idx % 4}`"
+        :class="row.colorClass"
         class="flex flex-col items-center justify-center aspect-square w-12 text-xl font-bold rounded-lg"
         >{{ idx }}</span
       >
@@ -65,12 +65,30 @@ const props = defineProps({
   data: {
     type: Array,
     default: [
-      { title: "Membership Units Sold", amount: 20 },
-      { title: "Appointments", amount: 23 },
-      { title: "Sold Amount ($)", amount: 430.25 },
-      { title: "Sold Amount (%)", amount: 85 },
-      { title: "Percentage to Goal", amount: 75 },
+      { title: "Membership Units Sold", amount: 20, colorName: "secondary" },
+      { title: "Appointments", amount: 23, colorName: "orange" },
+      { title: "Sold Amount ($)", amount: 430.25, colorName: "purple" },
+      { title: "Sold Amount (%)", amount: 85, colorName: "red" },
+      { title: "Percentage to Goal", amount: 75, colorName: "secondary" },
     ],
   },
 });
+
+const colorLists = {};
+const items = computed(() =>
+  props.data.map((item) => {
+    if (item.colorName === undefined) {
+      item.colorName = "secondary"; // default color scheme
+    }
+
+    if (colorLists[item.title] === undefined) {
+      colorLists[item.title] =
+        item.colorName === "secondary"
+          ? "bg-secondary/50 text-secondary"
+          : `bg-${item.colorName}-500/50 text-${item.colorName}-500`;
+    }
+
+    return Object.assign({}, { colorClass: colorLists[item.title] }, item);
+  })
+);
 </script>

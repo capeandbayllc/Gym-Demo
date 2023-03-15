@@ -73,10 +73,11 @@ import DetailList from "./partials/detail-list.vue";
 import SalesLeaderboard from "./partials/sales-leaderboard-list.vue";
 
 const personalTrainingDetailData = ref([
-  { title: "Appointments Completed", amount: 23 },
-  { title: "Sold Amount ($)", amount: 430.25 },
-  { title: "Sold Amount (%)", amount: 85 },
-  { title: "Percentage to Goal", amount: 75 },
+  { title: "Appointments Sold", amount: 23, colorName: 'secondary' },
+  { title: "Appointments Completed", amount: 23, colorName: 'orange' },
+  { title: "Sold Amount ($)", amount: 430.25, colorName: 'orange' },
+  { title: "Sold Amount (%)", amount: 85, colorName: 'purple' },
+  { title: "Percentage to Goal", amount: 75, colorName: 'red' },
 ]);
 
 const membershipSalesLeaderboard = ref([
