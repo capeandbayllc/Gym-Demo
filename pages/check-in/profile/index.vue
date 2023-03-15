@@ -66,12 +66,11 @@
 
 
 import { useQuery } from "@vue/apollo-composable";
-import gql from "graphql-tag";
-import {GET_SINGLE_MEMBER} from "@/api/queries/member";
+import member from "~/api/queries/member";
 const route = useRoute()
 const profileId = (route.query.id)
 const profileObjectData = ref({}); 
-const { result } = useQuery(GET_SINGLE_MEMBER, {
+const { result } = useQuery(member.query.get, {
     variables: { id: profileId },
   });
 watchEffect(() => {

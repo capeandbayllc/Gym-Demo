@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import { DocumentNode } from "graphql/language";
-import { GraphQLObject } from "~/api/queries/GraphQLObject";
+import { GraphQLQueryInterface } from "~/api/queries/GraphQLQueryInterface";
 
 const FIND_BY_MAIL: DocumentNode = gql`
   query User($email: String!) {
@@ -15,29 +15,13 @@ const FIND_BY_MAIL: DocumentNode = gql`
   }
 `;
 
-const UPDATE_USER = gql`
-  mutation UpdateUser($input: UserInput) {
-    updateUser(input: $input) {
-      id
-      first_name
-      last_name
-      email
-      profile_photo_path
-      phone
-    }
-  }
-`;
-
 export interface UserQuery {
   findByMail: DocumentNode;
 }
 
-const user: GraphQLObject<UserQuery, object> = {
+const user: GraphQLQueryInterface<UserQuery> = {
   query: {
     findByMail: FIND_BY_MAIL,
-  },
-  mutation: {
-    updateUser: UPDATE_USER,
   },
 };
 
