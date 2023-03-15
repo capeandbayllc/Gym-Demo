@@ -1,11 +1,20 @@
 <template>
-  <div>
-    <div>
+  <div
+    class="py-5 h-screen w-full bg-gradient"
+    :class="{ 'bg-black-animated': transitionScreen == 3 }"
+  >
+    <div
+      id="logo"
+      class="logo"
+      :class="{
+        'logo-screen2': transitionScreen == 2,
+        'logo-screen3': transitionScreen == 3,
+      }"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="pointer-events-none"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="482"
+        width="full"
         height="48"
         viewBox="0 0 482 48"
       >
@@ -28,136 +37,183 @@
       </svg>
     </div>
 
-    <h1 class="text-center mb-12 mt-20 text-3xl">Sign In</h1>
-
-    <form
-      @submit.prevent="handleClickLogin"
-      class="px-12 min-w-[20rem] max-w-sm mx-auto flex flex-col gap-3"
-    >
-      <!-- username -->
-      <label for="uname"> Email Address or Username* </label>
-      <input
-        id="uname"
-        type="text"
-        placeholder="Username"
-        required
-        v-model="username"
-      />
-
-      <!-- password -->
-      <label class="mt-2" for="pw"> Password* </label>
-      <div class="relative">
-        <input
-          id="pw"
-          :type="passwordInputType"
-          class="w-full"
-          placeholder="Password"
-          required
-          v-model="password"
-        />
-
-        <!-- reveal password -->
-        <div
-          class="absolute top-0 right-0 h-full flex flex-col justify-center mr-4"
+    <Transition>
+      <div v-if="transitionScreen == 1" class="login-screen">
+        <h1 class="text-center mb-12 mt-20 text-3xl">Sign In</h1>
+        <form
+          @submit.prevent="handleClickLogin"
+          class="px-12 min-w-[20rem] max-w-sm mx-auto flex flex-col gap-3"
         >
+          <!-- username -->
+          <label for="uname"> Email Address or Username* </label>
+          <input
+            id="uname"
+            type="text"
+            placeholder="Username"
+            required
+            v-model="username"
+          />
+
+          <!-- password -->
+          <label class="mt-2" for="pw"> Password* </label>
+          <div class="relative">
+            <input
+              id="pw"
+              :type="passwordInputType"
+              class="w-full"
+              placeholder="Password"
+              required
+              v-model="password"
+            />
+
+            <!-- reveal password -->
+            <div
+              class="absolute top-0 right-0 h-full flex flex-col justify-center mr-4"
+            >
+              <button
+                :class="{
+                  'pass-visible': passwordInputType === 'text',
+                  'pass-hidden': passwordInputType === 'password',
+                }"
+                class="transition-all"
+                type="button"
+                @click="handleTogglePasswordInputType"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="pointer-events-none"
+                  width="14.997"
+                  height="12.998"
+                  viewBox="0 0 14.997 12.998"
+                >
+                  <path
+                    id="icon_view_password"
+                    data-name="icon view password"
+                    d="M1718.325,623.832a.573.573,0,0,1-.066-.707l.022-.03,10.821-11.133a.191.191,0,0,0,.033-.044.251.251,0,0,0,.037-.045l.688-.707a.551.551,0,0,1,.394-.165.537.537,0,0,1,.385.164.566.566,0,0,1,0,.8l-1.331,1.37a11.308,11.308,0,0,1,2.634,3.945.6.6,0,0,1,0,.444c-1.569,3.755-4.355,5.992-7.456,5.992h-.008a6.73,6.73,0,0,1-3.958-1.34l-1.42,1.46a.54.54,0,0,1-.388.165A.519.519,0,0,1,1718.325,623.832Zm4.511-3.847a2.883,2.883,0,0,0,4.057-.772,3.017,3.017,0,0,0,.511-1.714,3.094,3.094,0,0,0-.5-1.694l-.8.824a1.925,1.925,0,0,1,.205.87,1.851,1.851,0,0,1-1.821,1.877,1.777,1.777,0,0,1-.849-.21Zm-5.8-2.262a.581.581,0,0,1,0-.443c1.566-3.75,4.353-5.985,7.448-5.985h.006a6.533,6.533,0,0,1,3,.738l-2.442,2.515a3.315,3.315,0,0,0-.557-.053,2.969,2.969,0,0,0-2.925,3.012,3.562,3.562,0,0,0,.051.572l-2.708,2.786A12.149,12.149,0,0,1,1717.031,617.723Z"
+                    transform="translate(-1716.987 -611)"
+                    fill="#c0bdcc"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- persistence -->
+          <div class="flex justify-between items-center gap-2 my-8 px-2">
+            <input
+              type="checkbox"
+              name="remember me"
+              v-model="remember"
+              id="persist"
+            />
+            <label class="mr-auto whitespace-nowrap" for="persist"
+              >Remember me</label
+            >
+
+            <a
+              class="text-secondary hover:text-primary transition-colors whitespace-nowrap"
+              href="/forgot"
+              >Forgot password?</a
+            >
+          </div>
+
           <button
-            :class="{
-              'pass-visible': passwordInputType === 'text',
-              'pass-hidden': passwordInputType === 'password',
-            }"
-            class="transition-all"
-            type="button"
-            @click="handleTogglePasswordInputType"
+            id="submitbtn"
+            class="w-full mb-8 relative z-10"
+            type="submit"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="pointer-events-none"
-              width="14.997"
-              height="12.998"
-              viewBox="0 0 14.997 12.998"
-            >
-              <path
-                id="icon_view_password"
-                data-name="icon view password"
-                d="M1718.325,623.832a.573.573,0,0,1-.066-.707l.022-.03,10.821-11.133a.191.191,0,0,0,.033-.044.251.251,0,0,0,.037-.045l.688-.707a.551.551,0,0,1,.394-.165.537.537,0,0,1,.385.164.566.566,0,0,1,0,.8l-1.331,1.37a11.308,11.308,0,0,1,2.634,3.945.6.6,0,0,1,0,.444c-1.569,3.755-4.355,5.992-7.456,5.992h-.008a6.73,6.73,0,0,1-3.958-1.34l-1.42,1.46a.54.54,0,0,1-.388.165A.519.519,0,0,1,1718.325,623.832Zm4.511-3.847a2.883,2.883,0,0,0,4.057-.772,3.017,3.017,0,0,0,.511-1.714,3.094,3.094,0,0,0-.5-1.694l-.8.824a1.925,1.925,0,0,1,.205.87,1.851,1.851,0,0,1-1.821,1.877,1.777,1.777,0,0,1-.849-.21Zm-5.8-2.262a.581.581,0,0,1,0-.443c1.566-3.75,4.353-5.985,7.448-5.985h.006a6.533,6.533,0,0,1,3,.738l-2.442,2.515a3.315,3.315,0,0,0-.557-.053,2.969,2.969,0,0,0-2.925,3.012,3.562,3.562,0,0,0,.051.572l-2.708,2.786A12.149,12.149,0,0,1,1717.031,617.723Z"
-                transform="translate(-1716.987 -611)"
-                fill="#c0bdcc"
-              />
-            </svg>
+            Sign in
           </button>
-        </div>
+
+          <!-- error -->
+          <div class="relative">
+            <div class="alert alert-error shadow-lg absolute" v-if="error">
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="stroke-current flex-shrink-0 h-6 w-6 pointer-events-none"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>{{ error }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- btn background effect svg composition layers -->
+          <svg class="pointer-events-none" height="0">
+            <filter id="btnbg" x="0" y="0" filterUnits="userSpaceOnUse">
+              <feOffset dx="4" dy="10" input="SourceAlpha" />
+              <feGaussianBlur stdDeviation="28.5" result="blur" />
+              <feFlood flood-color="#005bc4" flood-opacity="0.353" />
+              <feComposite operator="in" in2="blur" />
+              <feComposite in="SourceGraphic" />
+            </filter>
+          </svg>
+        </form>
       </div>
+    </Transition>
 
-      <!-- persistence -->
-      <div class="flex justify-between items-center gap-2 my-8 px-2">
-        <input
-          type="checkbox"
-          name="remember me"
-          v-model="remember"
-          id="persist"
-        />
-        <label class="mr-auto whitespace-nowrap" for="persist"
-          >Remember me</label
-        >
-
-        <a
-          class="text-secondary hover:text-primary transition-colors whitespace-nowrap"
-          href="/forgot"
-          >Forgot password?</a
-        >
+    <Transition>
+      <div class="bars" v-if="transitionScreen == 2">
+        <div class="bar bar-1"></div>
+        <div class="bar bar-2"></div>
+        <div class="bar bar-3"></div>
       </div>
+    </Transition>
 
-      <button id="submitbtn" class="w-full mb-8 relative z-10" type="submit">
-        Sign in
-      </button>
-
-      <!-- error -->
-      <div class="relative">
-        <div class="alert alert-error shadow-lg absolute" v-if="error">
-          <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="stroke-current flex-shrink-0 h-6 w-6 pointer-events-none"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span>{{ error }}</span>
+    <Transition>
+      <div v-if="transitionScreen == 3" class="bars-image">
+        <div class="logo_mask">
+          <div class="video_holder">
+            <video loop muted autoplay>
+              <source src="/video-background.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
-      </div>
 
-      <!-- btn background effect svg composition layers -->
-      <svg class="pointer-events-none" height="0">
-        <filter id="btnbg" x="0" y="0" filterUnits="userSpaceOnUse">
-          <feOffset dx="4" dy="10" input="SourceAlpha" />
-          <feGaussianBlur stdDeviation="28.5" result="blur" />
-          <feFlood flood-color="#005bc4" flood-opacity="0.353" />
-          <feComposite operator="in" in2="blur" />
-          <feComposite in="SourceGraphic" />
-        </filter>
-      </svg>
-    </form>
+        <!-- <svg class="mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:ev="http://www.w3.org/2001/xml-events" version="1.1" width="299px" height="auto" viewBox="0 0 299 279">
+          
+          <rect id="bg" y="0" width="299" height="55" rx="22" fill="#fff" />
+          <rect id="bg" y="112" width="299" height="55" rx="22" fill="#fff" />
+          <rect id="bg" y="225" width="299" height="55" rx="22" fill="#fff" />
+
+        </svg> -->
+
+        <!-- <svg class="mx-auto" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:ev="http://www.w3.org/2001/xml-events" version="1.1" baseProfile="full" width="299px" height="auto" viewBox="0 0 299 279">
+          
+          <rect id="bg" y="0" width="299" height="55" rx="22" fill="#0075C9" />
+          <rect id="bg" y="112" width="299" height="55" rx="22" fill="#0075C9" />
+          <rect id="bg" y="225" width="299" height="55" rx="22" fill="#0075C9" />
+
+        </svg> -->
+      </div>
+    </Transition>
   </div>
 </template>
 
 <script setup>
-import {request} from "~/api/utils/request";
+import { request } from "~/api/utils/request";
 import user from "~/api/queries/user";
-import {KIOSK_EMAIL} from "~/api/data/users/UserFactory";
-import {useLazyQuery, useQuery} from "@vue/apollo-composable";
+import { KIOSK_EMAIL } from "~/api/data/users/UserFactory";
+import { useLazyQuery, useQuery } from "@vue/apollo-composable";
 
-const username = ref();
-const password = ref();
+const username = ref("");
+const password = ref("");
 const remember = ref();
 const passwordInputType = ref("password");
 const error = ref();
+
+const transitionScreen = ref(1);
 
 const handleTogglePasswordInputType = () => {
   passwordInputType.value =
@@ -176,13 +232,23 @@ const handleClickLogin = async () => {
   }
 
   authCookie.value = authenticated;
-  navigateTo("/");
+  let screen = 2;
+  transitionScreen.value = screen;
+  let intervalId = setInterval(function () {
+    screen++;
+    if (screen == 4) {
+      navigateTo("/dashboard");
+      clearInterval(intervalId);
+    } else {
+      transitionScreen.value = screen;
+    }
+  }, 500);
 };
 
 const authenticate = async (username, password) => {
   const result = await request(user.query.findByMail, { email: username });
   // Password: "Hello123!"
-  if (! result.data.data.user || (btoa(password) !== "SGVsbG8xMjMh")) {
+  if (!result.data.data.user || btoa(password) !== "SGVsbG8xMjMh") {
     return null;
   }
 
@@ -194,6 +260,148 @@ const authenticate = async (username, password) => {
 </script>
 <!-- #C0BDCC -->
 <style scoped lang="postcss">
+.logo {
+  @apply absolute w-96 left-0 right-0 bottom-0 top-0 m-auto z-10 mt-12  pointer-events-none;
+  margin-top: calc(6vh);
+}
+
+.login-screen {
+  @apply mt-[120px];
+}
+
+@keyframes logo-screen2-animation {
+  from {
+    @apply w-96 mt-12;
+    margin-top: calc(0vh);
+  }
+  to {
+    @apply w-[299px] mt-[250px];
+    margin-top: calc(50vh + 175px);
+  }
+}
+
+.logo-screen2 {
+  animation-name: logo-screen2-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes logo-screen3-animation {
+  from {
+    @apply w-[299px] mt-[250px] opacity-100;
+    margin-top: calc(50vh + 175px);
+  }
+  to {
+    @apply w-96 mt-[250px] opacity-0;
+    margin-top: calc(50vh);
+  }
+}
+.logo-screen3 {
+  animation-name: logo-screen3-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes bg-black-animation {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 1);
+  }
+}
+
+.bg-black-animated {
+  animation-name: bg-black-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+.bars {
+  @apply absolute left-0 right-0 ml-auto mr-auto top-0 w-[299px];
+  margin-top: calc(50vh - 25px);
+}
+.bar {
+  @apply rounded-[22px] w-full rounded-[22px] h-[55px];
+  background-color: #0075c9;
+}
+
+@keyframes bar-1-animation {
+  from {
+    @apply bottom-[0px] opacity-0;
+  }
+  to {
+    @apply bottom-[115px] opacity-100;
+  }
+}
+
+.bar-1 {
+  @apply relative;
+  animation-name: bar-1-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes bar-2-animation {
+  from {
+    @apply bottom-[0px] opacity-0;
+  }
+  to {
+    @apply bottom-[57px] opacity-100;
+  }
+}
+
+.bar-2 {
+  @apply relative;
+  animation-name: bar-2-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes bar-3-animation {
+  from {
+    @apply bottom-[-20px] opacity-0;
+  }
+  to {
+    @apply bottom-[0px] opacity-100;
+  }
+}
+
+.bar-3 {
+  @apply relative;
+  animation-name: bar-3-animation;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.bars-image {
+  @apply absolute left-0 right-0 ml-auto mr-auto top-0 w-[299px];
+  margin-top: calc(50vh - 140px);
+}
+.video_holder {
+  width: 370px;
+  height: 280px;
+  overflow: hidden;
+}
+
+.video_holder video {
+  position: relative;
+  top: -80px;
+}
+
+.logo_mask {
+  -webkit-mask-image: url("/humberg-mask.svg");
+  mask-image: url("/humberg-mask.svg");
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: 100%;
+  mask-size: 100%;
+}
+
 input {
   @apply bg-base-300 outline-none;
 }
@@ -231,11 +439,24 @@ button[type="submit"] {
 .st0 {
   fill: #231f20;
 }
+
 .st1 {
   fill: #0075c9;
 }
 
 #submitbtn {
   filter: url(#btnbg);
+}
+
+.v-leave-active .logo {
+  transition: opacity 0.1s ease;
+}
+
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-leave-to {
+  opacity: 0;
 }
 </style>
