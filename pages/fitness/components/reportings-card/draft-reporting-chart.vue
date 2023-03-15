@@ -1,8 +1,8 @@
 <template>
-  <div class="percentage-container">
+  <div class="percentage-container p-4">
       <label class="header block text-[14px]">Drafting Report</label>
       <div class="percent-item grid grid-cols-1">
-        <AreaChart />
+        <AreaChart class="w-full" />
       </div>
   </div>
 </template>

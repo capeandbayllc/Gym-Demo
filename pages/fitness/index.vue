@@ -5,7 +5,6 @@
             <waivers-card class="col-span-1 -lg:col-span-2"/>
             <questionnaires-card class="col-span-1 -lg:col-span-2"/>
             <reportings-card class="col-span-2"/>
-
         </div>
     </div>
 </template>

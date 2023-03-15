@@ -1,26 +1,10 @@
 <template>
-  <div id="chart">
-    <apexchart type="area" height="350" :options="chartOptions" :series="series"></apexchart>
-  </div>
+  <apexchart id="drafting-report-chart" type="area" :options="chartOptions" :series="chartSeries" />
 </template>
-<script setup>
-const series  = [
-  {
-    name: 'Location',
-    data: [1000, 2000, 4000, 1000, 5000, 6000, 7000, 4000, 5000, 6000, 2000, 1000]
-  },
-  {
-    name: 'Timeline',
-    data: [1000, 2500, 5500, 5000, 6000, 5000, 3000, 7000, 9000, 5000, 7000, 1000]
-  },
-  {
-    name: 'Trainer',
-    data: [1000, 2000, 8000, 7000, 4000, 5000, 4000, 7000, 6000, 5000, 5000, 1000]
-  },
-]
+
+<script>
 const chartOptions = {
   chart: {
-    height: 350,
     type: 'area'
   },
   dataLabels: {
@@ -30,7 +14,7 @@ const chartOptions = {
     show: false,
   },
   fill: {
-    colors: ['#40c0ff', '#0275c9', '#04365c'],
+    colors: [ '#04365c', '#0275c9' , '#40c0ff'],
     gradient: {
       shade: 'dark',
       type: "vertical",
@@ -45,29 +29,49 @@ const chartOptions = {
   colors: ['#40c0ff', '#0275c9', '#04365c'],
   xaxis: {
     type: 'months',
-    categories: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     crosshairs: {
+      show: true,
+      width: 70,
+      position: 'front',
+      opacity: 0.9,        
+      stroke: {
+          color: '#D8E3F0',
+          width: 0,
+          dashArray: 0,
+      },
+      fill: {
+        type: 'gradient',
+        color: '#B1B9C4',
+        gradient: {
+            colorFrom: '#D8E3F0',
+            colorTo: '#BED1E6',
+            stops: [0, 100],
+            opacityFrom: 0,
+            opacityTo: 0.8,
+        },
+      },
+    },
+  },
+  yaxis: {
+      show: true,
+      showAlways: true,
+      showForNullSeries: true,
+      opposite: false,
+      reversed: false,
+      tickAmount: 10,
+      forceNiceScale: false,
+      floating: false,
+      labels: {
           show: true,
-          width: 70,
-          position: 'front',
-          opacity: 0.9,        
-          stroke: {
-              color: '#D8E3F0',
-              width: 0,
-              dashArray: 0,
-          },
-          fill: {
-              type: 'gradient',
-              color: '#B1B9C4',
-              gradient: {
-                  colorFrom: '#D8E3F0',
-                  colorTo: '#BED1E6',
-                  stops: [0, 100],
-                  opacityFrom: 0,
-                  opacityTo: 0.8,
-              },
+          style: {
+              colors: ['#fff'],
+              fontSize: '12px',
+              fontFamily: 'Helvetica, Arial, sans-serif',
+              fontWeight: 400,
+              cssClass: 'apexcharts-yaxis-label',
           },
       },
+      
   },
   markers: {
     size: 0,
@@ -89,16 +93,270 @@ const chartOptions = {
       size: undefined,
       sizeOffset: 3
     }
-},
-  tooltip: {
-    // enabled: false,
-    shared: false
-  },
 }
+}
+export default {
+  data() {
+    return {
+      chartOptions: {
+        // chart options here
+        ...chartOptions,
+        tooltip: {
+          custom: function({series, seriesIndex, dataPointIndex, w}) {
+            console.log(seriesIndex,dataPointIndex, 'context')
+            return (
+              `<div class="arrow_box">
+                <img src="${w.config.series[seriesIndex].data[dataPointIndex].avatar}" />
+              </div>`
+            );
+          }
+        }
+      },
+      chartSeries: [
+        {
+          name: 'Location',
+          data: [
+            {
+              x: "January",
+              y: 0,
+              avatar: '/account.png' // set avatar image for this point
+            },
+            {
+              x: "February",
+              y: 1800,
+              avatar:  '/account.png'
+            },
+            {
+              x: "March",
+              y: 1500,
+              avatar:  '/account.png'
+            },
+            {
+              x: "April",
+              y:2500,
+              avatar:  '/account.png'
+            },
+            {
+              x: "May",
+              y: 3500,
+              avatar:  '/account.png'
+            },
+            {
+              x: "June",
+              y: 2500,
+              avatar:  '/account.png'
+            },
+            {
+              x: "July",
+              y: 2000,
+              avatar: '/account.png' // set avatar image for this point
+            },
+            {
+              x: "August",
+              y: 3000,
+              avatar:  '/account.png'
+            },
+            {
+              x: "September",
+              y: 2500,
+              avatar:  '/account.png'
+            },
+            {
+              x: "October",
+              y:3000,
+              avatar:  '/account.png'
+            },
+            {
+              x: "November",
+              y: 3300,
+              avatar:  '/account.png'
+            },
+            {
+              x: "December",
+              y: 2000,
+              avatar:  '/account.png'
+            }
+          ],
+          pointRenderer: function({ x, y, seriesIndex, dataPointIndex, w }) {
+            const { avatar } = w.config.series[seriesIndex].data[dataPointIndex];
+            return {
+              image: {
+                src: avatar,
+                width: 32,
+                height: 32
+              },
+              x,
+              y,
+              offsetY: -16
+            };
+          }
+        },
+        {
+          name: 'Timeline',
+          data: [
+            {
+              x: "January",
+              y: 0,
+              avatar: '/account.png' // set avatar image for this point
+            },
+            {
+              x: "February",
+              y: 1900,
+              avatar:  '/account.png'
+            },
+            {
+              x: "March",
+              y: 1600,
+              avatar:  '/account.png'
+            },
+            {
+              x: "April",
+              y:2200,
+              avatar:  '/account.png'
+            },
+            {
+              x: "May",
+              y: 3000,
+              avatar:  '/account.png'
+            },
+            {
+              x: "June",
+              y: 2600,
+              avatar:  '/account.png'
+            },
+            {
+              x: "July",
+              y: 1800,
+              avatar: '/account.png' // set avatar image for this point
+            },
+            {
+              x: "August",
+              y: 2900,
+              avatar:  '/account.png'
+            },
+            {
+              x: "September",
+              y: 2200,
+              avatar:  '/account.png'
+            },
+            {
+              x: "October",
+              y:2800,
+              avatar:  '/account.png'
+            },
+            {
+              x: "November",
+              y: 3200,
+              avatar:  '/account.png'
+            },
+            {
+              x: "December",
+              y: 1700,
+              avatar:  '/account.png'
+            }
+          ],
+          pointRenderer: function({ x, y, seriesIndex, dataPointIndex, w }) {
+            const { avatar } = w.config.series[seriesIndex].data[dataPointIndex];
+            return {
+              image: {
+                src: avatar,
+                width: 32,
+                height: 32
+              },
+              x,
+              y,
+              offsetY: -16
+            };
+          }
+        },{
+          name: 'Location',
+          data: [
+            {
+              x: "January",
+              y: 0,
+              avatar: '/account.png' // set avatar image for this point
+            },
+            {
+              x: "February",
+              y: 1700,
+              avatar:  '/account.png'
+            },
+            {
+              x: "March",
+              y: 1600,
+              avatar:  '/account.png'
+            },
+            {
+              x: "April",
+              y:2000,
+              avatar:  '/account.png'
+            },
+            {
+              x: "May",
+              y: 2900,
+              avatar:  '/account.png'
+            },
+            {
+              x: "June",
+              y: 2200,
+              avatar:  '/account.png'
+            },
+            {
+              x: "July",
+              y: 2200,
+              avatar: '/account.png' // set avatar image for this point
+            },
+            {
+              x: "August",
+              y: 2700,
+              avatar:  '/account.png'
+            },
+            {
+              x: "September",
+              y: 2000,
+              avatar:  '/account.png'
+            },
+            {
+              x: "October",
+              y:2500,
+              avatar:  '/account.png'
+            },
+            {
+              x: "November",
+              y: 3000,
+              avatar:  '/account.png'
+            },
+            {
+              x: "December",
+              y: 2500,
+              avatar:  '/user-caller.png'
+            }
+          ],
+          pointRenderer: function({ x, y, seriesIndex, dataPointIndex, w }) {
+            const { avatar } = w.config.series[seriesIndex].data[dataPointIndex];
+            return {
+              image: {
+                src: avatar,
+                width: 10,
+                height: 10
+              },
+              x,
+              y,
+            };
+          }
+        }
+      ]
+    };
+  }
+};
+
 </script>
+
 <style>
-/* #SvgjsLine1162 {
-  stroke-width: 60px !important;
-  stroke-dasharray: none;
-} */
+#drafting-report-chart .apexcharts-legend {
+  @apply flex justify-start
+}
+#drafting-report-chart .apexcharts-legend-series {
+  @apply bg-white flex p-2
+}
 </style>
