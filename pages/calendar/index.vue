@@ -32,14 +32,17 @@
         </div>
 
         <div
-            class="z-50 fixed h-screen w-screen flex items-center justify-center pointer-events-none"
-            v-if="eventFormVisibility"
+            class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center pointer-events-none bg-[#fff]/[0.1] backdrop-blur-sm calendar-style-transition"
+            :class="{
+                'z-50 opacity-100': eventFormVisibility,
+                '-z-50 opacity-0': !eventFormVisibility,
+            }"
         >
             <EventForm
                 @cancel="resetState"
                 @createEvent="handleCreateEvent"
-                :members="result.members?.data"
-                :employees="result.members?.data"
+                :members="members"
+                :employees="employees"
                 :nodeContext="emptyNodeContext"
             />
         </div>
@@ -393,6 +396,7 @@ const getFormattedEvents = computed(() => {
             title: event.title,
             start: event.start,
             end: event.end,
+            allDay: event.full_day_event,
             backgroundColor: colors[Math.floor(Math.random() * colors.length)],
             extendedProps: {
                 users: [...event.attendees],
@@ -436,12 +440,12 @@ onMounted(async () => {
             console.log("GQL Result:", result.value);
             eventTypes.value = result.value.calendarEvents.data;
             employees.value = result.value.employee.data;
-            members.value = result.value.members.data;
+            // members.value = result.value.members.data;
             leads.value = result.value.leads.data;
             locations.value = result.value.locations.data;
             event_types.value = result.value.calendarEventTypes.data;
             events.value = result.value.calendarEvents;
-        }, 6000);
+        }, 2000);
     }
     //   await nextTick();
     //   window.dispatchEvent(new Event("resize"));

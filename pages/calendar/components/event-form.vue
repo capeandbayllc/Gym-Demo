@@ -5,16 +5,18 @@
         <button
             @click="emit('cancel')"
             type="button"
-            class="absolute top-4 right-4"
+            class="absolute top-4 right-4 hover:rotate-180 calendar-style-transition"
         >
-            <CrossCircleIcon class="w-7 h-7" />
+            <CrossCircleIcon
+                class="w-7 h-7 hover:text-secondary calendar-style-transition"
+            />
         </button>
 
         <div class="form-group-pair">
             <input
                 v-model="form.title"
                 type="text"
-                class="!rounded-b-none mb-3 p-2 text-black !bg-white rounded-xl mt-2"
+                class="!rounded-b-none mb-3 p-2 !text-black !bg-white rounded-xl mt-2 placeholder:!text-[#aaa]"
                 placeholder="Title"
             />
             <div class="w-full mx-auto">
@@ -24,11 +26,7 @@
 
         <div class="form-group-pair">
             <label>Member</label>
-            <select
-                v-model="form.member"
-                placeholder="Member"
-                class="w-full p-2 rounded-xl text-white mt-1 placeholder:text-black/[0.8] bg-[#555]"
-            >
+            <select v-model="form.member" placeholder="Member">
                 <option class="text-white/[0.7]" :value="null">Member</option>
                 <option v-for="mem in members" :key="mem.id">
                     {{ mem.first_name }} {{ mem.last_name }}
@@ -37,11 +35,7 @@
         </div>
         <div class="form-group-pair">
             <label>Instructor</label>
-            <select
-                v-model="form.instructor"
-                placeholder="Instructor"
-                class="w-full p-2 rounded-xl text-white mt-1 placeholder:text-white/[0.8] bg-[#555]"
-            >
+            <select v-model="form.instructor" placeholder="Instructor">
                 <option class="text-white/[0.7]" :value="null">
                     Instructor
                 </option>
@@ -52,7 +46,7 @@
         </div>
         <div class="form-group-pair">
             <label>Date</label>
-            <input v-model="form.time.date" id="date" type="date" />
+            <input v-model="form.date" id="date" type="date" />
         </div>
 
         <div class="form-group-pair">
@@ -61,18 +55,14 @@
                     <div class="w-full flex flex-col">
                         <label>Start</label>
                         <input
-                            v-model="form.time.end"
-                            id="end_time"
-                            type="date"
+                            v-model="form.start"
+                            id="start_time"
+                            type="time"
                         />
                     </div>
                     <div class="w-full flex flex-col">
                         <label>End</label>
-                        <input
-                            v-model="form.time.end"
-                            id="end_time"
-                            type="time"
-                        />
+                        <input v-model="form.end" id="end_time" type="time" />
                     </div>
                 </div>
             </div>
@@ -90,8 +80,11 @@
 
         <div class="flex justify-between mt-4">
             <div class="flex gap-2 items-center">
-                <input type="checkbox" />
-                <label>Recurring event</label>
+                <CheckboxInput
+                    :label="`Recurring event`"
+                    :isChecked="form.recurring"
+                    :onChange="toggleRecurringValue"
+                />
             </div>
             <div class="flex gap-2 items-center">
                 <label for="">Notification</label>
@@ -99,7 +92,7 @@
             </div>
         </div>
 
-        <div class="flex mt-8 mb-4 justify-end items-center gap-4">
+        <div class="flex mt-8 justify-end items-center gap-4">
             <button type="button" @click="emit('cancel')">Cancel</button>
             <button
                 @click="handleNewEvent"
@@ -114,10 +107,10 @@
 
 <script setup>
 import BtnGroup from "./partials/btn-group.vue";
-import {
-    addMinutesToDate,
-    formatRandomEventTime,
-} from "../helpers/calendar-events";
+// import {
+//     addMinutesToDate,
+//     formatRandomEventTime,
+// } from "../helpers/calendar-events";
 import { CrossCircleIcon } from "~~/components/icons";
 
 const props = defineProps({
@@ -136,20 +129,16 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["createEvent", "cancel"]);
-const currentDate = ref(new Date());
 
 const btnChoices = ["event", "task", "service", "prospect"];
 const form = ref({
     eventType: "event",
-    title: "",
+    title: null,
     member: null,
     instructor: null,
-    time: {
-        start: props.nodeContext?.start ? props.nodeContext.start : new Date(),
-        end: props.nodeContext?.start
-            ? formatRandomEventTime({ minute: -60 }, props.nodeContext.start)
-            : formatRandomEventTime({ minute: -60 }, new Date()),
-    },
+    date: null,
+    start: null,
+    end: null,
     description: "",
     recurring: false,
     notify: false,
@@ -158,19 +147,28 @@ const form = ref({
 const handleNewEvent = () => {
     emit("createEvent", form.value);
 };
+
+const toggleRecurringValue = () => {
+    form.value.recurring = !form.value.recurring;
+};
 </script>
 
-<style scoped lang="postcss">
+<style scoped>
 .form-group-pair {
     @apply w-full flex flex-col;
+}
 
-    label {
-        @apply font-light mt-4;
-    }
+input,
+textarea,
+select {
+    @apply w-full p-2 rounded-xl text-white mt-1 placeholder:text-black/[0.8] bg-[#555];
+    color-scheme: dark;
+}
+.calendar-style-transition {
+    @apply transition-all duration-300 ease-linear;
+}
 
-    input,
-    textarea {
-        @apply p-2 text-white rounded-xl mt-1 bg-[#555];
-    }
+label {
+    @apply font-light mt-4 text-[0.8rem];
 }
 </style>
