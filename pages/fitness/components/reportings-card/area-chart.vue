@@ -5,7 +5,10 @@
 <script>
 const chartOptions = {
   chart: {
-    type: 'area'
+    type: 'area',
+    toolbar: {
+      show: false
+    }
   },
   dataLabels: {
     enabled: false
@@ -329,7 +332,7 @@ export default {
             {
               x: "December",
               y: 2500,
-              avatar:  '/user-caller.png'
+              avatar:  '/account.png'
             }
           ],
           pointRenderer: function({ x, y, seriesIndex, dataPointIndex, w }) {
@@ -354,9 +357,16 @@ export default {
 
 <style>
 #drafting-report-chart .apexcharts-legend {
-  @apply flex justify-start
+  @apply flex justify-start pt-6
 }
 #drafting-report-chart .apexcharts-legend-series {
-  @apply bg-white flex p-2
+  @apply bg-[#f7f8fa] flex p-2 rounded-lg px-4;
+}
+#drafting-report-chart .apexcharts-legend-series .apexcharts-legend-marker {
+  @apply rounded-md mr-2;
+  border-radius: 3px !important;
+}
+#drafting-report-chart .apexcharts-legend-series .apexcharts-legend-text {
+  font-weight: bold !important;
 }
 </style>
