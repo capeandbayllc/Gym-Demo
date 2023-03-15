@@ -15,14 +15,14 @@
 		</div> -->
     <!-- scrolling side container (no container title, component titles) -->
     <section
-      class="max-h-[50vh] h-full flex gap-4 justify-center pb-8 px-24 overscroll-contain"
+      class="max-h-[50vh] h-full flex gap-4 justify-center pb-8 px-8 overscroll-contain"
     >
       <div class="overflow-y-scroll w-full pr-12">
         <ul class="w-full">
           <li>
             <PulseItemCard title="Club Membership Details">
               <template #card-content>
-                <ItemGridList :spacings="gridItemSpacing" />
+                <DetailList :spacings="gridItemSpacing" />
               </template>
             </PulseItemCard>
           </li>
@@ -30,7 +30,11 @@
             <h4>Membership Draft Breakdown</h4>
           </li>
           <li>
-            <h4>Memberhsip Sales Leaderboard</h4>
+            <PulseItemCard title="Membership Sales Leaderboard">
+              <template #card-content>
+                <SalesLeaderboard :data="membershipSalesLeaderboard" />
+              </template>
+            </PulseItemCard>
           </li>
           <li>
             <h4>Membership Calls and Mass Comms</h4>
@@ -38,7 +42,7 @@
           <li>
             <PulseItemCard title="Personal Training Details">
               <template #card-content>
-                <ItemGridList :data="personalTrainingDetailData" />
+                <DetailList :data="personalTrainingDetailData" />
               </template>
             </PulseItemCard>
           </li>
@@ -65,7 +69,8 @@ import PulseMemberSummary from "./pulse-member-summary.vue";
 import PulseClubEvents from "./pulse-club-events.vue";
 import PulseCheckHistory from "./pulse-check-history.vue";
 import PulseItemCard from "./partials/pulse-item-card.vue";
-import ItemGridList from "./partials/item-grid-list.vue";
+import DetailList from "./partials/detail-list.vue";
+import SalesLeaderboard from "./partials/sales-leaderboard-list.vue";
 
 const personalTrainingDetailData = ref([
   { title: "Appointments Completed", amount: 23 },
@@ -74,7 +79,18 @@ const personalTrainingDetailData = ref([
   { title: "Percentage to Goal", amount: 75 },
 ]);
 
-const gridItemSpacing = ref(["5rem", "1fr", "5rem"]);
+const membershipSalesLeaderboard = ref([
+  { rank: 1, name: "Sty Stance", points: 120, trending: "up" },
+  { rank: 2, name: "Aya Bauchanan", points: 120, trending: "down" },
+  { rank: 3, name: "Butch Fierce", points: 120, trending: "neutral" },
+  { rank: 4, name: "Henry Owens", points: 120, trending: "down" },
+  { rank: 5, name: "Penny Earns", points: 120, trending: "up" },
+  { rank: 6, name: "Max Smallson", points: 120, trending: "up" },
+  { rank: 7, name: "Steve Maxum", points: 110, trending: "down" },
+  { rank: 8, name: "Rich J.", points: 100, trending: "neutral" },
+  { rank: 9, name: "Mary Joe", points: 90, trending: "down" },
+  { rank: 10, name: "Gary Holmes", points: 80, trending: "up" },
+]);
 </script>
 
 <style scoped>

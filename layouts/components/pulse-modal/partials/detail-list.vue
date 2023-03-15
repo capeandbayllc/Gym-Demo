@@ -1,11 +1,8 @@
 <template>
-  <ul class="item-grid-list">
+  <ul class="detail-list">
     <div
       class="grid grid-cols-[5rem_1fr_5rem] capitalize justify-items-start text-secondary font-bold pl-2"
     >
-      <div
-        class="hidden bg-purple-500/50 text-purple-500 bg-secondary/50 text-secondary bg-orange-500/50 text-orange-500 bg-red-500/50 text-red-500"
-      />
       <span v-for="(head, ix) in headers" :key="`${head}_${ix}`">{{
         head.replace("_", "")
       }}</span>
@@ -16,7 +13,7 @@
       :key="idx"
     >
       <span
-        :class="getColor(idx)"
+        :class="`item-${idx % 4}`"
         class="flex flex-col items-center justify-center aspect-square w-12 text-xl font-bold rounded-lg"
         >{{ idx }}</span
       >
@@ -38,8 +35,24 @@
 </template>
 
 <style scoped>
-.item-grid-list li:not(:first-of-type) {
+.detail-list li:not(:first-of-type) {
   @apply border-t border-white/50;
+}
+
+.item-0 {
+  @apply bg-secondary/50 text-secondary;
+}
+
+.item-1 {
+  @apply bg-orange-500/50 text-orange-500;
+}
+
+.item-2 {
+  @apply bg-purple-500/50 text-purple-500;
+}
+
+.item-3 {
+  @apply bg-red-500/50 text-red-500;
 }
 </style>
 
@@ -59,16 +72,5 @@ const props = defineProps({
       { title: "Percentage to Goal", amount: 75 },
     ],
   },
-  indexColors: {
-    type: Array,
-    default: ["secondary", "orange", "purple", "red"],
-  },
 });
-
-function getColor(ix = 0) {
-  let colorIx = ix % props.indexColors.length;
-  if (props.indexColors[colorIx] === "secondary")
-    return `bg-secondary/50 text-secondary`;
-  return `bg-${props.indexColors[colorIx]}-500/50 text-${props.indexColors[colorIx]}-500`;
-}
 </script>
