@@ -1,7 +1,6 @@
 <template>
     <div class="max-w-[90vw] mx-auto">
         <table class="border-separate">
-          <div>
             <table-header :columns="columns" :stickyHeader="stickyHeader"/>
             <table-body v-if="!rowComponent"/>
 
@@ -15,7 +14,6 @@
                     @click="rowClicked(item)"
                 />
             </tbody>
-          </div>
         </table>
     </div>
 </template>
