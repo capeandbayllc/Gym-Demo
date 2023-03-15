@@ -248,6 +248,26 @@
         </div>
 
         <divider />
+
+        <!-- CALENDAR ACCESS & AVAILABILITY SECTION -->
+        <div class="grid grid-cols-1 py-2">
+          <div class="grid grid-cols-12 py-2">
+            <div class="col-start-2 col-span-3">
+              <h4 class="mb-4 inline-block">
+                Calendar Access <LockIcon class="inline-block ml-3" />
+              </h4>
+              <multi-select-dropdown
+                  :options="calendarDepartments"
+                  label="Department(s)"
+                  v-model="form.calendarDepartments"
+              />
+            </div>
+
+          </div>
+        </div>
+
+        <divider />
+
       </div>
 
 <!--          <profile-relation/>
@@ -393,7 +413,7 @@ input:hover {
 <script setup>
 import {ref} from 'vue';
 import '@vueform/multiselect/themes/default.css'
-import {MembersIcon} from "@/components/icons";
+import {MembersIcon, LockIcon} from "@/components/icons";
 import ProfileAddressSetting from "./components/address";
 import Divider from "./components/divider";
 import MultiSelectDropdown from "./components/multi-select-dropdown";
@@ -419,6 +439,7 @@ const form = ref({
   roles: [],
   departments: [],
   teams: [],
+  calendarDepartments: [],
 });
 
 const profileBasic = [
@@ -515,13 +536,6 @@ const location = [
   },
 ];
 
-const sections = [
-  {
-    key: 'profileBasic',
-    data: profileBasic,
-  },
-];
-
 const relationships = [
   {
     id: 1,
@@ -613,11 +627,30 @@ const teams = [
   }
 ];
 
+const calendarDepartments = [
+  {
+    value: 1,
+    label: 'Operations',
+  },
+  {
+    value: 2,
+    label: 'Personal Trainings',
+  },
+  {
+    value: 3,
+    label: 'Group Fitness',
+  },
+  {
+    value: 4,
+    label: 'Lead Sources',
+  },
+];
+
 const uploadPopUp = ref(false);
 
 const updateAddress = formData => {
   form.address = formData;
-  console.log('detals form: ', form);
+  console.log('details form: ', form);
 }
 
 </script>

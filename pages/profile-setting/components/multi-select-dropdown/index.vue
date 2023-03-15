@@ -21,9 +21,8 @@
 .multi-select {
     @apply flex flex-col gap-2;
     .multi-select-tags {
-        @apply grid grid-cols-3 gap-2;
         > div {
-            @apply h-9 flex items-center justify-center rounded bg-secondary cursor-pointer;
+            @apply float-left h-9 bg-secondary rounded px-1.5 mr-2 mt-2 cursor-pointer pt-2 ;
         }
     }
 }
@@ -38,6 +37,7 @@ export default {
 import { ref } from 'vue';
 import Multiselect from '@vueform/multiselect';
 import { getDefaultMultiselectTWClasses } from './getDefaultMultiselectTWClasses.js';
+
 const props = defineProps({
     modelValue: {
         type: Array,
@@ -51,10 +51,12 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["update:modelValue"]);
+
 const getLabel = (value) => {
     let label = props.options.filter(item => item.value === value)[0].label
     return label;
 };
+
 const removeOption = (value) => {
     let updated = props.modelValue.filter(item => item != value)
     emit('update:modelValue', updated)
