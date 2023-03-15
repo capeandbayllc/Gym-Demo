@@ -7,7 +7,7 @@
             <div class="mb-2">Schedule Type </div>
         </div>
         <div class="col-span-5 w-full">
-            <div class="mb-2">GD Profit Center</div>
+            <div class="mb-2">GR Profit Center</div>
         </div>
         <div class="col-span-4 w-full">
             <div class="mb-2 ml-4">Pre Tax Amount</div>

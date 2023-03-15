@@ -5,7 +5,7 @@
             <div class="flex justify-center items-center pt-8 pb-10">
                 <button class="flex flex-col items-center mr-[40px]" @click="openNewAgreementModal">
                     <NewAgreementIcon class="h-[50px] mb-2" />
-                    <span>Start a New Agreement</span>
+                    <span>Create a New Agreement</span>
                 </button>
                 <button class="flex flex-col items-center mr-[20px]">
                     <CreatePreSaleIcon class="h-[50px] mb-2" />
