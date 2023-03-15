@@ -18,7 +18,7 @@
     </div>
 
     <Transition>
-      <div v-if="transitionScreen == 1">
+      <div v-if="transitionScreen == 1" class="login-screen">
         <h1 class="text-center mb-12 mt-20 text-3xl">Sign In</h1>
         <form @submit.prevent="handleClickLogin" class="px-12 min-w-[20rem] max-w-sm mx-auto flex flex-col gap-3">
           <!-- username -->
@@ -126,35 +126,14 @@
         </svg> -->
       </div>
     </Transition>
-
   </div>
 </template>
-
-<style>
-/* we will explain what these classes do next! */
-.v-leave-active .logo {
-  transition: opacity 0.1s ease;
-}
-
-.v-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.v-leave-to {
-  opacity: 0;
-}
-</style>
 
 <script setup>
 import { request } from "~/api/utils/request";
 import user from "~/api/queries/user";
 import { KIOSK_EMAIL } from "~/api/data/users/UserFactory";
 import { useLazyQuery, useQuery } from "@vue/apollo-composable";
-import { exit } from "process";
-
-const reset = () => {
-  transitionScreen.value = 1
-};
 
 const username = ref('');
 const password = ref('');
@@ -210,13 +189,25 @@ const authenticate = async (username, password) => {
 </script>
 <!-- #C0BDCC -->
 <style scoped lang="postcss">
+
 .logo {
-  @apply absolute w-96 left-0 right-0 ml-auto mr-auto bottom-[89%] z-10;
+  @apply absolute w-96 left-0 right-0 bottom-0 top-0 m-auto z-10 mt-12;
+  margin-top: calc(6vh);
+}
+
+.login-screen{
+  @apply mt-[120px];
 }
 
 @keyframes logo-screen2-animation {
-  from {@apply bottom-[89%] w-96;}
-  to {@apply bottom-[90px] w-[299px];}
+  from {
+    @apply w-96 mt-12;
+    margin-top: calc(0vh);
+  }
+  to {
+    @apply w-[299px] mt-[250px];
+    margin-top: calc(50vh + 175px);
+  }
 }
 
 .logo-screen2 {
@@ -226,8 +217,14 @@ const authenticate = async (username, password) => {
 }
 
 @keyframes logo-screen3-animation {
-  from {@apply bottom-[90px] opacity-100 w-[299px];}
-  to {@apply bottom-[300px] opacity-0 w-96;}
+  from {
+    @apply w-[299px] mt-[250px] opacity-100;
+    margin-top: calc(50vh + 175px);
+  }
+  to {
+    @apply w-96 mt-[250px] opacity-0;
+    margin-top: calc(50vh);
+  }
 }
 .logo-screen3 {
   animation-name: logo-screen3-animation;
@@ -245,12 +242,10 @@ const authenticate = async (username, password) => {
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
 }
-
 .bars {
   @apply absolute left-0 right-0 ml-auto mr-auto top-0 w-[299px];
   margin-top: calc(50vh - 25px);
 }
-
 .bar {
   @apply rounded-[22px] w-full rounded-[22px] h-[55px];
   background-color: #0075C9;
@@ -367,4 +362,17 @@ button[type="submit"] {
 #submitbtn {
   filter: url(#btnbg);
 }
+
+.v-leave-active .logo {
+  transition: opacity 0.1s ease;
+}
+
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-leave-to {
+  opacity: 0;
+}
+
 </style>
