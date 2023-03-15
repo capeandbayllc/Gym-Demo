@@ -1,1 +1,22 @@
-<template></template>
+<template>
+  <div class="percentage-container">
+      <label class="header block text-[14px]">Drafting Report</label>
+      <div class="percent-item grid grid-cols-1">
+        <AreaChart />
+      </div>
+  </div>
+</template>
+<style scoped>
+.percentage-container{
+  padding: 10px 20px;
+  border : 2px solid #0077ac;
+  border-radius: 15px;
+}
+.header{
+  color : white;
+  text-align: left;
+}
+</style>
+<script setup>
+import AreaChart from './area-chart.vue';
+</script>
