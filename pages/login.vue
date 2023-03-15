@@ -247,7 +247,8 @@ const authenticate = async (username, password) => {
 }
 
 .bars {
-  @apply absolute left-0 right-0 ml-auto mr-auto bottom-[190px] w-[299px];
+  @apply absolute left-0 right-0 ml-auto mr-auto top-0 w-[299px];
+  margin-top: calc(50vh - 25px);
 }
 
 .bar {
@@ -293,7 +294,8 @@ const authenticate = async (username, password) => {
 }
 
 .bars-image{
-  @apply absolute left-0 right-0 ml-auto mr-auto bottom-[190px] w-[299px];
+  @apply absolute left-0 right-0 ml-auto mr-auto top-0 w-[299px];
+  margin-top: calc(50vh - 140px);
 }
 .video_holder {
   width: 370px;
