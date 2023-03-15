@@ -17,15 +17,11 @@
         </td>
         <td>
             <div class="campaign-data">
-                <select-box
-                    class="text-sm"
-                    :items="status_items"
-                    :value="data.status"
-                />
+                <status-select-box :status="data.status" />
             </div>
         </td>
         <td>
-            <div class="campaign-view">
+            <div class="campaign-data campaign-view">
                 <Button secondary class="text-base-content" size="xs" @click.stop="openCampaignDetailModal(data)">View</Button>
 
                 <DaisyModal ref="campaignDetailModalRef">
@@ -34,7 +30,9 @@
             </div>
         </td>
         <td>
-            <diagram-icon class="text-accent-focus/80" />
+            <div class="campaign-data">
+                <diagram-icon class="text-accent-focus/80" />
+            </div>
         </td>
     </tr>
 </template>
@@ -56,13 +54,13 @@
     td {
         @apply border-b border-secondary;
         > div {
-            @apply mb-1.5 border-l border-secondary text-center;
+            @apply mb-1.5 border-l border-secondary;
         }
         .campaign-title {
             
         }
         .campaign-data {
-            @apply flex items-center justify-center;
+            @apply flex items-center justify-center py-1 min-h-[2.5rem];
         }
         .status-select-box {
             @apply flex justify-center;
@@ -71,7 +69,7 @@
             @apply flex flex-row items-center justify-center space-x-2;
         }
         .deployment-circle {
-            @apply inline-flex items-center bg-red-600 rounded-full min-w-[30px] min-h-[30px] justify-center text-white text-sm;
+            @apply inline-flex items-center bg-error rounded-full min-w-[30px] min-h-[30px] justify-center text-white text-sm;
         }
     }
     td:first-child {
@@ -81,6 +79,10 @@
     }
     td:last-child {
         @apply text-center;
+
+        > svg {
+            display: inline-flex;
+        }
     }
 }
 .campaign-table-row:hover {
@@ -93,8 +95,9 @@
 }
 </style>
 <script setup>
-import DiagramIcon from "../../components/campaign-card/diagram-icon.vue";
 import ActionIcon from "./action-icon.vue";
+import StatusSelectBox from "./status-select-box.vue";
+import DiagramIcon from "../../components/campaign-card/diagram-icon.vue";
 import CampaignDetailsModal from "../../components/campaign-details/index.vue";
 
 const props = defineProps({

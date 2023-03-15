@@ -1,9 +1,13 @@
 <template>
-    <font-awesome-icon :icon="icon" size="lg" />
+    <div class="action-icon-box">
+        <font-awesome-icon :icon="icon" size="lg" />
+    </div>
 </template>
 
 <style scoped>
-    
+    .action-icon-box {
+        @apply border border-secondary rounded-xl py-2 px-3 bg-black;
+    }
 </style>
 
 <script setup>

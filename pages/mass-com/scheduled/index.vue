@@ -55,7 +55,7 @@
             @apply text-xl font-bold pt-6;
         }
         .page-content-block {
-            @apply bg-neutral rounded-3xl mt-3;
+            @apply bg-black border border-secondary rounded-3xl mt-3;
         }
     }
 }
