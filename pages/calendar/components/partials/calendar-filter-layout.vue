@@ -20,7 +20,7 @@
         <div
             class="flex flex-col gap-1 scrollbar-hide h-auto max-h-[6.5rem] calendar-style-transition"
             :class="{
-                'h-[10vh] opacity-100 mt-2 overflow-y-scroll': isOpen,
+                '!h-[10vh] opacity-100 mt-2 overflow-y-scroll': isOpen,
                 '!h-[0vh] opacity-0 mt-0 overflow-hidden': !isOpen,
             }"
         >

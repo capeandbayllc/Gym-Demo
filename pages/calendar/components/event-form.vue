@@ -12,7 +12,7 @@
             />
         </button>
 
-        <div class="form-group-pair">
+        <div class="w-full flex flex-col">
             <input
                 v-model="form.title"
                 type="text"
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="form-group-pair">
+        <div class="w-full flex flex-col">
             <label>Member</label>
             <select v-model="form.member" placeholder="Member">
                 <option class="text-white/[0.7]" :value="null">Member</option>
@@ -33,7 +33,7 @@
                 </option>
             </select>
         </div>
-        <div class="form-group-pair">
+        <div class="w-full flex flex-col">
             <label>Instructor</label>
             <select v-model="form.instructor" placeholder="Instructor">
                 <option class="text-white/[0.7]" :value="null">
@@ -44,31 +44,69 @@
                 </option>
             </select>
         </div>
-        <div class="form-group-pair">
-            <label>Date</label>
-            <input v-model="form.date" id="date" type="date" />
-        </div>
 
-        <div class="form-group-pair">
-            <div class="flex w-full gap-4 mt-2 flex-col">
-                <div class="flex gap-4">
-                    <div class="w-full flex flex-col">
-                        <label>Start</label>
-                        <input
-                            v-model="form.start"
-                            id="start_time"
-                            type="time"
-                        />
-                    </div>
-                    <div class="w-full flex flex-col">
-                        <label>End</label>
-                        <input v-model="form.end" id="end_time" type="time" />
-                    </div>
-                </div>
+        <div class="w-full flex flex-col">
+            <label>Start</label>
+            <div class="flex flex-row">
+                <input
+                    v-model="form.start.date"
+                    class="border-[#191919] calendar-style-transition"
+                    :class="{
+                        'basis-2/3 !rounded-r-none border-r': !form.allDay,
+                        'basis-[100%]': form.allDay,
+                    }"
+                    id="date"
+                    type="date"
+                />
+                <input
+                    v-model="form.start.time"
+                    class="!rounded-l-none basis-1/3 border-l border-[#191919] calendar-style-transition"
+                    :class="{
+                        'basis-1/3': !form.allDay,
+                        'basis-[0%] !p-0': form.allDay,
+                    }"
+                    id="start_time"
+                    type="time"
+                />
             </div>
         </div>
 
-        <div class="form-group-pair">
+        <div class="w-full flex flex-col">
+            <label>End</label>
+            <div class="flex flex-row">
+                <input
+                    v-model="form.end.date"
+                    class="border-[#191919] calendar-style-transition"
+                    :class="{
+                        'basis-2/3 !rounded-r-none border-r': !form.allDay,
+                        'basis-[100%]': form.allDay,
+                    }"
+                    id="date"
+                    type="date"
+                />
+                <input
+                    v-model="form.end.time"
+                    class="!rounded-l-none basis-1/3 border-l border-[#191919] calendar-style-transition"
+                    :class="{
+                        'basis-1/3': !form.allDay,
+                        'basis-[0%] !p-0': form.allDay,
+                    }"
+                    id="start_time"
+                    type="time"
+                />
+            </div>
+        </div>
+
+        <div class="w-full flex flex-col mt-4">
+            <RadioToggle
+                label="All Day"
+                :isChecked="form.allDay"
+                :onChange="() => (form.allDay = !form.allDay)"
+                labelClass="font-light tracking-wider text-[0.9rem]"
+            />
+        </div>
+
+        <div class="w-full flex flex-col">
             <label>Description</label>
             <textarea
                 class="resize-none"
@@ -83,12 +121,18 @@
                 <CheckboxInput
                     :label="`Recurring event`"
                     :isChecked="form.recurring"
-                    :onChange="toggleRecurringValue"
+                    :onChange="() => (form.recurring = !form.recurring)"
                 />
             </div>
             <div class="flex gap-2 items-center">
-                <label for="">Notification</label>
-                <input type="checkbox" />
+                <RadioToggle
+                    label="Notification"
+                    :isChecked="form.notify"
+                    :onChange="() => (form.notify = !form.notify)"
+                    labelClass="font-light tracking-wider text-[0.9rem]"
+                />
+                <!-- <label for="">Notification</label>
+                <input type="checkbox" /> -->
             </div>
         </div>
 
@@ -133,15 +177,21 @@ const emit = defineEmits(["createEvent", "cancel"]);
 const btnChoices = ["event", "task", "service", "prospect"];
 const form = ref({
     eventType: "event",
-    title: null,
+    title: "Baal",
     member: null,
     instructor: null,
-    date: null,
-    start: null,
-    end: null,
-    description: "",
+    start: {
+        date: "2023-01-04",
+        time: "13:00",
+    },
+    end: {
+        date: "2023-01-04",
+        time: "14:00",
+    },
+    description: "adkjnaskjnda",
     recurring: false,
     notify: false,
+    allDay: false,
 });
 
 const handleNewEvent = () => {
@@ -151,17 +201,35 @@ const handleNewEvent = () => {
 const toggleRecurringValue = () => {
     form.value.recurring = !form.value.recurring;
 };
+
+const resetInputs = () => {
+    form.value = {
+        eventType: "event",
+        title: null,
+        member: null,
+        instructor: null,
+        start: {
+            date: null,
+            time: null,
+        },
+        end: {
+            date: null,
+            time: null,
+        },
+        description: "",
+        recurring: false,
+        notify: false,
+        allDay: false,
+    };
+    emit("cancel");
+};
 </script>
 
 <style scoped>
-.form-group-pair {
-    @apply w-full flex flex-col;
-}
-
 input,
 textarea,
 select {
-    @apply w-full p-2 rounded-xl text-white mt-1 placeholder:text-black/[0.8] bg-[#555];
+    @apply w-full p-2 rounded-xl text-white mt-1 placeholder:text-black/[0.8] bg-[#555] text-[0.8rem];
     color-scheme: dark;
 }
 .calendar-style-transition {

@@ -139,7 +139,7 @@ import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload relate
 import { isEqual, set } from "date-fns";
 import "@fullcalendar/core/vdom"; // solves problem with Vite
 import "@vuepic/vue-datepicker/dist/main.css";
-import gql from "graphql-tag";
+import { query } from "./queries/queries";
 import { useQuery } from "@vue/apollo-composable";
 import CalendarFilterLayout from "./components/partials/calendar-filter-layout.vue";
 
@@ -154,7 +154,6 @@ import GrCalendar from "./components/gr-calendar.vue";
 import OfferUp from "./components/partials/offer-up.vue";
 
 /** Component State */
-const activeEventsList = ref([]);
 const initialized = ref(false);
 const eventDetails = ref(null); // Currently selected event context
 const emptyNodeContext = ref(null); // information about the empty node that was most recently clicked
@@ -212,118 +211,53 @@ const handleAddNew = (node) => {
         };
         resetState();
         eventFormVisibility.value = true;
-        console.log("node context", emptyNodeContext.value);
     }
 };
-
-const query = gql`
-    query CalendarEventsQuery {
-        calendarEventTypes {
-            data {
-                id
-                name
-                description
-                color
-                type
-            }
-        }
-        locations(page: 0) {
-            data {
-                id
-                name
-            }
-        }
-        employee {
-            data {
-                id
-                first_name
-                last_name
-                email
-            }
-        }
-        users {
-            data {
-                id
-                first_name
-                last_name
-                email
-                profile_photo_path
-            }
-        }
-        members {
-            data {
-                id
-                first_name
-                last_name
-                email
-                profile_photo_path
-            }
-        }
-        leads {
-            data {
-                id
-                first_name
-                last_name
-                email
-                profile_photo_path
-            }
-        }
-        calendarEvents {
-            id
-            title
-            ownerId
-            start
-            end
-            title
-            description
-            full_day_event
-            eventTypeId
-            locationId
-            location {
-                id
-                name
-            }
-            type {
-                id
-                name
-                description
-                color
-                type
-            }
-            attendees {
-                id
-                entity_type
-                entity_data {
-                    name
-                    profile_photo_url
-                    email
-                }
-            }
-        }
-    }
-`;
 
 const { result } = useQuery(query);
 
 const handleCreateEvent = (form) => {
-    console.log("create new event with info:", form);
-    console.log("current events", activeEventsList.value);
-    // activeEventsList.value = [...activeEventsList.value, { ...form }];
+    showCalendar.value = false;
+
     const newEventObj = {
+        ...events.value[0],
+        attendees: [],
+
         title: form.title,
         description: form.description,
-        start: form.time.start,
-        end: form.time.end,
-        backgroundColor: "#123456",
-        eventType: form.eventType,
-        instructor: form.instructor,
-        member: form.member,
-        notify: form.notify,
-        recurring: form.recurring,
+        start: getDateTimeString(
+            new Date(
+                `${form.start.date} ${!form.allDay ? form.start.time : ""}`
+            )
+        ),
+        end: getDateTimeString(
+            new Date(
+                `${form.end.date} ${
+                    !form.allDay ? form.end.time : "11:59:59 PM"
+                }`
+            )
+        ),
+        full_day_event: form.allDay,
     };
-    console.log("new event", newEventObj);
-    activeEventsList.value.push(newEventObj);
+
+    events.value.push(newEventObj);
     eventFormVisibility.value = false;
+
+    setTimeout(() => {
+        showCalendar.value = true;
+    }, 100);
+};
+
+const getDateTimeString = (date) => {
+    const year = date.getFullYear();
+    const month =
+        date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+    const dateNum = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+    const hour = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+    const min =
+        date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+
+    return `${year}-${month}-${dateNum} ${hour}:${min}:00`;
 };
 
 /** handles clicking calendar event */
@@ -334,7 +268,6 @@ const handleCalendarEvent = (e) => {
         start: e._instance.range.start,
         end: e._instance.range.end,
     };
-    console.log("event info", eventInfo);
     eventDetails.value = eventInfo;
     eventDetailsVisibibility.value = true;
 };
@@ -358,10 +291,20 @@ const getDayClass = (date) => {
 
 watch(result, (ov, nv) => {
     if (initialized.value) return;
-    initialized.value = true;
-    let { calendarEvents } = result.value;
-    activeEventsList.value.push(...calendarEvents);
-    console.log(result.value);
+    console.log("GQL Result:", result.value);
+    eventTypes.value = result.value.calendarEvents.data;
+    employees.value = [];
+    for (let employee of result.value.employee.data) {
+        employees.value.push({
+            ...employee,
+            name: `${employee.first_name} ${employee.last_name}`,
+        });
+    }
+    members.value = result.value.members.data;
+    leads.value = result.value.leads.data;
+    locations.value = result.value.locations.data;
+    event_types.value = result.value.calendarEventTypes.data;
+    events.value = [...result.value.calendarEvents];
 });
 
 let timeout = null;
@@ -433,25 +376,6 @@ const getFilteredEvents = computed(() => {
 
     return filteredEvents;
 });
-
-onMounted(async () => {
-    if (!timeout) {
-        timeout = setTimeout(() => {
-            console.log("GQL Result:", result.value);
-            eventTypes.value = result.value.calendarEvents.data;
-            employees.value = result.value.employee.data;
-            // members.value = result.value.members.data;
-            leads.value = result.value.leads.data;
-            locations.value = result.value.locations.data;
-            event_types.value = result.value.calendarEventTypes.data;
-            events.value = result.value.calendarEvents;
-        }, 2000);
-    }
-    //   await nextTick();
-    //   window.dispatchEvent(new Event("resize"));
-});
-
-onUnmounted(() => clearTimeout(timeout));
 </script>
 
 <style scoped>
