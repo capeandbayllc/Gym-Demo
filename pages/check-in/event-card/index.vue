@@ -1,29 +1,29 @@
 <template>
-  <div class="event-card-container card-gradient-bg">
+  <div
+    class="event-card-container to-primary/10 bg-gradient-to-t from-black/90"
+  >
     <div class="scheduled-event-container">
       <div class="events-header">Scheduled Events</div>
       <div class="event-items" v-if="mock.scheduled.length">
-          <div class="event-description">{{mock.scheduled[0].due}}</div>
+        <div class="event-description">{{ mock.scheduled[0].due }}</div>
         <div class="event-detail">
-          <div>{{mock.scheduled[0].title}}</div>
-          <book-checker v-model="form[mock.scheduled[0].id]"/>
+          <div>{{ mock.scheduled[0].title }}</div>
+          <book-checker v-model="form[mock.scheduled[0].id]" />
         </div>
       </div>
     </div>
     <div class="events-header pt-8">Upcoming Events</div>
     <div class="event-description border-none">At your location</div>
     <div class="events-header pb-2">September</div>
-        <event-list
-            :data="mock.upcoming"
-            class="max-h-[340px] overflow-auto"
-        />
+    <event-list :data="mock.upcoming" class="max-h-[21rem] overflow-auto" />
   </div>
 </template>
 <style scoped>
 .event-card-container {
   @apply w-[33%] -md:w-full flex-grow-0 bg-base-300/40;
 }
-.event-card-container, .scheduled-event-container {
+.event-card-container,
+.scheduled-event-container {
   @apply border border-secondary rounded flex flex-col p-3;
 }
 .upcoming-event-container {
@@ -48,56 +48,66 @@
 }
 </style>
 <script setup>
-import { ref } from 'vue'
-import EventList from '../event-list.vue';
-import BookChecker from '../book-checker.vue';
+import { ref } from "vue";
+import EventList from "../event-list.vue";
+import BookChecker from "../book-checker.vue";
 const mock = {
-    scheduled: [{
+  scheduled: [
+    {
       id: 1,
-        title: 'Yoga',
+      title: "Yoga",
       booked: true,
-        due: "Monday 5:20 - 6:10"
-    }],
-    upcoming: [{
+      due: "Monday 5:20 - 6:10",
+    },
+  ],
+  upcoming: [
+    {
       id: 2,
-        title: 'Yoga',
+      title: "Yoga",
       booked: false,
-        due: "Monday 5:20 - 6:10"
-    }, {
+      due: "Monday 5:20 - 6:10",
+    },
+    {
       id: 3,
-        title: 'PT Training',
+      title: "PT Training",
       booked: false,
-        due: "Monday 6:30 - 6:40"
-    },  {
+      due: "Monday 6:30 - 6:40",
+    },
+    {
       id: 4,
-        title: 'Yoga',
+      title: "Yoga",
       booked: false,
-        due: "Tuesday 6:30 - 6:40"
-    },{
+      due: "Tuesday 6:30 - 6:40",
+    },
+    {
       id: 5,
-        title: 'Yoga',
+      title: "Yoga",
       booked: false,
-        due: "Tuesday 6:30 - 6:40"
-    },{
+      due: "Tuesday 6:30 - 6:40",
+    },
+    {
       id: 6,
-        title: 'Yoga',
+      title: "Yoga",
       booked: false,
-        due: "Tuesday 6:30 - 6:40"
-    },{
+      due: "Tuesday 6:30 - 6:40",
+    },
+    {
       id: 7,
-        title: 'Yoga',
+      title: "Yoga",
       booked: false,
-        due: "Tuesday 6:30 - 6:40"
-    },{
+      due: "Tuesday 6:30 - 6:40",
+    },
+    {
       id: 8,
-        title: 'Yoga',
+      title: "Yoga",
       booked: false,
-        due: "Tuesday 6:30 - 6:40"
-    }]
-}
+      due: "Tuesday 6:30 - 6:40",
+    },
+  ],
+};
 
-const form = ref({})
+const form = ref({});
 for (let item of [...mock.scheduled, ...mock.upcoming]) {
-    form.value[item.id] = item.booked
+  form.value[item.id] = item.booked;
 }
 </script>
