@@ -1,6 +1,6 @@
 <template>
     <div class="text-center text-xl mt-4 font-semibold mb-6">
-        Select your Agreement Type
+        Select your Contract
     </div>
     <div class="flex justify-around cursor-pointer gradient-bg w-fit w-[450px] p-6 mx-auto rounded border border-secondary">
         <div v-for="(type, ndx) in filesTypes" :key="ndx" class="create-option mx-6" :class="{'transition-all scale-[1.2]': activeTab == ndx}" @click="activeTab = ndx">
@@ -19,21 +19,9 @@
         @apply inline-block items-center text-xs text-center w-20 mb-4;
     }
     
-  /*   .chart-content{
-        @apply bg-black rounded w-full text-3xl font-bold border-white border-2 text-center;
-    } */
     .content {
         @apply border border-secondary;
     }
-    /* .tab-list {
-        @apply flex flex-row space-x-5 pb-4;
-        .tab-item {
-            @apply px-4 py-1 rounded bg-base-content text-secondary text-base cursor-pointer;
-        }
-        .tab-item.active {
-            @apply bg-secondary text-base-content relative;
-        }
-    } */
 }
 .agreement-builder-modal-card {
     background-color: hsl(var(--n) / var(--tw-bg-opacity));
@@ -49,24 +37,21 @@ const props = defineProps({
 		default: null,
 	}
 })
+const emit = defineEmits(['close', 'changeNewAgreementData']);
+
 
 const activeTab = ref(null);
+const filesTypes = [ "Florida MTN", "Florida Term", "FLA. PIF" ];
 
 const changeNewAgreementData = ()=>{
     let changeNewAgreementData = props.newAgreementData;
-    changeNewAgreementData.type = filesTypes[activeTab.value]
+    changeNewAgreementData.contract = filesTypes[activeTab.value]
     emit('changeNewAgreementData', changeNewAgreementData)
 };
 
 watch(activeTab, () => {
     changeNewAgreementData()
 });
-
-const filesTypes = [ "Membership", "Personal Training", "FLA. PIF" ];
-
-
-const emit = defineEmits(['close', 'changeNewAgreementData']);
-
 
 watch(activeTab,()=>{
     emit("changeType",filesTypes[activeTab.value])
