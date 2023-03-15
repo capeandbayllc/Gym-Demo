@@ -7,6 +7,9 @@
         'bg-transparent border-secondary': transparent && !secondary,
         'rounded-t': !isCollapsed,
         rounded: isCollapsed,
+        'btn-xs': size === 'xs',
+        'btn-sm': size === 'sm',
+        'btn-lg': size === 'lg',
       }"
       :onClick="toggleCollapsed"
     >
@@ -44,6 +47,19 @@
 }
 .select-box-clear-btn {
   @apply text-right font-medium mr-3 text-sm cursor-pointer;
+}
+.select-box-btn.bg-secondary {
+    @apply border-0;
+}
+
+.btn-xs {
+  height: 1.5rem;
+}
+.btn-sm {
+  height: 2rem;
+}
+.btn-lg {
+  height: 4rem;
 }
 
 .fade-enter-active,
@@ -100,6 +116,10 @@ const props = defineProps({
   closeOnOutclick: {
     type: Boolean,
     default: true,
+  },
+  size: {
+    type: String,
+    default: '',
   },
 });
 
