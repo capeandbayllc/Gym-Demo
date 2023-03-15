@@ -14,9 +14,6 @@ import { getRandomInt } from "~/api/utils/number";
 import registerResolver from "~/api/utils/resolver";
 import graphQLSchema from "~/api/schema.gql?raw";
 import { UUIDManager } from "~/api/utils/UUIDManager";
-import {useMutation} from "@vue/apollo-composable";
-import user from "~/api/mutations/user";
-
 
 
 // Mirage GraphQL README:
@@ -50,20 +47,4 @@ const server = createServer({
 });
 
 console.log({ server });
-
-setTimeout(() => {
-  const usr = server.db.users[4];
-  const { mutate: updateCustomer } = useMutation(user.mutation.updateUser);
-  const m = updateCustomer({
-    input: {
-      // id: '132dssdds',
-      id: usr.id,
-      email: 'foo@bar.com',
-      first_name: 'foo' + getRandomInt(400),
-      last_name: 'bar',
-    },
-  });
-
-      m.then(m => console.log(111, m.data.updateUser.first_name)).catch(e => console.error(e));
-}, 2000)
 </script>
