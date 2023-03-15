@@ -67,38 +67,13 @@
 
 import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-
+import {GET_SINGLE_MEMBER} from "@/api/queries/member";
 const route = useRoute()
-const profileId = (route.params.id)
-const profileObjectData = ref({});
-
-console.log("Profile ID: ", route);
-
-const query = gql`
-  query SingleMember($id: ID) {
-    member(id: $id) {
-      id
-      first_name
-      last_name
-      email
-      primary_phone
-      locations {
-        id
-        name
-      }
-      homeLocation {
-        name
-      }
-      created_at
-    }
-  }
-`;
-
-const { result } = useQuery(query, {
+const profileId = (route.query.id)
+const profileObjectData = ref({}); 
+const { result } = useQuery(GET_SINGLE_MEMBER, {
     variables: { id: profileId },
   });
-
-
 watchEffect(() => {
     if (result.value) {
         profileObjectData.value = result.value
@@ -114,7 +89,7 @@ const isActiveMember = ref(false);
 const memberInfo = ref({});
 const memberInformation = [
   {
-    key: "first-name",
+    key: "firstName",
     label: "First Name",
     class: "secondary-input",
   },
@@ -124,7 +99,7 @@ const memberInformation = [
     class: "secondary-input",
   },
   {
-    key: "last-name",
+    key: "lastName",
     label: "Last Name",
     class: "secondary-input",
   },
@@ -193,7 +168,7 @@ const memberInformation = [
 const demographicsObj = ref({});
 const demographics = ref([
   {
-    key: "street-address",
+    key: "streetAddress",
     label: "Street Address",
     class: "col-span-3 neutral-input",
   },
@@ -213,7 +188,7 @@ const demographics = ref([
     class: "neutral-input",
   },
   {
-    key: "email-address",
+    key: "emailAddress",
     label: "Email Address",
     class: "neutral-input",
   },

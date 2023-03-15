@@ -43,3 +43,23 @@ const member: GraphQLObject<MemberQuery, object> = {
 }
 
 export default member;
+ 
+export const GET_SINGLE_MEMBER = gql`
+  query SingleMember($id: ID) {
+    member(id: $id) {
+      id
+      first_name
+      last_name
+      email
+      primary_phone
+      locations {
+        id
+        name
+      }
+      homeLocation {
+        name
+      }
+      created_at
+    }
+  }
+`;
