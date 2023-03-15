@@ -31,7 +31,7 @@
 </template>
 <style scoped>
  .alert-popup-card {
-    @apply rounded-2xl bg-neutral;
+    @apply rounded-2xl;
     .alert-popup-container {
         @apply pl-2 pr-2 pt-6 pb-6;
         .modal_scroll{
@@ -52,7 +52,7 @@
 import FilterAction from "./alert-modal/filter-action.vue";
 import RecentAlertsTableRow from '~~/pages/alerts-notifications/components/recent-alerts-table-row.vue';
 
-const searchInput =  ref("Kev");
+const searchInput =  ref("");
 const columns = [
     {
         label: 'Segment',
