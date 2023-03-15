@@ -190,6 +190,64 @@
 
         <divider />
 
+        <!-- HOME ROLE DEPT TEAM SECTION -->
+        <div class="grid grid-cols-1 py-2">
+          <div class="grid grid-cols-12 justify-items-center py-2">
+            <div class="mb-5 col-span-4 multi-select-input ml-20 w-8/12">
+              <multi-select-dropdown
+                  label="Home Location(s)"
+                  class=""
+                  v-model="form.homeLocations"
+                  mode="multiple"
+                  track-by="value"
+                  :caret="true"
+                  :options="homeLocation"
+              ></multi-select-dropdown>
+            </div>
+
+            <div class="mb-5 col-span-4 multi-select-input w-8/12">
+              <multi-select-dropdown
+                  class=""
+                  label="Role(s)"
+                  v-model="form.roles"
+                  mode="multiple"
+                  track-by="value"
+                  :caret="true"
+                  :options="roles"
+              ></multi-select-dropdown>
+            </div>
+
+            <div class="mb-5 col-span-4 multi-select-input w-8/12 -ml-24">
+              <multi-select-dropdown
+                  class=""
+                  label="Department(s)"
+                  v-model="form.departments"
+                  mode="multiple"
+                  track-by="value"
+                  :caret="true"
+                  :options="departments"
+              ></multi-select-dropdown>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 py-2">
+          <div class="grid grid-cols-12 justify-items-center pb-2 pt-16">
+            <div class="mb-5 col-span-4 multi-select-input ml-20 w-8/12">
+              <multi-select-dropdown
+                  label="Team(s)"
+                  class=""
+                  v-model="form.teams"
+                  mode="multiple"
+                  track-by="value"
+                  :caret="true"
+                  :options="teams"
+              ></multi-select-dropdown>
+            </div>
+          </div>
+        </div>
+
+        <divider />
       </div>
 
 <!--          <profile-relation/>
@@ -289,11 +347,14 @@ export default {
 }
 
 input, select, option {
-  @apply h-9 rounded w-full pl-2;
-  min-width: 16rem;
+  @apply h-9 rounded w-full pl-2 min-w-min;
+  /*min-width: 16rem;*/
 }
 
-
+.multi-select-input {
+  @apply h-9 rounded pl-2;
+  /*min-width: 24rem;*/
+}
 #relationship option {
   background-color: #333;
 }
@@ -331,10 +392,11 @@ input:hover {
 
 <script setup>
 import {ref} from 'vue';
+import '@vueform/multiselect/themes/default.css'
 import {MembersIcon} from "@/components/icons";
-// import Options from "../components/contact/Options";
 import ProfileAddressSetting from "./components/address";
 import Divider from "./components/divider";
+import MultiSelectDropdown from "./components/multi-select-dropdown";
 
 const form = ref({
   username: 'kevinbuchanan@email.com',
@@ -352,7 +414,11 @@ const form = ref({
     youtube: '',
     snapchat: '',
     facebook: ''
-  }
+  },
+  homeLocations:  [],
+  roles: [],
+  departments: [],
+  teams: [],
 });
 
 const profileBasic = [
@@ -454,10 +520,6 @@ const sections = [
     key: 'profileBasic',
     data: profileBasic,
   },
-  // {
-  //   key: 'location',
-  //   data: location,
-  // },
 ];
 
 const relationships = [
@@ -492,6 +554,63 @@ const departments = [
     value: 3,
     label: 'Group Fitness',
   },
+];
+
+const homeLocation = [
+  {
+    value: 1,
+    label: 'Club 1'
+  },
+  {
+    value: 2,
+    label: 'Club 2'
+  },
+  {
+    value: 3,
+    label: 'Club 3'
+  },
+  {
+    value: 4,
+    label: 'Club 4'
+  },
+];
+
+const roles = [
+  {
+    value: 1,
+    label: "Front Source"
+  },
+  {
+    value: 2,
+    label: "Lead Source"
+  },
+  {
+    value: 3,
+    label: "Trash"
+  },
+  {
+    value: 4,
+    label: "Sales"
+  }
+];
+
+const teams = [
+  {
+    value: 1,
+    label: "Team 1"
+  },
+  {
+    value: 2,
+    label: "Team 2"
+  },
+  {
+    value: 3,
+    label: "Team 3"
+  },
+  {
+    value: 4,
+    label: "Team 4"
+  }
 ];
 
 const uploadPopUp = ref(false);
