@@ -12,6 +12,7 @@
 <style scoped>
 </style>
 <script setup>
+import { ReportingIcon } from '~~/components/icons';
 import FitnessCard from '../fitness-card.vue';
 import IncomeChart from './income-chart.vue';
 import PercentageRadar from './percentage-radar.vue';

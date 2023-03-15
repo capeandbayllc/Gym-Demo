@@ -11,9 +11,10 @@
 <style scoped>
 .fitness-card-title {
     @apply flex bg-secondary justify-between h-12 items-center text-lg font-semibold px-[26px] py-7;
-    .title-icon {
-        @apply flex items-center justify-center w-9 h-9 mr-3 bg-neutral rounded-[14px];
-    }
+}
+
+.title-icon {
+    @apply flex items-center justify-center w-9 h-9 mr-3 bg-neutral rounded-[14px];
 }
 </style>
 <script setup>
