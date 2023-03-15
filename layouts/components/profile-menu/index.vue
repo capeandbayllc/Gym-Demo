@@ -13,9 +13,13 @@
               class="submenu-items"
               v-for="(child, sub_ndx) in item.children"
               :key="sub_ndx"
-              @click="handleProfileMenuNavigate(child.url)"
-            >
-              {{ child.label }}
+              >
+              <div v-if="child.label=='Help'" @click="handleClickActions">
+                {{ child.label }}
+              </div>
+              <div v-else @click="handleProfileMenuNavigate(child.url)">
+                {{ child.label }}
+              </div>
             </li>
           </ul>
         </li>
@@ -25,6 +29,10 @@
       </div>
     </div>
   </context-menu>
+
+  <daisy-modal :overlay="true" id="helpModal" ref="helpModal">
+            <help-modal />
+        </daisy-modal>
 </template>
 
 <style scoped>
@@ -55,7 +63,8 @@
 </style>
 <script setup>
 import { ref } from "vue";
-
+import HelpModal from "../help-modal/index.vue";
+const helpModal = ref(null);
 const profileMenu = ref(null);
 
 const open = () => {
@@ -113,6 +122,10 @@ const handleClickLogout = () => {
   authToken.value = null;
   console.log("logout", document.cookie, authToken);
   navigateTo("/login");
+};
+
+const handleClickActions = () => {
+  helpModal.value.open();
 };
 
 const handleProfileMenuNavigate = url => {

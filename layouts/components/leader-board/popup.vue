@@ -79,8 +79,9 @@
     </div>
 
     <div class="float-right m-2">
-      <button class="text-xs">View More</button>
+      <button class="text-xs" @click="showSlideout">View More</button>
     </div>
+
   </div>
 </template>
 <style scoped>
@@ -102,18 +103,15 @@
     }
   }
 }
+
+.button2 {
+  border-radius: 4px;
+}
 .solid {
   border-top: 1px solid #bbb;
   padding-bottom: 4px;
 }
 
-.button2 {
-  border-radius: 4px;
-}
-
-.margin-left {
-  margin-left: 17.5%;
-}
 .arrow-up {
   width: 0;
   height: 0;
@@ -359,5 +357,12 @@ const breakpoints = ref({
     snapAlign: "start",
   },
 });
+
+// const showLeaderBoardSlideout = ref(false);
+const emit = defineEmits(["show-leader-board"])
+const showSlideout = () => {
+  emit('show-leader-board')
+  emit('close')
+}
 let leaderBoardData = trainerData;
 </script>

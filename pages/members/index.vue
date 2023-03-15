@@ -84,7 +84,7 @@ import { useQuery } from "@vue/apollo-composable";
 
 const query = gql`
   query AllMembers {
-    members(first: 100) {
+    members(first: 10) {
       data {
         id
         first_name
@@ -110,6 +110,11 @@ const query = gql`
 `;
 
 const { result } = useQuery(query);
+const members = ref([]);
+watch(() => {
+  members.value = result.value.members.data;
+  console.log(members.value)
+})
 
 const isSearchEnable = ref(false);
 const filterBy = [
