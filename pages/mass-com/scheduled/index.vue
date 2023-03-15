@@ -16,8 +16,7 @@
             <h3 class="mt-4">Future Campaigns</h3>
             <div class="page-content-block">
                 <p class="text-sm p-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida est eget quam tincidunt, 
-                    nec aliquet magna porttitor. In ac mi finibus, posuere nibh in, facilisis sem.
+                    Campaigns in progress with a reminder of time on them.
                 </p>
                 <div class="max-h-[25vw] overflow-y-auto px-2">
                     <campaign-table type="future" />
@@ -27,8 +26,7 @@
             <h3 class="mt-4">Recent Campaigns</h3>
             <div class="page-content-block">
                 <p class="text-sm p-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida est eget quam tincidunt, 
-                    nec aliquet magna porttitor. In ac mi finibus, posuere nibh in, facilisis sem.
+                    A look at your current month to month campaign and communications.
                 </p>
                 <div class="max-h-[25vw] overflow-y-auto px-2">
                     <campaign-table type="current" />
