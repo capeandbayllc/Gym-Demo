@@ -1,16 +1,16 @@
 <template>
-  <div
-    class="w-full from-secondary to-transparent bg-gradient-to-r py-2 px-6 border-l-4 border-white rounded-md"
-  >
-    <slot name="title">
-      <h1 class="text-4xl font-semibold">{{ title }}</h1>
-    </slot>
-    <div class="mt-2 flex gap-4 items-center">
-      <slot name="subtitle">
-        <span>{{ subtitle }}</span>
-      </slot>
+    <div
+        class="w-full from-secondary to-transparent bg-gradient-to-r py-2 px-6 border-l-4 border-white rounded-md font-normal"
+    >
+        <slot name="title">
+            <h1 class="text-2xl">{{ title }}</h1>
+        </slot>
+        <div class="mt-1 flex gap-4 items-center">
+            <slot name="subtitle">
+                <span>{{ subtitle }}</span>
+            </slot>
+        </div>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -24,13 +24,13 @@
  */
 
 const props = defineProps({
-  title: {
-    type: String,
-    default: "Default Section Heading Title",
-  },
-  subtitle: {
-    type: String,
-    default: "Default Section Subtitle",
-  },
+    title: {
+        type: String,
+        default: "Default Section Heading Title",
+    },
+    subtitle: {
+        type: String,
+        default: "Default Section Subtitle",
+    },
 });
 </script>

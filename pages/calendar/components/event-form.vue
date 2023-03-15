@@ -5,7 +5,7 @@
         <button
             @click="emit('cancel')"
             type="button"
-            class="absolute top-4 right-4 hover:rotate-180 calendar-style-transition"
+            class="absolute top-4 right-4 hover:rotate-90 calendar-style-transition"
         >
             <CrossCircleIcon
                 class="w-7 h-7 hover:text-secondary calendar-style-transition"

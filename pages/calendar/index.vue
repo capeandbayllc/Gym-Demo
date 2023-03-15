@@ -1,52 +1,5 @@
 <template>
     <div class="px-8 w-full h-fit">
-        <!-- event details -->
-        <div
-            v-if="eventDetailsVisibibility"
-            class="z-50 fixed h-screen w-screen flex items-center justify-center pointer-events-none"
-        >
-            <EventDetails
-                :event="eventDetails"
-                @outclick="resetState"
-                @seemore="
-                    () => {
-                        eventDetailsVisibibility = false;
-                        eventInformationVisibibility = true;
-                    }
-                "
-            />
-        </div>
-        <!-- more in depth event information -->
-        <div
-            v-if="eventInformationVisibibility"
-            class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16 pointer-events-none"
-        >
-            <EventInformation :event="eventDetails" @outclick="resetState" />
-        </div>
-        <!-- offer-up panel -->
-        <div
-            v-if="offerUpVisibibility"
-            class="z-50 fixed h-screen w-screen flex items-center justify-end right-0 top-16 pointer-events-none"
-        >
-            <OfferUp :event="eventDetails" @outclick="resetState" />
-        </div>
-
-        <div
-            class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center pointer-events-none bg-[#fff]/[0.1] backdrop-blur-sm calendar-style-transition"
-            :class="{
-                'z-50 opacity-100': eventFormVisibility,
-                '-z-50 opacity-0': !eventFormVisibility,
-            }"
-        >
-            <EventForm
-                @cancel="resetState"
-                @createEvent="handleCreateEvent"
-                :members="members"
-                :employees="employees"
-                :nodeContext="emptyNodeContext"
-            />
-        </div>
-
         <!-- main content wrapper  -->
         <div
             class="border border-secondary bg-[#202020]/[0.9] rounded-3xl p-7 max-w-none flex gap-4"
@@ -132,6 +85,39 @@
             </section>
         </div>
     </div>
+    <div
+        class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-[#fff]/[0.1] backdrop-blur-sm calendar-style-transition"
+        :class="{
+            'z-50 opacity-100': eventFormVisibility || eventDetailsVisibibility,
+            '-z-50 opacity-0':
+                !eventFormVisibility && !eventDetailsVisibibility,
+        }"
+    >
+        <EventForm
+            v-if="eventFormVisibility"
+            @cancel="resetState"
+            @createEvent="handleCreateEvent"
+            :members="members"
+            :employees="employees"
+            :nodeContext="emptyNodeContext"
+        />
+        <EventDetails
+            v-if="eventDetailsVisibibility"
+            :event="eventDetails"
+            @cancel="resetState"
+            @outclick="resetState"
+            @seemore="showMoreDetails"
+        />
+    </div>
+
+    <div v-if="eventInformationVisibibility">
+        <EventInformation
+            :event="eventDetails"
+            :eventInformationVisibibility="eventInformationVisibibility"
+            @outclick="resetState"
+            @cancel="resetState"
+        />
+    </div>
 </template>
 <script setup>
 import { PlusIcon, BiCaretIcon } from "~~/components/icons";
@@ -155,7 +141,7 @@ import OfferUp from "./components/partials/offer-up.vue";
 
 /** Component State */
 const initialized = ref(false);
-const eventDetails = ref(null); // Currently selected event context
+const eventDetails = ref({ extendedProps: {} }); // Currently selected event context
 const emptyNodeContext = ref(null); // information about the empty node that was most recently clicked
 
 /** Component Visibility State */
@@ -332,7 +318,14 @@ const toggleFilterOption = (filter_id) => {
 };
 
 const getFormattedEvents = computed(() => {
-    const colors = ["#E4463C", "#4E3474", "#004570", "#5D5D5D"];
+    const colors = [
+        "#E4463C",
+        "#4E3474",
+        "#004570",
+        "#5D5D5D",
+        "#0C58ED",
+        "#998A99",
+    ];
     let formattedEvents = [];
     for (let event of getFilteredEvents.value) {
         formattedEvents.push({
@@ -376,6 +369,11 @@ const getFilteredEvents = computed(() => {
 
     return filteredEvents;
 });
+
+const showMoreDetails = () => {
+    eventDetailsVisibibility.value = false;
+    eventInformationVisibibility.value = true;
+};
 </script>
 
 <style scoped>

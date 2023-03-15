@@ -19,7 +19,7 @@
         </div>
         <div class="absolute w-[18%] h-[50px] top-[10px] right-0">
             <div
-                class="relative flex flex-row gap-2 h-[40px] hover:bg-secondary/[0.3] rounded-lg px-2 transition-all duration-200 cursor-pointer justify-end"
+                class="relative flex flex-row gap-2 h-[40px] rounded-lg px-2 transition-all duration-200 justify-end"
             >
                 <span
                     class="h-[34px] w-[34px] my-auto bg-white rounded-xl overflow-hidden border-2 border-secondary"
