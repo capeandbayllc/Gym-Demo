@@ -39,19 +39,19 @@
   @apply border-t border-white/50;
 }
 
-.item-0 {
+.secondary {
   @apply bg-secondary/50 text-secondary;
 }
 
-.item-1 {
+.orange {
   @apply bg-orange-500/50 text-orange-500;
 }
 
-.item-2 {
+.purple {
   @apply bg-purple-500/50 text-purple-500;
 }
 
-.item-3 {
+.red {
   @apply bg-red-500/50 text-red-500;
 }
 </style>
@@ -82,10 +82,7 @@ const items = computed(() =>
     }
 
     if (colorLists[item.title] === undefined) {
-      colorLists[item.title] =
-        item.colorName === "secondary"
-          ? "bg-secondary/50 text-secondary"
-          : `bg-${item.colorName}-500/50 text-${item.colorName}-500`;
+      colorLists[item.title] = item.colorName;
     }
 
     return Object.assign({}, { colorClass: colorLists[item.title] }, item);
