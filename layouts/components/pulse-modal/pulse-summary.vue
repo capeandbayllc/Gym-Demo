@@ -18,7 +18,7 @@
       class="max-h-[50vh] h-full flex gap-4 justify-center pb-8 px-8 overscroll-contain"
     >
       <div class="overflow-y-scroll w-full pr-12">
-        <ul class="w-full">
+        <ul class="w-full flex flex-col gap-16">
           <li>
             <PulseItemCard title="Club Membership Details">
               <template #card-content>
@@ -37,7 +37,14 @@
             </PulseItemCard>
           </li>
           <li>
-            <h4>Membership Calls and Mass Comms</h4>
+            <PulseItemCard title="Membership Calls and Mass Comms">
+              <template #card-content>
+                <MassCommsList
+                  @view="handleViewMemberComm"
+                  :data="membershipCallsAndMassComms"
+                />
+              </template>
+            </PulseItemCard>
           </li>
           <li>
             <PulseItemCard title="Personal Training Details">
@@ -71,13 +78,14 @@ import PulseCheckHistory from "./pulse-check-history.vue";
 import PulseItemCard from "./partials/pulse-item-card.vue";
 import DetailList from "./partials/detail-list.vue";
 import SalesLeaderboard from "./partials/sales-leaderboard-list.vue";
+import MassCommsList from "./partials/mass-comms-list.vue";
 
 const personalTrainingDetailData = ref([
-  { title: "Appointments Sold", amount: 23, colorName: 'secondary' },
-  { title: "Appointments Completed", amount: 23, colorName: 'orange' },
-  { title: "Sold Amount ($)", amount: 430.25, colorName: 'orange' },
-  { title: "Sold Amount (%)", amount: 85, colorName: 'purple' },
-  { title: "Percentage to Goal", amount: 75, colorName: 'red' },
+  { title: "Appointments Sold", amount: 23, colorName: "secondary" },
+  { title: "Appointments Completed", amount: 23, colorName: "orange" },
+  { title: "Sold Amount ($)", amount: 430.25, colorName: "orange" },
+  { title: "Sold Amount (%)", amount: 85, colorName: "purple" },
+  { title: "Percentage to Goal", amount: 75, colorName: "red" },
 ]);
 
 const membershipSalesLeaderboard = ref([
@@ -92,6 +100,21 @@ const membershipSalesLeaderboard = ref([
   { rank: 9, name: "Mary Joe", points: 90, trending: "down" },
   { rank: 10, name: "Gary Holmes", points: 80, trending: "up" },
 ]);
+
+const membershipCallsAndMassComms = ref([
+  { id: 0, days: 4, status: "Pending", subject: "Email" },
+  { id: 1, days: 2, status: "Pending", subject: "SMS Message" },
+  { id: 2, days: 8, status: "Pending", subject: "Follow Up" },
+  { id: 3, days: 1, status: "Pending", subject: "Follow Up" },
+  { id: 4, days: 2, status: "Pending", subject: "SMS Message" },
+]);
+
+const handleViewMemberComm = (ctx) => {
+  let clickedComm = membershipCallsAndMassComms.value.filter(
+    (m) => m.id === ctx
+  );
+  console.log("clicked view", Object.assign({}, ...clickedComm));
+};
 </script>
 
 <style scoped>

@@ -15,7 +15,7 @@
       <span
         :class="row.colorClass"
         class="flex flex-col items-center justify-center aspect-square w-12 text-xl font-bold rounded-lg"
-        >{{ idx }}</span
+        >{{ fmtIndex(idx + 1) }}</span
       >
 
       <template v-for="(hdr, hdix) in headers" :key="hdix">
@@ -88,4 +88,8 @@ const items = computed(() =>
     return Object.assign({}, { colorClass: colorLists[item.title] }, item);
   })
 );
+
+const fmtIndex = (ix = 0) => {
+  return `${ix}`.length === 1 ? `0${ix}` : ix;
+};
 </script>
