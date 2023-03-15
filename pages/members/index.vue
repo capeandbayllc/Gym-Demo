@@ -84,7 +84,7 @@ import { useQuery } from "@vue/apollo-composable";
 
 const query = gql`
   query AllMembers {
-    members(first: 100) {
+    members(first: 10) {
       data {
         id
         first_name
