@@ -1,5 +1,5 @@
 <template>
-    <dashboard-card :title-icon="CalendarIcon" :title="month" class="flex flex-col justify-between bg-black">
+    <dashboard-card :title-icon="CalendarIcon" title="December" class="flex flex-col justify-between bg-black">
         <Datepicker
             v-model="date"
             inline
@@ -10,9 +10,7 @@
             disable-month-year-select
             :enable-time-picker="false"
             :day-names="dayNames"
-            @update-month-year="handleMonthYear" 
-            arrownavigation
-            dark
+            @update-month-year="handleMonthYear"
         />
         <div class="calendar-footer">
             <div class="calendar-footer-labels">
@@ -85,7 +83,7 @@ const date = ref(new Date());
 
 const yoga = ["2023-02-01", "2023-02-02", "2023-02-05"]
 const pt = ["2023-02-17", "2023-02-18"]
-const cycle = ["2023-03-01", "2023-02-10"]
+const cycle = ["2023-12-01", "2024-02-10"]
 const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 const page = ref(new Date());
