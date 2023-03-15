@@ -1,6 +1,6 @@
 <template>
   <div class="percentage-container p-4">
-      <label class="header block text-[14px]">Drafting Report</label>
+      <label class="header block text-[14px] py-2">Drafting Report</label>
       <div class="percent-item grid grid-cols-1">
         <AreaChart class="w-full" />
       </div>

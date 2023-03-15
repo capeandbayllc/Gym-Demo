@@ -5,7 +5,7 @@
 			<PercentageRadar class="col-span-1"/>
 			<UnitsSoldChart class="col-span-1"/>
 			<DraftReportingChart class="col-span-3"/>
-			<!-- <SessionReportingList class="col-span-3" /> -->
+			<SessionReportingList class="col-span-3" />
 		</div> 
 	</fitness-card>
 </template>
