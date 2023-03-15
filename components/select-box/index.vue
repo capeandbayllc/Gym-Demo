@@ -5,9 +5,8 @@
             :class="{
                 'bg-secondary': secondary,
                 'bg-transparent': transparent && !secondary,
-                'rounded-t': !isCollapsed,
-                'rounded': isCollapsed,
-                'select-box-btn-primary': !isCollapsed
+                'rounded-t select-box-btn-primary': !isCollapsed,
+                'rounded': isCollapsed
             }"
             :onClick="toggleCollapsed"
         >
@@ -177,7 +176,7 @@ onUnmounted(() => {
 
 const className = computed({
   get() {
-    let additional = isCollapsed.value ? " collapsed" : "";
+    let additional = isCollapsed.value ? " collapsed" : "  ";
     return "select-box-wrapper " + props.class + additional;
   },
 });

@@ -4,39 +4,39 @@
             :items="nameList"
             value=""
             :label="'Name'" 
-            class="bg-secondary rounded border border-white select-box-filter-size"
+            class="bg-secondary rounded select-box-filter-size"
             >
         </select-box>
         <select-box
             :items="statusList"
             value=""
             :label="'Status'" 
-            class="bg-secondary rounded border border-white select-box-filter-size"
+            class="bg-secondary rounded select-box-filter-size"
             >
         </select-box>
         <select-box
             :items="scheduleList"
             value=""
             :label="'Schedule Types'"
-            class="bg-secondary rounded border border-white select-box-filter-size">
+            class="bg-secondary rounded select-box-filter-size">
         </select-box>
         <select-box
             :items="agreementList"
             value=""
             :label="'Agreement Types'"
-            class="bg-secondary rounded border border-white select-box-filter-size">
+            class="bg-secondary rounded select-box-filter-size">
         </select-box>
         <select-box
             :items="availabilityList"
             value=""
             :label="'Availability'"
-            class="bg-secondary rounded border border-white select-box-filter-size">
+            class="bg-secondary rounded select-box-filter-size">
         </select-box>
         <select-box
             :items="locationList"
             value=""
             :label="'Locations'"
-            class="bg-secondary rounded border border-white select-box-filter-size">
+            class="bg-secondary rounded select-box-filter-size">
         </select-box>
     </div>
 </template>

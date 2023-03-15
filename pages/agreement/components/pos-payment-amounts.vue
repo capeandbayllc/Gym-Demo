@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-12 p-4 gap-x-4 gap-y-8 w-[700px] text-sm max-h-[75vh] overflow-auto">
+    <simple-card class="gradient-bg grid grid-cols-12 p-4 gap-x-4 gap-y-8 w-[700px] text-sm max-h-[75vh] overflow-auto">
         <div class="col-span-12 w-full">
             <div class="mb-2 font-semibold text-lg">POS Payment Amounts</div>
         </div>
@@ -82,7 +82,7 @@
                 <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" ref="buttonActiveTotalAmountPaid" v-model="data.activeTotalAmountPaid" />Last Months Dues</div>
             </div>
         </div>
-    </div>
+    </simple-card>
 </template>
 <script setup>
 
