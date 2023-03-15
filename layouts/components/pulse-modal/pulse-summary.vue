@@ -22,7 +22,7 @@
           <li>
             <PulseItemCard title="Club Membership Details">
               <template #card-content>
-                <ItemGridList />
+                <ItemGridList :spacings="gridItemSpacing" />
               </template>
             </PulseItemCard>
           </li>
@@ -73,6 +73,8 @@ const personalTrainingDetailData = ref([
   { title: "Sold Amount (%)", amount: 85 },
   { title: "Percentage to Goal", amount: 75 },
 ]);
+
+const gridItemSpacing = ref(["5rem", "1fr", "5rem"]);
 </script>
 
 <style scoped>

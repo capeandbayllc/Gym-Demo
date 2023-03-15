@@ -1,16 +1,17 @@
 <template>
   <ul class="item-grid-list">
     <div
-      class="grid capitalize justify-items-start text-secondary font-bold pl-2"
-      :class="'grid-cols-[' + spacings.join('_') + ']'"
+      class="grid grid-cols-[5rem_1fr_5rem] capitalize justify-items-start text-secondary font-bold pl-2"
     >
+      <div
+        class="hidden bg-purple-500/50 text-purple-500 bg-secondary/50 text-secondary bg-orange-500/50 text-orange-500 bg-red-500/50 text-red-500"
+      />
       <span v-for="(head, ix) in headers" :key="`${head}_${ix}`">{{
         head.replace("_", "")
       }}</span>
     </div>
     <li
-      class="grid py-4 items-center"
-      :class="'grid-cols-[' + spacings.join('_') + ']'"
+      class="grid grid-cols-[5rem_1fr_5rem] py-4 items-center"
       v-for="(row, idx) in data"
       :key="idx"
     >
@@ -48,10 +49,6 @@ const props = defineProps({
     type: Array,
     default: ["title", "_", "amount"],
   },
-  spacings: {
-    type: Array,
-    default: ["5rem", "1fr", "5rem"],
-  },
   data: {
     type: Array,
     default: [
@@ -67,8 +64,6 @@ const props = defineProps({
     default: ["secondary", "orange", "purple", "red"],
   },
 });
-
-const className = "bg-red-500";
 
 function getColor(ix = 0) {
   let colorIx = ix % props.indexColors.length;
