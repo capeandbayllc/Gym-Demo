@@ -62,6 +62,7 @@ import {
     DraftIcon,
 } from "@/components/icons";
 import NavItem from "./nav-item.vue";
+import PosWindow from "~~/pages/pos/components/pos-window.vue";
 
 const collapsed = ref(false);
 
@@ -96,8 +97,9 @@ const navList = [
             },
             {
                 label: "Point Of Sale",
-                url: "/#",
+                url: null,
                 icon: PosIcon,
+                modalComponent: PosWindow,
             },
             {
                 label: "Fitness",
@@ -538,8 +540,9 @@ const navList = [
             },
             {
                 label: "Point Of Sale",
-                url: "/#",
+                url: null,
                 icon: PosIcon,
+                modalComponent: PosWindow,
             },
             {
                 label: "Fitness",

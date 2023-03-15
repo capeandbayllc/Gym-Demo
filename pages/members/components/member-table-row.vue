@@ -45,9 +45,18 @@
               </div>
             </div>
           </div>
-          <div class="dropdown-item" tabindex="-1">Add a Note</div>
+          <div
+              class="dropdown-item"
+              tabindex="-1" @click.stop="openNoteModal"
+            >
+            Add a Note
+          </div>
         </div>
       </div>
+
+      <daisy-modal ref="addNoteModalRef">
+        <addNoteModel @saveNote="saveNote" @deleteNote="deleteNote"></addNoteModel>
+      </daisy-modal>
 
       <Options :show="contactOption" @on:close="contactOption = null" />
     </td>
@@ -93,6 +102,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import MembershipBtn from "~~/components/buttons/membership-btn.vue";
+import addNoteModel from './add-note-modal.vue';
 
 library.add(faEllipsisH);
 
@@ -102,11 +112,22 @@ const props = defineProps({
   data: Object,
 });
 const contactOption = ref(null);
-
+console.log("Proposss ", props.data.id);
 const navigateToCheckIn = ()=>{
   router.push({
     name:'check-in', 
     query: { id: props.data.id }
   })
 }
+const addNoteModalRef = ref(null);
+
+const openNoteModal = ()=>{
+    addNoteModalRef.value.open();
+}
+const deleteNote = ()=>{
+    addNoteModalRef.value.close();
+}
+const saveNote = () => {
+    addNoteModalRef.value.close();
+};
 </script>
