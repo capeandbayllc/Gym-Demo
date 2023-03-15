@@ -1,5 +1,5 @@
 <template>
-    <fitness-card :title-icon="AssessmentsIcon" title="Fitness Assessments">
+    <fitness-card :title-icon="FitnessAssessmentsIcon" title="Fitness Assessments">
         <div class="assessment-container grid grid-cols-4 gap-5">
             <div class="assessments-chart col-span-1 -lg:col-span-4">
                 <div class="text-lg p-2 font-semibold chart-header">Assessments</div>
@@ -89,6 +89,7 @@
 }
 </style>
 <script setup>
+import { FitnessAssessmentsIcon } from '~~/components/icons'
 import FitnessCard from '../fitness-card.vue';
 import AssessmentsChart from './assessments-chart.vue';
 import MemberList from './member-list.vue';
