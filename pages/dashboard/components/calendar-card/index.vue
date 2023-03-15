@@ -1,16 +1,18 @@
 <template>
-    <dashboard-card :title-icon="CalendarIcon" :title="month" class="flex flex-col justify-between">
+    <dashboard-card :title-icon="CalendarIcon" :title="month" class="flex flex-col justify-between bg-black">
         <Datepicker
             v-model="date"
             inline
-            menu-class-name="dp-custom-menu"
-            calendar-class-name="dp-custom-calendar"
+            menu-class-name="dp-custom-menu bg-black"
+            calendar-class-name="dp-custom-calendar bg-black"
             :day-class="getDayClass"
             auto-apply
             disable-month-year-select
             :enable-time-picker="false"
             :day-names="dayNames"
             @update-month-year="handleMonthYear" 
+            arrownavigation
+            dark
         />
         <div class="calendar-footer">
             <div class="calendar-footer-labels">
@@ -27,13 +29,13 @@
                     Cycle
                 </div>
             </div>
-            <div class="-md:text-xs">Configure…</div>
+            
         </div>
     </dashboard-card>
 </template>
 <style scoped>
 .calendar-footer {
-    @apply h-12 bg-secondary flex justify-between items-center px-5;
+    @apply h-12 bg-black flex justify-between items-center px-5 rounded-b-xl;
     .calendar-footer-labels {
         @apply flex items-center gap-5;
     }
@@ -41,7 +43,7 @@
 </style>
 <style>
 .dp-custom-menu {
-    @apply !bg-base-content/20 grid p-6 border-none;
+    @apply bg-black grid p-6 border-none;
 }
 .dp-custom-calendar {
     .dp__calendar_header {
@@ -51,7 +53,7 @@
         @apply bg-transparent;
     }
     .dp__calendar {
-        @apply w-[30rem];
+        @apply w-[20rem];
     }
     .dp__calendar_item {
         @apply text-base-content flex flex-col items-center w-full;
