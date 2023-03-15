@@ -40,10 +40,12 @@
 </template>
 <style>
 .select-box-wrapper {
-    @apply relative min-w-fit;
+  @apply relative min-w-fit;
 }
 .select-box-btn {
-	@apply flex px-2 py-1 items-center h-full w-full justify-between transition-colors duration-300;
+  @apply flex flex-row border px-2 py-1 items-center justify-between transition-colors duration-300;
+  width: 165px;
+  height: 29px;
 }
 
 .select-box-filter-size{
@@ -51,7 +53,20 @@
 }
 
 .select-box-clear-btn {
-	@apply text-right font-medium mr-3 text-sm cursor-pointer;
+  @apply text-right font-medium mr-3 text-sm cursor-pointer;
+}
+.select-box-btn.bg-secondary {
+    @apply border-0;
+}
+
+.btn-xs {
+  height: 1.5rem;
+}
+.btn-sm {
+  height: 2rem;
+}
+.btn-lg {
+  height: 4rem;
 }
 
 .select-box-btn-primary {
@@ -67,7 +82,6 @@
 .fade-leave-to {
   opacity: 0;
 }
-
 </style>
 <script setup>
 import { ref, computed } from "vue";
@@ -126,26 +140,49 @@ const props = defineProps({
     }
 
 });
+
+const selectContentEl = ref(null);
 const isCollapsed = ref(true);
 const toggleCollapsed = () => {
-    isCollapsed.value = !isCollapsed.value;
+  isCollapsed.value = !isCollapsed.value;
 };
 
 const clearList = () => {
     toggleCollapsed();
     emit('onChange', '');
 };
+
 const onChange = (value) => {
     toggleCollapsed();
     emit('onChange', value);
 };
 
-const className = computed({
-    get() {
-        let additional = isCollapsed.value ? " collapsed" : "";
-        return "select-box-wrapper " + props.class + additional;
-    },
+const handleOutClick = (e) => {
+  if (!isCollapsed || !selectContentEl.value) return;
+  console.log("ELE", selectContentEl.value);
+  if (!selectContentEl.value.$el.contains(e.target)) {
+    toggleCollapsed();
+  }
+};
+
+onMounted(() => {
+  if (props.closeOnOutclick) {
+    window.addEventListener("click", handleOutClick, true);
+  }
 });
 
-const selected = computed(() => props.items?.filter(item => item.value === props.value)[0]?.label)
+onUnmounted(() => {
+  window.removeEventListener("click", handleOutClick, true);
+});
+
+const className = computed({
+  get() {
+    let additional = isCollapsed.value ? " collapsed" : "";
+    return "select-box-wrapper " + props.class + additional;
+  },
+});
+
+const selected = computed(
+  () => props.items?.filter((item) => item.value === props.value)[0]?.label
+);
 </script>

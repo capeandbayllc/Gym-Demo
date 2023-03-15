@@ -1,5 +1,5 @@
 <template>
-    <simple-card title="Marketing 2022" class="-lg:mb-4">
+    <simple-card title="Marketing 2022" class="-lg:mb-4 mb-4">
         <div class="member-card-content">
             <div class="member-docs">
                 <div v-for="doc in docs" :key="doc.id" class="member-doc">
