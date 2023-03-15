@@ -64,12 +64,74 @@
           </li>
         </ul>
       </div>
-      <div class="w-full">
-        <h4>Club History & details</h4>
+      <div class="right-sect w-full">
+        <PulseItemCard title="Club History & details" contentClass="px-12">
+          <template #card-content>
+            <!-- location & call type -->
+            <div class="flex justify-between">
+              <!-- location -->
+              <div class="flex flex-col justify-center">
+                <span class="text-xl">Location:</span>
+                <span class="text-2xl font-semibold">Club 1234</span>
+              </div>
+
+              <!-- calltype -->
+              <div class="min-w-[12rem] py-2">
+                <select class="bg-secondary rounded-2xl px-4 w-full h-full">
+                  <option>Call Type</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center mt-2">
+              <ClubDateLabel text="start date" date="02/24/23" />
+              <ClubDateLabel text="end date" date="02/25/23" />
+            </div>
+
+            <div class="mt-4">
+              <div class="right-detail-list-grid px-6 capitalize">
+                <span>title</span>
+                <span class="text-right">Amount</span>
+              </div>
+              <ul>
+                <li class="right-detail-list-grid bg-secondary">
+                  <span>Active Memberships</span>
+                  <span>243</span>
+                </li>
+                <li class="right-detail-list-grid bg-lime-500">
+                  <span>Personal Training Classes</span>
+                  <span>24</span>
+                </li>
+                <li class="right-detail-list-grid bg-secondary">
+                  <span>Membership Upgrades</span>
+                  <span>7</span>
+                </li>
+              </ul>
+            </div>
+          </template>
+        </PulseItemCard>
       </div>
     </section>
   </div>
 </template>
+
+<style scoped>
+div.right-sect h4 {
+  @apply text-2xl font-semibold;
+}
+
+.right-detail-list-grid {
+  @apply grid grid-cols-[80%_20%] items-center;
+}
+
+li.right-detail-list-grid {
+  @apply w-full py-3 px-6 my-4 rounded-2xl border text-xl;
+}
+
+li.right-detail-list-grid span:last-child {
+  @apply font-bold text-2xl text-right;
+}
+</style>
 
 <script setup>
 import PulseMemberSummary from "./pulse-member-summary.vue";
@@ -79,6 +141,7 @@ import PulseItemCard from "./partials/pulse-item-card.vue";
 import DetailList from "./partials/detail-list.vue";
 import SalesLeaderboard from "./partials/sales-leaderboard-list.vue";
 import MassCommsList from "./partials/mass-comms-list.vue";
+import ClubDateLabel from "./partials/club-date-label.vue";
 
 const personalTrainingDetailData = ref([
   { title: "Appointments Sold", amount: 23, colorName: "secondary" },
