@@ -13,6 +13,10 @@
     @apply h-80 overflow-x-auto w-full;
     table {
         @apply w-max md:w-full;
+
+        th {
+            @apply text-secondary
+        }
     }
 }
 </style>

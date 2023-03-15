@@ -1,5 +1,5 @@
 <template>
-    <div class="conversion-summary-wrapper">
+    <div class="conversion-summary-wrapper card-gradient-bg">
         <div class="conversion-summary-total">267</div>
         <div class="pb-6 text-sm">-1485 (-0.2%) this week</div>
         <div class="pb-4">Total audience breakdown</div>
@@ -22,7 +22,7 @@
 
 <style scoped>
 .conversion-summary-wrapper {
-    @apply flex flex-col border border-secondary rounded px-7 py-6;
+    @apply flex flex-col border border-secondary rounded-2xl px-7 py-6;
 }
 .conversion-summary-total {
     @apply text-6xl text-secondary font-bold;

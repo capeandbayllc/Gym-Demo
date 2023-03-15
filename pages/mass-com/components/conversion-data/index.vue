@@ -45,7 +45,7 @@
     @apply text-xl font-bold;
 }
 .conversion-data-body {
-    @apply flex flex-col lg:flex-row border border-secondary justify-between rounded p-3;
+    @apply flex flex-col lg:flex-row border border-secondary justify-between rounded-2xl p-4 bg-black;
 }
 .conversion-data-details {
     @apply flex flex-col;

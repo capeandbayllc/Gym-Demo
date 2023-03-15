@@ -1,5 +1,5 @@
 <template>
-    <simple-card title="Campaign Details" class="mb-4">
+    <simple-card :title="header ? 'Campaign Details' : ''" class="mb-4">
         <div class="campaign-content-details overflow-y-scroll max-h-[40vw]">
             <div class="flex flex-row justify-between px-6">
                 <div class="campaign-title">July 2020</div>
@@ -15,10 +15,9 @@
 <style scoped>
 .campaign-content-details {
     @apply pt-4 px-4 bg-transparent items-center w-full;
-
-    .campaign-title {
-        @apply: texr-lg;
-    }
+}
+.campaign-title {
+    @apply text-2xl items-end;
 }
 </style>
 
@@ -28,7 +27,11 @@ import CampaignRecentSummary from "./campaign-recent-summary.vue"
 import ConversionData from "./../conversion-data/index.vue"
 
 const props = defineProps({
-    data: Object
+    data: Object,
+    header: {
+        type: Boolean,
+        default: true
+    }
 })
 
 </script>

@@ -36,8 +36,8 @@
             </div>
 
             <h3 class="mt-4">Recent Campaign</h3>
-            <div class="page-content-block">
-                <recent-campaign-details :data="recentCampaign" />
+            <div class="mt-3">
+                <recent-campaign-details :data="recentCampaign" :fixed-height="false" />
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
 
 <script setup>
 import CampaignTable from "./components/scheduled-campaign-table.vue";
-import RecentCampaignDetails from '../components/campaign-details/index.vue';
+import RecentCampaignDetails from '../components/campaign-details/campaign-details-content.vue';
 
 const recentCampaign = {
     id: 1,

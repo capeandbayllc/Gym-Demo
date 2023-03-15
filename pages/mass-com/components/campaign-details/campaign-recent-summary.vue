@@ -56,7 +56,7 @@
 
 <style scoped>
 .recent-campaign-wrapper {
-    @apply flex flex-col border border-secondary rounded p-4 mt-4;
+    @apply flex flex-col border border-secondary rounded p-4 mt-4 bg-black rounded-2xl;
 }
 .recent-campaign-title {
     @apply text-lg font-bold mb-4;
@@ -71,7 +71,7 @@
     @apply flex flex-row flex-wrap justify-between;
 }
 .blocked-requests {
-    @apply text-6xl text-base-content font-bold bg-error w-fit rounded py-2 px-4 mt-4;
+    @apply text-6xl text-base-content font-bold bg-error w-fit rounded-2xl py-2 px-4 mt-4;
 }
 </style>
 
