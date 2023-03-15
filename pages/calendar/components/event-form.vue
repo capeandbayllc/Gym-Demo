@@ -177,18 +177,18 @@ const emit = defineEmits(["createEvent", "cancel"]);
 const btnChoices = ["event", "task", "service", "prospect"];
 const form = ref({
     eventType: "event",
-    title: "Baal",
+    title: null,
     member: null,
     instructor: null,
     start: {
-        date: "2023-01-04",
-        time: "13:00",
+        date: null,
+        time: null,
     },
     end: {
-        date: "2023-01-04",
-        time: "14:00",
+        date: null,
+        time: null,
     },
-    description: "adkjnaskjnda",
+    description: "",
     recurring: false,
     notify: false,
     allDay: false,
@@ -196,10 +196,7 @@ const form = ref({
 
 const handleNewEvent = () => {
     emit("createEvent", form.value);
-};
-
-const toggleRecurringValue = () => {
-    form.value.recurring = !form.value.recurring;
+    resetInputs();
 };
 
 const resetInputs = () => {
