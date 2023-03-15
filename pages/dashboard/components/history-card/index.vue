@@ -22,7 +22,7 @@
                 :columns="columns"
                 :row-component="HistoryTableRow"
                 :data="mock"
-                class="h-44 w-full no-scrollbar mt-2 text-sm"
+                class="h-44 w-full mt-2 text-sm"
             />
         </div>
     </dashboard-card>
@@ -55,7 +55,7 @@ const mock = [{
     event: "PT",
     membership: 'platinum',
     notification: true,
-    image:'images/profile/customers_0.jpg'
+    image:'images/profile/customers_7.jpg'
 
 }, {
     id: 2,
@@ -64,7 +64,7 @@ const mock = [{
     name: "Chris Italianzo",
     event: "Group Class",
     membership: 'bronze',
-    image:'images/profile/customers_1.jpg'
+    image:'images/profile/customers_8.jpg'
 }, {
     id: 3,
     date: "December 1",
@@ -73,7 +73,7 @@ const mock = [{
     event: "PT",
     membership: 'silver',
     notification: true,
-    image:'images/profile/customers_2.jpg'
+    image:'images/profile/customers_9.jpg'
 }, {
     id: 4,
     date: "December 1",
@@ -81,7 +81,7 @@ const mock = [{
     name: "Chris Italianzo",
     event: "Group Class",
     membership: 'bronze',
-    image:'images/profile/customers_3.jpg'
+    image:'images/profile/customers_10.jpg'
 }, {
     id: 5,
     date: "December 1",
@@ -89,7 +89,7 @@ const mock = [{
     name: "Tyler Andrezano",
     event: "PT",
     membership: 'gold',
-    image:'images/profile/customers_4.jpg'
+    image:'images/profile/customers_11.jpg'
 }]
 
 const replacePlaceholder = ()=>{
