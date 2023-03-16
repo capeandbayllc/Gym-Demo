@@ -63,26 +63,26 @@ export const query = gql`
             full_day_event
             eventTypeId
             locationId
-            location {
-                id
-                name
-            }
-            type {
-                id
-                name
-                description
-                color
-                type
-            }
-            attendees {
-                id
-                entity_type
-                entity_data {
-                    name
-                    profile_photo_url
-                    email
-                }
-            }
+            # location {
+            #     id
+            #     name
+            # }
+            # type {
+            #     id
+            #     name
+            #     description
+            #     color
+            #     type
+            # }
+            # attendees {
+            #     id
+            #     entity_type
+            #     entity_data {
+            #         name
+            #         profile_photo_url
+            #         email
+            #     }
+            # }
         }
     }
 `;

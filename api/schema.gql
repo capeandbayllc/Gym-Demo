@@ -64,6 +64,7 @@ type CalendarEvent {
   end: DateTime
   created_at: DateTime
   event_completion: DateTime
+  color: String
   editable: Int
   user_attendees: [EventAttendee]
   lead_attendees: [EventAttendee]

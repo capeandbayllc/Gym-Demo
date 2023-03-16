@@ -276,6 +276,7 @@ const getDayClass = (date) => {
 };
 
 watch(result, (ov, nv) => {
+    console.log("baal");
     if (initialized.value) return;
     console.log("GQL Result:", result.value);
     eventTypes.value = result.value.calendarEvents.data;

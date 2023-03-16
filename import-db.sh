@@ -4,11 +4,9 @@
 #   --path: The absolute/relative path to your gynrevnue project (default: "./../gr-prototype")
 #   --use: what is used to run artisan command, example php, sail or even some vendor executable (default: php)
 #   --build: If migration and seeder should be ran (default is false)
-#   -i: Should images be imported (default is false)
 # . import-db.sh --path="./../gr-prototype" --use=sail -build
 
 canBuild=0
-importImages=0
 path="./../gr-prototype"
 use="php"
 for var in "$@"
@@ -20,8 +18,6 @@ do
         path=${args[1]}
     elif [ "${args[0]}" = "--use" ]; then
         use=${args[1]}
-    elif [ "${args[0]}" = "-i" ]; then
-        importImages=1
     fi
 done
 
@@ -37,12 +33,7 @@ run_migration () {
     echo "Building schema"
     eval "$use artisan export:mirage-schema"
     echo "Hydrating data"
-    if ["$importImage" = "1"]; then
-        eval "$use artisan export:mirage-data --update-profile-image=true"
-    elif ["$importImage" = "0"]; then
-        eval "$use artisan export:mirage-data --update-profile-image=false"
-    fi
-    
+    eval "$use artisan export:mirage-data"
     cd $currentDir
 }
 
