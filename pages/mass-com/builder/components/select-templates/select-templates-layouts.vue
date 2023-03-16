@@ -19,7 +19,7 @@
         </div>
 
         <div class="flex pt-3 justify-center">
-            <Button outline size="xs" class="rounded-full">Build Your Campaign</Button>
+            <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page')">Build Your Campaign</Button>
         </div>
     </div>
 </template>

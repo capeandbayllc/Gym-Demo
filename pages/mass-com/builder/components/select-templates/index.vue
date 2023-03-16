@@ -8,7 +8,7 @@
         </div>
 
         <div class="tab-content">
-            <tab-layouts v-if="activeTab == 'layouts'"></tab-layouts>
+            <tab-layouts v-if="activeTab == 'layouts'" @next-page=" $emit('next-page')" ></tab-layouts>
             <tab-saved v-if="activeTab == 'saved'"></tab-saved>
             <tab-campaigns v-if="activeTab == 'campaigns'"></tab-campaigns>
             <tab-search v-if="activeTab == 'search'"></tab-search>
@@ -44,6 +44,7 @@ import TabLayouts from "./select-templates-layouts.vue";
 import TabSaved from "./select-templates-saved.vue";
 import TabCampaigns from "./select-templates-campaigns.vue";
 import TabSearch from "./select-templates-search.vue";
+import { emit } from "process";
 
 const props = defineProps({
     data: Object

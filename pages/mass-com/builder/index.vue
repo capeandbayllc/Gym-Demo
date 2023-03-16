@@ -6,7 +6,8 @@
 
         <div class="page-content card-gradient-bg">
             <div class="page-content-block">
-                <select-template />
+                <select-template @next-page="activePage = 'map-contacts'" v-if="activePage == 'select-template'" />
+                <map-contacts v-if="activePage == 'map-contacts'" />
             </div>
         </div>
     </div>
@@ -28,9 +29,13 @@
 
 <script setup>
 import SelectTemplate from "./components/select-templates/index.vue";
+import MapContacts from "./components/map-contacts/index.vue";
 
 const props = defineProps({
     data: Object
 })
+
+// let activePage = ref('select-template');
+let activePage = ref('map-contacts');
 
 </script>
