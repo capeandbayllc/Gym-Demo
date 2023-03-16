@@ -7,8 +7,6 @@
 <!-- TODO: i) responsive checking for ipad screen -->
 <!-- TODO: ii) Search manager (have some questions here????) (how will it work):-->
 <!-- TODO: iii) Add connection: responsive check-->
-<!-- TODO: iv) Address: later responsive check; there is a gap problem in city state zip -->
-<!-- TODO: v) Social media handles: LATER responsive check-->
 <!-- TODO: vii) Calendar: right now, default time, later from DB : What will happen if I click new???-->
 <!-- TODO: ix) Cancel / Save hover???-->
 <!-- TODO: UPTO HERE: NOW ALL RESPONSIVE CHECK & Save Success -->
@@ -118,7 +116,7 @@
           <div class="grid grid-cols-12">
             <div class="col-start-2 col-span-10">
               <div class="py-2"> Address </div>
-              <input class="neutral-input" v-model="form.address.address"/>
+              <input class="neutral-input rounded-xl " v-model="form.address.address"/>
             </div>
           </div>
         </div>
@@ -126,20 +124,22 @@
 
         <!--   City, State, Zip code SECTION-->
         <div class="grid grid-cols-1 py-2">
-          <div class="grid grid-cols-12 justify-items-center py-2">
-            <div class="mb-5 col-span-2 col-span-4 ml-12 w-3/5">
-              <div class="mb-1.5"> City </div>
-              <input class="neutral-input" v-model="form.address.city"/>
-            </div>
+          <div class="w-5/6 ml-auto mr-auto mt-2 mb-4">
+            <div class="grid grid-cols-12 py-2 -ml-2 gap-10 lg:gap-10 md:gap-4">
+              <div class="mb-5 col-span-4 multi-select-input w-full">
+                <div class="mb-1.5"> City </div>
+                <input class="neutral-input rounded-xl" v-model="form.address.city"/>
+              </div>
 
-            <div class="mb-5 col-span-4 w-3/5">
-              <div class="mb-1.5"> State </div>
-              <input class="neutral-input" v-model="form.address.state"/>
-            </div>
+              <div class="mb-5 col-span-4 multi-select-input w-full">
+                <div class="mb-1.5"> State </div>
+                <input class="neutral-input rounded-xl" v-model="form.address.state"/>
+              </div>
 
-            <div class="mb-5 col-span-4 w-3/5 -ml-12">
-              <div class="mb-1.5"> Zip code  </div>
-              <input class="neutral-input" v-model="form.address.zipcode"/>
+              <div class="mb-5 col-span-4 multi-select-input w-full">
+                <div class="mb-1.5"> Zip code </div>
+                <input class="neutral-input rounded-xl" v-model="form.address.zipcode"/>
+              </div>
             </div>
           </div>
         </div>
@@ -158,7 +158,7 @@
 
             <div class="grid grid-cols-12 p-2 mb-5 -mt-3">
               <div class="col-start-2 col-span-10">
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 lg:grid-cols-2 md:grid-cols-1 gap-4 lg:mb-0 md:mb-5">
                   <div class="mb-5 rounded-lg overflow-hidden">
                     <input class="neutral-input ml-8" v-model="form.social.instagram"/>
                     <div class="w-9 h-9 mr-3 -mt-9">
@@ -175,7 +175,7 @@
 
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 lg:grid-cols-2 md:grid-cols-1 gap-4 lg:mb-0 md:mb-5">
                   <div class="mb-5 rounded-lg overflow-hidden">
                     <input class="neutral-input ml-8" v-model="form.social.tiktok"/>
                     <div class="w-9 h-9 mr-3 bg-blue-500 -mt-9">
@@ -192,7 +192,7 @@
 
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 lg:grid-cols-2 md:grid-cols-1 gap-4 lg:mb-0 md:mb-5">
                   <div class="mb-5 rounded-lg overflow-hidden">
                     <input class="neutral-input ml-8" v-model="form.social.snapchat"/>
                     <div class="w-9 h-9 mr-3 bg-blue-500 -mt-9">
@@ -433,7 +433,7 @@ export default {
 }
 
 input, select, option {
-  @apply h-9 rounded w-full pl-2 min-w-min;
+  @apply h-9 w-full pl-2 min-w-min;
 }
 
 .multi-select-input {
