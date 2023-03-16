@@ -17,7 +17,7 @@
 </template>
 <style scoped>
 .select-box-icon {
-	@apply transform transition transition-transform ml-2;
+	@apply transform transition transition-transform ml-2 mt-[2px];
 }
 </style>
 <script setup>
