@@ -65,28 +65,18 @@
 <script setup>
 
 
-import { GET_SINGLE_MEMBER } from "@/api/queries/member";
 import { useQuery } from "@vue/apollo-composable";
+import member from "~/api/queries/member";
 const route = useRoute()
 const profileId = (route.query.id)
 const profileObjectData = ref({}); 
-const { result } = useQuery(GET_SINGLE_MEMBER, {
+const { result } = useQuery(member.query.get, {
     variables: { id: profileId },
   });
-  
-onMounted( () => {
-    if (result.value) {
-        profileObjectData.value = result?.value
-        memberInfo.value.firstName = profileObjectData?.value?.member?.first_name;
-        memberInfo.value.lastName = profileObjectData?.value?.member?.last_name;
-        demographicsObj.value.streetAddress = profileObjectData?.value?.member?.homeLocation?.name;
-        demographicsObj.value.emailAddress = profileObjectData?.value?.member.email;
-    }
-});
-
 
 const isActiveMember = ref(false);
 const memberInfo = ref({});
+
 const memberInformation = [
   {
     key: "firstName",
@@ -233,6 +223,17 @@ const demographics = ref([
     class: "neutral-input",
   },
 ]);
+
+watchEffect(() => {
+    if (result.value) {
+        profileObjectData.value = result?.value
+        memberInfo.value.firstName = profileObjectData?.value?.member?.first_name;
+        memberInfo.value.lastName = profileObjectData?.value?.member?.last_name;
+        demographicsObj.value.streetAddress = profileObjectData?.value?.member?.homeLocation?.name;
+        demographicsObj.value.emailAddress = profileObjectData?.value?.member.email;
+    }
+});
+
 </script>
 <style scoped>
 .profile-wrap {

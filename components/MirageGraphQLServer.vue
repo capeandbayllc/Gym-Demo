@@ -11,10 +11,9 @@ import { NoteFactory } from "~/api/data/notes/NoteFactory";
 import createAdminAndKioskUser from "~/api/data/users/UserFactory";
 import { NotificationFactory } from "~/api/data/notifications/NotificationFactory";
 import { getRandomInt } from "~/api/utils/number";
-import registerResolver from "~/api/queries/utils/resolver";
+import registerResolver from "~/api/utils/resolver";
 import graphQLSchema from "~/api/schema.gql?raw";
 import { UUIDManager } from "~/api/utils/UUIDManager";
-
 
 
 // Mirage GraphQL README:

@@ -174,21 +174,21 @@ import {
   MessageIcon,
   EditIcon,
 } from "~~/components/icons";
-import { GET_SINGLE_MEMBER } from "@/api/queries/member";
+import  Member from "@/api/queries/member";
 
 const user = useState("auth");
 
 const route = useRoute()
 const profileId = (route.query.id)
 const ProfileInfo = ref({}); 
-const { result } = useQuery(GET_SINGLE_MEMBER, {
+const { result } = useQuery(Member.query.get , {
     variables: { id: profileId },
   });
- 
-onMounted( () => {
-    if (result.value) {
-      ProfileInfo.value = result.value
-    }
+
+watchEffect( () => {
+  if (result.value) {
+    ProfileInfo.value = result.value
+  }
 });
 
 const guests = [
