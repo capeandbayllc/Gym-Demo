@@ -1,7 +1,7 @@
 <template>
   <div class="sales-leaderboard px-4 relative max-h-72 overflow-auto z-[1]">
     <div class="sticky top-0 bg-black z-[1]">
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-4 pt-4">
         <span class="text-secondary text-xl font-semibold"
           >Leaderboard for</span
         >
@@ -48,7 +48,7 @@
 <style scoped>
 .sales-leaderboard {
   select {
-    @apply bg-neutral border border-secondary p-2 rounded-xl;
+    @apply bg-neutral border border-secondary p-2 rounded-2xl;
   }
 
   li.leaderboard-person:not(:first-of-type) {

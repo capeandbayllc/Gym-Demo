@@ -1,18 +1,5 @@
 <template>
   <div class="pulse-summary">
-    <!-- <div class="pulse-summary-item">
-			<h4>New Members</h4>
-			<pulse-member-summary />
-		</div>
-		<div class="pulse-summary-item">
-			<h4>Club Events</h4>
-			<pulse-club-events />
-			
-		</div>
-		<div class="pulse-summary-item">
-			<h4>Check In History</h4>
-			<pulse-check-history />
-		</div> -->
     <!-- scrolling side container (no container title, component titles) -->
     <section
       class="max-h-[50vh] h-full flex gap-4 justify-center pb-8 px-8 overscroll-contain"
@@ -28,19 +15,7 @@
           </li>
           <li>
             <h4>Membership Draft Breakdown</h4>
-            <div
-              class="grid grid-cols-[repeat(3,_32%)] w-full justify-between mt-4"
-            >
-              <div class="card-item-container">
-                <ChartOne />
-              </div>
-              <div class="card-item-container">
-                <ChartOne />
-              </div>
-              <div class="card-item-container">
-                <ChartOne />
-              </div>
-            </div>
+            <PulseMultigraph />
           </li>
           <li>
             <PulseItemCard title="Membership Sales Leaderboard">
@@ -68,12 +43,21 @@
           </li>
           <li>
             <h4>Personal Training Draft Breakdown</h4>
+            <PulseMultigraph />
           </li>
           <li>
-            <h4>Personal Training Sales Leaderboard</h4>
+            <PulseItemCard title="Personal Training Sales Leaderboard">
+              <template #card-content>
+                <SalesLeaderboard :data="membershipSalesLeaderboard" />
+              </template>
+            </PulseItemCard>
           </li>
-          <li v-for="item in Array(25)" :key="item">
-            <h4>Personal Training Events</h4>
+          <li>
+            <PulseItemCard title="Personal Training Events">
+              <template #card-content>
+                <TrainingEvents :events="personalTrainingEvents" />
+              </template>
+            </PulseItemCard>
           </li>
         </ul>
       </div>
@@ -132,8 +116,6 @@
   </div>
 </template>
 
-<style scoped></style>
-
 <script setup>
 import PulseMemberSummary from "./pulse-member-summary.vue";
 import PulseClubEvents from "./pulse-club-events.vue";
@@ -143,8 +125,11 @@ import DetailList from "./partials/detail-list.vue";
 import SalesLeaderboard from "./partials/sales-leaderboard-list.vue";
 import MassCommsList from "./partials/mass-comms-list.vue";
 import ClubDateLabel from "./partials/club-date-label.vue";
+import PulseMultigraph from "./partials/pulse-multigraph.vue";
+import TrainingEvents from "./partials/training-events.vue";
 
-import ChartOne from "./partials/charts/pulse-line-chart.vue";
+import gql from "graphql-tag";
+import { useQuery } from "@vue/apollo-composable";
 
 const personalTrainingDetailData = ref([
   { title: "Appointments Sold", amount: 23, colorName: "secondary" },
@@ -173,6 +158,14 @@ const membershipCallsAndMassComms = ref([
   { id: 2, days: 8, status: "Pending", subject: "Follow Up" },
   { id: 3, days: 1, status: "Pending", subject: "Follow Up" },
   { id: 4, days: 2, status: "Pending", subject: "SMS Message" },
+]);
+
+const personalTrainingEvents = ref([
+  { name: "Aya Bauchanan", time: "12:00 PM", subtitle: "One-on-One" },
+  { name: "Butch Fierce", time: "12:00 PM", subtitle: "One-on-One" },
+  { name: "Penny Evans", time: "12:00 PM", subtitle: "One-on-One" },
+  { name: "Max Smallson", time: "12:00 PM", subtitle: "One-on-One" },
+  { name: "Jeff Gordon", time: "12:00 PM", subtitle: "Champaign" },
 ]);
 
 const handleViewMemberComm = (ctx) => {
@@ -206,10 +199,6 @@ div.right-sect h4 {
 
 ul.right-sect-list::-webkit-scrollbar {
   @apply hidden;
-}
-
-div.card-item-container {
-  @apply bg-black p-2 rounded-3xl border-2 border-secondary h-40;
 }
 
 .right-detail-list-grid {
