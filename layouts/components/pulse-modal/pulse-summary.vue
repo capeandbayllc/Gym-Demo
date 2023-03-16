@@ -55,13 +55,16 @@
           <li>
             <PulseItemCard title="Personal Training Events">
               <template #card-content>
-                <TrainingEvents :events="personalTrainingEvents" />
+                <TrainingEvents
+                  @view="handlePersonalEvent"
+                  :events="personalTrainingEvents"
+                />
               </template>
             </PulseItemCard>
           </li>
         </ul>
       </div>
-      <div class="right-sect w-full">
+      <div class="right-sect w-full max-h-full overflow-y-auto pr-8">
         <PulseItemCard title="Club History & details" contentClass="px-12">
           <template #card-content>
             <!-- location & call type -->
@@ -131,6 +134,47 @@ import TrainingEvents from "./partials/training-events.vue";
 import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
 
+const query = gql`
+  query AllMembers {
+    members(first: 100) {
+      data {
+        id
+        first_name
+        last_name
+        profile_photo_path
+      }
+      paginatorInfo {
+        count
+        perPage
+        total
+      }
+    }
+  }
+`;
+
+const { result } = useQuery(query);
+
+const members = computed(() => {
+  return result?.value ? result.value : null;
+});
+
+const personalTrainingEvents = computed(() => {
+  if (!result?.value) return [];
+  return result.value.members.data.map((m) => {
+    return {
+      id: m.id,
+      name: `${m.first_name} ${m.last_name}`,
+      time: "12:00 PM",
+      subject: "One-on-One",
+      profile_photo_path: m.profile_photo_path,
+    };
+  });
+});
+
+watch(members, (nv, ov) => {
+  console.log("members", members.value);
+});
+
 const personalTrainingDetailData = ref([
   { title: "Appointments Sold", amount: 23, colorName: "secondary" },
   { title: "Appointments Completed", amount: 23, colorName: "orange" },
@@ -160,19 +204,15 @@ const membershipCallsAndMassComms = ref([
   { id: 4, days: 2, status: "Pending", subject: "SMS Message" },
 ]);
 
-const personalTrainingEvents = ref([
-  { name: "Aya Bauchanan", time: "12:00 PM", subtitle: "One-on-One" },
-  { name: "Butch Fierce", time: "12:00 PM", subtitle: "One-on-One" },
-  { name: "Penny Evans", time: "12:00 PM", subtitle: "One-on-One" },
-  { name: "Max Smallson", time: "12:00 PM", subtitle: "One-on-One" },
-  { name: "Jeff Gordon", time: "12:00 PM", subtitle: "Champaign" },
-]);
-
 const handleViewMemberComm = (ctx) => {
   let clickedComm = membershipCallsAndMassComms.value.filter(
     (m) => m.id === ctx
   );
-  console.log("clicked view", Object.assign({}, ...clickedComm));
+  console.log("view mass comm:", Object.assign({}, ...clickedComm));
+};
+
+const handlePersonalEvent = (id) => {
+  console.log("view event with id:", id);
 };
 </script>
 
@@ -213,12 +253,6 @@ li.right-detail-list-grid span:last-child {
   @apply font-bold text-2xl text-right;
 }
 
-/* .pulse-summary {
-  @apply flex flex-col xl:flex-row xl:space-x-5 -xl:space-y-5 overflow-y-auto max-h-[100vw];
-}
-.pulse-summary-item {
-  @apply flex flex-col space-y-3;
-} */
 h4 {
   @apply text-xl font-semibold;
 }

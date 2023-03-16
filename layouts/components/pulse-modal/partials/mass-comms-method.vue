@@ -30,7 +30,7 @@ li:not(:first-of-type) {
 <script setup>
 const props = defineProps({
   context: {
-    type: String,
+    type: [String, Number],
     default: "unique-ctx-id",
   },
   subject: {
