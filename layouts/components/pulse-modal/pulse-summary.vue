@@ -84,8 +84,8 @@
             </div>
 
             <div class="flex justify-between items-center mt-2">
-              <ClubDateLabel text="start date" date="02/24/23" />
-              <ClubDateLabel text="end date" date="02/25/23" />
+              <ClubDateLabel text="start date" date="12/01/23" />
+              <ClubDateLabel text="end date" date="12/31/23" />
             </div>
 
             <div class="mt-4">
