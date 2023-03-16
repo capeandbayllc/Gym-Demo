@@ -22,7 +22,7 @@
                 :columns="columns"
                 :row-component="HistoryTableRow"
                 :data="mock"
-                class="h-44 w-full mt-2 text-sm"
+                class="h-44 w-full mt-2 overflow-y-auto text-sm max-h-44"
             />
         </div>
     </dashboard-card>
