@@ -48,7 +48,7 @@
     const chartOptions = {
         chart: {
             type: 'bar',
-            height: 230,
+            height: 330,
             toolbar: {
                 show: false,
             },
@@ -57,8 +57,8 @@
             bar: {
                 horizontal: false,
                 columnWidth: '35%',
-                borderRadius: 6,
-                borderRadiusApplication: 'around',
+                borderRadius: 4.5,
+                borderRadiusApplication: 'end',
             },
         },
         dataLabels: {
@@ -75,6 +75,16 @@
             tooltip: {
                 enabled: false
             },
+            labels: {
+                show: true,
+                style: {
+                    colors: '#fff',
+                    fontSize: '12px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-yaxis-label',
+                },
+            },
         },
         yaxis: {
             tickAmount: 7,
@@ -82,11 +92,32 @@
             max: 70,
             title: {
                 text: ''
-            }
+            },
+            labels: {
+                show: true,
+                style: {
+                    colors: ['#fff'],
+                    fontSize: '12px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                    fontWeight: 400,
+                    cssClass: 'apexcharts-yaxis-label',
+                },
+            },
         },
         fill: {
-            opacity: 1,
-            colors:  ['#0169b4'],
+            // opacity: 1,
+            // colors:  ['#0169b4'],
+            type: 'gradient',
+            gradient:{
+                shade : 'dark',
+                type: 'vertical',
+                shadeIntensity : 0,
+                gradientToColors: ['#0074c8', '#042137'],
+                inverseColors : false,
+                opacityTo : 0.1,
+                stops: [0, 100],
+                opacityFrom : 1,
+            },
         },
         grid : {
             yaxis: {
