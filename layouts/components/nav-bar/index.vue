@@ -62,6 +62,7 @@ import {
     DraftIcon,
 } from "@/components/icons";
 import NavItem from "./nav-item.vue";
+import PosWindow from "~~/pages/pos/components/pos-window.vue";
 
 const collapsed = ref(false);
 
@@ -96,8 +97,9 @@ const navList = [
             },
             {
                 label: "Point Of Sale",
-                url: "/#",
+                url: null,
                 icon: PosIcon,
+                modalComponent: PosWindow,
             },
             {
                 label: "Fitness",
@@ -520,6 +522,57 @@ const navList = [
     },
     {
         type: "mass-com",
+        navigation: [
+            {
+                label: "Financial Reporting",
+                icon: ReportIcon,
+                url: "/#",
+            },
+            {
+                label: "Communications",
+                url: "/#",
+                icon: MassComIcon,
+            },
+            {
+                label: "Favorites",
+                url: "/#",
+                icon: FavoriteCircleIcon,
+            },
+            {
+                label: "Point Of Sale",
+                url: null,
+                icon: PosIcon,
+                modalComponent: PosWindow,
+            },
+            {
+                label: "Fitness",
+                url: "/#",
+                icon: FitnessIcon,
+            },
+            {
+                label: "KPIS",
+                url: "/#",
+                icon: SpeedMeterIcon,
+            },
+            {
+                label: "Employee Tracking",
+                url: "/#",
+                icon: LocationIcon,
+            },
+            {
+                label: "Company Inbox",
+                url: "/#",
+                icon: DownloadIcon,
+            },
+            {
+                label: "Marketing",
+                url: "/#",
+                icon: MarketingIcon,
+            },
+        ],
+    },
+    {
+        type: "mass-com-scheduled",
         navigation: [
             {
                 label: "Financial Reporting",

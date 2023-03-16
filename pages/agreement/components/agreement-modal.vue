@@ -3,7 +3,7 @@
         Select your Agreement Type
     </div>
     <div class="flex justify-around cursor-pointer gradient-bg w-fit w-[450px] p-6 mx-auto rounded border border-secondary">
-        <div v-for="(type, ndx) in filesTypes" :key="ndx" class="create-option" :class="{'transition-all scale-[1.2]': activeTab == ndx}" @click="activeTab = ndx">
+        <div v-for="(type, ndx) in filesTypes" :key="ndx" class="create-option mx-6" :class="{'transition-all scale-[1.2]': activeTab == ndx}" @click="activeTab = ndx">
             <empty-file-icon class="mb-2 mx-auto w-14" />
             <span class="mb-4">{{type}}</span>
         </div>
@@ -16,7 +16,7 @@
         @apply border-b pb-2 border-base-content/50;
     }
     .create-option {
-        @apply inline-block items-center text-xs text-center mx-3 w-20 mb-4;
+        @apply inline-block items-center text-xs text-center w-20 mb-4;
     }
     
   /*   .chart-content{
@@ -42,10 +42,31 @@
 
 <script setup>
 import { EmptyFileIcon } from '~~/components/icons';
-const emit = defineEmits(['close']);
+
+const props = defineProps({
+    newAgreementData: {
+		type: Object,
+		default: null,
+	}
+})
 
 const activeTab = ref(null);
+
+const changeNewAgreementData = ()=>{
+    let changeNewAgreementData = props.newAgreementData;
+    changeNewAgreementData.type = filesTypes[activeTab.value]
+    emit('changeNewAgreementData', changeNewAgreementData)
+};
+
+watch(activeTab, () => {
+    changeNewAgreementData()
+});
+
 const filesTypes = [ "Membership", "Personal Training", "FLA. PIF" ];
+
+
+const emit = defineEmits(['close', 'changeNewAgreementData']);
+
 
 watch(activeTab,()=>{
     emit("changeType",filesTypes[activeTab.value])

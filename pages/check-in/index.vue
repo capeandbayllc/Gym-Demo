@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full flex flex-col check-in-modal-height">
-    <div class="page-checkin-container">
+    <div class="page-checkin-container" ref="checkInContainer">
       <div class="page-content">
         <div
           class="wrapper px-2 pt-2 w-full rounded-md"
@@ -90,6 +90,7 @@ import EventCard from "./event-card/index.vue";
 import ProfileCard from "./profile-card/index.vue";
 import Profile from "./profile/index.vue";
 import PosCard from "./pos-card/index.vue";
+import PosWindow from "../pos/components/pos-window.vue";
 import CalendarCard from "./calendar-card/index.vue";
 import NotificationCard from "./notification-card/index.vue";
 import GuestCard from "./guest-card/index.vue";
@@ -111,12 +112,14 @@ import Setting from "./setting/index.vue";
 import Engage from "./engage/index.vue";
 const option = ref(null);
 
+
+const appLayout = useLayoutElement();
+const checkInContainer = ref();
+
 watch(option, () => {
-  const appLayout = document.querySelector(".app-layout");
-  const scrollTO =
-    document.querySelector(".page-checkin-container").offsetHeight + 100;
+  const scrollTO = checkInContainer.value.offsetHeight + 100;
   setTimeout(() => {
-    appLayout.scroll({
+    appLayout.value.scroll({
       top: scrollTO,
       left: 0,
       behavior: "smooth",
@@ -140,8 +143,7 @@ const changeDetailView = (view) => {
 };
 
 const backToTop = () => {
-  const appLayout = document.querySelector(".app-layout");
-  appLayout.scroll({
+  appLayout.value.scroll({
     top: 0,
     left: 0,
     behavior: "smooth",
@@ -150,7 +152,7 @@ const backToTop = () => {
 
 const subSections = [
   { key: "profile", component: Profile },
-  { key: "pos", component: PosCard },
+  { key: "pos", component: PosWindow },
   { key: "calendar", component: CalendarCard },
   { key: "notification", component: NotificationCard },
   { key: "guest-pass", component: GuestCard },

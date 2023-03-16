@@ -96,7 +96,7 @@ const items = [
     }, 
     {
         key: 'mass-com',
-        path: '/mass-com',
+        path: '/mass-com/scheduled',
         icon: ComTowerIcon
     }, 
     {
