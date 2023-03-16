@@ -6,10 +6,18 @@
 
         <div class="page-content card-gradient-bg">
             <div class="page-content-block">
-                <select-template @next-page="activePage = 'map-contacts'" v-if="activePage == 'select-template'" />
-                <map-contacts v-if="activePage == 'map-contacts'" />
-                <lead-sources v-if="activePage == 'lead-sources'" />
+                <select-template v-if="activePage == 'select-template'" @next-page="activePage = $event" />
+                <map-contacts v-if="activePage == 'map-contacts'" @next-page="activePage = $event" />
+                <lead-sources v-if="activePage == 'lead-sources'" @next-page="activePage = $event" />
+                <save-campaign v-if="activePage == 'save-campaign'" @next-page="activePage = $event" />
             </div>
+        </div>
+
+        <div class="flex flex-col mt-6 justify-center items-center" v-if="activePage == 'save-campaign'">
+            <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page')">
+                Launch Campaign
+            </Button>
+            <p class="text-[10px] mt-2">View your Campaign and Reports</p>
         </div>
     </div>
 </template>
@@ -32,12 +40,12 @@
 import SelectTemplate from "./components/select-templates/index.vue";
 import MapContacts from "./components/map-contacts/index.vue";
 import LeadSources from "./components/lead-sources/index.vue";
+import SaveCampaign from "./components/save-campaign/index.vue";
 
 const props = defineProps({
     data: Object
 })
 
-// let activePage = ref('select-template');
-let activePage = ref('lead-sources');
+let activePage = ref('select-template');
 
 </script>

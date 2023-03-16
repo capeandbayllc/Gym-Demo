@@ -22,7 +22,7 @@
         </div>
 
         <div class="flex mt-6 justify-center">
-            <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page')">
+            <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page', 'save-campaign')">
                 Schedule The Campaign
             </Button>
         </div>
@@ -50,7 +50,7 @@
 </style>
 
 <script setup>
-import AddLineIcon from "~/pages/mass-com/builder/components/add-line-icon.vue"
+import AddLineIcon from "~/pages/mass-com/builder/components/add-line-icon.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";

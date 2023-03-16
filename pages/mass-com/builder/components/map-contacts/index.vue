@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="flex mt-6 justify-center">
-                    <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page')">Connect Leads</Button>
+                    <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page', 'lead-sources')">Connect Leads</Button>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="flex mt-2">
             <span @click.stop="$emit('back', 'select-templates')" class="text-secondary cursor-pointer">
                 <font-awesome-icon :icon="['fas', 'angle-left']" size="sm" />
-                <a class="text-xs ml-1">Back</a>
+                <a class="text-xs ml-1" @click.stop="$emit('next-page', 'select-template')">Back</a>
             </span>
         </div>
     </div>
