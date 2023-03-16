@@ -1,9 +1,9 @@
 <template>
     <dashboard-card
         :title-icon="ComTowerIcon"
-        title="Lorem ipsum"
+        title="Recent POS Transactions"
     >
-        <div class="transaction-data-list">
+        <div class="transaction-data-list no-scrollbar">
             <div class="transaction-data-row" v-for="item in mock" :key="item.id">
                 <div class="item-description">
                     <div class="w-10 h-10 rounded bg-secondary/50"></div>
@@ -13,32 +13,32 @@
                     </div>
                 </div>
                 <div class="item-value">
-                    <span class="text-sm"> ${{item.amount}}</span>
+                    <span class="text-sm"> ${{item.amount.toLocaleString("en-US")}}</span>
                     <span class="text-base-content/60 text-xs">{{item.percent}}%</span>
                 </div>
             </div>
         </div>
         <div class="footer-date">
-            <span>September</span>
-            <span>August</span>
+            <span>November</span>
+            <span>December</span>
         </div>
         <div class="footer-detail">All transactions</div>
     </dashboard-card>
 </template>
 <style scoped>
 .transaction-data-list {
-    @apply flex flex-col border-t-4 border-secondary px-5 mb-7;
+    @apply flex flex-col border-t-4 border-secondary px-5 mb-7 max-h-56 overflow-y-scroll overscroll-auto ;
     .transaction-data-row {
-        @apply flex flex-row justify-between pb-3 pt-6 w-full;
+        @apply flex flex-row justify-between pb-3 pt-4 w-full;
         .item-description {
             @apply flex flex-row space-x-3 items-center;
         }
         .item-value {
-            @apply flex flex-col justify-center items-end bg-secondary/30 px-3 rounded;
+            @apply flex flex-col justify-center items-end bg-secondary/10 px-3 rounded;
         }
     }
     .transaction-data-row:not(:last-child) {
-        @apply border-b border-base-content/60;
+        @apply border-b border-base-content/10;
     }
 }
 .footer-date {
@@ -54,21 +54,37 @@ import { ComTowerIcon } from '@/components/icons'
 
 const mock = [{
     id: 1,
-    title: "Lorem ipsum",
-    tx_count: 16,
-    amount: 69.65,
-    percent: 14
+    title: "Water (16oz.)",
+    tx_count: 764,
+    amount: 2376.21,
+    percent: 13
 }, {
     id: 2,
-    title: "Lorem ipsum",
-    tx_count: 16,
-    amount: 69.65,
+    title: "Energy Drinks",
+    tx_count: 230,
+    amount: 345.65,
     percent: 14
 }, {
     id: 3,
-    title: "Lorem ipsum",
+    title: "Branded Tees",
+    tx_count: 16,
+    amount: 210.65,
+    percent: 8
+},
+{
+    id: 4,
+    title: "Healthy Shake",
+    tx_count: 16,
+    amount: 252.65,
+    percent: 12
+},
+{
+    id: 5,
+    title: "Yoga Shoes",
     tx_count: 16,
     amount: 69.65,
     percent: 14
-}]
+}
+
+]
 </script>
