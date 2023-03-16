@@ -1,6 +1,6 @@
 export const getDefaultMultiselectTWClasses = () => ({
     container:
-        "relative w-full flex items-center justify-between box-border cursor-pointer border-base-content border-opacity-20 rounded bg-base-content/20 text-base min-h-9",
+        "relative w-full flex items-center justify-between box-border cursor-pointer border-base-content border-opacity-20 rounded-xl bg-base-content/20 text-base min-h-9",
     containerDisabled: "cursor-default bg-base-200",
     containerOpen: "rounded-b-none",
     containerOpenTop: "rounded-t-none",

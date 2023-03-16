@@ -10,6 +10,6 @@ export default {
 
 <style scoped>
 .divider {
-  @apply border-b-2 h-0 border-secondary col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-auto;
+  @apply border-b-2  border-secondary col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-auto;
 }
 </style>

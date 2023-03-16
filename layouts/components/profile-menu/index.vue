@@ -130,5 +130,6 @@ const handleClickActions = () => {
 
 const handleProfileMenuNavigate = url => {
   navigateTo(url);
+  close();
 };
 </script>

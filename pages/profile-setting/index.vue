@@ -9,9 +9,7 @@
 <!-- TODO: iii) Add connection: responsive check-->
 <!-- TODO: iv) Address: later responsive check; there is a gap problem in city state zip -->
 <!-- TODO: v) Social media handles: LATER responsive check-->
-<!-- TODO: vi) Dropdowns: how many max will be there??-->
 <!-- TODO: vii) Calendar: right now, default time, later from DB : What will happen if I click new???-->
-<!-- TODO: viii) Notes-->
 <!-- TODO: ix) Cancel / Save hover???-->
 <!-- TODO: UPTO HERE: NOW ALL RESPONSIVE CHECK & Save Success -->
 
@@ -116,7 +114,35 @@
         <divider />
 
         <!--   Address SECTION-->
-        <profile-address-setting :formAddress="form.address" @update-form-address="updateAddress" />
+        <div class="grid grid-cols-1 py-2">
+          <div class="grid grid-cols-12">
+            <div class="col-start-2 col-span-10">
+              <div class="py-2"> Address </div>
+              <input class="neutral-input" v-model="form.address.address"/>
+            </div>
+          </div>
+        </div>
+<!--        <profile-address-setting :formAddress="form.address" @update-form-address="updateAddress" />-->
+
+        <!--   City, State, Zip code SECTION-->
+        <div class="grid grid-cols-1 py-2">
+          <div class="grid grid-cols-12 justify-items-center py-2">
+            <div class="mb-5 col-span-2 col-span-4 ml-12 w-3/5">
+              <div class="mb-1.5"> City </div>
+              <input class="neutral-input" v-model="form.address.city"/>
+            </div>
+
+            <div class="mb-5 col-span-4 w-3/5">
+              <div class="mb-1.5"> State </div>
+              <input class="neutral-input" v-model="form.address.state"/>
+            </div>
+
+            <div class="mb-5 col-span-4 w-3/5 -ml-12">
+              <div class="mb-1.5"> Zip code  </div>
+              <input class="neutral-input" v-model="form.address.zipcode"/>
+            </div>
+          </div>
+        </div>
 
         <divider />
 
@@ -192,63 +218,114 @@
         <divider />
 
         <!-- HOME ROLE DEPT TEAM SECTION -->
-        <div class="grid grid-cols-1 py-2">
-          <div class="grid grid-cols-12 justify-items-center py-2">
-            <div class="mb-5 col-span-4 multi-select-input ml-20 w-8/12">
-              <multi-select-dropdown
-                  label="Home Location(s)"
-                  class=""
-                  v-model="form.homeLocations"
-                  mode="multiple"
-                  track-by="value"
-                  :caret="true"
-                  :options="homeLocation"
-              ></multi-select-dropdown>
-            </div>
+        <div class="grid grid-cols-1 pb-2">
+          <div class="w-5/6 ml-auto mr-auto mt-2 mb-4">
+            <div class="grid grid-cols-12 py-2 -ml-2 gap-4">
+              <div class="mb-5 col-span-4 multi-select-input w-full">
+                <multi-select-dropdown
+                    label="Home Location(s)"
+                    v-model="form.homeLocations"
+                    mode="multiple"
+                    track-by="value"
+                    :caret="true"
+                    :options="homeLocation"
+                ></multi-select-dropdown>
+              </div>
 
-            <div class="mb-5 col-span-4 multi-select-input w-8/12">
-              <multi-select-dropdown
-                  class=""
-                  label="Role(s)"
-                  v-model="form.roles"
-                  mode="multiple"
-                  track-by="value"
-                  :caret="true"
-                  :options="roles"
-              ></multi-select-dropdown>
-            </div>
+              <div class="mb-5 col-span-4 multi-select-input w-full">
+                <multi-select-dropdown
+                    label="Role(s)"
+                    v-model="form.roles"
+                    mode="multiple"
+                    track-by="value"
+                    :caret="true"
+                    :options="roles"
+                ></multi-select-dropdown>
+              </div>
 
-            <div class="mb-5 col-span-4 multi-select-input w-8/12 -ml-24">
-              <multi-select-dropdown
-                  class=""
-                  label="Department(s)"
-                  v-model="form.departments"
-                  mode="multiple"
-                  track-by="value"
-                  :caret="true"
-                  :options="departments"
-              ></multi-select-dropdown>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 py-2">
-          <div class="grid grid-cols-12 justify-items-center pb-2 pt-16">
-            <div class="mb-5 col-span-4 multi-select-input ml-20 w-8/12">
-              <multi-select-dropdown
-                  label="Team(s)"
-                  class=""
-                  v-model="form.teams"
-                  mode="multiple"
-                  track-by="value"
-                  :caret="true"
-                  :options="teams"
-              ></multi-select-dropdown>
+              <div class="mb-5 col-span-4 multi-select-input w-full">
+                <multi-select-dropdown
+                    label="Department(s)"
+                    v-model="form.departments"
+                    mode="multiple"
+                    track-by="value"
+                    :caret="true"
+                    :options="departments"
+                ></multi-select-dropdown>
+              </div>
             </div>
           </div>
         </div>
 
-        <divider />
+        <div class="grid grid-cols-1 ml-0 -mt-12">
+          <div class="w-5/6 ml-auto mr-auto mb-4">
+            <div class="grid grid-cols-12 pb-2 gap-4">
+              <div class="col-span-4  w-full">
+                <div class="multi-select-tags">
+                  <div class="float-left h-9 bg-secondary rounded-xl px-1.5 mr-2 mt-2 cursor-pointer pt-2 w-max"
+                       v-for="value in form.homeLocations" :key="value" @click="removeOption(form.homeLocations, value, 'homeLocations')">
+                    {{ getLabel(value, homeLocation) }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-4 w-full ml-0.5">
+                <div class="multi-select-tags">
+                  <div class="float-left h-9 bg-secondary rounded-xl px-1.5 mr-2 mt-2 cursor-pointer pt-2 w-max"
+                       v-for="value in form.roles" :key="value" @click="removeOption(form.roles, value, 'roles')">
+                    {{ getLabel(value, roles) }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-4 w-full ml-1.5">
+                <div class="multi-select-tags">
+                  <div class="float-left h-9 bg-secondary rounded-xl px-1.5 mr-2 mt-2 cursor-pointer pt-2 w-max"
+                       v-for="value in form.departments" :key="value" @click="removeOption(form.departments, value, 'departments')">
+                    {{ getLabel(value, departments) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- TEAM SECTION -->
+        <div class="grid grid-cols-1 py-2">
+          <div class="w-5/6 ml-auto mr-auto mt-10 mb-10">
+            <div class="grid grid-cols-12 py-2 -ml-2 gap-4">
+              <div class="mb-5 col-span-4 w-full multi-select-input">
+                <multi-select-dropdown
+                    label="Team(s)"
+                    v-model="form.teams"
+                    mode="multiple"
+                    track-by="value"
+                    :caret="true"
+                    :options="teams"
+                ></multi-select-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 ml-0 -mt-16">
+          <div class="grid grid-cols-12 pb-2">
+            <div class="col-span-4 col-start-2 w-8/12">
+              <div class="multi-select-tags">
+                <div class="float-left h-9 bg-secondary rounded-xl px-1.5 mr-2 mt-2 cursor-pointer pt-2 w-max"
+                     v-for="value in form.teams" :key="value" @click="removeOption(form.teams, value, 'teams')">
+                  {{ getLabel(value, teams) }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <divider/>
+
 
         <!-- CALENDAR ACCESS & AVAILABILITY SECTION -->
         <div class="grid grid-cols-1 py-2">
@@ -306,25 +383,11 @@
               <textarea
                   name="notes"
                   rows="6"
-                  class="neutral-input rounded-2xl w-full mb-4"
-              ></textarea>
-<!--              <div class="text-center">-->
-<!--                <Button-->
-<!--                    ghost-->
-<!--                    size="sm"-->
-<!--                    class="mr-2 capitalize"-->
-<!--                >Cancel</Button>-->
-<!--                <Button-->
-<!--                    secondary-->
-<!--                    size="sm"-->
-<!--                    class="capitalize"-->
-<!--                >Save</Button-->
-<!--                >-->
-<!--              </div>-->
+                  class="neutral-input rounded-2xl w-full mb-4">
+              </textarea>
             </div>
 
           </div>
-
         </div>
 
         <!-- Save section -->
@@ -408,13 +471,16 @@ input:hover {
   background-color: #0075C9;
 }
 
+.tags-option {
+    @apply float-left h-9 bg-secondary rounded px-1.5 mr-2 mt-2 cursor-pointer pt-2;
+}
+
 </style>
 
 <script setup>
 import {ref} from 'vue';
 import '@vueform/multiselect/themes/default.css'
 import {MembersIcon, LockIcon, BlueClockIcon} from "@/components/icons";
-import ProfileAddressSetting from "./components/address";
 import Divider from "./components/divider";
 import MultiSelectDropdown from "./components/multi-select-dropdown";
 
@@ -625,6 +691,22 @@ const teams = [
   {
     value: 4,
     label: "Team 4"
+  },
+  {
+    value: 5,
+    label: "Front Source"
+  },
+  {
+    value: 6,
+    label: "Lead Source"
+  },
+  {
+    value: 7,
+    label: "Trash"
+  },
+  {
+    value: 8,
+    label: "Sales"
   }
 ];
 
@@ -650,9 +732,18 @@ const calendarDepartments = [
 const uploadPopUp = ref(false);
 
 const updateAddress = formData => {
-  form.address = formData;
+  form.value.address = formData;
   console.log('details form: ', form);
-}
+};
+
+const getLabel = (value, options) => {
+  return options.filter(item => item.value === value)[0].label;
+};
+
+const removeOption = (formValue, value, key) => {
+  formValue = formValue.filter(item => item != value);
+  form.value[key] = formValue;
+};
 
 </script>
 
