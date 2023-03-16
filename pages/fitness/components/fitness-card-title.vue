@@ -10,7 +10,7 @@
 </template>
 <style scoped>
 .fitness-card-title {
-    @apply flex bg-secondary justify-between h-12 items-center text-lg font-semibold px-[26px] py-7;
+    @apply flex bg-secondary justify-between h-12 items-center text-lg font-normal px-[20px] rounded-[15px] rounded-b-none;
 }
 
 .title-icon {

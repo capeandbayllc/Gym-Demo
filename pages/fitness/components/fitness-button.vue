@@ -18,7 +18,7 @@
     cursor: pointer;
     border-radius: 12px;
     min-width: 90px;
-    font-weight: bold;
+    font-weight: normal;
     cursor : default;
     transition : all 0.3s;
 }
@@ -27,6 +27,8 @@
     background : #181916;
     min-width : 70px;
     cursor : pointer;
+    padding: 1px 10px;
+    font-size: 18px;
 }
 .default:hover{
     background : #0077CB;
