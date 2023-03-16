@@ -59,7 +59,7 @@
         @apply border-b pb-2 border-base-content/50;
     }
     .create-option {
-        @apply inline-block items-center text-xs text-center mx-3 w-20 mb-4;
+        @apply inline-block items-center text-xs text-center mx-12 w-20 mb-4;
     }
     
     .chart-content{

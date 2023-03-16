@@ -9,17 +9,17 @@
                                 :items="states"
                                 :label="'State'+(selectedState?': '+selectedState:'')"
                                 v-model="selectedState"
-                                :onChange="filterState"
+                                @onChange="filterState"
                                 placeholderSearch="Search State"
-                                class="w-36 z-[23]"
+                                class="z-[23] select-box-filter-size"
                                 secondary
                             />
                             <select-box
                                 :items="cities"
-                                :onChange="filterCity"
+                                @onChange="filterCity"
                                 :label="'City'+(selectedCity?': '+selectedCity:'')"
                                 placeholderSearch="Search City"
-                                class="w-36"
+                                class="select-box-filter-size"
                                 secondary
                                 v-if="cities.length"
                             />
