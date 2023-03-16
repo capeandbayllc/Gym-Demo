@@ -262,8 +262,37 @@
                   v-model="form.calendarDepartments"
               />
             </div>
+<!--            col-span-2 3xl:col-span-3 -lg:col-span-1 -md:col-auto-->
+            <div class="col-start-6 col-span-6">
+              <div class="border-2 border-secondary rounded-2xl p-12 w-full mb-4 bg-transparent">
+                <h4 class="mb-1 inline-block font-bold w-full"> Availability </h4>
+                <label class="mr-3">Daily Times Set:</label>
+                <span class="mx-2 inline-block">
+                        <BlueClockIcon class="inline-block mr-1" /> 10:20 am
+                    </span>
+                <span class="mx-2 inline-block">
+                        <BlueClockIcon class="inline-block mr-1" /> 1:00 pm
+                    </span>
+                <span class="mx-2 inline-block">
+                        <BlueClockIcon class="inline-block mr-1" /> 3:00 pm
+                    </span>
+              </div>
+              <Button
+                  secondary
+                  size="sm"
+                  class="float-right capitalize rounded-xl font-light text-base">
+                + New
+              </Button>
+              <Button
+                  ghost
+                  size="sm"
+                  class="float-right mr-2 capitalize rounded-xl font-light">
+                <span class="text-base text-gray-500 hover:text-blue-400">Cancel</span>
+              </Button>
+            </div>
 
           </div>
+
         </div>
 
         <divider />
@@ -413,7 +442,7 @@ input:hover {
 <script setup>
 import {ref} from 'vue';
 import '@vueform/multiselect/themes/default.css'
-import {MembersIcon, LockIcon} from "@/components/icons";
+import {MembersIcon, LockIcon, BlueClockIcon} from "@/components/icons";
 import ProfileAddressSetting from "./components/address";
 import Divider from "./components/divider";
 import MultiSelectDropdown from "./components/multi-select-dropdown";
