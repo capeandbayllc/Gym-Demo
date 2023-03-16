@@ -8,7 +8,10 @@
       </div>
       <img :src="user.profile_photo_path" alt="profile image" />
     </div>
-    <div class="profile-name">{{ user.first_name }} {{ user.last_name }}</div>
+    <div class="profile-name">
+      {{ ProfileInfo?.member?.first_name ? ProfileInfo.member.first_name : user.first_name }} 
+      {{ ProfileInfo?.member?.last_name ? ProfileInfo.member.last_name : user.last_name }}
+    </div>
     <div class="pb-5">
       Member since 2022
       <br />
@@ -171,7 +174,22 @@ import {
   MessageIcon,
   EditIcon,
 } from "~~/components/icons";
+import { GET_SINGLE_MEMBER } from "@/api/queries/member";
+
 const user = useState("auth");
+
+const route = useRoute()
+const profileId = (route.query.id)
+const ProfileInfo = ref({}); 
+const { result } = useQuery(GET_SINGLE_MEMBER, {
+    variables: { id: profileId },
+  });
+ 
+onMounted( () => {
+    if (result.value) {
+      ProfileInfo.value = result.value
+    }
+});
 
 const guests = [
   {

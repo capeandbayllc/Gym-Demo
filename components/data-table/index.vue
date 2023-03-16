@@ -1,8 +1,9 @@
 <template>
-    <div class="overflow-y-auto max-w-[90vw] mx-auto">
+    <div class="max-w-[90vw] mx-auto">
         <table class="border-separate">
-            <table-header :columns="columns" />
-            <table-body v-if="!rowComponent" />
+            <table-header :columns="columns" :stickyHeader="stickyHeader"/>
+            <table-body v-if="!rowComponent"/>
+
             <tbody>
                 <component
                     v-for="item in data"
@@ -34,6 +35,10 @@ const props = defineProps({
         default: [],
     },
     rowComponent: Object,
+    stickyHeader:{
+      type: Boolean,
+      default: false
+    }
 });
 
 const emit = defineEmits(["row-clicked"]);

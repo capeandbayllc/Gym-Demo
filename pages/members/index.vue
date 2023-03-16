@@ -110,6 +110,11 @@ const query = gql`
 `;
 
 const { result } = useQuery(query);
+const members = ref([]);
+watch(() => {
+  members.value = result?.value?.members?.data;
+})
+
 const isSearchEnable = ref(false);
 const filterBy = [
   {

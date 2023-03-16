@@ -1,7 +1,13 @@
 <template>
     <div class="page-mass-com-container">
         <div class="page-content">
-            <h2>Overall/Trends</h2>
+            <div class="flex flex-1">
+                <h2 class="flex flex-auto">Overall/Trends</h2>
+                <div class="flex gap-2 items-end pb-2">
+                    <Button secondary size="xs">Drip Campaigns</Button>
+                    <Button outline size="xs" @click.stop="$router.push('/mass-com/scheduled')">Scheduled Campaigns</Button>
+                </div>
+            </div>
             <div class="overall-trends">
                 <sales-show-ratio class="min-h-96 col-span-2 h-full" />
                 <sales-draft-related class="min-h-96 col-span-2 h-full" />
@@ -13,6 +19,8 @@
             <h2 class="mb-4">Recent campaigns</h2>
             <new-member-campaigns class="mb-4" />
             <marketing />
+
+            <!-- <RecentCampaignDetails :data="recentCampaign" /> -->
         </div>
     </div>
 </template>
@@ -41,6 +49,16 @@ import BuildCampaignCard from './components/build-campaign-card/index';
 import CampaignCard from './components/campaign-card/index.vue';
 import newMemberCampaigns from './components/new-member-campaigns.vue';
 import marketing from './components/marketing.vue';
+/* import RecentCampaignDetails from './components/campaign-details/index.vue'; */
+
+const recentCampaign = {
+    id: 1,
+    title: "Fourth of July Fitness",
+    started: 44,
+    in_progress: 43,
+    completed: 88,
+    status: "in_progress"
+};
 
 onMounted(async () => {
     await nextTick();

@@ -65,22 +65,22 @@
 <script setup>
 
 
+import { GET_SINGLE_MEMBER } from "@/api/queries/member";
 import { useQuery } from "@vue/apollo-composable";
-import gql from "graphql-tag";
-import {GET_SINGLE_MEMBER} from "@/api/queries/member";
 const route = useRoute()
 const profileId = (route.query.id)
 const profileObjectData = ref({}); 
 const { result } = useQuery(GET_SINGLE_MEMBER, {
     variables: { id: profileId },
   });
-watchEffect(() => {
+  
+onMounted( () => {
     if (result.value) {
-        profileObjectData.value = result.value
-        memberInfo.value.firstName = profileObjectData.value.member.first_name;
-        memberInfo.value.lastName = profileObjectData.value.member.last_name;
-        demographicsObj.value.streetAddress = profileObjectData.value.member.homeLocation.name;
-        demographicsObj.value.emailAddress = profileObjectData.value.member.email;
+        profileObjectData.value = result?.value
+        memberInfo.value.firstName = profileObjectData?.value?.member?.first_name;
+        memberInfo.value.lastName = profileObjectData?.value?.member?.last_name;
+        demographicsObj.value.streetAddress = profileObjectData?.value?.member?.homeLocation?.name;
+        demographicsObj.value.emailAddress = profileObjectData?.value?.member.email;
     }
 });
 
