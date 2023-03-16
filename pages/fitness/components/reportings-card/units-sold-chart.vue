@@ -1,5 +1,5 @@
 <template>
-    <div class="units-sold">
+    <div class="units-sold flex flex-col justify-between">
         <div class="grid grid-cols-10 header">
             <label class="col-span-2 text-[12px] text-white">Units Sold</label>
             <div class="col-span-5"></div>
@@ -16,14 +16,15 @@
         <ClientOnly class="col-span-5">
             <apexchart 
                 type="area"
+                class="unit-sold-apex-chart"
                 :options="options"
                 :series="series"
             />
         </ClientOnly>
     </div>
 </template>
-<style scoped>
-.btn-status{
+<style>
+.units-sold  .btn-status{
     width: 15px;
     height: 15px;
     background : #0077ac;
@@ -38,13 +39,11 @@
     border-radius : 15px;
     padding: 10px;
 }
-.header{
+.units-sold .header{
     margin-top: 5px;
     margin-bottom: 10px;
 }
-.apexcharts-grid{
-    background: blue;
-}
+
 </style>
 <script setup>
 
@@ -56,9 +55,25 @@ const options ={
     chart:{
         height : 350,
         type: 'area',
+        background: 'linear-gradient(180deg, rgba(4,55,92,0 ) 0.00%, rgba(63,192,255,0.72 ) 100.00%)',
         toolbar:{
             show: false,
         },
+        events: {
+        mouseMove: function(event, chartContext, config) {
+            var tooltip = chartContext.el.querySelector('.apexcharts-tooltip');
+            var pointsArray = config.globals.pointsArray;
+            var seriesIndex = config.seriesIndex;
+            var dataPointIndex = config.dataPointIndex === -1 ? 0 : config.dataPointIndex;
+
+            if (seriesIndex !== -1) {
+                var position = pointsArray[seriesIndex][dataPointIndex];
+
+                tooltip.style.top = position[1] + 'px';
+                tooltip.style.left = position[0] + 'px';
+            }
+        }
+    }
     },
     dataLabels: {
         enabled : false
@@ -79,25 +94,41 @@ const options ={
             style: {
                 colors: '#FFF'
             }
+        },
+        crosshairs: {
+            show: true,
+            position: 'front',
+            opacity: 0.9,
         }
     },
     yaxis:{
-        show : false
+        show : false,
     },
     grid: {
         show : false
     },
     fill:{
-        
         type: 'gradient',
+        colors: '#3FC0FF',
         gradient:{
-            shade : 'dark',
+            shade : 'light',
             type: 'vertical',
-            shadeIntensity : 1,
-            gradientToColors: ['#0C1C31', '#0077ac'],
+            shadeIntensity : 10,
+            gradientToColors: ['#003650', '#3FC0FF'],
             inverseColors : true,
-            opacityTo : 1,
-            opacityFrom : 1,
+            opacityTo : 6,
+            opacityFrom : 10,
+        }
+    },
+    markers: {
+        size: 0,
+        strokeColors: '#fff',
+        strokeWidth: 4,
+        strokeOpacity: 0.9,
+        radius: 2,
+        hover: {
+        size: 5,
+        sizeOffset: 3
         }
     },
     tooltip: {

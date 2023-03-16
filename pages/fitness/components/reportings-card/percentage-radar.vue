@@ -1,7 +1,7 @@
 <template>
     <div class="percentage-container ">
         <label class="header block text-[14px] py-2">Percentages</label>
-        <div class="percentages overflow-auto h-[322px] py-4">
+        <div class="percentages overflow-auto h-[288px] py-4">
             <div v-for="(item, index) in percentages" :key="index" class="percent-item grid grid-cols-1">
                 <PercentPie class="" :item="item" />
                 <hr class="border-white border-opacity-50 my-3">
