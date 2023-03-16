@@ -10,8 +10,8 @@
         
         <template #content>
             <div class="global-search-popup-container">
-                <div class="md:flex justify-between gap-4">
-                    <div class="mb-4 md:mb-0">
+                <div class="md:flex items-center justify-between gap-4">
+                    <div class="mb-[12px]">
                         <div class="search-icon" :class="{
                             'text-secondary': openSearchInput,
                             'text-white': !openSearchInput,
@@ -29,27 +29,29 @@
                             v-model="searchInput"
                         />
                     </div>
-                    <div @click="!openFilters ? changeOpenFilters : null" class="filters-button" :class="{
+                    <div @click="changeOpenFilters" class="filters-button" :class="{
                         'open-filters' : openFilters===true,
                         'close-filters' : openFilters===false,
                         'cursor-pointer' : !openFilters}"
                     >
-                        <div class="text-secondary cursor-pointer" @click="changeOpenFilters">
+                        <button class="text-secondary cursor-pointer" @click="closeOpenFilters">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10.59" height="17.795" viewBox="0 0 10.59 17.795">
                                 <path fill="currentColor" id="arrow_dow_copy" data-name="arrow dow copy" d="M1076.446,558.4a1.457,1.457,0,0,1,1.918-.144l.165.144,6.384,6.548,6.384-6.548a1.458,1.458,0,0,1,1.918-.144l.165.144a1.509,1.509,0,0,1,.143,1.944l-.143.167-7.425,7.6a1.457,1.457,0,0,1-1.918.144l-.165-.144-7.425-7.6A1.509,1.509,0,0,1,1076.446,558.4Z" transform="translate(568.554 -1076.015) rotate(90)"/>
                             </svg>
-                        </div>
-                        <span class="px-[30px]">
+                        </button>
+                        <span v-if="!openFilters" class="px-[30px]">
                             Filters
                         </span>
+                        <people-search-action v-else
+                            @peopleSearchActionSelected="filterSelected"
+                            :actions-btn="actionsBtn"
+                        ></people-search-action>
+                        
                     </div>
                 </div>
 
 
-                <!-- <people-search-action
-                    @peopleSearchActionSelected="filterSelected"
-                    :actions-btn="actionsBtn"
-                ></people-search-action> -->
+                
                 <search-list
                     :filter="tblFilter"
                     class="modal_scroll"
@@ -75,23 +77,21 @@
     @apply text-white font-light;
 }
 .search-input{
-    @apply pl-[45px] text-white input w-full bg-primary rounded-[19px] w-full md:w-[427px];
+    @apply pl-[45px] text-white input w-full bg-primary rounded-[19px] w-full md:w-[427px] h-[50px];
 }
 
 .search-input:focus{
-    @apply outline-none border border-secondary bg-white text-secondary;
+    @apply outline-none border-[2px] border-secondary bg-white text-secondary;
 }
 .search-icon {
-    @apply absolute top-[53px] left-[39px];
+    @apply relative top-[31px] left-[18px] w-0;
 }
+
 
 .filters-button{
-    @apply flex items-center justify-start px-[10px] py-[9px] border border-secondary text-white rounded-[19px] w-[135px];
+    @apply flex items-center justify-start px-[10px] py-[9px] border-[2px] border-secondary text-white rounded-[19px] w-[135px] min-h-[50px];
     background-color: #415b6e;
 }
-
-
-
 
 @keyframes open-filters-animation {
     from {
@@ -103,9 +103,10 @@
 }
 
 .open-filters {
-  animation-name: open-filters-animation;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
+    @apply bg-white text-black;
+    animation-name: open-filters-animation;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
 }
 
 @keyframes svg-open-filters-animation {
@@ -116,7 +117,6 @@
         transform: rotate(180deg);
     }
 }
-
 
 .open-filters svg {
   animation-name: svg-open-filters-animation;
@@ -139,14 +139,32 @@
   animation-fill-mode: forwards;
 }
 
+@keyframes svg-close-filters-animation {
+    from {
+        transform: rotate(180deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
 .close-filters svg{
-    transform: rotate(180deg);
+    animation-name: svg-close-filters-animation;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes toggle-animation {
+    from {
+        @apply text-secondary;
+    }
+    to {
+        @apply text-gray-400;
+    }
 }
 </style>
 <script setup>
 import PeopleSearchAction from "~~/pages/people-search/components/people-search-action.vue";
 import SearchList from "~~/pages/people-search/components/search-list.vue";
-import { SearchIcon, ArrowIcon } from '@/components/icons'
 
 
 const props = defineProps({
@@ -167,16 +185,26 @@ const changeOpenSearchInput = (value) => {
 };
 
 const openFilters = ref('');
-const changeOpenFilters = (value) => {
-    openFilters.value = !openFilters.value;
+const closeOpenFilters = (value) => {
+    if(openFilters.value==true){
+        setTimeout(()=>{
+            openFilters.value = false;
+        },1)
+    }
 };
 
+const changeOpenFilters = (value) => {
+    if(!openFilters.value){
+        openFilters.value = true;
+    }
+};
 const searchInput = ref("");
 const tblFilter = ref(null);
 
 const filterSelected = (value) => {
     tblFilter.value = value;
 };
+
 
 const actionsBtn = [
     {
