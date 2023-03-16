@@ -8,6 +8,7 @@
             <div class="page-content-block">
                 <select-template @next-page="activePage = 'map-contacts'" v-if="activePage == 'select-template'" />
                 <map-contacts v-if="activePage == 'map-contacts'" />
+                <lead-sources v-if="activePage == 'lead-sources'" />
             </div>
         </div>
     </div>
@@ -30,12 +31,13 @@
 <script setup>
 import SelectTemplate from "./components/select-templates/index.vue";
 import MapContacts from "./components/map-contacts/index.vue";
+import LeadSources from "./components/lead-sources/index.vue";
 
 const props = defineProps({
     data: Object
 })
 
 // let activePage = ref('select-template');
-let activePage = ref('map-contacts');
+let activePage = ref('lead-sources');
 
 </script>
