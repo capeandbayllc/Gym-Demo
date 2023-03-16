@@ -1,5 +1,5 @@
 <!-- TODO: Remains:-->
-<!-- TODO: 1. i) TOP IMAGE: MAY BE POSITIONING (from left side): need more specific image-->
+<!-- TODO: 1. i) VVI: TOP IMAGE: MAY BE POSITIONING (from left side): need more specific image-->
 <!-- TODO: ii) toggle image-->
 <!-- TODO: iii) if possible upload-->
 
@@ -13,6 +13,7 @@
 <!-- TODO: vii) Calendar: right now, default time, later from DB : What will happen if I click new???-->
 <!-- TODO: viii) Notes-->
 <!-- TODO: ix) Cancel / Save hover???-->
+<!-- TODO: UPTO HERE: NOW ALL RESPONSIVE CHECK & Save Success -->
 
 <!-- TODO: 3. Update password-->
 <!-- TODO: 4. Login related-->
@@ -297,83 +298,56 @@
 
         <divider />
 
-      </div>
-
-<!--          <profile-relation/>
-          <div>
-            <h4 class="mb-4 inline-block">
-              Calendar Access
-              <LockIcon class="inline-block"/>
-            </h4>
-            <multi-select
-                :options="departments"
-                label="Department(s)"
-                v-model="form.departments"
-            />
-          </div>
-          <div class="col-span-2 3xl:col-span-3 -lg:col-span-1 -md:col-auto">
-            <div
-                class="border border-secondary rounded p-4 w-full mb-4 bg-transparent"
-            >
-              <h4 class="mb-1 inline-block font-bold w-full">
-                Availability
-              </h4>
-              <label class="mr-3">Daily Times Set:</label>
-              <span class="mx-2 inline-block">
-                        <ClockIcon class="inline-block mr-1"/> 10:20 am
-                    </span>
-              <span class="mx-2 inline-block">
-                        <ClockIcon class="inline-block mr-1"/> 1:00 pm
-                    </span>
-              <span class="mx-2 inline-block">
-                        <ClockIcon class="inline-block mr-1"/> 3:00 pm
-                    </span>
+        <!-- NOTES SECTION -->
+        <div class="grid grid-cols-1 py-2">
+          <div class="grid grid-cols-12 py-2">
+            <div class="col-start-2 col-span-10">
+              <h4 class="mb-4 inline-block w-full">Notes</h4>
+              <textarea
+                  name="notes"
+                  rows="6"
+                  class="neutral-input rounded-2xl w-full mb-4"
+              ></textarea>
+<!--              <div class="text-center">-->
+<!--                <Button-->
+<!--                    ghost-->
+<!--                    size="sm"-->
+<!--                    class="mr-2 capitalize"-->
+<!--                >Cancel</Button>-->
+<!--                <Button-->
+<!--                    secondary-->
+<!--                    size="sm"-->
+<!--                    class="capitalize"-->
+<!--                >Save</Button-->
+<!--                >-->
+<!--              </div>-->
             </div>
-            <Button
-                secondary
-                size="sm"
-                class="float-right capitalize"
-            >+ New
-            </Button
-            >
-            <Button
-                ghost
-                size="sm"
-                class="float-right mr-2 capitalize"
-            >Edit
-            </Button
-            >
+
           </div>
-          <div class="divider"></div>
-          <div
-              class="col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-span-1"
-          >
-            <h4 class="mb-4 inline-block w-full">Notes</h4>
-            <textarea
-                name="notes"
-                rows="6"
-                class="neutral-input rounded w-full mb-4"
-            ></textarea>
+
+        </div>
+
+        <!-- Save section -->
+        <div class="grid grid-cols-1 pt-2 pb-8">
+          <div class="grid grid-cols-1 justify-items-center">
             <div class="text-center">
               <Button
                   ghost
                   size="sm"
-                  class="mr-2 capitalize"
-              >Cancel
-              </Button
-              >
+                  class="mr-2 capitalize ">
+                <span class="text-light text-gray-500 hover:text-blue-400">Cancel</span>
+              </Button>
               <Button
                   secondary
                   size="sm"
-                  class="capitalize"
-              >Save
-              </Button
-              >
+                  class="capitalize rounded-xl font-light">
+                Save
+              </Button>
             </div>
           </div>
-
         </div>
-      </div>-->
+
+      </div>
 
     </div>
   </div>
@@ -397,12 +371,10 @@ export default {
 
 input, select, option {
   @apply h-9 rounded w-full pl-2 min-w-min;
-  /*min-width: 16rem;*/
 }
 
 .multi-select-input {
   @apply h-9 rounded pl-2;
-  /*min-width: 24rem;*/
 }
 #relationship option {
   background-color: #333;
@@ -436,7 +408,6 @@ input:hover {
   background-color: #0075C9;
 }
 
-/*}*/
 </style>
 
 <script setup>
@@ -469,6 +440,7 @@ const form = ref({
   departments: [],
   teams: [],
   calendarDepartments: [],
+  notes: "",
 });
 
 const profileBasic = [
