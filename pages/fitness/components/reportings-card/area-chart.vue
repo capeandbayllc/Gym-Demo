@@ -7,8 +7,12 @@ const chartOptions = {
   chart: {
     type: 'area',
     toolbar: {
-      show: false
-    }
+      show: true
+    },
+  zoom: {
+    enabled: true,
+    type: '',
+  }
   },
   dataLabels: {
     enabled: false
@@ -80,7 +84,7 @@ const chartOptions = {
     size: 0,
     colors: undefined,
     strokeColors: '#fff',
-    strokeWidth: 4,
+    strokeWidth: 2,
     strokeOpacity: 0.9,
     strokeDashArray: 0,
     fillOpacity: 1,
