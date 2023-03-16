@@ -2,7 +2,7 @@
     <fitness-card :title-icon="FitnessAssessmentsIcon" title="Fitness Assessments">
         <div class="assessment-container grid grid-cols-4 gap-5">
             <div class="assessments-chart col-span-1 -lg:col-span-4">
-                <div class="text-lg p-2 font-semibold chart-header">Assessments</div>
+                <div class="text-md p-2 font-normal chart-header">Assessments</div>
                 <div>
                     <assessments-chart />
                 </div>
@@ -79,7 +79,9 @@
     display: flex;
 }
 .status-div span{
-    font-size: 12px;
+    font-size: 11px;
+    color: #ffffff;
+    padding-left: 2px;
 }
 .circled-div{
     width: 14px;

@@ -1,5 +1,5 @@
 <template>
-    <div class="income-chart">
+    <div class="income-chart flex flex-col justify-between">
         <div class="grid grid-cols-10 header">
             <label class="col-span-2 text-[12px] text-white">Income</label>
             <div class="col-span-5"></div>
@@ -14,7 +14,8 @@
             </div>
         </div>
         <ClientOnly class="col-span-5">
-            <apexchart 
+            <apexchart
+                class="income-apex-chart"
                 type="area"
                 :options="options"
                 :series="series"
@@ -23,27 +24,14 @@
     </div>
 </template>
 <style scoped>
-.btn-status{
-    width: 15px;
-    height: 15px;
-    background : #0077ac;
-    border-radius: 50%;
-    color: black;
-    font-size: 10px;
-    font-weight: bold;
-    margin : auto;
+.income-chart .btn-status{
+    @apply w-[15px] h-[15px] bg-[#0077ac] rounded-full text-black text-[10px] font-bold m-auto;
 }
 .income-chart{
-    border : 2px solid #0077ac;
-    border-radius : 15px;
-    padding: 10px;
+    @apply border-2 border-[#0077ac] rounded-[15px] p-[10px];
 }
-.header{
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-.apexcharts-grid{
-    background: blue;
+.income-chart .header{
+    @apply mt-[5px] mb-[10px];
 }
 </style>
 <script setup>
@@ -56,6 +44,7 @@ const options ={
     chart:{
         height : 350,
         type: 'area',
+        background: 'linear-gradient(180deg, rgba(4,55,92,0 ) 0.00%, #04375c 100.00%)',
         toolbar:{
             show: false,
         },
@@ -79,6 +68,11 @@ const options ={
             style: {
                 colors: '#FFF'
             }
+        },
+        crosshairs: {
+            show: true,
+            position: 'front',
+            opacity: 0.9,
         }
     },
     yaxis:{
@@ -98,6 +92,17 @@ const options ={
             inverseColors : true,
             opacityTo : 1,
             opacityFrom : 1,
+        }
+    },
+    markers: {
+        size: 0,
+        strokeColors: '#fff',
+        strokeWidth: 4,
+        strokeOpacity: 0.9,
+        radius: 2,
+        hover: {
+        size: 5,
+        sizeOffset: 3
         }
     },
     tooltip: {
