@@ -22,12 +22,25 @@
           <li>
             <PulseItemCard title="Club Membership Details">
               <template #card-content>
-                <DetailList :spacings="gridItemSpacing" />
+                <DetailList />
               </template>
             </PulseItemCard>
           </li>
           <li>
             <h4>Membership Draft Breakdown</h4>
+            <div
+              class="grid grid-cols-[repeat(3,_32%)] w-full justify-between mt-4"
+            >
+              <div class="card-item-container">
+                <ChartOne />
+              </div>
+              <div class="card-item-container">
+                <ChartOne />
+              </div>
+              <div class="card-item-container">
+                <ChartOne />
+              </div>
+            </div>
           </li>
           <li>
             <PulseItemCard title="Membership Sales Leaderboard">
@@ -93,7 +106,7 @@
                 <span>title</span>
                 <span class="text-right">Amount</span>
               </div>
-              <ul>
+              <ul class="right-sect-list max-h-52 overflow-y-scroll">
                 <li class="right-detail-list-grid bg-secondary">
                   <span>Active Memberships</span>
                   <span>243</span>
@@ -106,6 +119,10 @@
                   <span>Membership Upgrades</span>
                   <span>7</span>
                 </li>
+                <li class="right-detail-list-grid bg-yellow-500">
+                  <span>Cancelations</span>
+                  <span>3</span>
+                </li>
               </ul>
             </div>
           </template>
@@ -115,23 +132,7 @@
   </div>
 </template>
 
-<style scoped>
-div.right-sect h4 {
-  @apply text-2xl font-semibold;
-}
-
-.right-detail-list-grid {
-  @apply grid grid-cols-[80%_20%] items-center;
-}
-
-li.right-detail-list-grid {
-  @apply w-full py-3 px-6 my-4 rounded-2xl border text-xl;
-}
-
-li.right-detail-list-grid span:last-child {
-  @apply font-bold text-2xl text-right;
-}
-</style>
+<style scoped></style>
 
 <script setup>
 import PulseMemberSummary from "./pulse-member-summary.vue";
@@ -142,6 +143,8 @@ import DetailList from "./partials/detail-list.vue";
 import SalesLeaderboard from "./partials/sales-leaderboard-list.vue";
 import MassCommsList from "./partials/mass-comms-list.vue";
 import ClubDateLabel from "./partials/club-date-label.vue";
+
+import ChartOne from "./partials/charts/pulse-line-chart.vue";
 
 const personalTrainingDetailData = ref([
   { title: "Appointments Sold", amount: 23, colorName: "secondary" },
@@ -196,6 +199,31 @@ const handleViewMemberComm = (ctx) => {
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-secondary/60 outline-secondary/60;
 }
+
+div.right-sect h4 {
+  @apply text-2xl font-semibold;
+}
+
+ul.right-sect-list::-webkit-scrollbar {
+  @apply hidden;
+}
+
+div.card-item-container {
+  @apply bg-black p-2 rounded-3xl border-2 border-secondary h-40;
+}
+
+.right-detail-list-grid {
+  @apply grid grid-cols-[80%_20%] items-center;
+}
+
+li.right-detail-list-grid {
+  @apply w-full py-3 px-6 my-3 rounded-2xl border text-xl;
+}
+
+li.right-detail-list-grid span:last-child {
+  @apply font-bold text-2xl text-right;
+}
+
 /* .pulse-summary {
   @apply flex flex-col xl:flex-row xl:space-x-5 -xl:space-y-5 overflow-y-auto max-h-[100vw];
 }
