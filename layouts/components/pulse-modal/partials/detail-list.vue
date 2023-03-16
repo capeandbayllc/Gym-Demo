@@ -21,7 +21,7 @@
       <template v-for="(hdr, hdix) in headers" :key="hdix">
         <p
           v-if="hdr !== '_'"
-          class="capitalize text-lg font-semibold"
+          class="capitalize text-lg font-semibold whitespace-nowrap overflow-hidden text-ellipsis"
           :class="{
             'flex flex-col items-center justify-center place-self-center bg-white/20 h-full w-full rounded-lg':
               hdr === 'amount',

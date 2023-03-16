@@ -1,5 +1,5 @@
 <template>
-  <apexchart type="radialBar" :options="options" height="140" :series="data" />
+  <apexchart type="radialBar" :options="options" :series="data" />
 </template>
 
 <script setup>
@@ -12,30 +12,34 @@ const props = defineProps({
 
 const options = {
   chart: {
+    width: "100%",
+    height: "auto",
     type: "radialBar",
+    offsetY: 12,
+    offsetX: 28,
     toolbar: {
       show: false,
     },
-
-    width: "100%",
-    offsetY: 30,
-    offsetX: 30,
   },
   stroke: {
     lineCap: "round",
   },
   plotOptions: {
+    bar: {
+      borderRadius: 10,
+    },
     radialBar: {
       hollow: {
+        margin: 9,
         size: "67%",
       },
       track: {
-        background: "#fff",
-        strokeWidth: 8,
+        startAngle: 0,
+        endAngle: 0,
+        strokeWidth: "20%",
         margin: 0,
       },
       dataLabels: {
-        show: true,
         name: {
           show: false,
         },

@@ -1,5 +1,5 @@
 <template>
-  <apexchart type="bar" :options="options" height="100%" :series="data" />
+  <apexchart type="bar" :options="options" :series="data" />
 </template>
 
 <script setup>
@@ -86,9 +86,9 @@ const options = {
     toolbar: {
       show: false,
     },
-    height: "100%",
+    height: "auto",
     width: "100%",
-    offsetY: 20,
+    offsetY: 40,
   },
   plotOptions: {
     bar: {

@@ -27,14 +27,21 @@
         <span class="text-2xl"> 20 </span>
         <span class="text-xs text-secondary"> +0.8% </span>
       </div>
-      <PulseRadialChart />
+      <div class="graph-container">
+        <PulseRadialChart />
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="postcss" scoped>
 div.card-item-container {
-  @apply bg-black p-2 rounded-3xl border-2 border-secondary h-40 relative;
+  @apply grid justify-end items-end;
+  @apply bg-black p-2 rounded-3xl border-2 border-secondary aspect-square max-w-xs relative;
+}
+
+div.graph-container {
+  @apply pt-4 pl-4;
 }
 </style>
 

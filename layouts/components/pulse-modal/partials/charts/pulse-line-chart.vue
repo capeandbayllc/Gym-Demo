@@ -64,9 +64,9 @@ const options = {
     toolbar: {
       show: false,
     },
-    height: "100%",
+    height: "auto",
     width: "100%",
-    offsetY: 60,
+    offsetY: 30,
   },
 };
 </script>
