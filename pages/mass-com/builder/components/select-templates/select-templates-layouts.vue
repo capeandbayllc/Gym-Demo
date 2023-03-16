@@ -1,0 +1,86 @@
+<template>
+    <div class="select-templates-layouts-container">
+        <p class="py-2">Featured</p>
+
+        <div class="flex gap-3">
+            <div class="block-border templates-block">
+                <div v-for="doc in docs" :key="doc.id" class="templates-doc">
+                    <normal-doc class="mb-2" />
+                    <div class="templates-doc-title">{{doc.name}}</div>
+                    <div class="templates-doc-date">{{doc.date}}</div>
+                </div>
+            </div>
+            <div class="block-border add-block">
+                <div class="btn btn-outline btn-secondary btn-circle btn-lg mt-6">
+                    <add-campaign-icon @click.stop="$router.push('/mass-com/builder')" />
+                </div>
+                <p class="text-[10px] mt-3">Create New</p>
+            </div>
+        </div>
+
+        <div class="flex pt-3 justify-center">
+            <Button outline size="xs" class="rounded-full">Build Your Campaign</Button>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+.select-templates-layouts-container {
+    @apply text-xs;
+    .block-border {
+        @apply border border-white rounded-md min-h-[12vw]
+    }
+    .templates-block {
+        @apply flex flex-grow overflow-y-auto gap-3 p-3 max-w-[35vw];
+
+        .templates-doc {
+            @apply text-center;
+            .templates-doc-title {
+                @apply text-secondary text-[8px];
+            }
+            .templates-doc-date {
+                @apply text-[8px]
+            }
+        }
+    }
+    .add-block {
+        @apply px-8 flex flex-col justify-center text-center;
+    }
+}
+</style>
+
+<script setup>
+import NormalDoc from '~/pages/mass-com/components/normal-doc.vue';
+import AddCampaignIcon from '~/pages/mass-com/components/build-campaign-card/add-campaign-icon.vue';
+
+const docs = [{
+        id: 1,
+        name: "Training Guide",
+        date: "April 09, 2022"
+    }, {
+        id: 1,
+        name: "Onboarding",
+        date: "April 09, 2022"
+    }, {
+        id: 1,
+        name: "Hiring Documents",
+        date: "April 09, 2022"
+    }, {
+        id: 1,
+        name: "Job Performance",
+        date: "April 09, 2022"
+    }, {
+        id: 1,
+        name: "Compensation",
+        date: "April 09, 2022"
+    }, {
+        id: 1,
+        name: "Hiring Documents",
+        date: "April 09, 2022"
+    }, {
+        id: 1,
+        name: "Compensation",
+        date: "April 09, 2022"
+    }
+]
+</script>
