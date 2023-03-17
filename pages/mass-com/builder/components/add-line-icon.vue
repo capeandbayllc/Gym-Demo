@@ -1,5 +1,5 @@
 <template>
-    <div class="inline-flex items-center justify-center w-full opacity-control">
+    <div class="inline-flex items-center justify-center w-full opacity-control relative">
         <hr class="w-32 bg-gray-200">
         <div class="absolute bg-black p-1">
             <button class="btn btn-xs plus-icon">

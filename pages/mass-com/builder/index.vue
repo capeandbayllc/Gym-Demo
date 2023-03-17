@@ -10,6 +10,9 @@
                 <map-contacts v-if="activePage == 'map-contacts'" @next-page="activePage = $event" />
                 <lead-sources v-if="activePage == 'lead-sources'" @next-page="activePage = $event" />
                 <save-campaign v-if="activePage == 'save-campaign'" @next-page="activePage = $event" />
+                <email-builder v-if="activePage == 'email-builder'" @next-page="activePage = $event" />
+                <save-campaign-form v-if="activePage == 'save-campaign-form'" @next-page="activePage = $event" />
+                <success-message v-if="activePage == 'success-message'" @next-page="activePage = $event" />
             </div>
         </div>
 
@@ -41,6 +44,9 @@ import SelectTemplate from "./components/select-templates/index.vue";
 import MapContacts from "./components/map-contacts/index.vue";
 import LeadSources from "./components/lead-sources/index.vue";
 import SaveCampaign from "./components/save-campaign/index.vue";
+import EmailBuilder from "./components/email-builder/index.vue";
+import SaveCampaignForm from "./components/save-campaign-form/index.vue";
+import SuccessMessage from "./components/success-message/index.vue";
 
 const props = defineProps({
     data: Object
