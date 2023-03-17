@@ -26,11 +26,19 @@
                 Schedule The Campaign
             </Button>
         </div>
+
+        <div class="flex mt-2 absolute bottom-0">
+            <span @click.stop="$emit('back', 'select-templates')" class="text-secondary cursor-pointer">
+                <font-awesome-icon :icon="['fas', 'angle-left']" size="sm" />
+                <a class="text-xs ml-1" @click.stop="$emit('next-page', 'select-template')">Back</a>
+            </span>
+        </div>
     </div>
 </template>
 
 <style scoped>
 .lead-sources-container {
+    @apply relative;
     .lead-sources-block {
         @apply border border-white rounded-lg h-[20vw] mt-5 p-4 w-[15vw] text-xs;
         .lead-sources-list {
