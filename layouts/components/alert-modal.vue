@@ -53,7 +53,7 @@
 import FilterAction from "./alert-modal/filter-action.vue";
 import RecentAlertsTableRow from "~~/pages/alerts-notifications/components/recent-alerts-table-row.vue";
 
-const searchInput = ref("");
+const searchInput =  ref("");
 const columns = [
   {
     label: "Segment",
