@@ -14,7 +14,7 @@
             <CallSquareIcon />
             <AlertIcon /> -->
             <div class="global-search-popup-container">
-                <div class="md:flex items-center justify-between gap-4">
+                <div class="md:flex items-center justify-between gap-4 p-6">
                     <div class="mb-[12px]">
                         <div class="search-icon" :class="{
                             'text-secondary': openSearchInput,

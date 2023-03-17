@@ -24,7 +24,7 @@
 </template>
 <style>
 .people-lead-table{
-    @apply max-w-[100%] overflow-x-scroll;
+    @apply max-w-[100%] xl:overflow-x-hidden overflow-x-scroll;
 }
 </style>
 <script setup>
