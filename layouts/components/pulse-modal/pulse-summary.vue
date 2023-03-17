@@ -183,18 +183,31 @@ const personalTrainingDetailData = ref([
   { title: "Percentage to Goal", amount: 75, colorName: "red" },
 ]);
 
-const membershipSalesLeaderboard = ref([
-  { rank: 1, name: "Sty Stance", points: 120, trending: "up" },
-  { rank: 2, name: "Aya Bauchanan", points: 120, trending: "down" },
-  { rank: 3, name: "Butch Fierce", points: 120, trending: "neutral" },
-  { rank: 4, name: "Henry Owens", points: 120, trending: "down" },
-  { rank: 5, name: "Penny Earns", points: 120, trending: "up" },
-  { rank: 6, name: "Max Smallson", points: 120, trending: "up" },
-  { rank: 7, name: "Steve Maxum", points: 110, trending: "down" },
-  { rank: 8, name: "Rich J.", points: 100, trending: "neutral" },
-  { rank: 9, name: "Mary Joe", points: 90, trending: "down" },
-  { rank: 10, name: "Gary Holmes", points: 80, trending: "up" },
-]);
+let points = 182;
+
+const randomTrendStr = () => {
+  let vals = ["up", "down", "neutral"];
+  return vals[Math.floor(Math.random() * vals.length)];
+};
+
+const pointObj = {
+  val: 450,
+  fn: function () {
+    return (this.val -= 12);
+  },
+};
+
+const membershipSalesLeaderboard = computed(() => {
+  if (!result?.value) return [];
+  return result.value.members.data.map((m, ix) => {
+    return {
+      rank: ix + 1,
+      name: `${m.first_name} ${m.last_name}`,
+      points: pointObj.fn(),
+      trending: randomTrendStr(),
+    };
+  });
+});
 
 const membershipCallsAndMassComms = ref([
   { id: 0, days: 4, status: "Pending", subject: "Email" },
