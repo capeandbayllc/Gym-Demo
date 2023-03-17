@@ -34,7 +34,23 @@
                 <membership-btn :membership="data.type" class="max-w-[100px]" />
             </div>
             <div :class="`w-[${columns[6].width}px]`">
-                
+                <div class="text-secondary h-6 w-6 flex items-center justify-center" >
+                    <svg @click="showDropdownInfo" v-show="!dropdownInfo" class="more-icon-normal" xmlns="http://www.w3.org/2000/svg" width="23.999" height="6" viewBox="0 0 23.999 6">
+                        <path id="icon_more-2" data-name="icon more" d="M1329,732.81a3,3,0,1,1,3,3A3,3,0,0,1,1329,732.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1320,732.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1311,732.81Z" transform="translate(-1311 -729.81)" fill="#0075C9"/>
+                    </svg>
+                    <svg @click="hideDropdownInfo" v-show="dropdownInfo" xmlns="http://www.w3.org/2000/svg" width="14.999" height="15" viewBox="0 0 14.999 15">
+                        <path id="icon_more" data-name="icon more" d="M1329,735.81a3,3,0,1,1,3,3A3,3,0,0,1,1329,735.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1320,735.81Zm0-9a3,3,0,1,1,3,3A3,3,0,0,1,1320,726.81Z" transform="translate(-1320 -723.81)" fill="#0075C9"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="dropdown-info"  v-show="dropdownInfo">
+                <div class="dropdown-info-container">
+                    <div class="close-button" @click="hideDropdownInfo"><CrossIcon/></div>
+                    <p @click="openInfoModal">Edit account</p>
+                    <p @click="openInfoModal">View alerts</p>
+                    <p @click="openInfoModal">Add Guest Pass</p>
+                    <p @click="openInfoModal">POS</p>
+                </div>
             </div>
             <!-- <div class="text-xs w-full" :class="`w-[${columns[6].width}px]`">{{ data.created_at.replace(/:\d{2}$/, "") }}</div> -->
         </div>
@@ -52,6 +68,19 @@
                 <div class="text-center flex gap-4 justify-center my-4">
                     <button class="text-white text-sm border border-white rounded-xl px-4 py-1" @click="closeAlertModal">Resolve</button>
                     <button class="text-white hover:text-secondary text-sm bg-secondary hover:bg-gray-900 border border-secondary rounded-xl px-4 py-1 transition-all duration-75" @click="closeAlertModal">Read alert notes</button>
+                </div>
+            </simple-card>
+        </daisy-modal>
+        <daisy-modal ref="infoModal" id="infoModal" :closable="false">
+            <simple-card class="p-4 w-[400px] mx-auto info-modal">
+                <close-btn :isBlack="true" @click="closeInfoModal"/>
+                <div class="my-6">
+                    <p class="text-[19px] mb-1">Agent: Kyle P.</p>
+                    <p class="text-[19px] mb-1">Created by: Kyle P.</p>
+                </div>
+                <p class="font-thin mb-8">5/5/2022, 12:24:44 PM</p>
+                <div class="text-center flex gap-4 justify-center my-4">
+                    <button class="text-white hover:text-secondary text-sm bg-secondary hover:bg-gray-900 border border-secondary rounded-xl px-4 py-1 transition-all duration-75" @click="closeInfoModal">View note</button>
                 </div>
             </simple-card>
         </daisy-modal>
@@ -77,6 +106,10 @@
         @apply bg-secondary;
     }
 }
+
+.more-icon .more-icon-normal{
+
+}
 </style>
 <style>
 .people-search-tbl-content thead {
@@ -86,6 +119,7 @@
     @apply bg-cover bg-center text-center;
     background-image: url('/notification-modal-background.png');
 }
+
 .number-alert-circle{
     @apply flex justify-center;
 }
@@ -93,6 +127,25 @@
 .number-alert-circle .number{
     @apply bg-white w-[40px] h-[40px] rounded-full text-black flex justify-center items-center font-bold pb-[3px] pl-[2px] text-[30px];
 }
+
+.info-modal{
+    @apply bg-cover bg-center text-center;
+    background-image: url('/public/info-modal-background.png');
+}
+
+.dropdown-info{
+    @apply bg-secondary text-white right-[200px] top-[40px] relative w-0;
+
+    .dropdown-info-container{
+        @apply bg-secondary p-3 w-[180px] border-[2px] rounded-[20px];
+    }
+}
+
+
+.close-button{
+    @apply relative h-0 w-0 right-[-130px];
+}
+
 </style>
 <script setup>
 import MembershipBtn from "~/components/buttons/membership-btn.vue";
@@ -101,6 +154,7 @@ import {
   SmsSquareIcon,
   EmailSquareIcon,
   CallSquareIcon,
+  CrossIcon
 } from "~~/components/icons";
 
 // import {
@@ -122,6 +176,26 @@ const openAlertModal =()=>{
 }
 const closeAlertModal =()=>{
     alertModal.value.close()
+}
+
+const infoModal = ref(null);
+
+const openInfoModal =()=>{
+    console.log(alertModal.value)
+    infoModal.value.open()
+}
+const closeInfoModal =()=>{
+    infoModal.value.close()
+}
+
+const dropdownInfo = ref(false);
+
+const showDropdownInfo = ()=>{
+    dropdownInfo.value = true;
+}
+
+const hideDropdownInfo = ()=>{
+    dropdownInfo.value = false;
 }
 
 </script>
