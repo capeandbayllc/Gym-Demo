@@ -1,50 +1,56 @@
 <template>
-  <div :class="className">
-    <button
-      class="select-box-btn"
-      :class="{
-        'bg-secondary': secondary,
-        'bg-transparent border-secondary': transparent && !secondary,
-        'rounded-t': !isCollapsed,
-        rounded: isCollapsed,
-        'btn-xs': size === 'xs',
-        'btn-sm': size === 'sm',
-        'btn-lg': size === 'lg',
-      }"
-      :onClick="toggleCollapsed"
-    >
-      {{ value ? selected : label }}
-      <select-box-icon :isCollapsed="isCollapsed" :color="color" />
-    </button>
-    <transition name="fade">
-      <select-box-content v-if="!isCollapsed" ref="selectContentEl">
-        <select-box-search-input
-          :secondary="false"
-          :placeholder="placeholderSearch"
-          size="xs"
-        ></select-box-search-input>
-        <select-box-item
-          v-for="item in items"
-          :key="item.value"
-          :value="item.value"
-          :label="item.label"
-          :selected="item.value === value"
-          :onClick="onChange"
-        />
-        <p class="select-box-clear-btn" :onClick="clearList">Clear List</p>
-      </select-box-content>
-    </transition>
-  </div>
+    <div :class="className" class="flex items-center w-full">
+        <button
+			class="select-box-btn"
+            :class="{
+                'bg-secondary': secondary,
+                'bg-transparent': transparent && !secondary,
+                'rounded-t select-box-btn-primary': !isCollapsed,
+                'rounded': isCollapsed
+            }"
+            :onClick="toggleCollapsed"
+        >
+            {{ value ? selected : (!isCollapsed && labelOpened ? labelOpened : label)  }}
+            <select-box-icon
+                :isCollapsed="isCollapsed"
+                :color="color"
+            />
+        </button>
+        <transition name="fade">
+            <select-box-content v-if="!isCollapsed">
+                <select-box-search-input v-if="showSearch" 
+                    :secondary="false"
+                    :placeholder="placeholderSearch" 
+                    size="xs" 
+                ></select-box-search-input>
+                <select-box-item
+                    v-for="item in items"
+                    :key="item.value"
+                    :value="item.value"
+                    :label="item.label"
+                    :selected="item.value === value"
+                    :onClick="onChange"
+                />
+                <p class="select-box-clear-btn" v-if="showClearList" :onClick="clearList">Clear List</p>
+            </select-box-content>
+        </transition>
+
+    </div>
 </template>
 <style>
 .select-box-wrapper {
   @apply relative min-w-fit;
 }
 .select-box-btn {
-  @apply flex flex-row border px-2 py-1 items-center justify-between;
+  @apply flex flex-row border px-2 py-1 items-center justify-between transition-colors duration-300;
   width: 165px;
   height: 29px;
 }
+
+.select-box-filter-size{
+    @apply w-[165px] h-[29px];
+}
+
 .select-box-clear-btn {
   @apply text-right font-medium mr-3 text-sm cursor-pointer;
 }
@@ -60,6 +66,10 @@
 }
 .btn-lg {
   height: 4rem;
+}
+
+.select-box-btn-primary {
+    @apply bg-secondary text-white;
 }
 
 .fade-enter-active,
@@ -78,49 +88,56 @@ import SelectBoxIcon from "./select-box-icon.vue";
 import SelectBoxContent from "./SelectBoxContent.vue";
 import SelectBoxItem from "./SelectBoxItem.vue";
 
+const emit = defineEmits(['onChange']);
+
 const props = defineProps({
-  label: {
-    type: String,
-    default: "Select...",
-  },
-  placeholderSearch: {
-    type: String,
-    default: "Search",
-  },
-  items: {
-    type: Array,
-    default: [],
-  },
-  value: {
-    type: String,
-  },
-  color: {
-    type: String,
-  },
-  onChange: {
-    type: Function,
-    default: () => null,
-  },
-  class: {
-    type: String,
-    default: "",
-  },
-  secondary: {
-    type: Boolean,
-    default: false,
-  },
-  transparent: {
-    type: Boolean,
-    default: true,
-  },
-  closeOnOutclick: {
-    type: Boolean,
-    default: true,
-  },
-  size: {
-    type: String,
-    default: '',
-  },
+    label: {
+        type: String,
+        default: "Select...",
+    },
+    placeholderSearch: {
+        type: String,
+        default: "Search",
+    },
+    items: {
+        type: Array,
+        default: [],
+    },
+    value: {
+        type: String,
+    },
+    color: {
+        type: String,
+    },
+    class: {
+        type: String,
+        default: "",
+    },
+    secondary: {
+        type: Boolean,
+        default: false
+    },
+    transparent: {
+        type: Boolean,
+        default: true
+    },
+    classOpened: {
+        type: String,
+        default: "",
+    },
+    labelOpened: {
+        type: String,
+        default: "",
+    },
+    showSearch:{
+        type: Boolean,
+        default: true,
+    },
+    showClearList:{
+        type: Boolean,
+        default: true,
+    }
+
 });
 
 const selectContentEl = ref(null);
@@ -130,12 +147,13 @@ const toggleCollapsed = () => {
 };
 
 const clearList = () => {
-  toggleCollapsed();
-  props.onChange("");
+    toggleCollapsed();
+    emit('onChange', '');
 };
+
 const onChange = (value) => {
-  toggleCollapsed();
-  props.onChange(value);
+    toggleCollapsed();
+    emit('onChange', value);
 };
 
 const handleOutClick = (e) => {
@@ -158,7 +176,7 @@ onUnmounted(() => {
 
 const className = computed({
   get() {
-    let additional = isCollapsed.value ? " collapsed" : "";
+    let additional = isCollapsed.value ? " collapsed" : "  ";
     return "select-box-wrapper " + props.class + additional;
   },
 });

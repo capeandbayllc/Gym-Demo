@@ -18,12 +18,13 @@ const props = defineProps({
 const mock = [
     {
         name: "New Members",
-        data: [220, 170, 165, 140, 160, 125, 235],
+        data: [180, 200, 220, 250,230,220,200,180,150],
     },
     {
         name: "Renewals",
-        data: [180, 155, 125, 200, 210, 160, 200],
+        data: [220, 200, 170, 160,150,160,180,200,220 ],
     },
+    
 ];
 
 const options = {
@@ -86,10 +87,10 @@ const options = {
     annotations: {
         points: [
             {
-                x: 120,
-                y: 125,
+                x: 270,
+                y: 180,
                 marker: {
-                    size: 8,
+                    size: 5,
                     fillColor: '#0074C8',
                     strokeColor: '#0074C8',
                     radius: 2,
@@ -104,14 +105,15 @@ const options = {
                         fontSize: '12px',
                         fontWeight: 400,
                     },
-                    text: '11 Febuary $24.150',
+                    text: '11 December $24.150',
                 }
             },
+            
             {
-                x: 315,
-                y: 145,
+                x: 85,
+                y: 175,
                 marker: {
-                    size: 8,
+                    size: 5,
                     fillColor: '#0074C8',
                     strokeColor: '#0074C8',
                     radius: 2,
@@ -125,8 +127,9 @@ const options = {
                         background: '#004B81',
                         fontSize: '12px',
                         fontWeight: 400,
+                        height:'3rem',
                     },
-                    text: '11 March $24.150',
+                    text: '27 November $241.150',
                 }
             }
         ],

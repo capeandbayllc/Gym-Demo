@@ -4,8 +4,10 @@
             :columns="columns"
             :data="items"
             :row-component="AgreementSearchTableRow"
+            @handle="eventHandle"
             class="h-56 overflow-y-auto"
         />
+
     </div>
 </template>
 <script setup>
@@ -21,4 +23,9 @@ const props = defineProps({
     }
 });
 
+const emit = defineEmits(['showConfirmStatusModal']);
+
+const eventHandle = (event)=>{
+    emit('showConfirmStatusModal', event)
+};
 </script>

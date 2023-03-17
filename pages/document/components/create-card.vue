@@ -6,8 +6,10 @@
                 <span class="text-center">{{type}}</span>
             </div>
             <div class="create-option">
-                <add-icon class="mb-2.5" />
-                Create New
+                <NuxtLink to="/agreement" class="text-center">
+                    <add-icon class="mb-2.5" />
+                    Create New
+                </NuxtLink>
             </div>
             <div class="create-option">
                 <add-icon class="mb-2.5" />

@@ -9,6 +9,7 @@
                     v-for="item in data"
                     :key="item.id"
                     :is="rowComponent"
+                    @handle="eventHandle"
                     :data="item"
                     @click="rowClicked(item)"
                 />
@@ -45,10 +46,14 @@ const props = defineProps({
     }
 });
 
-const emit = defineEmits(["row-clicked"]);
+const emit = defineEmits(["row-clicked", "handle"]);
 
 const rowClicked = (data) => {
-    emit("row-clicked", data);
-};
+	emit("row-clicked", data);
+}
+
+const eventHandle = (event)=>{
+	emit('handle', event);
+}
 
 </script>
