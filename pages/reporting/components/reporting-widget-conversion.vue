@@ -2,12 +2,13 @@
     <card title="Reporting Widget 2" class="bg-neutral"
         :options="{
             'collapse': false,
-            'favorite': true,
+            'favorite': false,
+            'add': true,
         }"
     >
         <template #content>
-            <div class="card-content">
-                <div class="grid grid-cols-5 mt-2 font-semibold text-lg -xl:text-sm -lg:text-xs  text-center">
+            <div class="card-content px-4 pb-3">
+                <div class="grid grid-cols-5 mt-2 font-semibold text-lg -xl:text-sm -lg:text-xs text-center">
                     <div class="cursor-pointer" :class="{'text-secondary': activeFilter === index}" v-for="(item, index) in filterList" :key="index" @click="setFilter(index)">{{ item }}</div>
                 </div>
                 <div class="grid grid-cols-1 mt-2 text-base -xl:text-xs font-normal">
