@@ -26,11 +26,11 @@
             </p>
             <div class="account-box" v-if="isDetailOpened">
               <ul>
-                <ii v-for="{ key, icon } in accountOptions" :key="key">
+                <li v-for="{ key, icon } in accountOptions" :key="key">
                   <button @click="changeDetailView(key)">
                     <component :is="icon" />
                   </button>
-                </ii>
+                </li>
               </ul>
               <UserInfo v-if="detailView == 'memberinfo'" />
               <Setting v-if="detailView == 'setting'" />
@@ -113,6 +113,7 @@ import Engage from "./engage/index.vue";
 const option = ref(null);
 const route = useRoute();
 const profileId = (route.query.id)
+
 
 const appLayout = useLayoutElement();
 const checkInContainer = ref();
