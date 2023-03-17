@@ -1,18 +1,18 @@
 import gql from "graphql-tag";
 import { DocumentNode } from "graphql/language";
-import { GraphQLObject } from "~/api/queries/GraphQLObject";
+import { GraphQLQueryInterface } from "~/api/queries/GraphQLQueryInterface";
 
 const FIND_BY_MAIL: DocumentNode = gql`
-    query User($email: String!) {
-        user(email: $email) {
-            id
-            first_name
-            last_name
-            email
-            profile_photo_path
-            phone
-        }
+  query User($email: String!) {
+    user(email: $email) {
+      id
+      first_name
+      last_name
+      email
+      profile_photo_path
+      phone
     }
+  }
 `;
 
 const FIND_BY_ID: DocumentNode = gql`
@@ -33,7 +33,7 @@ export interface UserQuery {
     findById: DocumentNode;
 }
 
-const user: GraphQLObject<UserQuery, object> = {
+const user: GraphQLQueryInterface<UserQuery, object> = {
     query: {
         findByMail: FIND_BY_MAIL,
         findById: FIND_BY_ID,
