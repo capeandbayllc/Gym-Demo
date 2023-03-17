@@ -181,12 +181,7 @@ const memberInformation = [
     key: "member-misc-2",
     label: "Member Misc. 2",
     class: "neutral-input",
-  },
-  {
-    key: "member-misc-3",
-    label: "Member Misc. 3",
-    class: "neutral-input",
-  },
+  },*/
 ];
 
 const demographicsObj = ref({});
