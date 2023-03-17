@@ -1,5 +1,5 @@
 <template>
-    <thead class="top-0 text-base-content">
+    <thead class="top-0 text-base-content sticky bg-black">
         <tr>
             <th
                 v-for="(column, ndx) in columns"
@@ -25,7 +25,7 @@
 </template>
 <style scoped>
 thead {
-    @apply z-10;
+    @apply z-10 sticky;
 }
 </style>
 <script setup>

@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { createServer } from "miragejs";
+import {createServer} from "miragejs";
 import { createGraphQLHandler } from "@miragejs/graphql";
 import { parse } from "graphql/language";
 import data from "~/api/data/data";
@@ -14,6 +14,7 @@ import { getRandomInt } from "~/api/utils/number";
 import registerResolver from "~/api/utils/resolver";
 import graphQLSchema from "~/api/schema.gql?raw";
 import { UUIDManager } from "~/api/utils/UUIDManager";
+import {underscore} from "miragejs/lib/utils/inflector";
 
 
 // Mirage GraphQL README:
@@ -21,6 +22,18 @@ import { UUIDManager } from "~/api/utils/UUIDManager";
 
 const server = createServer({
   routes() {
+    // make relationships use snake_case.
+    const registerModel = this.schema.registerModel;
+    this.schema.registerModel = function (type, ModelClass) {
+      for (let associationProperty in ModelClass.prototype) {
+        ModelClass.prototype[associationProperty].getForeignKey = function () {
+          return `${underscore(this.name)}_id`;
+        }
+      }
+
+      return registerModel.bind(this)(type, ModelClass);
+    }
+
     const parsed = parse(graphQLSchema);
     const graphQLHandler = createGraphQLHandler(parsed, this.schema, {
       resolvers: registerResolver(parsed, this),
@@ -28,7 +41,6 @@ const server = createServer({
 
     this.post("/graphql", graphQLHandler);
   },
-  fixtures: data,
   identityManagers: {
     application: UUIDManager,
   },
@@ -38,7 +50,7 @@ const server = createServer({
   },
   seeds(server) {
     createAdminAndKioskUser(server);
-    server.loadFixtures(); //loads our json data
+    server.db.loadData(data);
     server.db.users.forEach((u) =>
       server.createList("notification", getRandomInt(10), { user_id: u.id })
     );
@@ -47,4 +59,6 @@ const server = createServer({
 });
 
 console.log({ server });
+
+onUnmounted(() => server.shutdown());
 </script>

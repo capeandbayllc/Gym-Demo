@@ -7,9 +7,20 @@ const UPDATE_USER = gql`
         updateUser(input: $input) {
             id
             first_name
+            middle_name
             last_name
+            date_of_birth
+            gender
+            drivers_license_number
+            occupation
+            employer
+            barcode
             email
-            profile_photo_path
+            alternate_phone
+            address1
+            address2
+            city
+            state
             phone
         }
     }

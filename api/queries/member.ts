@@ -14,6 +14,7 @@ const GET_MEMBERS: DocumentNode = gql`
                 gender
                 profile_photo_path
                 created_at
+                updated_at
                 homeLocation {
                     name
                 }
@@ -34,16 +35,26 @@ const GET_SINGLE_MEMBER: DocumentNode = gql`
     query SingleMember($id: ID) {
         member(id: $id) {
             id
+            user_id
             first_name
+            middle_name
             last_name
+            date_of_birth
+            gender
+            drivers_license_number
+            occupation
+            employer
+            barcode
             email
+            phone
             primary_phone
-            locations {
-                id
-                name
-            }
             homeLocation {
-                name
+                name,
+                address1
+                address2
+                city
+                state
+                zip
             }
             created_at
         }

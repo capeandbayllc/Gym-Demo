@@ -19,12 +19,12 @@ export function apply(args: InputInterface, { mirageSchema } : any, info: GraphQ
         throw new Error(`Could not auto resolve table name for "${name}"`);
     }
 
-    const data: DbCollection = schema.find(args.input.id);
-    if (data === null) {
+    const model: DbCollection = schema.find(args.input.id);
+    if (model === null) {
         throw new Error(`"${name}": cant find record with id:"${args.input.id}" on "${tableName}"`);
     }
 
-    return data.update(args.input);
+    return model.update(args.input);
 }
 
 

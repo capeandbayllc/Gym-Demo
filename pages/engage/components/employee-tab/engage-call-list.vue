@@ -1,74 +1,67 @@
 <template>
-    <div class="engage-call-list-container">
-        <!-- <h3>Call List</h3> -->
-        <h3 class="text-secondary">Upgrades:</h3>
-        <data-table
-            :columns="columns"
-            :data="data"
-            :row-component="CallListItem"
-            class="h-80 overflow-y-auto text-xs"
-        />
-    </div>
+  <div class="engage-call-list-container">
+    <!-- <h3>Call List</h3> -->
+    <h3 class="text-secondary">Upgrades:</h3>
+
+    <data-table
+      :columns="columns"
+      :data="members2"
+      :row-component="CallListItem"
+      :stickyHeader="true"
+      class="h-80 text-xs overflow-y-auto"
+    />
+  </div>
 </template>
 <style scoped>
 .engage-call-list-container {
-    @apply col-span-2 pb-1 -md:col-span-3;
-    h3 {
-        @apply text-base;
-    }
+  @apply col-span-2 pb-1 -md:col-span-3;
+  h3 {
+    @apply text-base;
+  }
 }
 </style>
 <script setup>
-import CallListItem from './call-list-item.vue';
+import CallListItem from "./call-list-item.vue";
+import gql from "graphql-tag";
+import { useQuery } from "@vue/apollo-composable";
+import member from "~/api/queries/member";
+import {request} from "~/api/utils/request";
 
-const columns = ["Name", "Location", "Date Upgraded", "Contacted", "Membership Type", ""]
-const data = [{
-    id: 1,
-    avatar: "/account.png",
-    name: "Sandy Lin",
-    location: "Location",
-    date: "1.02.22",
-    membership: "platinum",
-    call_type: 'Call'
-}, {
-    id: 2,
-    avatar: "/account.png",
-    name: "Randy Portis",
-    location: "Location",
-    date: "1.02.22",
-    membership: "platinum",
-    call_type: 'Email'
-}, {
-    id: 3,
-    avatar: "/account.png",
-    name: "Tess Hightower",
-    location: "Location",
-    date: "1.02.22",
-    membership: "platinum",
-    call_type: 'In-Club'
-}, {
-    id: 4,
-    avatar: "/account.png",
-    name: "Sandy Lin",
-    location: "Location",
-    date: "1.02.22",
-    membership: "platinum",
-    call_type: 'Call'
-}, {
-    id: 5,
-    avatar: "/account.png",
-    name: "Randy Portis",
-    location: "Location",
-    date: "1.02.22",
-    membership: "platinum",
-    call_type: 'Email'
-}, {
-    id: 6,
-    avatar: "/account.png",
-    name: "Tess Hightower",
-    location: "Location",
-    date: "1.02.22",
-    membership: "platinum",
-    call_type: 'In-Club'
-}]
+
+const { result } = useQuery(member.query.browse);
+
+const members = ref([]);
+
+watch(result, (nv, ov) => {
+  if (result) {
+    console.log("result", result);
+    members.value = result.value.members.data;
+  }
+});
+
+const membershipTypes = ["platinum", "gold", "silver", "bronze"];
+
+const getRandomMembershipType = () => {
+  return membershipTypes[Math.floor(Math.random() * membershipTypes.length)];
+};
+
+const members2 = computed(() => {
+  return members.value.map((item) => {
+    return {
+      ...item,
+      membership_type: getRandomMembershipType(),
+      updated_at: new Date(item.updated_at).toLocaleDateString().replaceAll('/', '.'),
+    };
+  });
+});
+
+const columns = [
+  "",
+  "Name",
+  "Location",
+  "",
+  "Membership Type",
+  "Date Upgraded",
+  "",
+];
 </script>

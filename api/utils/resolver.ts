@@ -77,6 +77,8 @@ class QueryResolver {
             delete args.filter;
         }
 
+        // @todo: use instead:
+        //const records = mirageGraphQLFieldResolver(obj, args, context, info);
         let records = (Object.keys(args).length > 0) ? schema.where(args).models : schema.all().models;
         if (filter) {
             records = await this.filter(records, filter, args, context, info);
@@ -158,7 +160,6 @@ function getMutationResolvers(mutation: ObjectTypeDefinitionNode, server: Server
 
 export default function registerResolver(node: DocumentNode, server: Server) {
     const resolvers = {Query: {}, Mutation: {}}
-    console.clear();
 
     // @ts-ignore
     node.definitions.forEach((doc: ObjectTypeDefinitionNode) => {
