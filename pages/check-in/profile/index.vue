@@ -89,11 +89,6 @@ const memberInformation = [
     class: "neutral-input",
   },
   {
-    key: "social-security-number",
-    label: "Social Security Number",
-    class: "neutral-input",
-  },
-  {
     key: "occupation",
     label: "Occupation",
     class: "neutral-input",
@@ -136,6 +131,11 @@ const memberInformation = [
   {
     key: "member-misc-2",
     label: "Member Misc. 2",
+    class: "neutral-input",
+  },
+  {
+    key: "member-misc-3",
+    label: "Member Misc. 3",
     class: "neutral-input",
   },
 ];
