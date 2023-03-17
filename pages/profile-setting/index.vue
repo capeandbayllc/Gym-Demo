@@ -6,8 +6,6 @@
 <!-- TODO: 2. basic info-->
 <!-- TODO: i) responsive checking for ipad screen -->
 <!-- TODO: ii) Search manager (have some questions here????) (how will it work):-->
-<!-- TODO: iii) Add connection: responsive check-->
-<!-- TODO: vii) Calendar: right now, default time, later from DB : What will happen if I click new???-->
 <!-- TODO: ix) Cancel / Save hover???-->
 <!-- TODO: UPTO HERE: NOW ALL RESPONSIVE CHECK & Save Success -->
 
@@ -74,37 +72,48 @@
         </div>
 
         <!--    ADD CONNECTION SECTION-->
-        <div class="grid grid-cols-6 gap-4 py-2 mt-4">
-          <div class="col-start-2 col-span-4 border-2 border-secondary rounded-2xl">
+        <div class="grid grid-cols-12 gap-4 py-2 mt-4">
+          <div class="col-start-3 col-span-8 border-2 border-secondary rounded-2xl">
 
             <div class="mt-4 mr-5 float-right w-12 p-2.5 pl-2 rounded-2xl bg-blue-500">
               <MembersIcon  />
             </div>
 
-              <div class="grid grid-cols-9 justify-items-center py-2">
-                <div class="mb-5 col-span-5">
-                  <h6 class="pt-5 mb-3 font-bold text-lg">Add Connection</h6>
-                  <div class="-mb-1.5 mt-4">Lead Member to Connect</div>
-                  <!-- TODO:  Search key -->
-                  <input class="neutral-input rounded-xl mt-3"
-                         v-model="form['lead-member']"
-                         placeholder="Search by last name or email"/>
+            <div class="grid grid-cols-12 p-2 -my-3 mt-3 mb-3">
+              <div class="col-start-2 col-span-10">
+                <h6 class="pt-5 font-medium text-lg pl-2">Add Connection</h6>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-12 p-2 mb-5 -mt-3">
+              <div class="col-start-2 col-span-10">
+                <div class="grid grid-cols-2 lg:grid-cols-2 md:grid-cols-1 gap-2 lg:mb-0 md:mb-5">
+                  <div class="mb-5">
+                    <div class="mb-2">Lead Member to Connect</div>
+                    <!-- TODO:  Search key -->
+                    <input class="neutral-input rounded-xl"
+                           v-model="form['lead-member']"
+                           placeholder="Search by last name or email"/>
+                  </div>
+
+                  <div class="mb-5">
+                    <div class="mb-2">Relationship:</div>
+                    <select id="relationship" class="neutral-input rounded-xl"
+                            v-model="form['relationship']">
+                      <option selected value="0" key="0">Relationship</option>
+                      <option
+                          v-for="item in relationships"
+                          :key="item.id"
+                          value="item.id">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+
                 </div>
 
-                <div class="mb-5 col-span-3 mt-16">
-                  <div class="-mb-1.5">Relationship:</div>
-                  <select id="relationship" class="neutral-input rounded-xl"
-                          v-model="form['relationship']">
-                    <option selected value="0" key="0">Relationship</option>
-                    <option
-                            v-for="item in relationships"
-                            :key="item.id"
-                            value="item.id">
-                      {{ item.name }}
-                    </option>
-                  </select>
-                </div>
               </div>
+            </div>
 
           </div>
         </div>
@@ -331,40 +340,65 @@
         <div class="grid grid-cols-1 py-2">
           <div class="grid grid-cols-12 py-2">
             <div class="col-start-2 col-span-3">
-              <h4 class="mb-4 inline-block">
-                Calendar Access <LockIcon class="inline-block ml-3" />
-              </h4>
-              <multi-select-dropdown
-                  :options="calendarDepartments"
-                  label="Department(s)"
-                  v-model="form.calendarDepartments"
-              />
+
+              <div class="grid grid-cols-1 ml-0">
+                <h4 class="mb-4 inline-block">
+                  Calendar Access <LockIcon class="inline-block ml-3" />
+                </h4>
+                <multi-select-dropdown
+                    :options="calendarDepartments"
+                    label="Department(s)"
+                    v-model="form.calendarDepartments"
+                />
+              </div>
+              <div class="grid grid-cols-1 ml-0">
+                <div class="col-span-12">
+                  <div class="float-left h-9 bg-secondary rounded-xl px-1.5 mr-2 mt-2 cursor-pointer pt-2 w-max"
+                       v-for="value in form.calendarDepartments" :key="value"
+                       @click="removeOption(form.calendarDepartments, value, 'calendarDepartments')">
+                    {{ getLabel(value, calendarDepartments) }}
+                  </div>
+                </div>
+              </div>
             </div>
 <!--            col-span-2 3xl:col-span-3 -lg:col-span-1 -md:col-auto-->
             <div class="col-start-6 col-span-6">
-              <div class="border-2 border-secondary rounded-2xl p-12 w-full mb-4 bg-transparent">
-                <h4 class="mb-1 inline-block font-bold w-full"> Availability </h4>
-                <label class="mr-3">Daily Times Set:</label>
-                <span class="mx-2 inline-block">
-                        <BlueClockIcon class="inline-block mr-1" /> 10:20 am
-                    </span>
-                <span class="mx-2 inline-block">
-                        <BlueClockIcon class="inline-block mr-1" /> 1:00 pm
-                    </span>
-                <span class="mx-2 inline-block">
-                        <BlueClockIcon class="inline-block mr-1" /> 3:00 pm
-                    </span>
+              <div class="border-2 border-secondary rounded-2xl p-12 pr-8 w-full mb-4 bg-transparent">
+
+                <div class="grid grid-rows-2">
+                  <div>
+                    <h4 class="mb-1 inline-block font-bold w-full"> Availability </h4>
+                  </div>
+
+                  <div>
+                    <div class="grid grid-cols-12">
+                      <div class="col-span-3 lg:col-span-3 md:col-span-4">
+                        <label class="mr-3">Daily Times Set:</label>
+                      </div>
+                      <div class="col-span-9 lg:col-span-9 md:col-span-8">
+                        <span class="availability-time-span">
+                          <BlueClockIcon class="inline-block mr-1"/> 10:20 am
+                        </span>
+                        <span class="availability-time-span">
+                          <BlueClockIcon class="inline-block mr-1"/> 1:00 pm
+                        </span>
+                        <span class="availability-time-span">
+                          <BlueClockIcon class="inline-block mr-1"/> 3:00 pm
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
               </div>
-              <Button
-                  secondary
-                  size="sm"
-                  class="float-right capitalize rounded-xl font-light text-base">
+              <Button secondary
+                      size="sm"
+                      class="float-right capitalize rounded-xl font-light text-base">
                 + New
               </Button>
-              <Button
-                  ghost
-                  size="sm"
-                  class="float-right mr-2 capitalize rounded-xl font-light">
+              <Button ghost
+                      size="sm"
+                      class="float-right mr-2 capitalize rounded-xl font-light">
                 <span class="text-base text-gray-500 hover:text-blue-400">Cancel</span>
               </Button>
             </div>
@@ -471,8 +505,8 @@ input:hover {
   background-color: #0075C9;
 }
 
-.tags-option {
-    @apply float-left h-9 bg-secondary rounded px-1.5 mr-2 mt-2 cursor-pointer pt-2;
+.availability-time-span {
+  @apply mx-2 inline-block mb-2;
 }
 
 </style>
