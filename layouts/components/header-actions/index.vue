@@ -7,13 +7,14 @@
 			<people-icon />People
 		</Button> -->
     <div @mouseover="showFocus" @mouseleave="hideFocus">
-      <input
+      <FormAppInput ref="globalSearchInput" placeholder="Search" v-model="globalSearch" @click="$emit('show-global-search')"/>
+      <!-- <input
         ref="globalSearchInput"
         type="text"
         placeholder="Search"
         class="input global-search-input w-80 -xl:w-40 -lg:w-80 -md:w-40 -lg:mr-0 mr-9 bg-base-content rounded text-black text-lg h-9"
         @click="$emit('show-global-search')"
-      />
+      /> -->
     </div>
     <div class="relative">
       <person-add-icon @click="showUserMenu" />
@@ -121,6 +122,8 @@ const showFocus = () => {
   globalSearchInput.value.style = "";
   globalSearchInput.value.focus();
 };
+
+const globalSearch = ref('')
 
 const emit = defineEmits(["show-leader-board"]);
 const showLeaderBoard = () => {

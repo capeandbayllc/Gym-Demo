@@ -4,11 +4,11 @@
     :class="{
       'fill-green-500': direction === 'up',
       'fill-red-500 rotate-180': direction === 'down',
-      'text-gray-500': direction === '-',
+      'text-gray-500': direction === '-' || direction === 'neutral',
     }"
   >
     <svg
-      :class="{ hidden: direction === '-' }"
+      :class="{ hidden: direction === '-' || direction === 'neutral' }"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 320 512"
     >
@@ -18,7 +18,11 @@
       />
     </svg>
 
-    <span v-if="direction === '-'" class="text-2xl font-bold">-</span>
+    <span
+      v-if="direction === '-' || direction === 'neutral'"
+      class="text-2xl font-bold"
+      >-</span
+    >
   </div>
 </template>
 

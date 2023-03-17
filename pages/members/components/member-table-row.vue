@@ -29,7 +29,9 @@
           class="dropdown-content menu p-2 shadow bg-black rounded w-52 items-start"
         >
           <div class="dropdown-item" tabindex="-1">Preview</div>
-          <div class="dropdown-item" tabindex="-1">Edit</div>
+          <div class="dropdown-item" tabindex="-1">
+             <span @click="navigateToCheckIn" >Edit</span>
+          </div>
           <div class="dropdown-item" tabindex="-1">Trash</div>
           <div class="" tabindex="-1">
             <div class="dropdown dropdown-left dropdown-end dropdown-hover contact-menu">
@@ -103,11 +105,20 @@ import MembershipBtn from "~~/components/buttons/membership-btn.vue";
 import addNoteModel from './add-note-modal.vue';
 
 library.add(faEllipsisH);
+
+const router = useRouter()
+
 const props = defineProps({
   data: Object,
 });
 const contactOption = ref(null);
-
+console.log("Proposss ", props.data.id);
+const navigateToCheckIn = ()=>{
+  router.push({
+    name:'check-in', 
+    query: { id: props.data.id }
+  })
+}
 const addNoteModalRef = ref(null);
 
 const openNoteModal = ()=>{
