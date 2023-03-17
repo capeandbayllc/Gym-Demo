@@ -377,16 +377,11 @@
       <div class="grid grid-cols-1 pt-2 pb-8">
         <div class="grid grid-cols-1 justify-items-center">
           <div class="text-center">
-            <Button
-                ghost
-                size="sm"
-                class="mr-2 capitalize ">
+            <Button ghost size="sm" class="mr-2 capitalize hover:bg-transparent">
                 <span class="text-light text-gray-500 hover:text-blue-400"
                       @click="resetBasicForm()">Cancel</span>
             </Button>
-            <Button
-                secondary
-                size="sm"
+            <Button secondary size="sm"
                 class="capitalize rounded-xl font-light"
                 @click="saveBasicInfo()">
               Save
@@ -407,9 +402,6 @@ export default {
 </script>
 
 <style scoped>
-.page-setting-container {
-  @apply py-4 w-full h-fit;
-}
 
 .page-border {
   @apply border border-secondary rounded-2xl;
@@ -456,21 +448,6 @@ input:hover {
 
 .availability-time-span {
   @apply mx-2 inline-block mb-2;
-}
-
-.profile-image {
-  border-width: 3px;
-  border-radius: 2.5rem;
-  border-color: #1C6bbC;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-}
-
-.profile-image > img {
-  border-radius: 1.75rem;
 }
 
 </style>

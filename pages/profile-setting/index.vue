@@ -6,7 +6,6 @@
 <!-- TODO: i) responsive checking for ipad screen -->
 <!-- TODO: ii) Search manager (have some questions here????) (how will it work):-->
 
-<!-- TODO: 3. Update password: HERE-->
 <!-- TODO: 4. Login related-->
 <!-- TODO: 5. Attachment-->
 <!-- TODO: 6. Salary-->
@@ -51,10 +50,10 @@
       </div>
     </div>
 
-    <!--    FIRST SECTION -->
     <basic-info></basic-info>
 
     <update-password></update-password>
+
   </div>
 </template>
 
@@ -70,51 +69,13 @@ export default {
   @apply py-4 w-full h-fit;
 }
 
-.page-border {
-  @apply border border-secondary rounded-2xl;
-}
-
-input, select, option {
-  @apply h-9 w-full pl-2 min-w-min;
-}
-
-.multi-select-input {
-  @apply h-9 rounded pl-2;
-}
-#relationship option {
-  background-color: #333;
-}
-
-#relationship option:hover {
-  background-color: #333
-}
 
 input:focus {
   @apply outline-none;
 }
 
-.secondary-input {
-  @apply bg-secondary;
-}
-
-.neutral-input {
-  @apply bg-base-content/20;
-}
-
-.readonly-input {
-  @apply bg-transparent text-base-content/50;
-}
-
-.outline-input {
-  @apply bg-transparent border border-secondary;
-}
-
 input:hover {
   background-color: #0075C9;
-}
-
-.availability-time-span {
-  @apply mx-2 inline-block mb-2;
 }
 
 .profile-image {
