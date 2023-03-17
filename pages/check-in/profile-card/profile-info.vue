@@ -1,7 +1,8 @@
 <template>
   <div v-if="ProfileInfo" class="profile-info-container">
     <div
-        class="profile-avatar outline-4 hover:outline-[0.75rem] transition-all outline-yellow-400 duration-200 ease-in-out outline-none border-none"
+
+      class="profile-avatar outline-4 hover:outline-[0.75rem] transition-all outline-yellow-400 duration-200 ease-in-out outline-none border-none overflow-visible"
     >
       <div class="alert-badge" v-if="user.notifications.length > 0">
         {{ user.notifications.length }}
@@ -107,7 +108,7 @@
 .profile-info-container {
   @apply flex flex-col flex-1 items-center text-lg text-center;
   .profile-avatar {
-    @apply relative rounded-full border-4 p-1.5 overflow-hidden;
+    @apply relative rounded-full border-4 p-1.5;
     img {
       @apply w-36 h-36 rounded-full;
     }
