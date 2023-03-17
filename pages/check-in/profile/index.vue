@@ -99,6 +99,7 @@ request(member.query.get, { id: profileId }).then(({data}) => {
 const isActiveMember = ref(false);
 const isProcessing = ref(false);
 const memberInfo = ref({});
+
 const memberInformation = [
   {
     key: "first_name",
