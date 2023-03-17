@@ -48,6 +48,7 @@ const GET_SINGLE_MEMBER: DocumentNode = gql`
             email
             phone
             primary_phone
+            profile_photo_path
             homeLocation {
                 name,
                 address1

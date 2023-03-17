@@ -6,10 +6,11 @@ export function onCompleted(user: any, args: InputInterface, {mirageSchema}: any
     const reflectData = schema.findBy({ user_id: user.id });
     const payload: any = args.input;
 
+    delete payload.id;
     if (reflectData === null) {
-        schema.create(Object.assign({}, payload, { userId: user.id, id: void 0 }));
+        schema.create(Object.assign({}, payload, { userId: user.id }));
     } else {
-        console.log(111, reflectData, reflectData.update(payload))
+        reflectData.update(payload);
     }
 
     user.homeLocation.update({

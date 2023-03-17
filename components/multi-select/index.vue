@@ -6,6 +6,7 @@
         :options="options"
         :mode="isSingleSelect ? 'single' : 'multiple'"
         :placeholder="label"
+        :can-deselect="!isSingleSelect"
         :classes="getDefaultMultiselectTWClasses()"
         :caret="isSingleSelect"
         :close-on-select="isSingleSelect"
@@ -29,14 +30,13 @@
 }
 </style>
 <script setup>
-import {ref} from 'vue'
 import Multiselect from '@vueform/multiselect'
 import "@vueform/multiselect/themes/default.css"
 import {getDefaultMultiselectTWClasses} from './getDefaultMultiselectTWClasses.js'
 
 const props = defineProps({
   modelValue: {
-    type: Array,
+    type: [Array, String],
     default: []
   },
   label: String,

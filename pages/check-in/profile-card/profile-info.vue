@@ -1,16 +1,16 @@
 <template>
-  <div class="profile-info-container">
+  <div v-if="ProfileInfo" class="profile-info-container">
     <div
-      class="profile-avatar outline-4 hover:outline-[0.75rem] transition-all outline-yellow-400 duration-200 ease-in-out outline-none border-none"
+        class="profile-avatar outline-4 hover:outline-[0.75rem] transition-all outline-yellow-400 duration-200 ease-in-out outline-none border-none"
     >
       <div class="alert-badge" v-if="user.notifications.length > 0">
         {{ user.notifications.length }}
       </div>
-      <img :src="user.profile_photo_path" alt="profile image" />
+      <img :src="ProfileInfo.profile_photo_path" alt="profile image" />
     </div>
     <div class="profile-name">
-      {{ ProfileInfo?.member?.first_name ? ProfileInfo.member.first_name : user.first_name }} 
-      {{ ProfileInfo?.member?.last_name ? ProfileInfo.member.last_name : user.last_name }}
+      {{ ProfileInfo.first_name }}
+      {{ ProfileInfo.last_name }}
     </div>
     <div class="pb-5">
       Member since 2022
@@ -175,22 +175,13 @@ import {
   EditIcon,
 } from "~~/components/icons";
 import  Member from "@/api/queries/member";
+import {request} from "~/api/utils/request";
 
 const user = useState("auth");
 
 const route = useRoute()
 const profileId = (route.query.id)
-const ProfileInfo = ref({}); 
-const { result } = useQuery(Member.query.get , {
-    variables: { id: profileId },
-  });
-
-watchEffect( () => {
-  if (result.value) {
-    ProfileInfo.value = result.value
-  }
-});
-
+const ProfileInfo = ref(null);
 const guests = [
   {
     id: 1,
@@ -244,4 +235,16 @@ const engageOptions = [
     icon: MessageIcon,
   },
 ];
+
+getMember();
+
+function getMember() {
+  if (profileId) {
+    request(Member.query.get, { id: profileId }).then(({data}) => {
+      ProfileInfo.value = data.data.member;
+    });
+  } else {
+    ProfileInfo.value = user;
+  }
+}
 </script>

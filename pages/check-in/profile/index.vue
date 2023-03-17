@@ -33,7 +33,12 @@
             >
           </div>
           <template v-if="Array.isArray(item.options)">
-            <MultiSelect v-model="memberInfo[item.key]" :options="item.options" is-single-select />
+            <MultiSelect
+                v-model="memberInfo[item.key]"
+                :options="item.options"
+                is-single-select
+                placeholder="Select Gender"
+            />
           </template>
           <template v-else-if="item.type === 'date'">
             <Datepicker class="custom-date" v-model="memberInfo[item.key]" auto-apply :enable-time-picker="false" dark/>
