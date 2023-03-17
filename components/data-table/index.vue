@@ -35,6 +35,10 @@ const props = defineProps({
         default: [],
     },
     rowComponent: Object,
+    headerComponent: {
+        type: Object,
+        default: false
+    },
     stickyHeader:{
       type: Boolean,
       default: false
@@ -46,4 +50,5 @@ const emit = defineEmits(["row-clicked"]);
 const rowClicked = (data) => {
     emit("row-clicked", data);
 };
+
 </script>

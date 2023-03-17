@@ -9,6 +9,10 @@
     >
         
         <template #content>
+            <!-- <SmsSquareIcon />
+            <EmailSquareIcon />
+            <CallSquareIcon />
+            <AlertIcon /> -->
             <div class="global-search-popup-container">
                 <div class="md:flex items-center justify-between gap-4">
                     <div class="mb-[12px]">
@@ -44,23 +48,69 @@
                         </span>
                         <people-search-action v-else
                             @peopleSearchActionSelected="filterSelected"
-                            :actions-btn="actionsBtn"
                         ></people-search-action>
-                        
                     </div>
                 </div>
-
-
                 
                 <search-list
                     :filter="tblFilter"
-                    class="modal_scroll"
                     @row-clicked="clickRow"
                 ></search-list>
             </div>
         </template>
     </card>
 </template>
+<script setup>
+import PeopleSearchAction from "~~/pages/people-search/components/people-search-action.vue";
+import SearchList from "~~/pages/people-search/components/search-list.vue";
+
+import {
+    SmsSquareIcon,
+    CallSquareIcon,
+    EmailSquareIcon,
+    AlertIcon,
+} from "~~/components/icons";
+
+
+const props = defineProps({
+    currentPage: {
+        type: String,
+        default: "",
+    },
+});
+const emit = defineEmits(["row-clicked"]);
+
+const clickRow = (data) => {
+    emit("row-clicked", data);
+};
+
+const openSearchInput = ref(false);
+const changeOpenSearchInput = (value) => {
+    openSearchInput.value = value;
+};
+
+const openFilters = ref('');
+const closeOpenFilters = (value) => {
+    if(openFilters.value==true){
+        setTimeout(()=>{
+            openFilters.value = false;
+        },1)
+    }
+};
+
+const changeOpenFilters = (value) => {
+    if(!openFilters.value){
+        openFilters.value = true;
+    }
+};
+const searchInput = ref("");    
+const tblFilter = ref(null);
+
+const filterSelected = (value) => {
+    tblFilter.value = value;
+};
+
+</script>
 <style scoped>
 .global-search-popup-card {
     @apply rounded-2xl bg-neutral;
@@ -162,66 +212,3 @@
     }
 }
 </style>
-<script setup>
-import PeopleSearchAction from "~~/pages/people-search/components/people-search-action.vue";
-import SearchList from "~~/pages/people-search/components/search-list.vue";
-
-
-const props = defineProps({
-    currentPage: {
-        type: String,
-        default: "",
-    },
-});
-const emit = defineEmits(["row-clicked"]);
-
-const clickRow = (data) => {
-    emit("row-clicked", data);
-};
-
-const openSearchInput = ref(false);
-const changeOpenSearchInput = (value) => {
-    openSearchInput.value = value;
-};
-
-const openFilters = ref('');
-const closeOpenFilters = (value) => {
-    if(openFilters.value==true){
-        setTimeout(()=>{
-            openFilters.value = false;
-        },1)
-    }
-};
-
-const changeOpenFilters = (value) => {
-    if(!openFilters.value){
-        openFilters.value = true;
-    }
-};
-const searchInput = ref("");
-const tblFilter = ref(null);
-
-const filterSelected = (value) => {
-    tblFilter.value = value;
-};
-
-
-const actionsBtn = [
-    {
-        name: "Leads",
-        type: "leads",
-    },
-    {
-        name: "Members",
-        type: "members",
-    },
-    {
-        name: "Employees",
-        type: "employees",
-    },
-    {
-        name: "Segments",
-        type: "segments",
-    },
-];
-</script>
