@@ -8,7 +8,12 @@
       </div>
       <img :src="user.profile_photo_path" alt="profile image" />
     </div>
-    <div class="profile-name">{{ user.first_name }} {{ user.last_name }}</div>
+    <div v-if="row" class="profile-name">
+      {{ row.first_name }} {{ row.last_name }}
+    </div>
+    <div v-else class="profile-name">
+      {{ user.first_name }} {{ user.last_name }}
+    </div>
     <div class="pb-5">
       Member since 2022
       <br />
@@ -171,6 +176,17 @@ import {
   MessageIcon,
   EditIcon,
 } from "~~/components/icons";
+const props = defineProps(
+
+        {   
+            row:{
+              type:Object,
+              required:true
+            }
+        }
+    )
+
+
 const user = useState("auth");
 
 const guests = [

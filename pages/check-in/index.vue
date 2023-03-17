@@ -9,6 +9,7 @@
           <div class="flex -md:block">
             <event-card class="mr-2" />
             <profile-card
+              :row="row"
               :active-option="detailView"
               @select-option="detailView = $event"
               @toggle-detail="toggleDetailSection"
@@ -60,7 +61,7 @@
 </template>
 <style scoped>
 .page-checkin-container {
-  @apply py-4 px-5 w-full h-fit;
+  @apply py-4  w-full h-fit;
   .page-title {
     @apply text-lg font-light pb-3 pl-5;
   }
@@ -71,10 +72,10 @@
     }
     .account-box {
       ul {
-        @apply flex w-10/12 justify-around mx-auto -md:w-full;
+        @apply flex w-10/12 justify-around mx-auto -md:w-full bg-black pt-4 mb-2 rounded-full;
 
         li {
-          @apply inline-block;
+          @apply inline-block m-auto;
         }
       }
     }
@@ -114,7 +115,15 @@ const option = ref(null);
 
 const appLayout = useLayoutElement();
 const checkInContainer = ref();
+const props = defineProps(
 
+        {   
+            row:{
+              type:Object,
+              required:true
+            }
+        }
+    )
 watch(option, () => {
   const scrollTO = checkInContainer.value.offsetHeight + 100;
   setTimeout(() => {
