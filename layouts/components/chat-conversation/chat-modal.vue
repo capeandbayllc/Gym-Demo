@@ -189,8 +189,8 @@
       </div>
       <div class=" inline ml-2 gradient-bg border rounded-lg max-h-auto h-auto">
         <div class="flex bg-black m-2">
-          <div class="relative p-1">
-            <img src="/chat-conversation/group-chat.svg" class="w-16 h-16 -lg:w-14 -lg:h-14" @click="toggleChatOpen"/>
+          <div class="relative p-3">
+            <img :src="viewChat.avatar" class="w-12 h-12 -lg:w-14 -lg:h-14 rounded-full"/>
           </div>
           <div class="align-top mb-1 ml-2 mr-2">
             <div class="text-xl -lg:text-sm font-semibold pt-2 overflo overflow-hidden text-ellipsis w-[200px] whitespace-nowrap">
@@ -209,7 +209,7 @@
         </div>
         <div class="message-body px-7 pb-4 -lg:px-2 -lg:py-2 -lg:pr-6 overflow-auto">
           <div class="relative">
-            <ChatMessagesCard/>
+            <ChatMessagesCard :me="{...user, ...{ avatar: user.profile_photo_path } }" :with="viewChat"/>
           </div>
         </div>
         <div class="bg-base-content p-4 py-2 -lg:p-2 rounded-b-md">
@@ -227,116 +227,93 @@
   </div>
 </template>
 <style scoped>
-.chat-conversation-container {
-  @apply bg-black fixed z-20 rounded-xl border-sky-700 border-2;
-  position: relative;
-  padding: 6px;
-
-.chat-content {
-  height: calc(108vh - 14rem);
-
-
-.left-side-chat-container {
-  bottom: 2em;
-
-.chat-messages-container {
-  height: calc(106vh - 380px);
+ .chat-conversation-container {
+     @apply bg-black fixed z-20 rounded-xl border-sky-700 border-2;
+     position: relative;
+     padding: 6px;
+     .chat-content {
+         height: calc(108vh - 14rem);
+         .left-side-chat-container {
+             bottom: 2em;
+             .chat-messages-container {
+                 height: calc(106vh - 380px);
+            }
+        }
+         .right-side-chat-container {
+             overflow: hidden;
+             min-width: 550px;
+             .message-body {
+                 height: calc(106vh - 380px);
+                 background: linear-gradient(0deg, rgba(0, 116, 200, 1) 0%, rgba(0, 0, 0, 1) 100%);
+            }
+        }
+    }
 }
-
+ @media (max-width: 820px) {
+     .chat-conversation-container .chat-content .right-side-chat-container {
+         min-width: 100px !important;
+    }
 }
-.right-side-chat-container {
-  overflow: hidden;
-  min-width: 550px;
-
-.message-body {
-  height: calc(106vh - 380px);
-  background: linear-gradient(0deg, rgba(0, 116, 200, 1) 0%, rgba(0, 0, 0, 1) 100%);
+ .scroll-chat {
+     max-height: calc(106vh - 279px);
+     padding-right: 1em;
 }
-
+ .chat-message-block {
+     width: auto;
 }
+ .message-body {
+     height: calc(106vh - 380px);
 }
+ .pills-body {
+     height: calc(106vh - 228px);
 }
-@media (max-width: 820px) {
-  .chat-conversation-container .chat-content .right-side-chat-container {
-    min-width: 100px !important;
-  }
+ .chat-icons {
+     height: 3em;
+     width: 3em;
+     margin: auto;
 }
-
-.scroll-chat {
-  max-height: calc(106vh - 279px);
-  padding-right: 1em;
+ .text-min {
+     font-size: 10px;
+     text-align: -webkit-center;
 }
-
-.chat-message-block {
-  width: auto;
+ .chat-pill {
+     bottom: 0.8em;
+     right: 2.7em;
 }
-
-.message-body {
-  height: calc(106vh - 380px);
+ @media (max-width: 1024px) {
+     .chat-pill {
+         bottom: 0.4em;
+         right: 2.3em;
+    }
 }
-
-.pills-body {
-  height: calc(106vh - 228px);
+ .text-extra-small {
+     font-size: 10px;
+     height: 2.2em;
+     padding: 0.35em;
+     width: 2.2em;
 }
-
-.chat-icons {
-  height: 3em;
-  width: 3em;
-  margin: auto;
+ .chat-names {
+     @apply text-sm rounded px-3 py-1 fixed bg-blue-800 whitespace-nowrap z-10 
 }
-
-.text-min {
-  font-size: 10px;
-  text-align: -webkit-center;
+ #chat-head:hover {
+     cursor: pointer;
+     opacity: 1;
 }
-
-.chat-pill {
-  bottom: 0.8em;
-  right: 2.7em;
+ .hover-icon:hover {
+     cursor: pointer;
+     color: #007FD5;
+     border: 1px solid #007FD5;
 }
-
-@media (max-width: 1024px) {
-  .chat-pill {
-    bottom: 0.4em;
-    right: 2.3em;
-  }
-}
-
-.text-extra-small {
-  font-size: 10px;
-  height: 2.2em;
-  padding: 0.35em;
-  width: 2.2em;
-}
-
-.chat-names {
-  @apply text-sm rounded px-3 py-1 fixed bg-blue-800 whitespace-nowrap z-10
-}
-
-#chat-head:hover {
-  cursor: pointer;
-  opacity: 1;
-}
-.hover-icon:hover {
-  cursor: pointer;
-  color: #007FD5;
-  border: 1px solid #007FD5;
-}
-
-.conversation-block:hover {
-  background-color: #007FD5;
-  cursor: pointer;
-
-.grid {
-
-.flex {
-
-.text-black {
-  color: white;
-}
-
-}
-}
+ .conversation-block:hover {
+     background-color: #007FD5;
+     cursor: pointer;
+     .grid {
+         .flex {
+             .text-black {
+                 color: white;
+            }
+        }
+    }
 }
 </style>
 <script setup>

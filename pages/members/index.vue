@@ -112,8 +112,7 @@ const query = gql`
 const { result } = useQuery(query);
 const members = ref([]);
 watch(() => {
-  members.value = result.value.members.data;
-  console.log(members.value)
+  members.value = result?.value?.members?.data;
 })
 
 const isSearchEnable = ref(false);

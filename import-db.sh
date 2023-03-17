@@ -9,11 +9,14 @@
 canBuild=0
 path="./../gr-prototype"
 use="php"
+includeImage=""
 for var in "$@"
 do
     args=(${var//=/ })
     if [ "${args[0]}" = "-b" ]; then
          canBuild=1
+    elif [ "${args[0]}" = "-i" ]; then
+        includeImage="--update-profile-image=true"
     elif [ "${args[0]}" = "--path" ]; then
         path=${args[1]}
     elif [ "${args[0]}" = "--use" ]; then
@@ -33,7 +36,7 @@ run_migration () {
     echo "Building schema"
     eval "$use artisan export:mirage-schema"
     echo "Hydrating data"
-    eval "$use artisan export:mirage-data --update-profile-image=true"
+    eval "$use artisan export:mirage-data $includeImage"
     cd $currentDir
 }
 
@@ -41,8 +44,10 @@ copy_schema_data () {
     echo "Importing schema with data"
     mv "$storagePath/data.json" ./api/data
     mv "$storagePath/lighthouse-schema.graphql" ./api/schema.gql
-    mkdir -p ./public/images/profile
-    mv "$storagePath/profile-images"/* ./public/images/profile
+    if [ "$includeImage" != "" ]; then
+        mkdir -p ./public/images/profile
+        mv "$storagePath/profile-images"/* ./public/images/profile
+    fi
 }
 
 run_migration
