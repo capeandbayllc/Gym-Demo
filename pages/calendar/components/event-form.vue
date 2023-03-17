@@ -1,6 +1,6 @@
 <template>
     <form
-        class="p-10 bg-neutral border-2 rounded-3xl text-[0.9rem] flex flex-col border-secondary pointer-events-auto relative !font-light tracking-wider"
+        class="p-10 bg-neutral border-2 rounded-3xl text-[0.9rem] flex flex-col border-secondary !pointer-events-auto relative !font-light tracking-wider"
     >
         <button
             @click="emit('cancel')"

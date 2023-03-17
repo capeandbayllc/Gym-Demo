@@ -1,24 +1,25 @@
 <template>
     <section
-        ref="eventDetailsElement"
-        class="bg-neutral py-8 px-6 rounded-2xl border-2 border-secondary max-w-2xl w-full relative font-light !tracking-wider text-[0.9rem] pointer-events-auto"
+        class="bg-neutral py-8 px-6 rounded-2xl border-2 border-secondary max-w-2xl w-full relative font-light !tracking-wider text-[0.9rem] !pointer-events-auto"
     >
         <div class="flex flex-row gap-2">
-            <SectionHeader :title="event.title">
+            <SectionHeader :title="event?.title">
                 <template #subtitle>
                     <div class="mt-2 flex gap-4 items-center">
                         <span class="capitalize"
-                            >{{ weekdays[new Date(event.start).getDay()] }},
-                            {{ months[new Date(event.start).getMonth()] }}
-                            {{ new Date(event.start).getDate() }}</span
+                            >{{ weekdays[new Date(event?.start).getDay()] }},
+                            {{ months[new Date(event?.start).getMonth()] }}
+                            {{ new Date(event?.start).getDate() }}</span
                         >
                         <span class="h-2 w-2 bg-white rounded-full"></span>
-                        <span
-                            >{{ new Date(event.start).getHours() }}:{{
-                                new Date(event.start).getMinutes()
+                        <span>
+                            {{ parseHour(event?.start) }}:{{
+                                parseMinutes(event?.start)
                             }}
-                            - 00:00 AM</span
-                        >
+                            - {{ parseHour(event?.end) }}:{{
+                                parseMinutes(event?.end)
+                            }}
+                        </span>
                     </div>
                 </template>
             </SectionHeader>
@@ -33,10 +34,20 @@
                 <span
                     class="h-[34px] w-[34px] my-auto bg-white rounded-xl overflow-hidden border-2 border-secondary"
                 >
-                    <UserIcon class="w-[30px] h-[30px]" />
+                    <img
+                        :src="
+                            event?.extendedProps.instructor.profile_photo_path
+                        "
+                        class="w-[30px] h-[30px]"
+                        v-if="
+                            event?.extendedProps.instructor.profile_photo_path
+                        "
+                    />
+                    <UserIcon class="w-[30px] h-[30px]" v-else />
                 </span>
                 <span class="tracking-wider">
-                    {{ event.extendedProps.instructor }}
+                    {{ event?.extendedProps.instructor.first_name }}
+                    {{ event?.extendedProps.instructor.last_name }}
                 </span>
             </li>
             <li class="flex gap-6 text-xl">
@@ -47,17 +58,19 @@
                         class="w-[20px] h-[20px] fill-white mx-auto"
                     />
                 </span>
-                <span class="tracking-wider">Tampa 675</span>
+                <span class="tracking-wider">
+                    {{ event?.extendedProps.location.name }}
+                </span>
             </li>
         </ul>
         <div class="flex flex-col gap-2 mt-4">
-            <span>{{ event.extendedProps.description }}</span>
+            <span>{{ event?.extendedProps.description }}</span>
 
             <div class="flex justify-between items-center mt-8">
                 <button
                     class="bg-[#3D7DCF] px-2 py-1 flex flex-row gap-3 rounded-xl hover:bg-secondary calendar-style-transition"
                     type="button"
-                    @click="emit('offerup')"
+                    @click="offerUp"
                 >
                     <span class="my-auto">Offer Up</span>
                     <BiDirArrowIcon
@@ -65,11 +78,7 @@
                     />
                 </button>
 
-                <button
-                    type="button"
-                    @click="emit('seemore')"
-                    class="underline"
-                >
+                <button type="button" @click="seeMore" class="underline">
                     See more
                 </button>
             </div>
@@ -79,7 +88,12 @@
 
 <script setup>
 import SectionHeader from "./section-header.vue";
-import { weekdays, months } from "../../helpers/calendar-events";
+import {
+    weekdays,
+    months,
+    parseHour,
+    parseMinutes,
+} from "../../helpers/calendar-events";
 import {
     CrossCircleIcon,
     LocationDotIcon,
@@ -96,19 +110,13 @@ const props = defineProps({
     },
 });
 
-const eventDetailsElement = ref(null);
-
-const ensureClickBoundary = (e) => {
-    if (!eventDetailsElement.value.contains(e.target)) emit("outclick");
+const seeMore = () => {
+    emit("seemore");
 };
 
-onMounted(() => {
-    window.addEventListener("click", ensureClickBoundary, true);
-});
-
-onUnmounted(() => {
-    window.removeEventListener("click", ensureClickBoundary, true);
-});
+const offerUp = () => {
+    emit("offerup");
+};
 </script>
 
 <style scoped>

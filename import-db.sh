@@ -33,7 +33,8 @@ run_migration () {
     echo "Building schema"
     eval "$use artisan export:mirage-schema"
     echo "Hydrating data"
-    eval "$use artisan export:mirage-data --update-profile-image=true"
+    # eval "$use artisan export:mirage-data --update-profile-image=true"
+    eval "$use artisan export:mirage-data --update-profile-image=false"
     cd $currentDir
 }
 

@@ -69,12 +69,10 @@
                 </div>
                 <GrCalendar
                     :events="getFormattedEvents"
+                    :filterOptions="filterOptions"
                     @clickEventNode="handleCalendarEvent"
                     @clickEmptyNode="handleAddNew"
-                    v-if="
-                        (getFormattedEvents.length || events.length) &&
-                        showCalendar
-                    "
+                    v-if="getFormattedEvents.length || events.length"
                 />
                 <div
                     class="h-[76vh] flex flex-col justify-center"
@@ -88,25 +86,30 @@
     <div
         class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-[#fff]/[0.1] backdrop-blur-sm calendar-style-transition"
         :class="{
-            'z-50 opacity-100': eventFormVisibility || eventDetailsVisibibility,
-            '-z-50 opacity-0':
-                !eventFormVisibility && !eventDetailsVisibibility,
+            'z-50 opacity-100': eventFormVisibility,
+            '-z-50 opacity-0': !eventFormVisibility,
         }"
     >
         <EventForm
-            v-if="eventFormVisibility"
             @cancel="resetState"
             @createEvent="handleCreateEvent"
             :members="members"
             :employees="employees"
             :nodeContext="emptyNodeContext"
         />
+    </div>
+    <div
+        class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-[#fff]/[0.1] backdrop-blur-sm calendar-style-transition"
+        :class="{
+            'z-50 opacity-100': eventDetailsVisibibility,
+            '-z-50 opacity-0': !eventDetailsVisibibility,
+        }"
+    >
         <EventDetails
-            v-if="eventDetailsVisibibility"
             :event="eventDetails"
             @cancel="resetState"
-            @outclick="resetState"
             @seemore="showMoreDetails"
+            @offerup="showOfferUp"
         />
     </div>
 
@@ -116,14 +119,14 @@
         @outclick="resetState"
         @cancel="resetState"
     />
-    <!-- <OfferUp
-        :offerUpVisibibility="offerUpVisibibility"
-        @outclick="resetState"
+    <OfferUp
+        :event="eventDetails"
+        :showOfferUp="offerUpVisibibility"
         @cancel="resetState"
-    /> -->
+    />
 </template>
 <script setup>
-import { PlusIcon, BiCaretIcon } from "~~/components/icons";
+import { PlusIcon } from "~~/components/icons";
 import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
 import { isEqual, set } from "date-fns";
 import "@fullcalendar/core/vdom"; // solves problem with Vite
@@ -141,16 +144,19 @@ import EventForm from "./components/event-form.vue";
 // import { calendarEvents as events } from "./helpers/calendar-events";
 import GrCalendar from "./components/gr-calendar.vue";
 import OfferUp from "./components/partials/offer-up.vue";
+import user from "~/api/queries/user";
+import { request } from "~/api/utils/request";
 
 /** Component State */
 const initialized = ref(false);
-const eventDetails = ref(null); // Currently selected event context
+// const eventDetails = ref({ extendedProps: {} }); // Currently selected event context
+const eventDetails = ref(); // Currently selected event context
 const emptyNodeContext = ref(null); // information about the empty node that was most recently clicked
 
 /** Component Visibility State */
 const eventDetailsVisibibility = ref(false);
 const eventInformationVisibibility = ref(false);
-const offerUpVisibibility = ref(true);
+const offerUpVisibibility = ref(false);
 const eventFormVisibility = ref(false);
 
 const filterOptions = ref({
@@ -168,7 +174,6 @@ const filterOptions = ref({
     },
 });
 
-const showCalendar = ref(true);
 const eventTypes = ref([]);
 const employees = ref([]);
 const members = ref([]);
@@ -206,8 +211,6 @@ const handleAddNew = (node) => {
 const { result } = useQuery(query);
 
 const handleCreateEvent = (form) => {
-    showCalendar.value = false;
-
     const newEventObj = {
         ...events.value[0],
         attendees: [],
@@ -231,10 +234,6 @@ const handleCreateEvent = (form) => {
 
     events.value.push(newEventObj);
     eventFormVisibility.value = false;
-
-    setTimeout(() => {
-        showCalendar.value = true;
-    }, 100);
 };
 
 const getDateTimeString = (date) => {
@@ -287,18 +286,26 @@ watch(result, (ov, nv) => {
         employees.value.push({
             ...employee,
             name: `${employee.first_name} ${employee.last_name}`,
+            id: employee.user_id,
         });
     }
     members.value = result.value.members.data;
     leads.value = result.value.leads.data;
     locations.value = result.value.locations.data;
     event_types.value = result.value.calendarEventTypes.data;
-    events.value = [...result.value.calendarEvents];
+    let tempEventsContainer = [...result.value.calendarEvents];
+
+    for (let event of tempEventsContainer) {
+        console.log(tempEventsContainer.attendees);
+        request(user.query.findById, { id: event.owner_id }).then(
+            ({ data }) => {
+                events.value.push({ ...event, owner: data.data.user });
+            }
+        );
+    }
 });
 
 const selectOption = (filter_id, option) => {
-    showCalendar.value = false;
-
     if (filterOptions.value[filter_id].selected.includes(option)) {
         filterOptions.value[filter_id].selected.splice(
             filterOptions.value[filter_id].selected.indexOf(option),
@@ -307,10 +314,6 @@ const selectOption = (filter_id, option) => {
     } else {
         filterOptions.value[filter_id].selected.push(option);
     }
-
-    setTimeout(() => {
-        showCalendar.value = true;
-    }, 100);
 };
 
 const toggleFilterOption = (filter_id) => {
@@ -319,14 +322,6 @@ const toggleFilterOption = (filter_id) => {
 };
 
 const getFormattedEvents = computed(() => {
-    const colors = [
-        "#E4463C",
-        "#4E3474",
-        "#004570",
-        "#5D5D5D",
-        "#0C58ED",
-        "#998A99",
-    ];
     let formattedEvents = [];
     for (let event of getFilteredEvents.value) {
         formattedEvents.push({
@@ -334,10 +329,14 @@ const getFormattedEvents = computed(() => {
             start: event.start,
             end: event.end,
             allDay: event.full_day_event,
-            backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+            backgroundColor: event.color,
             extendedProps: {
                 users: [...event.attendees],
                 description: event.description,
+                color: event.color,
+                users: Array(Math.floor(Math.random() * 40) + 1).fill(),
+                instructor: event.owner,
+                location: event.location,
             },
         });
     }
@@ -358,11 +357,11 @@ const getFilteredEvents = computed(() => {
 
     for (let event of events.value) {
         if (
-            filterOptions.value.employees.selected.includes(
-                event.eventTypeId
+            filterOptions.value.event_types.selected.includes(
+                event.event_type_id
             ) ||
-            filterOptions.value.locations.selected.includes(event.ownerId) ||
-            filterOptions.value.event_types.selected.includes(event.locationId)
+            filterOptions.value.employees.selected.includes(event.owner_id) ||
+            filterOptions.value.locations.selected.includes(event.location_id)
         ) {
             filteredEvents.push(event);
         }
@@ -372,8 +371,13 @@ const getFilteredEvents = computed(() => {
 });
 
 const showMoreDetails = () => {
-    eventDetailsVisibibility.value = false;
+    resetState();
     eventInformationVisibibility.value = true;
+};
+
+const showOfferUp = () => {
+    resetState();
+    offerUpVisibibility.value = true;
 };
 </script>
 
@@ -386,6 +390,3 @@ const showMoreDetails = () => {
     @apply transition-all duration-300 ease-linear;
 }
 </style>
-"Mirage: You're instantiating a user that has a homeLocationId of
-02e4e2cb-904c-46d4-8b62-e74a043eab5e, but that record doesn't exist in the
-database."

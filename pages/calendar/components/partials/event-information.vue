@@ -1,6 +1,5 @@
 <template>
     <section
-        ref="eventInfoElement"
         class="w-full bg-neutral border-2 h-full rounded-3xl rounded-l-none absolute top-0 right-0 z-50 overflow-hidden font-light"
         :class="{
             'max-w-[45%] opacity-100': eventInformationVisibibility,
@@ -36,12 +35,24 @@
 
         <div class="px-6 flex flex-col gap-5">
             <!-- who/where -->
-            <div class="flex flex-col gap-8 mt-8">
-                <div class="flex gap-4 w-[35%]">
+            <div class="flex flex-col gap-5 mt-5">
+                <div class="flex gap-4">
                     <span
                         class="w-12 h-12 my-auto p-1 bg-white rounded-xl overflow-hidden border-2 border-secondary"
                     >
+                        <img
+                            :src="
+                                event?.extendedProps.instructor
+                                    .profile_photo_path
+                            "
+                            class="w-[calc(3rem-12px)] h-[calc(3rem-12px)]"
+                            v-if="
+                                event?.extendedProps.instructor
+                                    .profile_photo_path
+                            "
+                        />
                         <UserIcon
+                            v-else
                             class="w-[calc(3rem-12px)] h-[calc(3rem-12px)]"
                         />
                     </span>
@@ -49,7 +60,12 @@
                         <span class="text-[0.8rem] text-white/50"
                             >Instructor</span
                         >
-                        <span>{{ event?.extendedProps.instructor }}</span>
+                        <span class="line-clamp-1">
+                            {{ event?.extendedProps.instructor.first_name }}
+                            {{
+                                event?.extendedProps.instructor.last_name
+                            }}</span
+                        >
                     </span>
                 </div>
                 <div class="flex gap-4 w-[35%]">
@@ -62,13 +78,9 @@
                     </span>
                     <span class="flex flex-col tracking-wider">
                         <span class="text-[0.8rem] text-white/50">Address</span>
-                        <span>{{ event?.extendedProps.instructor }}</span>
+                        <span>{{ event?.extendedProps.location.name }}</span>
                     </span>
                 </div>
-            </div>
-
-            <div>
-                {{ event?.extendedProps.description }}
             </div>
 
             <!-- confirmed/payroll ? -->
@@ -172,22 +184,6 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
-});
-
-const eventInfoElement = ref(null);
-
-const ensureClickBoundary = (e) => {
-    if (!eventInfoElement.value.contains(e.target)) {
-        emit("outclick");
-    }
-};
-
-onMounted(() => {
-    window.addEventListener("click", ensureClickBoundary, true);
-});
-
-onUnmounted(() => {
-    window.removeEventListener("click", ensureClickBoundary, true);
 });
 
 const buttonChoices = ["is_over", "show", "personal", "physical"];

@@ -59,6 +59,7 @@ const props = defineProps({
         type: Array,
         default: [],
     },
+    filterOptions: Object,
 });
 
 /** empty node on calendar click handler */
@@ -114,7 +115,6 @@ const calendarOptions = ref({
             },
             nowIndicator: true,
         },
-        events: props.events,
         editable: true,
         selectable: true,
         dayMaxEvents: true,
@@ -162,17 +162,10 @@ const onViewChanged = () => {
     });
 };
 
-const dateSelect = ref();
-const onSelectDate = (modelData) => {
-    selectedDate.value = modelData;
-    if (calenderView.value !== "timeGridWeek") {
-        start.value = modelData;
-        calendar.value.getApi().gotoDate(start.value);
-    } else {
-        start.value = modelData[0];
-        calendar.value.getApi().gotoDate(start.value);
-    }
-};
+watch(props.filterOptions, () => {
+    calendar.value.calendar.getEventSources()[0].remove();
+    calendar.value.calendar.addEventSource(props.events);
+});
 
 watch(calenderView, () => {
     setTimeout(() => {

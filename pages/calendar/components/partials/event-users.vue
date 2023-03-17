@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row justify-end mt-auto">
+    <div class="flex flex-row justify-end mt-auto overflow-hidden">
         <div class="pr-1" v-if="users.length > 0">
             <div
                 class="bg-white flex flex-row gap-[1px] rounded-full h-[16px] px-[2px] py-[1px]"

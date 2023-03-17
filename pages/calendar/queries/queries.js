@@ -20,6 +20,7 @@ export const query = gql`
         employee {
             data {
                 id
+                user_id
                 first_name
                 last_name
                 email
@@ -56,12 +57,20 @@ export const query = gql`
             id
             title
             owner_id
+            color
             start
             end
             title
             description
             full_day_event
             event_type_id
+            attendees {
+                id
+                entity_type
+                entity_data {
+                    name
+                }
+            }
             location_id
             location {
                 id
@@ -82,6 +91,11 @@ export const query = gql`
                     profile_photo_url
                     email
                 }
+            }
+            owner {
+                id
+                name
+                profile_photo_path
             }
         }
     }
