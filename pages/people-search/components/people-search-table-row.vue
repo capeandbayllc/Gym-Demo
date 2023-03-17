@@ -84,7 +84,7 @@
 }
 .alert-modal{
     @apply bg-cover bg-center text-center;
-    background-image: url('/bars-background.png');
+    background-image: url('/notification-modal-background.png');
 }
 .number-alert-circle{
     @apply flex justify-center;
