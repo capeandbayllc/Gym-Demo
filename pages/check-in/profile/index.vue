@@ -138,11 +138,6 @@ const memberInformation = [
     ]
   },
   {
-    key: "social-security-number",
-    label: "Social Security Number",
-    class: "neutral-input",
-  },
-  {
     key: "occupation",
     label: "Occupation",
     class: "neutral-input",
