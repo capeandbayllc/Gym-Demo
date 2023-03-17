@@ -12,7 +12,8 @@
             </div>
         </div>
         <daisy-modal ref="outgoingCallModalRef">
-            <outgoing-call-modal @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal>
+            <!-- <outgoing-call-modal @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal> -->
+            <MakeCall  @close="closeOutgoingCall" @callNow="showInCallModal" @saveNow="saveNow"/>
         </daisy-modal>
         <daisy-modal ref="emailModalRef">
             <EmailModal @close="closeEmailModal"/>
@@ -28,6 +29,8 @@ import engageHistoryTable from './engage-history-table.vue';
 import OutgoingCallModal from '../../call-user/components/outgoing-call-modal.vue';
 import EmailModal from './email.vue';
 import SMSModal from './message.vue';
+import MakeCall from '../side-car-split/make-call.vue';
+
 const columns = [
     {
         label: "Type",
@@ -109,6 +112,10 @@ const closeSMSModal = ()=>{
 }
 
 const showInCallModal = () => {
+    outgoingCallModalRef.value.close();
+};
+
+const saveNow = () => {
     outgoingCallModalRef.value.close();
 };
 
