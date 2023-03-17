@@ -60,6 +60,7 @@ import {
     EventTypeIcon,
     MakeCopyeIcon,
     DraftIcon,
+    ClubhubIcon,
 } from "@/components/icons";
 import NavItem from "./nav-item.vue";
 import PosWindow from "~~/pages/pos/components/pos-window.vue";
@@ -648,6 +649,19 @@ const navList = [
                 label: "Draft in Progress",
                 icon: DraftIcon,
                 url: "/#",
+            },
+        ],
+    },
+    {
+        type: "club",
+        navigation: [
+            {
+                icon: WidgetIcon,
+                url: "/engage",
+            },
+            {
+                icon: ClubhubIcon,
+                url: "/club",
             },
         ],
     },
