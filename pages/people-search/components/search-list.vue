@@ -1,10 +1,6 @@
 <template>
     <div class="mt-5 club-search-tbl-content">
-        <simple-card
-            title="Members"
-            class="mb-5"
-            v-if="!filter || filter === 'members'"
-        >
+        <div v-if="!filter || filter === 'members'">
             <people-search-table
                 :columns="columns"
                 :items="membersData"
@@ -12,7 +8,7 @@
                 class="p-6"
                 @row-clicked="clickRow"
             />
-        </simple-card>
+        </div>
     </div>
 </template>
 <script setup>
@@ -36,36 +32,32 @@ const clickRow = (data) => {
 const columns = [
     {
         label: "Segment",
-        class: "text-secondary text-left",
+        width: 200
     },
     {
-        label: "First Name",
-        class: "text-secondary text-left",
+        label: "Alerts",
+        width: 100
     },
     {
-        label: "Last Name",
-        class: "text-secondary text-left",
+        label: "Name",
+        width: 200
     },
     {
-        label: "Mobile",
-        class: "text-secondary text-left",
-    },
-    {
-        label: "Email",
-        class: "text-secondary text-left",
+        label: "Communication",
+        width: 250
     },
     {
         label: "Location",
-        class: "text-secondary text-left",
-    },
+        width: 100
+    }, 
     {
         label: "Type",
-        class: "text-secondary text-left",
+        width: 120
     },
     {
-        label: "Created",
-        class: "text-secondary text-left",
-    },
+        label: "Info",
+        width: 10
+    }
 ];
 
 const membersData = ref([]);
