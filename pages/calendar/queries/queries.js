@@ -11,7 +11,7 @@ export const query = gql`
                 type
             }
         }
-        locations(page: 0) {
+        locations {
             data {
                 id
                 name
@@ -55,34 +55,34 @@ export const query = gql`
         calendarEvents {
             id
             title
-            ownerId
+            owner_id
             start
             end
             title
             description
             full_day_event
-            eventTypeId
-            locationId
-            # location {
-            #     id
-            #     name
-            # }
-            # type {
-            #     id
-            #     name
-            #     description
-            #     color
-            #     type
-            # }
-            # attendees {
-            #     id
-            #     entity_type
-            #     entity_data {
-            #         name
-            #         profile_photo_url
-            #         email
-            #     }
-            # }
+            event_type_id
+            location_id
+            location {
+                id
+                name
+            }
+            type {
+                id
+                name
+                description
+                color
+                type
+            }
+            attendees {
+                id
+                entity_type
+                entity_data {
+                    name
+                    profile_photo_url
+                    email
+                }
+            }
         }
     }
 `;

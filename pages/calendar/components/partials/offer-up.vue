@@ -3,12 +3,12 @@
         ref="offerUpElement"
         class="max-w-3xl w-full bg-neutral border-2 border-secondary p-4 h-full rounded-md"
     >
-        <SectionHeader :title="event.title">
+        <SectionHeader :title="event?.title">
             <template #subtitle>
                 <div class="mt-2 flex gap-4 items-center">
                     <span
-                        >{{ weekdays[new Date(event.start).getDay()] }},
-                        {{ months[new Date(event.start).getMonth()] }}
+                        >{{ weekdays[new Date(event?.start).getDay()] }},
+                        {{ months[new Date(event?.start).getMonth()] }}
                         {{ new Date(event.start).getDate() }}</span
                     >
                     <span class="h-2 w-2 bg-white rounded-full"></span>
@@ -43,7 +43,24 @@ onUnmounted(() => {
 const props = defineProps({
     event: {
         type: [Object, null],
-        default: null,
+        default: {
+            title: "Priority One",
+            start: "2023-04-01 1:00:00 AM",
+            end: "2023-04-01 1:00:00 AM",
+            backgroundColor: "#12345",
+            extendedProps: {
+                department: "BioChemistry",
+                users: [
+                    { name: "lalala", image: "" },
+                    { name: "lalala", image: "" },
+                ],
+                description: "Lecture",
+            },
+
+            data: {
+                foo: "bar",
+            },
+        },
     },
 });
 </script>

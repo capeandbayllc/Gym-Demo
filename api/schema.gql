@@ -1632,7 +1632,6 @@ type User {
   updated_at: DateTime!
   start_date: DateTime
   end_date: DateTime
-  user_type: String
   termination_date: DateTime
   manager: String
   zip: String

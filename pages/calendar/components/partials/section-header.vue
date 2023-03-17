@@ -1,6 +1,9 @@
 <template>
     <div
-        class="w-full from-secondary to-transparent bg-gradient-to-r py-2 px-6 border-l-4 border-white rounded-md font-normal"
+        class="w-full from-secondary to-transparent bg-gradient-to-r py-2 px-6 border-white rounded-md font-normal"
+        :class="{
+            'border-l-4': border,
+        }"
     >
         <slot name="title">
             <h1 class="text-2xl">{{ title }}</h1>
@@ -31,6 +34,10 @@ const props = defineProps({
     subtitle: {
         type: String,
         default: "Default Section Subtitle",
+    },
+    border: {
+        type: Boolean,
+        default: true,
     },
 });
 </script>

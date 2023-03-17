@@ -110,14 +110,17 @@
         />
     </div>
 
-    <div v-if="eventInformationVisibibility">
-        <EventInformation
-            :event="eventDetails"
-            :eventInformationVisibibility="eventInformationVisibibility"
-            @outclick="resetState"
-            @cancel="resetState"
-        />
-    </div>
+    <EventInformation
+        :event="eventDetails"
+        :eventInformationVisibibility="eventInformationVisibibility"
+        @outclick="resetState"
+        @cancel="resetState"
+    />
+    <!-- <OfferUp
+        :offerUpVisibibility="offerUpVisibibility"
+        @outclick="resetState"
+        @cancel="resetState"
+    /> -->
 </template>
 <script setup>
 import { PlusIcon, BiCaretIcon } from "~~/components/icons";
@@ -141,13 +144,13 @@ import OfferUp from "./components/partials/offer-up.vue";
 
 /** Component State */
 const initialized = ref(false);
-const eventDetails = ref({ extendedProps: {} }); // Currently selected event context
+const eventDetails = ref(null); // Currently selected event context
 const emptyNodeContext = ref(null); // information about the empty node that was most recently clicked
 
 /** Component Visibility State */
 const eventDetailsVisibibility = ref(false);
 const eventInformationVisibibility = ref(false);
-const offerUpVisibibility = ref(false);
+const offerUpVisibibility = ref(true);
 const eventFormVisibility = ref(false);
 
 const filterOptions = ref({
@@ -276,7 +279,6 @@ const getDayClass = (date) => {
 };
 
 watch(result, (ov, nv) => {
-    console.log("baal");
     if (initialized.value) return;
     console.log("GQL Result:", result.value);
     eventTypes.value = result.value.calendarEvents.data;
@@ -293,8 +295,6 @@ watch(result, (ov, nv) => {
     event_types.value = result.value.calendarEventTypes.data;
     events.value = [...result.value.calendarEvents];
 });
-
-let timeout = null;
 
 const selectOption = (filter_id, option) => {
     showCalendar.value = false;
@@ -386,3 +386,6 @@ const showMoreDetails = () => {
     @apply transition-all duration-300 ease-linear;
 }
 </style>
+"Mirage: You're instantiating a user that has a homeLocationId of
+02e4e2cb-904c-46d4-8b62-e74a043eab5e, but that record doesn't exist in the
+database."
