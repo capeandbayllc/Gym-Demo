@@ -85,14 +85,14 @@ const setFilter = (item)  => {
 	activeFilter.value = item;
 }
 const reportBy = (type) => {
-	if(type === 'prevMonth') {
-		prevMonth.value = !prevMonth.value
-		prevYear.value = false
-	}
-	if(type === 'prevYear'){
-		prevYear.value = !prevYear.value
-		prevMonth.value = false
-	}
+	// if(type === 'prevMonth') {
+	// 	prevMonth.value = !prevMonth.value
+	// 	prevYear.value = false
+	// }
+	// if(type === 'prevYear'){
+	// 	prevYear.value = !prevYear.value
+	// 	prevMonth.value = false
+	// }
 }
 
 // Chart Data
