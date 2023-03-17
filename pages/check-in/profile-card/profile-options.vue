@@ -26,8 +26,8 @@
 
 <script setup>
 import { ref } from "vue";
-import ProfileOptionItem from "./profile-option-item.vue";
 import CheckInButton from "./check-in-button.vue";
+import ProfileOptionItem from "./profile-option-item.vue";
 
 const emit = defineEmits(["update:selected", "update:check-in"]);
 

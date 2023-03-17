@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import {DocumentNode} from "graphql/language";
-import {GraphQLObject} from "~/api/queries/GraphQLObject";
+import {GraphQLQueryInterface} from "~/api/queries/GraphQLQueryInterface";
 
 const GET_MEMBERS: DocumentNode = gql`
     query Members($page: Int, $first: Int, $filter: Filter) {
@@ -31,16 +31,47 @@ const GET_MEMBERS: DocumentNode = gql`
     }
 `;
 
+const GET_SINGLE_MEMBER: DocumentNode = gql`
+    query SingleMember($id: ID) {
+        member(id: $id) {
+            id
+            user_id
+            first_name
+            middle_name
+            last_name
+            date_of_birth
+            gender
+            drivers_license_number
+            occupation
+            employer
+            barcode
+            email
+            phone
+            primary_phone
+            profile_photo_path
+            homeLocation {
+                name,
+                address1
+                address2
+                city
+                state
+                zip
+            }
+            created_at
+        }
+    }
+`;
+
 export interface MemberQuery {
     browse: DocumentNode
+    get: DocumentNode
 }
 
-const member: GraphQLObject<MemberQuery, object> = {
+const member: GraphQLQueryInterface<MemberQuery> = {
     query: {
         browse: GET_MEMBERS,
+        get: GET_SINGLE_MEMBER
     },
-    mutation: {
-    }
 }
 
 export default member;

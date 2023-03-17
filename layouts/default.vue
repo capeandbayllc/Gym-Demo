@@ -53,7 +53,7 @@
   @apply w-screen /* overflow-x-hidden */;
 }
 .floating-tooltip {
-  @apply text-sm rounded-full px-3 py-1 bg-blue-800 whitespace-nowrap absolute top-0 left-0;
+  @apply text-sm rounded-full px-3 py-1 bg-blue-800 whitespace-nowrap fixed top-0 left-0;
   z-index: 10000;
   &:empty {
     @apply hidden;
