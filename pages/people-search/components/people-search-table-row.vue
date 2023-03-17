@@ -171,7 +171,6 @@ const props = defineProps({
 const alertModal = ref(null);
 
 const openAlertModal =()=>{
-    console.log(alertModal.value)
     alertModal.value.open()
 }
 const closeAlertModal =()=>{
@@ -181,7 +180,6 @@ const closeAlertModal =()=>{
 const infoModal = ref(null);
 
 const openInfoModal =()=>{
-    console.log(alertModal.value)
     infoModal.value.open()
 }
 const closeInfoModal =()=>{
