@@ -11,29 +11,25 @@
                 <reporting-widget-member></reporting-widget-member>
             </div>
             <div class="col-span-2">
-                <create-report-card></create-report-card>
-                <!-- <reporting-widget-clients></reporting-widget-clients> -->
+                <!-- <create-report-card></create-report-card> -->
+                <reporting-widget-clients></reporting-widget-clients>
             </div>
         </div>
     </div>
 </template>
 <style scoped>
 .reporting-page-content {
-    @apply flex flex-col items-center pb-5 pt-4 max-w-[1120px] mx-auto w-full px-5;
-    .reporting-container { 
-        @apply grid grid-cols-3 gap-4;
-    }
+    @apply pb-5 pt-4 mx-auto w-full px-10;
 }
-</style>
-<style>
-    .reporting-container {
-        .card-title  {
-            @apply text-base font-medium !important;
-        }
-    }
-    @media (max-width:1300px){
-        /* .reporting-page-content {width:90% !important} */
-    }
+.reporting-page-content .reporting-container { 
+    @apply grid grid-cols-3 gap-4;
+}
+.reporting-page-content .reporting-container .card-title  {
+    @apply text-base font-medium !important;
+}
+@media (max-width:1300px){
+    /* .reporting-page-content {width:90% !important} */
+}
 </style>
 <script setup>
 import ReportingWidgetLeads from './components/reporting-widget-leads.vue';
