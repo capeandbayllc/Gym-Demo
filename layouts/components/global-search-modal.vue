@@ -113,14 +113,14 @@ const filterSelected = (value) => {
 </script>
 <style scoped>
 .global-search-popup-card {
-    @apply rounded-2xl bg-neutral;
-    .global-search-popup-container {
-        @apply pl-2 pr-2 pt-6 pb-6;
-        .modal_scroll {
-            @apply overflow-y-auto;
-            height: 60vh;
-        }
+  @apply rounded-2xl bg-neutral;
+  .global-search-popup-container {
+    @apply pl-2 pr-2 pt-6 pb-6;
+    .modal_scroll {
+      @apply overflow-y-auto;
+      height: 60vh;
     }
+  }
 }
 
 .search-input::placeholder{
