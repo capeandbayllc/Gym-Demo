@@ -27,6 +27,7 @@ const server = createServer({
     this.schema.registerModel = function (type, ModelClass) {
       for (let associationProperty in ModelClass.prototype) {
         ModelClass.prototype[associationProperty].getForeignKey = function () {
+        console.log(`${underscore(this.name)}_id`);
           return `${underscore(this.name)}_id`;
         }
       }

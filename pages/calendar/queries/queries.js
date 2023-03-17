@@ -64,13 +64,6 @@ export const query = gql`
             description
             full_day_event
             event_type_id
-            attendees {
-                id
-                entity_type
-                entity_data {
-                    name
-                }
-            }
             location_id
             location {
                 id
@@ -83,7 +76,7 @@ export const query = gql`
                 color
                 type
             }
-            attendees {
+            calendarAttendees {
                 id
                 entity_type
                 entity_data {
@@ -92,11 +85,11 @@ export const query = gql`
                     email
                 }
             }
-            owner {
-                id
-                name
-                profile_photo_path
-            }
+            # owner {
+            #     id
+            #     name
+            #     profile_photo_path
+            # }
         }
     }
 `;
