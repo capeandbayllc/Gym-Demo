@@ -111,6 +111,8 @@ import UserInfo from "./user-info/index.vue";
 import Setting from "./setting/index.vue";
 import Engage from "./engage/index.vue";
 const option = ref(null);
+const route = useRoute();
+const profileId = (route.query.id)
 
 
 const appLayout = useLayoutElement();
@@ -125,6 +127,20 @@ watch(option, () => {
       behavior: "smooth",
     });
   }, 500);
+});
+
+onMounted(() => {
+  if(profileId){
+
+  detailView.value = 'profile';
+    setTimeout(() => {
+      window.scroll({
+        top: 600,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }, 0);
+  }
 });
 
 const showEngageModal = () => {

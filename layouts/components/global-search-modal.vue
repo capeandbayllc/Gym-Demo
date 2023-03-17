@@ -1,43 +1,43 @@
 <template>
-    <card
-        title=""
-        class="global-search-popup-card"
-        :options="{
-            collapse: false,
-            favorite: false,
-        }"
-    >
-        <template #content>
-            <div class="global-search-popup-container">
-                <input
-                    type="text"
-                    placeholder="Search"
-                    class="input w-full bg-base-content text-black text-lg"
-                    v-model="searchInput"
-                />
-                <people-search-action
-                    @peopleSearchActionSelected="filterSelected"
-                    :actions-btn="actionsBtn"
-                ></people-search-action>
-                <search-list
-                    :filter="tblFilter"
-                    class="modal_scroll"
-                    @row-clicked="clickRow"
-                ></search-list>
-            </div>
-        </template>
-    </card>
+  <card
+    title=""
+    class="global-search-popup-card"
+    :options="{
+      collapse: false,
+      favorite: false,
+    }"
+  >
+    <template #content>
+      <div class="global-search-popup-container">
+        <input
+          type="text"
+          placeholder="Search"
+          class="input w-full bg-base-content text-black text-lg"
+          v-model="searchInput"
+        />
+        <people-search-action
+          @peopleSearchActionSelected="filterSelected"
+          :actions-btn="actionsBtn"
+        ></people-search-action>
+        <search-list
+          :filter="tblFilter"
+          class="modal_scroll"
+          @row-clicked="clickRow"
+        ></search-list>
+      </div>
+    </template>
+  </card>
 </template>
 <style scoped>
 .global-search-popup-card {
-    @apply rounded-2xl bg-neutral;
-    .global-search-popup-container {
-        @apply pl-2 pr-2 pt-6 pb-6;
-        .modal_scroll {
-            @apply overflow-y-auto;
-            height: 60vh;
-        }
+  @apply rounded-2xl bg-neutral;
+  .global-search-popup-container {
+    @apply pl-2 pr-2 pt-6 pb-6;
+    .modal_scroll {
+      @apply overflow-y-auto;
+      height: 60vh;
     }
+  }
 }
 </style>
 <style></style>
@@ -46,39 +46,39 @@ import PeopleSearchAction from "~~/pages/people-search/components/people-search-
 import SearchList from "~~/pages/people-search/components/search-list.vue";
 
 const props = defineProps({
-    currentPage: {
-        type: String,
-        default: "",
-    },
+  currentPage: {
+    type: String,
+    default: "",
+  },
 });
 const emit = defineEmits(["row-clicked"]);
 const clickRow = (data) => {
-    emit("row-clicked", data);
+  emit("row-clicked", data);
 };
 
-const searchInput = ref("Kev");
+const searchInput = ref("");
 const tblFilter = ref(null);
 
 const filterSelected = (value) => {
-    tblFilter.value = value;
+  tblFilter.value = value;
 };
 
 const actionsBtn = [
-    {
-        name: "Leads",
-        type: "leads",
-    },
-    {
-        name: "Members",
-        type: "members",
-    },
-    {
-        name: "Employees",
-        type: "employees",
-    },
-    {
-        name: "Segments",
-        type: "segments",
-    },
+  {
+    name: "Leads",
+    type: "leads",
+  },
+  {
+    name: "Members",
+    type: "members",
+  },
+  {
+    name: "Employees",
+    type: "employees",
+  },
+  {
+    name: "Segments",
+    type: "segments",
+  },
 ];
 </script>
