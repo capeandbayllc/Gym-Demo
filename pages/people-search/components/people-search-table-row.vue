@@ -130,7 +130,7 @@
 
 .info-modal{
     @apply bg-cover bg-center text-center;
-    background-image: url('/public/info-modal-background.png');
+    background-image: url('/info-modal-background.png');
 }
 
 .dropdown-info{
