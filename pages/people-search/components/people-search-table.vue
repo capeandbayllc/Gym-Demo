@@ -8,8 +8,8 @@
                 :is="rowComponent"
                 :columns="columns"
                 :data="item"
-                @click="rowClicked(item)"
-            />
+                />
+                <!-- @click="rowClicked(item)" -->
         </div>
         <!-- <data-table
             :columns="columns"

@@ -6,8 +6,8 @@
                 {{ data.segment }}
             </div>
             <div class="flex items-center" :class="`w-[${columns[1].width}px]`">
-                <AlertIcon class="mr-2 text-red-600"/>
-                <AlertIcon class="mr-2 text-yellow-500"/>
+                <AlertIcon class="mr-2 text-red-600" @click="openAlertModal"/>
+                <AlertIcon class="mr-2 text-yellow-500" @click="openAlertModal"/>
                 <span>2</span>
             </div>
             <div class="" :class="`w-[${columns[2].width}px]`">
@@ -38,6 +38,23 @@
             </div>
             <!-- <div class="text-xs w-full" :class="`w-[${columns[6].width}px]`">{{ data.created_at.replace(/:\d{2}$/, "") }}</div> -->
         </div>
+        <daisy-modal ref="alertModal" id="alertModal" :closable="false">
+            <simple-card class="p-4 w-[400px] mx-auto alert-modal">
+                <close-btn :isBlack="true" @click="closeAlertModal"/>
+                <h5 class="text-3xl mb-2">Alert</h5>
+                <div class="number-alert-circle mb-3">
+                    <div class="number">
+                        3
+                    </div>
+                </div>
+                <p class="text-[19px] mb-1">Overdue membership. Missing fees.</p>
+                <p class="font-thin mb-6">Aya Buchanan | 5/5/2022, 12:24:44 PM</p>
+                <div class="text-center flex gap-4 justify-center my-4">
+                    <button class="text-white text-sm border border-white rounded-xl px-4 py-1" @click="closeAlertModal">Resolve</button>
+                    <button class="text-white hover:text-secondary text-sm bg-secondary hover:bg-gray-900 border border-secondary rounded-xl px-4 py-1 transition-all duration-75" @click="closeAlertModal">Read alert notes</button>
+                </div>
+            </simple-card>
+        </daisy-modal>
     </div>
 </template>
 <style scoped>
@@ -63,7 +80,18 @@
 </style>
 <style>
 .people-search-tbl-content thead {
-    @apply top-0 sticky bg-black h-10;
+    @apply top-0 sticky bg-black h-10 text-white;
+}
+.alert-modal{
+    @apply bg-cover bg-center text-center;
+    background-image: url('/bars-background.png');
+}
+.number-alert-circle{
+    @apply flex justify-center;
+}
+
+.number-alert-circle .number{
+    @apply bg-white w-[40px] h-[40px] rounded-full text-black flex justify-center items-center font-bold pb-[3px] pl-[2px] text-[30px];
 }
 </style>
 <script setup>
@@ -75,6 +103,10 @@ import {
   CallSquareIcon,
 } from "~~/components/icons";
 
+// import {
+//   closeBtn
+// } from "~~/components";
+
 const props = defineProps({
     data: Object,
     columns: {
@@ -82,4 +114,14 @@ const props = defineProps({
         default: [],
     },
 });
+const alertModal = ref(null);
+
+const openAlertModal =()=>{
+    console.log(alertModal.value)
+    alertModal.value.open()
+}
+const closeAlertModal =()=>{
+    alertModal.value.close()
+}
+
 </script>
