@@ -20,7 +20,7 @@
                     {{ data.first_name }} {{ data.last_name }}
                 </div>
             </div>
-            <div class="flex items-center px-[20px]" :class="`w-[${columns[3].width}px]`">
+            <div class="flex items-center pr-[20px]" :class="`w-[${columns[3].width}px]`">
                 <SmsSquareIcon class="mr-[40px]" />
                 <EmailSquareIcon class="mr-[40px]" />
                 <CallSquareIcon />
@@ -88,7 +88,7 @@
 </template>
 <style scoped>
 .people-lead-tbl-row {
-    @apply bg-base-100 rounded-[15px] h-14 flex items-center pr-[20px] py-[30px] my-[13px] cursor-pointer transition-all duration-75 border-2 border-base-100 hover:border-secondary hover:bg-primary;
+    @apply bg-base-100 rounded-[15px] h-14 flex items-center px-[20px] py-[30px] my-[13px] cursor-pointer transition-all duration-75 border-2 border-base-100 hover:border-secondary hover:bg-primary;
 
     td {
         @apply border-y-2 border-secondary text-left px-3;
