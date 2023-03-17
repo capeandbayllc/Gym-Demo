@@ -1,12 +1,12 @@
 <template>
     <dashboard-card
         :title-icon="MembersIcon"
-        title="Lorem ipsum"
+        title="Monthly Review"
     >
         <div class="statistic-chart-container">
             <statistic-chart />
         </div>
-        <div class="statistic-data-list">
+        <div class="statistic-data-list max-h-40 overflow-y-scroll no-scrollbar">
             <div class="statistic-data-row" v-for="item in mock" :key="item.id">
                 <div class="item-description">
                     <div class="w-10 h-10 rounded bg-secondary/50"></div>
@@ -30,7 +30,7 @@
     margin-bottom: -30px;
 }
 .statistic-data-list {
-    @apply flex flex-col border-t-4 border-secondary px-10 mb-7 -lg:px-5;
+    @apply flex flex-col border-t-4 border-secondary px-5 mb-7 -lg:px-5;
     .statistic-data-row {
         @apply flex flex-row justify-between pb-3 pt-6 w-full;
         .item-description {
@@ -41,7 +41,7 @@
         }
     }
     .statistic-data-row:not(:last-child) {
-        @apply border-b border-base-content/60;
+        
     }
 }
 </style>
@@ -52,15 +52,23 @@ import StatisticChart from './statistic-chart.vue';
 
 const mock = [{
     id: 1,
-    title: "Lorem ipsum",
+    title: "Membership Upgrades",
     tx_count: 16,
     amount: 69.65,
     percent: 14
 }, {
     id: 2,
-    title: "Lorem ipsum",
+    title: "Pt Classes",
+    tx_count: 48,
+    amount: 69.65,
+    percent: 14
+},
+{
+    id: 1,
+    title: "Membership Upgrades",
     tx_count: 16,
     amount: 69.65,
     percent: 14
-}]
+},
+]
 </script>

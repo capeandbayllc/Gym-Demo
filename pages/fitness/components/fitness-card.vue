@@ -1,16 +1,16 @@
 <template>
-    <dashboard-simple-card>
+    <simple-card>
         <template #title>
-            <dashboard-card-title
+            <fitness-card-title
                 :title-icon="titleIcon"
                 :title="title"
             />
         </template>
         <slot />
-    </dashboard-simple-card>
+    </simple-card>
 </template>
 <script setup>
-import DashboardCardTitle from "./dashboard-card-title.vue";
+import FitnessCardTitle from "./fitness-card-title.vue";
 const props = defineProps({
     titleIcon: Object,
     title: String

@@ -17,7 +17,7 @@
 </template>
 <style scoped>
 .simple-card {
-	@apply relative border border-secondary bg-black rounded-[19px];
+	@apply relative border border-secondary rounded-xl bg-base-300;
 	.simple-card-title {
 		@apply flex items-center h-12 text-xl font-semibold px-6 text-base-content justify-between bg-gradient-to-b from-secondary to-base-300/30 bg-secondary bg-blend-darken;
 	}

@@ -1,5 +1,5 @@
 <template>
-    <div class="dashboard-card-title">
+    <div class="dashboard-card-title rounded-t-xl">
         <div class="flex items-center">
             <div class="title-icon">
                 <component :is="titleIcon" />
@@ -11,9 +11,9 @@
 </template>
 <style scoped>
 .dashboard-card-title {
-    @apply flex bg-secondary justify-between h-12 items-center text-lg font-semibold px-4;
+    @apply flex bg-secondary justify-between h-12 items-center text-lg font-normal px-4;
     .title-icon {
-        @apply flex items-center justify-center w-9 h-9 mr-3 bg-neutral rounded-full;
+        @apply flex items-center justify-center w-9 h-9 mr-3 bg-neutral rounded-md;
     }
 }
 </style>
