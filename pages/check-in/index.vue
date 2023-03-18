@@ -9,6 +9,7 @@
           <div class="flex -md:block">
             <event-card class="mr-2" />
             <profile-card
+              :key="refreshIndex"
               :active-option="detailView"
               @select-option="detailView = $event"
               @toggle-detail="toggleDetailSection"
@@ -51,6 +52,7 @@
         <component
           v-if="detailView === key"
           @close="detailView = null"
+          @on-profile-update="refreshIndex++"
           :key="key"
           :is="component"
         />
@@ -117,6 +119,7 @@ const profileId = (route.query.id)
 
 const appLayout = useLayoutElement();
 const checkInContainer = ref();
+const refreshIndex = ref(0);
 
 watch(option, () => {
   const scrollTO = checkInContainer.value.offsetHeight + 100;
