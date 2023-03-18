@@ -21,12 +21,16 @@
                 </div>
             </div>
             <div class="flex items-center pr-[20px]" :class="`w-[${columns[3].width}px]`">
-                <SmsSquareIcon class="mr-[40px]" />
-                <EmailSquareIcon class="mr-[40px]" />
-                <CallSquareIcon />
-                <!-- {{ data.phone }} -->
+                <div class="mr-[40px]">
+                    <SmsSquareIcon />
+                </div>
+                <a :href="'mailto:'+data.email" class="mr-[40px]">
+                    <EmailSquareIcon />
+                </a>
+                <a :href="'tel:'+data.phone">
+                    <CallSquareIcon />
+                </a>
             </div>
-            <!-- <div class="whitespace-nowrap w-full" :class="`w-[${columns[4].width}px]`">{{ data.email }}</div> -->
             <div class="text-xs" :class="`w-[${columns[4].width}px]`" :title="data.homeLocation.name">
                 Club 4
             </div>
@@ -43,16 +47,15 @@
                     </svg>
                 </div>
             </div>
-            <div class="dropdown-info"  v-show="dropdownInfo">
-                <div class="dropdown-info-container">
-                    <div class="close-button" @click="hideDropdownInfo"><CrossIcon/></div>
-                    <p @click="openInfoModal">Edit account</p>
-                    <p @click="openInfoModal">View alerts</p>
-                    <p @click="openInfoModal">Add Guest Pass</p>
-                    <p @click="openInfoModal">POS</p>
+            <div class="dropdown"  v-show="dropdownInfo">
+                <div class="dropdown-container">
+                    <cross-icon @click="hideDropdownInfo" class="flex absolute text-white h-[15px] w-[15px] top-[15px] left-[150px] cursor-pointer"></cross-icon>
+                    <div @click="openInfoModal" class="dropdown-item">Edit account</div>
+                    <div @click="openInfoModal" class="dropdown-item">View alerts</div>
+                    <div @click="openInfoModal" class="dropdown-item">Add Guest Pass</div>
+                    <div @click="openInfoModal">POS</div>
                 </div>
             </div>
-            <!-- <div class="text-xs w-full" :class="`w-[${columns[6].width}px]`">{{ data.created_at.replace(/:\d{2}$/, "") }}</div> -->
         </div>
         <daisy-modal ref="alertModal" id="alertModal" :closable="false">
             <simple-card class="p-4 w-[400px] mx-auto alert-modal">
@@ -165,19 +168,13 @@
     background-image: url('/info-modal-background.png');
 }
 
-.dropdown-info{
-    @apply bg-secondary text-white right-[200px] top-[40px] relative w-0;
+.dropdown{
+    @apply bg-secondary text-white right-[160px] top-[90px] relative w-0;
 
-    .dropdown-info-container{
+    .dropdown-container{
         @apply bg-secondary p-3 w-[180px] border-[2px] rounded-[20px];
     }
 }
-
-
-.close-button{
-    @apply relative h-0 w-0 right-[-130px];
-}
-
 
 .arrow-icon{
     @apply cursor-pointer h-6 w-6 ml-auto mt-3;
@@ -185,6 +182,10 @@
 
 .arrow-icon svg{
     @apply h-12 w-12;
+}
+
+.dropdown-item {
+    @apply mb-2;
 }
 
 </style>
@@ -212,7 +213,7 @@ const openAlertModal =()=>{
     alertModal.value.open()
 }
 const closeAlertModal =()=>{
-    alertModal.value.close()
+    alertModal.value()
 }
 
 const infoModal = ref(null);
