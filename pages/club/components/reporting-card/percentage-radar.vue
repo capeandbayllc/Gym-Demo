@@ -2,7 +2,7 @@
     <div class="percentage-container">
         <div class="percentages overflow-auto h-[288px] py-4">
             <div :key="index" class="percent-item grid grid-cols-1" v-for="(item, index) in percentages">
-                <PercentPie :item="item" class=""/>
+                <PercentPie :item="item" />
                 <hr class="border-white border-opacity-50 my-3">
             </div>
         </div>
@@ -61,5 +61,4 @@
             gradient: "conic-gradient(from 360deg at 50% 50%, rgba(4,54,92,0.85) 0deg, rgba(6,83,139,0 ) 360deg)"
         },
     ])
-
 </script>

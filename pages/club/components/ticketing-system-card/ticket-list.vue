@@ -14,7 +14,7 @@
                     <label>{{ item.assignee }}</label>
                 </div>
                 <div class="w-[25%]">
-                    <ClubButton :btn_type="item.status.klass" :label="item.status.label"></ClubButton>
+                    <ClubButton :btn_type="getKlass(item.status)" :label="item.status"></ClubButton>
                 </div>
                 <div class="w-[25%]">
                     <ClubButton :btn_type='default' :label='View'></ClubButton>
@@ -67,6 +67,10 @@
 </style>
 <script setup>
     import ClubButton from '../club-button.vue';
+    const STATUS_OPEN = 'Open';
+    const STATUS_PENDING = 'Pending';
+    const STATUS_RESOLVED = 'Resolved';
+
     const props = defineProps({
         columns: {
             type: Array,
@@ -77,4 +81,14 @@
             default: []
         }
     });
+
+    const getKlass = (status) => {
+        if(status===STATUS_OPEN) {
+            return 'bg-error bg-opacity-60';
+        } else if(status===STATUS_PENDING) {
+            return 'bg-primary bg-opacity-60';
+        } else if(status===STATUS_RESOLVED) {
+            return 'bg-success bg-opacity-60';
+        }
+    }
 </script>

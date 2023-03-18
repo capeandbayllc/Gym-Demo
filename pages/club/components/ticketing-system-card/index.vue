@@ -36,46 +36,31 @@
             id:1,
             type: 'Alert Type',
             assignee: 'Aya B.',
-            status: {
-                klass: 'bg-error bg-opacity-60',
-                label: 'Open'
-            },
+            status: 'Open',
         },
         {
             id:2,
             type: 'Alert Type',
             assignee: 'Sty S.',
-            status: {
-                klass: 'bg-default bg-opacity-60',
-                label: 'Open'
-            },
+            status: 'Pending',
         },
         {
             id:3,
             type: 'Alert Type',
             assignee: 'Henry O.',
-            status: {
-                klass: 'bg-success bg-opacity-60',
-                label: 'Resolved'
-            },
+            status: 'Resolved',
         },
         {
             id:4,
             type: 'Alert Type',
             assignee: 'Butch F.',
-            status: {
-                klass: 'bg-success bg-opacity-60',
-                label: 'Resolved'
-            },
+            status: 'Resolved',
         },
         {
             id:5,
             type: 'Alert Type',
             assignee: 'Max S.',
-            status: {
-                klass: 'bg-success bg-opacity-60',
-                label: 'Resolved'
-            },
+            status: 'Resolved',
         },
     ];
 </script>

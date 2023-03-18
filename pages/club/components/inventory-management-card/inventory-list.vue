@@ -11,7 +11,7 @@
                     <label>{{ item.name }}</label>
                 </div>
                 <div class="w-[30%]">
-                    <ClubButton :btn_type="getStatus(item.quantity)" :label="item.quantity"></ClubButton>
+                    <ClubButton :btn_type="getKlass(item.quantity)" :label="item.quantity"></ClubButton>
                 </div>
                 <div class="w-[40%]">
                     <label>{{ item.item_number }}</label>
@@ -75,7 +75,7 @@
         }
     });
 
-    const getStatus = (itemCount) => {
+    const getKlass = (itemCount) => {
         if(itemCount <= 2) {
             return 'bg-error bg-opacity-60';
         } else if(itemCount <=5) {
