@@ -3,8 +3,8 @@
         <Datepicker
             v-model="date"
             inline
-            menu-class-name="dp-custom-menu bg-black"
-            calendar-class-name="dp-custom-calendar bg-black"
+            menu-class-name="dp-custom-menu"
+            calendar-class-name="dp-custom-calendar"
             :day-class="getDayClass"
             auto-apply
             disable-month-year-select
@@ -41,7 +41,9 @@
 </style>
 <style>
 .dp-custom-menu {
-    @apply bg-black grid p-6 border-none;
+    @apply grid p-6;
+    background-color: #000 !important;
+    border: 0px !important;
 }
 .dp-custom-calendar {
     .dp__calendar_header {
