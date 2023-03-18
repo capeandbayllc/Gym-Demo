@@ -54,6 +54,8 @@
 
     <account-auth></account-auth>
 
+    <salary></salary>
+
   </div>
 </template>
 
@@ -98,10 +100,11 @@ input:hover {
 <script setup>
 import {ref} from 'vue';
 import '@vueform/multiselect/themes/default.css'
-import {MembersIcon, LockIcon, BlueClockIcon} from "@/components/icons";
+import {MembersIcon, LockIcon} from "@/components/icons";
 import BasicInfo from "./components/basic-info";
 import UpdatePassword from "./components/update-password";
 import AccountAuth from "./components/account-auth";
+import Salary from "./components/salary";
 
 let user = useState("auth");
 

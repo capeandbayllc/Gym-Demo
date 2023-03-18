@@ -78,7 +78,7 @@ input:hover {
 </style>
 
 <script setup>
-import {computed, ref} from 'vue';
+import {ref} from 'vue';
 
 let form = {};
 const initForm = () => {
