@@ -19,7 +19,10 @@
         </div>
 
         <div class="flex pt-6 justify-center">
-            <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page')">Build Your Campaign</Button>
+            <Button hoverSecondary hoverIcon size="xs" class="rounded-full normal-case pl-3" @click.stop="$emit('next-page')">
+                Build Your Campaign
+                <right-arrow-icon class="ml-2" />
+            </Button>
         </div>
     </div>
 </template>
@@ -38,7 +41,7 @@
                 @apply text-secondary text-sm;
             }
             .templates-doc-date {
-                @apply text-sm
+                @apply text-xs;
             }
         }
     }
@@ -51,6 +54,7 @@
 <script setup>
 import NormalDoc from '~/pages/mass-com/components/normal-doc.vue';
 import AddCampaignIcon from '~/pages/mass-com/components/build-campaign-card/add-campaign-icon.vue';
+import RightArrowIcon from "~/components/icons/arrow.vue";
 
 const docs = [{
         id: 1,
