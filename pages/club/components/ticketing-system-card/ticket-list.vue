@@ -1,7 +1,7 @@
 <template>
     <div class="ticket-container">
         <div class="columns-header">
-            <label v-for="column in columns" class="column-item" :class=column.class>
+            <label v-for="column in columns" class="column-item" :class="column.class">
                 {{ column.label }}
             </label>
         </div>
@@ -25,7 +25,7 @@
 </template>
 <style scoped>
     .ticket-container {
-        @apply py-[10px] px-[40px] border-2 border-[#0077ac]
+        @apply py-[10px] px-[20px] border-2 border-[#0077ac]
     }
     .columns-header {
         color : #0077ac;
@@ -40,7 +40,7 @@
     .ticket-list{
         margin-top: 5px;
         overflow-y: auto;
-        max-height : 180px;
+        max-height : 240px;
     }
     .ticket-list::-webkit-scrollbar{
         display: none;

@@ -1,7 +1,7 @@
 <template>
     <div class="address-container">
         <div class="columns-header">
-            <label v-for="column in columns" class="column-item" :class=column.class>
+            <label v-for="column in columns" class="column-item" :class="column.class">
                 {{ column.label }}
             </label>
         </div>
@@ -33,7 +33,7 @@
 </template>
 <style scoped>
     .address-container {
-        @apply py-[10px] px-[40px] border-2 border-[#0077ac]
+        @apply py-[10px] px-[20px] border-2 border-[#0077ac]
     }
     .columns-header {
         color : #0077ac;
@@ -48,7 +48,7 @@
     .address-list{
         margin-top: 5px;
         overflow-y: auto;
-        max-height : 180px;
+        max-height : 240px;
     }
     .address-list::-webkit-scrollbar{
         display: none;

@@ -1,7 +1,7 @@
 <template>
     <div class="club-ref-sheet-list-container">
         <div class="columns-header">
-            <label v-for="column in columns" class="column-item" :class=column.class>
+            <label v-for="column in columns" class="column-item" :class="column.class">
                 {{ column.label }}
             </label>
         </div>
@@ -49,7 +49,7 @@
     .club-list{
         margin-top: 5px;
         overflow-y: auto;
-        max-height : 180px;
+        max-height : 240px;
     }
     .club-list::-webkit-scrollbar{
         display: none;
