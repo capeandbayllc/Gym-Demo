@@ -38,7 +38,7 @@
         </div>
 
         <div class="flex mt-6 justify-center">
-            <Button hover-secondary hoverIcon size="xs" class="rounded-full normal-case pl-3" @click.stop="$emit('next-page', 'email-builder')">
+            <Button hover-secondary hoverIcon size="xs" class="rounded-full normal-case pl-3" @click.stop="openEmailbuilderModal">
                 Save The Campaign
                 <right-arrow-icon class="ml-2" />
             </Button>
@@ -50,6 +50,18 @@
                 <a class="text-xs ml-1" @click.stop="$emit('next-page', 'lead-sources')">Back</a>
             </span>
         </div>
+
+        <daisy-modal ref="emailBuiderModalRef">
+            <email-builder-modal @close="closeEmailBuilderModal" @next-page="openSaveCampaignFormModal" />
+        </daisy-modal>
+
+        <daisy-modal ref="saveCampaignFormModalRef">
+            <save-campaign-form-modal @close="closeSaveCampaignFormModal" @next-page="openSuccessMessageModal" />
+        </daisy-modal>
+
+        <daisy-modal ref="successMessageModalRef">
+            <success-message-modal @close="closeSuccessMessageModal" />
+        </daisy-modal>
     </div>    
 </template>
 
@@ -92,8 +104,15 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEnvelope, faMessage, faPhone } from "@fortawesome/free-solid-svg-icons";
 import RightArrowIcon from "~/components/icons/arrow.vue";
+import EmailBuilderModal from "../email-builder/index.vue";
+import SaveCampaignFormModal from "../save-campaign-form/index.vue";
+import SuccessMessageModal from "../success-message/index.vue";
 
 library.add(faEnvelope, faMessage, faPhone);
+
+const emailBuiderModalRef = ref(null);
+const saveCampaignFormModalRef = ref(null);
+const successMessageModalRef = ref(null);
 
 const campaign_items = ref([
     {
@@ -115,6 +134,29 @@ const campaign_items = ref([
         status: 'inactive'
     }
 ]);
+
+const openEmailbuilderModal = () => {
+    emailBuiderModalRef.value.open();
+}
+const closeEmailBuilderModal = () => {
+    emailBuiderModalRef.value.close();
+}
+
+const openSaveCampaignFormModal = () => {
+    closeEmailBuilderModal();
+    saveCampaignFormModalRef.value.open();
+}
+const closeSaveCampaignFormModal = () => {
+    saveCampaignFormModalRef.value.close();
+}
+
+const openSuccessMessageModal = () => {
+    closeSaveCampaignFormModal();
+    successMessageModalRef.value.open();
+}
+const closeSuccessMessageModal = () => {
+    successMessageModalRef.value.close();
+}
 
 const addDayItem = (day) => {
     day = day + 1;
