@@ -1,16 +1,22 @@
 <template>
     <div
-        class="absolute border border-secondary flex flex-col gap-3 py-3 rounded-2xl text-[0.6rem] font-light tracking-wider z-20 bg-[#191919]"
+        class="absolute border border-secondary flex flex-col py-3 rounded-2xl text-[0.6rem] font-light tracking-wider bg-[#191919] calendar-style-transition"
         :class="{
             'top-[55%] left-[55%]': isParent,
-            'top-[-40%] left-[100%]': !isParent,
+            'top-[-40%] left-[99.5%]': !isParent,
+            'opacity-0 -z-20': !showCalendarUserDropDown,
+            'opacity-100 z-20': showCalendarUserDropDown,
         }"
     >
         <span
             class="relative flex flex-row gap-10 justify-between px-3 py-2 hover:bg-secondary cursor-pointer calendar-style-transition min-w-[13vw]"
-            v-for="option in calendarViewOptions"
+            :class="{
+                'bg-secondary': currentSelect === index,
+            }"
+            v-for="(option, index) in calendarViewOptions"
+            @click="setCurrentSelect(index)"
         >
-            <span>{{ option.name }}</span>
+            <span class="line-clamp-1">{{ option.name }}</span>
             <span v-if="option.children || option.list"
                 ><ArrowIcon direction="right" class="my-auto"
             /></span>
@@ -18,11 +24,13 @@
             <CalendarUserDropdown
                 :isParent="false"
                 :calendarViewOptions="option.children"
+                :showCalendarUserDropDown="currentSelect === index"
                 v-if="option.children"
             />
             <CalendarUserDropdown
                 :isParent="false"
                 :calendarViewOptions="option.list"
+                :showCalendarUserDropDown="currentSelect === index"
                 v-if="option.list"
             />
             <!-- </div> -->
@@ -37,6 +45,16 @@ import { ArrowIcon } from "~~/components/icons";
 const props = defineProps({
     isParent: Boolean,
     calendarViewOptions: Array,
+    showCalendarUserDropDown: Boolean,
+});
+
+const currentSelect = ref(null);
+const setCurrentSelect = (index) => {
+    currentSelect.value = index;
+};
+
+watch(props.showCalendarUserDropDown, () => {
+    currentSelect.value = null;
 });
 </script>
 

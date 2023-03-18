@@ -179,6 +179,13 @@ const filterOptions = ref({
     },
 });
 
+const eventTypes = ref([]);
+const employees = ref([]);
+const members = ref([]);
+const leads = ref([]);
+const locations = ref([]);
+const event_types = ref([]);
+const events = ref([]);
 const calendarViewOptions = ref([
     {
         name: "Club",
@@ -223,14 +230,6 @@ const calendarViewOptions = ref([
         ],
     },
 ]);
-
-const eventTypes = ref([]);
-const employees = ref([]);
-const members = ref([]);
-const leads = ref([]);
-const locations = ref([]);
-const event_types = ref([]);
-const events = ref([]);
 
 const resetState = () => {
     eventDetailsVisibibility.value = false;

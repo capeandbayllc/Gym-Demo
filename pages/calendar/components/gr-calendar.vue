@@ -2,6 +2,8 @@
     <div class="relative">
         <div
             class="absolute w-[18%] h-[50px] top-[10px] left-0 hidden lg:block"
+            ref="calendarUserDropdown"
+            @click="setShowCalendarUserDropDownToTrue()"
         >
             <div
                 class="relative flex flex-row gap-2 h-[40px] hover:bg-secondary/[0.3] rounded-lg px-2 transition-all duration-200 cursor-pointer"
@@ -21,6 +23,7 @@
             <CalendarUserDropdown
                 :isParent="true"
                 :calendarViewOptions="calendarViewOptions"
+                :showCalendarUserDropDown="showCalendarUserDropDown"
             />
         </div>
         <div
@@ -70,6 +73,8 @@ const props = defineProps({
     },
     filterOptions: Object,
     calendarViewOptions: Array,
+    setShowCalendarUserDropDown: Function,
+    showCalendarUserDropDown: Boolean,
 });
 
 /** empty node on calendar click handler */
@@ -85,7 +90,8 @@ const currentView = ref("timeGridWeek");
 const selectedDate = ref(null);
 const monthCalendar = ref(null);
 const listCalendar = ref(null);
-
+const showCalendarUserDropDown = ref(false);
+const calendarUserDropdown = ref(null);
 /** existing event click handler */
 const eventClick = (info) => {
     emit("clickEventNode", info.event);
@@ -172,6 +178,32 @@ const onViewChanged = () => {
     });
 };
 
+const setShowCalendarUserDropDownToTrue = () => {
+    showCalendarUserDropDown.value = true;
+};
+
+const setShowCalendarUserDropDownToFalse = (event) => {
+    if (
+        event.target === calendarUserDropdown.value ||
+        event.composedPath().includes(calendarUserDropdown.value)
+    ) {
+        return;
+    }
+    showCalendarUserDropDown.value = false;
+};
+
+// onMounted(() => {
+
+// });
+
+onUnmounted(() => {
+    document.removeEventListener(
+        "click",
+        setShowCalendarUserDropDownToFalse,
+        true
+    );
+});
+
 watch(props.filterOptions, () => {
     calendar.value.calendar.getEventSources()[0].remove();
     calendar.value.calendar.addEventSource(props.events);
@@ -183,6 +215,11 @@ watch(calendar, () => {
 });
 
 onMounted(async () => {
+    document.addEventListener(
+        "click",
+        setShowCalendarUserDropDownToFalse,
+        true
+    );
     await nextTick();
     window.dispatchEvent(new Event("resize"));
 });
