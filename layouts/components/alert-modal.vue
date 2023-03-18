@@ -7,6 +7,8 @@
           favorite: false,
       }"
   >
+
+      
       
       <template #content>
           <div class="global-search-popup-container">
@@ -47,7 +49,12 @@
                       ></people-search-action>
                   </div>
               </div>
-              
+              <div class="px-6 flex">
+                <div class="call-type">
+                  Call type
+                  <arrow-icon direction="up" />
+                </div>
+              </div>
               <search-list
                   :filter="tblFilter"
                   @row-clicked="clickRow"
@@ -59,6 +66,8 @@
 <script setup>
 import PeopleSearchAction from "~~/pages/people-search/components/people-search-action.vue";
 import SearchList from "~~/pages/people-search/components/search-list.vue";
+import { ArrowIcon } from "~~/components/icons";
+
 
 const props = defineProps({
   currentPage: {
@@ -100,6 +109,10 @@ const filterSelected = (value) => {
 
 </script>
 <style scoped>
+
+.call-type{
+  @apply bg-secondary text-white flex items-center px-3 h-[37px] w-[165px] rounded-[14px] justify-between;
+}
 .global-search-popup-card {
 @apply rounded-2xl bg-neutral;
 .global-search-popup-container {
