@@ -30,7 +30,7 @@
                         <div class="outline-block">Performance</div>
                         <div class="outline-block">Conversions</div>
                     </div>
-                    <div class="flex flex-col justify-center items-center px-3 max-w-[100px]" @click.stop="addDayItem(item.day)">
+                    <div class="flex flex-col justify-center items-center px-3 max-w-[100px] mb-6" @click.stop="addDayItem(item.day)">
                         <add-line-icon />
                     </div>
                 </div>
@@ -38,18 +38,26 @@
         </div>
 
         <div class="flex mt-6 justify-center">
-            <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page', 'email-builder')">
+            <Button hover-secondary hoverIcon size="xs" class="rounded-full normal-case pl-3" @click.stop="$emit('next-page', 'email-builder')">
                 Save The Campaign
+                <right-arrow-icon class="ml-2" />
             </Button>
+        </div>
+
+        <div class="flex mt-2">
+            <span @click.stop="$emit('back', 'select-templates')" class="text-secondary cursor-pointer">
+                <font-awesome-icon :icon="['fas', 'angle-left']" size="sm" />
+                <a class="text-xs ml-1" @click.stop="$emit('next-page', 'lead-sources')">Back</a>
+            </span>
         </div>
     </div>    
 </template>
 
 <style scoped>
 .save-campaign-container {
-    @apply p-2;
+    @apply flex flex-col flex-auto p-2 justify-center;
     .campaign-day-block {
-        @apply flex flex-col border border-white rounded-lg h-[18vw] px-4 pt-4 w-full text-xs;
+        @apply flex flex-col border border-white rounded-lg p-4 w-full text-xs;
     }
     .campaign-day-list {
         @apply flex flex-row mt-3 max-w-[36.5rem] overflow-y-auto;
@@ -57,13 +65,13 @@
     .campaign-day-item {
         @apply flex flex-row;
         .outline-block {
-            @apply inline-flex border border-secondary rounded-lg p-1 mt-1 w-max text-[10px];
+            @apply inline-flex border border-secondary rounded-lg p-1 mt-1 w-max;
         }
         .type-block {
-            @apply flex flex-row text-[7px]
+            @apply flex flex-row text-[8px]
         }
         .type-icon {
-            @apply p-1 border hover:bg-green-700/50 text-center cursor-pointer ml-1 w-6;
+            @apply p-1 border hover:bg-green-700/50 text-center cursor-pointer ml-1 w-8;
         }
         .type-icon.active {
             @apply bg-green-700/50 border border-green-700;
@@ -73,7 +81,7 @@
         }
     }
     .line {
-        @apply h-[20px] border border-white my-1;
+        @apply h-[30px] border border-white my-1;
     }
 }
 </style>
@@ -83,6 +91,7 @@ import AddLineIcon from "~/pages/mass-com/builder/components/add-line-icon.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEnvelope, faMessage, faPhone } from "@fortawesome/free-solid-svg-icons";
+import RightArrowIcon from "~/components/icons/arrow.vue";
 
 library.add(faEnvelope, faMessage, faPhone);
 

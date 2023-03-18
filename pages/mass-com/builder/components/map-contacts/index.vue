@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="flex mt-6 justify-center">
-                    <Button hoverSecondary hoverIcon size="xs" class="rounded-full normal-case pl-3" @click.stop="$emit('next-page', 'lead-sources')">
+                    <Button hover-secondary hover-icon size="xs" class="rounded-full normal-case pl-3" @click.stop="$emit('next-page', 'lead-sources')">
                         Connect Leads
                         <right-arrow-icon class="ml-2" />
                     </Button>

@@ -17,7 +17,7 @@
         </div>
 
         <div class="flex flex-col mt-6 justify-center items-center" v-if="activePage == 'save-campaign'">
-            <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page')">
+            <Button hover-secondary size="xs" class="rounded-full normal-case" @click.stop="$emit('next-page')">
                 Launch Campaign
             </Button>
             <p class="text-[10px] mt-2">View your Campaign and Reports</p>
