@@ -38,16 +38,18 @@
                 <membership-btn :membership="data.type" class="max-w-[100px]" />
             </div>
             <div :class="`w-[${columns[6].width}px]`">
-                <div class="text-secondary h-6 w-6 flex items-center justify-center" >
-                    <svg @click="showDropdownInfo" v-show="!dropdownInfo" class="more-icon-normal" xmlns="http://www.w3.org/2000/svg" width="23.999" height="6" viewBox="0 0 23.999 6">
+                <div v-show="!dropdownInfo" @click="showDropdownInfo" class="text-secondary h-6 w-6 flex items-center justify-center" >
+                    <svg class="more-icon-normal" xmlns="http://www.w3.org/2000/svg" width="23.999" height="6" viewBox="0 0 23.999 6">
                         <path id="icon_more-2" data-name="icon more" d="M1329,732.81a3,3,0,1,1,3,3A3,3,0,0,1,1329,732.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1320,732.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1311,732.81Z" transform="translate(-1311 -729.81)" fill="#0075C9"/>
                     </svg>
-                    <svg @click="hideDropdownInfo" v-show="dropdownInfo" xmlns="http://www.w3.org/2000/svg" width="14.999" height="15" viewBox="0 0 14.999 15">
+                </div>
+                <div v-show="dropdownInfo" @click="hideDropdownInfo" class="text-secondary h-6 w-6 flex items-center justify-center" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14.999" height="15" viewBox="0 0 14.999 15">
                         <path id="icon_more" data-name="icon more" d="M1329,735.81a3,3,0,1,1,3,3A3,3,0,0,1,1329,735.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1320,735.81Zm0-9a3,3,0,1,1,3,3A3,3,0,0,1,1320,726.81Z" transform="translate(-1320 -723.81)" fill="#0075C9"/>
                     </svg>
                 </div>
             </div>
-            <div class="dropdown"  v-show="dropdownInfo">
+            <div class="dropdown" v-show="dropdownInfo">
                 <div class="dropdown-container">
                     <cross-icon @click="hideDropdownInfo" class="flex absolute text-white h-[15px] w-[15px] top-[15px] left-[150px] cursor-pointer"></cross-icon>
                     <div @click="openInfoModal" class="dropdown-item">Edit account</div>
@@ -228,6 +230,7 @@ const closeInfoModal =()=>{
 const dropdownInfo = ref(false);
 
 const showDropdownInfo = ()=>{
+    console.log('hello')
     dropdownInfo.value = true;
 }
 
