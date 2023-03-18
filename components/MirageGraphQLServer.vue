@@ -26,9 +26,13 @@ const server = createServer({
     const registerModel = this.schema.registerModel;
     this.schema.registerModel = function (type, ModelClass) {
       for (let associationProperty in ModelClass.prototype) {
-        ModelClass.prototype[associationProperty].getForeignKey = function () {
-        console.log(`${underscore(this.name)}_id`);
-          return `${underscore(this.name)}_id`;
+        const association = ModelClass.prototype[associationProperty];
+        association.getForeignKey = function () {
+          if (association.constructor.name.startsWith('BelongsTo')) {
+            return `${underscore(this.name)}_id`;
+          } else {
+            return `${this._container.inflector.singularize(underscore(this.name))}_ids`;
+          }
         }
       }
 
