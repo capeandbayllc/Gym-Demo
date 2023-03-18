@@ -5,8 +5,6 @@
 <!-- TODO: 2. basic info-->
 <!-- TODO: i) responsive checking for ipad screen -->
 <!-- TODO: ii) Search manager (have some questions here????) (how will it work):-->
-
-<!-- TODO: 4. Login related-->
 <!-- TODO: 5. Attachment-->
 <!-- TODO: 6. Salary-->
 <!-- TODO: 7. Hierchy-->
@@ -54,6 +52,8 @@
 
     <update-password></update-password>
 
+    <account-auth></account-auth>
+
   </div>
 </template>
 
@@ -99,9 +99,9 @@ input:hover {
 import {ref} from 'vue';
 import '@vueform/multiselect/themes/default.css'
 import {MembersIcon, LockIcon, BlueClockIcon} from "@/components/icons";
-import Divider from "./components/divider";
 import BasicInfo from "./components/basic-info";
 import UpdatePassword from "./components/update-password";
+import AccountAuth from "./components/account-auth";
 
 let user = useState("auth");
 
