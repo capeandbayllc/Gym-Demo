@@ -1,7 +1,15 @@
 <template>
     <div class="lead-sources-container">
-        <div class="flex flex-row justify-end gap-3">
-            <div class="lead-sources-block">
+        <div class="action-block">
+            <div class="flex mt-2">
+                <span @click.stop="$emit('back', 'select-templates')" class="text-secondary cursor-pointer">
+                    <font-awesome-icon :icon="['fas', 'angle-left']" size="sm" />
+                    <a class="text-xs ml-1" @click.stop="$emit('next-page', 'map-contacts')">Back</a>
+                </span>
+            </div>
+        </div>
+        <div class="lead-sources-block">
+            <div class="lead-source-form">
                 <p>Lead Sources</p>
                 <div class="lead-sources-list">
                     <div class="sources-item" v-for="source in sources">{{ source.title }}</div>
@@ -13,43 +21,43 @@
                     </button>
                 </div>
             </div>
-            <div class="view-member-block">
-                <div class="text-center">
-                    <span class="text-[8px] text-secondary">Add or View Members</span>
-                    <add-line-icon />
-                </div>
+
+            <div class="flex justify-center">
+                <Button hoverSecondary hoverIcon size="xs" class="rounded-full normal-case pl-3" @click.stop="$emit('next-page', 'save-campaign')">
+                    Schedule The Campaign
+                    <right-arrow-icon class="ml-2" />
+                </Button>
             </div>
         </div>
-
-        <div class="flex mt-6 justify-center">
-            <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page', 'save-campaign')">
-                Schedule The Campaign
-            </Button>
-        </div>
-
-        <div class="flex mt-2 absolute bottom-0">
-            <span @click.stop="$emit('back', 'select-templates')" class="text-secondary cursor-pointer">
-                <font-awesome-icon :icon="['fas', 'angle-left']" size="sm" />
-                <a class="text-xs ml-1" @click.stop="$emit('next-page', 'select-template')">Back</a>
-            </span>
-        </div>
+        <div class="view-member-block">
+            <div class="text-center">
+                <span class="text-xs text-secondary">Add or View Members</span>
+                <add-line-icon />
+            </div>
+        </div>        
     </div>
 </template>
 
 <style scoped>
 .lead-sources-container {
-    @apply relative;
+    @apply flex flex-row flex-grow gap-3;
+    .action-block {
+        @apply flex flex-[33.3%] flex-col-reverse;
+    }
     .lead-sources-block {
-        @apply border border-white rounded-lg h-[20vw] mt-5 p-4 w-[15vw] text-xs;
+        @apply flex flex-[33.3%] flex-col justify-between;
+        .lead-source-form {
+            @apply flex flex-col border border-white rounded-lg mt-5 p-4 text-xs;
+        }
         .lead-sources-list {
-            @apply mt-4 h-[12vw] overflow-y-auto;
+            @apply mt-4 h-[22vw] overflow-y-auto;
         }
     }
     .sources-item {
         @apply rounded mt-2 w-full text-left px-3 py-1 min-h-6 bg-gray-700/60 font-light;
     }
     .view-member-block {
-        @apply flex flex-col justify-center items-center w-[15vw]
+        @apply flex flex-[33.3%] flex-col justify-center items-center w-[15vw]
     }
     .plus-icon {
         @apply w-[2rem] rounded-full bg-secondary mt-2
@@ -62,6 +70,7 @@ import AddLineIcon from "~/pages/mass-com/builder/components/add-line-icon.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import RightArrowIcon from "~/components/icons/arrow.vue";
 
 library.add(faPlusCircle);
 

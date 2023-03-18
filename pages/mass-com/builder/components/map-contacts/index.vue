@@ -27,7 +27,10 @@
                 </div>
 
                 <div class="flex mt-6 justify-center">
-                    <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page', 'lead-sources')">Connect Leads</Button>
+                    <Button hoverSecondary hoverIcon size="xs" class="rounded-full normal-case pl-3" @click.stop="$emit('next-page', 'lead-sources')">
+                        Connect Leads
+                        <right-arrow-icon class="ml-2" />
+                    </Button>
                 </div>
             </div>
         </div>
@@ -46,7 +49,7 @@
     @apply flex flex-col justify-center;
 
     .map-contacts-form {
-        @apply border border-white rounded-lg min-h-[12vw] mt-5 p-6 w-[30vw] text-xs
+        @apply flex flex-col border border-white rounded-lg h-[32vw] mt-5 p-6 w-[30vw] text-xs justify-center
     }
     .text-input-field {
         @apply input input-bordered w-full h-8 placeholder:text-xs;
@@ -64,6 +67,7 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import RightArrowIcon from "~/components/icons/arrow.vue";
 
 library.add(faAngleLeft);
 </script>
