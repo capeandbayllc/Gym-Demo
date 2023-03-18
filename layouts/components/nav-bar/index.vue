@@ -96,12 +96,6 @@ const navList = [
                 icon: FavoriteCircleIcon,
             },
             {
-                label: "Point Of Sale",
-                url: null,
-                icon: PosIcon,
-                modalComponent: PosWindow,
-            },
-            {
                 label: "Fitness",
                 url: "/#",
                 icon: FitnessIcon,
