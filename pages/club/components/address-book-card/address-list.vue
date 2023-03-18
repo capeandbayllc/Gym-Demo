@@ -11,7 +11,11 @@
                 <ul>
                     <li v-for="item in category.items" :key="item.id" class="address-row">
                         <div class="w-[25%] flex">
-                            <label>{{ item.name }}</label>
+                            <div class="flex items-center gap-2">
+                                <img class="rounded-lg h-12 w-12 object-cover bg-gray-300 border-2 border-blue-400" :src="item.photo" alt="{{ item.name }}">
+                                <label class="ml-4 font-medium">{{ item.name }}</label>
+                            </div>
+                            <!--<label></label>-->
                         </div>
                         <div class="w-[25%] flex">
                             <label>{{ item.company }}</label>

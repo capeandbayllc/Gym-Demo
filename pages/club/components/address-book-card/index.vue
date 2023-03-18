@@ -46,6 +46,7 @@
                     company: 'Company Name',
                     phone: '(123) 456-7890',
                     email: 'email@email.com',
+                    photo: '/images/profile/customers_8.jpg'
                 },
                 {
                     id:2,
@@ -54,6 +55,7 @@
                     company: 'Company Name',
                     phone: '(123) 456-7890',
                     email: 'email@email.com',
+                    photo: '/images/profile/customers_7.jpg'
                 },
                 {
                     id:3,
@@ -62,6 +64,7 @@
                     company: 'Company Name',
                     phone: '(123) 456-7890',
                     email: 'email@email.com',
+                    photo: '/images/profile/customers_9.jpg'
                 },
             ],
         },
@@ -76,6 +79,7 @@
                     company: 'Company Name',
                     phone: '(123) 456-7890',
                     email: 'email@email.com',
+                    photo: '/images/profile/customers_7.jpg'
                 },
                 {
                     id:5,
@@ -84,6 +88,7 @@
                     company: 'Company Name',
                     phone: '(123) 456-7890',
                     email: 'email@email.com',
+                    photo: '/images/profile/customers_8.jpg'
                 },
             ],
         },
@@ -98,6 +103,7 @@
                     company: 'Company Name',
                     phone: '(123) 456-7890',
                     email: 'email@email.com',
+                    photo: '/images/profile/customers_9.jpg'
                 },
             ],
         }
