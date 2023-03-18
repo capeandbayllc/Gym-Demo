@@ -4,14 +4,21 @@
         <h5 class="subtitle">Start your campaign</h5>
 
         <div class="tabs">
-            <div class="tab tab-bordered" v-for="tab in tabs" :class="{'tab-active': activeTab == tab.id}">{{ tab.title }}</div>
+            <div 
+                class="tab tab-bordered" 
+                :class="{'tab-active': activeTab == tab.id}"
+                v-for="tab in tabs" 
+                @click.stop="activeTab = tab.id"
+            >
+                {{ tab.title }}
+            </div>
         </div>
 
         <div class="tab-content">
-            <tab-layouts v-if="activeTab == 'layouts'" @next-page=" $emit('next-page', 'map-contacts')" ></tab-layouts>
-            <tab-saved v-if="activeTab == 'saved'"></tab-saved>
-            <tab-campaigns v-if="activeTab == 'campaigns'"></tab-campaigns>
-            <tab-search v-if="activeTab == 'search'"></tab-search>
+            <tab-layouts v-if="activeTab == 'layouts'" @next-page=" $emit('next-page', 'map-contacts')" />
+            <tab-saved v-if="activeTab == 'saved'" />
+            <tab-campaigns v-if="activeTab == 'campaigns'" />
+            <tab-search v-if="activeTab == 'search'" />
         </div>
     </div>
 </template>
@@ -20,9 +27,6 @@
 .select-templates-container {
     .title {
         @apply text-xl;
-    }
-    .subtitle {
-        @apply text-xs;
     }
 }
 .tabs {
@@ -63,6 +67,6 @@ const tabs = [{
     title: 'Search'
 }];
 
-let activeTab = 'layouts';
+const activeTab = ref('layouts');
 
 </script>

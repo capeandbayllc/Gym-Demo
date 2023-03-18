@@ -5,7 +5,7 @@
         <div class="flex gap-3">
             <div class="block-border templates-block">
                 <div v-for="doc in docs" :key="doc.id" class="templates-doc">
-                    <normal-doc class="mb-2" />
+                    <normal-doc class="mb-2 h-40 w-auto" />
                     <div class="templates-doc-title">{{doc.name}}</div>
                     <div class="templates-doc-date">{{doc.date}}</div>
                 </div>
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="flex pt-3 justify-center">
+        <div class="flex pt-6 justify-center">
             <Button outline size="xs" class="rounded-full" @click.stop="$emit('next-page')">Build Your Campaign</Button>
         </div>
     </div>
@@ -26,25 +26,24 @@
 
 <style scoped>
 .select-templates-layouts-container {
-    @apply text-xs;
     .block-border {
         @apply border border-white rounded-md min-h-[12vw]
     }
     .templates-block {
-        @apply flex flex-grow overflow-y-auto gap-3 p-3 max-w-[35vw];
+        @apply flex flex-grow overflow-y-auto gap-3 p-3 max-w-[58vw];
 
         .templates-doc {
-            @apply text-center;
+            @apply text-center p-2;
             .templates-doc-title {
-                @apply text-secondary text-[8px];
+                @apply text-secondary text-sm;
             }
             .templates-doc-date {
-                @apply text-[8px]
+                @apply text-sm
             }
         }
     }
     .add-block {
-        @apply px-8 flex flex-col justify-center text-center;
+        @apply px-8 flex flex-col flex-grow justify-center items-center;
     }
 }
 </style>
