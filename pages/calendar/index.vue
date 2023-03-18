@@ -346,6 +346,7 @@ const getFormattedEvents = computed(() => {
                 users: Array(Math.floor(Math.random() * 40) + 1).fill(),
                 instructor: event.owner,
                 location: event.location,
+                attendees: event.attendees,
             },
         });
     }

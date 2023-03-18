@@ -155,9 +155,13 @@
 
             <!-- attendees -->
             <div class="mt-8">
-                <span class="text-xl font-semibold">Attendee(s) - 1</span>
-                <ul class="flex flex-col w-full mt-4">
-                    <AttendeeListItem>
+                <span class="text-xl font-semibold"
+                    >Attendee(s) - {{ event?.extendedProps.attendees }}</span
+                >
+                <ul
+                    class="flex flex-col gap-3 w-full mt-4 !max-h-[18vh] overflow-y-scroll no-scrollbar"
+                >
+                    <AttendeeListItem v-for="i in [1, 2, 3, 4, 5]">
                         <template #tertiary>
                             <div class="flex gap-2">
                                 <button
