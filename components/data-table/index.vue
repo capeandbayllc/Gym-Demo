@@ -36,6 +36,10 @@ const props = defineProps({
         default: [],
     },
     rowComponent: Object,
+    headerComponent: {
+        type: Object,
+        default: false
+    },
     stickyHeader:{
       type: Boolean,
       default: false

@@ -1,6 +1,8 @@
 <template>
     <div class="relative">
-        <div class="absolute w-[18%] h-[50px] top-[10px] left-0">
+        <div
+            class="absolute w-[18%] h-[50px] top-[10px] left-0 hidden lg:block"
+        >
             <div
                 class="relative flex flex-row gap-2 h-[40px] hover:bg-secondary/[0.3] rounded-lg px-2 transition-all duration-200 cursor-pointer"
             >
@@ -16,8 +18,14 @@
                     <ArrowIcon class="w-[20px] h-auto my-auto" />
                 </span>
             </div>
+            <CalendarUserDropdown
+                :isParent="true"
+                :calendarViewOptions="calendarViewOptions"
+            />
         </div>
-        <div class="absolute w-[18%] h-[50px] top-[10px] right-0">
+        <div
+            class="absolute w-[18%] h-[50px] top-[10px] right-0 hidden lg:block"
+        >
             <div
                 class="relative flex flex-row gap-2 h-[40px] rounded-lg px-2 transition-all duration-200 justify-end"
             >
@@ -49,6 +57,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import "@vuepic/vue-datepicker/dist/main.css";
 // import { calendarEvents as events } from "../helpers/calendar-events";
 import CalendarEvent from "./partials/calendar-event.vue";
+import CalendarUserDropdown from "./calendar-user-dropdown.vue";
 import { UserIcon, ArrowIcon } from "~~/components/icons";
 
 const calenderView = ref("timeGridWeek");
@@ -60,6 +69,7 @@ const props = defineProps({
         default: [],
     },
     filterOptions: Object,
+    calendarViewOptions: Array,
 });
 
 /** empty node on calendar click handler */
@@ -167,11 +177,9 @@ watch(props.filterOptions, () => {
     calendar.value.calendar.addEventSource(props.events);
 });
 
-watch(calenderView, () => {
-    setTimeout(() => {
-        calendar.value.getApi().render();
-        console.log("huh");
-    });
+watch(calendar, () => {
+    calendar.value.calendar.getEventSources()[0].remove();
+    calendar.value.calendar.addEventSource(props.events);
 });
 
 onMounted(async () => {
@@ -180,49 +188,6 @@ onMounted(async () => {
 });
 </script>
 <style>
-.calendar-date-picker {
-    .dp__theme_dark {
-        --dp-background-color: #000000;
-        --dp-menu-border-color: #191919;
-    }
-    .dp__calendar_header {
-        @apply text-secondary !font-normal !h-[25px] text-[0.8rem] pb-0;
-    }
-    .dp__month_year_row {
-        @apply border-none flex flex-row !gap-1;
-        .dp__month_year_col_nav {
-            @apply bg-secondary rounded;
-            .dp__inner_nav {
-                @apply text-base-content;
-                &:hover {
-                    @apply bg-secondary;
-                }
-            }
-        }
-    }
-    .dp__calendar {
-        @apply bg-transparent;
-        .dp__calendar_wrap {
-            @apply bg-neutral border-2 border-secondary rounded-2xl;
-            .dp__calendar_header_separator {
-                @apply h-0;
-            }
-        }
-    }
-}
-
-.dp__cell_inner {
-    @apply !p-0 !h-[25px] text-[0.8rem] !font-light;
-}
-
-.dp__month_year_select {
-    @apply flex-row !py-0 !h-auto;
-}
-
-.dp__month_year_select {
-    @apply flex-row !py-0 !h-auto;
-}
-
 .fc .fc-list-sticky .fc-list-day > *,
 .fc-theme-standard .fc-list-day-cushion,
 .fc .fc-cell-shaded,
@@ -337,7 +302,7 @@ th.fc-day-today {
 }
 
 .fc.fc-media-screen.fc-direction-ltr.fc-theme-standard {
-    @apply !max-h-[76vh] !min-h-[65.8vh];
+    @apply max-h-[100vh] lg:h-[76vh] !min-h-[80vh] lg:!min-h-[65.8vh];
 }
 
 .fc-timeGridDay-button,

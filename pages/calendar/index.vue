@@ -5,7 +5,9 @@
             class="border border-secondary bg-[#202020]/[0.9] rounded-3xl p-7 max-w-none flex gap-4"
         >
             <!-- left sidebar -->
-            <aside class="flex flex-col gap-5 font-light !text-[0.8rem]">
+            <div
+                class="flex flex-col gap-5 font-light !text-[0.8rem] w-[220px]"
+            >
                 <Datepicker
                     class="calendar-date-picker"
                     menu-class-name="!bg-transparent !border-none"
@@ -43,12 +45,14 @@
                     :selectOption="selectOption"
                     :toggleFilterOption="toggleFilterOption"
                 />
-            </aside>
+            </div>
 
             <section class="w-full !font-light !tracking-wider">
                 <!-- main section heading area -->
                 <div class="flex justify-between items-center w-full">
-                    <h1 class="font-light text-3xl w-full">January 2088</h1>
+                    <h1 class="font-light text-xl my-auto w-full">
+                        January 2088
+                    </h1>
                     <!-- filters/page actions -->
                     <div class="flex gap-2 w-full justify-end">
                         <button
@@ -70,6 +74,7 @@
                 <GrCalendar
                     :events="getFormattedEvents"
                     :filterOptions="filterOptions"
+                    :calendarViewOptions="calendarViewOptions"
                     @clickEventNode="handleCalendarEvent"
                     @clickEmptyNode="handleAddNew"
                     v-if="getFormattedEvents.length || events.length"
@@ -122,6 +127,7 @@
     <OfferUp
         :event="eventDetails"
         :showOfferUp="offerUpVisibibility"
+        :employees="employees"
         @cancel="resetState"
     />
 </template>
@@ -158,7 +164,6 @@ const eventDetailsVisibibility = ref(false);
 const eventInformationVisibibility = ref(false);
 const offerUpVisibibility = ref(false);
 const eventFormVisibility = ref(false);
-
 const filterOptions = ref({
     employees: {
         isOpen: false,
@@ -173,6 +178,51 @@ const filterOptions = ref({
         selected: [],
     },
 });
+
+const calendarViewOptions = ref([
+    {
+        name: "Club",
+        list: [
+            { name: "Club #1" },
+            { name: "Club #2" },
+            { name: "Club #3" },
+            { name: "Club #4" },
+            { name: "Club #5" },
+        ],
+    },
+    {
+        name: "Employees",
+        children: [
+            {
+                name: "Trainers",
+                list: [
+                    { name: "Jeff" },
+                    { name: "Sam" },
+                    { name: "Alex" },
+                    { name: "Ruth" },
+                ],
+            },
+            {
+                name: "Staff",
+                list: [
+                    { name: "Not Jeff" },
+                    { name: "Not Sam" },
+                    { name: "Not Alex" },
+                    { name: "Not Ruth" },
+                ],
+            },
+            {
+                name: "Management",
+                list: [
+                    { name: "Some Other Jeff" },
+                    { name: "Some Other Sam" },
+                    { name: "Some Other Alex" },
+                    { name: "Some Other Ruth" },
+                ],
+            },
+        ],
+    },
+]);
 
 const eventTypes = ref([]);
 const employees = ref([]);
@@ -296,13 +346,18 @@ watch(result, (ov, nv) => {
     let tempEventsContainer = [...result.value.calendarEvents];
 
     for (let event of tempEventsContainer) {
-        console.log(tempEventsContainer.attendees);
         request(user.query.findById, { id: event.owner_id }).then(
             ({ data }) => {
                 events.value.push({ ...event, owner: data.data.user });
             }
         );
     }
+
+    setTimeout(() => {
+        filterOptions.value.employees.isOpen = true;
+        filterOptions.value.locations.isOpen = true;
+        filterOptions.value.event_types.isOpen = true;
+    }, 500);
 });
 
 const selectOption = (filter_id, option) => {
@@ -337,6 +392,7 @@ const getFormattedEvents = computed(() => {
                 users: Array(Math.floor(Math.random() * 40) + 1).fill(),
                 instructor: event.owner,
                 location: event.location,
+                attendees: event.attendees,
             },
         });
     }
@@ -381,12 +437,57 @@ const showOfferUp = () => {
 };
 </script>
 
-<style scoped>
+<style>
 .search-input {
-    @apply !text-white py-1 p-2 rounded-xl border-2 border-transparent text-[0.8rem] !font-light !tracking-wider w-[50%] bg-secondary/[0.4] placeholder:!text-white/[0.8] calendar-style-transition;
+    @apply !text-white py-1 p-2 rounded-xl border-2 border-transparent text-[0.8rem] !font-light !tracking-wider w-[50%] bg-secondary/[0.4] placeholder:!text-white/[0.8] calendar-style-transition hidden lg:block;
 }
 
 .calendar-style-transition {
     @apply transition-all duration-300 ease-linear;
+}
+
+.calendar-date-picker {
+    .dp__theme_dark {
+        --dp-background-color: #000000;
+        --dp-menu-border-color: #191919;
+    }
+
+    .dp__month_year_row {
+        @apply border-none flex flex-row !gap-1 !w-[220px];
+        .dp__month_year_col_nav {
+            @apply bg-secondary rounded-lg;
+            .dp__inner_nav {
+                @apply text-base-content;
+                &:hover {
+                    @apply bg-secondary;
+                }
+            }
+        }
+    }
+    .dp__calendar {
+        @apply bg-transparent !w-[220px];
+        .dp__calendar_wrap {
+            @apply bg-neutral border-2 border-secondary rounded-2xl;
+            .dp__calendar_header_separator {
+                @apply h-0;
+            }
+        }
+    }
+}
+
+.dp__calendar_header,
+.dp__calendar_row {
+    @apply text-secondary !font-normal !h-[25px] mx-auto !w-[200px] text-[0.7rem] pb-0 !px-1 flex flex-row justify-center;
+}
+
+.dp__calendar_header_item {
+    @apply !w-[20px] !h-[20px];
+}
+.dp__cell_inner {
+    @apply !h-[20px] !w-[20px] text-[0.7rem] !font-light mx-auto;
+}
+
+.dp__month_year_select {
+    @apply flex-row !py-0 !h-auto !w-[75px] text-[0.8rem];
 }
 </style>

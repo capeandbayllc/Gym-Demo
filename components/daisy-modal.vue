@@ -37,7 +37,7 @@
   right: -52px;
 }
 .modal-box {
-  @apply overflow-visible shadow-none p-0 min-w-fit max-w-none;
+  @apply overflow-visible shadow-none p-0 min-w-fit bg-transparent max-w-7xl w-fit;
 }
 .overlay-modal {
   background: rgb(25 25 25 / 60%);

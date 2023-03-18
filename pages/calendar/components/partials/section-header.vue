@@ -6,7 +6,7 @@
         }"
     >
         <slot name="title">
-            <h1 class="text-2xl">{{ title }}</h1>
+            <h1 class="text-xl">{{ title }}</h1>
         </slot>
         <div class="mt-1 flex gap-4 items-center">
             <slot name="subtitle">
