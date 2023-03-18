@@ -18,6 +18,10 @@
                     <ArrowIcon class="w-[20px] h-auto my-auto" />
                 </span>
             </div>
+            <CalendarUserDropdown
+                :isParent="true"
+                :calendarViewOptions="calendarViewOptions"
+            />
         </div>
         <div
             class="absolute w-[18%] h-[50px] top-[10px] right-0 hidden lg:block"
@@ -53,6 +57,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import "@vuepic/vue-datepicker/dist/main.css";
 // import { calendarEvents as events } from "../helpers/calendar-events";
 import CalendarEvent from "./partials/calendar-event.vue";
+import CalendarUserDropdown from "./calendar-user-dropdown.vue";
 import { UserIcon, ArrowIcon } from "~~/components/icons";
 
 const calenderView = ref("timeGridWeek");
@@ -64,6 +69,7 @@ const props = defineProps({
         default: [],
     },
     filterOptions: Object,
+    calendarViewOptions: Array,
 });
 
 /** empty node on calendar click handler */

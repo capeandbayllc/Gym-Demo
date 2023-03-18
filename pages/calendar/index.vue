@@ -74,6 +74,7 @@
                 <GrCalendar
                     :events="getFormattedEvents"
                     :filterOptions="filterOptions"
+                    :calendarViewOptions="calendarViewOptions"
                     @clickEventNode="handleCalendarEvent"
                     @clickEmptyNode="handleAddNew"
                     v-if="getFormattedEvents.length || events.length"
@@ -177,6 +178,51 @@ const filterOptions = ref({
         selected: [],
     },
 });
+
+const calendarViewOptions = ref([
+    {
+        name: "Club",
+        list: [
+            { name: "Club #1" },
+            { name: "Club #2" },
+            { name: "Club #3" },
+            { name: "Club #4" },
+            { name: "Club #5" },
+        ],
+    },
+    {
+        name: "Employees",
+        children: [
+            {
+                name: "Trainers",
+                list: [
+                    { name: "Jeff" },
+                    { name: "Sam" },
+                    { name: "Alex" },
+                    { name: "Ruth" },
+                ],
+            },
+            {
+                name: "Staff",
+                list: [
+                    { name: "Not Jeff" },
+                    { name: "Not Sam" },
+                    { name: "Not Alex" },
+                    { name: "Not Ruth" },
+                ],
+            },
+            {
+                name: "Management",
+                list: [
+                    { name: "Some Other Jeff" },
+                    { name: "Some Other Sam" },
+                    { name: "Some Other Alex" },
+                    { name: "Some Other Ruth" },
+                ],
+            },
+        ],
+    },
+]);
 
 const eventTypes = ref([]);
 const employees = ref([]);
