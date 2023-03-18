@@ -230,7 +230,6 @@ const closeInfoModal =()=>{
 const dropdownInfo = ref(false);
 
 const showDropdownInfo = ()=>{
-    console.log('hello')
     dropdownInfo.value = true;
 }
 

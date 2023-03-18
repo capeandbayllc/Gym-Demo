@@ -63,9 +63,7 @@ const columns = [
 const membersData = ref([]);
 const types = ["platinum", "gold", "silver", "bronze"];
 request(member.query.browse).then(({ data }) => {
-    console.clear()
     data.data.members.data.forEach((member) => {
-        console.log(member)
         membersData.value.push(
             Object.assign(
                 {},
