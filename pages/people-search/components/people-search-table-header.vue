@@ -1,5 +1,5 @@
 <template>
-    <div class="border-b-[4px] border-primary mb-[15px] pb-[15px] px-[20px]">
+    <div class="border-b-[4px] border-primary text-secondary mb-[15px] pb-[15px] px-[20px]">
         <div class="flex justify-start">
             <div
                 v-for="(column, ndx) in columns"
