@@ -1,6 +1,6 @@
 <template>
   <div
-    class="page-people-search-center-container bg-gradient-to-b from-[#031222]/75 to-black"
+    class="page-people-search-center-container bg-gradient-to-b from-[#031222]/75 to-black mt-8"
   >
     <div>
       <input

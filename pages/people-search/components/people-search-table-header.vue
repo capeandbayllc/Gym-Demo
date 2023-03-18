@@ -1,5 +1,5 @@
 <template>
-  <div class="border-b-4 border-secondary mb-4 px-4">
+  <div class="border-b-4 border-secondary mb-4 px-4 pb-4">
     <div
       class="grid grid-cols-[repeat(2,_14%),repeat(2,_1fr),_repeat(2,_12%),_7%] items-center pr-4"
     >
