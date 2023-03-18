@@ -42,10 +42,6 @@
 import ChartContent from "./chart-content.vue";
 import EditSalesFunnelModal from "./edit-sales-funnel/index.vue";
 import EngageCallList from "./engage-call-list.vue";
-// Calls attempted changed from 25: 16% to 200:16%.
-// Calls completed changed to 78:34%.
-// Scheduled appts changed to 32:34%.
-// Appointments Set changed to 22:30%.
 
 const data = [
   {
