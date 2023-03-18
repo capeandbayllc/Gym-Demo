@@ -13,12 +13,10 @@
                         >
                         <span class="h-2 w-2 bg-white rounded-full"></span>
                         <span>
-                            {{ parseHour(event?.start) }}:{{
-                                parseMinutes(event?.start)
-                            }}
-                            - {{ parseHour(event?.end) }}:{{
-                                parseMinutes(event?.end)
-                            }}
+                            <span
+                                >{{ getTimeString(event?.start) }} -
+                                {{ getTimeString(event?.end) }}</span
+                            >
                         </span>
                     </div>
                 </template>
@@ -93,6 +91,7 @@ import {
     months,
     parseHour,
     parseMinutes,
+    getTimeString,
 } from "../../helpers/calendar-events";
 import {
     CrossCircleIcon,

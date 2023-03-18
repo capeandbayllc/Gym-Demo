@@ -1,10 +1,12 @@
 <template>
     <li
-        class="grid py-2 px-2 grid-cols-[5rem_1fr_5rem] items-center w-full bg-[#18203A] rounded-2xl border-2 border-[#073A76]"
+        class="grid py-2 px-2 grid-cols-[5rem_1fr_5rem] items-center w-full bg-[#18203A] rounded-3xl border-2 border-[#073A76]"
     >
         <div class="p-4">
             <slot name="primary">
-                <span class="w-12 h-12 bg-white rounded-full block"></span>
+                <span
+                    class="w-12 h-12 bg-white rounded-2xl border-2 border-secondary block"
+                ></span>
             </slot>
         </div>
 
@@ -12,7 +14,7 @@
         <div class="flex flex-col text-sm gap-1">
             <slot name="secondary">
                 <span class="font-normal capitalize">{{ attendee.name }}</span>
-                <span class="flex gap-2 items-center">
+                <span class="flex gap-2 items-center text-[0.8rem]">
                     <span class="block w-4 fill-secondary">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +27,9 @@
                         </svg>
                     </span>
 
-                    {{ attendee.email }}
+                    <span class="text-[0.7rem] font-light my-auto">{{
+                        attendee.email
+                    }}</span>
                 </span>
 
                 <span class="flex gap-2 items-center">
@@ -40,7 +44,9 @@
                             />
                         </svg>
                     </span>
-                    {{ attendee.phone }}
+                    <span class="text-[0.7rem] font-light my-auto">{{
+                        attendee.phone
+                    }}</span>
                 </span>
             </slot>
         </div>

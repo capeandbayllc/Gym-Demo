@@ -4,7 +4,7 @@
         v-if="arg.view.type !== 'dayGridMonth'"
     >
         <div class="flex flex-col gap-1 justify-between">
-            <div class="!line-clamp-2">
+            <div class="!line-clamp-1">
                 {{ arg.event.title }}
             </div>
             <EventTime :start="arg.event.start" :end="arg.event.end" />

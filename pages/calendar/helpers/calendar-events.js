@@ -199,3 +199,64 @@ export const calendarEvents = [
         },
     },
 ];
+
+export const getDiffToEndDate = (endDate) => {
+    let prepend = null, append = null;
+
+    if (endDate) {
+        endDate = new Date(endDate);
+        const dateString = `${getDateString(endDate.getDate())} of ${months[endDate.getMonth()].slice(0, 1).toUpperCase()}${months[endDate.getMonth()].slice(1)}, ${endDate.getFullYear()}`;
+        const today = new Date();
+        const diff = endDate - today;
+        const diffDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+        if (diffDays < -2) {
+            prepend = 'finished on';
+            append = dateString;
+        } else if (diffDays === -2) {
+            prepend = 'finished';
+            append = 'day before yesterday';
+        } else if (diffDays === -1) {
+            prepend = 'finished';
+            append = 'yesterday';
+        } else if (diffDays === 0) {
+            prepend = diff > 0 ? 'finished' : 'finishes';
+            append = 'today';
+        } else if (diffDays === 1) {
+            prepend = 'finishes';
+            append = 'tomorrow';
+        } else if (diffDays === 2) {
+            prepend = 'finishes';
+            append = 'day after tomorrow';
+        } else {
+            prepend = 'finishes on';
+            append = dateString;
+        }
+    }
+
+    return { prepend, append };
+}
+
+export const getDateString = (date) => {
+    let dateStr = `${date}`;
+    if (dateStr[dateStr.length - 1] === '1' && (date < 10 || date > 19)) {
+        dateStr = `${dateStr}st`;
+    } else if (dateStr[dateStr.length - 1] === '2' && (date < 10 || date > 19)) {
+        dateStr = `${dateStr}nd`;
+    } else if (dateStr[dateStr.length - 1] === '3' && (date < 10 || date > 19)) {
+        dateStr = `${dateStr}rd`;
+    } else {
+        dateStr = `${dateStr}th`;
+    }
+
+    return dateStr;
+}
+
+export const getTimeString = (time) => {
+    time = new Date(time);
+    const hour = time.getHours();
+    const minute = time.getMinutes();
+    const ampm = hour < 12 ? 'AM' : 'PM';
+
+    return `${hour <= 12 ? hour : hour - 12}:${minute < 10 ? `0${minute}` : minute} ${ampm}`;
+}

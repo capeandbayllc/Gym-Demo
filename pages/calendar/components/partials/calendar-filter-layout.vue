@@ -3,7 +3,7 @@
         class="flex flex-col p-3 border-2 border-secondary rounded-xl bg-neutral font-light"
     >
         <div class="flex flex-row justify-between font-light">
-            <h3 class="text-[0.95rem] my-auto font-light tracking-wide">
+            <h3 class="text-[0.8rem] my-auto font-light tracking-wide">
                 {{ title }} ({{ options.length }})
             </h3>
             <div class="flex flex-row gap-2">
@@ -28,7 +28,7 @@
                 class="flex flex-row justify-between"
                 v-for="(option, optionIndex) in options"
             >
-                <div class="flex flex-row gap-3 w-full">
+                <div class="flex flex-row gap-1.5 w-full">
                     <input
                         type="checkbox"
                         :id="`filter-${option.id}`"
@@ -36,7 +36,7 @@
                         @change="selectOption(filter_id, option.id)"
                     />
                     <label
-                        class="my-auto text-[0.8rem] cursor-pointer w-[calc(100%-28px)] line-clamp-1"
+                        class="my-auto text-[0.7rem] cursor-pointer w-[calc(100%-28px)] line-clamp-1"
                         :for="`filter-${option.id}`"
                     >
                         {{ option.name }}

@@ -76,7 +76,7 @@ export const query = gql`
                 color
                 type
             }
-            calendarAttendees {
+            attendees {
                 id
                 entity_type
                 entity_data {
