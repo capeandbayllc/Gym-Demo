@@ -32,11 +32,25 @@
               >*</span
             >
           </div>
-          <input
-            :class="item.class"
-            class="w-full p-1 rounded-sm"
-            v-model="memberInfo[item.key]"
-          />
+          <template v-if="Array.isArray(item.options)">
+            <MultiSelect
+                v-model="memberInfo[item.key]"
+                :options="item.options"
+                is-single-select
+                placeholder="Select Gender"
+            />
+          </template>
+          <template v-else-if="item.type === 'date'">
+            <Datepicker class="custom-date" v-model="memberInfo[item.key]" auto-apply :enable-time-picker="false" dark/>
+          </template>
+          <template v-else>
+            <input
+                :type="item.type ?? 'text'"
+                :class="item.class"
+                class="w-full p-1 rounded-sm"
+                v-model="memberInfo[item.key]"
+            />
+          </template>
         </div>
       </div>
       <div class="profile-section">
@@ -56,42 +70,72 @@
           />
         </div>
       </div>
+      <div class="text-center mx-5 mb-2 rounded-md p-2">
+          <Button type="button" @click.stop="updateUser" :class="[{loading: isProcessing}, 'bg-black']">
+            Update Profile
+          </Button>
+      </div>
     </simple-card>
   </div>
 </template>
 <script setup>
+import member from "~/api/queries/member";
+import {request} from "~/api/utils/request";
+import user from "~/api/mutations/user";
+import {useMutation} from "@vue/apollo-composable";
+import Datepicker from '@vuepic/vue-datepicker';
+import MultiSelect from '~/components/multi-select/index.vue';
+
+const route = useRoute()
+const profileId = (route.query.id)
+
+request(member.query.get, { id: profileId }).then(({data}) => {
+  const member = data.data.member;
+
+  const homeLocation = member.homeLocation;
+  delete member.homeLocation;
+  console.log(member, homeLocation)
+
+  // @todo remove userId when mirage case is resolved.
+  memberInfo.value = {...member, ...{id: member.user_id}};
+  demographicsObj.value = {...homeLocation, ...member};
+});
+
 const isActiveMember = ref(false);
+const isProcessing = ref(false);
 const memberInfo = ref({});
+
 const memberInformation = [
   {
-    key: "first-name",
+    key: "first_name",
     label: "First Name",
     class: "secondary-input",
   },
   {
-    key: "middle-name",
+    key: "middle_name",
     label: "Middle Name",
     class: "secondary-input",
   },
   {
-    key: "last-name",
+    key: "last_name",
     label: "Last Name",
     class: "secondary-input",
   },
   {
-    key: "birthday",
+    key: "date_of_birth",
     label: "Date of Birth",
     class: "neutral-input",
+    type: 'date'
   },
   {
     key: "gender",
     label: "Gender",
     class: "neutral-input",
-  },
-  {
-    key: "social-security-number",
-    label: "Social Security Number",
-    class: "neutral-input",
+    options: [
+      'male',
+      'female',
+      'other'
+    ]
   },
   {
     key: "occupation",
@@ -108,7 +152,7 @@ const memberInformation = [
     label: "Barcode",
     class: "neutral-input",
   },
-  {
+  /*{
     key: "previous-agreement-number",
     label: "Previous Agreement Number",
     class: "neutral-input",
@@ -137,13 +181,13 @@ const memberInformation = [
     key: "member-misc-2",
     label: "Member Misc. 2",
     class: "neutral-input",
-  },
+  },*/
 ];
 
 const demographicsObj = ref({});
 const demographics = ref([
   {
-    key: "street-address",
+    key: "address1",
     label: "Street Address",
     class: "col-span-3 neutral-input",
   },
@@ -158,31 +202,31 @@ const demographics = ref([
     class: "neutral-input",
   },
   {
-    key: "zip-code",
+    key: "zip",
     label: "Zip Code",
     class: "neutral-input",
   },
   {
-    key: "email-address",
+    key: "email",
     label: "Email Address",
     class: "neutral-input",
   },
   {
-    key: "drivers-license",
-    label: "Driver's License",
-    class: "neutral-input",
-  },
-  {
-    key: "primary-phone",
+    key: "phone",
     label: "Primary Phone",
     class: "neutral-input",
   },
   {
-    key: "mobile-phone",
-    label: "Mobile Phone",
+    key: "drivers_license_number",
+    label: "Driver's License",
     class: "neutral-input",
   },
   {
+    key: "alternate_phone",
+    label: "Mobile Phone",
+    class: "neutral-input",
+  },
+  /*{
     key: "work-phone",
     label: "Work Phone",
     class: "neutral-input",
@@ -191,7 +235,7 @@ const demographics = ref([
     key: "fax-number",
     label: "Fax Number",
     class: "neutral-input",
-  },
+  },*/
   {
     key: "emergency-contact",
     label: "Emergency Contact",
@@ -202,12 +246,39 @@ const demographics = ref([
     label: "Emergency Contact Phone",
     class: "neutral-input",
   },
-  {
+  /*{
     key: "emergency-availability",
     label: "Emergency Availability",
     class: "neutral-input",
-  },
+  },*/
 ]);
+
+function updateUser() {
+  isProcessing.value = true;
+  const { mutate: updateCustomer } = useMutation(user.mutation.updateUser);
+  updateCustomer({
+    input: {
+      id: memberInfo.value.id,
+      first_name: memberInfo.value.first_name,
+      middle_name: memberInfo.value.middle_name,
+      last_name: memberInfo.value.last_name,
+      date_of_birth: memberInfo.value.date_of_birth,
+      drivers_license_number: demographicsObj.value.drivers_license_number,
+      occupation: memberInfo.value.occupation,
+      employer: memberInfo.value.employer,
+      barcode: memberInfo.value.barcode,
+      email: memberInfo.value.email,
+      gender: memberInfo.value.gender,
+      alternate_phone: demographicsObj.value.alternate_phone,
+      // location
+      address1: demographicsObj.value.address1,
+      address2: demographicsObj.value.address2,
+      city: demographicsObj.value.city,
+      state: demographicsObj.value.state,
+      phone: demographicsObj.value.phone,
+    },
+  }).finally(() => isProcessing.value = false);
+}
 </script>
 <style scoped>
 .profile-wrap {

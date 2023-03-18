@@ -1,18 +1,20 @@
 <template>
-  <div class="profile-info-container">
+  <div v-if="ProfileInfo" class="profile-info-container">
     <div
-      class="profile-avatar outline-4 hover:outline-[0.75rem] transition-all outline-yellow-400 duration-200 ease-in-out outline-none border-none"
+
+      class="profile-avatar outline-4 hover:outline-[0.75rem] transition-all outline-yellow-400 duration-200 ease-in-out outline-none border-none overflow-visible"
     >
       <div class="alert-badge" v-if="user.notifications.length > 0">
         {{ user.notifications.length }}
       </div>
-      <img :src="user.profile_photo_path" alt="profile image" />
+      <img :src="ProfileInfo.profile_photo_path" alt="profile image" />
     </div>
     <div v-if="row" class="profile-name">
       {{ row.first_name }} {{ row.last_name }}
     </div>
     <div v-else class="profile-name">
-      {{ user.first_name }} {{ user.last_name }}
+        {{ ProfileInfo.first_name }}
+      {{ ProfileInfo.last_name }}
     </div>
     <div class="pb-5">
       Member since 2022
@@ -109,7 +111,7 @@
 .profile-info-container {
   @apply flex flex-col flex-1 items-center text-lg text-center;
   .profile-avatar {
-    @apply relative rounded-full border-4 p-1.5 overflow-hidden;
+    @apply relative rounded-full border-4 p-1.5;
     img {
       @apply w-36 h-36 rounded-full;
     }
@@ -176,6 +178,7 @@ import {
   MessageIcon,
   EditIcon,
 } from "~~/components/icons";
+<<<<<<< HEAD
 const props = defineProps(
 
         {   
@@ -186,9 +189,16 @@ const props = defineProps(
         }
     )
 
+=======
+import  Member from "@/api/queries/member";
+import {request} from "~/api/utils/request";
+>>>>>>> 13d83afa8abcb41738d40982db790c4443480129
 
 const user = useState("auth");
 
+const route = useRoute()
+const profileId = (route.query.id)
+const ProfileInfo = ref(null);
 const guests = [
   {
     id: 1,
@@ -242,4 +252,16 @@ const engageOptions = [
     icon: MessageIcon,
   },
 ];
+
+getMember();
+
+function getMember() {
+  if (profileId) {
+    request(Member.query.get, { id: profileId }).then(({data}) => {
+      ProfileInfo.value = data.data.member;
+    });
+  } else {
+    ProfileInfo.value = user;
+  }
+}
 </script>
