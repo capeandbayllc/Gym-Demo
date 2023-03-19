@@ -2,23 +2,23 @@
     <tr class="history-table-row">
         <td>
             <div class="min-w-max">
-                {{ data.date }}:
-                <span class="text-secondary ml-0.5">{{ data.time }}</span>
+                {{ data?.date }}:
+                <span class="text-secondary ml-0.5">{{ data?.time }}</span>
             </div>
         </td>
         <td>
             <div class="min-w-max !justify-start">
-                <img class="w-8 h-9 mr-1 rounded-xl border-blue-700 border shadow-xl" :src="'/'+data.image" /> 
-                {{data.name}}
-                <img v-if="data.notification" class="pl-1" src="/bell-table-icon.svg">
+                <img class="w-8 h-9 mr-1 rounded-xl border-blue-700 border shadow-xl" :src="'/'+data?.image" />
+                {{data?.name}}
+                <img v-if="data?.notification" class="pl-1" src="/bell-table-icon.svg">
             </div>
         </td>
         <td>
-            <div><span class="border rounded-2xl px-4 py-1 text-xs whitespace-nowrap">{{data.event}}</span></div>
+            <div><span class="border rounded-2xl px-4 py-1 text-xs whitespace-nowrap">{{data?.event}}</span></div>
         </td>
         <td>
             <div>
-                <membership-btn :membership="data.membership" class="w-28"/>
+                <membership-btn :membership="data?.membership" class="w-28"/>
             </div>
         </td>
        <!--  <td>
@@ -43,7 +43,7 @@
                     >View</Button
                 >
             </div>
-        </td> 
+        </td>
     </tr>
 </template>
 <style scoped>

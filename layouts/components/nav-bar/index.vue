@@ -1,7 +1,7 @@
 <template>
     <div
         class="nav-bar-container"
-        :class="{ 'mt-11': windowWidth > 1250 }"
+        :class="{ 'mt-[3.25rem]': windowWidth > 1250 }"
         v-if="navItems.length > 0"
     >
         <div
@@ -31,7 +31,7 @@
     @apply bg-secondary h-8 cursor-pointer;
 }
 .nav-bar-items {
-    @apply border border-secondary bg-base-300;
+    @apply border border-secondary !bg-[#191919]/[0.8] border-l-0 rounded-r-xl;
 }
 </style>
 <script setup>
@@ -96,14 +96,8 @@ const navList = [
                 icon: FavoriteCircleIcon,
             },
             {
-                label: "Point Of Sale",
-                url: null,
-                icon: PosIcon,
-                modalComponent: PosWindow,
-            },
-            {
                 label: "Fitness",
-                url: "/#",
+                url: "/fitness",
                 icon: FitnessIcon,
             },
             {
@@ -209,6 +203,11 @@ const navList = [
                 label: "Recruiting",
                 icon: RecruitingIcon,
                 url: "/recruitment",
+            },
+            {
+              label: "Point Of Sale",
+              url: "/pos",
+              icon: PosIcon,
             },
         ],
     },
@@ -540,13 +539,13 @@ const navList = [
             },
             {
                 label: "Point Of Sale",
-                url: null,
+                url: "/pos",
                 icon: PosIcon,
                 modalComponent: PosWindow,
             },
             {
                 label: "Fitness",
-                url: "/#",
+                url: "/fitness",
                 icon: FitnessIcon,
             },
             {
@@ -591,12 +590,12 @@ const navList = [
             },
             {
                 label: "Point Of Sale",
-                url: "/#",
+                url: "/pos",
                 icon: PosIcon,
             },
             {
                 label: "Fitness",
-                url: "/#",
+                url: "/fitness",
                 icon: FitnessIcon,
             },
             {

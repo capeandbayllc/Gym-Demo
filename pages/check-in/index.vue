@@ -9,6 +9,7 @@
           <div class="flex -md:block">
             <event-card class="mr-2" />
             <profile-card
+              :key="refreshIndex"
               :active-option="detailView"
               @select-option="detailView = $event"
               @toggle-detail="toggleDetailSection"
@@ -26,11 +27,11 @@
             </p>
             <div class="account-box" v-if="isDetailOpened">
               <ul>
-                <ii v-for="{ key, icon } in accountOptions" :key="key">
+                <li v-for="{ key, icon } in accountOptions" :key="key">
                   <button @click="changeDetailView(key)">
                     <component :is="icon" />
                   </button>
-                </ii>
+                </li>
               </ul>
               <UserInfo v-if="detailView == 'memberinfo'" />
               <Setting v-if="detailView == 'setting'" />
@@ -51,6 +52,7 @@
         <component
           v-if="detailView === key"
           @close="detailView = null"
+          @on-profile-update="refreshIndex++"
           :key="key"
           :is="component"
         />
@@ -111,9 +113,13 @@ import UserInfo from "./user-info/index.vue";
 import Setting from "./setting/index.vue";
 import Engage from "./engage/index.vue";
 const option = ref(null);
+const route = useRoute();
+const profileId = (route.query.id)
+
 
 const appLayout = useLayoutElement();
 const checkInContainer = ref();
+const refreshIndex = ref(0);
 
 watch(option, () => {
   const scrollTO = checkInContainer.value.offsetHeight + 100;
@@ -124,6 +130,20 @@ watch(option, () => {
       behavior: "smooth",
     });
   }, 500);
+});
+
+onMounted(() => {
+  if(profileId){
+
+  detailView.value = 'profile';
+    setTimeout(() => {
+      window.scroll({
+        top: 600,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }, 0);
+  }
 });
 
 const showEngageModal = () => {
