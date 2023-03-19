@@ -50,7 +50,7 @@
             @apply flex flex-col border border-white rounded-lg mt-5 p-4 text-xs mb-4 h-full;
         }
         .lead-sources-list {
-            @apply mt-4 min-h-[75%] overflow-y-auto;
+            @apply mt-4 min-h-[72%] overflow-y-auto;
         }
     }
     .sources-item {

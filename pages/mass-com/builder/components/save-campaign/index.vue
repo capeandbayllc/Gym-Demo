@@ -71,7 +71,7 @@
 .save-campaign-container {
     @apply flex flex-col flex-auto justify-center max-w-full;
     .campaign-day-block {
-        @apply flex flex-col border border-white rounded-lg p-4 text-xs self-center;
+        @apply flex flex-col border border-white rounded-lg p-4 text-xs self-center w-full;
     }
     .campaign-day-list {
         @apply flex flex-row mt-3 overflow-y-auto;
