@@ -169,21 +169,21 @@
 import MembershipBtn from "~~/components/buttons/membership-btn.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import OfferUpBtn from "~~/components/buttons/offer-up-btn.vue";
-import gql from "graphql-tag";
-import { useQuery } from "@vue/apollo-composable";
 import {
     CallIcon,
     EmailIcon,
     MessageIcon,
     EditIcon,
 } from "~~/components/icons";
-import Member from "@/api/queries/member";
 import { request } from "~/api/utils/request";
+import member from "@/api/queries/member";
+import lead from "~/api/queries/lead";
 
 const user = useState("auth");
 
 const route = useRoute();
 const profileId = route.query.id;
+const isLeadView = route.query.type === 'lead';
 const ProfileInfo = ref(null);
 const guests = [
     {
@@ -243,8 +243,8 @@ getMember();
 
 function getMember() {
     if (profileId) {
-        request(Member.query.get, { id: profileId }).then(({ data }) => {
-            ProfileInfo.value = data.data.member;
+        request((isLeadView ? lead : member).query.get, { id: profileId }).then(({ data }) => {
+          ProfileInfo.value = data.data[isLeadView ? 'lead' : 'member'];
         });
     } else {
         ProfileInfo.value = user.value;

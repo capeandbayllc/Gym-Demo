@@ -48,6 +48,14 @@ type AudienceTargets {
   membership_type_id: [ID]
 }
 
+type CalendarAttendee {
+  id: ID
+  entity_type: String
+  invitation_status: String
+  entity_id: String
+  entity: User
+}
+
 type CalendarEvent {
   id: ID!
   title: String!
@@ -64,10 +72,10 @@ type CalendarEvent {
   event_completion: DateTime
   color: String
   editable: Int
-  user_attendees: [EventAttendee]
-  lead_attendees: [EventAttendee]
-  member_attendees: [EventAttendee]
-  attendees: [EventAttendee]
+  user_attendees: [CalendarAttendee]
+  lead_attendees: [CalendarAttendee]
+  member_attendees: [CalendarAttendee]
+  attendees: [CalendarAttendee]
   location_id: String
   call_task: Int
   im_attending: Boolean
@@ -469,7 +477,7 @@ type EndUser {
   owner_user_id: String
   primary_phone: String
   alternate_phone: String
-  gender: Boolean
+  gender: String
   date_of_birth: DateTime
   profile_photo_path: String
   interaction_count: InteractionCount!
@@ -517,13 +525,6 @@ type Enum {
   label: String!
   value: String!
   description: String
-}
-
-type EventAttendee {
-  id: ID
-  entity_type: String
-  invitation_status: String
-  entity_data: AttendeeDetailData
 }
 
 type File {
@@ -590,13 +591,14 @@ type Lead {
   middle_name: String
   last_name: String
   email: String!
+  user_id: ID
   created_at: DateTime!
   updated_at: DateTime!
   lead_owners: [TeamUser]
   owner_user_id: String
   primary_phone: String
   alternate_phone: String
-  gender: Boolean
+  gender: String
   date_of_birth: DateTime
   profile_photo_path: String
   interaction_count: InteractionCount!

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">GymRevenue Sales Demo</string>
+    <string name="title_activity_main">GymRevenue Sales Demo</string>
+    <string name="package_name">com.gymrevenue.demo</string>
+    <string name="custom_url_scheme">com.gymrevenue.demo</string>
+</resources>

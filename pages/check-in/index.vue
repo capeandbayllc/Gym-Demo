@@ -115,6 +115,7 @@ import Engage from "./engage/index.vue";
 const option = ref(null);
 const route = useRoute();
 const profileId = (route.query.id)
+const isPreview = route.query.preview;
 
 
 const appLayout = useLayoutElement();
@@ -133,9 +134,9 @@ watch(option, () => {
 });
 
 onMounted(() => {
-  if(profileId){
+  if (profileId && !isPreview) {
 
-  detailView.value = 'profile';
+    detailView.value = 'profile';
     setTimeout(() => {
       window.scroll({
         top: 600,
