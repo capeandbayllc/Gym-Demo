@@ -432,6 +432,8 @@ library.add(far, fas);
 const selectedConversation = ref(null);
 const showDropDown = ref(false);
 
+const me = useMe();
+
 const members = ref([]);
 const chatItems = [
   {
@@ -474,20 +476,54 @@ request(member.query.browse, { first: 50 }).then(({ data }) => {
   });
 });
 
-const conversations = computed(() =>
-  members.value.slice(0, 5).map((m) => ({
-    ...m,
-    messages: test_message_list.map((m) =>
-      m.from ? m : { ...m, from: selectedConversation.value }
-    ),
-  }))
-);
 const offlineMembers = computed(() =>
   pluckRandom(members.value.filter((m) => !m.active))
 );
 const onlineMembers = computed(() =>
   pluckRandom(members.value.filter((m) => m.active))
 );
+
+const conversations = computed(() => members.value.slice(0, 5));
+
+const test_message_list = [
+  {
+    id: 1,
+    from: me.value,
+    message: "Hey...\n\nDo I need to bring a mat to yoga class tonight?",
+    created_at: "4:40 PM",
+  },
+  {
+    id: 3,
+    from: me.value,
+    message:
+      "Also, I have a friend Wanda that would like to join. Can she come too?",
+    created_at: "4:46 PM",
+  },
+  {
+    id: 4,
+    from: null,
+    message:
+      "Hi George, We have mats available but you can bring your own. Yes, Wanda can attend.  There are a few spots available.",
+    created_at: "4:50 PM",
+  },
+];
+
+const conversationMessages = ref({});
+
+watch(conversations, () => {
+  conversations.value.forEach((c) => {
+    conversationMessages.value[c.id] = test_message_list.map((m) =>
+      m.from ? m : { ...m, from: c }
+    );
+  });
+  conversationMessages.value = { ...conversationMessages.value };
+});
+
+const selectedChatMessages = computed(() => {
+  if (selectedConversation.value?.id) {
+    return conversationMessages.value[selectedConversation.value.id];
+  }
+});
 
 function pluckRandom(list, limit = 3) {
   return list.sort(() => Math.random() - Math.random()).slice(0, limit);
@@ -514,45 +550,10 @@ function hideName(e) {
   floatingTooltip("");
 }
 
-const me = useMe();
-
-const test_message_list = [
-  {
-    id: 1,
-    from: me.value,
-    message: "Hey...\n\nDo I need to bring a mat to yoga class tonight?",
-    created_at: "4:40 PM",
-  },
-  {
-    id: 3,
-    from: me.value,
-    message:
-      "Also, I have a friend Wanda that would like to join. Can she come too?",
-    created_at: "4:46 PM",
-  },
-  {
-    id: 4,
-    from: null,
-    message:
-      "Hi George, We have mats available but you can bring your own. Yes, Wanda can attend.  There are a few spots available.",
-    created_at: "4:50 PM",
-  },
-];
-
-const selectedChatMessages = computed(
-  () =>
-    selectedConversation &&
-    test_message_list.map((m) =>
-      m.from ? m : { ...m, from: selectedConversation.value }
-    )
-);
-
 const newMessage = ref();
 
 const sendMessage = () => {
-  console.info("send new message :", newMessage.value);
-  console.info("view:", selectedConversation.value);
-  selectedChatMessages.value.push({
+  conversationMessages.value[selectedConversation.value.id].push({
     id: selectedChatMessages.value.length + 1,
     from: me.value,
     message: newMessage.value,
@@ -562,7 +563,7 @@ const sendMessage = () => {
       hour12: true,
     }),
   });
-  selectedChatMessages.value = selectedChatMessages.value;
+  conversationMessages.value = conversationMessages.value;
   newMessage.value = null;
 };
 </script>
