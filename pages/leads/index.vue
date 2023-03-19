@@ -97,8 +97,6 @@ import PersonalInformation from '~/pages/check-in/user-info/personal-information
 import Interests from '~/pages/check-in/profile-card/add-member/interests.vue'
 import EmergencyInfo from '~/pages/check-in/profile-card/add-member/emergency-info.vue'
 import BroughtToday from '~/pages/check-in/profile-card/add-member/brought-today.vue';
-import gql from "graphql-tag";
-import {useQuery} from "@vue/apollo-composable";
 import {request} from "~/api/utils/request";
 import lead from "~/api/queries/lead";
 

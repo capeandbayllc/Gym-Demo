@@ -14,7 +14,7 @@
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="full"
+        width="100%"
         height="48"
         viewBox="0 0 482 48"
       >
@@ -117,8 +117,9 @@
             >
           </div>
 
+          <!-- filter does not work on safari -->
           <button
-            id="submitbtn"
+            id="submitbtn_disabled"
             class="w-full mb-8 relative z-10"
             type="submit"
           >
@@ -225,7 +226,10 @@ const authCookie = useCookie("auth");
 // TODO: would be better as a server route, but we would have to use Amplifiy adapter
 const handleClickLogin = async () => {
   error.value = null;
-  const authenticated = await authenticate(username.value, password.value);
+  const authenticated = await authenticate(
+    username.value.toLowerCase(),
+    password.value
+  );
   if (!authenticated) {
     error.value = "Credentials not found.";
     return;
@@ -426,6 +430,8 @@ button[type="submit"] {
   @apply bg-black py-4 capitalize rounded-lg border border-white transition-colors duration-300;
   @apply hover:bg-secondary hover:border-secondary;
   -webkit-transform: translate3d(0, 0, 0);
+  box-shadow: 0 0px 40px rgba(255, 255, 255, 0.2);
+  /**  box shadow can be removed if we fix the svg filter safari issue */
 }
 
 .pass-visible {

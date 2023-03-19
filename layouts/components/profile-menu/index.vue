@@ -17,7 +17,7 @@
               <div v-if="child.label=='Help'" @click="handleClickActions">
                 {{ child.label }}
               </div>
-              <div v-else>
+              <div v-else @click="handleProfileMenuNavigate(child.url)">
                 {{ child.label }}
               </div>
             </li>
@@ -34,6 +34,7 @@
             <help-modal />
         </daisy-modal>
 </template>
+
 <style scoped>
 .profile-menu-container {
   @apply z-[22] absolute right-4 p-3 text-sm border-8 rounded-xl border-secondary;
@@ -69,9 +70,11 @@ const profileMenu = ref(null);
 const open = () => {
   profileMenu.value.open();
 };
+
 const close = () => {
   profileMenu.value.close();
 };
+
 const emit = defineEmits(["isProfileMenuOpen"]);
 const isProfileMenuOpenFn = (data) => {
   emit("isProfileMenuOpen", data);
@@ -87,6 +90,7 @@ const menu = [
       },
       {
         label: "Settings",
+        url: '/profile-setting',
       },
       {
         label: "User Management",
@@ -119,7 +123,13 @@ const handleClickLogout = () => {
   console.log("logout", document.cookie, authToken);
   navigateTo("/login");
 };
+
 const handleClickActions = () => {
   helpModal.value.open();
+};
+
+const handleProfileMenuNavigate = url => {
+  navigateTo(url);
+  close();
 };
 </script>
