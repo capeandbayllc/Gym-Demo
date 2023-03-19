@@ -12,10 +12,9 @@
                     <li v-for="item in category.items" :key="item.id" class="address-row">
                         <div class="w-[25%] flex">
                             <div class="flex items-center gap-2">
-                                <img class="rounded-lg h-12 w-12 object-cover bg-gray-300 border-2 border-blue-400" :src="item.photo" alt="{{ item.name }}">
+                                <img class="rounded-lg h-12 w-12 object-cover bg-gray-300 border-2 border-blue-400 hidden md:block" :src="item.photo" alt="{{ item.name }}">
                                 <label class="ml-4 font-medium">{{ item.name }}</label>
                             </div>
-                            <!--<label></label>-->
                         </div>
                         <div class="w-[25%] flex">
                             <label>{{ item.company }}</label>
@@ -51,7 +50,7 @@
     }
     .address-list{
         margin-top: 5px;
-        overflow-y: auto;
+        overflow: auto;
         max-height : 240px;
     }
     .address-list::-webkit-scrollbar{
