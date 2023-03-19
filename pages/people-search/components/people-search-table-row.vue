@@ -11,7 +11,10 @@
         />
         {{ data.segment }}
       </div>
-      <div class="flex items-center gap-2 px-4" :class="`w-[${columns[1].width}px]`">
+      <div
+        class="flex items-center gap-2 px-4"
+        :class="`w-[${columns[1].width}px]`"
+      >
         <AlertIcon class="mr-2 text-red-600" @click="openAlertModal" />
         <AlertIcon class="mr-2 text-yellow-500" @click="openAlertModal" />
         <span>2</span>
@@ -155,7 +158,7 @@
       :overlay="false"
       ref="viewNoteModal"
       id="viewNoteModal"
-      class="w-[100vw]"
+      class="!w-screen max-h-screen !h-screen"
       :closable="false"
     >
       <div
@@ -272,10 +275,6 @@ import {
   CrossIcon,
   EmailSquareIcon,
   SmsSquareIcon,
-  EmailSquareIcon,
-  CallSquareIcon,
-  CrossIcon,
-  ArrowIcon,
 } from "~~/components/icons";
 
 const props = defineProps({
