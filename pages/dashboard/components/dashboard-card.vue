@@ -1,5 +1,5 @@
 <template>
-    <simple-card>
+    <dashboard-simple-card>
         <template #title>
             <dashboard-card-title
                 :title-icon="titleIcon"
@@ -7,7 +7,7 @@
             />
         </template>
         <slot />
-    </simple-card>
+    </dashboard-simple-card>
 </template>
 <script setup>
 import DashboardCardTitle from "./dashboard-card-title.vue";

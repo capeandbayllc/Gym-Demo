@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import {DocumentNode} from "graphql/language";
-import {GraphQLObject} from "~/api/queries/GraphQLObject";
+import {GraphQLQueryInterface} from "~/api/queries/GraphQLQueryInterface";
 
 const GET_ALL_NOTIFICATIONS: DocumentNode = gql`
     query Notifications($user_id: String!, $page: Int, $first: Int) {
@@ -31,11 +31,10 @@ export interface NotificationQuery {
 }
 
 
-const notification: GraphQLObject<NotificationQuery, object> = {
+const notification: GraphQLQueryInterface<NotificationQuery> = {
     query: {
         browse: GET_ALL_NOTIFICATIONS,
     },
-    mutation: {}
 }
 
 export default notification;

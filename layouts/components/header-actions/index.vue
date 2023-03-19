@@ -1,52 +1,61 @@
 <template>
-    <div class="header-actions">
-        <!-- <Button outline size="sm" class="hover:text-secondary"><pos-icon />POS</Button>
+  <div class="header-actions">
+    <!-- <Button outline size="sm" class="hover:text-secondary"><pos-icon />POS</Button>
 		<Button outline size="sm" class="hover:text-secondary"
 			@click="$emit('show-people-search')"
 		>
 			<people-icon />People
 		</Button> -->
     <div @mouseover="showFocus" @mouseleave="hideFocus">
-      <input
+      <FormAppInput
+        ref="globalSearchInput"
+        placeholder="Search"
+        v-model="globalSearch"
+        @click="$emit('show-global-search')"
+      />
+      <!-- <input
         ref="globalSearchInput"
         type="text"
         placeholder="Search"
         class="input global-search-input w-80 -xl:w-40 -lg:w-80 -md:w-40 -lg:mr-0 mr-9 bg-base-content rounded text-black text-lg h-9"
         @click="$emit('show-global-search')"
-      />
+      /> -->
     </div>
     <div class="relative">
       <person-add-icon @click="showUserMenu" />
       <user-add-menu ref="userMenu" />
     </div>
     <div class="alert-container mt-1">
-      <alarm-btn :count="user.notifications.length" @click="$emit('show-alert-modal')" />
+      <alarm-btn
+        :count="user.notifications.length"
+        @click="$emit('show-alert-modal')"
+      />
       <alert-list :list="user.notifications" class="alert-list" />
     </div>
     <!-- <div class="setting-icon">
 			<setting-icon />
 		</div> -->
-        <!--    <div class="relative z-10">-->
-        <!--      <question-round-icon @click="$emit('show-help')" />-->
-        <!--    </div>-->
-        <div class="leader-board-container relative z-10">
-            <button class="w-6">
-                <TrophyIcon
-                    @mouseover="openPop"
-                    @click="$router.push('/leaderboard')"
-                />
-            </button>
-            <LeaderPop
-                v-if="showLeaderPop"
-                @close="toggle"
-                @show-leader-board="showLeaderBoard"
-                class="leader-pop"
-            />
-        </div>
-        <div class="!ml-[-40px]">
-            <account-btn @click="$emit('show-profile-menu')" />
-        </div>
+    <!--    <div class="relative z-10">-->
+    <!--      <question-round-icon @click="$emit('show-help')" />-->
+    <!--    </div>-->
+    <div class="leader-board-container relative z-10">
+      <button class="w-6">
+        <TrophyIcon
+          @mouseover="openLeaderboardPopover"
+          @click="$router.push('/leaderboard')"
+        />
+      </button>
+      <LeaderPop
+        v-if="isLeaderboardPopoverVisible"
+        @close="closeLeaderboardPopover"
+        @show-leader-board="showLeaderBoard"
+        class="leader-pop"
+      />
     </div>
+    <div class="!ml-[-40px]">
+      <account-btn @click="$emit('show-profile-menu')" />
+    </div>
+  </div>
 </template>
 <style>
 .alert-container:hover svg {
@@ -65,7 +74,7 @@
 /*  @apply rotate-12;*/
 /*}*/
 .leader-board-container:hover .notification {
-    @apply -right-2 left-auto z-10 ease-linear;
+  @apply -right-2 left-auto z-10 ease-linear;
 }
 </style>
 <style scoped>
@@ -86,7 +95,7 @@
 }
 
 .leader-board-container:hover .leader-pop {
-    @apply block;
+  @apply block;
 }
 .alert-container {
   @apply relative -sm:!ml-4;
@@ -96,18 +105,16 @@
   }
 }
 .leader-board-container {
-    @apply relative -sm:!ml-4;
-    .leader-pop {
-        @apply block;
-        right: -8rem;
-    }
+  @apply relative -sm:!ml-4;
+  .leader-pop {
+    @apply block;
+    right: -8rem;
+  }
 }
 </style>
 <script setup>
 import { ref } from "vue";
-import {
-  PersonAddIcon,
-} from "@/components/icons";
+import { PersonAddIcon } from "@/components/icons";
 import AlarmBtn from "./alarm-btn.vue";
 import AccountBtn from "./account-btn.vue";
 import AlertList from "./alert-list.vue";
@@ -118,26 +125,27 @@ import TrophyIcon from "~/components/icons/trophy.vue";
 const userMenu = ref(null);
 const globalSearchInput = ref("");
 const showFocus = () => {
-  globalSearchInput.value.style = "";
-  globalSearchInput.value.focus();
+  // globalSearchInput.value.style = "";
+  // globalSearchInput.value?.focus();
 };
+
+const globalSearch = ref("");
 
 const emit = defineEmits(["show-leader-board"]);
 const showLeaderBoard = () => {
-    emit("show-leader-board");
+  emit("show-leader-board");
 };
 const hideFocus = () => {
-  globalSearchInput.value.blur();
+  // globalSearchInput.value.blur();
 };
-const showLeaderPop = ref(false);
-const toggle = () => {
-    showLeaderPop.value = !showLeaderPop.value;
-    console.log("toggle");
+const isLeaderboardPopoverVisible = ref(false);
+const openLeaderboardPopover = () => {
+  isLeaderboardPopoverVisible.value = true;
 };
-const openPop = () => {
-    showLeaderPop.value = true;
+const closeLeaderboardPopover = () => {
+  isLeaderboardPopoverVisible.value = false;
 };
 
 const showUserMenu = () => userMenu.value.open();
-const user = useState('auth');
+const user = useState("auth");
 </script>
