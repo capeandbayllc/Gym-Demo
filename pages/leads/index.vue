@@ -97,49 +97,21 @@ import PersonalInformation from '~/pages/check-in/user-info/personal-information
 import Interests from '~/pages/check-in/profile-card/add-member/interests.vue'
 import EmergencyInfo from '~/pages/check-in/profile-card/add-member/emergency-info.vue'
 import BroughtToday from '~/pages/check-in/profile-card/add-member/brought-today.vue';
-import gql from "graphql-tag";
-import {useQuery} from "@vue/apollo-composable";
+import {request} from "~/api/utils/request";
+import lead from "~/api/queries/lead";
 
 const isSearchEnable = ref(false)
 const addMemberPopUp = ref(null)
 const addMemberScreens = ref([Welcome,JoinTour,Infomrmation,PersonalInformation,Interests,EmergencyInfo,BroughtToday]);
 const addMemberScreenIndex = ref(0);
-
-
-const query = gql`
-  query AllLeads {
-    leads(first: 10) {
-      data {
-        id
-        first_name
-        last_name
-        locations {
-          name
-        }
-        opportunity
-        created_at
-      }
-      paginatorInfo {
-        count
-        perPage
-        total
-      }
-    }
-  }
-`;
-
-const { result } = useQuery(query);
 const leads = ref([]);
-
-watch(result, (nv, ov) => {
-  if (result) {
-    console.log("result", result);
-    leads.value = result.value.leads.data;
-  }
-});
 
 const leadTypes = ["app_referal", "grand_opening", "snapshot", "free_trial", "streaming_preview"];
 const opportunity = ["error", "warning", "accent"];
+
+request(lead.query.browse).then(({data}) => {
+  leads.value = data.data.leads.data;
+})
 const getRandomType = () => {
   return leadTypes[Math.floor(Math.random() * leadTypes.length)];
 };
