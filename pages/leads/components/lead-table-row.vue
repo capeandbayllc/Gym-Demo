@@ -1,12 +1,12 @@
 <template>
   <tr class="people-lead-tbl-row">
-    <td>{{ data.created }}</td>
+    <td>{{ data.created_at }}</td>
     <td>
       <div :class="'opportunity-' + data.opportunity"></div>
     </td>
     <td>{{ data.first_name }}</td>
     <td>{{ data.last_name }}</td>
-    <td>{{ data.location }}</td>
+    <td>{{ data.locations.name }}</td>
     <td>
       <div :class="'type-' + data.type">
         {{ data.type }}
