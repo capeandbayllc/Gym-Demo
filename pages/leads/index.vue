@@ -44,7 +44,7 @@
                 <div>
                     <data-table
                         :columns="columns"
-                        :data="leads"
+                        :data="leads_display"
                         :row-component="LeadTableRow"
                         class="h-96 overflow-y-auto"
                     />
@@ -108,7 +108,7 @@ const addMemberScreenIndex = ref(0);
 
 const query = gql`
   query AllLeads {
-    leads(first: 100) {
+    leads(first: 10) {
       data {
         id
         first_name
@@ -129,7 +129,37 @@ const query = gql`
 `;
 
 const { result } = useQuery(query);
-console.log(result);
+const leads = ref([]);
+
+watch(result, (nv, ov) => {
+  if (result) {
+    console.log("result", result);
+    leads.value = result.value.leads.data;
+  }
+});
+
+const leadTypes = ["app_referal", "grand_opening", "snapshot", "free_trial", "streaming_preview"];
+const opportunity = ["error", "warning", "accent"];
+const getRandomType = () => {
+  return leadTypes[Math.floor(Math.random() * leadTypes.length)];
+};
+const getRandomOpportunity = () => {
+  return opportunity[Math.floor(Math.random() * opportunity.length)];
+};
+
+const leads_display = computed(() => {
+  return leads.value.map((item) => {
+    return {
+      ...item,
+      type: getRandomType(),
+      opportunity: getRandomOpportunity(),
+      status: 'available',
+      updated_at: new Date(item.updated_at).toLocaleDateString().replaceAll('/', '.'),
+      created_at: new Date(item.created_at).toLocaleDateString().replaceAll('/', '.'),
+
+    };
+  });
+});
 
 const openAddMemberPopUp =()=>{
   addMemberPopUp.value.open()
@@ -220,66 +250,6 @@ const columns = [
         class: '',
     },
 ];
-const leads = [
-    {
-        id: 1,
-        created: '5/5 2002, 12:24:44PM',
-        opportunity: 'accent',
-        first_name: 'Caleb',
-        last_name: 'Sauer',
-        location: 'Stencil 5',
-        type: 'app_referal',
-        status: 'available',
-    },
-    {
-        id: 2,
-        created: '5/5 2002, 12:24:44PM',
-        opportunity: 'accent',
-        first_name: 'Caleb',
-        last_name: 'Sauer',
-        location: 'Stencil 5',
-        type: 'grand_opening',
-        status: 'available',
-    },
-    {
-        id: 3,
-        created: '5/5 2002, 12:24:44PM',
-        opportunity: 'error',
-        first_name: 'Nathan',
-        last_name: 'Sipes',
-        location: 'Stencil 5',
-        type: 'snapshot',
-        status: 'available',
-    },
-    {
-        id: 4,
-        created: '5/5 2002, 12:24:44PM',
-        opportunity: 'warning',
-        first_name: 'Nathan',
-        last_name: 'Sipes',
-        location: 'Stencil 5',
-        type: 'grand_opening',
-        status: 'available',
-    },
-    {
-        id: 5,
-        created: '5/5 2002, 12:24:44PM',
-        opportunity: 'warning',
-        first_name: 'Nathan',
-        last_name: 'Sipes',
-        location: 'Stencil 5',
-        type: 'free_trial',
-        status: 'available',
-    },
-    {
-        id: 6,
-        created: '5/5 2002, 12:24:44PM',
-        opportunity: 'warning',
-        first_name: 'Nathan',
-        last_name: 'Sipes',
-        location: 'Stencil 5',
-        type: 'streaming_preview',
-        status: 'available',
-    },
-];
+
+
 </script>
