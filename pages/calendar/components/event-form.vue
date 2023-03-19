@@ -174,7 +174,7 @@ const props = defineProps({
 
 const emit = defineEmits(["createEvent", "cancel"]);
 
-const btnChoices = ["event", "task", "service", "prospect"];
+const btnChoices = ["event", "task", "service", "class"];
 const form = ref({
     eventType: "event",
     title: null,
