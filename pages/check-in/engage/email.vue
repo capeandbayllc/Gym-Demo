@@ -47,26 +47,24 @@
             :items="emailType"
             value=""
             :label="'Email type'"
-            class=""
+            class="max-w-[15rem]"
           >
           </select-box>
-          <div class="">
+          <div class="flex items-center gap-2">
             <button
               type="button"
-              class="btn w-max rounded btn-sm font-medium ml-32 mr-3"
+              class="rounded btn-sm font-medium"
               error
               outline
               @click="$emit('close')"
             >
               Cancel
             </button>
-            <button
-              class="btn w-max rounded text-base-content btn-sm font-medium mr-3"
-            >
+            <button class="rounded text-base-content btn-sm font-medium">
               Save
             </button>
             <button
-              class="btn w-max bg-success border-success rounded text-base-content btn-sm font-medium"
+              class="bg-success border-success rounded text-base-content btn-sm font-medium"
               @click="$emit('email-now')"
             >
               Send Now
@@ -113,7 +111,7 @@ const emailType = [
 
 <style scoped>
 .email-modal-container {
-  @apply pl-8 pr-8 pt-8 pb-8 bg-neutral;
+  @apply pl-8 pr-8 pt-8 pb-8 bg-neutral min-w-[40rem] rounded-b-[19px];
   .card-title {
     @apply border-b pb-2 border-base-content/50;
   }
