@@ -5,7 +5,12 @@
                 <h2 class="flex flex-auto">Overall/Trends</h2>
                 <div class="flex gap-2 items-end pb-2">
                     <Button secondary size="xs">Drip Campaigns</Button>
-                    <Button outline size="xs" @click.stop="$router.push('/mass-com/scheduled')">Scheduled Campaigns</Button>
+                    <Button
+                        outline
+                        size="xs"
+                        @click.stop="$router.push('/mass-com/scheduled')"
+                        >Scheduled Campaigns</Button
+                    >
                 </div>
             </div>
             <div class="overall-trends">
@@ -29,7 +34,7 @@
     @apply py-4 w-full h-fit pr-5;
     .page-content {
         /* @apply px-32; */
-        @apply block border border-secondary bg-neutral rounded p-7;
+        @apply block border border-secondary bg-neutral p-7 rounded-3xl;
         h2 {
             @apply text-xl font-bold pt-6;
         }
@@ -43,12 +48,12 @@
 }
 </style>
 <script setup>
-import SalesShowRatio from '@/pages/components/sales-show-ratio/index.vue';
-import SalesDraftRelated from '@/pages/components/sales-draft-related/index.vue';
-import BuildCampaignCard from './components/build-campaign-card/index';
-import CampaignCard from './components/campaign-card/index.vue';
-import newMemberCampaigns from './components/new-member-campaigns.vue';
-import marketing from './components/marketing.vue';
+import SalesShowRatio from "@/pages/components/sales-show-ratio/index.vue";
+import SalesDraftRelated from "@/pages/components/sales-draft-related/index.vue";
+import BuildCampaignCard from "./components/build-campaign-card/index";
+import CampaignCard from "./components/campaign-card/index.vue";
+import newMemberCampaigns from "./components/new-member-campaigns.vue";
+import marketing from "./components/marketing.vue";
 /* import RecentCampaignDetails from './components/campaign-details/index.vue'; */
 
 const recentCampaign = {
@@ -57,12 +62,11 @@ const recentCampaign = {
     started: 44,
     in_progress: 43,
     completed: 88,
-    status: "in_progress"
+    status: "in_progress",
 };
 
 onMounted(async () => {
     await nextTick();
-    window.dispatchEvent(new Event('resize'))
+    window.dispatchEvent(new Event("resize"));
 });
-
 </script>
