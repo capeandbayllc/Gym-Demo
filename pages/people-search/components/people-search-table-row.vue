@@ -1,21 +1,25 @@
 <template>
   <div>
-    <div
-      class="people-lead-tbl-row mr-2 grid grid-cols-[repeat(2,_14%),repeat(2,_1fr),_repeat(2,_12%),_7%] items-center"
-    >
-      <div class="flex items-center text-base font-semibold text-green-600">
+    <div class="people-lead-tbl-row mr-2">
+      <div
+        class="flex items-center text-base font-semibold text-green-600"
+        :class="`w-[${columns[0].width}px]`"
+      >
         <input
           type="checkbox"
           class="checkbox checkbox-secondary bg-white mr-2"
         />
         {{ data.segment }}
       </div>
-      <div class="flex items-center gap-2 px-4">
+      <div
+        class="flex items-center gap-2 px-4"
+        :class="`w-[${columns[1].width}px]`"
+      >
         <AlertIcon class="mr-2 text-red-600" @click="openAlertModal" />
         <AlertIcon class="mr-2 text-yellow-500" @click="openAlertModal" />
         <span>2</span>
       </div>
-      <div class="">
+      <div class="" :class="`w-[${columns[2].width}px]`">
         <div class="flex items-center">
           <img
             :src="data.profile_photo_path"
@@ -29,23 +33,33 @@
         class="flex items-center pr-[20px]"
         :class="`w-[${columns[3].width}px]`"
       >
-        <SmsSquareIcon class="mr-[40px]" />
-        <EmailSquareIcon class="mr-[40px]" />
-        <CallSquareIcon />
-        <!-- {{ data.phone }} -->
+        <div class="mr-[40px]">
+          <SmsSquareIcon />
+        </div>
+        <a :href="'mailto:' + data.email" class="mr-[40px]">
+          <EmailSquareIcon />
+        </a>
+        <a :href="'tel:' + data.phone">
+          <CallSquareIcon />
+        </a>
       </div>
-      <!-- <div class="whitespace-nowrap w-full" :class="`w-[${columns[4].width}px]`">{{ data.email }}</div> -->
-      <div class="text-xs" :title="data.homeLocation.name">Club 4</div>
-      <div class="">
-        <membership-btn :membership="data.type" class="!max-w-[5rem] w-full" />
+      <div
+        class="text-xs"
+        :class="`w-[${columns[4].width}px]`"
+        :title="data.homeLocation.name"
+      >
+        Club 4
       </div>
-      <div>
-        <button
-          @click="() => (dropdownInfo = !dropdownInfo)"
+      <div class="" :class="`w-[${columns[5].width}px]`">
+        <membership-btn :membership="data.type" class="max-w-[100px]" />
+      </div>
+      <div :class="`w-[${columns[6].width}px]`">
+        <div
+          v-show="!dropdownInfo"
+          @click="showDropdownInfo"
           class="text-secondary h-6 w-6 flex items-center justify-center"
         >
           <svg
-            v-show="!dropdownInfo"
             class="more-icon-normal"
             xmlns="http://www.w3.org/2000/svg"
             width="23.999"
@@ -60,8 +74,13 @@
               fill="#0075C9"
             />
           </svg>
+        </div>
+        <div
+          v-show="dropdownInfo"
+          @click="hideDropdownInfo"
+          class="text-secondary h-6 w-6 flex items-center justify-center"
+        >
           <svg
-            v-show="dropdownInfo"
             xmlns="http://www.w3.org/2000/svg"
             width="14.999"
             height="15"
@@ -75,20 +94,20 @@
               fill="#0075C9"
             />
           </svg>
-        </button>
-        <div class="dropdown-info" v-show="dropdownInfo">
-          <div class="dropdown-info-container">
-            <div class="close-button" @click="hideDropdownInfo">
-              <CrossIcon />
-            </div>
-            <p @click="openInfoModal">Edit account</p>
-            <p @click="openInfoModal">View alerts</p>
-            <p @click="openInfoModal">Add Guest Pass</p>
-            <p @click="openInfoModal">POS</p>
-          </div>
         </div>
       </div>
-      <!-- <div class="text-xs w-full" :class="`w-[${columns[6].width}px]`">{{ data.created_at.replace(/:\d{2}$/, "") }}</div> -->
+      <div class="dropdown" v-show="dropdownInfo">
+        <div class="dropdown-container">
+          <cross-icon
+            @click="hideDropdownInfo"
+            class="flex absolute text-white h-[15px] w-[15px] top-[15px] left-[150px] cursor-pointer"
+          ></cross-icon>
+          <div @click="openInfoModal" class="dropdown-item">Edit account</div>
+          <div @click="openInfoModal" class="dropdown-item">View alerts</div>
+          <div @click="openInfoModal" class="dropdown-item">Add Guest Pass</div>
+          <div @click="openInfoModal">POS</div>
+        </div>
+      </div>
     </div>
     <daisy-modal ref="alertModal" id="alertModal" :closable="false">
       <simple-card class="p-4 w-[400px] mx-auto alert-modal">
@@ -115,6 +134,7 @@
         </div>
       </simple-card>
     </daisy-modal>
+
     <daisy-modal ref="infoModal" id="infoModal" :closable="false">
       <simple-card class="p-4 w-[400px] mx-auto info-modal">
         <close-btn :isBlack="true" @click="closeInfoModal" />
@@ -133,15 +153,16 @@
         </div>
       </simple-card>
     </daisy-modal>
+
     <daisy-modal
       :overlay="false"
       ref="viewNoteModal"
       id="viewNoteModal"
-      class="!w-[100vw]"
+      class="!w-screen max-h-screen !h-screen"
       :closable="false"
     >
       <div
-        class="p-4 bg-black border-t border-l border-secondary w-[400px] h-[100vh] ml-auto"
+        class="p-4 bg-[#191919] border-t border-l border-secondary w-[450px] h-[100vh] px-[30px] ml-auto"
       >
         <div class="arrow-icon">
           <arrow-icon :sizeFull="true" @click="closeViewNoteModal" />
@@ -183,33 +204,30 @@
 </template>
 <style scoped>
 .people-lead-tbl-row {
-  @apply bg-base-100 cursor-pointer transition-all duration-75 border-2 border-base-100 hover:border-secondary hover:bg-primary my-4 py-4 rounded-xl px-4;
+  @apply bg-base-100 rounded-[15px] h-14 flex items-center px-[20px] py-[30px] my-[13px] cursor-pointer transition-all duration-75 border-2 border-base-100 hover:border-secondary hover:bg-primary;
 
   td {
     @apply border-y-2 border-secondary text-left px-3;
   }
-
   td:first-child {
     @apply border-l-2 rounded-l text-accent-focus/60;
   }
-
   td:last-child {
     @apply border-r-2 rounded-r capitalize;
   }
-
   .type-warning {
     @apply bg-orange-400;
   }
-
   .type-secondary {
     @apply bg-secondary;
   }
 }
 
+.more-icon .more-icon-normal {
+}
 .people-search-tbl-content thead {
   @apply top-0 sticky bg-black h-10 text-white;
 }
-
 .alert-modal {
   @apply bg-cover bg-center text-center;
   background-image: url("/notification-modal-background.png");
@@ -228,16 +246,12 @@
   background-image: url("/info-modal-background.png");
 }
 
-.dropdown-info {
-  @apply bg-secondary text-white top-4 right-48 relative w-0;
+.dropdown {
+  @apply bg-secondary text-white right-[160px] top-[90px] relative w-0;
 
-  .dropdown-info-container {
-    @apply bg-secondary p-3 w-[180px] border-[2px] rounded-[20px] absolute;
+  .dropdown-container {
+    @apply bg-secondary p-3 w-[180px] border-[2px] rounded-[20px];
   }
-}
-
-.close-button {
-  @apply relative h-0 w-0 right-[-130px];
 }
 
 .arrow-icon {
@@ -246,6 +260,10 @@
 
 .arrow-icon svg {
   @apply h-12 w-12;
+}
+
+.dropdown-item {
+  @apply mb-2;
 }
 </style>
 <script setup>
@@ -272,7 +290,7 @@ const openAlertModal = () => {
   alertModal.value.open();
 };
 const closeAlertModal = () => {
-  alertModal.value.close();
+  alertModal.value();
 };
 
 const infoModal = ref(null);
