@@ -78,7 +78,7 @@
               <!-- calltype -->
               <div class="min-w-[12rem] py-2">
                 <select class="bg-secondary rounded-2xl px-4 w-full h-full">
-                  <option>Call Type</option>
+                  <option>Overview</option>
                 </select>
               </div>
             </div>

@@ -33,6 +33,6 @@ const props = defineProps({
 
 const fmtDate = (time) => {
   let d = time instanceof Date ? time : new Date(time);
-  return d.toLocaleDateString().replaceAll("/", ".");
+  return d.toLocaleDateString();
 };
 </script>
