@@ -96,14 +96,8 @@ const navList = [
                 icon: FavoriteCircleIcon,
             },
             {
-                label: "Point Of Sale",
-                url: null,
-                icon: PosIcon,
-                modalComponent: PosWindow,
-            },
-            {
                 label: "Fitness",
-                url: "/#",
+                url: "/fitness",
                 icon: FitnessIcon,
             },
             {
@@ -209,6 +203,11 @@ const navList = [
                 label: "Recruiting",
                 icon: RecruitingIcon,
                 url: "/recruitment",
+            },
+            {
+              label: "Point Of Sale",
+              url: "/pos",
+              icon: PosIcon,
             },
         ],
     },
@@ -540,13 +539,13 @@ const navList = [
             },
             {
                 label: "Point Of Sale",
-                url: null,
+                url: "/pos",
                 icon: PosIcon,
                 modalComponent: PosWindow,
             },
             {
                 label: "Fitness",
-                url: "/#",
+                url: "/fitness",
                 icon: FitnessIcon,
             },
             {
@@ -591,12 +590,12 @@ const navList = [
             },
             {
                 label: "Point Of Sale",
-                url: "/#",
+                url: "/pos",
                 icon: PosIcon,
             },
             {
                 label: "Fitness",
-                url: "/#",
+                url: "/fitness",
                 icon: FitnessIcon,
             },
             {
