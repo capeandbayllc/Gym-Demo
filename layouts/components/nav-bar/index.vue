@@ -204,6 +204,11 @@ const navList = [
                 icon: RecruitingIcon,
                 url: "/recruitment",
             },
+            {
+              label: "Point Of Sale",
+              url: "/pos",
+              icon: PosIcon,
+            },
         ],
     },
     {
