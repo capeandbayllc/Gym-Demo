@@ -25,6 +25,7 @@
 
 <style scoped>
 .select-templates-container {
+    @apply flex flex-col w-full;
     .title {
         @apply text-xl;
     }

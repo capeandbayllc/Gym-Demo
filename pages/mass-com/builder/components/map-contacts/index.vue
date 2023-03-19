@@ -49,7 +49,7 @@
     @apply flex flex-col justify-center;
 
     .map-contacts-form {
-        @apply flex flex-col border border-white rounded-lg h-[32vw] mt-5 p-6 w-[30vw] text-xs justify-center
+        @apply flex flex-col border border-white rounded-lg mt-5 p-6 text-xs justify-center
     }
     .text-input-field {
         @apply input input-bordered w-full h-8 placeholder:text-xs;

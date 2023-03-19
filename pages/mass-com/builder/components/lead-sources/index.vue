@@ -47,10 +47,10 @@
     .lead-sources-block {
         @apply flex flex-[33.3%] flex-col justify-between;
         .lead-source-form {
-            @apply flex flex-col border border-white rounded-lg mt-5 p-4 text-xs;
+            @apply flex flex-col border border-white rounded-lg mt-5 p-4 text-xs mb-4 h-full;
         }
         .lead-sources-list {
-            @apply mt-4 h-[22vw] overflow-y-auto;
+            @apply mt-4 min-h-[75%] overflow-y-auto;
         }
     }
     .sources-item {

@@ -4,10 +4,12 @@
 
         <div class="flex gap-3">
             <div class="block-border templates-block">
-                <div v-for="doc in docs" :key="doc.id" class="templates-doc">
-                    <normal-doc class="mb-2 h-40 w-auto" />
-                    <div class="templates-doc-title">{{doc.name}}</div>
-                    <div class="templates-doc-date">{{doc.date}}</div>
+                <div class="flex w-full max-w-">
+                    <div v-for="doc in docs" :key="doc.id" class="templates-doc">
+                        <normal-doc class="mb-2 h-40 w-auto" />
+                        <div class="templates-doc-title">{{doc.name}}</div>
+                        <div class="templates-doc-date">{{doc.date}}</div>
+                    </div>
                 </div>
             </div>
             <div class="block-border add-block">
@@ -30,10 +32,10 @@
 <style scoped>
 .select-templates-layouts-container {
     .block-border {
-        @apply border border-white rounded-md min-h-[12vw]
+        @apply border border-white rounded-md
     }
     .templates-block {
-        @apply flex flex-grow overflow-y-auto gap-3 p-3 max-w-[58vw];
+        @apply flex flex-grow overflow-y-auto gap-3 p-3;
 
         .templates-doc {
             @apply text-center p-2;
@@ -46,7 +48,7 @@
         }
     }
     .add-block {
-        @apply px-8 flex flex-col flex-grow justify-center items-center;
+        @apply px-8 flex flex-col flex-grow justify-center items-center max-w-[8rem];
     }
 }
 </style>

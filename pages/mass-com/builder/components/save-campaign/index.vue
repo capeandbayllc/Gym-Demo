@@ -3,35 +3,37 @@
         <div class="campaign-day-block">
             <p class="text-xs w-full">Build your drip campaign by day</p>
             <div class="campaign-day-list">
-                <div class="campaign-day-item" v-for="item in campaign_items">
-                    <div 
-                        class="flex flex-col items-center"
-                        :class="{
-                            'opacity-50': item.status == 'inactive'
-                        }"
-                    >
-                        <div class="outline-block">Day {{ item.day }}</div>
-                        <div class="line"></div>
-                        <div class="type-block">
-                            <div class="type-icon" :class="{'active': item.types.email}" @click.stop="toggleDayType('email', item.day)">
-                                <font-awesome-icon :icon="['far', 'envelope']" size="xl" />
-                                <p>email</p>
+                <div class="flex flex-row max-w-full">
+                    <div class="campaign-day-item" v-for="item in campaign_items">
+                        <div 
+                            class="flex flex-col items-center"
+                            :class="{
+                                'opacity-50': item.status == 'inactive'
+                            }"
+                        >
+                            <div class="outline-block">Day {{ item.day }}</div>
+                            <div class="line"></div>
+                            <div class="type-block">
+                                <div class="type-icon" :class="{'active': item.types.email}" @click.stop="toggleDayType('email', item.day)">
+                                    <font-awesome-icon :icon="['far', 'envelope']" size="xl" />
+                                    <p>email</p>
+                                </div>
+                                <div class="type-icon" :class="{'active': item.types.sms}" @click.stop="toggleDayType('sms', item.day)">
+                                    <font-awesome-icon :icon="['far', 'message']" size="xl" />
+                                    <p>sms</p>
+                                </div>
+                                <div class="type-icon" :class="{'active': item.types.call}"  @click.stop="toggleDayType('call', item.day)">
+                                    <font-awesome-icon :icon="['far', 'phone']" size="xl" />
+                                    <p>call</p>
+                                </div>
                             </div>
-                            <div class="type-icon" :class="{'active': item.types.sms}" @click.stop="toggleDayType('sms', item.day)">
-                                <font-awesome-icon :icon="['far', 'message']" size="xl" />
-                                <p>sms</p>
-                            </div>
-                            <div class="type-icon" :class="{'active': item.types.call}"  @click.stop="toggleDayType('call', item.day)">
-                                <font-awesome-icon :icon="['far', 'phone']" size="xl" />
-                                <p>call</p>
-                            </div>
+                            <div class="line"></div>
+                            <div class="outline-block">Performance</div>
+                            <div class="outline-block">Conversions</div>
                         </div>
-                        <div class="line"></div>
-                        <div class="outline-block">Performance</div>
-                        <div class="outline-block">Conversions</div>
-                    </div>
-                    <div class="flex flex-col justify-center items-center px-3 max-w-[100px] mb-6" @click.stop="addDayItem(item.day)">
-                        <add-line-icon />
+                        <div class="flex flex-col justify-center items-center px-3 max-w-[100px] mb-6" @click.stop="addDayItem(item.day)">
+                            <add-line-icon />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,12 +69,12 @@
 
 <style scoped>
 .save-campaign-container {
-    @apply flex flex-col flex-auto p-2 justify-center;
+    @apply flex flex-col flex-auto justify-center max-w-full;
     .campaign-day-block {
-        @apply flex flex-col border border-white rounded-lg p-4 w-full text-xs;
+        @apply flex flex-col border border-white rounded-lg p-4 text-xs self-center;
     }
     .campaign-day-list {
-        @apply flex flex-row mt-3 max-w-[36.5rem] overflow-y-auto;
+        @apply flex flex-row mt-3 overflow-y-auto;
     }
     .campaign-day-item {
         @apply flex flex-row;

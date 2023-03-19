@@ -28,9 +28,9 @@
         @apply pl-10 pr-4 mb-2
     }
     .page-content {
-        @apply flex border border-secondary rounded-3xl min-h-[35rem] max-w-[80vw] mt-[4rem] p-4;
+        @apply flex border border-secondary rounded-3xl min-h-[30rem] mt-[4rem] p-4 max-w-[768px];
         .page-content-block {
-            @apply flex flex-1 bg-black border border-secondary rounded-2xl min-h-fit p-6 justify-center;
+            @apply flex flex-1 bg-black border border-secondary rounded-2xl min-h-fit p-6 justify-center max-w-full;
         }
     }
 }

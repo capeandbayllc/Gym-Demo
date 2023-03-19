@@ -8,13 +8,12 @@
                     <div class="email-form">
                         <input type="text" placeholder="Message Title" class="email-form-input  max-h-8" />
 
-                        <textarea type="text" placeholder="Type here" class="email-form-input min-h-[12vw]" rows="20">
-        Lorem ipsum dolor sit amet
+                        <textarea type="text" placeholder="Type here" class="email-form-input min-h-[12vw]" rows="20">Lorem ipsum dolor sit amet
 
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida mauris eu quam fermentum gravida. 
-        Curabitur vel lorem cursus, egestas arcu eu, ultricies augue. Sed in lorem faucibus, feugiat lectus ac, ultrices 
-        nisl. Suspendisse tempor justo mi. Pellentesque rhoncus non risus at ultricies. Fusce at sem sit amet velit 
-        tincidunt dictum. Ut a consequat enim, vel tincidunt arcu.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida mauris eu quam fermentum gravida. 
+Curabitur vel lorem cursus, egestas arcu eu, ultricies augue. Sed in lorem faucibus, feugiat lectus ac, ultrices 
+nisl. Suspendisse tempor justo mi. Pellentesque rhoncus non risus at ultricies. Fusce at sem sit amet velit 
+tincidunt dictum. Ut a consequat enim, vel tincidunt arcu.
                         </textarea>
                     </div>
                     <div class="email-status">
@@ -56,9 +55,9 @@
 
 <style scoped>
 .email-builder-container {
-    @apply flex flex-col border bg-black border-white rounded-lg p-4 w-full text-xs;
+    @apply flex flex-col border bg-black border-white rounded-lg p-4 w-[630px] text-xs;
     .email-form {
-        @apply flex flex-col min-w-[40vw];
+        @apply flex flex-col flex-grow;
     }
     .email-form-input {
         @apply input input-bordered w-full max-w-sm bg-black border-white border mt-3 placeholder:text-xs text-xs p-2;
@@ -67,7 +66,7 @@
         @apply flex flex-col;
     }
     .email-time-block {
-        @apply border border-secondary p-2 rounded-md text-secondary text-xs flex flex-col w-fit
+        @apply border border-secondary p-2 rounded-md text-secondary text-xs flex flex-col w-[210px]
     }
     .email-time-block-item {
         @apply flex gap-2 items-center
