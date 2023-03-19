@@ -181,11 +181,11 @@ const form = ref({
     member: null,
     instructor: null,
     start: {
-        date: null,
+        date: "2022-12-15",
         time: null,
     },
     end: {
-        date: null,
+        date: "2022-12-15",
         time: null,
     },
     description: "",
