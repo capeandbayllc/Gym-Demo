@@ -124,14 +124,27 @@
         </div>
         <p class="font-thin mb-8">5/5/2022, 12:24:44 PM</p>
         <div class="text-center flex gap-4 justify-center my-4">
-          <button class="text-white hover:text-secondary text-sm bg-secondary hover:bg-gray-900 border border-secondary rounded-xl px-4 py-1 transition-all duration-75" @click="openViewNoteModal">View note</button>
+          <button
+            class="text-white hover:text-secondary text-sm bg-secondary hover:bg-gray-900 border border-secondary rounded-xl px-4 py-1 transition-all duration-75"
+            @click="openViewNoteModal"
+          >
+            View note
+          </button>
         </div>
       </simple-card>
     </daisy-modal>
-    <daisy-modal :overlay="false" ref="viewNoteModal" id="viewNoteModal" class="w-[100vw]" :closable="false">
-      <div class="p-4 bg-black border-t border-l border-secondary w-[400px] h-[100vh] ml-auto">
+    <daisy-modal
+      :overlay="false"
+      ref="viewNoteModal"
+      id="viewNoteModal"
+      class="!w-[100vw]"
+      :closable="false"
+    >
+      <div
+        class="p-4 bg-black border-t border-l border-secondary w-[400px] h-[100vh] ml-auto"
+      >
         <div class="arrow-icon">
-          <arrow-icon :sizeFull="true" @click="closeViewNoteModal"/>
+          <arrow-icon :sizeFull="true" @click="closeViewNoteModal" />
         </div>
         <div class="h-full flex items-center">
           <div class="bg-white rounded-[22px] w-full p-6 mb-[67px]">
@@ -143,16 +156,23 @@
               <p>Club 4 (East Side Phily Hill)</p>
             </div>
             <div class="text-gray-600 mt-3">
-              <p class="mb-3">Member has questions on missed PT class and wants to hold membership for 6 months for medical reasons. Note supplied.</p>
+              <p class="mb-3">
+                Member has questions on missed PT class and wants to hold
+                membership for 6 months for medical reasons. Note supplied.
+              </p>
               <p class="mb-3">Reviewed with manager.</p>
               <p class="mb-3">Kyle.</p>
             </div>
             <div class="text-white flex flex-col gap-4 items-center mt-[100px]">
               <div>
-                <button class="bg-accent-focus px-3 py-2 rounded-[12px]">Create an action</button>
+                <button class="bg-accent-focus px-3 py-2 rounded-[12px]">
+                  Create an action
+                </button>
               </div>
               <div>
-                <button class="bg-secondary px-3 py-2 rounded-[12px]">Resolve</button>
+                <button class="bg-secondary px-3 py-2 rounded-[12px]">
+                  Resolve
+                </button>
               </div>
             </div>
           </div>
@@ -182,8 +202,6 @@
   }
 }
 
-</style>
-<style>
 .people-search-tbl-content thead {
   @apply top-0 sticky bg-black h-10 text-white;
 }
@@ -217,15 +235,13 @@
   @apply relative h-0 w-0 right-[-130px];
 }
 
-
-.arrow-icon{
-    @apply cursor-pointer h-6 w-6 ml-auto mt-3;
+.arrow-icon {
+  @apply cursor-pointer h-6 w-6 ml-auto mt-3;
 }
 
-.arrow-icon svg{
-    @apply h-12 w-12;
+.arrow-icon svg {
+  @apply h-12 w-12;
 }
-
 </style>
 <script setup>
 import MembershipBtn from "~/components/buttons/membership-btn.vue";
@@ -235,7 +251,7 @@ import {
   EmailSquareIcon,
   CallSquareIcon,
   CrossIcon,
-  ArrowIcon
+  ArrowIcon,
 } from "~~/components/icons";
 
 const props = defineProps({
@@ -275,12 +291,11 @@ const hideDropdownInfo = () => {
 
 const viewNoteModal = ref(false);
 
-const openViewNoteModal = ()=>{
-    viewNoteModal.value.open()
-}
+const openViewNoteModal = () => {
+  viewNoteModal.value.open();
+};
 
-const closeViewNoteModal = ()=>{
-    viewNoteModal.value.close()
-}
-
+const closeViewNoteModal = () => {
+  viewNoteModal.value.close();
+};
 </script>
