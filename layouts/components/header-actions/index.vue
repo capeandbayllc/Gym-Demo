@@ -126,7 +126,7 @@ const userMenu = ref(null);
 const globalSearchInput = ref("");
 const showFocus = () => {
   // globalSearchInput.value.style = "";
-  globalSearchInput.value?.focus();
+  // globalSearchInput.value?.focus();
 };
 
 const globalSearch = ref("");
@@ -136,7 +136,7 @@ const showLeaderBoard = () => {
   emit("show-leader-board");
 };
 const hideFocus = () => {
-  globalSearchInput.value.blur();
+  // globalSearchInput.value.blur();
 };
 const isLeaderboardPopoverVisible = ref(false);
 const openLeaderboardPopover = () => {
