@@ -44,7 +44,7 @@
     :isLeaderBoardVisible="isLeaderBoardVisible"
     @show-leader-board="showLeaderBoard"
   />
-  <div id="amplify-deploy-test" class="hidden">
+  <div id="amplify-deploy-test-2" class="hidden">
     Quick Test to confirm Amplify deployments are working
   </div>
 </template>
@@ -53,11 +53,11 @@
   @apply w-screen /* overflow-x-hidden */;
 }
 .floating-tooltip {
-  @apply text-sm rounded-full px-3 py-1 bg-blue-800 whitespace-nowrap absolute top-0 left-0;
+  @apply text-sm rounded-full px-3 py-1 bg-blue-800 whitespace-nowrap fixed top-0 left-0;
   z-index: 10000;
   &:empty {
     @apply hidden;
-   }
+  }
 }
 .app-content {
   @apply flex flex-row relative;
@@ -92,10 +92,11 @@ const layoutRef = useLayoutElement();
 const showCircularMenu = ref(false);
 const floatingTooltip = ref();
 
-provide('floating-modal', (text, style = {}) => {
+provide("floating-modal", (text, style = {}) => {
   floatingTooltip.value.textContent = text;
   for (const [key, value] of Object.entries(style)) {
-    floatingTooltip.value.style[key] = typeof value === 'function' ? value(floatingTooltip.value) : value;
+    floatingTooltip.value.style[key] =
+      typeof value === "function" ? value(floatingTooltip.value) : value;
   }
 });
 

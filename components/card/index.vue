@@ -5,7 +5,7 @@
             'collapsed': isCollapsed
         }"
     >
-        <div class="card-title-container" v-if="!titleComponent">
+        <div class="card-title-container" v-if="!titleComponent && showTitleContainer">
             <div class="card-title">
                 {{title}}
             </div>
@@ -16,6 +16,10 @@
                 />
                 <collapse-btn
                     v-if="options.collapse"
+                    v-model="isCollapsed"
+                />
+                <add-btn
+                    v-if="options.add"
                     v-model="isCollapsed"
                 />
             </div>
@@ -31,9 +35,9 @@
 </template>
 <style scoped>
 .card-container {
-    @apply border border-secondary rounded px-4 py-3 relative;
+    @apply border-2 border-secondary rounded-[18px] relative;
     .card-title-container {
-        @apply flex flex-row justify-between;
+        @apply flex flex-row justify-between items-center h-12 text-xl rounded-tl-[15px] rounded-tr-[15px] font-semibold px-6 text-base-content bg-gradient-to-b from-secondary to-base-300/30 bg-secondary bg-blend-darken;;
         .card-title {
             @apply text-lg font-bold;
         }
@@ -52,6 +56,7 @@
 <script setup>
 import { ref } from "vue";
 import FavoriteBtn from "~~/components/buttons/favorite-btn.vue";
+import addBtn from "~~/components/buttons/add-btn.vue";
 import CollapseBtn from "~~/components/buttons/collapse-btn.vue";
 
 const props = defineProps({
@@ -65,7 +70,11 @@ const props = defineProps({
             favorite: true,
         },
     },
-    titleComponent: Object
+    titleComponent: Object,
+    showTitleContainer:{
+        type: Boolean,
+        default: true
+    }
 });
 
 const isFavorite = ref(false);
