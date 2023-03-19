@@ -139,11 +139,11 @@ const items = [
         path: "/setting",
         icon: SettingIcon,
     },
-    {
+    /*{
         key: "schedule",
         path: "/schedule",
         icon: ScheduleIcon,
-    },
+    },*/
     {
         key: "pos",
         path: "/pos",

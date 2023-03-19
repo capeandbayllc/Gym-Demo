@@ -469,7 +469,7 @@ type EndUser {
   owner_user_id: String
   primary_phone: String
   alternate_phone: String
-  gender: Boolean
+  gender: String
   date_of_birth: DateTime
   profile_photo_path: String
   interaction_count: InteractionCount!
@@ -590,13 +590,14 @@ type Lead {
   middle_name: String
   last_name: String
   email: String!
+  user_id: ID
   created_at: DateTime!
   updated_at: DateTime!
   lead_owners: [TeamUser]
   owner_user_id: String
   primary_phone: String
   alternate_phone: String
-  gender: Boolean
+  gender: String
   date_of_birth: DateTime
   profile_photo_path: String
   interaction_count: InteractionCount!
