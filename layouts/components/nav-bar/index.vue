@@ -534,7 +534,7 @@ const navList = [
             },
             {
                 label: "Point Of Sale",
-                url: null,
+                url: "/pos",
                 icon: PosIcon,
                 modalComponent: PosWindow,
             },
@@ -585,7 +585,7 @@ const navList = [
             },
             {
                 label: "Point Of Sale",
-                url: "/#",
+                url: "/pos",
                 icon: PosIcon,
             },
             {
