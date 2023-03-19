@@ -244,8 +244,7 @@ getMember();
 function getMember() {
     if (profileId) {
         request((isLeadView ? lead : member).query.get, { id: profileId }).then(({ data }) => {
-          console.log(data)
-            ProfileInfo.value = data.data[isLeadView ? 'lead' : 'member'];
+          ProfileInfo.value = data.data[isLeadView ? 'lead' : 'member'];
         });
     } else {
         ProfileInfo.value = user.value;

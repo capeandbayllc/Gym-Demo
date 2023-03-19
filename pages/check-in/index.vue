@@ -134,7 +134,6 @@ watch(option, () => {
 });
 
 onMounted(() => {
-  console.log(isPreview)
   if (profileId && !isPreview) {
 
     detailView.value = 'profile';
