@@ -1,85 +1,85 @@
 <template>
   <div>
     <div
-        class="people-lead-tbl-row mr-2 grid grid-cols-[repeat(2,_14%),repeat(2,_1fr),_repeat(2,_12%),_7%] items-center"
+      class="people-lead-tbl-row mr-2 grid grid-cols-[repeat(2,_14%),repeat(2,_1fr),_repeat(2,_12%),_7%] items-center"
     >
       <div class="flex items-center text-base font-semibold text-green-600">
         <input
-            type="checkbox"
-            class="checkbox checkbox-secondary bg-white mr-2"
+          type="checkbox"
+          class="checkbox checkbox-secondary bg-white mr-2"
         />
         {{ data.segment }}
       </div>
       <div class="flex items-center gap-2 px-4">
-        <AlertIcon class="mr-2 text-red-600" @click="openAlertModal"/>
-        <AlertIcon class="mr-2 text-yellow-500" @click="openAlertModal"/>
+        <AlertIcon class="mr-2 text-red-600" @click="openAlertModal" />
+        <AlertIcon class="mr-2 text-yellow-500" @click="openAlertModal" />
         <span>2</span>
       </div>
       <div class="">
         <div class="flex items-center">
           <img
-              :src="data.profile_photo_path"
-              :gender="data.gender"
-              class="w-[40px] border-2 border-secondary rounded-[12px] mr-2"
+            :src="data.profile_photo_path"
+            :gender="data.gender"
+            class="w-[40px] border-2 border-secondary rounded-[12px] mr-2"
           />
           {{ data.first_name }} {{ data.last_name }}
         </div>
       </div>
       <div
-          class="flex items-center pr-[20px]"
-          :class="`w-[${columns[3].width}px]`"
+        class="flex items-center pr-[20px]"
+        :class="`w-[${columns[3].width}px]`"
       >
-        <SmsSquareIcon class="mr-[40px]"/>
-        <EmailSquareIcon class="mr-[40px]"/>
-        <CallSquareIcon/>
+        <SmsSquareIcon class="mr-[40px]" />
+        <EmailSquareIcon class="mr-[40px]" />
+        <CallSquareIcon />
         <!-- {{ data.phone }} -->
       </div>
       <!-- <div class="whitespace-nowrap w-full" :class="`w-[${columns[4].width}px]`">{{ data.email }}</div> -->
       <div class="text-xs" :title="data.homeLocation.name">Club 4</div>
       <div class="">
-        <membership-btn :membership="data.type" class="!max-w-[5rem] w-full"/>
+        <membership-btn :membership="data.type" class="!max-w-[5rem] w-full" />
       </div>
       <div>
         <button
-            @click="() => (dropdownInfo = !dropdownInfo)"
-            class="text-secondary h-6 w-6 flex items-center justify-center"
+          @click="() => (dropdownInfo = !dropdownInfo)"
+          class="text-secondary h-6 w-6 flex items-center justify-center"
         >
           <svg
-              v-show="!dropdownInfo"
-              class="more-icon-normal"
-              xmlns="http://www.w3.org/2000/svg"
-              width="23.999"
-              height="6"
-              viewBox="0 0 23.999 6"
+            v-show="!dropdownInfo"
+            class="more-icon-normal"
+            xmlns="http://www.w3.org/2000/svg"
+            width="23.999"
+            height="6"
+            viewBox="0 0 23.999 6"
           >
             <path
-                id="icon_more-2"
-                data-name="icon more"
-                d="M1329,732.81a3,3,0,1,1,3,3A3,3,0,0,1,1329,732.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1320,732.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1311,732.81Z"
-                transform="translate(-1311 -729.81)"
-                fill="#0075C9"
+              id="icon_more-2"
+              data-name="icon more"
+              d="M1329,732.81a3,3,0,1,1,3,3A3,3,0,0,1,1329,732.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1320,732.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1311,732.81Z"
+              transform="translate(-1311 -729.81)"
+              fill="#0075C9"
             />
           </svg>
           <svg
-              v-show="dropdownInfo"
-              xmlns="http://www.w3.org/2000/svg"
-              width="14.999"
-              height="15"
-              viewBox="0 0 14.999 15"
+            v-show="dropdownInfo"
+            xmlns="http://www.w3.org/2000/svg"
+            width="14.999"
+            height="15"
+            viewBox="0 0 14.999 15"
           >
             <path
-                id="icon_more"
-                data-name="icon more"
-                d="M1329,735.81a3,3,0,1,1,3,3A3,3,0,0,1,1329,735.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1320,735.81Zm0-9a3,3,0,1,1,3,3A3,3,0,0,1,1320,726.81Z"
-                transform="translate(-1320 -723.81)"
-                fill="#0075C9"
+              id="icon_more"
+              data-name="icon more"
+              d="M1329,735.81a3,3,0,1,1,3,3A3,3,0,0,1,1329,735.81Zm-9,0a3,3,0,1,1,3,3A3,3,0,0,1,1320,735.81Zm0-9a3,3,0,1,1,3,3A3,3,0,0,1,1320,726.81Z"
+              transform="translate(-1320 -723.81)"
+              fill="#0075C9"
             />
           </svg>
         </button>
         <div class="dropdown-info" v-show="dropdownInfo">
           <div class="dropdown-info-container">
             <div class="close-button" @click="hideDropdownInfo">
-              <CrossIcon/>
+              <CrossIcon />
             </div>
             <p @click="openInfoModal">Edit account</p>
             <p @click="openInfoModal">View alerts</p>
@@ -92,7 +92,7 @@
     </div>
     <daisy-modal ref="alertModal" id="alertModal" :closable="false">
       <simple-card class="p-4 w-[400px] mx-auto alert-modal">
-        <close-btn :isBlack="true" @click="closeAlertModal"/>
+        <close-btn :isBlack="true" @click="closeAlertModal" />
         <h5 class="text-3xl mb-2">Alert</h5>
         <div class="number-alert-circle mb-3">
           <div class="number">3</div>
@@ -101,14 +101,14 @@
         <p class="font-thin mb-6">Aya Buchanan | 5/5/2022, 12:24:44 PM</p>
         <div class="text-center flex gap-4 justify-center my-4">
           <button
-              class="text-white text-sm border border-white rounded-xl px-4 py-1"
-              @click="closeAlertModal"
+            class="text-white text-sm border border-white rounded-xl px-4 py-1"
+            @click="closeAlertModal"
           >
             Resolve
           </button>
           <button
-              class="text-white hover:text-secondary text-sm bg-secondary hover:bg-gray-900 border border-secondary rounded-xl px-4 py-1 transition-all duration-75"
-              @click="closeAlertModal"
+            class="text-white hover:text-secondary text-sm bg-secondary hover:bg-gray-900 border border-secondary rounded-xl px-4 py-1 transition-all duration-75"
+            @click="closeAlertModal"
           >
             Read alert notes
           </button>
@@ -117,7 +117,7 @@
     </daisy-modal>
     <daisy-modal ref="infoModal" id="infoModal" :closable="false">
       <simple-card class="p-4 w-[400px] mx-auto info-modal">
-        <close-btn :isBlack="true" @click="closeInfoModal"/>
+        <close-btn :isBlack="true" @click="closeInfoModal" />
         <div class="my-6">
           <p class="text-[19px] mb-1">Agent: Kyle P.</p>
           <p class="text-[19px] mb-1">Created by: Kyle P.</p>
@@ -125,8 +125,8 @@
         <p class="font-thin mb-8">5/5/2022, 12:24:44 PM</p>
         <div class="text-center flex gap-4 justify-center my-4">
           <button
-              class="text-white hover:text-secondary text-sm bg-secondary hover:bg-gray-900 border border-secondary rounded-xl px-4 py-1 transition-all duration-75"
-              @click="openViewNoteModal"
+            class="text-white hover:text-secondary text-sm bg-secondary hover:bg-gray-900 border border-secondary rounded-xl px-4 py-1 transition-all duration-75"
+            @click="openViewNoteModal"
           >
             View note
           </button>
@@ -134,17 +134,17 @@
       </simple-card>
     </daisy-modal>
     <daisy-modal
-        :overlay="false"
-        ref="viewNoteModal"
-        id="viewNoteModal"
-        class="!w-[100vw]"
-        :closable="false"
+      :overlay="false"
+      ref="viewNoteModal"
+      id="viewNoteModal"
+      class="!w-[100vw]"
+      :closable="false"
     >
       <div
-          class="p-4 bg-black border-t border-l border-secondary w-[400px] h-[100vh] ml-auto"
+        class="p-4 bg-black border-t border-l border-secondary w-[400px] h-[100vh] ml-auto"
       >
         <div class="arrow-icon">
-          <arrow-icon :sizeFull="true" @click="closeViewNoteModal"/>
+          <arrow-icon :sizeFull="true" @click="closeViewNoteModal" />
         </div>
         <div class="h-full flex items-center">
           <div class="bg-white rounded-[22px] w-full p-6 mb-[67px]">
@@ -250,7 +250,14 @@
 </style>
 <script setup>
 import MembershipBtn from "~/components/buttons/membership-btn.vue";
-import {AlertIcon, ArrowIcon, CallSquareIcon, CrossIcon, EmailSquareIcon, SmsSquareIcon,} from "~~/components/icons";
+import {
+  AlertIcon,
+  ArrowIcon,
+  CallSquareIcon,
+  CrossIcon,
+  EmailSquareIcon,
+  SmsSquareIcon,
+} from "~~/components/icons";
 
 const props = defineProps({
   data: Object,
