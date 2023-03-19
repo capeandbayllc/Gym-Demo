@@ -1,6 +1,6 @@
 <template>
     <card
-        title=""
+        :showTitleContainer="false"
         class="global-search-popup-card gradient-bg"
         :options="{
             collapse: false,
@@ -9,12 +9,8 @@
     >
         
         <template #content>
-            <!-- <SmsSquareIcon />
-            <EmailSquareIcon />
-            <CallSquareIcon />
-            <AlertIcon /> -->
             <div class="global-search-popup-container">
-                <div class="md:flex items-center justify-between gap-4 p-6">
+                <div class="md:flex items-center justify-between gap-4 px-6 pb-2">
                     <div class="mb-[12px]">
                         <div class="search-icon" :class="{
                             'text-secondary': openSearchInput,
@@ -63,14 +59,6 @@
 <script setup>
 import PeopleSearchAction from "~~/pages/people-search/components/people-search-action.vue";
 import SearchList from "~~/pages/people-search/components/search-list.vue";
-
-import {
-    SmsSquareIcon,
-    CallSquareIcon,
-    EmailSquareIcon,
-    AlertIcon,
-} from "~~/components/icons";
-
 
 const props = defineProps({
     currentPage: {
@@ -139,7 +127,7 @@ const filterSelected = (value) => {
 
 
 .filters-button{
-    @apply flex items-center justify-start px-[10px] py-[9px] border-[2px] border-secondary text-white rounded-[19px] w-[135px] min-h-[50px];
+    @apply flex items-center justify-start px-[10px] py-[9px] border-[2px] border-secondary text-white rounded-[19px] w-[135px] min-h-[50px] ml-auto;
     background-color: #415b6e;
 }
 

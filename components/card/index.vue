@@ -5,7 +5,7 @@
             'collapsed': isCollapsed
         }"
     >
-        <div class="card-title-container" v-if="!titleComponent">
+        <div class="card-title-container" v-if="!titleComponent && showTitleContainer">
             <div class="card-title">
                 {{title}}
             </div>
@@ -70,7 +70,11 @@ const props = defineProps({
             favorite: true,
         },
     },
-    titleComponent: Object
+    titleComponent: Object,
+    showTitleContainer:{
+        type: Boolean,
+        default: true
+    }
 });
 
 const isFavorite = ref(false);

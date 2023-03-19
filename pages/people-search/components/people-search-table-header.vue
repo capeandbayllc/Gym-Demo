@@ -1,14 +1,15 @@
 <template>
-  <div class="border-b-4 border-secondary mb-4 px-4 pb-4">
-    <div
-      class="grid grid-cols-[repeat(2,_14%),repeat(2,_1fr),_repeat(2,_12%),_7%] items-center pr-4"
-    >
+  <div
+    class="border-b-[4px] border-primary text-secondary mb-[15px] pb-[15px] px-[20px]"
+  >
+    <div class="flex justify-start">
       <div
         v-for="(column, ndx) in columns"
         :key="column.field ? column.field : ndx"
-        class="capitalize font-normal whitespace-nowrap text-secondary w-full"
+        class="capitalize font-normal whitespace-nowrap"
+        :class="column.class + ` w-[${column.width}px]`"
       >
-        <div v-if="column.label === 'Alerts'" class="flex items-center w-full">
+        <div v-if="column.label === 'Alerts'" class="flex items-center">
           <AlertIcon class="mr-2 text-secondary" />
           {{ column.label ? column.label : column }}
         </div>
@@ -38,6 +39,7 @@ thead th {
 <script setup>
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { AlertIcon } from "~~/components/icons";
 
 library.add(faAlignLeft);
