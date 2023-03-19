@@ -53,21 +53,22 @@ type CalendarEvent {
   title: String!
   description: String
   full_day_event: Int
-  event_type_id: ID
+  event_type_id: String
   type: CalendarEventType
   location: Location
   owner: User!
-  owner_id: ID
+  owner_id: String
   start: DateTime
   end: DateTime
   created_at: DateTime
   event_completion: DateTime
+  color: String
   editable: Int
   user_attendees: [EventAttendee]
   lead_attendees: [EventAttendee]
   member_attendees: [EventAttendee]
   attendees: [EventAttendee]
-  location_id: ID
+  location_id: String
   call_task: Int
   im_attending: Boolean
   my_reminder: Reminder
@@ -419,6 +420,7 @@ type EmergencyContact {
 
 type Employee {
   id: ID!
+  user_id: ID!
   first_name: String
   last_name: String
   middle_name: String
