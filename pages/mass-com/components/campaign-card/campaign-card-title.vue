@@ -1,8 +1,8 @@
 <template>
     <div class="campaign-card-title">
-        <div class="text-xl">Current Campaign</div>
+        <div class="text-xl basis-1/3">Current Campaign</div>
         <select-box
-            class="text-sm"
+            class="text-sm basis1/3"
             :items="items"
             label="Current Campaigns"
         />
@@ -10,12 +10,14 @@
 </template>
 <style scoped>
 .campaign-card-title {
-    @apply flex flex-row justify-between items-center h-12 font-semibold px-6 text-base-content bg-secondary;
+    @apply flex flex-row justify-between items-center h-12 font-semibold px-6 text-base-content bg-secondary rounded-t-2xl;
 }
 </style>
 <script setup>
-const items = [{
-    value: 'current',
-    label: 'Current Campaigns'
-}]
+const items = [
+    {
+        value: "current",
+        label: "Current Campaigns",
+    },
+];
 </script>
