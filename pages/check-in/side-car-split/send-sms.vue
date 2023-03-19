@@ -50,7 +50,7 @@
 </style>
 
 <script setup>
-import ProfileImage from '@/public/images/profile/users_84.jpg';
+import ProfileImage from '@/public/images/profile/users_2.jpg';
 import { MessageIcon } from '~~/components/icons';
 import Body from './components/body.vue';
 import Footer from './components/footer.vue';
