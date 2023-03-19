@@ -12,22 +12,30 @@
             </div>
         </div>
         <daisy-modal ref="outgoingCallModalRef">
-            <outgoing-call-modal @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal>
+            <!-- <outgoing-call-modal @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal> -->
+            <MakeCallModal  @close="closeOutgoingCall" @callNow="showInCallModal" @saveNow="saveNow"/>
         </daisy-modal>
         <daisy-modal ref="emailModalRef">
-            <EmailModal @close="closeEmailModal"/>
+            <!-- <EmailModal @close="closeEmailModal"/> -->
+            <SendEmailModal @close="closeEmailModal" @saveEmail="saveEmail" @sendEmail="sendEmail" />
         </daisy-modal>
         <daisy-modal ref="smsModalRef">
-            <SMSModal @close="closeSMSModal"/>
+            <!-- <SMSModal @close="closeSMSModal"/> -->
+            <SendSmsModal @close="closeSMSModal" @saveSms="saveSms" @sendSms="sendSms" />
         </daisy-modal>
     </simple-card>
 </template>
 <script setup>
 import { CallIcon,EmailIcon,MessageIcon } from '~~/components/icons';
 import engageHistoryTable from './engage-history-table.vue';
-import OutgoingCallModal from '../../call-user/components/outgoing-call-modal.vue';
-import EmailModal from './email.vue';
-import SMSModal from './message.vue';
+// import OutgoingCallModal from '../../call-user/components/outgoing-call-modal.vue';
+// import EmailModal from './email.vue';
+// import SMSModal from './message.vue';
+// import MakeCall from '../side-car-split/make-call.vue';
+import MakeCallModal from '../side-car-split/make-call.vue';
+import SendEmailModal from '../side-car-split/send-email.vue';
+import SendSmsModal from '../side-car-split/send-sms.vue';
+
 const columns = [
     {
         label: "Type",
@@ -101,14 +109,30 @@ const openEmailModal = ()=>{
 const closeEmailModal = ()=>{
     emailModalRef.value.close();
 }
+const saveEmail = ()=>{
+    emailModalRef.value.close();
+}
+const sendEmail = ()=>{
+    emailModalRef.value.close();
+}
 const openSMSModal = ()=>{
     smsModalRef.value.open();
 }
 const closeSMSModal = ()=>{
     smsModalRef.value.close();
 }
+const saveSms = ()=>{
+    smsModalRef.value.close();
+}
+const sendSms = ()=>{
+    smsModalRef.value.close();
+}
 
 const showInCallModal = () => {
+    outgoingCallModalRef.value.close();
+};
+
+const saveNow = () => {
     outgoingCallModalRef.value.close();
 };
 
