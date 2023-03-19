@@ -78,7 +78,7 @@ export const query = gql`
             }
             attendees {
                 id
-                entity_type
+                entity_id
             }
             # owner {
             #     id
