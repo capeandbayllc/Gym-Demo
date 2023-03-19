@@ -125,8 +125,8 @@ import TrophyIcon from "~/components/icons/trophy.vue";
 const userMenu = ref(null);
 const globalSearchInput = ref("");
 const showFocus = () => {
-  globalSearchInput.value.style = "";
-  globalSearchInput.value.focus();
+  // globalSearchInput.value.style = "";
+  globalSearchInput.value?.focus();
 };
 
 const globalSearch = ref("");
