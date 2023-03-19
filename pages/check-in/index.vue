@@ -10,6 +10,7 @@
             <event-card class="mr-2" />
             <profile-card
               :row="row"
+              :key="refreshIndex"
               :active-option="detailView"
               @select-option="detailView = $event"
               @toggle-detail="toggleDetailSection"
@@ -52,6 +53,7 @@
         <component
           v-if="detailView === key"
           @close="detailView = null"
+          @on-profile-update="refreshIndex++"
           :key="key"
           :is="component"
         />
@@ -113,20 +115,18 @@ import Setting from "./setting/index.vue";
 import Engage from "./engage/index.vue";
 const option = ref(null);
 const route = useRoute();
-const profileId = (route.query.id)
-
+const profileId = route.query.id;
 
 const appLayout = useLayoutElement();
 const checkInContainer = ref();
-const props = defineProps(
+const refreshIndex = ref(0);
 
-        {   
-            row:{
-              type:Object,
-              required:true
-            }
-        }
-    )
+const props = defineProps({
+  row: {
+    type: Object,
+    required: true,
+  },
+});
 watch(option, () => {
   const scrollTO = checkInContainer.value.offsetHeight + 100;
   setTimeout(() => {
@@ -139,14 +139,13 @@ watch(option, () => {
 });
 
 onMounted(() => {
-  if(profileId){
-
-  detailView.value = 'profile';
+  if (profileId) {
+    detailView.value = "profile";
     setTimeout(() => {
       window.scroll({
         top: 600,
         left: 0,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }, 0);
   }

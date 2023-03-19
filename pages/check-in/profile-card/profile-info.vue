@@ -1,7 +1,6 @@
 <template>
   <div v-if="ProfileInfo" class="profile-info-container">
     <div
-
       class="profile-avatar outline-4 hover:outline-[0.75rem] transition-all outline-yellow-400 duration-200 ease-in-out outline-none border-none overflow-visible"
     >
       <div class="alert-badge" v-if="user.notifications.length > 0">
@@ -9,11 +8,8 @@
       </div>
       <img :src="ProfileInfo.profile_photo_path" alt="profile image" />
     </div>
-    <div v-if="row" class="profile-name">
-      {{ row.first_name }} {{ row.last_name }}
-    </div>
-    <div v-else class="profile-name">
-        {{ ProfileInfo.first_name }}
+    <div class="profile-name">
+      {{ ProfileInfo.first_name }}
       {{ ProfileInfo.last_name }}
     </div>
     <div class="pb-5">
@@ -178,26 +174,20 @@ import {
   MessageIcon,
   EditIcon,
 } from "~~/components/icons";
-<<<<<<< HEAD
-const props = defineProps(
+import Member from "@/api/queries/member";
+import { request } from "~/api/utils/request";
 
-        {   
-            row:{
-              type:Object,
-              required:true
-            }
-        }
-    )
-
-=======
-import  Member from "@/api/queries/member";
-import {request} from "~/api/utils/request";
->>>>>>> 13d83afa8abcb41738d40982db790c4443480129
+const props = defineProps({
+  row: {
+    type: Object,
+    required: true,
+  },
+});
 
 const user = useState("auth");
 
-const route = useRoute()
-const profileId = (route.query.id)
+const route = useRoute();
+const profileId = route.query.id;
 const ProfileInfo = ref(null);
 const guests = [
   {
@@ -257,11 +247,11 @@ getMember();
 
 function getMember() {
   if (profileId) {
-    request(Member.query.get, { id: profileId }).then(({data}) => {
+    request(Member.query.get, { id: profileId }).then(({ data }) => {
       ProfileInfo.value = data.data.member;
     });
   } else {
-    ProfileInfo.value = user;
+    ProfileInfo.value = user.value;
   }
 }
 </script>

@@ -1,30 +1,38 @@
 <template>
-  <div>
+  <div ref="popoverContainer">
     <div class="close-btn" @click="$emit('close')">
       <cross-icon />
     </div>
 
     <div class="leader-pop-info">
-      <TrophyIcon class="w-12"/>
+      <TrophyIcon class="w-12" />
 
       <div class="leader-pop-title justify-center">Leaderboard</div>
       <div
-        class="justify-center bg-[#18203A] border-color-[#073A76] button2 w-[60%] h-8 "
+        class="justify-center bg-[#18203A] border-color-[#073A76] button2 w-[60%] h-8"
       >
         <button
-            type="button"
-            class="btn-xs text-white pl-3 pr-3 m-1 button2"
-            @click="(e) => { selected = 'clubs' }"
-            :class="{'btn-secondary': selected==='clubs'}"
-            name="clubs"
+          type="button"
+          class="btn-xs text-white pl-3 pr-3 m-1 button2"
+          @click="
+            (e) => {
+              selected = 'clubs';
+            }
+          "
+          :class="{ 'btn-secondary': selected === 'clubs' }"
+          name="clubs"
         >
           Clubs
         </button>
         <button
           type="button"
           class="btn-xs text-white pl-3 pr-3 m-1 button2"
-          :class="{'btn-secondary': selected==='trainers'}"
-          @click="(e) => { selected = 'trainers' }"
+          :class="{ 'btn-secondary': selected === 'trainers' }"
+          @click="
+            (e) => {
+              selected = 'trainers';
+            }
+          "
           name="trainers"
         >
           Trainers
@@ -36,8 +44,13 @@
         class="leader-pop-help bg-black border border-secondary px-0 rounded-md"
       >
         <div class="carousel-wrap col-span-6">
-          <div v-if="selected==='trainers'" :breakpoints="breakpoints" class="m-2" name="data">
-            <tr v-for="leader in trainerData" :key='leader.name' >
+          <div
+            v-if="selected === 'trainers'"
+            :breakpoints="breakpoints"
+            class="m-2"
+            name="data"
+          >
+            <tr v-for="leader in trainerData" :key="leader.name">
               <td>
                 <div class="px-1 m-1">{{ leader.rank }}</div>
               </td>
@@ -55,8 +68,13 @@
               <td><div class="px-1">PTS</div></td>
             </tr>
           </div>
-          <div v-if="selected==='clubs'" :breakpoints="breakpoints" class="m-2" name="data">
-            <tr v-for="leader in locationData" :key='leader.name' >
+          <div
+            v-if="selected === 'clubs'"
+            :breakpoints="breakpoints"
+            class="m-2"
+            name="data"
+          >
+            <tr v-for="leader in locationData" :key="leader.name">
               <td>
                 <div class="px-1 m-1">{{ leader.rank }}</div>
               </td>
@@ -81,7 +99,6 @@
     <div class="float-right m-2">
       <button class="text-xs" @click="showSlideout">View More</button>
     </div>
-
   </div>
 </template>
 <style scoped>
@@ -134,8 +151,7 @@ import { ref } from "vue";
 import { CrossIcon } from "~~/components/icons";
 import TrophyIcon from "~/components/icons/trophy-circle.vue";
 
-
-const selected = ref('trainers')
+const selected = ref("trainers");
 
 const locationData = ref([
   {
@@ -358,11 +374,29 @@ const breakpoints = ref({
   },
 });
 
-// const showLeaderBoardSlideout = ref(false);
-const emit = defineEmits(["show-leader-board"])
+const emit = defineEmits(["show-leader-board"]);
 const showSlideout = () => {
-  emit('show-leader-board')
-  emit('close')
-}
-let leaderBoardData = trainerData;
+  console.log("show slideout");
+  emit("show-leader-board");
+  emit("close");
+};
+
+const popoverContainer = ref();
+
+onMounted(() => {
+  document.addEventListener("click", onMenuOutsideClickHandler);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", onMenuOutsideClickHandler);
+});
+
+const onMenuOutsideClickHandler = (event) => {
+  const isClickInside = popoverContainer.value.contains(event.target);
+
+  if (!isClickInside) {
+    // The click was outside the specifiedElement, do something
+    emit("close");
+  }
+};
 </script>

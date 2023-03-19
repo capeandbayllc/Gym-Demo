@@ -86,6 +86,7 @@ import {useMutation} from "@vue/apollo-composable";
 import Datepicker from '@vuepic/vue-datepicker';
 import MultiSelect from '~/components/multi-select/index.vue';
 
+const emit = defineEmits(['on-profile-update'])
 const route = useRoute()
 const profileId = (route.query.id)
 
@@ -277,7 +278,7 @@ function updateUser() {
       state: demographicsObj.value.state,
       phone: demographicsObj.value.phone,
     },
-  }).finally(() => isProcessing.value = false);
+  }).then(() => emit('on-profile-update')).finally(() => isProcessing.value = false);
 }
 </script>
 <style scoped>
