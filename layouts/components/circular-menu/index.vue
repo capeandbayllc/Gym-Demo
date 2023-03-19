@@ -153,8 +153,8 @@ const items = [
 
 const activeKey = ref("main-bg");
 const getDegree = (ndx) => {
-    const start = -27;
-    const end = 92;
+    const start = -25;
+    const end = 100;
     return start + ((end - start) * ndx) / 10;
 };
 const setActiveKey = (key) => {
