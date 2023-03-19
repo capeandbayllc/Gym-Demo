@@ -11,7 +11,7 @@
         />
         {{ data.segment }}
       </div>
-      <div class="flex items-center" :class="`w-[${columns[1].width}px]`">
+      <div class="flex items-center gap-2 px-4" :class="`w-[${columns[1].width}px]`">
         <AlertIcon class="mr-2 text-red-600" @click="openAlertModal" />
         <AlertIcon class="mr-2 text-yellow-500" @click="openAlertModal" />
         <span>2</span>
@@ -267,6 +267,10 @@
 import MembershipBtn from "~/components/buttons/membership-btn.vue";
 import {
   AlertIcon,
+  ArrowIcon,
+  CallSquareIcon,
+  CrossIcon,
+  EmailSquareIcon,
   SmsSquareIcon,
   EmailSquareIcon,
   CallSquareIcon,
