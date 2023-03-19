@@ -247,12 +247,6 @@ const handleAddNew = (node) => {
     if (eventDetailsVisibibility.value || eventInformationVisibibility.value) {
         return;
     } else {
-        filterOptions.value.employees.isOpen =
-            !filterOptions.value.employees.isOpen;
-        filterOptions.value.locations.isOpen =
-            !filterOptions.value.locations.isOpen;
-        filterOptions.value.event_types.isOpen =
-            !filterOptions.value.event_types.isOpen;
         const startTime = new Date(node.date);
 
         emptyNodeContext.value = {
@@ -265,21 +259,18 @@ const handleAddNew = (node) => {
         };
         resetState();
         eventFormVisibility.value = true;
-
-        setTimeout(() => {
-            filterOptions.value.employees.isOpen =
-                !filterOptions.value.employees.isOpen;
-            filterOptions.value.locations.isOpen =
-                !filterOptions.value.locations.isOpen;
-            filterOptions.value.event_types.isOpen =
-                !filterOptions.value.event_types.isOpen;
-        }, 500);
     }
 };
 
 const { result } = useQuery(query);
 
 const handleCreateEvent = (form) => {
+    filterOptions.value.employees.isOpen =
+        !filterOptions.value.employees.isOpen;
+    filterOptions.value.locations.isOpen =
+        !filterOptions.value.locations.isOpen;
+    filterOptions.value.event_types.isOpen =
+        !filterOptions.value.event_types.isOpen;
     const newEventObj = {
         ...events.value[0],
         attendees: [],
@@ -303,6 +294,14 @@ const handleCreateEvent = (form) => {
 
     events.value.push(newEventObj);
     eventFormVisibility.value = false;
+    setTimeout(() => {
+        filterOptions.value.employees.isOpen =
+            !filterOptions.value.employees.isOpen;
+        filterOptions.value.locations.isOpen =
+            !filterOptions.value.locations.isOpen;
+        filterOptions.value.event_types.isOpen =
+            !filterOptions.value.event_types.isOpen;
+    }, 500);
 };
 
 const getDateTimeString = (date) => {
