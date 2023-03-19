@@ -1,20 +1,22 @@
 <template>
-    <div class="pos-footer">
-        <div class="pos-button-item group" @click="showAddProductModal">
-            <PlusIcon class="pos-add-icon" />
-            <span class="pos-add-text">Product</span>
-        </div>
-        <div class="pos-button-item group" @click="showAddCategoryModal">
-            <PlusIcon class="pos-add-icon" />
-            <span class="pos-add-text">Category</span>
-        </div>
-        <div class="pos-button-item group" @click="removeProductModal">
-            <MinusIcon class="pos-remove-icon" />
-            <span class="pos-remove-text">Product</span>
-        </div>
-        <div class="pos-button-item group" @click="removeCategoryModal">
-            <MinusIcon class="pos-remove-icon" />
-            <span class="pos-remove-text">Category</span>
+    <div class="flex flex-col">
+        <div class="pos-footer">
+            <div class="pos-button-item group" @click="showAddProductModal">
+                <PlusIcon class="pos-add-icon" />
+                <span class="pos-add-text">Product</span>
+            </div>
+            <div class="pos-button-item group" @click="showAddCategoryModal">
+                <PlusIcon class="pos-add-icon" />
+                <span class="pos-add-text">Category</span>
+            </div>
+            <div class="pos-button-item group" @click="removeProductModal">
+                <MinusIcon class="pos-remove-icon" />
+                <span class="pos-remove-text">Product</span>
+            </div>
+            <div class="pos-button-item group" @click="removeCategoryModal">
+                <MinusIcon class="pos-remove-icon" />
+                <span class="pos-remove-text">Category</span>
+            </div>
         </div>
     </div>
 </template>
@@ -45,7 +47,7 @@ const removeCategoryModal = () => {
 
 <style scoped>
 .pos-footer {
-    @apply flex flex-col md:flex-row gap-8 px-10 py-[7px] md:h-[3rem] bg-[#191919]/[0.6] mx-auto rounded-xl md:rounded-b-full;
+    @apply flex flex-col md:flex-row gap-8 px-10 py-[7px] md:h-[3rem] bg-[#191919]/[0.6] !mx-auto rounded-xl md:rounded-b-full w-auto;
 }
 .pos-button-item {
     @apply flex flex-row gap-2 text-[0.7rem] lg:text-[0.9rem] cursor-pointer;
