@@ -97,7 +97,7 @@ const navList = [
             },
             {
                 label: "Fitness",
-                url: "/#",
+                url: "/fitness",
                 icon: FitnessIcon,
             },
             {
@@ -540,7 +540,7 @@ const navList = [
             },
             {
                 label: "Fitness",
-                url: "/#",
+                url: "/fitness",
                 icon: FitnessIcon,
             },
             {
@@ -590,7 +590,7 @@ const navList = [
             },
             {
                 label: "Fitness",
-                url: "/#",
+                url: "/fitness",
                 icon: FitnessIcon,
             },
             {
