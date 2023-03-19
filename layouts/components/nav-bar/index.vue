@@ -1,7 +1,7 @@
 <template>
     <div
         class="nav-bar-container"
-        :class="{ 'mt-11': windowWidth > 1250 }"
+        :class="{ 'mt-[3.25rem]': windowWidth > 1250 }"
         v-if="navItems.length > 0"
     >
         <div
@@ -31,35 +31,35 @@
     @apply bg-secondary h-8 cursor-pointer;
 }
 .nav-bar-items {
-    @apply border border-secondary bg-base-300;
+    @apply border border-secondary !bg-[#191919]/[0.8] border-l-0 rounded-r-xl;
 }
 </style>
 <script setup>
 import { ref, onMounted } from "vue";
 import {
-    DownloadIcon,
-    FavoriteCircleIcon,
-    FitnessIcon,
-    LocationIcon,
-    MarketingIcon,
-    MassComIcon,
-    PosIcon,
-    ReportIcon,
-    SpeedMeterIcon,
-    UpperArrowIcon,
-    ContractEditIcon,
-    ContractIcon,
-    TrainingIcon,
-    PersonAddIcon,
-    MembersIcon,
-    EmployeeIcon,
-    WidgetIcon,
-    VendorIcon,
-    CorporationIcon,
-    RecruitingIcon,
-    EventTypeIcon,
-    MakeCopyeIcon,
-    DraftIcon,
+  DownloadIcon,
+  FavoriteCircleIcon,
+  FitnessIcon,
+  LocationIcon,
+  MarketingIcon,
+  MassComIcon,
+  PosIcon,
+  ReportIcon,
+  SpeedMeterIcon,
+  UpperArrowIcon,
+  ContractEditIcon,
+  ContractIcon,
+  TrainingIcon,
+  PersonAddIcon,
+  MembersIcon,
+  EmployeeIcon,
+  WidgetIcon,
+  VendorIcon,
+  CorporationIcon,
+  RecruitingIcon,
+  EventTypeIcon,
+  MakeCopyeIcon,
+  DraftIcon, BackDocument,
 } from "@/components/icons";
 import NavItem from "./nav-item.vue";
 import PosWindow from "~~/pages/pos/components/pos-window.vue";
@@ -73,6 +73,16 @@ const toggleCollapse = () => {
 let navItems = shallowRef([]);
 
 const navList = [
+    {
+        type: "agreement",
+        navigation: [
+          {
+            label: "Back To Document Center",
+            icon: BackDocument,
+            url: "/document",
+          },
+        ],
+    },
     {
         type: "reporting",
         navigation: [
