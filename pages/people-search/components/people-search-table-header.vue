@@ -38,7 +38,6 @@ thead th {
 <script setup>
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { AlertIcon } from "~~/components/icons";
 
 library.add(faAlignLeft);
