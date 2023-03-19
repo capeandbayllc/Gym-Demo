@@ -37,29 +37,29 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import {
-    DownloadIcon,
-    FavoriteCircleIcon,
-    FitnessIcon,
-    LocationIcon,
-    MarketingIcon,
-    MassComIcon,
-    PosIcon,
-    ReportIcon,
-    SpeedMeterIcon,
-    UpperArrowIcon,
-    ContractEditIcon,
-    ContractIcon,
-    TrainingIcon,
-    PersonAddIcon,
-    MembersIcon,
-    EmployeeIcon,
-    WidgetIcon,
-    VendorIcon,
-    CorporationIcon,
-    RecruitingIcon,
-    EventTypeIcon,
-    MakeCopyeIcon,
-    DraftIcon,
+  DownloadIcon,
+  FavoriteCircleIcon,
+  FitnessIcon,
+  LocationIcon,
+  MarketingIcon,
+  MassComIcon,
+  PosIcon,
+  ReportIcon,
+  SpeedMeterIcon,
+  UpperArrowIcon,
+  ContractEditIcon,
+  ContractIcon,
+  TrainingIcon,
+  PersonAddIcon,
+  MembersIcon,
+  EmployeeIcon,
+  WidgetIcon,
+  VendorIcon,
+  CorporationIcon,
+  RecruitingIcon,
+  EventTypeIcon,
+  MakeCopyeIcon,
+  DraftIcon, BackDocument,
 } from "@/components/icons";
 import NavItem from "./nav-item.vue";
 import PosWindow from "~~/pages/pos/components/pos-window.vue";
@@ -73,6 +73,16 @@ const toggleCollapse = () => {
 let navItems = shallowRef([]);
 
 const navList = [
+    {
+        type: "agreement",
+        navigation: [
+          {
+            label: "Back To Document Center",
+            icon: BackDocument,
+            url: "/document",
+          },
+        ],
+    },
     {
         type: "reporting",
         navigation: [
