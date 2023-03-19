@@ -9,6 +9,7 @@
           <div class="flex -md:block">
             <event-card class="mr-2" />
             <profile-card
+              :row="row"
               :key="refreshIndex"
               :active-option="detailView"
               @select-option="detailView = $event"
@@ -62,7 +63,7 @@
 </template>
 <style scoped>
 .page-checkin-container {
-  @apply py-4 px-5 w-full h-fit;
+  @apply py-4  w-full h-fit;
   .page-title {
     @apply text-lg font-light pb-3 pl-5;
   }
@@ -73,10 +74,10 @@
     }
     .account-box {
       ul {
-        @apply flex w-10/12 justify-around mx-auto -md:w-full;
+        @apply flex w-10/12 justify-around mx-auto -md:w-full bg-black pt-4 mb-2 rounded-full;
 
         li {
-          @apply inline-block;
+          @apply inline-block m-auto;
         }
       }
     }
@@ -114,13 +115,18 @@ import Setting from "./setting/index.vue";
 import Engage from "./engage/index.vue";
 const option = ref(null);
 const route = useRoute();
-const profileId = (route.query.id)
-
+const profileId = route.query.id;
 
 const appLayout = useLayoutElement();
 const checkInContainer = ref();
 const refreshIndex = ref(0);
 
+const props = defineProps({
+  row: {
+    type: Object,
+    required: true,
+  },
+});
 watch(option, () => {
   const scrollTO = checkInContainer.value.offsetHeight + 100;
   setTimeout(() => {
@@ -133,14 +139,13 @@ watch(option, () => {
 });
 
 onMounted(() => {
-  if(profileId){
-
-  detailView.value = 'profile';
+  if (profileId) {
+    detailView.value = "profile";
     setTimeout(() => {
       window.scroll({
         top: 600,
         left: 0,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }, 0);
   }

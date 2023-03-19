@@ -24,7 +24,7 @@
           <Button outline size="sm" class="my-1 border-primary">Trash</Button>
           <Button outline size="sm" class="my-1 border-primary">Contact Lead</Button>
           <Button outline size="sm" class="my-1 border-primary">Add a Note</Button> -->
-          <div class="dropdown-item" tabindex="-1">Preview</div>
+          <div class="dropdown-item" tabindex="-1" @click="handlePreviewClick" >Preview</div>
           <div class="dropdown-item" tabindex="-1">Edit</div>
           <div class="dropdown-item" tabindex="-1">Trash</div>
           <div class="" tabindex="-1">
@@ -48,6 +48,12 @@
 
       <daisy-modal ref="noteCardModalRef" :closable="false">
         <NoteCardModal @close="closeNoteCardModal"/>
+      </daisy-modal>
+
+      <daisy-modal ref="checkInModalRef" style="width:100%; overflow-y: auto;" closable>
+        <div class="w-full max-w-screen px-2">
+          <CheckIn :row="data" @close="closeChekInModal"/>
+        </div>
       </daisy-modal>
     </td>
   </tr>
@@ -127,7 +133,9 @@ import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import NoteCardModal from "~/pages/check-in/note-card/index.vue";
+import CheckIn from "~/pages/check-in/index.vue"
 import {Ref} from "vue";
+
 
 export type Type = 'text' | 'email' | 'call' | null;
 
@@ -135,6 +143,13 @@ library.add(faEllipsisH);
 const props = defineProps<{
   data: Object
 }>()
+const checkInModalRef: Ref<any> = ref(null);
+const handlePreviewClick = () => {
+  checkInModalRef.value.open();
+};
+const closeChekInModal = () => {
+  checkInModalRef.value.close();
+};
 
 const contactOption: Ref<Type> = ref(null);
 const noteCardModalRef: Ref<any> = ref(null);
