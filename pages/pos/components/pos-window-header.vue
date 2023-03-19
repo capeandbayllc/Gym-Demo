@@ -79,6 +79,7 @@ const showGlobalSearchModal = () => {
 };
 
 const selectPerson = (data) => {
+    console.log('here');
     emit("person-selected", data);
     globalSearchModal.value.close();
 };
