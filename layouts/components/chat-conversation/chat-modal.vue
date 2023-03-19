@@ -303,11 +303,11 @@
               placeholder="Type here"
               class="input w-full max-w-md -lg:max-w-max bg-base-content text-base-300"
               v-model="newMessage"
-              @keyup.enter="sendMessage"
+              @keyup.enter="handleSendNewMessage"
             />
             <div class="gap-5 flex">
               <img src="/chat-conversation/image.svg" class="w-5" />
-              <button class="w-10" @click="sendMessage">
+              <button class="w-10" @click="handleSendNewMessage">
                 <img
                   src="/chat-conversation/send.svg"
                   alt="Send Message"
@@ -434,7 +434,14 @@ const showDropDown = ref(false);
 
 const me = useMe();
 
-const members = ref([]);
+const alChatBot = {
+  id: "al-chat-bot",
+  name: "Al",
+  profile_photo_path: "https://cdn-icons-png.flaticon.com/512/2582/2582389.png",
+  // avatar: "/chat-bot.png",
+};
+
+const members = ref([alChatBot]);
 const chatItems = [
   {
     name: "Trainers Forum",
@@ -479,9 +486,13 @@ request(member.query.browse, { first: 50 }).then(({ data }) => {
 const offlineMembers = computed(() =>
   pluckRandom(members.value.filter((m) => !m.active))
 );
-const onlineMembers = computed(() =>
-  pluckRandom(members.value.filter((m) => m.active))
-);
+const onlineMembers = computed(() => [
+  alChatBot,
+  ...pluckRandom(
+      members.value.filter((m) => m.active),
+      2
+  ),
+]);
 
 const conversations = computed(() => members.value.slice(0, 5));
 
@@ -512,9 +523,13 @@ const conversationMessages = ref({});
 
 watch(conversations, () => {
   conversations.value.forEach((c) => {
-    conversationMessages.value[c.id] = test_message_list.map((m) =>
-      m.from ? m : { ...m, from: c }
-    );
+    let defaultMessages = [];
+    if(c.id !== alChatBot.id){
+      defaultMessages = test_message_list.map((m) =>
+          m.from ? m : { ...m, from: c }
+      );
+    }
+    conversationMessages.value[c.id] =defaultMessages;
   });
   conversationMessages.value = { ...conversationMessages.value };
 });
@@ -552,18 +567,45 @@ function hideName(e) {
 
 const newMessage = ref();
 
-const sendMessage = () => {
-  conversationMessages.value[selectedConversation.value.id].push({
+const handleSendNewMessage = () => {
+  if (newMessage.value) {
+    addMessageToConversation(me.value, newMessage.value);
+    newMessage.value = null;
+  }
+};
+
+const addMessageToConversation = (from, message) => {
+  const conversationId = selectedConversation.value.id;
+  conversationMessages.value[conversationId].push({
     id: selectedChatMessages.value.length + 1,
-    from: me.value,
-    message: newMessage.value,
+    from,
+    message,
     created_at: new Date().toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "numeric",
       hour12: true,
     }),
   });
-  conversationMessages.value = conversationMessages.value;
-  newMessage.value = null;
+
+  //handle AI response
+  if(selectedConversation.value.id === alChatBot.id){
+    setTimeout(() => {
+      handleAlChatBotResponse();
+    }, Math.random() * 2500);
+  }
 };
+
+const handleAlChatBotResponse = () => {
+  const message = "Let me figure out my response....";
+  conversationMessages.value[alChatBot.id].push({
+    id: selectedChatMessages.value.length + 1,
+    from: alChatBot,
+    message,
+    created_at: new Date().toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    }),
+  });
+}
 </script>
