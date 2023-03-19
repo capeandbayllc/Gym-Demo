@@ -1,7 +1,7 @@
 <template>
     <div
         class="nav-bar-container"
-        :class="{ 'mt-11': windowWidth > 1250 }"
+        :class="{ 'mt-[3.25rem]': windowWidth > 1250 }"
         v-if="navItems.length > 0"
     >
         <div
@@ -31,35 +31,35 @@
     @apply bg-secondary h-8 cursor-pointer;
 }
 .nav-bar-items {
-    @apply border border-secondary bg-base-300;
+    @apply border border-secondary !bg-[#191919]/[0.8] border-l-0 rounded-r-xl;
 }
 </style>
 <script setup>
 import { ref, onMounted } from "vue";
 import {
-    DownloadIcon,
-    FavoriteCircleIcon,
-    FitnessIcon,
-    LocationIcon,
-    MarketingIcon,
-    MassComIcon,
-    PosIcon,
-    ReportIcon,
-    SpeedMeterIcon,
-    UpperArrowIcon,
-    ContractEditIcon,
-    ContractIcon,
-    TrainingIcon,
-    PersonAddIcon,
-    MembersIcon,
-    EmployeeIcon,
-    WidgetIcon,
-    VendorIcon,
-    CorporationIcon,
-    RecruitingIcon,
-    EventTypeIcon,
-    MakeCopyeIcon,
-    DraftIcon,
+  DownloadIcon,
+  FavoriteCircleIcon,
+  FitnessIcon,
+  LocationIcon,
+  MarketingIcon,
+  MassComIcon,
+  PosIcon,
+  ReportIcon,
+  SpeedMeterIcon,
+  UpperArrowIcon,
+  ContractEditIcon,
+  ContractIcon,
+  TrainingIcon,
+  PersonAddIcon,
+  MembersIcon,
+  EmployeeIcon,
+  WidgetIcon,
+  VendorIcon,
+  CorporationIcon,
+  RecruitingIcon,
+  EventTypeIcon,
+  MakeCopyeIcon,
+  DraftIcon, BackDocument,
 } from "@/components/icons";
 import NavItem from "./nav-item.vue";
 import PosWindow from "~~/pages/pos/components/pos-window.vue";
@@ -72,7 +72,66 @@ const toggleCollapse = () => {
 
 let navItems = shallowRef([]);
 
+const reporting = [
+    {
+      label: "Financial Reporting",
+      icon: ReportIcon,
+      url: "/#",
+    },
+    {
+      label: "Communications",
+      url: "/#",
+      icon: MassComIcon,
+    },
+    {
+      label: "Favorites",
+      url: "/#",
+      icon: FavoriteCircleIcon,
+    },
+    {
+      label: "Point Of Sale",
+      url: null,
+      icon: PosIcon,
+      modalComponent: PosWindow,
+    },
+    {
+      label: "Fitness",
+      url: "/#",
+      icon: FitnessIcon,
+    },
+    {
+      label: "KPIS",
+      url: "/#",
+      icon: SpeedMeterIcon,
+    },
+    {
+      label: "Employee Tracking",
+      url: "/#",
+      icon: LocationIcon,
+    },
+    {
+      label: "Company Inbox",
+      url: "/#",
+      icon: DownloadIcon,
+    },
+    {
+      label: "Marketing",
+      url: "/#",
+      icon: MarketingIcon,
+    },
+];
+
 const navList = [
+    {
+        type: "agreement",
+        navigation: [
+          {
+            label: "Back To Document Center",
+            icon: BackDocument,
+            url: "/document",
+          },
+        ],
+    },
     {
         type: "reporting",
         navigation: [
@@ -620,6 +679,56 @@ const navList = [
             },
         ],
     },
+  {
+    type: "mass-com-scheduled",
+    navigation: [
+      {
+        label: "Financial Reporting",
+        icon: ReportIcon,
+        url: "/#",
+      },
+      {
+        label: "Communications",
+        url: "/#",
+        icon: MassComIcon,
+      },
+      {
+        label: "Favorites",
+        url: "/#",
+        icon: FavoriteCircleIcon,
+      },
+      {
+        label: "Point Of Sale",
+        url: "/#",
+        icon: PosIcon,
+      },
+      {
+        label: "Fitness",
+        url: "/#",
+        icon: FitnessIcon,
+      },
+      {
+        label: "KPIS",
+        url: "/#",
+        icon: SpeedMeterIcon,
+      },
+      {
+        label: "Employee Tracking",
+        url: "/#",
+        icon: LocationIcon,
+      },
+      {
+        label: "Company Inbox",
+        url: "/#",
+        icon: DownloadIcon,
+      },
+      {
+        label: "Marketing",
+        url: "/#",
+        icon: MarketingIcon,
+      },
+    ],
+  },
     {
         type: "calendar",
         navigation: [
@@ -649,6 +758,16 @@ const navList = [
                 url: "/#",
             },
         ],
+    },
+    {
+      type: "profile-setting",
+      navigation: [
+        {
+          icon: WidgetIcon,
+          url: "/#",
+        },
+        ...reporting
+      ],
     },
 ];
 

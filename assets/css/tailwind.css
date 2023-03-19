@@ -114,6 +114,26 @@
     rgba(0, 0, 0, 0.35);
   background-blend-mode: multiply;
 }
+
 .page-content {
   @apply mx-auto w-full max-w-[1120px];
+}
+
+.profile-setting-gradient-bg{
+    background: -webkit-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+    background: -o-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+    background: -ms-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+    background: -moz-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+    background: linear-gradient(to bottom, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+    background-blend-mode: multiply;
+}
+
+.border-12 {
+    border-width: 12px;
+}
+:root {
+    --fc-border-color: hsl(var(--bc) / 0.5);
+    --fc-today-bg-color: hsl(var(--b3) / 0.4);
+    --fc-button-bg-color: hsl(var(--p));
+    --fc-button-active-bg-color: hsl(var(--s));
 }

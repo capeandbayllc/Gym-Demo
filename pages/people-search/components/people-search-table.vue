@@ -8,6 +8,7 @@
         :is="rowComponent"
         :columns="columns"
         :data="item"
+        @click="clickRow(item)"
       />
       <!-- @click="rowClicked(item)" -->
     </div>
@@ -47,7 +48,7 @@ const props = defineProps({
 
 const emit = defineEmits(["row-clicked"]);
 
-const clickRow = (data) => {
-  emit("row-clicked", data);
+const clickRow = (item) => {
+  emit("row-clicked", item);
 };
 </script>

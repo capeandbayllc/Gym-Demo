@@ -24,10 +24,20 @@ const server = createServer({
   routes() {
     // make relationships use snake_case.
     const registerModel = this.schema.registerModel;
+    const cache = {};
+
     this.schema.registerModel = function (type, ModelClass) {
       for (let associationProperty in ModelClass.prototype) {
-        ModelClass.prototype[associationProperty].getForeignKey = function () {
-          return `${underscore(this.name)}_id`;
+        const association = ModelClass.prototype[associationProperty];
+
+        association.getForeignKey = function () {
+          if (cache[this.name] === undefined) {
+            cache[this.name] = association.type === 'belongsTo'
+                ? `${underscore(this.name)}_id`
+                : `${this._container.inflector.singularize(underscore(this.name))}_ids`;
+          }
+
+          return cache[this.name];
         }
       }
 
