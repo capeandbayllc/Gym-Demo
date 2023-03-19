@@ -25,7 +25,7 @@
                         <div class="w-[20%] flex">
                             <label>{{ item.email }}</label>
                         </div>
-                        <div class="w-[10%] flex">
+                        <div class="w-[10%] hidden md:flex md:items-center">
                             <ClubButton :btn_type='default' :label="'Contact'"></ClubButton>
                         </div>
                     </li>
