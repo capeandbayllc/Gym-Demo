@@ -12,7 +12,10 @@
     .percentage-container {
         padding: 30px 40px;
         border: 2px solid #0077ac;
+        border-top: none;
         border-radius: 15px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
     }
 
     .header {

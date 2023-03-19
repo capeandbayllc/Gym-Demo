@@ -86,7 +86,7 @@
         if(status===STATUS_OPEN) {
             return 'bg-error bg-opacity-60';
         } else if(status===STATUS_PENDING) {
-            return 'bg-primary bg-opacity-60';
+            return 'bg-gray-200 bg-opacity-60';
         } else if(status===STATUS_RESOLVED) {
             return 'bg-success bg-opacity-60';
         }

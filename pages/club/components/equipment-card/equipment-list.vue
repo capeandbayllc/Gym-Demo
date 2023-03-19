@@ -63,7 +63,7 @@
                     <label>{{ item.type }}</label>
                 </div>
                 <div class="w-[25%]">
-                    <ClubButton :btn_type="'bg-primary bg-opacity-60'" :label="item.quantity"></ClubButton>
+                    <ClubButton :btn_type="'bg-secondary'" :label="item.quantity"></ClubButton>
                 </div>
                 <div class="w-[25%]">
                     <ClubButton :btn_type='default' :label='View'></ClubButton>

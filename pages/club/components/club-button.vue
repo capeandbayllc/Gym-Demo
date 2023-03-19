@@ -16,7 +16,7 @@
     margin: auto;
     cursor: pointer;
     border-radius: 12px;
-    min-width: 90px;
+    min-width: 50px;
     font-weight: normal;
     cursor : default;
     transition : all 0.3s;

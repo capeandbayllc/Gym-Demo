@@ -24,6 +24,9 @@
     .inventory-container {
         @apply py-[10px] px-[20px] border-2 border-[#0077ac]
     }
+    .inventory-container {
+        border-bottom: none;
+    }
     .columns-header {
         color : #0077ac;
         border-bottom : 3px solid #0077ac;
@@ -37,7 +40,7 @@
     .inventory-list{
         margin-top: 5px;
         overflow-y: auto;
-        max-height : 240px;
+        max-height : 260px;
     }
     .inventory-list::-webkit-scrollbar{
         display: none;

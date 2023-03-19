@@ -1,4 +1,5 @@
 <template>
+    <h3>Club Hub</h3>
     <div class="page-clubhub-container">
         <div class="page-content">
             <div class="grid grid-cols-6 gap-5">
