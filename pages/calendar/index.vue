@@ -17,6 +17,7 @@
                     auto-apply
                     :enable-time-picker="false"
                     dark
+                    :start-date="`2022-12-01`"
                 />
                 <CalendarFilterLayout
                     :title="'Locations'"
@@ -51,7 +52,7 @@
                 <!-- main section heading area -->
                 <div class="flex justify-between items-center w-full">
                     <h1 class="font-light text-xl my-auto w-full">
-                        January 2088
+                        December 2022
                     </h1>
                     <!-- filters/page actions -->
                     <div class="flex gap-2 w-full justify-end">
@@ -246,7 +247,14 @@ const handleAddNew = (node) => {
     if (eventDetailsVisibibility.value || eventInformationVisibibility.value) {
         return;
     } else {
+        filterOptions.value.employees.isOpen =
+            !filterOptions.value.employees.isOpen;
+        filterOptions.value.locations.isOpen =
+            !filterOptions.value.locations.isOpen;
+        filterOptions.value.event_types.isOpen =
+            !filterOptions.value.event_types.isOpen;
         const startTime = new Date(node.date);
+
         emptyNodeContext.value = {
             start: startTime,
             dateStr: node.dateStr,
@@ -257,6 +265,15 @@ const handleAddNew = (node) => {
         };
         resetState();
         eventFormVisibility.value = true;
+
+        setTimeout(() => {
+            filterOptions.value.employees.isOpen =
+                !filterOptions.value.employees.isOpen;
+            filterOptions.value.locations.isOpen =
+                !filterOptions.value.locations.isOpen;
+            filterOptions.value.event_types.isOpen =
+                !filterOptions.value.event_types.isOpen;
+        }, 500);
     }
 };
 
