@@ -14,7 +14,7 @@
                 selected: modelValue,
             }"
         >
-            {{ label}}
+            {{ label }}
         </div>
     </div>
 </template>
