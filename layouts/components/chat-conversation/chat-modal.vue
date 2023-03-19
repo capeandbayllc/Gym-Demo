@@ -107,9 +107,11 @@
             Conversations
           </div>
           <div class="inline">
+            <template v-for="(chat, index) in conversations">
+
             <div
                 class="conversation-block justify-start bg-white rounded-md flex mt-4"
-                v-for="(chat, index) in conversations"
+                v-if="conversationMessages[chat.id]?.length"
                 :key="index"
                 @click="selectedConversation = chat"
             >
@@ -161,6 +163,8 @@
                 </div>
               </div>
             </div>
+            </template>
+
           </div>
         </div>
       </div>
@@ -309,11 +313,12 @@
             <select
                 v-else
                 class="input w-full max-w-md -lg:max-w-max bg-base-content text-base-300"
+                :class="{'opacity-50': !newMessage}"
                 v-model="newMessage"
                 @keyup.enter="handleSendNewMessage"
                 @input="handleQuestionChangeForChatBot"
             >
-              <option :value="null">Select a question...</option>
+              <option :value="null" selected>Select a question...</option>
               <option v-for="({question}, idx) in alChatBotTrainingSet" :value="question">{{ question }}</option>
             </select>
             <div class="gap-5 flex">
@@ -610,7 +615,12 @@ const handleSendNewMessage = () => {
 
 const addMessageToConversation = (from, message) => {
   const conversationId = selectedConversation.value.id;
-  //TODO: add in new conversation if not exists
+
+  //add in new conversation if not exists
+  if(!conversationMessages.value[conversationId]) {
+    conversationMessages.value[conversationId] = [];
+  }
+
   conversationMessages.value[conversationId].push({
     id: selectedChatMessages.value.length + 1,
     from,
