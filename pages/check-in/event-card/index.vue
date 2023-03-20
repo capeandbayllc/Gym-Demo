@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="events-header pt-8 font-normal">Classses</div>
+        <div class="events-header pt-8 font-normal">Classes</div>
         <div class="event-description border-none">At your location</div>
         <div class="events-header pb-2">December</div>
         <event-list
@@ -98,7 +98,7 @@ const mock = {
             id: 7,
             title: "PT Training",
             booked: false,
-            due: "Wednesday 10:30am - 1:10am",
+            due: "Wednesday 10:30am - 11:10am",
         },
         {
             id: 8,
