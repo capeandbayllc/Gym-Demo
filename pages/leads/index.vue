@@ -118,7 +118,7 @@
 import LeadTableRow from "./components/lead-table-row.vue";
 import { SearchIcon, AddIcon, NextIcon } from "@/components/icons";
 import Welcome from "~/pages/check-in/profile-card/add-member/welcom.vue";
-// import JoinTour from "~/pages/check-in/profile-card/add-member/join-tour.vue";
+import JoinTour from "~/pages/check-in/profile-card/add-member/join-tour.vue";
 import Infomrmation from "~/pages/check-in/profile-card/add-member/information.vue";
 import PersonalInformation from "~/pages/check-in/user-info/personal-information/index.vue";
 import Interests from "~/pages/check-in/profile-card/add-member/interests.vue";
@@ -131,7 +131,7 @@ const isSearchEnable = ref(false);
 const addMemberPopUp = ref(null);
 const addMemberScreens = ref([
     Welcome,
-    // JoinTour,
+    JoinTour,
     Infomrmation,
     PersonalInformation,
     Interests,
