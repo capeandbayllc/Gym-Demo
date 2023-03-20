@@ -1,8 +1,11 @@
 <template>
     <context-menu v-show="!isPageView" ref="userMenu" class="user-menu">
-        <div class="border border-white inline-block rounded py-1 px-2 w-max cursor-pointer hover:bg-white hover:text-black transition uppercase font-semibold">+ Member</div>
-        <div class="border border-white inline-block rounded py-1 px-2 w-max cursor-pointer hover:bg-white hover:text-black transition uppercase font-semibold" @click.prevent="openAddMemberPopUp">+ Lead</div>
-        <div class="border border-white inline-block rounded py-1 px-2 w-max cursor-pointer hover:bg-white hover:text-black transition uppercase font-semibold">+ Guest Pass</div>
+     <div class="cursor-pointer mx-2" @click.prevent="openAddMemberPopUp">
+        <AddLead class="m-auto h-8" />
+        <div class="m-auto whitespace-nowrap font-semibold text-xs mt-1" >
+          Add Lead
+        </div>
+     </div>
     </context-menu>
     <daisy-modal
         id="addMemberPopUp"
@@ -24,7 +27,7 @@
 </template>
 <style scoped>
 .user-menu {
-    @apply bg-secondary p-4 flex flex-col space-y-3 top-12 rounded;
+    @apply bg-secondary p-4 flex flex-col space-y-3 top-12 ml-6 rounded;
     left: -4rem;
 }
 </style>
@@ -38,7 +41,7 @@ import Interests from '../../../pages/check-in/profile-card/add-member/interests
 import EmergencyInfo from '../../../pages/check-in/profile-card/add-member/emergency-info.vue'
 import BroughtToday from '../../../pages/check-in/profile-card/add-member/brought-today.vue';
 import MembershipType from '../../../pages/check-in/new-agreement/membership-type.vue';
-import { NextIcon } from "@/components/icons";
+import { NextIcon,AddLead } from "@/components/icons";
 
 const props = defineProps({
   mode: {
