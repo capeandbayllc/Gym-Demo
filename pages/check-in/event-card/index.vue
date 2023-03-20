@@ -98,7 +98,7 @@ const mock = {
             id: 7,
             title: "PT Training",
             booked: false,
-            due: "Wednesday 10:30am - 11:10am",
+            due: "Wednesday 10:30am - 1:10am",
         },
         {
             id: 8,
