@@ -22,8 +22,8 @@
             address: '1234 Street Address',
             city: 'Cityville',
             state: 'Stateville',
-            subleased_thumb: 'sublease.png',
-            map_img: 'map.png',
+            subleased_thumb: '/sublease.png',
+            map_img: '/map.png',
         }
     };
 </script>
