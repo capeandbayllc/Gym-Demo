@@ -377,4 +377,8 @@ thead .fc-scroller {
         @apply bg-gradient-to-b from-secondary/80 via-secondary;
     } */
 }
+
+.fc-daygrid-event {
+    @apply overflow-hidden;
+}
 </style>
