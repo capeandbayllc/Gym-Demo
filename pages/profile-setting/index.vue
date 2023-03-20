@@ -1,8 +1,3 @@
-<!-- TODO: Remains:-->
-<!-- TODO: iii) if possible upload, responsive checking for ipad screen <820-->
-
-<!-- TODO: ii) Search manager (have some questions here????) (how will it work):-->
-<!-- TODO: 5. Attachment-->
 <template>
   <div class="page-setting-container">
     <!--    PROFILE IMAGE SECTION-->
@@ -67,6 +62,8 @@
     <update-password></update-password>
 
     <account-auth></account-auth>
+
+    <attachment></attachment>
 
     <salary></salary>
 
@@ -161,6 +158,7 @@ import UpdatePassword from "./components/update-password";
 import AccountAuth from "./components/account-auth";
 import Salary from "./components/salary";
 import Hierarchy from "./components/hierarchy";
+import Attachment from "./components/attachment";
 
 let user = useState("auth");
 
