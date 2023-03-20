@@ -460,6 +460,7 @@ import {library} from "@fortawesome/fontawesome-svg-core";
 import {fas} from "@fortawesome/pro-solid-svg-icons";
 import {request} from "~/api/utils/request";
 import member from "~/api/queries/member";
+import location from "~/api/queries/location";
 import {getRandomInt} from "~/api/utils/number";
 import {faker} from "@faker-js/faker";
 
@@ -478,7 +479,7 @@ const alChatBot = {
 };
 
 const members = ref([alChatBot]);
-const chatItems = [
+const chatItems = ref([
   {
     name: "Trainers Forum",
     image: "/chat-conversation/trainer.png",
@@ -490,7 +491,7 @@ const chatItems = [
     icon: ["fas", "fa-user-plus"],
   },
   {
-    name: "Club #1234",
+    name: "",
     image: "/chat-conversation/club.png",
     icon: ["fas", "fa-warehouse-alt"],
   },
@@ -499,7 +500,13 @@ const chatItems = [
     image: "/chat-conversation/plus.png",
     icon: ["fas", "fa-plus-circle"],
   },
-];
+]);
+
+const locationData = ref(null);
+request(location.query.get, { id: 'afea5d32-ec62-480d-af29-d67fc8c9c7a3' }).then(({data}) => {
+    locationData.value = data.data.location;
+    chatItems.value[2].name = locationData.value.name;
+});
 
 const user = useState("auth");
 const floatingTooltip = inject("floating-modal");
