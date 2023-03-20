@@ -38,6 +38,6 @@ const filterSelected = (value) => {
 };
 
 const rowClicked = (member) => {
-    window.open(`/check-in?id=${member.id}&type=member&preview=true`, "_blank");
+    window.open(`/check-in?id=${member.id}&type=member&preview=true`, "_self");
 };
 </script>

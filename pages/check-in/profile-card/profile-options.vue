@@ -19,7 +19,7 @@
 </template>
 <style scoped>
 .profile-options-container {
-    @apply flex flex-col space-y-6 items-center;
+    @apply flex flex-row gap-5 xl:flex-col xl:space-y-6 items-center;
     .profile-options {
         @apply flex flex-col min-w-[14rem] justify-between text-xs h-full border-2 border-secondary rounded-3xl p-5 w-full bg-secondary/20;
     }
