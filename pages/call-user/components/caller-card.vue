@@ -1,7 +1,7 @@
 <template>
    <div class="call-image-container">
         <div class="profile-avatar" :class="{'bg-secondary': userCallSetting.type === 'outgoing-call' || userCallSetting.type === 'incoming-call', 'bg-gray-600': userCallSetting.type === 'end-call'}">
-            <img :src="userCallSetting.callerProfileImage"/>
+            <img :src="userCallSetting.callerProfileImage" class="rounded-full" alt=""/>
         </div>
         <div class="profile-info">
             <div class="profile-name">{{ userCallSetting.userName }}</div>

@@ -22,10 +22,8 @@
 </style>
 <script setup>
 import CallListItem from "./call-list-item.vue";
-import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
 import member from "~/api/queries/member";
-import {request} from "~/api/utils/request";
 
 
 const { result } = useQuery(member.query.browse);

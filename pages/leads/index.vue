@@ -126,9 +126,6 @@ const leads_display = computed(() => {
       type: getRandomType(),
       opportunity: getRandomOpportunity(),
       status: 'available',
-      updated_at: new Date(item.updated_at).toLocaleDateString().replaceAll('/', '.'),
-      created_at: new Date(item.created_at).toLocaleDateString().replaceAll('/', '.'),
-
     };
   });
 });

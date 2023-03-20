@@ -1,6 +1,6 @@
 <template>
   <tr class="people-lead-tbl-row">
-    <td>{{ data.created_at }}</td>
+    <td>{{ dateFormat(data.created_at, 'dd/mm/yyyy') }}</td>
     <td>
       <div :class="'opportunity-' + data.opportunity"></div>
     </td>
@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <Options :show="contactOption" @on:close="contactOption = null" />
+      <Options :user="data" :show="contactOption" @on:close="contactOption = null" />
 
       <daisy-modal ref="noteCardModalRef" :closable="false">
         <NoteCardModal @close="closeNoteCardModal"/>
@@ -127,6 +127,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import NoteCardModal from "~/pages/check-in/note-card/index.vue";
 import {Ref} from "vue";
+import dateFormat from "dateformat";
 
 export type Type = 'text' | 'email' | 'call' | null;
 const router = useRouter()

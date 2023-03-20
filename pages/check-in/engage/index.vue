@@ -90,7 +90,7 @@ const leadsData = [
         date_time:"09/26/22 12:22:00 PM",
         status:"Answered",
         completed_by:"Kevin Buchanan"
-    }    
+    }
 ];
 
 const outgoingCallModalRef = ref(null);

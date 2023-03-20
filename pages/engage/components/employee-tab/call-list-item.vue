@@ -15,24 +15,15 @@
         </td>
       
         <td class="w-[7rem]">
-          <!-- <button class="contact-button" @click.stop="contactOption='call'">
+           <button class="contact-button" @click.stop="contactOption='call'">
             <CallIcon class="icon"></CallIcon>
-          </button> -->
+          </button>
           
-          <!-- <button class="contact-button" @click.stop="contactOption = 'email'">
+           <button class="contact-button" @click.stop="contactOption = 'email'">
             <EmailIcon class="icon"></EmailIcon>
-          </button> -->
+          </button>
          
-          <!-- <button class="contact-button" @click.stop="contactOption = 'text'">
-            <MessageIcon class="icon"></MessageIcon>
-          </button> -->
-          <button class="contact-button"  @click="outgoingCall">
-            <CallIcon class="icon"></CallIcon>
-          </button>
-          <button class="contact-button" @click="openEmailModal">
-            <EmailIcon class="icon"></EmailIcon>
-          </button>
-          <button class="contact-button" @click="openSMSModal">
+           <button class="contact-button" @click.stop="contactOption = 'text'">
             <MessageIcon class="icon"></MessageIcon>
           </button>
         </td>
@@ -59,19 +50,11 @@
               <div class="dropdown-item" tabindex="-1">POS</div>
             </div>
           </div>
-          <Options :show="contactOption" @on:close="contactOption = null" />
+
         </td>
     </tr>
 
-    <daisy-modal ref="outgoingCallModalRef">
-           <MakeCallModal  @close="closeOutgoingCall" @callNow="showInCallModal" @saveNow="saveNow"/>
-      </daisy-modal>
-      <daisy-modal ref="emailModalRef">
-            <SendEmailModal @close="closeEmailModal" @saveEmail="saveEmail" @sendEmail="sendEmail" />
-      </daisy-modal>
-      <daisy-modal ref="smsModalRef">
-           <SendSmsModal @close="closeSMSModal" @saveSms="saveSms" @sendSms="sendSms" />
-      </daisy-modal> 
+    <Options :user="data" :show="contactOption" @on:close="contactOption = null" />
 </template>
 <style scoped>
 .call-list-item {
@@ -123,9 +106,6 @@ import {CallIcon, EmailIcon, MessageIcon, CrossIcon} from "~/components/icons";
 import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
-import MakeCallModal from '../../../check-in/side-car-split/make-call.vue';
-import SendEmailModal from '../../../check-in/side-car-split/send-email.vue';
-import SendSmsModal from '../../../check-in/side-car-split/send-sms.vue';
 
 
 library.add(faEllipsisH);
@@ -154,30 +134,11 @@ const hovering = () => {
 const outgoingCallModalRef = ref(null);
 const emailModalRef = ref(null);
 const smsModalRef = ref(null);
-const outgoingCall = ()=>{
-    outgoingCallModalRef.value.open();
-}
-const closeOutgoingCall = ()=>{
-    outgoingCallModalRef.value.close();
-}
-
-const openEmailModal = ()=>{
-    emailModalRef.value.open();
-}
-const closeEmailModal = ()=>{
-    emailModalRef.value.close();
-}
 const saveEmail = ()=>{
     emailModalRef.value.close();
 }
 const sendEmail = ()=>{
     emailModalRef.value.close();
-}
-const openSMSModal = ()=>{
-    smsModalRef.value.open();
-}
-const closeSMSModal = ()=>{
-    smsModalRef.value.close();
 }
 const saveSms = ()=>{
     smsModalRef.value.close();
@@ -185,11 +146,6 @@ const saveSms = ()=>{
 const sendSms = ()=>{
     smsModalRef.value.close();
 }
-
-const showInCallModal = () => {
-    outgoingCallModalRef.value.close();
-};
-
 const saveNow = () => {
     outgoingCallModalRef.value.close();
 };
