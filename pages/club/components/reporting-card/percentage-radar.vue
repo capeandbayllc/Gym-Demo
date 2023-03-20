@@ -10,7 +10,7 @@
 </template>
 <style scoped>
     .percentage-container {
-        padding: 30px 40px;
+        padding: 30px 20px;
         border: 2px solid #0077ac;
         border-top: none;
         border-radius: 15px;
