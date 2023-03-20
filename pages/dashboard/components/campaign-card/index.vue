@@ -1,5 +1,5 @@
 <template>
-    <dashboard-card :title-icon="CampaignIcon" title="Drip Campaigns">
+    <dashboard-card :title-icon="CampaignIcon" title="New Member Revenue">
         <div class="text-lg p-4 font-semibold">December: 2022</div>
         <div class="capmaign-chart-container">
             <capmaign-chart />

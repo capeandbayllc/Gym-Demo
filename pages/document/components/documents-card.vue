@@ -4,7 +4,7 @@
             <template #title>
                 <div class="document-card-title">
                     Documents
-                    <search-input neutral size="md" border="base"/>
+                    <search-input neutral size="md" border="base" />
                 </div>
             </template>
             <div class="p-6">
@@ -19,89 +19,89 @@
     </div>
 </template>
 <style scoped>
-    .document-card-title {
-        @apply flex items-center h-14 text-xl font-semibold px-6 text-base-content bg-secondary justify-between;
-    }
+.document-card-title {
+    @apply flex items-center h-14 text-xl rounded-t-xl font-semibold px-6 text-base-content bg-secondary justify-between;
+}
 </style>
 <style>
-    .document-tbl-content thead {
-        @apply top-0 sticky bg-black h-10;
-    }
+.document-tbl-content thead {
+    @apply top-0 sticky bg-black h-10;
+}
 </style>
 <script setup>
-import DocumentTableRow from './document-table-row.vue';
+import DocumentTableRow from "./document-table-row.vue";
 const columns = [
     {
-        label: "Segment",
-        class: "text-secondary text-left"
+        label: "Document Name",
+        class: "text-secondary text-left",
     },
     {
         label: "Type",
-        class: "text-secondary text-left"
+        class: "text-secondary text-left",
     },
     {
         label: "Created",
-        class: "text-secondary text-left"
+        class: "text-secondary text-left",
     },
     {
         label: "Uploaded By",
-        class: "text-secondary text-left"
-    }
+        class: "text-secondary text-left",
+    },
 ];
 const documentsData = [
     {
         id: 1,
-        segment: 'New Employee',
+        segment: "New Employee",
         created: "5/5 2002, 12:24:44PM",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
-        type: "Contract"
+        type: "Contract",
     },
     {
         id: 2,
-        segment: 'New Member',
+        segment: "New Member",
         created: "5/5 2002, 12:24:44PM",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
-        type: "Form"
+        type: "Form",
     },
     {
         id: 3,
-        segment: 'Training Guide',
+        segment: "Training Guide",
         created: "5/5 2002, 12:24:44PM",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
-        type: "Training"
+        type: "Training",
     },
     {
         id: 4,
-        segment: 'Training Guide',
+        segment: "Training Guide",
         created: "5/5 2002, 12:24:44PM",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
-        type: "Training"
+        type: "Training",
     },
     {
         id: 5,
-        segment: 'Job Performance',
+        segment: "Job Performance",
         created: "5/5 2002, 12:24:44PM",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
-        type: "Training"
+        type: "Training",
     },
     {
         id: 6,
-        segment: 'Compensation',
+        segment: "Compensation",
         created: "5/5 2002, 12:24:44PM",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
-        type: "Contract"
+        type: "Contract",
     },
 ];
 </script>
