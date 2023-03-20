@@ -20,13 +20,13 @@
                 <div class="calendar-list-container">
                     <div>
                         <div class="flex items-center justify-between h-full">
-                            <div class="relative w-fit flex flex-col justify-center text-left text-white">
+                            <div class="relative w-1/2 flex flex-col justify-left text-left text-white">
                                 <div class="grid grid-cols-3 gap-1 items-center">
                                     <div class="col-span-1 flex items-center justify-center">
                                         <arrow-icon direction="left" class="h-fit cursor-pointer" @click="previousMonth"/>
                                     </div>
                                     <div class="col-span-1 flex items-center justify-center">
-                                        <span class="flex">{{ monthNames[selectedMonth] }}</span>
+                                        <span>{{ monthNames[selectedMonth] }}</span>
                                     </div>
                                     <div class="col-span-1 flex items-center justify-center">
                                         <arrow-icon direction="right" class="h-fit cursor-pointer" @click="nextMonth"/>
