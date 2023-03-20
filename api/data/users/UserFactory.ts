@@ -18,7 +18,7 @@ export default function createAdminAndKioskUser(server: Server): void {
       date_of_birth: null,
       gender: "male",
       drivers_license_number: null,
-      profile_photo_path: "account-lg.png",
+      profile_photo_path: "/account-lg.png",
       occupation: null,
       employer: null,
       barcode: null,

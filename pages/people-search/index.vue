@@ -32,7 +32,7 @@
 import PeopleSearchAction from "./components/people-search-action.vue";
 import SearchList from "./components/search-list.vue";
 const router = useRouter();
-const searchInput = ref("Kev");
+const searchInput = ref("");
 const tblFilter = ref(null);
 const filterSelected = (value) => {
     tblFilter.value = value;

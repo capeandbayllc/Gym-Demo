@@ -1,17 +1,17 @@
 <template>
-    <NuxtLink class="nav-item" :to="url" v-if="url">
+    <NuxtLink class="nav-item" :to="url" >
         <component :is="icon" />
         <span v-if="label" class="nav-item-label">{{ label }}</span>
     </NuxtLink>
-    <span class="nav-item" v-else @click="openNavModal">
-        <component :is="icon" />
-        <span v-if="label" class="nav-item-label">{{ label }}</span>
-    </span>
-    <daisy-modal :overlay="false" id="navModal" ref="navModal">
-        <div class="w-[90vw]">
-            <component :is="modalComponent" />
-        </div>
-    </daisy-modal>
+<!--    <span class="nav-item" v-else @click="openNavModal">-->
+<!--        <component :is="icon" />-->
+<!--        <span v-if="label" class="nav-item-label">{{ label }}</span>-->
+<!--    </span>-->
+<!--    <daisy-modal :overlay="false" id="navModal" ref="navModal">-->
+<!--        <div class="w-[90vw]">-->
+<!--            <component :is="modalComponent" />-->
+<!--        </div>-->
+<!--    </daisy-modal>-->
 </template>
 <style scoped>
 .nav-item {

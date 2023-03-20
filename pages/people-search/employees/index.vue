@@ -162,23 +162,23 @@ const prevScreen = () => {
 const locationType = [
   {
     value: '1',
-    label: 'Location 1',
+    label: 'Club 1',
   },
   {
     value: '2',
-    label: 'Location 2',
+    label: 'Club 2',
   },
   {
     value: '3',
-    label: 'Location 3',
+    label: 'Club 3',
   },
   {
     value: '4',
-    label: 'Location 4',
+    label: 'Club 4',
   },
   {
     value: '5',
-    label: 'Location 5',
+    label: 'Club 5',
   },
 ];
 const leadType = [
@@ -209,7 +209,7 @@ const columns = [
     class: 'text-secondary',
   },
   {
-    label: 'Department',
+    label: 'Last Name',
     class: 'text-secondary',
   },
   {
@@ -217,11 +217,11 @@ const columns = [
     class: 'text-secondary',
   },
   {
-    label: 'Last Name',
+    label: 'Location',
     class: 'text-secondary',
   },
   {
-    label: 'Location',
+    label: 'Department',
     class: 'text-secondary',
   },
   {
