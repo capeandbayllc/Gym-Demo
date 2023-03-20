@@ -613,6 +613,15 @@ const navList = [
         ...reporting
       ],
     },
+    {
+        type: "club",
+        navigation: [
+            {
+                icon: WidgetIcon,
+                url: "/engage",
+            },
+        ],
+    }
 ];
 
 const route = useRoute();
