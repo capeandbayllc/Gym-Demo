@@ -31,6 +31,7 @@
 <script setup>
 import PeopleSearchAction from "./components/people-search-action.vue";
 import SearchList from "./components/search-list.vue";
+const router = useRouter();
 const searchInput = ref("Kev");
 const tblFilter = ref(null);
 const filterSelected = (value) => {
@@ -38,6 +39,9 @@ const filterSelected = (value) => {
 };
 
 const rowClicked = (member) => {
-    window.open(`/check-in?id=${member.id}&type=member&preview=true`, "_self");
+    router.push({
+        path: "/check-in",
+        query: { id: member.id, preview: true },
+    });
 };
 </script>

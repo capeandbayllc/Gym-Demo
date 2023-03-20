@@ -20,5 +20,3 @@ const name = ref("Kevin Buchanan");
 const email = ref("kevinbuchanan@gmail.com");
 
 </script>
-<style setup>
-</style>
