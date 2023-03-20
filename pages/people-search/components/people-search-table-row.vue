@@ -7,6 +7,7 @@
             >
                 <input
                     type="checkbox"
+                    @click.stop=""
                     class="checkbox checkbox-secondary bg-white mr-2"
                 />
                 {{ data.segment }}
@@ -37,19 +38,19 @@
                 :class="`w-[${columns[3].width}px]`"
             >
                 <div class="mr-[40px]">
-                    <SmsSquareIcon  @click="contactOption = 'text'" />
+                    <SmsSquareIcon  @click.stop="contactOption = 'text'" />
                 </div>
                 <!-- <a :href="'mailto:' + data.email" class="mr-[40px]">
                     <EmailSquareIcon />
                 </a> -->
                 <a  class="mr-[40px]">
-                    <EmailSquareIcon @click="contactOption = 'email'" />
+                    <EmailSquareIcon @click.stop="contactOption = 'email'" />
                 </a>
                 <!-- <a :href="'tel:' + data.phone">
                     <CallSquareIcon  />
                 </a> -->
                 <a >
-                    <CallSquareIcon @click="contactOption = 'call'" />
+                    <CallSquareIcon @click.stop="contactOption = 'call'" />
                 </a>
             </div>
             <div
@@ -65,7 +66,7 @@
             <div :class="`w-[${columns[6].width}px]`">
                 <div
                     v-show="!dropdownInfo"
-                    @click="showDropdownInfo"
+                    @click.stop="showDropdownInfo"
                     class="text-secondary h-6 w-6 flex items-center justify-center"
                 >
                     <svg
@@ -86,7 +87,7 @@
                 </div>
                 <div
                     v-show="dropdownInfo"
-                    @click="hideDropdownInfo"
+                    @click.stop="hideDropdownInfo"
                     class="text-secondary h-6 w-6 flex items-center justify-center"
                 >
                     <svg
