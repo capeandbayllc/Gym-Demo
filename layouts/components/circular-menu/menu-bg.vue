@@ -1,5 +1,4 @@
 <template>
-    asdf
     <div
 		class="menu-bg"
 		:class="{
