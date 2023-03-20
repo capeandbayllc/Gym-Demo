@@ -36,6 +36,3 @@ const emergencyInfo = ref([
 
 
 </script>
-<style setup>
-
-</style>

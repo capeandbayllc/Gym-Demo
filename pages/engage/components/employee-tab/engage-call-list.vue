@@ -20,7 +20,6 @@ import CallListItem from "./call-list-item.vue";
 import { useQuery } from "@vue/apollo-composable";
 import member from "~/api/queries/member";
 
-
 const { result } = useQuery(member.query.browse);
 
 const members = ref([]);
@@ -43,6 +42,9 @@ const members2 = computed(() => {
     return {
       ...item,
       membership_type: getRandomMembershipType(),
+      updated_at: new Date(item.updated_at)
+        .toLocaleDateString()
+        .replaceAll("/", "."),
     };
   });
 });

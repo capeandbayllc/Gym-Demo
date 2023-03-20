@@ -140,30 +140,54 @@ library.add(faEllipsisH);
 const contactOption = ref(null);
 
 const props = defineProps({
-    data: Object
-})
-let isHovering = false
+  data: Object,
+});
+let isHovering = false;
 
 const hovering = () => {
   console.log(isHovering);
   isHovering = !isHovering;
-}
+};
 
 const outgoingCallModalRef = ref(null);
 const emailModalRef = ref(null);
 const smsModalRef = ref(null);
-const saveEmail = ()=>{
-    emailModalRef.value.close();
-}
-const sendEmail = ()=>{
-    emailModalRef.value.close();
-}
-const saveSms = ()=>{
-    smsModalRef.value.close();
-}
-const sendSms = ()=>{
-    smsModalRef.value.close();
-}
+const outgoingCall = () => {
+  outgoingCallModalRef.value.open();
+};
+const closeOutgoingCall = () => {
+  outgoingCallModalRef.value.close();
+};
+
+const openEmailModal = () => {
+  emailModalRef.value.open();
+};
+const closeEmailModal = () => {
+  emailModalRef.value.close();
+};
+const saveEmail = () => {
+  emailModalRef.value.close();
+};
+const sendEmail = () => {
+  emailModalRef.value.close();
+};
+const openSMSModal = () => {
+  smsModalRef.value.open();
+};
+const closeSMSModal = () => {
+  smsModalRef.value.close();
+};
+const saveSms = () => {
+  smsModalRef.value.close();
+};
+const sendSms = () => {
+  smsModalRef.value.close();
+};
+
+const showInCallModal = () => {
+  outgoingCallModalRef.value.close();
+};
+
 const saveNow = () => {
   outgoingCallModalRef.value.close();
 };

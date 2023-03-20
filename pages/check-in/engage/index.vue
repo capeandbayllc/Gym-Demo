@@ -25,7 +25,7 @@
             </div>
             <div>
                 <h3 class="text-xl pl-6">Engage History</h3>
-                <EngageHistoryTable
+                <engageHistoryTable
                     :columns="columns"
                     :items="leadsData"
                     class="p-6"
@@ -60,7 +60,7 @@
 </template>
 <script setup>
 import { CallIcon, EmailIcon, MessageIcon } from "~~/components/icons";
-import EngageHistoryTable from "./engage-history-table.vue";
+import engageHistoryTable from "./engage-history-table.vue";
 // import OutgoingCallModal from '../../call-user/components/outgoing-call-modal.vue';
 // import EmailModal from './email.vue';
 // import SMSModal from './message.vue';
