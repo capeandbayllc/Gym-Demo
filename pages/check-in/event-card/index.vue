@@ -15,7 +15,10 @@
         <div class="events-header pt-8 font-normal">Classses</div>
         <div class="event-description border-none">At your location</div>
         <div class="events-header pb-2">December</div>
-        <event-list :data="mock.upcoming" class="max-h-[15rem] lg:max-h-full xl:max-h-[15rem] overflow-auto" />
+        <event-list
+            :data="mock.upcoming"
+            class="max-h-[15rem] lg:max-h-[26rem] xl:max-h-[15rem] overflow-auto"
+        />
     </div>
 </template>
 <style scoped>
