@@ -1,4 +1,5 @@
 <template>
+    asdf
     <div
 		class="menu-bg"
 		:class="{
@@ -10,7 +11,7 @@
 </template>
 <style scoped>
 .menu-bg {
-    @apply absolute rounded-full;
+    @apply absolute rounded-full bg-contain;
     width: 36vw;
     height: 36vw;
     top: 2vw;
