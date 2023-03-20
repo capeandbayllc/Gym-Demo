@@ -106,6 +106,9 @@
 import { ArrowIcon } from "~~/components/icons";
 import SideBarMember from "./side-bar-member.vue";
 import CheckInModal from "../check-in-modal/index.vue";
+
+
+
 const locations = [
     {
         value: 1,

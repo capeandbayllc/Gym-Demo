@@ -85,20 +85,21 @@ import user from "~/api/mutations/user";
 import {useMutation} from "@vue/apollo-composable";
 import Datepicker from '@vuepic/vue-datepicker';
 import MultiSelect from '~/components/multi-select/index.vue';
+import lead from "~/api/queries/lead";
 
+const emit = defineEmits(['on-profile-update'])
 const route = useRoute()
 const profileId = (route.query.id)
+const isLeadView = route.query.type === 'lead';
 
-request(member.query.get, { id: profileId }).then(({data}) => {
-  const member = data.data.member;
+request((isLeadView ? lead : member).query.get, { id: profileId }).then(({data}) => {
+  const user = data.data[isLeadView ? 'lead' : 'member'];
 
-  const homeLocation = member.homeLocation;
-  delete member.homeLocation;
-  console.log(member, homeLocation)
+  const homeLocation = user.homeLocation;
+  delete user.homeLocation;
 
-  // @todo remove userId when mirage case is resolved.
-  memberInfo.value = {...member, ...{id: member.user_id}};
-  demographicsObj.value = {...homeLocation, ...member};
+  memberInfo.value = {...user, ...{ id: user.user_id}};
+  demographicsObj.value = {...homeLocation, ...user};
 });
 
 const isActiveMember = ref(false);
@@ -277,7 +278,7 @@ function updateUser() {
       state: demographicsObj.value.state,
       phone: demographicsObj.value.phone,
     },
-  }).finally(() => isProcessing.value = false);
+  }).then(() => emit('on-profile-update')).finally(() => isProcessing.value = false);
 }
 </script>
 <style scoped>

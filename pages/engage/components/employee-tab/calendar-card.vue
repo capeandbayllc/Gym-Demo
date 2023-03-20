@@ -29,8 +29,8 @@
         <Datepicker class="custom-date" v-model="date" inline auto-apply :enable-time-picker="false" dark/>
     </div>
     <div class="calendar-card">
-        <div class="swiper-text">Monday</div>
-        <div class="calendar-date">September 6</div>
+        <div class="swiper-text">Tuesday</div>
+        <div class="calendar-date">December 6</div>
     </div>
 </template>
 <style>
