@@ -18,7 +18,7 @@
     @apply flex w-full h-16 items-center justify-center cursor-pointer;
 }
 .nav-item:hover .nav-item-label {
-    @apply flex h-9 w-fit left-0 px-4 text-sm font-semibold items-center text-base-content;
+    @apply flex h-9 w-fit left-0 px-4 text-sm font-semibold items-center text-base-content z-[999];
 }
 .nav-item:hover {
     @apply text-secondary;

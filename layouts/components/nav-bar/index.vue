@@ -159,8 +159,8 @@ const navList = [
         icon: FavoriteCircleIcon,
       },
       {
-        label: "Fitness",
-        url: "/fitness",
+        label: "Physical Therapy",
+        url: null,
         icon: FitnessIcon,
       },
       {
