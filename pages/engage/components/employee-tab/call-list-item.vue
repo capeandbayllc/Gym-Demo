@@ -126,7 +126,7 @@
     @apply float-left h-[.5rem] w-[.5rem] rounded-full bottom-0 right-2 mr-[2px];
   }
   .contact-button {
-    @apply bg-[#0089FF] border-white border rounded-xl p-2;
+    @apply bg-[#0089FF] border-white border rounded-xl p-1;
   }
   .icon {
     @apply fill-white w-4 h-4;
