@@ -201,7 +201,6 @@ import {
   NewAgreementHoverIcon,
   ArrowIcon,
 } from "@/components/icons";
-import '@fullcalendar/core/vdom';
 import AlertButton from "./alert-button.vue";
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
