@@ -18,7 +18,7 @@
         },
         {
             label: 'Company',
-            class: 'text-secondary text-center w-[25%]',
+            class: 'text-secondary text-center w-[20%]',
         },
         {
             label: 'Phone',
@@ -30,7 +30,7 @@
         },
         {
             label: ' ',
-            class: 'text-secondary text-center w-[10%]'
+            class: 'text-secondary text-center w-[15%]'
         }
     ];
 

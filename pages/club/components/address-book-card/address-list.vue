@@ -16,7 +16,7 @@
                                 <label class="ml-4 font-medium">{{ item.name }}</label>
                             </div>
                         </div>
-                        <div class="w-[25%] flex">
+                        <div class="w-[20%] flex">
                             <label>{{ item.company }}</label>
                         </div>
                         <div class="w-[20%] flex">
@@ -25,7 +25,7 @@
                         <div class="w-[20%] flex">
                             <label>{{ item.email }}</label>
                         </div>
-                        <div class="w-[10%] hidden md:flex md:items-center">
+                        <div class="w-[15%] hidden md:flex md:items-center">
                             <ClubButton :btn_type='default' :label="'Contact'"></ClubButton>
                         </div>
                     </li>
