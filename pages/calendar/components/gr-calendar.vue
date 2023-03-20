@@ -52,7 +52,6 @@ import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload relate
 import { isEqual, set } from "date-fns";
 
 /** FullCalendar component & plugins */
-import '@fullcalendar/core/vdom';
 import FullCalendar from "@fullcalendar/vue3";
 import listPlugin from "@fullcalendar/list";
 import dayGridPlugin from "@fullcalendar/daygrid";
