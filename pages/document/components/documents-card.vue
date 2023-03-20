@@ -32,7 +32,7 @@
 import DocumentTableRow from "./document-table-row.vue";
 const columns = [
     {
-        label: "Segment",
+        label: "Document Name",
         class: "text-secondary text-left",
     },
     {

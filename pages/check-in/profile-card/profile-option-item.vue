@@ -20,7 +20,7 @@
 </template>
 <style scoped>
 .profile-option-item {
-    @apply relative flex flex-row cursor-pointer text-base lg:text-lg m-1 transition-all duration-150 ease-linear;
+    @apply relative flex flex-row cursor-pointer text-base lg:text-lg m-1 transition-all duration-150 ease-linear w-auto lg:w-[45%] xl:w-auto;
     .checker {
         @apply w-5 h-5 min-w-[24px] min-h-[24px] lg:w-7 lg:h-7 bg-secondary rounded-full mr-4 border-2 my-auto transition-all duration-150 ease-linear;
     }

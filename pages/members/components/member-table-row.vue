@@ -28,9 +28,9 @@
         <div
           class="dropdown-content menu p-2 shadow bg-black rounded w-52 items-start"
         >
-          <div class="dropdown-item" tabindex="-1">Preview</div>
+          <div class="dropdown-item" tabindex="-1" @click="navigateToCheckIn(true)">Preview</div>
           <div class="dropdown-item" tabindex="-1">
-             <span @click="navigateToCheckIn" >Edit</span>
+             <span @click="navigateToCheckIn(void 0)">Edit</span>
           </div>
           <div class="dropdown-item" tabindex="-1">Trash</div>
           <div class="" tabindex="-1">
@@ -129,10 +129,10 @@ const props = defineProps({
 });
 const contactOption = ref(null);
 console.log("Proposss ", props.data.id);
-const navigateToCheckIn = ()=>{
+const navigateToCheckIn = (preview) => {
   router.push({
     name:'check-in', 
-    query: { id: props.data.id }
+    query: { id: props.data.id, type: 'member', preview }
   })
 }
 const addNoteModalRef = ref(null);

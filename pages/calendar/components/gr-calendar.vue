@@ -101,6 +101,7 @@ const calendarOptions = ref({
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
     schedulerLicenseKey: "0157232768-fcs-1652392378",
     initialView: "timeGridWeek",
+    initialDate: "2022-12-01",
     slotDuration: "01:00",
     dateClick: handleDateClick,
     headerToolbar: {
@@ -375,5 +376,9 @@ thead .fc-scroller {
     /* table {
         @apply bg-gradient-to-b from-secondary/80 via-secondary;
     } */
+}
+
+.fc-daygrid-event {
+    @apply overflow-hidden;
 }
 </style>
