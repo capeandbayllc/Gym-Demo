@@ -148,4 +148,5 @@ const closeLeaderboardPopover = () => {
 
 const showUserMenu = () => userMenu.value.open();
 const user = useState("auth");
+console.log(user, 'user')
 </script>
