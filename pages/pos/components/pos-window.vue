@@ -3,6 +3,7 @@
         <div class="pos-window">
             <PosWindowHeader
                 @person-selected="selectPurchaser"
+                :hasDefaultPurchaser="member !== null"
                 :showPosAdminModal="showPosAdminModal"
             />
             <div
@@ -75,7 +76,7 @@
         id="paymentApproveModal"
         ref="paymentApproveModal"
     >
-        <PosPaymentApprove :amount="calculateCartTotal()" />
+        <PosPaymentApprove :amount="netPayable" />
     </daisy-modal>
     <daisy-modal
         :overlay="true"
@@ -125,6 +126,7 @@ const paymentApproveModal = ref(null);
 const paymentMethodsModal = ref(null);
 const posAdminModal = ref(null);
 const inventoryCategories = ref(staticInventoryCategories);
+const netPayable = ref(0);
 
 const addProductToCart = (item) => {
     cart.value.push({
@@ -171,6 +173,8 @@ const showRemoveCategoryModal = () => {
     removeCategoryModal.value.open();
 };
 const showPaymentApproveModal = () => {
+    netPayable.value = calculateCartTotal();
+    cart.value = [];
     paymentApproveModal.value.open();
 };
 

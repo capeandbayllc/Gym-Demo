@@ -39,6 +39,7 @@
                         class="text-[0.8rem] w-60 rounded-md px-3 text-black py-2"
                     /> -->
                     <input
+                        v-if="!hasDefaultPurchaser"
                         ref="globalSearchInput"
                         type="text"
                         placeholder="Search"
@@ -61,7 +62,10 @@ import GlobalSearchModal from "~~/layouts/components/global-search-modal.vue";
 import { PersonAdminIcon, BarcodeScanIcon } from "~~/components/icons";
 
 const emit = defineEmits(["person-selected"]);
-const props = defineProps({ showPosAdminModal: { type: Function } });
+const props = defineProps({
+    showPosAdminModal: { type: Function },
+    hasDefaultPurchaser: { type: Boolean },
+});
 const globalSearchInput = ref("");
 const globalSearchModal = ref(null);
 
@@ -79,7 +83,6 @@ const showGlobalSearchModal = () => {
 };
 
 const selectPerson = (data) => {
-    console.log('here');
     emit("person-selected", data);
     globalSearchModal.value.close();
 };

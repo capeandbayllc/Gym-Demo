@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
-import {DocumentNode} from "graphql/language";
-import {GraphQLQueryInterface} from "~/api/queries/GraphQLQueryInterface";
+import { DocumentNode } from "graphql/language";
+import { GraphQLQueryInterface } from "~/api/queries/GraphQLQueryInterface";
 
 const GET_MEMBERS: DocumentNode = gql`
     query Members($page: Int, $first: Int, $filter: Filter) {
@@ -50,7 +50,7 @@ const GET_SINGLE_MEMBER: DocumentNode = gql`
             primary_phone
             profile_photo_path
             homeLocation {
-                name,
+                name
                 address1
                 address2
                 city
@@ -63,15 +63,15 @@ const GET_SINGLE_MEMBER: DocumentNode = gql`
 `;
 
 export interface MemberQuery {
-    browse: DocumentNode
-    get: DocumentNode
+    browse: DocumentNode;
+    get: DocumentNode;
 }
 
 const member: GraphQLQueryInterface<MemberQuery> = {
     query: {
         browse: GET_MEMBERS,
-        get: GET_SINGLE_MEMBER
+        get: GET_SINGLE_MEMBER,
     },
-}
+};
 
 export default member;
