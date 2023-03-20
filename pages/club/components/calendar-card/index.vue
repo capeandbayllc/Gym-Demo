@@ -147,7 +147,7 @@
         },
     ];
 
-    const items = [
+    const items = ref([
         {
             id:1,
             event_name: 'PT Class',
@@ -178,7 +178,7 @@
             event_time: '1:00 PM',
             event_location: 'Club #1234',
         }
-    ];
+    ]);
 
     function previousMonth() {
         selectedMonth.value--;

@@ -64,6 +64,7 @@ const server = createServer({
     server.db.users.forEach((u) =>
       server.createList("notification", getRandomInt(10), { user_id: u.id })
     );
+    console.log(server.db);
     server.db.members.forEach(m => server.createList("note", getRandomInt(10), { entity_id: m.id }));
   },
 });

@@ -1,12 +1,14 @@
 <template>
     <club-card :title-icon="ClubRefSheetIcon" title="Club Reference Sheet">
-        <club-ref-sheet-list :columns="columns" :items="items" />
+        <club-ref-sheet-list :columns="columns" :items="locationsData.data" />
     </club-card>
 </template>
 <script setup>
     import { ClubRefSheetIcon } from '~~/components/icons'
     import ClubCard from '../club-card.vue';
     import ClubRefSheetList from './club-ref-sheet-list.vue'
+    import { request } from "~/api/utils/request";
+    import location from "~~/api/queries/location";
 
     onMounted(async () => {
         await nextTick();
@@ -136,4 +138,9 @@
             member_total: '12,345',
         },
     ];
+
+    const locationsData = ref([]);
+    request(location.query.browse).then(({ data }) => {
+        locationsData.value = data.data.locations;
+    });
 </script>
