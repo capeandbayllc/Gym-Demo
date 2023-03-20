@@ -1,15 +1,14 @@
 <template>
     <club-card :title-icon="CalendarIcon" title="Calendars">
         <div class="calendar-container">
-            <div class="col-span-1 -lg:col-span-2">
-                <div class="flex flex-col space-y-4 p-5">
+            <div class="col-span-1 -lg:col-span-2 m-10 mb-0">
+                <div class="flex flex-col space-y-4 justify-center items-center border rounded-lg border-white">
                     <date-picker
                             dark
                             inline
                             :auto-apply="true"
                             :enable-time-picker="false"
                             disable-month-year-select
-                            calendar-cell-class-name="club-calender-card-cell"
                             menu-class-name="club-calender-card-menu"
                             v-model="selectedDate"
                             @change="onDateChange"
@@ -210,18 +209,13 @@
 
 </script>
 <style scoped>
-    :deep(.club-calender-card-cell) {
-        padding: 20px 32px;
-    }
-
-    :deep(.dp__calendar_header) div {
-        margin: 15px 15px 5px 15px;
+    :deep(.dp__calendar) {
+        width: 100%;
     }
 
     :deep(.club-calender-card-menu) {
         background: transparent;
-        border: 1px solid white;
-        border-radius: 20px;
+        border: none;
     }
 
     :deep(.dp__menu_disabled) {
