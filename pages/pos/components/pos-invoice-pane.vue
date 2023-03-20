@@ -27,13 +27,13 @@
                     <h5 class="text-[1.2rem] tracking-wide font-light">
                         {{ purchaser.first_name }} {{ purchaser.last_name }}
                     </h5>
-                    <div>
+                    <div v-if="purchaser.created_at">
                         <div class="text-[0.7rem]">
                             Member since
                             {{ new Date(purchaser.created_at).getFullYear() }}
                         </div>
                         <div class="text-[0.7rem]">
-                            {{ purchaser.homeLocation.name }}
+                            {{ purchaser.homeLocation?.name }}
                         </div>
                     </div>
                     <span class="pos-view-member">View Profile</span>
