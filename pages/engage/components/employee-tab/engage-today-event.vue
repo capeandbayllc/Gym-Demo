@@ -10,7 +10,7 @@
         </div>
         <div class="event-item-content">
           <div class="event-name">
-            <img v-if="item.avatar" :src="item.avatar" class="h-6 pr-2" />
+            <img v-if="item.avatar" :src="item.avatar" class="rounded-full border h-6 mr-2" />
             {{ item.name }}
           </div>
           <div>{{ item.event_name }}</div>
@@ -46,57 +46,57 @@
 const mock = [
   {
     id: 1,
-    start: "5:20 PM",
+    start: "Monday 5:20 PM",
     end: "6:10 PM",
-    avatar: "/account.png",
+    avatar: "/images/profile/members_1.jpg",
     name: "Caleb Sauer",
     event_name: "Yoga",
   },
   {
     id: 2,
-    start: "6:30 PM",
-    end: "7:30 PM",
-    avatar: "/account.png",
+    start: "Monday 6:30 PM",
+    end: "6:40 PM",
+    avatar: "/images/profile/members_2.jpg",
     name: "Kristy Philips",
     event_name: "PT Training",
   },
   {
     id: 3,
-    start: "10:00 AM",
-    end: "11:00 AM",
-    avatar: "/account.png",
+    start: "Tuesday 6:30 AM",
+    end: "6:40 AM",
+    avatar: "/images/profile/members_3.jpg",
     name: "Delila Samuels",
     event_name: "Yoga",
   },
   {
     id: 4,
-    start: "11:45 AM",
-    end: "12:15 PM",
-    avatar: "/account.png",
+    start: "Tuesday 6:30 AM",
+    end: "6:40 AM",
+    avatar: "/images/profile/members_4.jpg",
     name: "Eric Smith",
     event_name: "Yoga",
   },
   {
     id: 5,
-    start: "5:20 PM",
-    end: "6:10 PM",
-    avatar: "/account.png",
+    start: "Tuesday 6:30 AM",
+    end: "6:40 AM",
+    avatar: "/images/profile/members_5.jpg",
     name: "Caleb Sauer",
     event_name: "Yoga",
   },
   {
     id: 6,
-    start: "5:20 PM",
-    end: "6:10 PM",
-    avatar: "/account.png",
+    start: "Tuesday 6:30 AM",
+    end: "6:40 AM",
+    avatar: "/images/profile/members_6.jpg",
     name: "Caleb Sauer",
     event_name: "Yoga",
   },
   {
     id: 7,
-    start: "5:20 PM",
-    end: "6:10 PM",
-    avatar: "/account.png",
+    start: "Tuesday 6:30 AM",
+    end: "6:40 AM",
+    avatar: "/images/profile/members_7.jpg",
     name: "Caleb Sauer",
     event_name: "Yoga",
   },
