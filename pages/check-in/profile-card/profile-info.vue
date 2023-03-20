@@ -42,7 +42,7 @@
                     <span class="edit-icon"><edit-icon class="mb-2" /></span>
                 </button>
             </div>
-            <OfferUpBtn />
+<!--            <OfferUpBtn />-->
         </div>
         <div class="grid w-full">
             <div

@@ -1,7 +1,7 @@
 <template>
   <div class="profile-options-container relative">
     <!-- <div class="flex flex-row gap-2 relative"> -->
-    <CheckInButton @click="handleCheckIn" />
+<!--    <CheckInButton @click="handleCheckIn" />-->
     <!-- </div> -->
     <div class="profile-options to-primary/75 bg-gradient-to-t from-black/80">
       <profile-option-item

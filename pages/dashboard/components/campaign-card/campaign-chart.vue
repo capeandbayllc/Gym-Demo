@@ -73,7 +73,7 @@ const options = {
                         fontWeight: 600,
                         color: 'hsl(var(--bc))',
                         formatter: function (w) {
-                            return 'Cash Report'
+                            return 'EFT'
                         }
                     }
                 },

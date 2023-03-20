@@ -1,6 +1,6 @@
 <template>
     <user-info-card>
-        <h2>Demographics</h2>
+        <h2>Member Information Continued</h2>
         <div
             v-for="(item, index) in demographics"
             :key="item.key"

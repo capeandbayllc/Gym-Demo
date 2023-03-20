@@ -13,7 +13,7 @@
         </div>
 
         <div class="page-content card-gradient-bg">
-            <h3 class="mt-4">Future Campaigns</h3>
+            <h3 class="mt-4">Active Campaigns</h3>
             <div class="page-content-block">
                 <p class="text-sm p-4">
                     Campaigns in progress with a reminder of time on them.
@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <h3 class="mt-4">Recent Campaigns</h3>
+            <h3 class="mt-4">In-Active Campaigns</h3>
             <div class="page-content-block">
                 <p class="text-sm p-4">
                     A look at your current month to month campaign and communications.
