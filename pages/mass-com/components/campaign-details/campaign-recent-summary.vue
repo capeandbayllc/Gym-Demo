@@ -27,7 +27,7 @@
             <div>
                 <div class="recent-campaign-item">
                     <div>End Date</div>
-                    <div>2023-07-31</div>
+                    <div>2022-07-31</div>
                 </div>
                 <div class="recent-campaign-item">
                     <div>Total clicks</div>

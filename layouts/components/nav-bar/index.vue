@@ -231,42 +231,37 @@ const navList = [
             {
                 label: "Leads",
                 icon: PersonAddIcon,
-                url: "/leads",
+                url: "/#",
             },
             {
                 label: "Members",
                 icon: MembersIcon,
-                url: "/members",
+                url: "/#",
             },
             {
                 label: "Fitness",
-                url: "/fitness",
+                url: "/#",
                 icon: FitnessIcon,
             },
             {
                 label: "Employees",
                 icon: EmployeeIcon,
-                url: "/leaderboard",
+                url: "/#",
             },
             {
                 label: "Vendors",
                 icon: VendorIcon,
-                url: "/vendors",
+                url: "/#",
             },
             {
                 label: "Corporation",
                 icon: CorporationIcon,
-                url: "/corporation",
+                url: "/#",
             },
             {
                 label: "Recruiting",
                 icon: RecruitingIcon,
-                url: "/recruitment",
-            },
-            {
-              label: "Point Of Sale",
-              url: "/pos",
-              icon: PosIcon,
+                url: "/#",
             },
         ],
     },
@@ -578,157 +573,6 @@ const navList = [
             },
         ],
     },
-    {
-        type: "mass-com",
-        navigation: [
-            {
-                label: "Financial Reporting",
-                icon: ReportIcon,
-                url: "/#",
-            },
-            {
-                label: "Communications",
-                url: "/#",
-                icon: MassComIcon,
-            },
-            {
-                label: "Favorites",
-                url: "/#",
-                icon: FavoriteCircleIcon,
-            },
-            {
-                label: "Point Of Sale",
-                url: "/pos",
-                icon: PosIcon,
-                modalComponent: PosWindow,
-            },
-            {
-                label: "Fitness",
-                url: "/fitness",
-                icon: FitnessIcon,
-            },
-            {
-                label: "KPIS",
-                url: "/#",
-                icon: SpeedMeterIcon,
-            },
-            {
-                label: "Employee Tracking",
-                url: "/#",
-                icon: LocationIcon,
-            },
-            {
-                label: "Company Inbox",
-                url: "/#",
-                icon: DownloadIcon,
-            },
-            {
-                label: "Marketing",
-                url: "/#",
-                icon: MarketingIcon,
-            },
-        ],
-    },
-    {
-        type: "mass-com-scheduled",
-        navigation: [
-            {
-                label: "Financial Reporting",
-                icon: ReportIcon,
-                url: "/#",
-            },
-            {
-                label: "Communications",
-                url: "/#",
-                icon: MassComIcon,
-            },
-            {
-                label: "Favorites",
-                url: "/#",
-                icon: FavoriteCircleIcon,
-            },
-            {
-                label: "Point Of Sale",
-                url: "/pos",
-                icon: PosIcon,
-            },
-            {
-                label: "Fitness",
-                url: "/fitness",
-                icon: FitnessIcon,
-            },
-            {
-                label: "KPIS",
-                url: "/#",
-                icon: SpeedMeterIcon,
-            },
-            {
-                label: "Employee Tracking",
-                url: "/#",
-                icon: LocationIcon,
-            },
-            {
-                label: "Company Inbox",
-                url: "/#",
-                icon: DownloadIcon,
-            },
-            {
-                label: "Marketing",
-                url: "/#",
-                icon: MarketingIcon,
-            },
-        ],
-    },
-  {
-    type: "mass-com-scheduled",
-    navigation: [
-      {
-        label: "Financial Reporting",
-        icon: ReportIcon,
-        url: "/#",
-      },
-      {
-        label: "Communications",
-        url: "/#",
-        icon: MassComIcon,
-      },
-      {
-        label: "Favorites",
-        url: "/#",
-        icon: FavoriteCircleIcon,
-      },
-      {
-        label: "Point Of Sale",
-        url: "/#",
-        icon: PosIcon,
-      },
-      {
-        label: "Fitness",
-        url: "/#",
-        icon: FitnessIcon,
-      },
-      {
-        label: "KPIS",
-        url: "/#",
-        icon: SpeedMeterIcon,
-      },
-      {
-        label: "Employee Tracking",
-        url: "/#",
-        icon: LocationIcon,
-      },
-      {
-        label: "Company Inbox",
-        url: "/#",
-        icon: DownloadIcon,
-      },
-      {
-        label: "Marketing",
-        url: "/#",
-        icon: MarketingIcon,
-      },
-    ],
-  },
     {
         type: "calendar",
         navigation: [
