@@ -13,7 +13,7 @@
 </template>
 <style scoped>
 .checkin-profile-card {
-    @apply border bg-[#191919]/95 border-secondary rounded-3xl flex flex-col flex-1 -lg:grow-[2]  xl:flex-row xl:space-x-16 px-3 xl:px-8 pt-7 pb-4;
+    @apply border bg-[#191919]/95 border-secondary rounded-3xl flex flex-col flex-1 gap-5 -lg:grow-[2]  xl:flex-row xl:space-x-16 px-3 xl:px-8 pt-7 pb-4;
 }
 </style>
 <script setup>
