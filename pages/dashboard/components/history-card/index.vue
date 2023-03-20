@@ -7,7 +7,7 @@
             <div class="flex flex-row w-full justify-between -sm:block">
                 <div class="flex flex-row gap-5 -sm:mb-4 -sm:gap-0 justify-between">
                     <div class="history-meta bg-base-content/30 -sm:mr-2">
-                        Gym Location 1
+                        {{ locationData?.name }}
                     </div>
                     <div class="history-meta bg-secondary/50">
                         Active Members: <span class="text-secondary font-bold">54</span>
@@ -44,6 +44,8 @@ import DashboardCard from '../dashboard-card.vue'
 import { CheckInIcon } from '@/components/icons'
 import HistoryTableRow from './history-table-row.vue';
 import {ref} from 'vue'
+import {request} from "~/api/utils/request";
+import location from "~/api/queries/location";
 
 let search=ref('search');
 const columns = ["Date and Time", "Member Name", "Event", "Membership Status", ""]
@@ -98,4 +100,11 @@ const replacePlaceholder = ()=>{
 const getBackSearch=()=>{
 	search.value='search';
 }
+
+const locationData = ref(null);
+request(location.query.get, { id: 'afea5d32-ec62-480d-af29-d67fc8c9c7a3' }).then(({data}) => {
+    locationData.value = data.data.location;
+});
+
+
 </script>

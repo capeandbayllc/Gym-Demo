@@ -1,6 +1,7 @@
 <template>
     <club-card :title-icon="ClubRefSheetIcon" title="Club Reference Sheet">
         <club-ref-sheet-list :columns="columns" :items="locationsData.data" />
+        {{ locationData }}
     </club-card>
 </template>
 <script setup>
@@ -44,99 +45,6 @@
             label: ' ',
             class: 'text-secondary text-center w-[15%]'
         }
-    ];
-
-    const items = [
-        {
-            id:1,
-            location: 'Club #1234',
-            address: '1234 Street Address',
-            phone: '(123) 456-7890',
-            manager: 'Manager Name',
-            assent_manager: 'Manager Name',
-            member_total: '12,345',
-        },
-        {
-            id:2,
-            location: 'Club #1234',
-            address: '1234 Street Address',
-            phone: '(123) 456-7890',
-            manager: 'Manager Name',
-            assent_manager: 'Manager Name',
-            member_total: '12,345',
-        },
-        {
-            id:3,
-            location: 'Club #1234',
-            address: '1234 Street Address',
-            phone: '(123) 456-7890',
-            manager: 'Manager Name',
-            assent_manager: 'Manager Name',
-            member_total: '12,345',
-        },
-        {
-            id:4,
-            location: 'Club #1234',
-            address: '1234 Street Address',
-            phone: '(123) 456-7890',
-            manager: 'Manager Name',
-            assent_manager: 'Manager Name',
-            member_total: '12,345',
-        },
-        {
-            id:5,
-            location: 'Club #1234',
-            address: '1234 Street Address',
-            phone: '(123) 456-7890',
-            manager: 'Manager Name',
-            assent_manager: 'Manager Name',
-            member_total: '12,345',
-        },
-        {
-            id:6,
-            location: 'Club #1234',
-            address: '1234 Street Address',
-            phone: '(123) 456-7890',
-            manager: 'Manager Name',
-            assent_manager: 'Manager Name',
-            member_total: '12,345',
-        },
-        {
-            id:7,
-            location: 'Club #1234',
-            address: '1234 Street Address',
-            phone: '(123) 456-7890',
-            manager: 'Manager Name',
-            assent_manager: 'Manager Name',
-            member_total: '12,345',
-        },
-        {
-            id:8,
-            location: 'Club #1234',
-            address: '1234 Street Address',
-            phone: '(123) 456-7890',
-            manager: 'Manager Name',
-            assent_manager: 'Manager Name',
-            member_total: '12,345',
-        },
-        {
-            id:9,
-            location: 'Club #1234',
-            address: '1234 Street Address',
-            phone: '(123) 456-7890',
-            manager: 'Manager Name',
-            assent_manager: 'Manager Name',
-            member_total: '12,345',
-        },
-        {
-            id:10,
-            location: 'Club #1234',
-            address: '1234 Street Address',
-            phone: '(123) 456-7890',
-            manager: 'Manager Name',
-            assent_manager: 'Manager Name',
-            member_total: '12,345',
-        },
     ];
 
     const locationsData = ref([]);

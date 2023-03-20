@@ -147,7 +147,6 @@ request(location.query.browse).then(({ data }) => {
         label: e.name
       }
     })
-    console.log(locations.value)
 });
 
 
