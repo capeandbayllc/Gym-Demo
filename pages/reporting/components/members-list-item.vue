@@ -1,19 +1,20 @@
 <template>
-    <tr class="reporting-members-list-item">
-        <td>
-            <div class="flex items-center">
-                <img :src="data.avatar" class="h-7 mr-2"/>{{data.name}}
-            </div>
-        </td>
-        <td>
-            <div class="px-2">
-                <membership-btn :membership="data.type" class="px-4 py-1 reporting-btn-member"/>
-            </div>
-        </td>
-        <td>
-            <div>{{data.date}}</div>
-        </td>
-    </tr>
+  <tr class="reporting-members-list-item">
+    <td>
+      <div class="flex items-center">
+        <img :src="data.profile_photo_path" alt="" class="h-7 mr-2 rounded-full"/>
+        {{ data.first_name }} {{ data.last_name }}
+      </div>
+    </td>
+    <td>
+      <div class="px-2">
+        <membership-btn :membership="data.type" class="px-4 py-1 reporting-btn-member"/>
+      </div>
+    </td>
+    <td>
+      <div>{{ dateformat(data.created_at, 'dd/mm/yyyy') }}</div>
+    </td>
+  </tr>
 </template>
 <style scoped>
 .reporting-members-list-item {
@@ -41,6 +42,7 @@
 </style>
 <script setup>
 import MembershipBtn from '@/components/buttons/membership-btn.vue';
+import dateformat from "dateformat";
 const props = defineProps({
     data: Object
 })

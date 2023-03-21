@@ -109,19 +109,19 @@
             <div class="dropdown" v-show="dropdownInfo">
                 <div class="dropdown-container">
                     <cross-icon
-                        @click="hideDropdownInfo"
+                        @click.stop="hideDropdownInfo"
                         class="flex absolute text-white h-[15px] w-[15px] top-[15px] left-[150px] cursor-pointer"
                     ></cross-icon>
-                    <div @click="openInfoModal" class="dropdown-item">
+                    <div @click.stop="openInfoModal" class="dropdown-item">
                         Edit account
                     </div>
-                    <div @click="openInfoModal" class="dropdown-item">
+                    <div @click.stop="openInfoModal" class="dropdown-item">
                         View alerts
                     </div>
-                    <div @click="openInfoModal" class="dropdown-item">
+                    <div @click.stop="openInfoModal" class="dropdown-item">
                         Add Guest Pass
                     </div>
-                    <div @click="openInfoModal">POS</div>
+                    <div @click.stop="openInfoModal">POS</div>
                 </div>
             </div>
         </div>
@@ -329,6 +329,7 @@ const closeAlertModal = () => {
 const infoModal = ref(null);
 
 const openInfoModal = () => {
+  return;// @Clayton want this to do nothing for now
     infoModal.value.open();
 };
 const closeInfoModal = () => {
