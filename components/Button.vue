@@ -28,10 +28,10 @@
 </template>
 
 <style scoped>
-.hover-icon >>> svg {
+.hover-icon:deep(svg) {
 	@apply hidden;
 }
-.hover-icon:hover >>> svg {
+.hover-icon:hover:deep(svg) {
 	@apply inline transition-all;
 }
 .btn-outline-secondary {
