@@ -5,11 +5,11 @@
         <div class="email-inner-content m-5 p-4 col-span-3 mb-8">
           <div class="flex items-center mb-4">
             <img
-              src="/user-caller.png"
-              class="w-12 border border-secondary rounded-full mr-4"
+                :src="user.profile_photo_path"
+                class="w-12 border border-secondary rounded-full mr-4"
             />
             <div>
-              <p class="text-xl">Mona Parksdale</p>
+              <p class="text-xl">{{ user.first_name }} {{ user.last_name }}</p>
               <p class="text-sm text-slate-500">Outgoing E-mail</p>
             </div>
             <div
@@ -80,15 +80,10 @@
 import { EmailIcon } from "~~/components/icons";
 
 const showNotes = ref(false);
+defineProps({
+  user: Object
+})
 
-const userCallSetting = {
-  type: "outgoing-call",
-  callType: "Outgoing Call",
-  userName: "Mona Parksdale",
-  phone: "+1 (123) 456-7890",
-  callIcon: "/phone.png",
-  callerProfileImage: "/user-caller.png",
-};
 const emailType = [
   {
     value: "1",
