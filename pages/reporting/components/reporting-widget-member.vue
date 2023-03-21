@@ -74,9 +74,7 @@ import ReportingMembersLineChart from './reporting-members-line-chart.vue';
 import ReportingMembersChart from './reporting-members-chart.vue';
 import MembersList from './members-list-item.vue'
 import {request} from "~/api/utils/request";
-import lead from "~/api/queries/lead";
 import member from "~/api/queries/member";
-import {faker} from "@faker-js/faker";
 import {getRandomInt} from "~/api/utils/number";
 const columns = ["Members Name", "Members Type", "Date"]
 const filterList = ['TODAY', 'MTD', 'QTD', 'YTD', 'RANGE'];

@@ -49,8 +49,8 @@
 <script setup>
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-import OutgoingCallModal from '../../call-user/components/outgoing-call-modal.vue';
-import EmailModal from '../../check-in/engage/email.vue';
+import OutgoingCallModal from '../../../call-user/components/outgoing-call-modal.vue';
+import EmailModal from '../../../check-in/engage/email.vue';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faEllipsisH);

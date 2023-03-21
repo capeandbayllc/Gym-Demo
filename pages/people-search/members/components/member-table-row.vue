@@ -152,6 +152,4 @@ const sendSms = ()=>{
 const saveNow = () => {
     outgoingCallModalRef.value.close();
 };
-
-
 </script>

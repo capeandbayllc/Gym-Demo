@@ -58,7 +58,7 @@
                 :class="`w-[${columns[4].width}px]`"
                 :title="data.homeLocation.name"
             >
-                Club 4
+                Club {{ Math.floor(Math.random() * 10)}}
             </div>
             <div class="" :class="`w-[${columns[5].width}px]`">
                 <membership-btn :membership="data.type" class="max-w-[100px]" />
