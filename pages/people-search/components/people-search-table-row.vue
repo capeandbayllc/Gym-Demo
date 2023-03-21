@@ -106,7 +106,7 @@
                     </svg>
                 </div>
             </div>
-            <div class="dropdown" v-show="dropdownInfo">
+            <div class="dropdown" v-show="dropdownInfo" @click.stop>
                 <div class="dropdown-container">
                     <cross-icon
                         @click.stop="hideDropdownInfo"
