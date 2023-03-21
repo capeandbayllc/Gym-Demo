@@ -54,7 +54,7 @@
     import { useMutation, useQuery } from "@vue/apollo-composable";
     import { NoteFactory } from "~~/api/data/notes/NoteFactory";
     import { NewAgreementIcon } from '~~/components/icons';
-    import { ADD_NOTE, GET_NOTES } from "../../../api/queries/note";
+    import { ADD_NOTE, GET_NOTES } from "../../../../api/queries/note";
     import Folder from "./folder.vue";
     import NoteForm from "./note-form.vue";
     import Note from "./note.vue";

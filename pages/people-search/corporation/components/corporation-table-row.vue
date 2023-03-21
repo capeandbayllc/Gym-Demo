@@ -14,8 +14,8 @@
                     <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1" @click.stop="outgoingCall">+ Call</div>
                 </div>
                 <!-- <div class="dropdown-content menu p-2 shadow bg-black rounded w-52">
-                    <Button outline size="sm" class="my-1 border-primary text-secondary" tabindex="-1" @click="outgoingCall">+ Call</Button>
-                    <Button outline size="sm" class="my-1 border-primary text-secondary" tabindex="-1" @click="openEmailModal">+ Email</Button>
+                    <Button outline size="sm" class="my-1 border-primary text-secondary" @click="openEmailModal">+ Email</Button>
+                    <Button outline size="sm" class="my-1 border-primary text-secondary" @click="outgoingCall">+ Call</Button>
                 </div> -->
                 <daisy-modal ref="outgoingCallModalRef">
                     <outgoing-call-modal @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal>
@@ -49,8 +49,8 @@
 <script setup>
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-import OutgoingCallModal from '../../call-user/components/outgoing-call-modal.vue';
-import EmailModal from '../../check-in/engage/email.vue';
+import OutgoingCallModal from '../../../call-user/components/outgoing-call-modal.vue';
+import EmailModal from '../../../check-in/engage/email.vue';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faEllipsisH);

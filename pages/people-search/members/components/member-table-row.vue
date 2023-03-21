@@ -115,9 +115,9 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import MembershipBtn from "~~/components/buttons/membership-btn.vue";
-import MakeCallModal from '../../check-in/side-car-split/make-call.vue';
-import SendEmailModal from '../../check-in/side-car-split/send-email.vue';
-import SendSmsModal from '../../check-in/side-car-split/send-sms.vue';
+import MakeCallModal from '../../../check-in/side-car-split/make-call.vue';
+import SendEmailModal from '../../../check-in/side-car-split/send-email.vue';
+import SendSmsModal from '../../../check-in/side-car-split/send-sms.vue';
 import addNoteModel from './add-note-modal.vue';
 
 library.add(faEllipsisH);
