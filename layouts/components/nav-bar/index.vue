@@ -25,7 +25,7 @@
 </template>
 <style scoped>
 .nav-bar-container {
-  @apply w-16 z-20 top-0 left-0 -xl:absolute;
+  @apply w-16 z-20 top-0 left-0 -xl:absolute z-[999]
 }
 
 .nav-bar-toggler {
