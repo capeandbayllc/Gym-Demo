@@ -32,15 +32,18 @@
         <div class="view-member-block">
             <div class="text-center">
                 <span class="text-xs text-secondary">Add or View Members</span>
-                <add-line-icon />
+                <add-line-icon @click.stop="openAudienceBuilder" />
             </div>
-        </div>        
+        </div>
+        <div class="audience-builder" v-if="showAudienceBuilder">
+            <audience-builder @close="closeAudienceBuilder" />
+        </div>    
     </div>
 </template>
 
 <style scoped>
 .lead-sources-container {
-    @apply flex flex-row flex-grow gap-3;
+    @apply flex flex-row flex-grow gap-3 relative;
     .action-block {
         @apply flex flex-[33.3%] flex-col-reverse;
     }
@@ -62,6 +65,9 @@
     .plus-icon {
         @apply w-[2rem] rounded-full bg-secondary mt-2
     }
+    .audience-builder {
+        @apply absolute border border-secondary top-3 right-3 w-[20rem] h-[22rem] bg-black rounded-md p-3;
+    }
 }
 </style>
 
@@ -71,9 +77,11 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import RightArrowIcon from "~/components/icons/arrow.vue";
+import AudienceBuilder from "./audience-builder.vue";
 
 library.add(faPlusCircle);
 
+const showAudienceBuilder = ref(false);
 let sources = ref([{
     title: 'Walk In'
 }, {
@@ -85,4 +93,10 @@ const addSource = () => {
         title: 'Guest Pass'
     });
 };
+const openAudienceBuilder = () => {
+    showAudienceBuilder.value = true;
+}
+const closeAudienceBuilder = () => {
+    showAudienceBuilder.value = false;
+}
 </script>
