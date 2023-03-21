@@ -1,9 +1,9 @@
 <template>
     <div
-        class="event-card-container to-primary/10 bg-gradient-to-t from-black/90"
+        class="event-card-container to-primary/10 bg-gradient-to-t from-black/90 font-extralight tracking-wide"
     >
         <div class="scheduled-event-container">
-            <div class="events-header">Scheduled Events</div>
+            <div class="events-header font-normal">Scheduled Events</div>
             <div class="event-items" v-if="mock.scheduled.length">
                 <div class="event-description">{{ mock.scheduled[0].due }}</div>
                 <div class="event-detail">
@@ -12,10 +12,13 @@
                 </div>
             </div>
         </div>
-        <div class="events-header pt-8">Upcoming Events</div>
+        <div class="events-header pt-8 font-normal">Classes</div>
         <div class="event-description border-none">At your location</div>
-        <div class="events-header pb-2">September</div>
-        <event-list :data="mock.upcoming" class="max-h-[21rem] overflow-auto" />
+        <div class="events-header pb-2">December</div>
+        <event-list
+            :data="mock.upcoming"
+            class="max-h-[15rem] lg:max-h-[26rem] xl:max-h-[15rem] overflow-auto"
+        />
     </div>
 </template>
 <style scoped>
@@ -34,16 +37,16 @@
 }
 .event-card-container {
     .events-header {
-        @apply text-lg font-semibold;
+        @apply text-lg;
     }
     .event-description {
-        @apply text-xs font-semibold border-b border-secondary pb-2;
+        @apply text-xs  border-b border-secondary pb-2;
     }
     .event-detail {
-        @apply flex flex-row justify-between items-center justify-between;
+        @apply flex flex-row justify-between items-center;
     }
     .event-items {
-        @apply flex flex-col text-sm font-semibold space-y-2 w-full;
+        @apply flex flex-col text-sm space-y-2 w-full;
     }
 }
 </style>
@@ -57,7 +60,7 @@ const mock = {
             id: 1,
             title: "Yoga",
             booked: true,
-            due: "Monday 5:20 - 6:10",
+            due: "Monday, Dec. 20 5:20pm - 6:10pm",
         },
     ],
     upcoming: [
@@ -65,43 +68,43 @@ const mock = {
             id: 2,
             title: "Yoga",
             booked: false,
-            due: "Monday 5:20 - 6:10",
+            due: "Monday 5:30pm - 6:40pm",
         },
         {
             id: 3,
             title: "PT Training",
             booked: false,
-            due: "Monday 6:30 - 6:40",
+            due: "Monday 5:30pm - 6:40pm",
         },
         {
             id: 4,
             title: "Yoga",
             booked: false,
-            due: "Tuesday 6:30 - 6:40",
+            due: "Tuesday 10:30am - 11:10am",
         },
         {
             id: 5,
             title: "Yoga",
             booked: false,
-            due: "Tuesday 6:30 - 6:40",
+            due: "Tuesday 5:30pm - 6:40pm",
         },
         {
             id: 6,
-            title: "Yoga",
+            title: "PT Training",
             booked: false,
-            due: "Tuesday 6:30 - 6:40",
+            due: "Tuesday 5:30pm - 6:40pm",
         },
         {
             id: 7,
-            title: "Yoga",
+            title: "PT Training",
             booked: false,
-            due: "Tuesday 6:30 - 6:40",
+            due: "Wednesday 10:30am - 11:10am",
         },
         {
             id: 8,
             title: "Yoga",
             booked: false,
-            due: "Tuesday 6:30 - 6:40",
+            due: "Wednesday 5:30pm - 6:40pm",
         },
     ],
 };

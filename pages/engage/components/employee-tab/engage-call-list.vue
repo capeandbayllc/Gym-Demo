@@ -1,8 +1,6 @@
 <template>
   <div class="engage-call-list-container">
-    <!-- <h3>Call List</h3> -->
-    <h3 class="text-secondary">Upgrades:</h3>
-
+    <h3 class="text-secondary text-lg">Upgrades:</h3>
     <data-table
       :columns="columns"
       :data="members2"
@@ -15,18 +13,12 @@
 <style scoped>
 .engage-call-list-container {
   @apply col-span-2 pb-1 -md:col-span-3;
-  h3 {
-    @apply text-base;
-  }
 }
 </style>
 <script setup>
 import CallListItem from "./call-list-item.vue";
-import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
 import member from "~/api/queries/member";
-import {request} from "~/api/utils/request";
-
 
 const { result } = useQuery(member.query.browse);
 
@@ -50,7 +42,9 @@ const members2 = computed(() => {
     return {
       ...item,
       membership_type: getRandomMembershipType(),
-      updated_at: new Date(item.updated_at).toLocaleDateString().replaceAll('/', '.'),
+      updated_at: new Date(item.updated_at)
+        .toLocaleDateString()
+        .replaceAll("/", "."),
     };
   });
 });

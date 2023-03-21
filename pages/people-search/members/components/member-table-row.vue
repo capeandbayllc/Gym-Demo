@@ -1,6 +1,6 @@
 <template>
   <tr class="people-member-tbl-row">
-    <td>{{ data.created_at }}</td>
+    <td>{{ dateFormat(data.created_at, 'dd/mm/yyyy') }}</td>
     <td>{{ data.first_name }}</td>
     <td>{{ data.last_name }}</td>
     <td class="px-4">{{ data.primary_phone }}</td>
@@ -39,12 +39,9 @@
                 Contact Member
               </div>
               <div class="dropdown-content menu p-2 shadow bg-black rounded w-40 items-start hidden">
-                <!-- <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'text'">Text</Button> -->
-                <!-- <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'email'">Email</Button> -->
-                <!-- <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'call'">Call</Button> -->
-                <Button outline size="sm" class="my-1 border-primary" @click="openSMSModal">Text</Button>
-                <Button outline size="sm" class="my-1 border-primary" @click="openEmailModal">Email</Button>
-                <Button outline size="sm" class="my-1 border-primary" @click="outgoingCall" >Call</Button>
+                 <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'text'">Text</Button>
+                 <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'email'">Email</Button>
+                 <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'call'">Call</Button>
               </div>
             </div>
           </div>
@@ -58,20 +55,10 @@
       </div>
 
       <daisy-modal ref="addNoteModalRef">
-        <addNoteModel @saveNote="saveNote" @deleteNote="deleteNote"></addNoteModel>
+        <AddNoteModel @saveNote="saveNote" @deleteNote="deleteNote" />
       </daisy-modal>
 
-      <daisy-modal ref="outgoingCallModalRef">
-           <MakeCallModal  @close="closeOutgoingCall" @callNow="showInCallModal" @saveNow="saveNow"/>
-      </daisy-modal>
-      <daisy-modal ref="emailModalRef">
-            <SendEmailModal @close="closeEmailModal" @saveEmail="saveEmail" @sendEmail="sendEmail" />
-      </daisy-modal>
-      <daisy-modal ref="smsModalRef">
-           <SendSmsModal @close="closeSMSModal" @saveSms="saveSms" @sendSms="sendSms" />
-      </daisy-modal>
-
-      <Options :show="contactOption" @on:close="contactOption = null" />
+      <Options :user="data" :show="contactOption" @on:close="contactOption = null" />
     </td>
   </tr>
 </template>
@@ -115,10 +102,8 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import MembershipBtn from "~~/components/buttons/membership-btn.vue";
-import MakeCallModal from '../../check-in/side-car-split/make-call.vue';
-import SendEmailModal from '../../check-in/side-car-split/send-email.vue';
-import SendSmsModal from '../../check-in/side-car-split/send-sms.vue';
-import addNoteModel from './add-note-modal.vue';
+import AddNoteModel from './add-note-modal.vue';
+import dateFormat from "dateformat";
 
 library.add(faEllipsisH);
 
@@ -150,30 +135,12 @@ const saveNote = () => {
 const outgoingCallModalRef = ref(null);
 const emailModalRef = ref(null);
 const smsModalRef = ref(null);
-const outgoingCall = ()=>{
-    outgoingCallModalRef.value.open();
-}
-const closeOutgoingCall = ()=>{
-    outgoingCallModalRef.value.close();
-}
 
-const openEmailModal = ()=>{
-    emailModalRef.value.open();
-}
-const closeEmailModal = ()=>{
-    emailModalRef.value.close();
-}
 const saveEmail = ()=>{
     emailModalRef.value.close();
 }
 const sendEmail = ()=>{
     emailModalRef.value.close();
-}
-const openSMSModal = ()=>{
-    smsModalRef.value.open();
-}
-const closeSMSModal = ()=>{
-    smsModalRef.value.close();
 }
 const saveSms = ()=>{
     smsModalRef.value.close();
@@ -181,10 +148,6 @@ const saveSms = ()=>{
 const sendSms = ()=>{
     smsModalRef.value.close();
 }
-
-const showInCallModal = () => {
-    outgoingCallModalRef.value.close();
-};
 
 const saveNow = () => {
     outgoingCallModalRef.value.close();

@@ -43,14 +43,19 @@
 import CallerCard from "./caller-card.vue";
 
 defineEmits(["call-now"]);
-const userCallSetting = {
+const props = defineProps({
+  user: Object
+})
+
+
+const userCallSetting = computed(() => ({
   type: "outgoing-call",
   callType: "Outgoing Call",
-  userName: "Mona Parksdale",
-  phone: "+1 (123) 456-7890",
+  userName: `${props.user.first_name} ${props.user.last_name}`,
+  phone: (props.user.phone ?? '1234567890').replace(/\D+/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3'),
   callIcon: "/phone.png",
-  callerProfileImage: "/user-caller.png",
-};
+  callerProfileImage: props.user.profile_photo_path,
+}));
 const callType = [
   {
     value: "1",

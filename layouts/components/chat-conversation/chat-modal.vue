@@ -641,18 +641,18 @@ const addMessageToConversation = (from, message) => {
 };
 
 const alChatBotTrainingSet = [
-  {question: "What is my daily membership sales needed for goal?", answer: "A. 484 per day, B. $14,520 per day"},
-  {question: "How many specific memberships sold month to date?", answer: "10,162 this month"},
-  {question: "What am I forecasting this month?", answer: "i. 15,000 New Members, ii. 375 New Clients"},
+  {question: "What is my daily membership sales needed for goal?", answer: "484 new members per day; $14,520 in new EFT per day"},
+  {question: "How many specific memberships sold month to date?", answer: "10,162 new members this month"},
+  {question: "What am I forecasting this month?", answer: "15,000 New Members; 375 New Personal Training Clients"},
   {question: "What is my membership net change month to date?", answer: "1,350 net members"},
-  {question: "What is my draft collection MTD", answer: "a. $575,800, b. $9,145,161"},
-  {question: "What are my draft projections?", answer: "a. $13,500,000, b. $2,137,500"},
-  {question: "How many past due members?", answer: "12,500"},
-  {question: "How many frozen accounts", answer: "1,875"},
-  {question: "How much weight has been lost MTD", answer: "18,500lbs"},
-  {question: "How many training sessions are scheduled today", answer: "1,612"},
-  {question: "What is my Revenue per member Month to date", answer: "$30"},
-  {question: "What is the average length of member", answer: "13 months"},
+  {question: "What is my draft collection MTD", answer: "$575,800 in Personal Training Draft; $9,145,161 in Membership Draft"},
+  {question: "What are my draft projections?", answer: "$13,500,000 in Membership; $2,137,500 in Personal Training"},
+  {question: "How many past due members?", answer: "12,500 past due members"},
+  {question: "How many frozen accounts", answer: "1,875 frozen accounts"},
+  {question: "How much weight has been lost MTD", answer: "18,500lbs lost MTD"},
+  {question: "How many training sessions are scheduled today", answer: "1,612 training sessions are scheduled today"},
+  {question: "What is my Revenue per member Month to date", answer: "$30 Revenue per Member MTD"},
+  {question: "What is the average length of member", answer: "13 months is the average length of member"},
 ];
 
 const handleAlChatBotResponse = () => {
