@@ -40,7 +40,7 @@
             id="globalSearchModal"
             ref="globalSearchModal"
         >
-            <global-search-modal />
+            <global-search-modal @row-clicked="rowClicked" />
         </daisy-modal>
         <daisy-modal :overlay="true" id="alertModal" ref="alertModal">
             <alert-modal />
@@ -90,6 +90,7 @@ import { MenuIcon } from "@/components/icons";
 import GlobalSearchModal from "./global-search-modal.vue";
 import AlertModal from "./alert-modal.vue";
 
+const router = useRouter();
 const pulseModal = ref(null);
 const peopleSearchModal = ref(null);
 const globalSearchModal = ref(null);
@@ -116,6 +117,14 @@ const showGlobalSearchModal = () => {
 const showAlertModal = () => {
     alertModal.value.open();
 };
+
+function rowClicked(member) {
+  globalSearchModal.value.close();
+  router.push({
+    path: "/check-in",
+    query: { id: member.id, preview: true },
+  });
+}
 
 const setIconPath = () => {
     iconPath.value =
