@@ -73,6 +73,9 @@
 import ReportingMembersLineChart from './reporting-members-line-chart.vue';
 import ReportingMembersChart from './reporting-members-chart.vue';
 import MembersList from './members-list-item.vue'
+import {request} from "~/api/utils/request";
+import member from "~/api/queries/member";
+import {getRandomInt} from "~/api/utils/number";
 const columns = ["Members Name", "Members Type", "Date"]
 const filterList = ['TODAY', 'MTD', 'QTD', 'YTD', 'RANGE'];
 const activeFilter = ref(0);
@@ -86,167 +89,41 @@ const setFilter = (index)  => {
     totalCount.value = [radialChatValues[index]];
     filterByRange.value = index === 4 ? true : false;
 }
-const data = ref([
-    {
-        id: 1,
-        name: "Halima Kuphal",
-        type: "gold",
-        date: "12.06.22",
-        avatar: '/checkin/kevin.png'
-    },
-    {
-        id: 2,
-        name: "Nathan Sipes",
-        type: "silver",
-        date: "12.06.22",
-        avatar: '/checkin/kevin.png'
-    },
-    {
-        id: 3,
-        name: "Candace Wehner",
-        type: "gold",
-        date: "12.06.22",
-        avatar: '/checkin/kevin.png'
-    },
-    {
-        id: 4,
-        name: "Anita Greenholt",
-        type: "platinum",
-        date: "12.06.22",
-        avatar: '/checkin/kevin.png'
-    },
-    {
-        id: 5,
-        name: "Cassie Herman",
-        type: "bronze",
-        date: "12.06.22",
-        avatar: '/checkin/kevin.png'
-    },
+const data = ref([]);
+const membersList = reactive([
+  {
+    variation: 'Default',
+    list: []
+  },
+  {
+    variation: 'Previous Month',
+    list: [],
+    userTotal: [14]
+  },
+  {
+    variation: 'Previous Year',
+    list: [],
+    userTotal: [54]
+  },
 ]);
-const membersList = [
-    {
-        variation: 'Default',
-        list: [
-            {
-                id: 1,
-                name: "Halima Kuphal",
-                type: "gold",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 2,
-                name: "Nathan Sipes",
-                type: "bronze",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 3,
-                name: "Candace Wehner",
-                type: "gold",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 4,
-                name: "Anita Greenholt",
-                type: "platinum",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 5,
-                name: "Cassie Herman",
-                type: "bronze",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-        ]
-    },
-    {
-        variation: 'Previous Month',
-        list: [
-            {
-                id: 1,
-                name: "Halima Kuphal",
-                type: "bronze",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 2,
-                name: "Nathan Sipes",
-                type: "bronze",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 3,
-                name: "Candace Wehner",
-                type: "gold",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 4,
-                name: "Anita Greenholt",
-                type: "platinum",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 5,
-                name: "Cassie Herman",
-                type: "bronze",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-        ],
-        userTotal: [14] 
-    },
-    {
-        variation: 'Previous Year',
-        list: [
-            {
-                id: 1,
-                name: "Halima Kuphal",
-                type: "bronze",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 2,
-                name: "Nathan Sipes",
-                type: "gold",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 3,
-                name: "Candace Wehner",
-                type: "gold",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 4,
-                name: "Anita Greenholt",
-                type: "platinum",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-            {
-                id: 5,
-                name: "Cassie Herman",
-                type: "bronze",
-                date: "12.06.22",
-                avatar: '/checkin/kevin.png'
-            },
-        ],
-        userTotal: [54] 
-    },
-];
+
+const membershipTypes = ["platinum", "gold", "silver", "bronze"];
+
+
+request(member.query.browse, {first: 15}).then((response) => {
+  const members = response.data.data.members.data.map(m => ({
+    ...m,
+    type: membershipTypes[getRandomInt(membershipTypes.length)]
+  }));
+
+  data.value = members.splice(0, 6);
+  while (members.length > 0) {
+    for (let i = 0; i < 3; i++) {
+      membersList[i].list.push(members.shift());
+    }
+  }
+});
+
 const reportBy = (type) => {
     if(type !== compareReport.value) {
         const result = membersList.find(item => {

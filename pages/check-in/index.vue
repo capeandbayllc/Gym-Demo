@@ -61,6 +61,7 @@
                 <component
                     v-if="detailView === key"
                     @close="detailView = null"
+                    :user="ProfileInfo"
                     @on-profile-update="refreshIndex++"
                     :key="key"
                     :is="component"

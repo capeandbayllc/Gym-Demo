@@ -28,3 +28,4 @@ export default defineNuxtConfig({
   },
   ssr: false,
 });
+//trigger rebuild

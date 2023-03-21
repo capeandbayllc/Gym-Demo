@@ -1,10 +1,10 @@
 <template>
     <div class="call-image-container">
         <div class="profile-avatar">
-            <img src="/user-caller.png"/>
+            <img :src="user.profile_photo_path" class="rounded-full" alt=""/>
         </div>
         <div class="profile-info">
-            <div class="profile-name">Mona Parksdale</div>
+            <div class="profile-name">{{ user.first_name }} {{ user.last_name }}</div>
             <div class="text-secondary">New Membership Call</div>
         </div>
         <div class="profile-calling">
@@ -25,7 +25,10 @@
 </template>
 
 <script setup>
- const showNotes = ref(false);
+defineProps({
+  user: Object
+})
+const showNotes = ref(false);
 </script>
  
 <style scoped>

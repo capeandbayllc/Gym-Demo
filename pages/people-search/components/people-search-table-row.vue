@@ -7,6 +7,7 @@
             >
                 <input
                     type="checkbox"
+                    @click.stop=""
                     class="checkbox checkbox-secondary bg-white mr-2"
                 />
                 {{ data.segment }}
@@ -37,19 +38,19 @@
                 :class="`w-[${columns[3].width}px]`"
             >
                 <div class="mr-[40px]">
-                    <SmsSquareIcon  @click="openSMSModal" />
+                    <SmsSquareIcon  @click.stop="contactOption = 'text'" />
                 </div>
                 <!-- <a :href="'mailto:' + data.email" class="mr-[40px]">
                     <EmailSquareIcon />
                 </a> -->
                 <a  class="mr-[40px]">
-                    <EmailSquareIcon @click="openEmailModal" />
+                    <EmailSquareIcon @click.stop="contactOption = 'email'" />
                 </a>
                 <!-- <a :href="'tel:' + data.phone">
                     <CallSquareIcon  />
                 </a> -->
                 <a >
-                    <CallSquareIcon @click="outgoingCall" />
+                    <CallSquareIcon @click.stop="contactOption = 'call'" />
                 </a>
             </div>
             <div
@@ -57,7 +58,7 @@
                 :class="`w-[${columns[4].width}px]`"
                 :title="data.homeLocation.name"
             >
-                Club 4
+                Club {{ Math.floor(Math.random() * 10)}}
             </div>
             <div class="" :class="`w-[${columns[5].width}px]`">
                 <membership-btn :membership="data.type" class="max-w-[100px]" />
@@ -65,7 +66,7 @@
             <div :class="`w-[${columns[6].width}px]`">
                 <div
                     v-show="!dropdownInfo"
-                    @click="showDropdownInfo"
+                    @click.stop="showDropdownInfo"
                     class="text-secondary h-6 w-6 flex items-center justify-center"
                 >
                     <svg
@@ -86,7 +87,7 @@
                 </div>
                 <div
                     v-show="dropdownInfo"
-                    @click="hideDropdownInfo"
+                    @click.stop="hideDropdownInfo"
                     class="text-secondary h-6 w-6 flex items-center justify-center"
                 >
                     <svg
@@ -105,22 +106,22 @@
                     </svg>
                 </div>
             </div>
-            <div class="dropdown" v-show="dropdownInfo">
+            <div class="dropdown" v-show="dropdownInfo" @click.stop>
                 <div class="dropdown-container">
                     <cross-icon
-                        @click="hideDropdownInfo"
+                        @click.stop="hideDropdownInfo"
                         class="flex absolute text-white h-[15px] w-[15px] top-[15px] left-[150px] cursor-pointer"
                     ></cross-icon>
-                    <div @click="openInfoModal" class="dropdown-item">
+                    <div @click.stop="openInfoModal" class="dropdown-item">
                         Edit account
                     </div>
-                    <div @click="openInfoModal" class="dropdown-item">
+                    <div @click.stop="openInfoModal" class="dropdown-item">
                         View alerts
                     </div>
-                    <div @click="openInfoModal" class="dropdown-item">
+                    <div @click.stop="openInfoModal" class="dropdown-item">
                         Add Guest Pass
                     </div>
-                    <div @click="openInfoModal">POS</div>
+                    <div @click.stop="openInfoModal">POS</div>
                 </div>
             </div>
         </div>
@@ -226,15 +227,8 @@
                 </div>
             </div>
         </daisy-modal>
-        <daisy-modal ref="outgoingCallModalRef">
-           <MakeCallModal  @close="closeOutgoingCall" @callNow="showInCallModal" @saveNow="saveNow"/>
-      </daisy-modal>
-      <daisy-modal ref="emailModalRef">
-            <SendEmailModal @close="closeEmailModal" @saveEmail="saveEmail" @sendEmail="sendEmail" />
-      </daisy-modal>
-      <daisy-modal ref="smsModalRef">
-           <SendSmsModal @close="closeSMSModal" @saveSms="saveSms" @sendSms="sendSms" />
-      </daisy-modal> 
+
+      <Options :user="data" :show="contactOption" @on:close="contactOption = null" />
     </div>
 </template>
 <style scoped>
@@ -261,7 +255,7 @@
 .more-icon .more-icon-normal {
 }
 .people-search-tbl-content thead {
-    @apply top-0 sticky bg-black h-10 text-white;
+    @apply top-0 bg-black h-10 text-white;
 }
 .alert-modal {
     @apply bg-cover bg-center text-center;
@@ -311,10 +305,11 @@ import {
     EmailSquareIcon,
     SmsSquareIcon
 } from "~~/components/icons";
-import MakeCallModal from '../../check-in/side-car-split/make-call.vue';
-import SendEmailModal from '../../check-in/side-car-split/send-email.vue';
-import SendSmsModal from '../../check-in/side-car-split/send-sms.vue';
+import Options from "~/pages/components/contact/Options.vue";
 
+const contactOption = ref(null);
+
+watch(contactOption, (v) => console.log(111, v));
 const props = defineProps({
     data: Object,
     columns: {
@@ -334,6 +329,7 @@ const closeAlertModal = () => {
 const infoModal = ref(null);
 
 const openInfoModal = () => {
+  return;// @Clayton want this to do nothing for now
     infoModal.value.open();
 };
 const closeInfoModal = () => {
@@ -364,30 +360,11 @@ const closeViewNoteModal = () => {
 const outgoingCallModalRef = ref(null);
 const emailModalRef = ref(null);
 const smsModalRef = ref(null);
-const outgoingCall = ()=>{
-    outgoingCallModalRef.value.open();
-}
-const closeOutgoingCall = ()=>{
-    outgoingCallModalRef.value.close();
-}
-
-const openEmailModal = ()=>{
-    emailModalRef.value.open();
-}
-const closeEmailModal = ()=>{
-    emailModalRef.value.close();
-}
 const saveEmail = ()=>{
     emailModalRef.value.close();
 }
 const sendEmail = ()=>{
     emailModalRef.value.close();
-}
-const openSMSModal = ()=>{
-    smsModalRef.value.open();
-}
-const closeSMSModal = ()=>{
-    smsModalRef.value.close();
 }
 const saveSms = ()=>{
     smsModalRef.value.close();
@@ -395,11 +372,6 @@ const saveSms = ()=>{
 const sendSms = ()=>{
     smsModalRef.value.close();
 }
-
-const showInCallModal = () => {
-    outgoingCallModalRef.value.close();
-};
-
 const saveNow = () => {
     outgoingCallModalRef.value.close();
 };

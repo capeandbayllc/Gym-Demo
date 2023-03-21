@@ -29,7 +29,7 @@
 </template>
 <style scoped>
 thead {
-  @apply z-50 sticky;
+  @apply z-50;
 }
 
 thead th {

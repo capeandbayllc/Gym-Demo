@@ -57,7 +57,7 @@ const mock = [{
     event: "PT",
     membership: 'platinum',
     notification: true,
-    image:'images/profile/customers_7.jpg'
+    image:'images/profile/members_0.jpg'
 
 }, {
     id: 2,
@@ -66,7 +66,7 @@ const mock = [{
     name: "Chris Italianzo",
     event: "Group Class",
     membership: 'bronze',
-    image:'images/profile/customers_8.jpg'
+    image:'images/profile/members_1.jpg'
 }, {
     id: 3,
     date: "December 1",
@@ -75,7 +75,7 @@ const mock = [{
     event: "PT",
     membership: 'silver',
     notification: true,
-    image:'images/profile/customers_9.jpg'
+    image:'images/profile/members_2.jpg'
 }, {
     id: 4,
     date: "December 1",
@@ -83,7 +83,7 @@ const mock = [{
     name: "Chris Italianzo",
     event: "Group Class",
     membership: 'bronze',
-    image:'images/profile/customers_10.jpg'
+    image:'images/profile/members_3.jpg'
 }, {
     id: 5,
     date: "December 1",
@@ -91,7 +91,7 @@ const mock = [{
     name: "Tyler Andrezano",
     event: "PT",
     membership: 'gold',
-    image:'images/profile/customers_11.jpg'
+    image:'images/profile/members_4.jpg'
 }]
 
 const replacePlaceholder = ()=>{
