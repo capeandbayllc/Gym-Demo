@@ -1,6 +1,6 @@
 <template>
   <tr class="people-lead-tbl-row">
-    <td>{{ data.created_at }}</td>
+    <td>{{ dateFormat(data.created_at, 'dd/mm/yyyy') }}</td>
     <td>{{ data.last_name }}</td>
     <td>{{ data.first_name }}</td>
     <td>Club {{ Math.floor(Math.random() * 10) }}</td>
@@ -8,7 +8,7 @@
       {{data.department}}
     </td>
     <td>
-        {{ data.position }}
+      {{ data.position }}
     </td>
     <td class="capitalize text-accent-focus/60">{{ data.status }} {{ contactOption }}</td>
     <td>
@@ -22,13 +22,13 @@
           <Button outline size="sm" class="my-1 border-primary">Trash</Button>
           <Button outline size="sm" class="my-1 border-primary">Contact Lead</Button>
           <Button outline size="sm" class="my-1 border-primary">Add a Note</Button> -->
-          <div class="dropdown-item" tabindex="-1" >Preview</div>
-          <div class="dropdown-item" tabindex="-1">Edit</div>
+          <div class="dropdown-item" tabindex="-1" @click="navigateToCheckIn(true)">Preview</div>
+          <div class="dropdown-item" tabindex="-1" @click="navigateToCheckIn(void 0)">Edit</div>
           <div class="dropdown-item" tabindex="-1">Trash</div>
           <div class="" tabindex="-1">
             <div class="dropdown dropdown-left dropdown-end dropdown-hover contact-menu">
               <div class="dropdown-item" tabindex="0" @click.prevent.stop>
-                Contact Employee
+                Contact Lead
               </div>
               <div class="dropdown-content menu p-2 shadow bg-black rounded w-40 items-start hidden">
                 <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'text'">Text</Button>
@@ -37,11 +37,11 @@
               </div>
             </div>
           </div>
-<!--          <div class="dropdown-item" tabindex="-1" @click.prevent.stop="openNoteCardModal">Add a Note</div>-->
+          <div class="dropdown-item" tabindex="-1" @click.prevent.stop="openNoteCardModal">Add a Note</div>
         </div>
       </div>
 
-      <Options :show="contactOption" @on:close="contactOption = null" />
+      <Options :user="data" :show="contactOption" @on:close="contactOption = null" />
 
       <daisy-modal ref="noteCardModalRef" :closable="false">
         <NoteCardModal @close="closeNoteCardModal"/>
@@ -86,6 +86,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import NoteCardModal from "~/pages/check-in/note-card/index.vue";
 import {Ref} from "vue";
+import dateFormat from "dateformat";
 
 export type Type = 'text' | 'email' | 'call' | null;
 const router = useRouter()
@@ -107,8 +108,8 @@ const closeNoteCardModal = () => {
 
 function navigateToCheckIn(preview) {
   router.push({
-    name:'check-in',
-    query: { id: props.data.id, type: 'lead', preview }
+    name: 'check-in',
+    query: {id: props.data.id, type: 'lead', preview}
   })
 }
 </script>

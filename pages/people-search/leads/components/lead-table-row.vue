@@ -1,13 +1,12 @@
 <template>
   <tr class="people-lead-tbl-row">
-    <td>{{ data.created_at }}</td>
+    <td>{{ dateFormat(data.created_at, 'dd/mm/yyyy') }}</td>
     <td>
       <div :class="'opportunity-' + data.opportunity"></div>
     </td>
     <td>{{ data.first_name }}</td>
     <td>{{ data.last_name }}</td>
-    <td> Club {{ Math.floor(Math.random() * 10) }}
-    </td>
+    <td> Club {{ Math.floor(Math.random() * 10) }} </td>
     <td>
       <div :class="'type-' + data.type">
         {{ data.type }}
@@ -35,8 +34,7 @@
               </div>
               <div class="dropdown-content menu p-2 shadow bg-black rounded w-40 items-start hidden">
                 <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'text'">Text</Button>
-                <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'email'">Email
-                </Button>
+                <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'email'">Email</Button>
                 <Button outline size="sm" class="my-1 border-primary" @click.stop="contactOption = 'call'">Call</Button>
               </div>
             </div>
@@ -45,7 +43,7 @@
         </div>
       </div>
 
-      <Options :show="contactOption" @on:close="contactOption = null"/>
+      <Options :user="data" :show="contactOption" @on:close="contactOption = null" />
 
       <daisy-modal ref="noteCardModalRef" :closable="false">
         <NoteCardModal @close="closeNoteCardModal"/>
@@ -57,7 +55,6 @@
 .dropdown-item {
   @apply hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary
 }
-
 .contact-menu:hover .dropdown-content {
   display: inline-grid !important;
 }
@@ -130,6 +127,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import NoteCardModal from "~/pages/check-in/note-card/index.vue";
 import {Ref} from "vue";
+import dateFormat from "dateformat";
 
 export type Type = 'text' | 'email' | 'call' | null;
 const router = useRouter()

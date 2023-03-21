@@ -161,20 +161,14 @@ const getRandomOpportunity = () => {
 };
 
 const leads_display = computed(() => {
-    return leads.value.map((item) => {
-        return {
-            ...item,
-            type: getRandomType(),
-            opportunity: getRandomOpportunity(),
-            status: "available",
-            updated_at: new Date(item.updated_at)
-                .toLocaleDateString()
-                .replaceAll("/", "."),
-            created_at: new Date(item.created_at)
-                .toLocaleDateString()
-                .replaceAll("/", "."),
-        };
-    });
+  return leads.value.map((item) => {
+    return {
+      ...item,
+      type: getRandomType(),
+      opportunity: getRandomOpportunity(),
+      status: 'available',
+    };
+  });
 });
 
 const openAddMemberPopUp = () => {

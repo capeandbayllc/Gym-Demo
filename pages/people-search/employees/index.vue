@@ -142,9 +142,6 @@ const employees_display = computed(() => {
       position: getRandomPosition(),
       department: getRandomDepartment(),
       status: 'available',
-      updated_at: new Date(item.updated_at).toLocaleDateString().replaceAll('/', '.'),
-      created_at: new Date(item.created_at).toLocaleDateString().replaceAll('/', '.'),
-
     };
   });
 });

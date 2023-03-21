@@ -591,6 +591,7 @@ type Lead {
   middle_name: String
   last_name: String
   email: String!
+  phone: String!
   user_id: ID
   created_at: DateTime!
   updated_at: DateTime!

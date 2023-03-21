@@ -11,6 +11,7 @@ const GET_LEAD: DocumentNode = gql`
                 last_name
                 email
                 gender
+                phone,
                 profile_photo_path
                 created_at
                 updated_at
