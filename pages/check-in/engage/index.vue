@@ -6,69 +6,48 @@
             >
                 <button
                     class="mx-6 h-15 w-15 border border-secondary rounded-full p-4"
-                    @click="outgoingCall"
+                    @click="contactOption = 'call'"
                 >
                     <CallIcon class="h-8 w-8" />
                 </button>
                 <button
                     class="mx-6 h-15 w-15 border border-secondary rounded-full p-4"
-                    @click="openEmailModal"
+                    @click="contactOption = 'email'"
                 >
                     <EmailIcon class="h-8 w-8" />
                 </button>
                 <button
                     class="mx-6 h-15 w-15 border border-secondary rounded-full p-4"
-                    @click="openSMSModal"
+                    @click="contactOption = 'text'"
                 >
                     <MessageIcon class="h-8 w-8" />
                 </button>
             </div>
             <div>
                 <h3 class="text-xl pl-6">Engage History</h3>
-                <engageHistoryTable
+                <EngageHistoryTable
                     :columns="columns"
                     :items="leadsData"
                     class="p-6"
                 />
             </div>
         </div>
-        <daisy-modal ref="outgoingCallModalRef">
-            <!-- <outgoing-call-modal @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal> -->
-            <MakeCallModal
-                @close="closeOutgoingCall"
-                @callNow="showInCallModal"
-                @saveNow="saveNow"
-            />
-        </daisy-modal>
-        <daisy-modal ref="emailModalRef">
-            <!-- <EmailModal @close="closeEmailModal"/> -->
-            <SendEmailModal
-                @close="closeEmailModal"
-                @saveEmail="saveEmail"
-                @sendEmail="sendEmail"
-            />
-        </daisy-modal>
-        <daisy-modal ref="smsModalRef">
-            <!-- <SMSModal @close="closeSMSModal"/> -->
-            <SendSmsModal
-                @close="closeSMSModal"
-                @saveSms="saveSms"
-                @sendSms="sendSms"
-            />
-        </daisy-modal>
+      <Options :user="user" :show="contactOption" @on:close="contactOption = null" />
     </simple-card>
 </template>
 <script setup>
 import { CallIcon, EmailIcon, MessageIcon } from "~~/components/icons";
-import engageHistoryTable from "./engage-history-table.vue";
-// import OutgoingCallModal from '../../call-user/components/outgoing-call-modal.vue';
-// import EmailModal from './email.vue';
-// import SMSModal from './message.vue';
-// import MakeCall from '../side-car-split/make-call.vue';
-import MakeCallModal from "../side-car-split/make-call.vue";
-import SendEmailModal from "../side-car-split/send-email.vue";
-import SendSmsModal from "../side-car-split/send-sms.vue";
+import EngageHistoryTable from "./engage-history-table.vue";
+import Options from "~/pages/components/contact/Options.vue";
 
+const props = defineProps({
+  user: Object
+});
+
+const contactOption = ref(null);
+
+console.log(props.user
+)
 const columns = [
     {
         label: "Type",
@@ -132,16 +111,12 @@ const smsModalRef = ref(null);
 const outgoingCall = () => {
     outgoingCallModalRef.value.open();
 };
-const closeOutgoingCall = () => {
-    outgoingCallModalRef.value.close();
-};
+
 
 const openEmailModal = () => {
     emailModalRef.value.open();
 };
-const closeEmailModal = () => {
-    emailModalRef.value.close();
-};
+
 const saveEmail = () => {
     emailModalRef.value.close();
 };
@@ -151,9 +126,7 @@ const sendEmail = () => {
 const openSMSModal = () => {
     smsModalRef.value.open();
 };
-const closeSMSModal = () => {
-    smsModalRef.value.close();
-};
+
 const saveSms = () => {
     smsModalRef.value.close();
 };
@@ -161,9 +134,6 @@ const sendSms = () => {
     smsModalRef.value.close();
 };
 
-const showInCallModal = () => {
-    outgoingCallModalRef.value.close();
-};
 
 const saveNow = () => {
     outgoingCallModalRef.value.close();

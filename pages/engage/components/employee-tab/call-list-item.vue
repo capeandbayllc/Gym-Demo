@@ -28,13 +28,15 @@
 
     <td class="">
       <div class="flex justify-evenly gap-2">
-        <button class="contact-button" @click="outgoingCall">
+        <button class="contact-button" @click.stop="contactOption='call'">
           <CallIcon class="icon"></CallIcon>
         </button>
-        <button class="contact-button" @click="openEmailModal">
+
+        <button class="contact-button" @click.stop="contactOption = 'email'">
           <EmailIcon class="icon"></EmailIcon>
         </button>
-        <button class="contact-button" @click="openSMSModal">
+
+        <button class="contact-button" @click.stop="contactOption = 'text'">
           <MessageIcon class="icon"></MessageIcon>
         </button>
       </div>
@@ -71,31 +73,10 @@
           <div class="dropdown-item" tabindex="-1">POS</div>
         </div>
       </div>
-      <Options :show="contactOption" @on:close="contactOption = null" />
     </td>
   </tr>
 
-  <daisy-modal ref="outgoingCallModalRef">
-    <MakeCallModal
-      @close="closeOutgoingCall"
-      @callNow="showInCallModal"
-      @saveNow="saveNow"
-    />
-  </daisy-modal>
-  <daisy-modal ref="emailModalRef">
-    <SendEmailModal
-      @close="closeEmailModal"
-      @saveEmail="saveEmail"
-      @sendEmail="sendEmail"
-    />
-  </daisy-modal>
-  <daisy-modal ref="smsModalRef">
-    <SendSmsModal
-      @close="closeSMSModal"
-      @saveSms="saveSms"
-      @sendSms="sendSms"
-    />
-  </daisy-modal>
+    <Options :user="data" :show="contactOption" @on:close="contactOption = null" />
 </template>
 <style scoped>
 .call-list-item {
@@ -152,18 +133,9 @@ import {
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
-import MakeCallModal from "../../../check-in/side-car-split/make-call.vue";
-import SendEmailModal from "../../../check-in/side-car-split/send-email.vue";
-import SendSmsModal from "../../../check-in/side-car-split/send-sms.vue";
+
 
 library.add(faEllipsisH);
-
-const format_date = (value) =>
-  function () {
-    if (value) {
-      return moment(String(value)).format("YYYY.MM.DD");
-    }
-  };
 
 const contactOption = ref(null);
 

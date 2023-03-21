@@ -1,23 +1,23 @@
 <template>
-  <daisy-modal v-if="disableCall" ref="outgoingCallModalRef">
-    <OutgoingCallModal @callNow="showOnGoingCall" />
+  <daisy-modal v-if="disableCall" ref="outgoingCallModalRef" @close="$emit('on:close', 'call')">
+    <MakeCall :user="user" @callNow="showOnGoingCall" />
   </daisy-modal>
-  <daisy-modal v-if="disableCall" ref="onGoingCallModalRef" @close="$emit('on:close', 'call')">
-    <OngoingCallCard />
+  <daisy-modal v-if="disableCall" ref="onGoingCallModalRef" @close="$emit('on:close', 'ongoing-call')">
+    <OngoingCall :user="user" />
   </daisy-modal>
   <daisy-modal v-if="disableEmail" ref="emailModalRef" @close="$emit('on:close', 'email')">
-    <EmailModal />
+    <SendEmail :user="user" />
   </daisy-modal>
   <daisy-modal v-if="disableText" ref="textModalRef" @close="$emit('on:close', 'text')">
-    <TextModal />
+    <SendSms :user="user" />
   </daisy-modal>
 </template>
 
 <script setup lang="ts">
-import OutgoingCallModal from "~/pages/call-user/components/outgoing-call-modal.vue";
-import EmailModal from '~/pages/check-in/engage/email.vue';
-import TextModal from '~/pages/check-in/engage/message.vue';
-import OngoingCallCard from "~/pages/call-user/components/ongoing-call-card.vue";
+import MakeCall from "~/pages/check-in/side-car-split/make-call.vue";
+import SendEmail from "~/pages/check-in/side-car-split/send-email.vue";
+import SendSms from "~/pages/check-in/side-car-split/send-sms.vue";
+import OngoingCall from "~/pages/check-in/side-car-split/ongoing-call.vue";
 
 export type Type = 'text' | 'email' | 'call' | null;
 interface Ref {
@@ -29,6 +29,7 @@ interface Props {
   disableText?: boolean
   disableCall?: boolean,
   show: Type
+  user: object
 }
 
 const emit = defineEmits<{
@@ -41,7 +42,7 @@ const props = withDefaults(defineProps<Props>(), {
   disableCall: true,
   show: {
     type: String,
-    validator: (prop: Type) => ['text', 'email', 'call', null].includes(prop)
+    validator: (prop: Type) => ['text', 'email', 'call', 'ongoing-call', null].includes(prop)
   }
 });
 
@@ -50,13 +51,11 @@ const onGoingCallModalRef = ref(null);
 const emailModalRef = ref(null);
 const textModalRef = ref(null);
 let lastOpen: Ref|null = null;
-let startedCall: Boolean = false;
 
 watch(() => props.show, toggleModal);
 
 function showOnGoingCall() {
-  toggleModal(null);
-  toggleModal('call');
+  toggleModal('ongoing-call');
 }
 
 function toggleModal(value: String|null): void {
@@ -71,9 +70,10 @@ function toggleModal(value: String|null): void {
     lastOpen = textModalRef;
   } else if (value === 'email') {
     lastOpen = emailModalRef;
+  } else if (value === 'call') {
+    lastOpen = outgoingCallModalRef;
   } else {
-    lastOpen = startedCall ? onGoingCallModalRef : outgoingCallModalRef;
-    startedCall = true;
+    lastOpen = onGoingCallModalRef;
   }
 
   lastOpen.value.open();

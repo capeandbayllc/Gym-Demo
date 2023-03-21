@@ -79,37 +79,10 @@
 <script setup>
 import MemberTableRow from "./components/member-table-row.vue";
 import { SearchIcon, AddIcon } from "@/components/icons";
-import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
+import member from "~/api/queries/member";
 
-const query = gql`
-  query AllMembers {
-    members(first: 10) {
-      data {
-        id
-        first_name
-        last_name
-        email
-        primary_phone
-        locations {
-          id
-          name
-        }
-        homeLocation {
-          name
-        }
-        created_at
-      }
-      paginatorInfo {
-        count
-        perPage
-        total
-      }
-    }
-  }
-`;
-
-const { result } = useQuery(query);
+const { result } = useQuery(member.query.browse);
 const members = ref([]);
 watch(() => {
   members.value = result?.value?.members?.data;
