@@ -2,7 +2,7 @@
     <simple-card title="Agreements" class="agreements-card" closable>
         <div class="p-8 card-gradient-bg">
             <CurrentAgreement v-if="!showNewAgreement" @new-agreement="newAgreement"/>
-            <div v-else class="bg-black w-fit mx-auto rounded-md p-6 border border-secondary new-agreements-wrapper">
+            <div v-else class="bg-black w-fit mx-auto rounded-[8px] p-[17px] border border-secondary new-agreements-wrapper">
                 <component :is="agreementScreens[agreementScreenIndex]"></component>
                 <div class="flex justify-end mt-6">
                     <Button size="sm" class="normal-case mx-2" ghost @click="prevScreen" v-if="agreementScreenIndex > 0">Back</Button>
@@ -33,7 +33,7 @@ const newAgreement = ()=>{
     showNewAgreement.value = true;
 }
 
-const agreementScreens = ref([Agreement,MembershipType,SelectGym,PersonalInformation, PersonalInformationNext,FinancialCollect,TermsAndCondition,PayNow]);
+const agreementScreens = ref([SelectGym,Agreement,MembershipType,PersonalInformation, PersonalInformationNext,FinancialCollect,TermsAndCondition,PayNow]);
 const agreementScreenIndex = ref(0);
 
 const nextScreen = ()=>{
