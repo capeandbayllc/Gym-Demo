@@ -6,7 +6,7 @@
         }"
     >
         <div class="card-title-container" v-if="!titleComponent && showTitleContainer" :class="smallHeader ? 'h-9' : 'h-12'">
-            <div class="card-title" :class="smallHeader ? 'text-sm' : 'text-lg'">
+            <div class="card-title border-none" :class="smallHeader ? 'text-sm' : 'text-lg'">
                 {{title}}
             </div>
             <div class="card-actions">

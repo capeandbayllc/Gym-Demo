@@ -39,11 +39,10 @@
                         />
                     </div>
                     <div class="w-full col-span-12 flex justify-end">
-                            <button class="bg-[#0075c9] rounded-md px-3 py-1 mt-2 text-sm">
-                                + Add to page
-                            </button>
-                        </div>
-                    
+                        <button class="bg-[#0075c9] rounded-md px-3 py-1 mt-2 text-sm">
+                            + Add to page
+                        </button>
+                    </div>
                 </div>
             </div>
         </template>
@@ -76,7 +75,10 @@
         .leading-none{
            @apply absolute -bottom-3 -left-6 flex flex-row-reverse items-center space-x-2 ;
            .value, .percent {
-            @apply text-xs font-normal;
+            @apply text-[10px] font-normal;
+           }
+           .value {
+            @apply ml-2 text-secondary;
            }
            .percent {
             @apply block leading-[32px] w-[32px] h-[32px] border border-white bg-black rounded-full;
@@ -106,52 +108,52 @@ const getTableList = (name) => {
 const data = [{
     id: 1,
     color: '#006bbc',
-    start: 180,
+    start: 220,
     end: 160,
     label: "Leads",
     value: 327,
     percent: 43,
     activeContent: true,
-    borderWidth: 137
+    borderWidth: 140
 }, {
     id: 2,
-    color: 'red',
+    color: '#009ffa',
     start: 160,
     end: 175,
     label: "Calls Attempt",
-    value: 25,
+    value: '10 loss: 6%',
     percent: 16,
     activeContent: false,
-    borderWidth: 137
+    borderWidth: 140
 }, {
     id: 3,
-    color: 'red',
+    color: '#49bcfd',
     start: 175,
     end: 155,
     label: "Calls Completed",
-    value: 78,
+    value: '22 loss: 18%',
     percent: 34,
     activeContent: false,
-    borderWidth: 137
+    borderWidth: 140
 }, {
     id: 4,
-    color: 'red',
+    color: '#7dd0fc',
     start: 155,
     end: 185,
     label: "Scheduled Appts",
-    value: 32,
+    value: '45 loss: 48%',
     percent: 24,
     activeContent: false,
-    borderWidth: 137
+    borderWidth: 140
 }, {
     id: 5,
-    color: 'red',
+    color: '#acddf7',
     start: 185,
     end: 160,
     label: "Appt Show",
-    value: 22,
+    value: '67 loss: 72%',
     percent: 33,
     activeContent: false,
-    borderWidth: 137
+    borderWidth: 140
 }];
 </script>
