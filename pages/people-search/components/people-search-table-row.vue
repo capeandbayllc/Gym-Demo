@@ -106,7 +106,7 @@
                     </svg>
                 </div>
             </div>
-            <div class="dropdown" v-show="dropdownInfo">
+            <div class="dropdown" v-show="dropdownInfo" @click.stop>
                 <div class="dropdown-container">
                     <cross-icon
                         @click.stop="hideDropdownInfo"
@@ -255,7 +255,7 @@
 .more-icon .more-icon-normal {
 }
 .people-search-tbl-content thead {
-    @apply top-0 sticky bg-black h-10 text-white;
+    @apply top-0 bg-black h-10 text-white;
 }
 .alert-modal {
     @apply bg-cover bg-center text-center;

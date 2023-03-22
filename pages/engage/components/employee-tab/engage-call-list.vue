@@ -5,7 +5,7 @@
       :columns="columns"
       :data="members2"
       :row-component="CallListItem"
-      :stickyHeader="true"
+      :stickyHeader="false"
       class="h-80 text-xs overflow-y-auto"
     />
   </div>

@@ -1,5 +1,5 @@
 <template>
-   <div class="inline">
+   <div class="inline-block">
         <div class="flex m-auto w-full pt-4 items-center justify-center">
             <font-awesome-icon class=" action-icon  " :icon="icon" />
         </div>
