@@ -1,8 +1,9 @@
 <template>
   <ClientOnly>
       <apexchart
+          class="statistics-1"
           type="donut"
-          height="200"
+          height="270"
           :options="options"
           :series=[10,40,20,48]
       />
@@ -23,6 +24,8 @@ const options = {
   ],
   legend: {
     show: true,
+    position: 'right',
+    horizontalAlign: 'center', 
     formatter: function (val, opts) {
         console.log(opts.w.globals.initialSeries[opts.seriesIndex], 'legendsss')
         return `${val} (${opts.w.globals.initialSeries[opts.seriesIndex]}%)`
@@ -86,3 +89,9 @@ const options = {
   },
 };
 </script>
+<style>
+.statistics-1  .apx-legend-position-right {
+  justify-content: center;
+}
+
+</style>

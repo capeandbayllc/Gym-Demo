@@ -1,7 +1,7 @@
 <template>
   <div class="funnel-chart">
     <div v-for="item in data" :key="item.id" class="funnel-chart-item">
-      <div class="item-content">
+      <div class="item-content relative">
         <component
           :is="contentItem"
           :label="item.label"

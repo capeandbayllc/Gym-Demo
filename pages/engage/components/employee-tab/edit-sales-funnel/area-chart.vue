@@ -1,5 +1,5 @@
 <template>
-  <apexchart id="graph-analysis-chart" type="area" height="250" :options="chartOptions" :series="chartSeries" />
+  <apexchart id="graph-analysis-chart" type="area" height="230" :options="chartOptions" :series="chartSeries" />
 </template>
 <script>
 const chartOptions = {

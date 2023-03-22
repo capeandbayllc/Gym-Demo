@@ -1,6 +1,6 @@
 <template>
   <div id="chart" class="flex statistics items-center justify-cener">
-    <apexchart type="radialBar" height="260" :options="radialChartOptions" :series="radialSeries"></apexchart>
+    <apexchart type="radialBar" height="220" :options="radialChartOptions" :series="radialSeries"></apexchart>
   </div>
 </template>
 <script setup>
@@ -53,7 +53,7 @@ const radialChartOptions = {
                 track: {
                   show: true,
                   background: '#0075c9',
-                  strokeWidth: '97%',
+                  strokeWidth: '100px',
                   opacity: 0.25,
                   margin: 5, 
                   dropShadow: {
@@ -77,13 +77,19 @@ const radialChartOptions = {
 .statistics .apx-legend-position-bottom {
   inset: auto 0px -80px !important;
 }
+.statistics .apexcharts-radialbar-area {
+  stroke-width: 7px;
+}
 .statistics .apexcharts-radial-series[seriesName="Marketing"] path{
   stroke:  #3fc0ff;
+  stroke-width: 7px;
 }
 .statistics .apexcharts-radial-series[seriesName="Finance"] path{
   stroke: #0075c9;
+  stroke-width: 7px;
 }
 .statistics .apexcharts-radial-series[seriesName="Influence"] path{
   stroke: #04375c;
+  stroke-width: 7px;
 }
 </style>

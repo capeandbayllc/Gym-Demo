@@ -1,6 +1,6 @@
 <template>
   <div class="data-graph-container pb-2 border-2 border-[#0075C9] rounded-[15px] h-full">
-      <div class="flex items-center justify-between py-2 px-4">
+      <div class="flex items-center justify-between pt-2 px-4">
         <label class="header block text-xs whitespace-nowrap mr-2 text-white text-left">Data Graph Analysis</label>
         <Listbox as="div" v-model="selected">
           <div class="relative">
