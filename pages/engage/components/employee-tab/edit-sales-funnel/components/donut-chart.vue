@@ -1,12 +1,12 @@
 <template>
   <ClientOnly>
-      <apexchart
-          class="statistics-1"
-          type="donut"
-          height="270"
-          :options="options"
-          :series=[10,40,20,48]
-      />
+    <apexchart
+      class="statistics-1"
+      type="donut"
+      width="310"
+      :options="options"
+      :series=[10,10,60,48]
+    />
   </ClientOnly>
 </template>
 <script setup>
@@ -93,5 +93,15 @@ const options = {
 .statistics-1  .apx-legend-position-right {
   justify-content: center;
 }
-
+.statistics-1 .apexcharts-canvas::before {
+  content: '';
+  position: absolute;
+  width: 141px;
+  height: 141px;
+  background: conic-gradient(from 90deg at 50% 50%, #0074c8 0deg, rgba(6,83,139,0 ) 360deg);
+  border-radius: 50%;
+  z-index: 9;
+  left: 17px;
+  top: 7px;
+}
 </style>
