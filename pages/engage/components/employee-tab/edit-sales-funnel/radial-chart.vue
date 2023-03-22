@@ -1,38 +1,89 @@
 <template>
-  <div id="chart">
-    <apexchart type="radialBar" height="350" :options="radialChartOptions" :series="radialSeries"></apexchart>
+  <div id="chart" class="flex statistics items-center justify-cener">
+    <apexchart type="radialBar" height="260" :options="radialChartOptions" :series="radialSeries"></apexchart>
   </div>
 </template>
 <script setup>
-const radialSeries = [44, 55, 67]
+const radialSeries = [48, 56, 80]
 const radialChartOptions = {
             chart: {
-              height: 350,
               type: 'radialBar',
+            },
+            legend: {
+              show: true,
+              position: 'bottom',
+              labels: {
+                colors: ['#fff', '#fff', '#fff'],
+            },
+            markers: {
+              width: 12,
+              height: 12,
+              strokeColor: '#fff',
+              fillColors: ['#3fc0ff', '#0075c9', '#04375c'],
+          },
             },
             plotOptions: {
               radialBar: {
+                inverseOrder: true,
                 dataLabels: {
                   name: {
-                    fontSize: '22px',
-                  },
-                  value: {
-                    fontSize: '16px',
-                  },
+                  show: false,
+                },
+                value: {
+                  show: true,
+                  fontSize: '20px',
+                  fontWeight: 600,
+                  color: '#fff',
+                  offsetY: 6,
+                  formatter: function (val) {
+                    return val + '%'
+                  }
+                },
                   total: {
                     show: true,
-                    label: 'Total',
+                    label: '',
+                    style: {
+                      color: '#fff'
+                    },
                     formatter: function (w) {
-                      // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                      return 249
+                      return  w.globals.initialSeries[0] + '%'
                     }
                   }
                 },
                 track: {
-
-                }
-              }
+                  show: true,
+                  background: '#0075c9',
+                  strokeWidth: '97%',
+                  opacity: 0.25,
+                  margin: 5, 
+                  dropShadow: {
+                      enabled: false,
+                      top: 0,
+                      left: 0,
+                      blur: 3,
+                      opacity: 0.5
+                  }
+                },
+              },
+             
             },
-            labels: ['Apples', 'Oranges', 'Bananas'],
+            labels: ['Marketing','Finance', 'Influence'],
           }
 </script>
+<style>
+.statistics .apexcharts-radialbar-area {
+  stroke-linecap: round;
+}
+.statistics .apx-legend-position-bottom {
+  inset: auto 0px -80px !important;
+}
+.statistics .apexcharts-radial-series[seriesName="Marketing"] path{
+  stroke:  #3fc0ff;
+}
+.statistics .apexcharts-radial-series[seriesName="Finance"] path{
+  stroke: #0075c9;
+}
+.statistics .apexcharts-radial-series[seriesName="Influence"] path{
+  stroke: #04375c;
+}
+</style>
