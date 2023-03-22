@@ -5,12 +5,12 @@
             <div v-else class="bg-black w-fit mx-auto rounded-[8px] p-[17px] border border-secondary new-agreements-wrapper">
                 <component :is="agreementScreens[agreementScreenIndex]"></component>
                 <div class="flex justify-end mt-6">
-                    <Button size="sm" class="normal-case mx-2" ghost @click="prevScreen" v-if="agreementScreenIndex > 0">Back</Button>
-                    <Button size="sm" class="normal-case mx-2 ml-auto" ghost @click="showNewAgreement = false">Cancel</Button>
-                    <Button size="sm" class="normal-case mx-2" secondary v-if="agreementScreenIndex == 0">Save as a Draft</Button>
-                    <Button size="sm" class="normal-case mx-2">Add to Segment</Button>
+                    <button class="button-simple mr-auto" @click="prevScreen" v-if="agreementScreenIndex > 0">Back</button>
+                    <button class="button-simple" @click="showNewAgreement = false">Cancel</button>
+                    <!-- <Button size="sm" class="normal-case mx-2" secondary v-if="agreementScreenIndex == 0">Save as a Draft</Button> -->
+                    <!-- <Button size="sm" class="normal-case mx-2">Add to Segment</Button> -->
                     <!-- <Button size="sm" class="normal-case mx-2">Complet and Send Document</Button> -->
-                    <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue ></Button>
+                    <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue</Button>
                 </div>
             </div>
         </div>
@@ -49,6 +49,9 @@ const prevScreen = ()=>{
 <style scoped>
 .agreements-card {
     @apply m-auto w-full max-w-[1120px];
+}
+.button-simple{
+    @apply normal-case px-2 text-[#6d6d6d] my-auto hover:text-primary transition-colors duration-300;
 }
 </style>
 <style>
