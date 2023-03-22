@@ -35,9 +35,6 @@
 		</div>
 	</div>
 </template>
-<style scoped>
-
-</style>
 <script setup>
 
 import {FontAwesomeIcon}  from '@fortawesome/vue-fontawesome'
@@ -51,34 +48,34 @@ const actionFirstRowData=[       //first row data
 	{
 		id:1,
 		title:"Getting Started",
-		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+		description:"",
 		icon:['far', 'fa-person-running']
 	},
 	{	id:2,
 		title:"Profile Preferences",
-		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+		description:"",
 		icon:['fas', 'fa-circle-user']
 	},
 	{	id:3,
 		title:"Username & Password",
-		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+		description:"",
 		icon:['fas', 'fa-unlock-keyhole']
 	},
 ];
 const actionSecondRowData=[        //second row data
 	{	id:1,
 		title:"Calendar",
-		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+		description:"",
 		icon:['fas', 'fa-calendar-days']
 	},
 	{	id:2,
 		title:"Billing & Subscription",
-		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+		description:"",
 		icon:['fas', 'fa-dollar-sign']
 	},
 	{	id:3,
 		title:"Tips & Tricks",
-		description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+		description:"",
 		icon:['fas', 'fa-lightbulb']
 	},
 ]
@@ -93,41 +90,32 @@ const getBackSearch=()=>{
 </script>
 <style scoped>
 .helpbot-container{
-	@apply fixed z-20 rounded-xl border-sky-700 border-2;
-        position: relative; 
-        padding: 6px;
-		cursor: pointer;
+	@apply fixed z-20 rounded-xl border-sky-700 border-2 max-w-[516px] h-auto p-[6px] cursor-pointer;
+	position: relative;
 }
 .action-block{
-	@apply flex flex-row;
-	width: 32rem;
-	border-color:#0075C9;
+	@apply grid grid-cols-3 border-[#0075C9];
 }
 .action-part{
 	@apply inline justify-center items-center m-auto;
 }
 .help-search{
-	@apply rounded-md w-1/2 m-auto text-base pl-3 hover:placeholder-opacity-0 mt-2;
-	background-color: #0075C9;
+	@apply rounded-md w-1/2 m-auto text-base pl-3 hover:placeholder-opacity-0 mt-2 bg-[#0075C9];
 }
 .action-border{
-	border-color: #0075C9;
+	@apply border-[#0075C9]
 }
 .help-search:hover{
 	placeholder-opacity: 0;
 	cursor: pointer;
 }
 .action-icon{
-    @apply w-6 h-6 -lg:w-5 -lg:h-5 border rounded-full p-3 bg-white;
-    color: #0075C9;
+    @apply w-6 h-6 -lg:w-5 -lg:h-5 border rounded-full p-3 bg-white text-[#0075C9];
 }
 .action-button{
-	@apply text-sm text-center px-2 py-1 rounded-lg mr-4;
-	background-color: #0075C9;
-	border: 1px solid #0075C9;
+	@apply text-sm text-center px-2 py-1 rounded-lg mr-4 bg-[#0075C9] border border-[#0075C9];
 }
 .action-button:hover{
-	cursor: pointer;
-	@apply text-white bg-black border-white border;
+	@apply text-white bg-black border-white border cursor-pointer;
 }
 </style>
