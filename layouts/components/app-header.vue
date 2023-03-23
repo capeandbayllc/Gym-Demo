@@ -31,14 +31,14 @@
             @show-leader-board="showLeaderBoard"
         />
         <daisy-modal
-        :overlay="true"
-        id="employeTimeTracking"
-        ref="employeeTimeTracking"
-        class="w-fit"
-        :showCloseButton="false"
-    >
-        <EmployeeModal @close="closeEmployeeModal" :visible="employeeModalVisible"/>
-    </daisy-modal>
+            :overlay="true"
+            id="employeTimeTracking"
+            ref="employeeTimeTracking"
+            class="w-fit"
+            :showCloseButton="false"
+            >
+            <EmployeeModal @close="closeEmployeeModal" :visible="employeeModalVisible" @showBreak="$emit('break')" />
+        </daisy-modal>
         <daisy-modal :overlay="true" id="pulseModal" ref="pulseModal">
             <pulse-modal />
         </daisy-modal>

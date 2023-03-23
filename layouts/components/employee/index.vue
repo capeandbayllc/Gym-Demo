@@ -12,14 +12,20 @@
         </div>
       </template>
     </ModalWrapper>
-    <ModalWrapper v-else-if="timeTrack" title="Choose an action:" @close="close">
+    <ModalWrapper v-else-if="timeTrack" title="Choose an action:" class="w-[721px]" @close="close">
       <template #body>
-        <TimeTrack />
+        <TimeTrack @break="$emit('showBreak')"/>
       </template>
       <template #footer>
-        <div class="actions">
-          <button class="text-[#0075c9] text-[15px]">
-            Sign-In With QR Code
+        <div class="actions flex justify-center items-center pt-5 pb-3 space-x-3">
+          <button class="text-[#0075c9] text-[15px] rounded-[12px] border border-[#0075c9] px-2">
+            Timesheet
+          </button>
+          <button class="text-[#0075c9] text-[15px] rounded-[12px] border border-[#0075c9] px-2">
+            Schedule
+          </button>
+          <button class="text-[#0075c9] text-[15px] rounded-[12px] border border-[#0075c9] px-2">
+            Hours & PTO
           </button>
         </div>
       </template>
@@ -27,7 +33,6 @@
   </div>
 </template>
 <script setup>
-import { faLeaf } from '@fortawesome/free-solid-svg-icons';
 import {ref} from 'vue';
 import ModalWrapper from "./modal-wrapper.vue";
 import SignIn from "./sign-in.vue";
@@ -56,4 +61,5 @@ const submitSignin = (param)=> {
   timeTrack.value = param
   signIn.value = false
 }
+
 </script>
