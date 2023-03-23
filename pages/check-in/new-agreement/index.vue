@@ -1,6 +1,13 @@
 <template>
     <simple-card title="Agreements" class="agreements-card" closable>
         <div class="p-8 card-gradient-bg">
+            <div v-if="showNewAgreement && agreementScreenIndex == 2" class="profile-image-container">
+                <div class="profile-image">
+                    <div class="profile-avatar">
+                        <img src="/checkin/avatar_random.jpg" alt="profile image" />
+                    </div>
+                </div>
+            </div>
             <CurrentAgreement v-if="!showNewAgreement" @new-agreement="newAgreement"/>
             <div v-else class="bg-black w-fit mx-auto rounded-[8px] p-[17px] border border-secondary new-agreements-wrapper">
                 <component :is="agreementScreens[agreementScreenIndex]"></component>
@@ -34,7 +41,7 @@ const newAgreement = ()=>{
     showNewAgreement.value = true;
 }
 
-const agreementScreens = ref([SelectGym,AgreementModal,MembershipType,PersonalInformation, PersonalInformationNext,FinancialCollect,TermsAndCondition,PayNow]);
+const agreementScreens = ref([SelectGym,AgreementModal,PersonalInformation,MembershipType, PersonalInformationNext,FinancialCollect,TermsAndCondition,PayNow]);
 const agreementScreenIndex = ref(0);
 
 const nextScreen = ()=>{
@@ -53,6 +60,22 @@ const prevScreen = ()=>{
 }
 .button-simple{
     @apply normal-case px-2 text-[#6d6d6d] my-auto hover:text-primary transition-colors duration-300;
+}
+.profile-avatar {
+    @apply rounded-[25px] p-1 inline-block ring-[4px] bg-black ring-secondary border-none;
+    img {
+        @apply w-[72px] h-[72px] rounded-[25px];
+    }
+}
+
+.profile-image-container{
+    @apply mb-5;
+}
+
+@media (min-width:1152px){
+    .profile-image-container{
+        @apply relative left-[80px] h-0 mb-0;
+    }
 }
 </style>
 <style>
