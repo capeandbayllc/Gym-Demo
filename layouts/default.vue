@@ -4,6 +4,7 @@
       @show-circular-menu="toggleCircularMenu"
       @show-help="showBot"
       @show-profile-menu="showProfileMenu"
+      @show-empoyee-tracking="showEmployeTracking"
       class="sticky top-0 z-[25]"
       @show-leader-board="showLeaderBoard"
     />

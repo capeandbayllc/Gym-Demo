@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-no-repeat relative h-16 w-44 flex items-center justify-center bg-contain self-end bg-[center_5px]" :class="{'bg-image':profileMenuIsOpen}">
+	<div class="bg-no-repeat relative h-16 flex items-center justify-center bg-contain self-end bg-[center_5px]">
 		<div class="account-btn w-10 ml-[20px]">
 			<img :src="user.profile_photo_path" alt="profile image" class="rounded-full"/>
 		</div>
