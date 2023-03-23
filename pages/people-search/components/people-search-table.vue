@@ -5,7 +5,6 @@
       <PeopleSearchTableRow
         v-for="item in items"
         :key="item.id"
-        :is="rowComponent"
         :columns="columns"
         :data="item"
         @click="clickRow(item)"

@@ -174,18 +174,18 @@ const props = defineProps({
 
 const emit = defineEmits(["createEvent", "cancel"]);
 
-const btnChoices = ["event", "task", "service", "prospect"];
+const btnChoices = ["event", "task", "service", "class"];
 const form = ref({
     eventType: "event",
     title: null,
     member: null,
     instructor: null,
     start: {
-        date: null,
+        date: "2022-12-15",
         time: null,
     },
     end: {
-        date: null,
+        date: "2022-12-15",
         time: null,
     },
     description: "",

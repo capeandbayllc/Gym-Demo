@@ -52,7 +52,7 @@
 </style>
 <style>
 .club-search-tbl-content thead{
-    @apply top-0 sticky bg-neutral h-10;
+    @apply top-0 bg-neutral h-10;
 }
 .club-search-tbl-content th{
     @apply font-normal;

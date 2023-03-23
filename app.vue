@@ -2,7 +2,7 @@
   <ApolloClientProvider>
     <MirageGraphQLServer>
       <NuxtLayout>
-        <NuxtPage />
+        <NuxtPage :key="$route.fullPath" />
       </NuxtLayout>
     </MirageGraphQLServer>
   </ApolloClientProvider>

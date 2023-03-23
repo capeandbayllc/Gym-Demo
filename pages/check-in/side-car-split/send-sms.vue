@@ -1,13 +1,12 @@
 <template>
     <div class="lg:flex space-x-3">
         <simple-card title="Send an SMS Text" class="rounded-xl">
-       <div class="bg-gradient-to-t from-[#18203A] to-[#11609E] p-6 w-[500px]">
+       <div class="bg-gradient-to-t rounded-b-xl from-[#18203A] to-[#11609E] p-6 w-[500px]">
             <div class="bg-black p-4 border-[1px] border-[#008AE0] rounded-xl">
-                
                 <Body 
-                    @notesModal="notesModal" 
-                    :ProfileImage="ProfileImage"
-                    profileName="Aya Buchanan"
+                    @notesModal="notesModal"
+                    :ProfileImage="user.profile_photo_path"
+                    :profileName="`${user.first_name} ${user.last_name}`"
                     callType="outgoing SMS Text"
                     :callTypeIcon="MessageIcon"
                 >
@@ -17,7 +16,7 @@
                             <textarea placeholder="This text confirms on meeting this afternoon. Thx" class="w-full h-10 rounded-xl bg-transparent border-[1px] px-4 placeholder-white h-28 p-2"></textarea>
                             <div class="text-xs space-x-3 absolute right-3 bottom-3">
                                 <span class="cursor-pointer">+ See Scripts</span>
-                                <span class="cursor-pointer">+ Add an Attachemnt</span>
+                                <span class="cursor-pointer">+ Add an Attachment</span>
                             </div>
                            </div>
                         </div>
@@ -50,13 +49,14 @@
 </style>
 
 <script setup>
-import ProfileImage from '@/public/images/profile/users_84.jpg';
 import { MessageIcon } from '~~/components/icons';
 import Body from './components/body.vue';
 import Footer from './components/footer.vue';
 import Notes from './components/notes.vue';
 
-
+defineProps({
+  user: Object
+})
 const notesModalStatus = ref(false);
 const notesModal = ()=>{
     notesModalStatus.value = !notesModalStatus.value;

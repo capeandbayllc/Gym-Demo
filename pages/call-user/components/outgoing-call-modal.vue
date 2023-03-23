@@ -41,16 +41,25 @@
 
 <script setup>
 import CallerCard from "./caller-card.vue";
+import {faker} from "@faker-js/faker";
 
 defineEmits(["call-now"]);
-const userCallSetting = {
+const props = defineProps({
+  user: Object
+})
+
+const firstName = computed(() => props.user?.first_name ?? faker.name.firstName());
+const lastName = computed(() => props.user?.last_name ?? faker.name.lastName());
+const phone = computed(() => props.user?.phone ?? faker.phone.phoneNumber());
+const profilePhoto = computed(() => props.user?.profile_photo_path ?? '/images/profile/member_7.jpg');
+const userCallSetting = computed(() => ({
   type: "outgoing-call",
   callType: "Outgoing Call",
-  userName: "Mona Parksdale",
-  phone: "+1 (123) 456-7890",
+  userName: `${firstName} ${lastName}`,
+  phone: (phone.value.replace(/\D+/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')),
   callIcon: "/phone.png",
-  callerProfileImage: "/user-caller.png",
-};
+  callerProfileImage: profilePhoto.value,
+}));
 const callType = [
   {
     value: "1",

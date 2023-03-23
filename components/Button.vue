@@ -19,11 +19,25 @@
             'btn-xs': size === 'xs',
             'btn-sm': size === 'sm',
             'btn-lg': size === 'lg',
+			'hover-icon': hoverIcon,
+			'btn-outline-secondary': hoverSecondary
         }"
     >
         <slot></slot>
     </button>
 </template>
+
+<style scoped>
+.hover-icon:deep(svg) {
+	@apply hidden;
+}
+.hover-icon:hover:deep(svg) {
+	@apply inline transition-all;
+}
+.btn-outline-secondary {
+	@apply btn-outline border-secondary hover:bg-secondary hover:border-secondary hover:text-white;
+}
+</style>
 
 <script setup>
 
@@ -86,6 +100,14 @@ const props = defineProps({
 	},
 	size: {
 		type: String,
+	},
+	hoverIcon: {
+		type: Boolean,
+		default: false
+	},
+	hoverSecondary: {
+		type: Boolean,
+		default: false
 	},
 })
  </script>

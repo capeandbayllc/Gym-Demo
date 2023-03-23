@@ -14,7 +14,7 @@
       <div class="absolute top-0 left-0 py-4 px-4 flex flex-col justify-end">
         <span class="text-sm">MTD</span>
         <span class="text-2xl">
-          2.309
+          $2,309
           <span class="text-xs text-secondary">+0.8%</span>
         </span>
         <span class="text-xs text-secondary"> 56 New </span>
@@ -24,7 +24,7 @@
     <div class="card-item-container">
       <div class="absolute top-0 left-0 py-4 px-4 flex flex-col justify-end">
         <span class="text-sm">% Collected</span>
-        <span class="text-2xl"> 20 </span>
+        <span class="text-2xl"> 20% </span>
         <span class="text-xs text-secondary"> +0.8% </span>
       </div>
       <div class="graph-container">

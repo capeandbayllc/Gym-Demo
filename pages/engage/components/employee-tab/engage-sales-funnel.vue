@@ -1,19 +1,18 @@
 <template>
-  <div class="border border-secondary rounded p-3 bg-black">
-    <div class="engage-sales-funnel-container">
+  <div class="border border-secondary rounded-3xl p-3 pt-6 bg-black">
+    <div class="engage-sales-funnel-container px-2">
       <div class="engage-sales-funnel-header">
         <h3>Acquisition & Sales Funnel</h3>
-        <Button
-          class="text-base-content"
-          size="sm"
-          secondary
+        <button
+          class="bg-secondary hover:bg-primary transition-colors text-sm px-3 py-1 rounded-lg"
           @click="showEditSalesFunnelModal"
-          >Edit</Button
         >
+          Edit
+        </button>
       </div>
       <funnel-chart
         :data="data"
-        class="h-72 w-full"
+        class="h-72 w-full rounded-3xl overflow-hidden"
         :content-item="ChartContent"
       />
     </div>

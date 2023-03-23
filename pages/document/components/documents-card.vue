@@ -25,14 +25,14 @@
 </style>
 <style>
 .document-tbl-content thead {
-    @apply top-0 sticky bg-black h-10;
+    @apply top-0  bg-black h-10;
 }
 </style>
 <script setup>
 import DocumentTableRow from "./document-table-row.vue";
 const columns = [
     {
-        label: "Segment",
+        label: "Document Name",
         class: "text-secondary text-left",
     },
     {

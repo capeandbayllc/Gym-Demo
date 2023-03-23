@@ -17,6 +17,7 @@
                     auto-apply
                     :enable-time-picker="false"
                     dark
+                    :start-date="`2022-12-01`"
                 />
                 <CalendarFilterLayout
                     :title="'Locations'"
@@ -51,7 +52,7 @@
                 <!-- main section heading area -->
                 <div class="flex justify-between items-center w-full">
                     <h1 class="font-light text-xl my-auto w-full">
-                        January 2088
+                        December 2022
                     </h1>
                     <!-- filters/page actions -->
                     <div class="flex gap-2 w-full justify-end">
@@ -121,6 +122,7 @@
     <EventInformation
         :event="eventDetails"
         :eventInformationVisibibility="eventInformationVisibibility"
+        :eventIsLoading="eventIsLoading"
         @outclick="resetState"
         @cancel="resetState"
     />
@@ -162,6 +164,7 @@ const emptyNodeContext = ref(null); // information about the empty node that was
 /** Component Visibility State */
 const eventDetailsVisibibility = ref(false);
 const eventInformationVisibibility = ref(false);
+const eventIsLoading = ref(true);
 const offerUpVisibibility = ref(false);
 const eventFormVisibility = ref(false);
 const filterOptions = ref({
@@ -236,6 +239,7 @@ const resetState = () => {
     eventInformationVisibibility.value = false;
     offerUpVisibibility.value = false;
     eventFormVisibility.value = false;
+    eventIsLoading.value = true;
 };
 
 /** sets up state for form entry */
@@ -244,6 +248,7 @@ const handleAddNew = (node) => {
         return;
     } else {
         const startTime = new Date(node.date);
+
         emptyNodeContext.value = {
             start: startTime,
             dateStr: node.dateStr,
@@ -260,6 +265,12 @@ const handleAddNew = (node) => {
 const { result } = useQuery(query);
 
 const handleCreateEvent = (form) => {
+    filterOptions.value.employees.isOpen =
+        !filterOptions.value.employees.isOpen;
+    filterOptions.value.locations.isOpen =
+        !filterOptions.value.locations.isOpen;
+    filterOptions.value.event_types.isOpen =
+        !filterOptions.value.event_types.isOpen;
     const newEventObj = {
         ...events.value[0],
         attendees: [],
@@ -283,6 +294,14 @@ const handleCreateEvent = (form) => {
 
     events.value.push(newEventObj);
     eventFormVisibility.value = false;
+    setTimeout(() => {
+        filterOptions.value.employees.isOpen =
+            !filterOptions.value.employees.isOpen;
+        filterOptions.value.locations.isOpen =
+            !filterOptions.value.locations.isOpen;
+        filterOptions.value.event_types.isOpen =
+            !filterOptions.value.event_types.isOpen;
+    }, 500);
 };
 
 const getDateTimeString = (date) => {
@@ -326,7 +345,7 @@ const getDayClass = (date) => {
     return "";
 };
 
-watch(result, (ov, nv) => {
+watch(result, async (ov, nv) => {
     if (initialized.value) return;
     console.log("GQL Result:", result.value);
     eventTypes.value = result.value.calendarEvents.data;
@@ -347,7 +366,17 @@ watch(result, (ov, nv) => {
     for (let event of tempEventsContainer) {
         request(user.query.findById, { id: event.owner_id }).then(
             ({ data }) => {
-                events.value.push({ ...event, owner: data.data.user });
+                events.value.push({
+                    ...event,
+                    owner: data.data.user,
+                    attendees: event.attendees.map((attendeeId) => ({
+                        id: attendeeId,
+                        name: null,
+                        email: null,
+                        phone: null,
+                        profile_photo_path: null,
+                    })),
+                });
             }
         );
     }
@@ -388,7 +417,6 @@ const getFormattedEvents = computed(() => {
                 users: [...event.attendees],
                 description: event.description,
                 color: event.color,
-                users: Array(Math.floor(Math.random() * 40) + 1).fill(),
                 instructor: event.owner,
                 location: event.location,
                 attendees: event.attendees,
@@ -425,9 +453,23 @@ const getFilteredEvents = computed(() => {
     return filteredEvents;
 });
 
-const showMoreDetails = () => {
+const showMoreDetails = async () => {
     resetState();
     eventInformationVisibibility.value = true;
+
+    for (let attendee of eventDetails.value.extendedProps.users) {
+        const { data } = await request(user.query.findById, {
+            id: attendee.id.entity_id,
+        });
+        attendee.name = `${data.data.user.first_name} ${data.data.user.last_name}`;
+        attendee.email = data.data.user.email;
+        attendee.phone = data.data.user.phone;
+        attendee.profile_photo_path = data.data.user.profile_photo_path;
+    }
+
+    console.log(eventDetails.value);
+
+    eventIsLoading.value = false;
 };
 
 const showOfferUp = () => {

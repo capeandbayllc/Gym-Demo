@@ -33,12 +33,11 @@ export interface UserQuery {
     findById: DocumentNode;
 }
 
-const user: GraphQLQueryInterface<UserQuery, object> = {
+const user: GraphQLQueryInterface<UserQuery> = {
     query: {
         findByMail: FIND_BY_MAIL,
         findById: FIND_BY_ID,
-    },
-    mutation: {},
+    }
 };
 
 export default user;

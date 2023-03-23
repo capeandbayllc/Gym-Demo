@@ -8,5 +8,5 @@ const infoTypes: Array<string> = ['info', 'default', 'success', 'warning', 'erro
 // https://miragejs.com/docs/main-concepts/factories/
 export const NotificationFactory: FactoryDefinition = Factory.extend({
     state: infoTypes[getRandomInt(infoTypes.length)],
-    text: faker.lorem.sentence(getRandomInt(5, 1)),
+    text: 'Kevin Buchanan is attempting to check in and needs to resolve his account before entry',
 });
