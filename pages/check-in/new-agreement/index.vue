@@ -9,7 +9,7 @@
                 </div>
             </div>
             <CurrentAgreement v-if="!showNewAgreement" @new-agreement="newAgreement"/>
-            <div v-else class="bg-black w-fit mx-auto rounded-[8px] p-[17px] border border-secondary new-agreements-wrapper">
+            <div v-else class="bg-black w-fit mx-auto p-[17px] border border-secondary new-agreements-wrapper" :class="agreementScreenIndex==0?'rounded-[8px]':'rounded-[19px]'">
                 <component :is="agreementScreens[agreementScreenIndex]"></component>
                 <div class="flex justify-end mt-6">
                     <button class="button-simple mr-auto" @click="prevScreen" v-if="agreementScreenIndex > 0">Back</button>
@@ -41,7 +41,7 @@ const newAgreement = ()=>{
     showNewAgreement.value = true;
 }
 
-const agreementScreens = ref([SelectGym,AgreementModal,PersonalInformation,MembershipType, PersonalInformationNext,FinancialCollect,TermsAndCondition,PayNow]);
+const agreementScreens = ref([SelectGym,AgreementModal,PersonalInformation,PersonalInformationNext,FinancialCollect,MembershipType,TermsAndCondition,PayNow]);
 const agreementScreenIndex = ref(0);
 
 const nextScreen = ()=>{

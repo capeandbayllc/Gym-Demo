@@ -12,7 +12,7 @@
                 :showSearch="false"
                 :showClearList="false"
                 :bgSecondaryOpened="false"
-                @onChange="data.primary.grProfitCenter = $event"
+                @onChange=""
                 classButton="my-[5px] mx-[10px]"
                 class="bg-[#5a5a5a] text-white rounded-[10px]  max-w-[200px]">
             </select-box>
