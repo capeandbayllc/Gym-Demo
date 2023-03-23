@@ -412,16 +412,6 @@ const navList = [
     ],
   },
   {
-    type: "profile-setting",
-    navigation: [
-      {
-        icon: WidgetIcon,
-        url: null,
-      },
-      ...reporting
-    ],
-  },
-  {
     type: "club",
     navigation: [
       {
