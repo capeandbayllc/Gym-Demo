@@ -1,0 +1,302 @@
+<template>
+  <apexchart id="graph-analysis-chart" type="area" :options="chartOptions" :series="chartSeries" />
+</template>
+<script>
+const chartOptions = {
+  chart: {
+    type: 'area',
+    height: '300px',
+    toolbar: {
+      show: false
+    },
+  zoom: {
+    enabled: true,
+    type: '',
+  }
+  },
+  dataLabels: {
+    enabled: false
+  },
+  stroke: {
+    show: false,
+  },
+  fill: {
+    colors: [ '#04365c', '#0275c9' , '#40c0ff'],
+    gradient: {
+      shade: 'dark',
+      type: "vertical",
+      shadeIntensity: .1,
+      gradientToColors: undefined,
+      inverseColors: true,
+      opacityFrom: 1,
+      opacityTo: 0.8,
+      stops: [0, 50, 100],
+    },
+  },
+  colors: ['#40c0ff', '#0275c9', '#04365c'],
+  xaxis: {
+    type: 'months',
+    crosshairs: {
+      show: true,
+      width: 70,
+      position: 'front',
+      opacity: 0.9,        
+      stroke: {
+          color: '#D8E3F0',
+          width: 0,
+          dashArray: 0,
+      },
+      fill: {
+        type: 'gradient',
+        color: '#B1B9C4',
+        gradient: {
+            colorFrom: '#D8E3F0',
+            colorTo: '#BED1E6',
+            stops: [0, 100],
+            opacityFrom: 0,
+            opacityTo: 0.8,
+        },
+      },
+    },
+  },
+  yaxis: {
+      show: true,
+      showAlways: true,
+      showForNullSeries: true,
+      opposite: false,
+      reversed: false,
+      tickAmount: 10,
+      forceNiceScale: false,
+      floating: false,
+      labels: {
+          show: true,
+          style: {
+              colors: ['#fff'],
+              fontSize: '12px',
+              fontFamily: 'Helvetica, Arial, sans-serif',
+              fontWeight: 400,
+              cssClass: 'apexcharts-yaxis-label',
+          },
+      },
+      
+  },
+  markers: {
+    size: 0,
+    colors: undefined,
+    strokeColors: '#fff',
+    strokeWidth: 2,
+    strokeOpacity: 0.9,
+    strokeDashArray: 0,
+    fillOpacity: 1,
+    discrete: [],
+    shape: "circle",
+    radius: 2,
+    offsetX: 0,
+    offsetY: 0,
+    onClick: undefined,
+    onDblClick: undefined,
+    showNullDataPoints: true,
+    hover: {
+      size: undefined,
+      sizeOffset: 3
+    }
+}
+}
+export default {
+  data() {
+    return {
+      chartOptions: {
+        // chart options here
+        ...chartOptions,
+        // tooltip: {
+        //   custom: function({series, seriesIndex, dataPointIndex, w}) {
+        //     console.log(seriesIndex,dataPointIndex, 'context')
+        //     return (
+        //       `<div class="arrow_box">
+        //         <img src="${w.config.series[seriesIndex].data[dataPointIndex].avatar}" />
+        //       </div>`
+        //     );
+        //   }
+        // }
+      },
+      chartSeries: [
+        {
+          name: 'Statistics 1',
+          data: [
+            {
+              x: "January",
+              y: '16%',
+            },
+            {
+              x: "February",
+              y: '50%',
+            },
+            {
+              x: "March",
+              y: '45%',
+            },
+            {
+              x: "April",
+              y: '34%',
+            },
+            {
+              x: "May",
+              y: '23%',
+            },
+            {
+              x: "June",
+              y: '22%',
+            },
+            {
+              x: "July",
+              y: '43%',
+            },
+            {
+              x: "August",
+              y: '33%',
+            },
+            {
+              x: "September",
+              y: '28%',
+            },
+            {
+              x: "October",
+              y:'31%',
+            },
+            {
+              x: "November",
+              y: '29%',
+            },
+            {
+              x: "December",
+              y: '43%',
+            }
+          ],
+        },
+        {
+          name: 'Statistics 2',
+          data: [
+            {
+              x: "January",
+              y: '15%',
+            },
+            {
+              x: "February",
+              y: '47%',
+            },
+            {
+              x: "March",
+              y: '23%',
+            },
+            {
+              x: "April",
+              y: '34%',
+            },
+            {
+              x: "May",
+              y: '29%',
+            },
+            {
+              x: "June",
+              y: '12%',
+            },
+            {
+              x: "July",
+              y: '40%',
+            },
+            {
+              x: "August",
+              y: '39%',
+            },
+            {
+              x: "September",
+              y: '25%',
+            },
+            {
+              x: "October",
+              y:'39%',
+            },
+            {
+              x: "November",
+              y: '29%',
+            },
+            {
+              x: "December",
+              y: '33%',
+            }
+          ],
+        },
+        {
+          name: 'Statistics 3',
+          data: [
+            {
+              x: "January",
+              y: '8%',
+            },
+            {
+              x: "February",
+              y: '40%',
+            },
+            {
+              x: "March",
+              y: '35%',
+            },
+            {
+              x: "April",
+              y: '24%',
+            },
+            {
+              x: "May",
+              y: '13%',
+            },
+            {
+              x: "June",
+              y: '22%',
+            },
+            {
+              x: "July",
+              y: '23%',
+            },
+            {
+              x: "August",
+              y: '33%',
+            },
+            {
+              x: "September",
+              y: '18%',
+            },
+            {
+              x: "October",
+              y:'31%',
+            },
+            {
+              x: "November",
+              y: '29%',
+            },
+            {
+              x: "December",
+              y: '23%',
+            }
+          ],
+        },
+      ]
+    };
+  },
+}
+</script>
+<style >
+
+#graph-analysis-chart .apexcharts-legend {
+  @apply flex justify-start pt-6;
+}
+#graph-analysis-chart .apexcharts-legend-series {
+  @apply bg-[#f7f8fa] flex p-2 rounded-lg px-4;
+}
+#graph-analysis-chart .apexcharts-legend-series .apexcharts-legend-marker {
+  @apply rounded-md mr-2;
+  border-radius: 3px !important;
+}
+#graph-analysis-chart .apexcharts-legend-series .apexcharts-legend-text {
+  font-weight: bold !important;
+}
+</style>

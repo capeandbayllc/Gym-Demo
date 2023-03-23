@@ -18,13 +18,15 @@
     </div>
     <engage-call-list />
   </div>
-  <daisy-modal
-    id="editSalesFunnelModal"
-    ref="editSalesFunnelModal"
-    class="w-full !min-w-0 max-w-fit h-[600px]"
-  >
-    <edit-sales-funnel-modal class="h-[600px] overflow-auto" />
-  </daisy-modal>
+      <daisy-modal
+        id="editSalesFunnelModal"
+        ref="editSalesFunnelModal"
+        class="w-full max-w-[1152px] h-[771px]"
+      >
+        <edit-sales-funnel-modal class="h-[771px] max-w-[1152px] overflow-auto" />
+      </daisy-modal>
+ 
+
 </template>
 <style scoped>
 .engage-sales-funnel-container {
@@ -38,6 +40,7 @@
 }
 </style>
 <script setup>
+import {ref} from 'vue';
 import ChartContent from "./chart-content.vue";
 import EditSalesFunnelModal from "./edit-sales-funnel/index.vue";
 import EngageCallList from "./engage-call-list.vue";
