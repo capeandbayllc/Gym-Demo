@@ -1,24 +1,18 @@
 <template>
     <simple-card title="Agreements" class="agreements-card" closable>
-        <div class="p-8 card-gradient-bg">
-            <div v-if="showNewAgreement && agreementScreenIndex == 2" class="profile-image-container">
-                <div class="profile-image">
-                    <div class="profile-avatar">
-                        <img src="/checkin/avatar_random.jpg" alt="profile image" />
-                    </div>
-                </div>
-            </div>
+        <div class="p-8 card-gradient-bg"> 
             <CurrentAgreement v-if="!showNewAgreement" @new-agreement="newAgreement"/>
-            <div v-else class="bg-black w-fit mx-auto p-[17px] border border-secondary new-agreements-wrapper" :class="agreementScreenIndex==0?'rounded-[8px]':'rounded-[19px]'">
-                <component :is="agreementScreens[agreementScreenIndex]"></component>
+            <component v-else :is="agreementScreens[agreementScreenIndex]" :modalClass="'bg-black w-fit mx-auto p-[17px] border border-secondary new-agreements-wrapper '+(agreementScreenIndex==0?'rounded-[8px]':'rounded-[19px]')">
                 <div class="flex justify-end mt-6">
                     <button class="button-simple mr-auto" @click="prevScreen" v-if="agreementScreenIndex > 0">Back</button>
                     <button class="button-simple" @click="showNewAgreement = false">Cancel</button>
+                    <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue</Button>
                     <!-- <Button size="sm" class="normal-case mx-2" secondary v-if="agreementScreenIndex == 0">Save as a Draft</Button> -->
                     <!-- <Button size="sm" class="normal-case mx-2">Add to Segment</Button> -->
                     <!-- <Button size="sm" class="normal-case mx-2">Complet and Send Document</Button> -->
-                    <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue</Button>
                 </div>
+            </component>
+            <div class="" :class="agreementScreenIndex==0?'rounded-[8px]':'rounded-[19px]'">
             </div>
         </div>
     </simple-card>
@@ -60,22 +54,6 @@ const prevScreen = ()=>{
 }
 .button-simple{
     @apply normal-case px-2 text-[#6d6d6d] my-auto hover:text-primary transition-colors duration-300;
-}
-.profile-avatar {
-    @apply rounded-[25px] p-1 inline-block ring-[4px] bg-black ring-secondary border-none;
-    img {
-        @apply w-[72px] h-[72px] rounded-[25px];
-    }
-}
-
-.profile-image-container{
-    @apply mb-5;
-}
-
-@media (min-width:1152px){
-    .profile-image-container{
-        @apply relative left-[80px] h-0 mb-0;
-    }
 }
 </style>
 <style>

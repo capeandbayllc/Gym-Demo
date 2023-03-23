@@ -1,12 +1,17 @@
 <template>
-    <div class="text-center text-xl mt-4 font-semibold mb-6">
-        Select your Agreement Type
-    </div>
-    <div class="flex justify-around cursor-pointer gradient-bg w-fit w-[450px] p-6 mx-auto rounded-[14px] border border-secondary">
-        <div v-for="(type, ndx) in filesTypes" :key="ndx" class="create-option mx-6" :class="{'transition-all scale-[1.2]': activeTab == ndx}" @click="activeTab = ndx">
-            <empty-file-icon class="mb-2 mx-auto w-14" />
-            <span class="mb-4">{{type}}</span>
+    <div :class="modalClass">
+        <div>
+            <div class="text-center text-xl mt-4 font-semibold mb-6">
+                Select your Agreement Type
+            </div>
+            <div class="flex justify-around cursor-pointer gradient-bg w-fit w-[450px] p-6 mx-auto rounded-[14px] border border-secondary">
+                <div v-for="(type, ndx) in filesTypes" :key="ndx" class="create-option mx-6" :class="{'transition-all scale-[1.2]': activeTab == ndx}" @click="activeTab = ndx">
+                    <empty-file-icon class="mb-2 mx-auto w-14" />
+                    <span class="mb-4">{{type}}</span>
+                </div>
+            </div>
         </div>
+        <slot></slot>
     </div>
 </template>
 <style scoped>
@@ -43,12 +48,15 @@
 <script setup>
 import { EmptyFileIcon } from '~~/components/icons';
 
-// const props = defineProps({
+const props = defineProps({
+    modalClass:{
+        type: String
+    }
 //     newAgreementData: {
 // 		type: Object,
 // 		default: null,
 // 	}
-// })
+})
 
 const activeTab = ref(null);
 

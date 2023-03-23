@@ -1,28 +1,36 @@
 <template>
-    <simple-card bg-gradient class="p-4 gap-4 w-[400px] width-full">
-        <h2 class="text-md font-bold mb-4">Personal information</h2>
-        <p class="px-4 text-sm mb-4">Want to add family members to help keep you accountable to your fitness goals? This is your chance to add memberships for $0 down and $17 a month.</p>
-        <div class="form-control w-full max-w-xs">
-            <label class="label">
-                <span class="label-text">How many members would you like to add?</span>
-            </label>
-            <select-box
-                :items="cities"
-                label="Nobody - I prefer to work alone"
-                :showSearch="false"
-                :showClearList="false"
-                :bgSecondaryOpened="false"
-                @onChange=""
-                classButton="my-[5px] mx-[10px]"
-                class="bg-[#5a5a5a] text-white rounded-[10px] w-full">
-            </select-box>
-
-        </div>
-        <p class="text-sm mt-4">*Each additional membership subject to $49 annual fee. Must be 12 and up.</p>
-    </simple-card>
+    <div :class="modalClass">
+        <simple-card bg-gradient class="p-4 gap-4 w-[400px] width-full">
+            <h2 class="text-md font-bold mb-4">Personal information</h2>
+            <p class="px-4 text-sm mb-4">Want to add family members to help keep you accountable to your fitness goals? This is your chance to add memberships for $0 down and $17 a month.</p>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="label-text">How many members would you like to add?</span>
+                </label>
+                <select-box
+                    :items="cities"
+                    label="Nobody - I prefer to work alone"
+                    :showSearch="false"
+                    :showClearList="false"
+                    :bgSecondaryOpened="false"
+                    @onChange=""
+                    classButton="my-[5px] mx-[10px]"
+                    class="bg-[#5a5a5a] text-white rounded-[10px] w-full">
+                </select-box>
     
+            </div>
+            <p class="text-sm mt-4">*Each additional membership subject to $49 annual fee. Must be 12 and up.</p>
+        </simple-card>
+        <slot></slot>
+    </div>
 </template>
 <script setup>
+
+const props = defineProps({
+    modalClass:{
+        type: String
+    }
+})
 
 const personalInfoForm = ref({
     firstName:"",
