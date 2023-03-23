@@ -5,8 +5,8 @@
             'collapsed': isCollapsed
         }"
     >
-        <div class="card-title-container" v-if="!titleComponent && showTitleContainer" :class="smallHeader ? 'h-9' : 'h-12'">
-            <div class="card-title border-none" :class="smallHeader ? 'text-sm' : 'text-lg'">
+        <div class="card-title-container" v-if="!titleComponent && showTitleContainer">
+            <div class="card-title">
                 {{title}}
             </div>
             <div class="card-actions">
@@ -28,7 +28,7 @@
         <div class="card-summary-container" v-if="isCollapsed">
             <slot name="summary"/>
         </div>
-        <div class="card-content-container" :class="bgBlack ? 'bg-black rounded-[16px]' : null" v-else>
+        <div class="card-content-container" v-else>
             <slot name="content"/>
         </div>
     </div>
@@ -37,9 +37,9 @@
 .card-container {
     @apply border-2 border-secondary rounded-[18px] relative;
     .card-title-container {
-        @apply flex flex-row justify-between items-center text-xl rounded-tl-[15px] rounded-tr-[15px] font-semibold px-6 text-base-content bg-gradient-to-b from-secondary to-base-300/30 bg-secondary bg-blend-darken;;
+        @apply flex flex-row justify-between items-center h-12 text-xl rounded-tl-[15px] rounded-tr-[15px] font-semibold px-6 text-base-content bg-gradient-to-b from-secondary to-base-300/30 bg-secondary bg-blend-darken;;
         .card-title {
-            @apply font-bold;
+            @apply text-lg font-bold;
         }
         .card-actions {
             @apply flex flex-row space-x-2 cursor-pointer items-center;
@@ -74,14 +74,6 @@ const props = defineProps({
     showTitleContainer:{
         type: Boolean,
         default: true
-    },
-    smallHeader:{
-        type: Boolean,
-        default: false
-    },
-    bgBlack:{
-        type: Boolean,
-        default: false
     }
 });
 

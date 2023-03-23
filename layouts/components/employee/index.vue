@@ -18,7 +18,7 @@
       </template>
       <template #footer>
         <div class="actions flex justify-center items-center pt-5 pb-3 space-x-3">
-          <button class="text-[#0075c9] text-[15px] rounded-[12px] border border-[#0075c9] px-2">
+          <button class="text-[#0075c9] text-[15px] rounded-[12px] border border-[#0075c9] px-2" @click="activeTimesheet">
             Timesheet
           </button>
           <button class="text-[#0075c9] text-[15px] rounded-[12px] border border-[#0075c9] px-2">
@@ -30,6 +30,11 @@
         </div>
       </template>
     </ModalWrapper>
+    <ModalWrapper v-else-if="timesheet" title="Timesheet:" class="w-[998px]" @close="close">
+      <template #body>
+        <Timesheet />
+      </template>
+    </ModalWrapper>
   </div>
 </template>
 <script setup>
@@ -37,6 +42,7 @@ import {ref} from 'vue';
 import ModalWrapper from "./modal-wrapper.vue";
 import SignIn from "./sign-in.vue";
 import TimeTrack from "./time-track.vue";
+import Timesheet from "./timesheet.vue";
 
 const emit = defineEmits(['close'])
 const props = defineProps({
@@ -45,20 +51,28 @@ const props = defineProps({
 
 let signIn = ref(true)
 let timeTrack = ref(false)
+let timesheet = ref(false)
 
 const close = ()=> {
   emit('close')
   if(props.visible) {
     signIn.value = true
     timeTrack.value = false
+    timesheet.value = false
   } else {
     signIn.value = false
     timeTrack.value = false
+    timesheet.value = false
   }
   
 }
 const submitSignin = (param)=> {
   timeTrack.value = param
+  signIn.value = false
+}
+const activeTimesheet = ()=> {
+  timesheet.value = true
+  timeTrack.value = false
   signIn.value = false
 }
 

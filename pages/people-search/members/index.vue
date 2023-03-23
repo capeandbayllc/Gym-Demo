@@ -24,11 +24,11 @@
       <div class="-md:px-4 custom-page-content flex-col">
         <div class="flex flex-row justify-between space-x-4 mb-4">
           <div class="flex gap-4">
-            <!--            <select-box-search-input-->
-            <!--                :secondary="false"-->
-            <!--                :placeholder="Filter"-->
-            <!--                size="xs"-->
-            <!--            ></select-box-search-input>-->
+<!--            <select-box-search-input-->
+<!--                :secondary="false"-->
+<!--                :placeholder="Filter"-->
+<!--                size="xs"-->
+<!--            ></select-box-search-input>-->
             <select-box
               :items="filterBy"
               value=""
@@ -40,12 +40,12 @@
           </div>
         </div>
         <div>
-          <!--          {{ result }}-->
+<!--          {{ result }}-->
           <data-table
             :columns="columns"
-            :data="members"
+            :data="result?.members?.data"
             :row-component="MemberTableRow"
-            class="h-96 overflow-y-auto pr-4"
+            class="h-96 overflow-y-auto"
           />
         </div>
       </div>
@@ -56,10 +56,10 @@
 .page-members-center-container {
   @apply py-4 pr-5 w-full h-fit;
   .custom-page-content {
-    @apply block border border-secondary bg-black rounded-b p-7 mx-auto w-full max-w-7xl;
+    @apply block border border-secondary bg-black rounded-b p-7 mx-auto w-full max-w-[1120px];
   }
   .custom-page-content-header {
-    @apply bg-secondary rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-7xl;
+    @apply bg-secondary rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-[1120px];
     .search-icon {
       @apply float-right m-1 mr-6 cursor-pointer;
     }
@@ -84,19 +84,9 @@ import member from "~/api/queries/member";
 
 const { result } = useQuery(member.query.browse);
 const members = ref([]);
-const membershipTypes = ["platinum", "gold", "silver", "bronze"];
-
-const getRandomMembershipType = () => {
-  return membershipTypes[Math.floor(Math.random() * membershipTypes.length)];
-};
 watch(() => {
-  members.value = result?.value?.members?.data.map((m) => {
-    return {
-      ...m,
-      membership_type: getRandomMembershipType(),
-    };
-  });
-});
+  members.value = result?.value?.members?.data;
+})
 
 const isSearchEnable = ref(false);
 const filterBy = [
