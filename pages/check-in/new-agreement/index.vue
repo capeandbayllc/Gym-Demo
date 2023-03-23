@@ -7,9 +7,6 @@
                     <button class="button-simple mr-auto" @click="prevScreen" v-if="agreementScreenIndex > 0">Back</button>
                     <button class="button-simple" @click="showNewAgreement = false">Cancel</button>
                     <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue</Button>
-                    <!-- <Button size="sm" class="normal-case mx-2" secondary v-if="agreementScreenIndex == 0">Save as a Draft</Button> -->
-                    <!-- <Button size="sm" class="normal-case mx-2">Add to Segment</Button> -->
-                    <!-- <Button size="sm" class="normal-case mx-2">Complet and Send Document</Button> -->
                 </div>
             </component>
             <div class="" :class="agreementScreenIndex==0?'rounded-[8px]':'rounded-[19px]'">

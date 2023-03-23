@@ -26,9 +26,6 @@
                         <input class="gray-input" v-model="personalInfoForm.birthDate"/>
                     </div>
                     <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full flex items-center">
-                        <!-- <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked />Male</div>
-                        <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked />Female</div>
-                        <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked />Other</div> -->
                         <div class="toggle-custom" :class="{ 'toggle-active': maleCheck }">
                             <div @click="changeMaleCheck" class="circle"></div>
                             <div @click="changeMaleCheck" class="line"></div>
