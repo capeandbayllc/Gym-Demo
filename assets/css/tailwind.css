@@ -149,7 +149,7 @@
 
 @keyframes toggle-circle-animation {
   from {
-      @apply bg-secondary left-[45px];
+      @apply bg-secondary left-[48px];
   }
   to {
       @apply bg-gray-400 left-[22px];
@@ -185,7 +185,7 @@
       @apply bg-gray-400 left-[22px];
   }
   to {
-      @apply bg-secondary left-[45px];
+      @apply bg-secondary left-[48px];
   }
 }
 

@@ -18,11 +18,11 @@
 <script setup>
 import CurrentAgreement from './current-agreement.vue';
 import MembershipType from './membership-type.vue';
-// import Agreement from '../user-info/agreement';
 import SelectGym from '../user-info/select-gym';
 import PersonalInformation from '../user-info/personal-information';
 import PersonalInformationNext from '../user-info/personal-information/personal-info-next.vue';
-import FinancialCollect from '../user-info/financial-collect';
+import DueTodayPayment from '../user-info/financial-collect/due-today.vue';
+import MostlyDuesPayment from '../user-info/financial-collect/mostly-dues.vue';
 import AgreementModal from '../user-info/agreement-modal.vue';
 import TermsAndCondition from '../user-info/terms-condition.vue';
 import PayNow from '../user-info/pay-now.vue';;
@@ -32,7 +32,7 @@ const newAgreement = ()=>{
     showNewAgreement.value = true;
 }
 
-const agreementScreens = ref([SelectGym,AgreementModal,PersonalInformation,PersonalInformationNext,FinancialCollect,MembershipType,TermsAndCondition,PayNow]);
+const agreementScreens = ref([SelectGym,AgreementModal,PersonalInformation,PersonalInformationNext,DueTodayPayment,MostlyDuesPayment,      MembershipType,TermsAndCondition,PayNow]);
 const agreementScreenIndex = ref(0);
 
 const nextScreen = ()=>{

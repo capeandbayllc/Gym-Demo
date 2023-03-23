@@ -12,7 +12,7 @@
                 <div class="col-span-2 text-xl font-semibold text-base-content mb-4">
                     Personal Information (Profile)
                 </div>
-                <div class="max-h-[70vh] overflow-auto grid pr-2 grid-cols-2 gap-4 w-[600px] text-sm width-full">
+                <div class="max-h-[70vh] overflow-x-hidden overflow-y-scroll grid pr-2 grid-cols-2 gap-4 w-[600px] text-sm width-full">
                     <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
                         <div class="mb-2">First Name</div>
                         <input class="gray-input" v-model="personalInfoForm.firstName"/>
@@ -63,7 +63,6 @@
                     <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full flex">
                         <div class="mr-4 w-[80%]">
                             <div class="mb-2">State*</div>
-                            <!-- <input class="gray-input" v-model="personalInfoForm.state"/> -->
                             <select-box
                                 :items="cities"
                                 label="Florida"
@@ -96,14 +95,6 @@
                         <div class="mb-2">Email</div>
                         <input class="gray-input" v-model="personalInfoForm.email"/>
                     </div>
-                    <!-- <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full flex justify-center items-center text-xs">
-                        <input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked /> 
-                        Send me promotional texts
-                    </div>
-                    <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full flex justify-center items-center text-xs">
-                        <input type="checkbox" v-model="sendMePromotionalEmails" class="toggle toggle-info toggle-sm mr-2" /> 
-                        Send me promotional emails
-                    </div> -->
                     <p class="col-span-2 py-4 pb-8">Yes! I would like a Fitness Club Consultant to follow up with me regarding a membership by text message and/or cell phone call; I also would like to receive other offers from Fitness Club via text message and/or cell phone call. By checking the box, I therefore agree to receive autodialed and manually dialed advertising text messages and cell phone calls from Fitness Club and its affiliates to the mobile phone number provided here. I understand that my consent to receive promotional autodialed and manually dialed text messages and/or phone calls is not a condition of purchasing goods and services from Fitness Club. Message and data rates may apply. I understand that I may withdraw my consent at any time by texting STOP to a text message or by informing the calling party during a phone call. Fitness Club has no intention of selling your personal information. Florida** law requires businesses to provide an alternate form of opt-out requests via email. If you are a Nevada resident, you may submit such opt-out requests to info@fitnessclub.com. To be effective, your request must include your full name, address, phone number, and email.</p>
                 </div>
             </simple-card>

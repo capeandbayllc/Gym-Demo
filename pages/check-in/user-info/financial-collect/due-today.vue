@@ -1,7 +1,7 @@
 <template>
-  <div class="lg:flex gap-4 max-w-[900px] width-full display-flex-column mx-auto">
-    <div :class="modalClass" class="mx-0 mb-[20px] lg:mb-0">
-      <div class="w-full border border-secondary rounded-md p-4 card-details card-gradient-bg width-full">
+  <div class="lg:flex gap-4 max-w-[1000px] width-full display-flex-column mx-auto">
+    <div :class="modalClass" class="mx-0 mb-[20px] lg:mb-0 w-full">
+      <div class="border border-secondary rounded-md p-4 card-details card-gradient-bg">
           <div class="flex justify-between mb-4">
               <p class="text-lg font-semibold">Due Today*</p>
               <div class="w-[200px]">
