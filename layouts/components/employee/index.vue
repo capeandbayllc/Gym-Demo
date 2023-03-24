@@ -37,7 +37,20 @@
     </ModalWrapper>
     <ModalWrapper v-else-if="hoursPTO" title="Hours & PTO" @close="close">
       <template #body>
-        <HoursPTO @gotoTimesheet="activeTimesheet" @gotoAddHours="" />
+        <HoursPTO @gotoTimesheet="activeTimesheet" @gotoAddHours="activeAddDay" />
+      </template>
+    </ModalWrapper>
+    <ModalWrapper v-else-if="addDay" title="Add Day" @close="close">
+      <template #body>
+        <AddDay />
+        <div class="flex justify-end items-center mt-6 space-x-4">
+          <button class="text-[#707070] rounded-[12px] px-2" @click="close">
+            Cancel
+          </button>
+          <button class="text-white rounded-[12px] bg-[#0075c9] px-2 h-[36px]">
+            Save
+          </button>
+        </div>
       </template>
     </ModalWrapper>
   </div>
@@ -49,6 +62,7 @@ import SignIn from "./sign-in.vue";
 import TimeTrack from "./time-track.vue";
 import Timesheet from "./timesheet.vue";
 import HoursPTO from "./hours-pto.vue";
+import AddDay from "./add-day.vue";
 
 const emit = defineEmits(['close'])
 const props = defineProps({
@@ -59,21 +73,24 @@ let signIn = ref(true)
 let timeTrack = ref(false)
 let timesheet = ref(false)
 let hoursPTO = ref(false)
+let addDay = ref(false)
 
 const close = ()=> {
   emit('close')
   if(props.visible) {
     signIn.value = true
-    timeTrack.value = false
-    timesheet.value = false
-    hoursPTO.value = false
+    allFalse()
   } else {
     signIn.value = false
-    timeTrack.value = false
-    timesheet.value = false
-    hoursPTO.value = false
+    allFalse()
   }
   
+}
+const allFalse = ()=> {
+  timeTrack.value = false
+  timesheet.value = false
+  hoursPTO.value = false
+  addDay.value = false
 }
 const submitSignin = (param)=> {
   timeTrack.value = param
@@ -82,13 +99,15 @@ const submitSignin = (param)=> {
 const activeTimesheet = ()=> {
   timesheet.value = true
   timeTrack.value = false
-  signIn.value = false
+  
 }
 const activeHoursPTO = ()=> {
   hoursPTO.value = true
-  timesheet.value = false
   timeTrack.value = false
-  signIn.value = false
+}
+const activeAddDay = ()=> {
+  addDay.value = true
+  hoursPTO.value = false
 }
 
 </script>
