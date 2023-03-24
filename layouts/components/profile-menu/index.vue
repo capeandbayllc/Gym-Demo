@@ -63,8 +63,9 @@
     /*hover:rounded-md hover:bg-[#2F72C4]*/
     > div {
       > button {
-        @apply bg-blue-500 text-white py-1 px-4 hover:bg-blue-600;
-        border-radius: 0.75rem
+        @apply text-white py-1 px-4 hover:bg-blue-500;
+        border-radius: 0.75rem;
+        background-color: #0075C9;
       }
     }
   }
