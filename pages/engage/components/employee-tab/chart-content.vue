@@ -1,9 +1,13 @@
 <template>
     <div class="chart-content">
-        <div class="text-[9px]">{{label}}</div>
+        <div class="text-[9px] label">{{label}}</div>
         <div class="leading-none">
-            {{value}} <br />
-            {{percent}}%
+            <span class="value">
+                {{value}}
+            </span> <br>
+            <span class="percent">
+                {{percent}}%
+            </span>
         </div>
     </div>
 </template>
@@ -11,6 +15,7 @@
 .chart-content {
     @apply text-center text-sm font-bold py-2 px-3;
 }
+
 </style>
 <script setup>
 const props = defineProps({
