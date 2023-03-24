@@ -199,7 +199,7 @@
 <script setup>
 import { ref } from "vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
-import EmployeeSearchList from './employee-search-list.vue'
+import EmployeeSearchList from './components/employee-search-list.vue'
 const filters = ref({
   location: false,
   type: false,

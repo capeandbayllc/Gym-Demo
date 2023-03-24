@@ -1,6 +1,6 @@
 <template>
   <div class="border border-[#0075c9] outer-gradient-modal p-4 rounded-[19px]">
-    <ModalWrapper v-if="signIn && visible" title="Complete the following:" class="w-[721px]" @close="close">
+    <ModalWrapper v-if="signIn && visible" title="Complete the following:" @close="close">
       <template #body>
         <SignIn @submit="submitSignin" />
       </template>
@@ -12,7 +12,7 @@
         </div>
       </template>
     </ModalWrapper>
-    <ModalWrapper v-else-if="timeTrack" title="Choose an action:" class="w-[721px]" @close="close">
+    <ModalWrapper v-else-if="timeTrack" title="Choose an action:" @close="close">
       <template #body>
         <TimeTrack @break="$emit('showBreak')"/>
       </template>
@@ -24,15 +24,20 @@
           <button class="text-[#0075c9] text-[15px] rounded-[12px] border border-[#0075c9] px-2">
             Schedule
           </button>
-          <button class="text-[#0075c9] text-[15px] rounded-[12px] border border-[#0075c9] px-2">
+          <button class="text-[#0075c9] text-[15px] rounded-[12px] border border-[#0075c9] px-2" @click="activeHoursPTO">
             Hours & PTO
           </button>
         </div>
       </template>
     </ModalWrapper>
-    <ModalWrapper v-else-if="timesheet" title="Timesheet:" class="w-[998px]" @close="close">
+    <ModalWrapper v-else-if="timesheet" title="Timesheet:" compWidth="w-[998px]" @close="close">
       <template #body>
         <Timesheet />
+      </template>
+    </ModalWrapper>
+    <ModalWrapper v-else-if="hoursPTO" title="Hours & PTO" @close="close">
+      <template #body>
+        <HoursPTO @gotoTimesheet="activeTimesheet" @gotoAddHours="" />
       </template>
     </ModalWrapper>
   </div>
@@ -43,6 +48,7 @@ import ModalWrapper from "./modal-wrapper.vue";
 import SignIn from "./sign-in.vue";
 import TimeTrack from "./time-track.vue";
 import Timesheet from "./timesheet.vue";
+import HoursPTO from "./hours-pto.vue";
 
 const emit = defineEmits(['close'])
 const props = defineProps({
@@ -52,6 +58,7 @@ const props = defineProps({
 let signIn = ref(true)
 let timeTrack = ref(false)
 let timesheet = ref(false)
+let hoursPTO = ref(false)
 
 const close = ()=> {
   emit('close')
@@ -59,10 +66,12 @@ const close = ()=> {
     signIn.value = true
     timeTrack.value = false
     timesheet.value = false
+    hoursPTO.value = false
   } else {
     signIn.value = false
     timeTrack.value = false
     timesheet.value = false
+    hoursPTO.value = false
   }
   
 }
@@ -72,6 +81,12 @@ const submitSignin = (param)=> {
 }
 const activeTimesheet = ()=> {
   timesheet.value = true
+  timeTrack.value = false
+  signIn.value = false
+}
+const activeHoursPTO = ()=> {
+  hoursPTO.value = true
+  timesheet.value = false
   timeTrack.value = false
   signIn.value = false
 }

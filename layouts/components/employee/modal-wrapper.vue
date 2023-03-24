@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-wrapper">
+  <div class="modal-wrapper" :class="compWidth ?? 'w-[721px]'">
     <div class="border relative border-[#0075c9] bg-black px-4 py-6 rounded-[19px]">
       <div class="header pt-4 pb-6 text-center">
         <h4 class="text-[20px] font-bold">{{ title }}</h4>
@@ -19,7 +19,8 @@
 </template>
 <script setup>
 defineProps({
-  title: String
+  title: String,
+  compWidth: String
 })
 </script>
 <style scoped>
