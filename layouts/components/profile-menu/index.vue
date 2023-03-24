@@ -14,10 +14,10 @@
               :key="sub_ndx"
               >
               <div v-if="child.label=='Help'" @click="handleClickActions">
-                {{ child.label }}
+                <button> {{ child.label }} </button>
               </div>
               <div v-else @click="handleProfileMenuNavigate(child.url)">
-                {{ child.label }}
+                <button> {{ child.label }} </button>
               </div>
             </li>
           </ul>
@@ -36,28 +36,43 @@
 
 <style scoped>
 .profile-menu-container {
-  @apply z-[30] absolute right-8 p-3 text-sm w-64;
+  @apply z-[30] absolute right-8 p-3 text-sm w-72;
   background: linear-gradient(to bottom right, #004285, #00254C);
   > div {
     @apply border-4 rounded-3xl -m-4;
+    border-color: #D4D8DD;
   }
   .menu-list {
-    @apply m-6 mb-0;
+    @apply m-6 mb-0 mt-4;
   }
   .menu-items {
     @apply py-2 px-0;
   }
   li {
-    @apply py-1.5 px-2 cursor-pointer;
+    @apply py-1.5 pr-2 cursor-pointer;
   }
   li:last-child {
     @apply pb-2;
   }
   .menu-items {
     @apply border-b last:border-b-0;
+    border-bottom-color: #A6B8CB;
   }
   .submenu-items {
-    @apply my-1 font-normal w-fit hover:rounded-md hover:bg-[#2F72C4];
+    @apply my-1 font-normal w-fit;
+    /*hover:rounded-md hover:bg-[#2F72C4]*/
+    > div {
+      > button {
+        @apply bg-blue-500 text-white py-1 px-4 hover:bg-blue-600;
+        border-radius: 0.75rem
+      }
+    }
+  }
+}
+
+@media (max-width: 1920px) {
+  .profile-menu-container {
+    @apply right-12;
   }
 }
 </style>
