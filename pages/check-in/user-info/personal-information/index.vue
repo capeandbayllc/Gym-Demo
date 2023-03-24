@@ -3,7 +3,7 @@
         <div class="profile-image-container">
             <div class="profile-image">
                 <div class="profile-avatar">
-                    <img src="/checkin/avatar_random.jpg" alt="profile image" />
+                    <img :src="ProfileInfo.profile_photo_path" alt="profile image" />
                 </div>
             </div>
         </div> 
@@ -12,7 +12,7 @@
                 <div class="col-span-2 text-xl font-semibold text-base-content mb-4">
                     Personal Information (Profile)
                 </div>
-                <div class="max-h-[70vh] overflow-x-hidden overflow-y-scroll grid pr-2 grid-cols-2 gap-4 w-[600px] text-sm width-full">
+                <div class="max-h-[70vh] overflow-x-hidden overflow-y-scroll grid pr-2 grid-cols-2 gap-4 w-[650px] text-sm width-full">
                     <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
                         <div class="mb-2">First Name</div>
                         <input class="gray-input" v-model="personalInfoForm.firstName"/>
@@ -25,22 +25,22 @@
                         <div class="mb-2">Birth Date</div>
                         <input class="gray-input" v-model="personalInfoForm.birthDate"/>
                     </div>
-                    <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full flex items-center">
-                        <div class="toggle-custom" :class="{ 'toggle-active': maleCheck }">
+                    <div class="col-span-1 -lg:col-span-2 -md:col-auto mr-auto flex flex-wrap items-center">
+                        <div class="toggle-custom mb-2" :class="{ 'toggle-active': maleCheck }">
                             <div @click="changeMaleCheck" class="circle"></div>
                             <div @click="changeMaleCheck" class="line"></div>
                             <span @click="changeMaleCheck">
                                 Male
                             </span>
                         </div>
-                        <div class="toggle-custom" :class="{ 'toggle-active': femaleCheck }">
+                        <div class="toggle-custom mb-2" :class="{ 'toggle-active': femaleCheck }">
                             <div @click="changeFemaleCheck" class="circle"></div>
                             <div @click="changeFemaleCheck" class="line"></div>
                             <span @click="changeFemaleCheck">
                                 Female
                             </span>
                         </div>
-                        <div class="toggle-custom" :class="{ 'toggle-active': otherCheck }">
+                        <div class="toggle-custom mb-2" :class="{ 'toggle-active': otherCheck }">
                             <div @click="changeOtherCheck" class="circle"></div>
                             <div @click="changeOtherCheck" class="line"></div>
                             <span @click="changeOtherCheck">
@@ -103,6 +103,14 @@
     </div>
 </template>
 <script setup>
+import { request } from "~/api/utils/request";
+import member from "@/api/queries/member";
+
+const route = useRoute();
+const profileId = route.query.id;
+const isLeadView = route.query.type === "lead";
+const ProfileInfo = ref(null);
+const user = useState("auth");
 
 const personalInfoForm = ref({
     firstName:"",
@@ -123,6 +131,19 @@ const personalInfoForm = ref({
     sendMePromotionalTexts: "",
     sendMePromotionalEmails: ""
 })
+
+getMember();
+function getMember() {
+    if (profileId) {
+        request((isLeadView ? lead : member).query.get, { id: profileId }).then(
+            ({ data }) => {
+                ProfileInfo.value = data.data[isLeadView ? "lead" : "member"];
+            }
+        );
+    } else {
+        ProfileInfo.value = user.value;
+    }
+}
 
 const props = defineProps({
     modalClass:{
@@ -168,7 +189,7 @@ const changeOtherCheck = ()=>{
 
     @media (min-width:1152px){
         .profile-image-container{
-            @apply relative left-[80px] h-0 mb-0;
+            @apply relative left-[60px] h-0 mb-0;
         }
     }
 </style>
