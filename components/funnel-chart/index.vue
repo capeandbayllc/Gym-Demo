@@ -1,7 +1,7 @@
 <template>
   <div class="funnel-chart">
     <div v-for="item in data" :key="item.id" class="funnel-chart-item">
-      <div class="item-content">
+      <div class="item-content relative">
         <component
           :is="contentItem"
           :label="item.label"
@@ -13,13 +13,17 @@
       <div
         class="item-shadow"
         :style="{
-          ...getStyle(item, 144),
+          ...getStyle(item, 104),
         }"
       ></div>
       <div
-        class="item-chart"
+        :class="[item.color ? `border-[${item.color}]` : 'border-secondary']"
+        class="item-chart absolute border-y-transparent"
         :style="{
-          ...getStyle(item, 120),
+          'border-right-color': item.color ? item.color : '#0074C8',
+          'border-left-color': item.color ? item.color : '#0074C8',
+          ...getStyle(item, 70),
+         
         }"
       ></div>
     </div>
@@ -33,9 +37,9 @@
     .item-shadow {
       @apply absolute border-secondary/50 border-y-transparent;
     }
-    .item-chart {
-      @apply absolute border-secondary border-y-transparent;
-    }
+    /* .item-chart {
+      @apply ;
+    } */
     .item-content {
       @apply flex w-full h-full z-10 items-center justify-center;
       .active-chart-section {
