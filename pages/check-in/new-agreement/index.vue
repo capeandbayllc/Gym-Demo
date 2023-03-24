@@ -6,7 +6,7 @@
                 <div class="flex justify-end mt-6">
                     <button class="button-simple mr-auto" @click="prevScreen" v-if="agreementScreenIndex > 0">Back</button>
                     <button class="button-simple" @click="showNewAgreement = false">Cancel</button>
-                    <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue</Button>
+                    <button class="normal-case mx-2 border-2 rounded-[10px] border-secondary px-[10px] py-[2px]" outline @click="nextScreen">Continue</button>
                 </div>
             </component>
             <div class="" :class="agreementScreenIndex==0?'rounded-[8px]':'rounded-[19px]'">
@@ -23,6 +23,7 @@ import PersonalInformation from '../user-info/personal-information';
 import PersonalInformationNext from '../user-info/personal-information/personal-info-next.vue';
 import DueTodayPayment from '../user-info/financial-collect/due-today.vue';
 import MostlyDuesPayment from '../user-info/financial-collect/mostly-dues.vue';
+import SecondaryPayments from '../user-info/financial-collect/secondary-payments.vue';
 import AgreementModal from '../user-info/agreement-modal.vue';
 import TermsAndCondition from '../user-info/terms-condition.vue';
 import PayNow from '../user-info/pay-now.vue';;
@@ -32,7 +33,9 @@ const newAgreement = ()=>{
     showNewAgreement.value = true;
 }
 
-const agreementScreens = ref([SelectGym,AgreementModal,PersonalInformation,PersonalInformationNext,DueTodayPayment,MostlyDuesPayment,      MembershipType,TermsAndCondition,PayNow]);
+const agreementScreens = ref([SelectGym,AgreementModal,PersonalInformation,PersonalInformationNext,DueTodayPayment,MostlyDuesPayment,SecondaryPayments,TermsAndCondition,PayNow]);
+// MembershipType
+
 const agreementScreenIndex = ref(0);
 
 const nextScreen = ()=>{

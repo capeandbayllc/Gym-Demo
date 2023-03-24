@@ -3,7 +3,7 @@
     <div :class="modalClass" class="mx-0 mb-[20px] lg:mb-0 w-full">
       <div class="border border-secondary rounded-md p-4 card-details card-gradient-bg">
           <div class="flex justify-between mb-4">
-              <p class="text-lg font-semibold">Mostly due*</p>
+              <p class="text-lg font-semibold">Secondary Payments*</p>
           </div>
           <div class="flex gap-3 justify-between items-center mb-3">
             <Button size="sm" class="border-gray-400 bg-transparent text-sm normal-case hover:!bg-secondary hover:text-white hover:!border-secondary rounded-[10px]" :class="{'!bg-secondary text-white !border-secondary': payWith == 'checking'}" @click="payWith = 'checking'">Pay with Checking</Button>
@@ -16,9 +16,6 @@
           </div>
           <PayWithChecking v-if="payWith == 'checking'"/>
           <PayWithCard v-if="payWith == 'card'"/>
-      </div>
-      <div class="flex justify-end">
-        <button class="text-[#6d6d6d] hover:text-secondary mt-3 mr-3 -mb-2">Add a secondary method of payment</button>
       </div>
       <slot></slot>
     </div>
