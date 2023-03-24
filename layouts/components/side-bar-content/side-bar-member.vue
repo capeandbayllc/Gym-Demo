@@ -1,9 +1,11 @@
 <template>
-    <div class="side-bar-member">
-        <img :src="profile_photo_path"/>
-        <div class="member-name">{{first_name}}</div>
-        <div v-if="unread" class="unread-badge">{{unread}}</div>
-    </div>
+    <NuxtLink :to="`/check-in?id=${id}&preview=true`">
+        <div class="side-bar-member">
+            <img :src="profile_photo_path"/>
+            <div class="member-name">{{first_name}}</div>
+            <div v-if="unread" class="unread-badge">{{unread}}</div>
+        </div>
+    </NuxtLink>
 </template>
 <style scoped>
 .side-bar-member {
