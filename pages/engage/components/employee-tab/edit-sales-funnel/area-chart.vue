@@ -1,24 +1,34 @@
 <template>
-  <apexchart id="graph-analysis-chart" type="area" :options="chartOptions" :series="chartSeries" />
+  <apexchart id="graph-analysis-chart" type="area" height="250" :options="chartOptions" :series="chartSeries" />
 </template>
 <script>
 const chartOptions = {
   chart: {
     type: 'area',
-    height: '300px',
     toolbar: {
       show: false
     },
-  zoom: {
-    enabled: true,
-    type: '',
-  }
+    zoom: {
+      enabled: true,
+      type: '',
+    }
+  },
+  legend: {
+    position: 'bottom',
+    fontSize: '8px',
+    markers:  {
+      width: 10,
+      height: 10
+    }
   },
   dataLabels: {
     enabled: false
   },
   stroke: {
     show: false,
+  },
+  grid: {
+    borderColor: 'rgba(255,255,255,0.2)'
   },
   fill: {
     colors: [ '#04365c', '#0275c9' , '#40c0ff'],
@@ -36,9 +46,21 @@ const chartOptions = {
   colors: ['#40c0ff', '#0275c9', '#04365c'],
   xaxis: {
     type: 'months',
+    labels: {
+      style: {
+        fontSize: '7px',
+        colors: '#fff',
+      }
+    },
+    axisBorder: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
     crosshairs: {
       show: true,
-      width: 70,
+      width: 40,
       position: 'front',
       opacity: 0.9,        
       stroke: {
@@ -65,14 +87,19 @@ const chartOptions = {
       showForNullSeries: true,
       opposite: false,
       reversed: false,
-      tickAmount: 10,
+      tickAmount: 9,
+      min:0,
+      max:45,
       forceNiceScale: false,
       floating: false,
       labels: {
           show: true,
+          formatter: function (val) {
+              return val + "k"
+            },
           style: {
               colors: ['#fff'],
-              fontSize: '12px',
+              fontSize: '10px',
               fontFamily: 'Helvetica, Arial, sans-serif',
               fontWeight: 400,
               cssClass: 'apexcharts-yaxis-label',
@@ -125,51 +152,51 @@ export default {
           data: [
             {
               x: "January",
-              y: '16%',
+              y: '16',
             },
             {
               x: "February",
-              y: '50%',
+              y: '37',
             },
             {
               x: "March",
-              y: '45%',
+              y: '45',
             },
             {
               x: "April",
-              y: '34%',
+              y: '34',
             },
             {
               x: "May",
-              y: '23%',
+              y: '23',
             },
             {
               x: "June",
-              y: '22%',
+              y: '22',
             },
             {
               x: "July",
-              y: '43%',
+              y: '43',
             },
             {
               x: "August",
-              y: '33%',
+              y: '33',
             },
             {
               x: "September",
-              y: '28%',
+              y: '28',
             },
             {
               x: "October",
-              y:'31%',
+              y:'31',
             },
             {
               x: "November",
-              y: '29%',
+              y: '29',
             },
             {
               x: "December",
-              y: '43%',
+              y: '43',
             }
           ],
         },
@@ -178,51 +205,51 @@ export default {
           data: [
             {
               x: "January",
-              y: '15%',
+              y: '15',
             },
             {
               x: "February",
-              y: '47%',
+              y: '28',
             },
             {
               x: "March",
-              y: '23%',
+              y: '23',
             },
             {
               x: "April",
-              y: '34%',
+              y: '34',
             },
             {
               x: "May",
-              y: '29%',
+              y: '29',
             },
             {
               x: "June",
-              y: '12%',
+              y: '12',
             },
             {
               x: "July",
-              y: '40%',
+              y: '40',
             },
             {
               x: "August",
-              y: '39%',
+              y: '39',
             },
             {
               x: "September",
-              y: '25%',
+              y: '25',
             },
             {
               x: "October",
-              y:'39%',
+              y:'39',
             },
             {
               x: "November",
-              y: '29%',
+              y: '29',
             },
             {
               x: "December",
-              y: '33%',
+              y: '33',
             }
           ],
         },
@@ -231,51 +258,51 @@ export default {
           data: [
             {
               x: "January",
-              y: '8%',
+              y: '8',
             },
             {
               x: "February",
-              y: '40%',
+              y: '40',
             },
             {
               x: "March",
-              y: '35%',
+              y: '35',
             },
             {
               x: "April",
-              y: '24%',
+              y: '24',
             },
             {
               x: "May",
-              y: '13%',
+              y: '13',
             },
             {
               x: "June",
-              y: '22%',
+              y: '22',
             },
             {
               x: "July",
-              y: '23%',
+              y: '23',
             },
             {
               x: "August",
-              y: '33%',
+              y: '33',
             },
             {
               x: "September",
-              y: '18%',
+              y: '18',
             },
             {
               x: "October",
-              y:'31%',
+              y:'31',
             },
             {
               x: "November",
-              y: '29%',
+              y: '29',
             },
             {
               x: "December",
-              y: '23%',
+              y: '23',
             }
           ],
         },
@@ -290,10 +317,10 @@ export default {
   @apply flex justify-start pt-6;
 }
 #graph-analysis-chart .apexcharts-legend-series {
-  @apply bg-[#f7f8fa] flex p-2 rounded-lg px-4;
+  @apply bg-[#f7f8fa] flex px-2 py-1 rounded-lg;
 }
 #graph-analysis-chart .apexcharts-legend-series .apexcharts-legend-marker {
-  @apply rounded-md mr-2;
+  @apply rounded-md mr-1;
   border-radius: 3px !important;
 }
 #graph-analysis-chart .apexcharts-legend-series .apexcharts-legend-text {
