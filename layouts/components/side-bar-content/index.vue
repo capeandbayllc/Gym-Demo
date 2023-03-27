@@ -23,9 +23,10 @@
         <div class="divider my-6"></div>
         <div class="member-list">
             <side-bar-member
-                v-for="member in members"
+                v-for="(member, index) in membersData"
                 :key="member.id"
-                v-bind="{ ...member }"
+                :index="index"
+                v-bind="{...member}"
             />
         </div>
     </div>
@@ -56,10 +57,6 @@
     }
     .location-list {
       @apply grid grid-cols-12;
-
-      .select-box-wrapper {
-        @apply col-start-1 col-span-4
-      }
     }
 }
 </style>
@@ -110,12 +107,13 @@
 }
 </style>
 <script setup>
-import '@vueform/multiselect/themes/default.css';
 import { ArrowIcon } from "~~/components/icons";
 import SideBarMember from "./side-bar-member.vue";
 import CheckInModal from "../check-in-modal/index.vue";
 import SelectBox from "../../../components/select-box";
 import SelectLocation from "./select-location";
+import { request } from "~/api/utils/request";
+import member from "~/api/queries/member";
 
 const locations = [
     {
@@ -147,6 +145,14 @@ const members = [
         name: "Walter K.",
     },
 ];
+const membersData = ref([]);
+const types = ["platinum", "gold", "silver", "bronze"];
+request(member.query.browse).then(({ data }) => {
+  console.info("data.data.members", data.data.members);
+  data.data.members.data.forEach((member) => {
+    membersData.value.push(member);
+  });
+});
 const checkInModal = ref(null);
 const showCheckInModal = () => {
     checkInModal.value.open();
