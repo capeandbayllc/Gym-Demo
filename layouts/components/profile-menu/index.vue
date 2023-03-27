@@ -14,10 +14,10 @@
               :key="sub_ndx"
               >
               <div v-if="child.label=='Help'" @click="handleClickActions">
-                <button> {{ child.label }} </button>
+                {{ child.label }}
               </div>
               <div v-else @click="handleProfileMenuNavigate(child.url)">
-                <button> {{ child.label }} </button>
+                {{ child.label }}
               </div>
             </li>
           </ul>
@@ -60,13 +60,10 @@
   }
   .submenu-items {
     @apply my-1 font-normal w-fit;
-    /*hover:rounded-md hover:bg-[#2F72C4]*/
     > div {
-      > button {
-        @apply text-white py-1 px-4 hover:bg-blue-500;
-        border-radius: 0.75rem;
-        background-color: #0075C9;
-      }
+      @apply text-white py-1 px-4 hover:bg-blue-500;
+      border-radius: 0.75rem;
+      background-color: #0075C9;
     }
   }
 }
