@@ -2,7 +2,7 @@
     <NuxtLink :to="`/check-in?id=${id}&preview=true`">
         <div class="side-bar-member">
             <img :src="profile_photo_path"/>
-            <div class="member-name">{{first_name}}</div>
+            <div class="member-name">{{first_name}} {{last_name}}</div>
             <div v-if="unread" class="unread-badge">{{unread}}</div>
         </div>
     </NuxtLink>
