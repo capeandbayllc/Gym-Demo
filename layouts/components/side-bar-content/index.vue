@@ -13,19 +13,11 @@
         <div class="active-member-count text-center"> <p class="">24 </p></div>
       </div>
       <div class="location-list">
-<!--        <select-location class="col-start-1 col-span-4" />-->
+<!--        <select-location class="" />-->
         <select-location
+            :items="locations"
             label="Location"
-            mode="multiple"
-            track-by="value"
-            :caret="true"
-            :options="locations"
         ></select-location>
-<!--        <select-box-->
-<!--            :items="locations"-->
-<!--            label="Location"-->
-<!--            class="w-32 items-start self-start"-->
-<!--        />-->
       </div>
 
         <div class="divider my-6"></div>
@@ -37,9 +29,9 @@
             />
         </div>
     </div>
-    <daisy-modal :overlay="true" ref="checkInModal" id="check-in-modal">
-        <CheckInModal />
-    </daisy-modal>
+<!--    <daisy-modal :overlay="true" ref="checkInModal" id="check-in-modal">-->
+<!--        <CheckInModal />-->
+<!--    </daisy-modal>-->
 </template>
 <style scoped>
 .side-bar-content-container {
