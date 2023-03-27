@@ -18,10 +18,10 @@
         </button>
         <transition name="fade">
             <select-box-content v-if="!isCollapsed">
-                <select-box-search-input v-if="showSearch" 
+                <select-box-search-input v-if="showSearch"
                     :secondary="false"
-                    :placeholder="placeholderSearch" 
-                    size="xs" 
+                    :placeholder="placeholderSearch"
+                    size="xs"
                 ></select-box-search-input>
                 <select-box-item
                     v-for="item in items"
@@ -82,6 +82,11 @@
   opacity: 0;
 }
 </style>
+<script>
+export default {
+  name: "select-box"
+}
+</script>
 <script setup>
 import { ref, computed } from "vue";
 import SelectBoxIcon from "./select-box-icon.vue";
