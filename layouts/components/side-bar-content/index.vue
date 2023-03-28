@@ -130,21 +130,6 @@ const locations = [
     },
 ];
 
-const members = [
-    {
-        id: 1,
-        name: "Kelly Arsington",
-    },
-    {
-        id: 2,
-        name: "Sam Williams",
-        unread: 3,
-    },
-    {
-        id: 3,
-        name: "Walter K.",
-    },
-];
 const membersData = ref([]);
 const types = ["platinum", "gold", "silver", "bronze"];
 request(member.query.browse).then(({ data }) => {
