@@ -1,13 +1,12 @@
 <template>
   <context-menu
     ref="profileMenu"
-    class="gradient-bg profile-menu-container top-[3.50rem]"
-    @isProfileMenuOpen="isProfileMenuOpenFn"
+    class="profile-menu-container top-[4rem]"
   >
     <div class="flex flex-col">
       <ul class="menu-list">
         <li class="menu-items" v-for="(item, ndx) in menu" :key="ndx">
-          <span class="font-semibold">{{ item.label }}</span>
+          <span class="">{{ item.label }}</span>
           <ul v-if="item.children" class="submenu-list">
             <li
               class="submenu-items"
@@ -37,27 +36,41 @@
 
 <style scoped>
 .profile-menu-container {
-  @apply z-[22] absolute right-4 p-3 text-sm border-8 rounded-xl border-secondary;
+  @apply z-[30] absolute right-8 p-3 text-sm w-72;
+  background: linear-gradient(to bottom right, #004285, #00254C);
   > div {
-    @apply border-4 rounded-lg -m-4;
+    @apply border-4 rounded-3xl -m-4;
+    border-color: #D4D8DD;
   }
   .menu-list {
-    @apply m-6 mb-0;
+    @apply m-6 mb-0 mt-4;
   }
   .menu-items {
     @apply py-2 px-0;
   }
   li {
-    @apply py-1.5 px-2 cursor-pointer;
+    @apply py-1.5 pr-2 cursor-pointer;
   }
   li:last-child {
     @apply pb-2;
   }
   .menu-items {
     @apply border-b last:border-b-0;
+    border-bottom-color: #A6B8CB;
   }
   .submenu-items {
-    @apply my-1 font-normal w-fit hover:rounded-md hover:bg-[#2F72C4];
+    @apply my-1 font-normal w-fit;
+    > div {
+      @apply text-white py-1 px-4 hover:bg-blue-500;
+      border-radius: 0.75rem;
+      background-color: #0075C9;
+    }
+  }
+}
+
+@media (max-width: 1920px) {
+  .profile-menu-container {
+    @apply right-12;
   }
 }
 </style>
@@ -105,6 +118,17 @@ const menu = [
   },
   {
     label: "Manage Team Account",
+  },
+  {
+    label: "Extras",
+    children: [
+      {
+        label: "Workout Generator",
+      },
+      {
+        label: "Sales Slideshow",
+      },
+    ],
   },
   {
     label: "",
