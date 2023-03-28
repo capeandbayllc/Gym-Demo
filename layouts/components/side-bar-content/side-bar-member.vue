@@ -1,8 +1,12 @@
 <template>
+<!--  todo 1: 1st name on click background and border fix-->
+<!--  todo 2: 1st name on click model up / page route which is in nuxtlink now-->
+<!--  todo 3: check out click, css update and store temporarily-->
+<!--  todo 4: responsive check-->
 <!--    <NuxtLink :to="`/check-in?id=${id}&preview=true`">-->
 <!--  @mouseover="showCheckOut" @mouseleave="hideCheckOut"-->
-        <div class="side-bar-member">
-          <div class="member-content">
+        <div class="side-bar-member" >
+          <div :class="[isFirstIndex ? 'member-normal-content' : 'member-content']">
             <img :src="profile_photo_path" class="member-image"/>
             <!--    temporary condition only for demo-->
             <div :class="[isFirstIndex ? 'member-name-one' : 'member-name']">
@@ -30,20 +34,24 @@
 </template>
 <style scoped>
 .side-bar-member {
-    @apply flex flex-row items-center self-start relative;
+    @apply flex flex-row items-center self-start relative w-full;
     img {
         @apply w-10 h-10 rounded-lg border-2 border-[#0075C9] mr-3;
     }
     .member-name, .member-name-one {
-      @apply text-sm cursor-pointer p-1 px-2 rounded-lg;
+      @apply cursor-pointer px-2 rounded-lg border border-secondary h-8;
       border: 1px solid transparent;
       transition: padding-left 0.2s ease-in-out, border-color 0.2s ease-in-out 0.2s;
+      font-size: 0.875rem;
+      line-height: 2rem;
+      margin-top: 3px;
     }
     .member-name-one:hover {
       @apply pl-4 border-secondary;
     }
     .unread-badge {
-        @apply absolute w-4 h-4 top-0 text-[11px] rounded bg-error flex items-center justify-center;
+        @apply absolute w-4 h-4 top-0 text-[11px] rounded bg-error flex items-center justify-center ml-0;
+        transition: margin-left 0.2s ease-in-out;
         left: -0.25rem;
     }
     .check-out, .checked-out {
@@ -52,37 +60,32 @@
     .checked-out {
       @apply bg-error text-white px-2
     }
-    .member-check-out {
-      /*@apply invisible;*/
-    }
-    .member-content {
+    .member-normal-content {
       @apply flex w-44;
     }
+    .member-content {
+      @apply flex w-44 ml-0;
+      transition: margin-left 0.2s ease-in-out;
+    }
+
     .member-check-out-outer {
       position: fixed;
       left: 93%;
       visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
     }
-}
 
-.member-content:hover {
-  transition: margin-left 0.2s ease-in-out;
-  margin-left: -3.5rem;
-
-  .member-check-out {
-    transition: visibility 0.2s ease-in-out;
-    visibility: visible;
-  }
-}
-
-.member-content:hover .member-check-out-outer {
-  transition: visibility 0.2s ease-in-out;
-  visibility: visible;
-}
-
-.member-content {
-  transition: margin-left 0.2s ease-in-out;
-  margin-left: 0;
+    &:hover {
+      .member-content,
+      .member-content > .unread-badge {
+        margin-left: -3.5rem;
+      }
+      .member-check-out-outer {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
 }
 
 
@@ -127,6 +130,12 @@ const isCheckedOut = ref(false);
 const showCheckOut = () => {
   if (!isFirstIndex.value) {
     isCheckOutVisible.value = true;
+  }
+};
+
+const hideCheckOut = () => {
+  if (!isFirstIndex.value) {
+    isCheckOutVisible.value = false;
   }
 };
 
