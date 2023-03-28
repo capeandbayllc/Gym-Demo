@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="people-lead-tbl-row mr-2 font-light text-[0.8rem]" @mouseenter="enter()" @mouseleave="out()">
-            <div :class="`w-[${columns[2].width+20}px]`" v-if="!hover">
+        <div class="people-lead-tbl-row mr-2 font-light text-[0.8rem]">
+            <div class="" :class="`w-[${columns[2].width+20}px]`">
                 <div class="flex items-center">
                     <img
                         :src="data.profile_photo_path"
@@ -12,8 +12,8 @@
                 </div>
             </div>
             <div
-                class="flex items-center text-base font-semibold text-green-600 min-w-[150px]"
-                :class="hover?'segmentHover':'segmentOut' + ` w-[${columns[0].width-20}px]`"
+                class="flex items-center text-base font-semibold text-green-600"
+                :class="`w-[${columns[0].width-20}px]`"
             >
                 <input
                     type="checkbox"
@@ -22,44 +22,17 @@
                 />
                 {{ data.segment }}
             </div>
-            <Transition>
-                <div
-                    class="flex items-center gap-2 px-4"
-                    :class="`w-[${columns[1].width}px]`"
-                    v-if="hover"
-                >
-                    <AlertIcon class="text-red-600" @click.stop="openAlertModal" />
-                    <AlertIcon
-                        class="text-yellow-500"
-                        @click.stop="openAlertModal"
-                    />
-                    <span>2</span>
-                </div>
-            </Transition>
-            <div class="" :class="`w-[${columns[2].width+20}px]`" v-if="hover">
-                <div class="flex items-center">
-                    <img
-                        :src="data.profile_photo_path"
-                        :gender="data.gender"
-                        class="w-[40px] border-2 border-secondary rounded-[12px] mr-2 line-clamp-1"
-                    />
-                    {{ data.first_name }} {{ data.last_name }}
-                </div>
+            <div
+                class="flex items-center gap-2 px-4"
+                :class="`w-[${columns[1].width}px]`"
+            >
+                <AlertIcon class="text-red-600" @click.stop="openAlertModal" />
+                <AlertIcon
+                    class="text-yellow-500"
+                    @click.stop="openAlertModal"
+                />
+                <span>2</span>
             </div>
-            <Transition>
-                <div
-                    class="flex items-center gap-2 px-4"
-                    :class="`w-[${columns[1].width}px]`"
-                    v-if="!hover"
-                >
-                    <AlertIcon class="text-red-600" @click.stop="openAlertModal" />
-                    <AlertIcon
-                        class="text-yellow-500"
-                        @click.stop="openAlertModal"
-                    />
-                    <span>2</span>
-                </div>
-            </Transition>
             
             <div
                 class="flex items-center pr-[20px]"
@@ -322,49 +295,6 @@
 .dropdown-item {
     @apply mb-2;
 }
-
-.v-leave-active {
-  transition: opacity 0s ease;
-}
-
-.v-enter-active {
-  transition: opacity 0.3s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
-@keyframes segment-hover-animation {
-    from {
-        @apply relative left-[150px];
-    }
-    to {
-        @apply relative left-0;
-    }
-}
-
-.segmentHover{
-    animation-name: segment-hover-animation;
-    animation-duration: 0.3s;
-    animation-fill-mode: forwards;   
-}
-
-@keyframes segment-out-animation {
-    from {
-        @apply relative left-[-100px];
-    }
-    to {
-        @apply relative left-0;
-    }
-}
-
-.segmentOut{
-    animation-name: segment-out-animation;
-    animation-duration: 0.3s;
-    animation-fill-mode: forwards;   
-}
 </style>
 <script setup>
 import MembershipBtn from "~/components/buttons/membership-btn.vue";
@@ -389,14 +319,6 @@ const props = defineProps({
     },
 });
 const alertModal = ref(null);
-
-const hover = ref(false);
-const enter = () => {
-    hover.value = true;
-}
-const out = () => {
-    hover.value = false;
-}
 
 const openAlertModal = () => {
     alertModal.value.open();
