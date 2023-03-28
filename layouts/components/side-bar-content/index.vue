@@ -1,5 +1,5 @@
 <template>
-    <div class="side-bar-content-container transition-all duration-200 ease-linear">
+    <div class="side-bar-content-container transition-all duration-200 ease-linear overflow-x-hidden">
       <arrow-icon direction="right"
                   class="collapse-icon"
                   @click="$emit('close')"
@@ -135,6 +135,7 @@ const types = ["platinum", "gold", "silver", "bronze"];
 request(member.query.browse).then(({ data }) => {
   console.info("data.data.members", data.data.members);
   data.data.members.data.forEach((member) => {
+    member['checkIn'] = false;
     membersData.value.push(member);
   });
 });
