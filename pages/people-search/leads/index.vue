@@ -73,6 +73,8 @@
             <div class="bg-black rounded-md p-6 border border-secondary">
                 <component
                     :is="addMemberScreens[addMemberScreenIndex]"
+                    :newMemberData="newMemberData"
+                    @changeNewMemberData="newMemberData = $event"
                 ></component>
                 <div class="flex justify-end mt-6">
                     <button
@@ -96,6 +98,10 @@
                 </div>
             </div>
         </daisy-modal>
+
+        <!-- <pre>
+            {{ newMemberData }}
+        </pre> -->
     </div>
 </template>
 <style scoped>
@@ -135,6 +141,75 @@ import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today
 import { request } from "~/api/utils/request";
 import lead from "~/api/queries/lead";
 
+const newMemberData = ref({
+    user_id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
+    id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
+    first_name: "Cedrick",
+    middle_name: null,
+    last_name: "Schmeler",
+    email_verified_at: null,
+    email: "Cedrick.Schmeler@yahoo.com",
+    alternate_emails: null,
+    phone: "9846188996",
+    alternate_phone: null,
+    date_of_birth: null,
+    gender: "other",
+    drivers_license_number: null,
+    profile_photo_path: "/images/profile/users_8.jpg",
+    occupation: null,
+    employer: null,
+    barcode: null,
+    address1: "4782 Lehner Avenue Suite 976",
+    address2: "Apt. 344",
+    city: "Port Wendy",
+    state: "MT",
+    zip: "84678",
+    unsubscribed_email: false,
+    unsubscribed_sms: false,
+    user_type: "lead",
+    entry_source: null,
+    home_location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
+    manager: null,
+    opportunity: null,
+    external_id: null,
+    misc: null,
+    details: {
+        contact_preference: "sms",
+        emergency_contact: {
+            ec_first_name: "",
+            ec_last_name: "",
+            ec_phone: ""
+        },
+        membership_type_id: ""
+    },
+    is_previous: false,
+    created_at: "2023-03-19T20:42:50.000000Z",
+    updated_at: "2023-03-19T20:42:50.000000Z",
+    started_at: null,
+    ended_at: null,
+    terminated_at: null,
+    obfuscated_at: null,
+    twilioClientConversation_ids: [],
+    note_ids: [],
+    owner: null
+});
+
+const newMemberDataReset = ref({});
+
+onMounted(() => {
+    newMemberDataReset.value = {...newMemberData.value};
+})
+
+const saveLead = () => {
+    console.log('Save')
+    let currentDate = new Date();
+    let formattedDate = currentDate.toLocaleDateString('en-US') + ', ' + currentDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+    newMemberData.value.created_at = formattedDate;
+    newMemberData.value.updated_at = formattedDate;
+    // // agreements.value.push(newMemberData.value);
+    newMemberData.value = {...newMemberDataReset.value}  
+};
+
 const isSearchEnable = ref(false);
 const addMemberPopUp = ref(null);
 const addMemberScreens = ref([
@@ -146,6 +221,7 @@ const addMemberScreens = ref([
     EmergencyInfo,
     BroughtToday,
 ]);
+
 const addMemberScreenIndex = ref(0);
 const leads = ref([]);
 const filters = ref({status: ''})
@@ -188,6 +264,10 @@ const openAddMemberPopUp = () => {
     addMemberPopUp.value.open();
 };
 const nextScreen = () => {
+    console.clear();
+    if (!(addMemberScreenIndex.value < addMemberScreens.value.length - 1)) {
+        saveLead();
+    }
     addMemberScreenIndex.value =
         addMemberScreenIndex.value < addMemberScreens.value.length - 1
             ? addMemberScreenIndex.value + 1

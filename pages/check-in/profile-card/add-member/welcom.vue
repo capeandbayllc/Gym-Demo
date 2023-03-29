@@ -27,6 +27,14 @@
 <script setup>
 import { PersonAddIcon, PersonIcon } from "@/components/icons";
 
+const props = defineProps({
+    newMemberData: {
+		type: Object,
+		default: null,
+	}
+})
+const emit = defineEmits(['changeNewMemberData']);
+
 const options = ref([
     {
         title: "Interested in Membership",
@@ -45,6 +53,12 @@ const options = ref([
         selected: false,
     },
 ]);
+
+// watch(data, () => {
+//     let changeNewMemberData = props.newMemberData;
+//     changeNewMemberData.paymentSchedule = data.value;
+//     emit('changeNewMemberData', changeNewMemberData)
+// });
 
 const selectOption = (opt) => {
     options.value.forEach((o) => {

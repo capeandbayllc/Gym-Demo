@@ -2,28 +2,28 @@
     <simple-card class="grid grid-cols-2 p-4 gap-4 w-[600px] text-sm max-h-[70vh] overflow-auto width-full">
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">First Name</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.firstName"/>
+            <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.first_name"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Last Name</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.lastName"/>
+            <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.last_name"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Birth Date</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.birthDate"/>
+            <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.date_of_birth"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full flex items-center">
-            <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked />Male</div>
-            <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked />Female</div>
-            <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked />Other</div>
+            <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked @change="personalInfoForm.gender='male'"/>Male</div>
+            <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked @change="personalInfoForm.gender='female'"/>Female</div>
+            <div class="flex items-center mx-2"><input type="checkbox" class="toggle toggle-info toggle-sm mr-2" checked @change="personalInfoForm.gender='other'"/>Other</div>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Home Address 1*</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.homeAddress1"/>
+            <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.address1"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Home Address 2</div>
-            <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.homeAddress2"/>
+            <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.address2"/>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">City*</div>
@@ -36,7 +36,7 @@
             </div>
             <div>
                 <div class="mb-2">Zip Code*</div>
-                <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.zipCode"/>
+                <input class="white-input w-full p-1 rounded-sm" v-model="personalInfoForm.zip"/>
             </div>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
@@ -69,18 +69,24 @@
 </template>
 <script setup>
 
+const props = defineProps({
+    newMemberData: {
+		type: Object,
+		default: null,
+	}
+})
+const emit = defineEmits(['changeNewMemberData']);
+
 const personalInfoForm = ref({
-    firstName:"",
-    lastName:"",
-    birthDate: "",
-    male: "",
-    female: "",
-    other: "",
-    homeAddress1: "",
-    homeAddress2: "",
+    first_name:"",
+    last_name:"",
+    date_of_birth: "",
+    gender: "",
+    address1: "",
+    address2: "",
     city: "",
     state: "",
-    zipCode: "",
+    zip: "",
     emergencyContactName: "",
     emergencyContactPhone: "",
     mobilePhone: "",
@@ -88,6 +94,15 @@ const personalInfoForm = ref({
     sendMePromotionalTexts: "",
     sendMePromotionalEmails: ""
 })
+
+watch(personalInfoForm.value, () => {
+    let changeNewMemberData = props.newMemberData;
+    Object.keys(personalInfoForm.value).forEach(key => {
+        changeNewMemberData[key] = personalInfoForm.value[key];
+    });
+    console.log(changeNewMemberData)
+    emit('changeNewMemberData', changeNewMemberData)
+});
 
 </script>
 <style scoped>
