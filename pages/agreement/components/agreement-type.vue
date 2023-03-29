@@ -101,13 +101,6 @@ watch(data, () => {
         @apply bg-white text-black;
     }
 </style>
-<style>
-    .custom-date-input {
-        .dp__input {
-            height: 28px;
-        }
-    }
-</style>
 <style scoped lang="postcss">
 input[type="checkbox"] {
   @apply rounded-full bg-white appearance-none m-0 h-5 w-5 border border-[#C0BDCC] outline-none;
