@@ -1,9 +1,11 @@
 <template>
-    <div class="side-bar-member">
-        <img :src="avatar"/>
-        <div class="member-name">{{name}}</div>
-        <div v-if="unread" class="unread-badge">{{unread}}</div>
-    </div>
+    <NuxtLink :to="`/check-in?id=${id}&preview=true`">
+        <div class="side-bar-member">
+            <img :src="profile_photo_path"/>
+            <div class="member-name">{{first_name}} {{last_name}}</div>
+            <div v-if="unread" class="unread-badge">{{unread}}</div>
+        </div>
+    </NuxtLink>
 </template>
 <style scoped>
 .side-bar-member {
@@ -22,11 +24,13 @@
 </style>
 <script setup>
 const props = defineProps({
-    avatar: {
+    profile_photo_path: {
         type: String,
         default: "/account-lg.png"
     },
-    name: String,
+    id: String,
+    first_name: String,
+    last_name: String,
     unread: Number
 })
 </script>

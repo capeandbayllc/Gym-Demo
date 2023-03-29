@@ -83,7 +83,6 @@ import ContractModal from './components/contract-modal.vue';
 import EditPaymentPlan from './components/edit-payment-plan.vue';
 import AgreementType from './components/agreement-type.vue';
 import SaveModal from './components/save-modal.vue';
-// import { exit } from "process";
 
 const authToken = useCookie("auth");
 
