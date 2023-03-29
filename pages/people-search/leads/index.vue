@@ -41,6 +41,14 @@
                             class="w-40 filter-selected"
                         >
                         </select-box>
+                        <select-box
+                            :items="leadStatus"
+                            @onChange="filters.status = $event"
+                            :label="'Lead Status'"
+                            :secondary="true"
+                            class="w-40 filter-selected"
+                        >
+                        </select-box>
                     </div>
                     <!-- <div class="flex gap-4">
                         <search-input
@@ -140,22 +148,29 @@ const addMemberScreens = ref([
 ]);
 const addMemberScreenIndex = ref(0);
 const leads = ref([]);
+const filters = ref({status: ''})
 
-const leadTypes = [
-    "app_referal",
-    "grand_opening",
-    "snapshot",
-    "free_trial",
-    "streaming_preview",
-];
+// const leadTypes = [
+//     "app_referal",
+//     "grand_opening",
+//     "snapshot",
+//     "free_trial",
+//     "streaming_preview",
+// ];
 const opportunity = ["error", "warning", "accent"];
-
-request(lead.query.browse).then(({ data }) => {
-    leads.value = data.data.leads.data;
-});
-const getRandomType = () => {
-    return leadTypes[Math.floor(Math.random() * leadTypes.length)];
-};
+const getLeadsQuery = ()=>{
+    request(lead.query.browse, { filter: filters.value }).then(({ data }) => {
+        leads.value = data.data.leads.data;
+    });
+}
+getLeadsQuery();
+watch(filters.value, ()=>{
+    leads.value = [];
+    getLeadsQuery()
+})
+// const getRandomType = () => {
+//     return leadTypes[Math.floor(Math.random() * leadTypes.length)];
+// };
 const getRandomOpportunity = () => {
     return opportunity[Math.floor(Math.random() * opportunity.length)];
 };
@@ -164,9 +179,7 @@ const leads_display = computed(() => {
   return leads.value.map((item) => {
     return {
       ...item,
-      type: getRandomType(),
       opportunity: getRandomOpportunity(),
-      status: 'available',
     };
   });
 });
@@ -231,6 +244,24 @@ const leadType = [
         value: "5",
         label: "Streaming Preview",
     },
+];
+const leadStatus = [
+    {
+        value: "New",
+        label: "New",
+    },
+    {
+        value: "Contacted",
+        label: "Contacted",
+    },
+    {
+        value: "Converted",
+        label: "Converted",
+    },
+    {
+        value: "Lost",
+        label: "Lost",
+    }
 ];
 const columns = [
     {

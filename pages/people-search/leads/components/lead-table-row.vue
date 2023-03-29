@@ -6,7 +6,8 @@
     </td>
     <td>{{ data.first_name }}</td>
     <td>{{ data.last_name }}</td>
-    <td> Club {{ Math.floor(Math.random() * 10) }} </td>
+    <td> {{ data.location.name }} </td>
+    <!-- <td> Club {{ Math.floor(Math.random() * 10) }} </td> -->
     <td>
       <div :class="'type-' + data.type">
         {{ data.type }}
