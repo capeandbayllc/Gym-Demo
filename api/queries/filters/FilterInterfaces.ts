@@ -4,6 +4,7 @@ export interface Filter {
     search: String
     trashed: String
     state: String
+    status: String
 }
 
 export interface Filterable {
