@@ -17,12 +17,14 @@
     "@fortawesome/pro-regular-svg-icons": "^6.3.0",
     "@fortawesome/pro-solid-svg-icons": "^6.3.0",
     "@miragejs/graphql": "^0.1.13",
-    "@nuxtjs/tailwindcss": "^6.6.0",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@vue/apollo-composable": "^4.0.0-beta.4",
+    "autoprefixer": "^10.4.14",
     "daisyui": "^2.51.4",
     "miragejs": "^0.1.47",
     "nuxt": "^3.3.1",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.0",
     "uuid": "^9.0.0"
   },
   "dependencies": {

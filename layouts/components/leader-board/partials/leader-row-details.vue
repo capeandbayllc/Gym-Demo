@@ -8,7 +8,7 @@
     </td>
 
     <!-- name -->
-    <td>{{ leader.first_name }} {{ leader.last_name }}</td>
+    <td>{{ leader.name }}</td>
 
     <!-- points -->
     <td>
@@ -41,7 +41,7 @@
               {{ leader.name }}
             </p>
             <span class="w-20">
-              <img :src="leader?.profile_photo_path" class="relative" />
+              <img :src="leader?.avatar" class="relative" />
             </span>
           </div>
 
