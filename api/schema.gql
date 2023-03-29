@@ -590,6 +590,8 @@ type Lead {
   first_name: String
   middle_name: String
   last_name: String
+  type: String!
+  status: String!
   email: String!
   phone: String!
   user_id: ID
@@ -604,7 +606,7 @@ type Lead {
   profile_photo_path: String
   interaction_count: InteractionCount!
   homeLocation: Location
-  locations: [Location]
+  location: Location
   opportunity: String
   agreement_number: String
   misc: String
