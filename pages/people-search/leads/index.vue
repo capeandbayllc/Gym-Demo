@@ -98,10 +98,6 @@
                 </div>
             </div>
         </daisy-modal>
-
-        <!-- <pre>
-            {{ newMemberData }}
-        </pre> -->
     </div>
 </template>
 <style scoped>
@@ -140,14 +136,18 @@ import EmergencyInfo from "~/pages/check-in/profile-card/add-member/emergency-in
 import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today.vue";
 import { request } from "~/api/utils/request";
 import lead from "~/api/queries/lead";
+import {default as leadMutation} from "~/api/mutations/lead";
+import {useMutation} from "@vue/apollo-composable";
 
 const newMemberData = ref({
     user_id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
     id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
-    first_name: "Cedrick",
+    first_name: "Pete",
     middle_name: null,
     last_name: "Schmeler",
-    email_verified_at: null,
+    status: "New",
+    type: "streaming_preview",
+    email_verified_at: null,    
     email: "Cedrick.Schmeler@yahoo.com",
     alternate_emails: null,
     phone: "9846188996",
@@ -169,6 +169,7 @@ const newMemberData = ref({
     user_type: "lead",
     entry_source: null,
     home_location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
+    location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
     manager: null,
     opportunity: null,
     external_id: null,
@@ -201,12 +202,42 @@ onMounted(() => {
 })
 
 const saveLead = () => {
-    console.log('Save')
     let currentDate = new Date();
     let formattedDate = currentDate.toLocaleDateString('en-US') + ', ' + currentDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
     newMemberData.value.created_at = formattedDate;
     newMemberData.value.updated_at = formattedDate;
-    // // agreements.value.push(newMemberData.value);
+    const { mutate: createMember } = useMutation(leadMutation.mutation.createLead);
+    createMember({
+        input: {
+            id: newMemberData.value.id + Math.floor(Math.random() * 9000000000) + 1000000000,
+            user_id: newMemberData.value.user_id,
+            first_name: newMemberData.value.first_name,
+            status: newMemberData.value.status,
+            type: newMemberData.value.type,
+            middle_name: newMemberData.value.middle_name,
+            last_name: newMemberData.value.last_name,
+            date_of_birth: newMemberData.value.date_of_birth,
+            phone: newMemberData.value.phone,
+            gender: newMemberData.value.gender,
+            drivers_license_number: newMemberData.value.drivers_license_number,
+            occupation: newMemberData.value.occupation,
+            employer: newMemberData.value.employer,
+            barcode: newMemberData.value.barcode,
+            email: newMemberData.value.email,
+            primary_phone: newMemberData.value.primary_phone,
+            profile_photo_path: newMemberData.value.profile_photo_path,
+            // home: newMemberData.value.home,
+            location_id: newMemberData.value.location_id,
+            home_location_id: newMemberData.value.home_location_id,
+            created_at: newMemberData.value.created_at,
+            updated_at: newMemberData.value.updated_at
+        },
+    })
+    .then(() => {
+        leads.value = [];
+        getLeadsQuery()
+    });
+    
     newMemberData.value = {...newMemberDataReset.value}  
 };
 
@@ -264,9 +295,9 @@ const openAddMemberPopUp = () => {
     addMemberPopUp.value.open();
 };
 const nextScreen = () => {
-    console.clear();
     if (!(addMemberScreenIndex.value < addMemberScreens.value.length - 1)) {
         saveLead();
+        addMemberPopUp.value.close();
     }
     addMemberScreenIndex.value =
         addMemberScreenIndex.value < addMemberScreens.value.length - 1

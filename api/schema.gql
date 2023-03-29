@@ -605,7 +605,7 @@ type Lead {
   gender: String
   date_of_birth: DateTime
   profile_photo_path: String
-  interaction_count: InteractionCount!
+  interaction_count: InteractionCount
   homeLocation: Location
   location: Location
   opportunity: String
@@ -819,6 +819,9 @@ type Mutation {
   createRole(input: CreateRoleInput): Role!
   updateRole(input: UpdateRoleInput): Role!
   deleteRole(id: ID!): Role!
+
+  """Create a Lead"""
+  createLead(input: LeadInput): Lead!
 }
 
 type Note {
@@ -1714,6 +1717,30 @@ input UserInput {
   employer: String
   barcode: String
   drivers_license_number: String
+}
+
+input LeadInput {
+  id: ID
+  user_id: String
+  first_name: String
+  status: String
+  type: String
+  middle_name: String
+  last_name: String
+  date_of_birth: String
+  phone: String
+  gender: String
+  drivers_license_number: String
+  occupation: String
+  employer: String
+  barcode: String
+  email: String
+  primary_phone: String
+  profile_photo_path: String
+  home_location_id: ID
+  location_id: ID
+  created_at: String
+  updated_at: String
 }
 
 """A paginated list of User items."""
