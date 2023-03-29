@@ -9,6 +9,9 @@
     import InspectionList from './inspection-list.vue';
     import {ref} from "vue";
     import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue';
+    import { request } from "~/api/utils/request";
+    import location from "~~/api/queries/location";
+
     const filters = ref({
         location: false,
         type: false,
@@ -19,8 +22,8 @@
         await nextTick();
         window.dispatchEvent(new Event('resize'))
     });
-    const clubItems = {
-        club_name: 'Club #1234',
+    const clubItems = ref({
+        club_name: '',
         items: [
             {
                 id:1,
@@ -49,5 +52,11 @@
                 quantity: 3,
             },
         ]
-    };
+    });
+
+    const locationData = ref(null);
+    request(location.query.get, { id: 'afea5d32-ec62-480d-af29-d67fc8c9c7a3' }).then(({data}) => {
+        locationData.value = data.data.location;
+        clubItems.value.club_name = locationData.value.name;
+    });
 </script>
