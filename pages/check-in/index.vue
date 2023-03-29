@@ -71,6 +71,7 @@
         </div>
     </div>
 </template>
+
 <style scoped>
 .page-checkin-container {
     @apply py-4 px-5 w-full h-fit;
@@ -97,6 +98,7 @@
     }
 }
 </style>
+
 <script setup>
 import { request } from "~/api/utils/request";
 import member from "@/api/queries/member";

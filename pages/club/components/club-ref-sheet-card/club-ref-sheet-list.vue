@@ -8,22 +8,22 @@
         <ul class="club-list">
             <li v-for="item in items" :key="item.id" class="club-row">
                 <div class="w-[15%] flex">
-                    <label>{{ item.location }}</label>
+                    <label>{{ item.name }}</label>
                 </div>
                 <div class="w-[25%] flex">
-                    <label>{{ item.address }}</label>
+                    <label>{{ item.state }}, {{ item.city }}, {{ item.address1 }}</label>
                 </div>
                 <div class="w-[15%] flex">
                     <label>{{ item.phone }}</label>
                 </div>
                 <div class="w-[15%] flex">
-                    <label>{{ item.manager }}</label>
+                    <label>{{ item.poc_first }} {{ item.poc_last }}</label>
                 </div>
                 <div class="w-[15%] flex">
-                    <label>{{ item.assent_manager }}</label>
+                    <label>{{ item.poc_first }} {{ item.poc_last }}</label>
                 </div>
                 <div class="w-[15%] flex">
-                    <ClubButton :btn_type="'bg-secondary bg-dark'" :label="item.member_total"></ClubButton>
+                    <ClubButton :btn_type="'bg-secondary bg-dark'" :label="'12,324'"></ClubButton>
                 </div>
                 <div class="w-[15%] flex">
                     <ClubButton :btn_type='default' :label='View'></ClubButton>
