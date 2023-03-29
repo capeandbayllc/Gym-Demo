@@ -1,38 +1,37 @@
 <template>
-    <div class="side-bar-content-container transition-all duration-200 ease-linear overflow-x-hidden">
-      <arrow-icon direction="right"
-                  class="collapse-icon"
-                  @click="$emit('close')"
-      />
-      <div class="mem-checkin-btn" @click="showCheckInModal">
-        Member Check In
-      </div>
-      <div class="divider mt-1 mb-4"></div>
-      <div class="active-members">
-        <div class="col-span-8 text-base">Active Club Members</div>
-        <div class="active-member-count text-center"> <p class="">24 </p></div>
-      </div>
-      <div class="location-list">
-<!--        <select-location class="" />-->
-        <select-location
-            :items="locations"
-            label="Location"
-        ></select-location>
-      </div>
+  <div class="side-bar-content-container transition-all duration-200 ease-linear overflow-x-hidden">
+    <transition name="fade">
+      <div v-if="!showCheckIn">
+        <arrow-icon direction="right" class="collapse-icon" @click="$emit('close')" />
+
+        <div class="mem-checkin-btn" @click="showCheckIn = true">Member Check In</div>
+        <div class="divider mt-1 mb-4"></div>
+
+        <div class="active-members">
+          <div class="col-span-8 text-base">Active Club Members</div>
+          <div class="active-member-count text-center"> <p class="">24 </p></div>
+        </div>
+
+        <div class="location-list">
+          <!--        <select-location class="" />-->
+          <select-location :items="locations" label="Location"></select-location>
+        </div>
 
         <div class="divider my-6"></div>
         <div class="member-list">
-            <side-bar-member
-                v-for="(member, index) in membersData"
-                :key="member.id"
-                :index="index"
-                v-bind="{...member}"
-            />
+          <side-bar-member v-for="(member, index) in membersData" :key="member.id" :index="index" v-bind="{...member}"/>
         </div>
-    </div>
-<!--    <daisy-modal :overlay="true" ref="checkInModal" id="check-in-modal">-->
-<!--        <CheckInModal />-->
-<!--    </daisy-modal>-->
+      </div>
+
+      <div v-else>
+        <div class="cross-icon collapse-icon" @click="showCheckIn = false">X</div>
+        <!--      <arrow-icon direction="right" class="collapse-icon" @click="$emit('close')" />-->
+
+        <div class="mem-checkin-btn-two" @click="showCheckIn = false">Member Check In</div>
+      </div>
+
+    </transition>
+  </div>
 </template>
 <style scoped>
 .side-bar-content-container {
@@ -59,6 +58,15 @@
       @apply grid grid-cols-12;
     }
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.2s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
 </style>
 <style>
 #check-in-modal .modal-close-btn svg g {
@@ -75,6 +83,7 @@
     max-width: 100% !important;
     width: auto !important;
 }
+
 @media (max-width: 2100px) {
     #check-in-modal {
         min-width: 65%;
@@ -114,6 +123,11 @@ import SelectBox from "../../../components/select-box";
 import SelectLocation from "./select-location";
 import { request } from "~/api/utils/request";
 import member from "~/api/queries/member";
+import MainContent from "./main-content";
+import SideBarMemberCheckIn from "./side-bar-member-check-in";
+
+let currentComponent = 'MainContent';
+let showCheckIn = ref(false);
 
 const locations = [
     {
@@ -129,6 +143,13 @@ const locations = [
         label: "Club Two",
     },
 ];
+const changeComponent = () => {
+  if ( currentComponent === 'MainContent') {
+    currentComponent = 'SideBarMemberCheckIn'
+  } else {
+    this.currentComponent = 'MainContent'
+  }
+}
 
 const membersData = ref([]);
 const types = ["platinum", "gold", "silver", "bronze"];
