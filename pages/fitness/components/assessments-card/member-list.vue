@@ -5,6 +5,9 @@
 </template>
 <script setup>
 import MemberSearchList from './member-search-list.vue';
+import {request} from "~/api/utils/request";
+import location from "~/api/queries/location";
+
 const props = defineProps({
     filter: {
         type : String,
@@ -37,11 +40,11 @@ const columns = [
         class: 'text-secondary text-center w-[15%]'
     }
 ];
-const membersData = [
+const membersData = ref([
     {
         id: 1,
         name: 'Aya Buchanan',
-        location: 'Club#1234',
+        location: '',
         type: 'Premium',
         status: 'Pending',
         date: '01.02.2023',
@@ -50,7 +53,7 @@ const membersData = [
     {
         id: 2,
         name: 'Sty Stance',
-        location: 'Club#1234',
+        location: '',
         type: 'Basic',
         status: 'Completed',
         date: '01.02.2023',
@@ -59,7 +62,7 @@ const membersData = [
     {
         id: 3,
         name: 'Aya Buchanan',
-        location: 'Club#1234',
+        location: '',
         type: 'Premium',
         status: 'Completed',
         date: '01.02.2023',
@@ -68,7 +71,7 @@ const membersData = [
     {
         id: 4,
         name: 'Sty Stance',
-        location: 'Club#1234',
+        location: '',
         type: 'Basic',
         status: 'Pending',
         date: '01.02.2023',
@@ -77,7 +80,7 @@ const membersData = [
     {
         id: 5,
         name: 'Henny Owens',
-        location: 'Club#1234',
+        location: '',
         type: 'Premium',
         status: 'Completed',
         date: '01.02.2023',
@@ -86,11 +89,20 @@ const membersData = [
     {
         id: 6,
         name: 'Butch Eierra',
-        location: 'Club#1234',
+        location: '',
         type: 'Premium',
         status: 'Pending',
         date: '01.02.2023',
         img_url: 'chat-conversation/1.png'
     },
-];
+]);
+
+const locationData = ref(null);
+request(location.query.get, { id: 'afea5d32-ec62-480d-af29-d67fc8c9c7a3' }).then(({data}) => {
+    locationData.value = data.data.location;
+    membersData.value.forEach(e => {
+        e.location = locationData.value.name;
+    });
+});
+
 </script>
