@@ -1,17 +1,15 @@
 <template>
     <simple-card title="Agreements" class="agreements-card" closable>
-        <div class="p-8 card-gradient-bg">
+        <div class="p-8 card-gradient-bg"> 
             <CurrentAgreement v-if="!showNewAgreement" @new-agreement="newAgreement"/>
-            <div v-else class="bg-black w-fit mx-auto rounded-md p-6 border border-secondary new-agreements-wrapper">
-                <component :is="agreementScreens[agreementScreenIndex]"></component>
+            <component v-else :is="agreementScreens[agreementScreenIndex]" :modalClass="'bg-black w-fit mx-auto p-[17px] border border-secondary new-agreements-wrapper '+(agreementScreenIndex==0?'rounded-[8px]':'rounded-[19px]')">
                 <div class="flex justify-end mt-6">
-                    <Button size="sm" class="normal-case mx-2" ghost @click="prevScreen" v-if="agreementScreenIndex > 0">Back</Button>
-                    <Button size="sm" class="normal-case mx-2 ml-auto" ghost @click="showNewAgreement = false">Cancel</Button>
-                    <Button size="sm" class="normal-case mx-2" secondary v-if="agreementScreenIndex == 0">Save as a Draft</Button>
-                    <Button size="sm" class="normal-case mx-2">Add to Segment</Button>
-                    <!-- <Button size="sm" class="normal-case mx-2">Complet and Send Document</Button> -->
-                    <Button size="sm" class="normal-case mx-2 border border-secondary" outline @click="nextScreen">Continue ></Button>
+                    <button class="button-simple mr-auto" @click="prevScreen" v-if="agreementScreenIndex > 0">Back</button>
+                    <button class="button-simple" @click="showNewAgreement = false">Cancel</button>
+                    <button class="normal-case mx-2 border-2 rounded-[10px] border-secondary px-[10px] py-[2px]" outline @click="nextScreen">Continue</button>
                 </div>
+            </component>
+            <div class="" :class="agreementScreenIndex==0?'rounded-[8px]':'rounded-[19px]'">
             </div>
         </div>
     </simple-card>
@@ -20,11 +18,13 @@
 <script setup>
 import CurrentAgreement from './current-agreement.vue';
 import MembershipType from './membership-type.vue';
-import Agreement from '../user-info/agreement';
 import SelectGym from '../user-info/select-gym';
 import PersonalInformation from '../user-info/personal-information';
 import PersonalInformationNext from '../user-info/personal-information/personal-info-next.vue';
-import FinancialCollect from '../user-info/financial-collect';
+import DueTodayPayment from '../user-info/financial-collect/due-today.vue';
+import MostlyDuesPayment from '../user-info/financial-collect/mostly-dues.vue';
+import SecondaryPayments from '../user-info/financial-collect/secondary-payments.vue';
+import AgreementModal from '../user-info/agreement-modal.vue';
 import TermsAndCondition from '../user-info/terms-condition.vue';
 import PayNow from '../user-info/pay-now.vue';;
 
@@ -33,7 +33,9 @@ const newAgreement = ()=>{
     showNewAgreement.value = true;
 }
 
-const agreementScreens = ref([Agreement,MembershipType,SelectGym,PersonalInformation, PersonalInformationNext,FinancialCollect,TermsAndCondition,PayNow]);
+const agreementScreens = ref([SelectGym,AgreementModal,PersonalInformation,PersonalInformationNext,DueTodayPayment,MostlyDuesPayment,SecondaryPayments,TermsAndCondition,PayNow]);
+// MembershipType
+
 const agreementScreenIndex = ref(0);
 
 const nextScreen = ()=>{
@@ -49,6 +51,9 @@ const prevScreen = ()=>{
 <style scoped>
 .agreements-card {
     @apply m-auto w-full max-w-[1120px];
+}
+.button-simple{
+    @apply normal-case px-2 text-[#6d6d6d] my-auto hover:text-primary transition-colors duration-300;
 }
 </style>
 <style>
