@@ -543,6 +543,7 @@ input Filter {
   search: String
   trashed: String
   state: String
+  status: String
 }
 
 type Folder {
