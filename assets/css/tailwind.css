@@ -128,6 +128,73 @@
     background-blend-mode: multiply;
 }
 
+.toggle-custom{
+  @apply ml-[-20px] flex text-gray-400 font-semibold;
+  animation-name: toggle-animation;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards; 
+}
+
+.toggle-custom *{
+  @apply cursor-pointer;
+}
+
+.toggle-custom button{
+  @apply flex;
+}
+
+.toggle-custom .line{
+  @apply w-[42px] h-[8px] rounded-[12px] mx-1 my-auto bg-gray-200;
+}
+
+@keyframes toggle-circle-animation {
+  from {
+      @apply bg-secondary left-[48px];
+  }
+  to {
+      @apply bg-gray-400 left-[22px];
+  }
+}
+
+
+.toggle-custom .circle{
+  @apply relative left-[22px] w-[22px] h-[22px] rounded-full bg-gray-400;
+  animation-name: toggle-circle-animation;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards; 
+}
+
+
+@keyframes toggle-active-animation {
+  from {
+      @apply text-gray-400;
+  }
+  to {
+      @apply text-secondary;
+  }
+}
+
+.toggle-active{
+  animation-name: toggle-active-animation;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;   
+}
+
+@keyframes toggle-active-circle-animation {
+  from {
+      @apply bg-gray-400 left-[22px];
+  }
+  to {
+      @apply bg-secondary left-[48px];
+  }
+}
+
+.toggle-active .circle{
+  animation-name: toggle-active-circle-animation;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
 .border-12 {
     border-width: 12px;
 }

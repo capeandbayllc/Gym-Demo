@@ -1,5 +1,10 @@
 <template>
-    <div class="simple-card">
+    <div class="simple-card" :class="{
+        'rounded-[4px]': roundedMd,
+        'rounded-[19px]': !roundedMd,
+        'card-gradient-bg': bgGradient,
+        'bg-black': !bgGradient
+        }">
         <component :is="titleComponent" v-if="titleComponent" v-bind="$attrs" />
         <div class="simple-card-title" v-else-if="title">
             <div>
@@ -32,5 +37,13 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    roundedMd:{
+        type: Boolean,
+        default: false
+    },
+    bgGradient:{
+        type: Boolean,
+        default: false
+    }
 });
 </script>
