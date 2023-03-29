@@ -647,7 +647,8 @@ type Location {
   id: ID
   gymrevenue_id: String
   location_no: String
-  location_type: LocationType
+  # location_type: LocationType
+  location_type: String
   name: String
   city: String
   state: String
