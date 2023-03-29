@@ -3,6 +3,7 @@
 <!--  todo 2: 1st name on click model up / page route which is in nuxtlink now-->
 <!--  todo 3: check out click, css update and store temporarily-->
 <!--  todo 4: responsive check-->
+<!--  todo 5: Make scrollable vertically -->
 <!--    <NuxtLink :to="`/check-in?id=${id}&preview=true`">-->
 <!--  @mouseover="showCheckOut" @mouseleave="hideCheckOut"-->
         <div class="side-bar-member" >
@@ -23,7 +24,7 @@
           <div  v-if="!isFirstIndex"
                 class="member-check-out-outer"
           >
-            <div class="member-check-out" :class="[isEvenIndex ? 'check-out' : 'checked-out']">
+            <div class="member-check-out" :class="[!checkIn ? 'check-out' : 'checked-out']">
               {{ !checkIn ? 'Check out' : 'Checked out' }}
 <!--              {{ isCheckedOut ? 'Checked out' : 'Check out' }}-->
             </div>
@@ -90,6 +91,13 @@
 
 
 </style>
+
+<script>
+export default {
+  'name': 'side-bar-member'
+}
+</script>
+
 <script setup>
 import {computed, ref} from "vue";
 
@@ -108,7 +116,6 @@ const props = defineProps({
 
 /**
  * this is a temporary condition only for demo
- * @type {ComputedRef<boolean>}
  */
 const isEvenIndex = computed(() => {
   console.info('props: ', props);
@@ -117,7 +124,6 @@ const isEvenIndex = computed(() => {
 
 /**
  * this is a temporary condition only for demo
- * @type {ComputedRef<boolean>}
  */
 const isFirstIndex = computed(() => {
   console.info('props: ', props);
