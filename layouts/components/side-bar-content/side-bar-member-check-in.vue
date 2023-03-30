@@ -1,6 +1,4 @@
 <template>
-  <!--  todo 4: responsive check-->
-  <!--  todo 5: Make scrollable vertically -->
   <div class="side-bar-member" >
     <div class="member-content">
       <img :src="profile_photo_path" class="member-image" :class="getImageBorder()"/>
@@ -8,7 +6,7 @@
         {{first_name}} {{ last_name }}
       </div>
       <!--  this is right  <div v-if="unread" class="unread-badge">{{unread}}</div>  -->
-      <!--   this condition is temporary, just to show badge in demo site-->
+      <!--   temporary condition, just to show badge in demo -->
       <div v-if="isEvenIndex" class="unread-badge">{{ props.unread ?? 3 }}</div>
     </div>
 
@@ -17,7 +15,7 @@
 </template>
 <style scoped>
 .side-bar-member {
-  @apply flex flex-row items-center self-start relative w-full;
+  @apply flex flex-row items-center self-start relative w-full ml-3;
   img {
     @apply w-10 h-10 rounded-3xl border-2 mr-3;
   }
@@ -53,7 +51,6 @@
   }
 }
 
-
 </style>
 
 <script>
@@ -81,7 +78,6 @@ const props = defineProps({
  * this is a temporary condition only for demo
  */
 const isEvenIndex = computed(() => {
-  console.info('props: ', props);
   return props.index % 2 === 0;
 });
 
@@ -89,7 +85,6 @@ const isEvenIndex = computed(() => {
  * this is a temporary condition only for demo
  */
 const isFirstIndex = computed(() => {
-  console.info('props: ', props);
   return props.index === 0;
 });
 

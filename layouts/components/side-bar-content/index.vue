@@ -18,7 +18,7 @@
           <select-location :items="locations" label="Location"></select-location>
         </div>
 
-        <div class="divider my-6"></div>
+        <div class="divider my-6 border-b-2"></div>
         <div class="member-list">
           <side-bar-member v-for="(member, index) in membersData" :key="member.id" :index="index" v-bind="{...member}"/>
         </div>
@@ -180,7 +180,6 @@ const locations = [
 const membersData = ref([]);
 const types = ["platinum", "gold", "silver", "bronze"];
 request(member.query.browse).then(({data}) => {
-  console.info("data.data.members", data.data.members);
   data.data.members.data.forEach((member) => {
     member['checkIn'] = false;
     membersData.value.push(member);

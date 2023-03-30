@@ -1,9 +1,8 @@
 <template>
-  <!--  todo 4: responsive check-->
   <div class="side-bar-member">
     <div :class="[isFirstIndex ? 'member-normal-content' : 'member-content']">
       <img :src="profile_photo_path" class="member-image"/>
-      <!--    temporary condition only for demo-->
+      <!--    temporary condition for demo-->
       <div :class="[isFirstIndex ? 'member-name-one' : 'member-name', isMemberSelected ? 'bg-member' : '']"
            @click="showMemberDetails(id)">
         {{ first_name }} {{ last_name }}
@@ -26,7 +25,7 @@
 </template>
 <style scoped>
 .side-bar-member {
-  @apply flex flex-row items-center self-start relative w-full;
+  @apply flex flex-row items-center self-start relative w-full ml-4;
 
   img {
     @apply w-10 h-10 rounded-lg border-2 border-[#0075C9] mr-3;
@@ -74,7 +73,7 @@
 
   .member-check-out-outer {
     position: fixed;
-    left: 93%;
+    left: 92%;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
@@ -87,6 +86,35 @@
     .member-check-out-outer {
       visibility: visible;
       opacity: 1;
+    }
+  }
+
+  @media (max-width: 1600px) {
+    .member-check-out-outer {
+      left: 90%;
+    }
+  }
+
+  @media (max-width: 1300px) {
+    .member-check-out-outer {
+      left: 88%;
+    }
+  }
+  @media (max-width: 1024px) {
+    .member-check-out-outer {
+      left: 86%;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .member-check-out-outer {
+      left: 84%;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .member-check-out-outer {
+      left: 81%;
     }
   }
 }
@@ -126,7 +154,6 @@ const isEvenIndex = computed(() => {
  * temporary condition only for demo
  */
 const isFirstIndex = computed(() => {
-  console.info('props: ', props);
   return props.index === 0;
 });
 
