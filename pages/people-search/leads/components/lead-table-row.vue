@@ -6,14 +6,14 @@
     </td>
     <td>{{ data.first_name }}</td>
     <td>{{ data.last_name }}</td>
-    <td> {{ data.location.name }} </td>
+    <td> {{ data.homeLocation?.name }} </td>
     <!-- <td> Club {{ Math.floor(Math.random() * 10) }} </td> -->
     <td>
       <div :class="'type-' + data.type">
         {{ data.type }}
       </div>
     </td>
-    <td class="capitalize text-accent-focus/60">{{ data.status }} {{ contactOption }}</td>
+    <td class="capitalize text-accent-focus/60">{{ data?.status }} {{ contactOption }}</td>
     <td>
       <div class="dropdown dropdown-end">
         <div class="text-base-content cursor-pointer" tabindex="0" @click.prevent.stop>
@@ -45,6 +45,8 @@
       </div>
 
       <Options :user="data" :show="contactOption" @on:close="contactOption = null" />
+
+      {{ data }}
 
       <daisy-modal ref="noteCardModalRef" :closable="false">
         <NoteCardModal @close="closeNoteCardModal"/>
