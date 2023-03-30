@@ -181,8 +181,10 @@ const hideCheckOut = () => {
   }
 };
 
+const emit = defineEmits(['update:activeMembers']);
 const toggleCheckOutStatus = () => {
   isCheckedOut.value = !isCheckedOut.value;
+  emit('update:activeMembers', isCheckedOut.value);
 };
 
 </script>

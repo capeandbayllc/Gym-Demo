@@ -29,7 +29,7 @@
     top: 50%;
 }
 .side-bar-arrow {
-    @apply pl-1 fixed;
+    @apply pl-1;
 }
 .side-bar-toggler {
     @apply flex cursor-pointer h-full w-fit;

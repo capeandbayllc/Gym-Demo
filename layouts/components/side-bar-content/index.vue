@@ -10,7 +10,7 @@
 
         <div class="active-members">
           <div class="col-span-8 text-base">Active Club Members</div>
-          <div class="active-member-count text-center"><p class="">24 </p></div>
+          <div class="active-member-count text-center"><p class=""> {{ activeMembers }} </p></div>
         </div>
 
         <div class="location-list">
@@ -20,7 +20,10 @@
 
         <div class="divider my-6 border-b-2"></div>
         <div class="member-list">
-          <side-bar-member v-for="(member, index) in membersData" :key="member.id" :index="index" v-bind="{...member}"/>
+          <side-bar-member v-for="(member, index) in membersData" :key="member.id"
+                           @update:activeMembers="updateActiveMembers"
+                           :index="index"
+                           v-bind="{...member}"/>
         </div>
       </div>
       <!--    Member Check In Sidebar -->
@@ -176,14 +179,21 @@ const locations = [
     label: "Club Two",
   },
 ];
+const activeMembers = ref(0);
 
 const membersData = ref([]);
 const types = ["platinum", "gold", "silver", "bronze"];
 request(member.query.browse).then(({data}) => {
+  activeMembers.value = data.data.members.data.length;
   data.data.members.data.forEach((member) => {
     member['checkIn'] = false;
     membersData.value.push(member);
   });
 });
+
+const updateActiveMembers = addRemove => {
+  if (addRemove) { activeMembers.value = activeMembers.value - 1; }
+  else {  activeMembers.value = activeMembers.value + 1; }
+}
 
 </script>
