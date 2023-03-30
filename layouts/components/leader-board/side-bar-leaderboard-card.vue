@@ -1,12 +1,12 @@
 <template>
-  <div v-for="(leader, index) in trainerData" :key="leader.name">
+  <div v-for="(leader, index) in trainerData" :key="leader.first_name">
     <div class="border-container">
       <div class="group side-bar-leaderboard-card w-[27.5%] relative float-left border-2 border-secondary rounded p-2 m-3.5 "  @mouseenter="addCircleColor" @mouseleave="addCircleColor" v-if="index < 3">
         <div class="relative ">
-          <img :src="avatar" class="relative" />
+          <img :src="leader.profile_photo_path" class="relative" />
           <div class="dot bg-[#FFF] group-hover:bg-[#FFD800]" >{{leader.rank}}</div>
         </div>
-        <div class="leaderboard-name relative">{{leader.name}}</div>
+        <div class="leaderboard-name relative">{{leader.first_name}} {{leader.last_name}} </div>
         <div class="points bg-[#5A5A5A5A] text-white group-hover:bg-[#FFD800] group-hover:text-black">{{leader.unitSold}} PTS</div>
         <div class="bg-[#0074C8] relative"> </div>
         <div class="bg-secondary text-[9px] border-[#0074C8] relative pr-2 pl-2 -bottom-2 ">

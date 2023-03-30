@@ -50,7 +50,7 @@
             class="m-2"
             name="data"
           >
-            <tr v-for="leader in trainerData" :key="leader.name">
+            <tr v-for="leader in leaderbordEmployees" :key="leader.first_name">
               <td>
                 <div class="px-1 m-1">{{ leader.rank }}</div>
               </td>
@@ -60,7 +60,7 @@
                 <div v-if="leader.trending === '-'" class="solid"></div>
               </td>
               <td>
-                <div class="px-1">{{ leader.name }}</div>
+                <div class="px-1">{{ leader.first_name }} {{ leader.last_name }}</div>
               </td>
               <td>
                 <div class="px-1 text-right">{{ leader.unitSold }}</div>
@@ -150,9 +150,12 @@
 import { ref } from "vue";
 import { CrossIcon } from "~~/components/icons";
 import TrophyIcon from "~/components/icons/trophy-circle.vue";
+import employee from "~/api/queries/employee";
+import { useQuery } from "@vue/apollo-composable";
 
+const { result } = useQuery(employee.query.browse);
 const selected = ref("trainers");
-
+const leaderbordEmployees= ref([]);
 const locationData = ref([
   {
     name: "Ames",
@@ -257,7 +260,7 @@ const locationData = ref([
 ]);
 const trainerData = ref([
   {
-    name: "Caleb Grill",
+    
     rank: "1st",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -267,7 +270,6 @@ const trainerData = ref([
     dollarAmount: "$1,200",
   },
   {
-    name: "Gabe Kalsheur",
     rank: "2nd",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -277,7 +279,6 @@ const trainerData = ref([
     dollarAmount: "$1,200",
   },
   {
-    name: "Aljaz Kunc",
     rank: "3rd",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -287,7 +288,6 @@ const trainerData = ref([
     dollarAmount: "$1,200",
   },
   {
-    name: "Osun Osunniyi",
     rank: "4th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -297,7 +297,6 @@ const trainerData = ref([
     dollarAmount: "$1,200",
   },
   {
-    name: "Jaren Holmes",
     rank: "5th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -307,7 +306,6 @@ const trainerData = ref([
     dollarAmount: "$1,200",
   },
   {
-    name: "Tre King",
     rank: "6th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -317,7 +315,6 @@ const trainerData = ref([
     dollarAmount: "$1,200",
   },
   {
-    name: "Tamin Lipsey",
     rank: "7th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -327,7 +324,6 @@ const trainerData = ref([
     dollarAmount: "$1,200",
   },
   {
-    name: "Rob Jones",
     rank: "8th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -337,7 +333,6 @@ const trainerData = ref([
     dollarAmount: "$1,200",
   },
   {
-    name: "Demarion Watson",
     rank: "9th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -347,7 +342,6 @@ const trainerData = ref([
     dollarAmount: "$1,200",
   },
   {
-    name: "Hason Ward",
     rank: "10th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -372,6 +366,17 @@ const breakpoints = ref({
     itemsToShow: 3,
     snapAlign: "start",
   },
+});
+
+
+watch(() => {
+  leaderbordEmployees.value= result?.value?.employee?.data.map((e,index) => {
+    return {
+      ...e,
+      ...trainerData.value[index]
+    };
+  });
+
 });
 
 const emit = defineEmits(["show-leader-board"]);
