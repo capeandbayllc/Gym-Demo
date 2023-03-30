@@ -170,7 +170,7 @@
       </div>
       <div>
         <label for="period">Employee:</label>
-        <FormSelectInput class="mt-3"/>
+        <FormSelectInput class="mt-3" :options="employees" v-model="selectedEmployee" @update="selectedEmployee = $event"/>
       </div>
     </div>
     <div class="">
@@ -206,6 +206,21 @@ const filters = ref({
   alert: false,
   segments: false,
 });
+let selectedEmployee = ref(null)
+let employees = ref([
+  {
+    id: 1, 
+    value: 'All',
+  },
+  {
+    id: 2, 
+    value: 'Employee 1',
+  },
+  {
+    id: 3, 
+    value: 'Employee 2',
+  }
+])
 const columns = [
     {
         label: 'Location',
