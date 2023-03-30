@@ -1,7 +1,7 @@
 <template>
     <div class="mt-5 club-search-tbl-content">
         <div v-if="!filter || filter === 'members'">
-            <people-search-table
+            <component :is="typeAlert?AlertSearchTable:PeopleSearchTable"
                 :columns="columns"
                 :items="membersData"
                 filter="id"
@@ -12,6 +12,7 @@
 </template>
 <script setup>
 import PeopleSearchTable from "./people-search-table.vue";
+import AlertSearchTable from "./alert-search-table.vue";
 import { request } from "~/api/utils/request";
 import member from "~/api/queries/member";
 import { getRandomInt } from "~/api/utils/number";
@@ -20,6 +21,11 @@ const props = defineProps({
         type: String,
         default: null,
     },
+    typeAlert: {
+        type: Boolean,
+        default: false,
+    },
+
 });
 
 const emit = defineEmits(["row-clicked"]);
