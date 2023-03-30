@@ -18,7 +18,7 @@
 
 <style>
 .app-body-content:has(#ppl-search) {
-  @apply px-20;
+  @apply pl-20 pr-4;
 }
 </style>
 
