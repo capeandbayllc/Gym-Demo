@@ -1,7 +1,8 @@
 <template>
   <context-menu
     ref="profileMenu"
-    class="profile-menu-container top-[4rem]"
+    class="gradient-bg profile-menu-container top-[3.80rem]"
+    @isProfileMenuOpen="isProfileMenuOpenFn"
   >
     <div class="flex flex-col">
       <ul class="menu-list">
