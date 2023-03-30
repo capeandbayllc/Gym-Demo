@@ -52,7 +52,10 @@
         class="leader-pop"
       />
     </div>
-    <div class="!ml-[-40px]">
+    <div class="employe-time-tracking">
+      <TimeTracking @click="$emit('show-empoyee-tracking')" />
+    </div>
+    <div class="">
       <account-btn @click="$emit('show-profile-menu')" />
     </div>
   </div>
@@ -116,6 +119,7 @@
 import { ref } from "vue";
 import { PersonAddIcon } from "@/components/icons";
 import AlarmBtn from "./alarm-btn.vue";
+import TimeTracking from "./time-track.vue";
 import AccountBtn from "./account-btn.vue";
 import AlertList from "./alert-list.vue";
 import LeaderPop from "~/layouts/components/leader-board/popup.vue";
