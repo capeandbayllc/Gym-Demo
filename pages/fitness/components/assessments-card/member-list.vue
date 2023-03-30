@@ -47,7 +47,7 @@ const membersData = ref([
         location: '',
         type: 'Premium',
         status: 'Pending',
-        date: '01.02.2023',
+        date: '02/01/2023',
         img_url: 'checkin/avatar_random.jpg'
     },
     {
@@ -56,7 +56,7 @@ const membersData = ref([
         location: '',
         type: 'Basic',
         status: 'Completed',
-        date: '01.02.2023',
+        date: '02/01/2023',
         img_url: 'chat-conversation/2.png'
     },
     {
@@ -65,7 +65,7 @@ const membersData = ref([
         location: '',
         type: 'Premium',
         status: 'Completed',
-        date: '01.02.2023',
+        date: '02/01/2023',
         img_url: 'chat-conversation/3.png'
     },
     {
@@ -74,7 +74,7 @@ const membersData = ref([
         location: '',
         type: 'Basic',
         status: 'Pending',
-        date: '01.02.2023',
+        date: '02/01/2023',
         img_url: 'chat-conversation/4.png'
     },
     {
@@ -83,7 +83,7 @@ const membersData = ref([
         location: '',
         type: 'Premium',
         status: 'Completed',
-        date: '01.02.2023',
+        date: '02/01/2023',
         img_url: 'chat-conversation/5.png'
     },
     {
@@ -92,7 +92,7 @@ const membersData = ref([
         location: '',
         type: 'Premium',
         status: 'Pending',
-        date: '01.02.2023',
+        date: '02/01/2023',
         img_url: 'chat-conversation/1.png'
     },
 ]);
