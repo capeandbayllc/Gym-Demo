@@ -1,5 +1,4 @@
 <template>
-  <!--  todo 1: 1st name on click background and border fix-->
   <!--  todo 4: responsive check-->
   <!--  todo 5: Make scrollable vertically -->
   <div class="side-bar-member" >

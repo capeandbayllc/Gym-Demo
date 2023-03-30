@@ -16,20 +16,17 @@
             <!--   this condition is temporary, just to show badge in demo site-->
             <div v-if="isEvenIndex" class="unread-badge">{{ props.unread ?? 3 }}</div>
           </div>
-
-<!--          v-if="!isFirstIndex" :class="[isEvenIndex ? 'check-out' : 'checked-out']"-->
-<!--          :class="[isCheckedOut ? 'checked-out' : 'check-out']"-->
-<!--          @click="toggleCheckOutStatus"-->
-          <div  v-if="!isFirstIndex"
-                class="member-check-out-outer"
-          >
-            <div class="member-check-out" :class="[!checkIn ? 'check-out' : 'checked-out']">
-              {{ !checkIn ? 'Check out' : 'Checked out' }}
-<!--              {{ isCheckedOut ? 'Checked out' : 'Check out' }}-->
+          
+          <div  v-if="!isFirstIndex" class="member-check-out-outer">
+            <div class="member-check-out"
+                 :class="[!checkIn && !isCheckedOut ? 'check-out' : 'checked-out']"
+                 @click="toggleCheckOutStatus">
+              {{ !checkIn && !isCheckedOut ? 'Check out' : 'Checked out' }}
             </div>
             </div>
 
           </div>
+
       <daisy-modal :overlay="true" ref="checkInModal" id="check-in-modal">
           <CheckInModal />
       </daisy-modal>
@@ -175,21 +172,7 @@ const isFirstIndex = computed(() => {
   return props.index === 0;
 });
 
-const isCheckOutVisible = ref(false);
-const isCheckedOut = ref(false);
 const isMemberSelected = ref(false);
-
-const showCheckOut = () => {
-  if (!isFirstIndex.value) {
-    isCheckOutVisible.value = true;
-  }
-};
-
-const hideCheckOut = () => {
-  if (!isFirstIndex.value) {
-    isCheckOutVisible.value = false;
-  }
-};
 
 const showMemberDetails = (id) => {
   if (isFirstIndex) {
@@ -203,17 +186,33 @@ const checkInModal = ref(null);
 const showCheckInModal = () => {
   checkInModal.value.open();
 };
+
 // const hideCheckOut = () => {
 //   if (!isCheckedOut.value) {
 //     isCheckOutVisible.value = false;
 //   }
 // };
 //
-// const toggleCheckOutStatus = () => {
-//   // console.log('here');
-//   isCheckedOut.value = !isCheckedOut.value;
-// };
 
-// const isHovering = ref(false);
-// const isTransitioning = ref(false);
+const isCheckOutVisible = ref(false);
+const isCheckedOut = ref(false);
+
+const showCheckOut = () => {
+  if (!isFirstIndex.value) {
+    isCheckOutVisible.value = true;
+  }
+};
+
+const hideCheckOut = () => {
+  if (!isFirstIndex.value) {
+    isCheckOutVisible.value = false;
+  }
+};
+const toggleCheckOutStatus = () => {
+  console.log('here');
+  isCheckedOut.value = !isCheckedOut.value;
+  // props.checkIn = !props.checkIn;
+};
+
+
 </script>
