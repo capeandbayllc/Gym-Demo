@@ -103,7 +103,7 @@ import { ArrowIcon } from "~~/components/icons";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import calendarViewModal from "../../../../components/calendar-view/index.vue";
-const date = ref(new Date());
+const date = ref(new Date(2022, 11, 6));
 const calendarView = ref(null);
 
 const showCalendarViewModal = () => {

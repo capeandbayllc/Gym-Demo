@@ -118,6 +118,7 @@ const onViewChanged = () => {
 
 const calendarOptions = ref({
     plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin],
+    initialDate: '2022-12-06',
     initialView: 'timeGridWeek',
     dateClick: handleDateClick,
     headerToolbar: {

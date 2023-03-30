@@ -43,8 +43,7 @@ const members2 = computed(() => {
       ...item,
       membership_type: getRandomMembershipType(),
       updated_at: new Date(item.updated_at)
-        .toLocaleDateString()
-        .replaceAll("/", "."),
+        .toLocaleDateString('en-GB')
     };
   });
 });
