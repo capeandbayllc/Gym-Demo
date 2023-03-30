@@ -1,4 +1,5 @@
 <template>
+  <!-- if making changes ensure grid columns are synchronised with headers -->
   <div>
     <div class="people-lead-tbl-row mr-2 font-light text-[0.8rem]">
       <div class="flex items-center gap-2">
@@ -41,7 +42,7 @@
       <div>
         <membership-btn :membership="data.type" />
       </div>
-      <div class="w-fit justify-self-center">
+      <div class="w-fit justify-self-center relative">
         <div
           v-show="!dropdownInfo"
           @click.stop="showDropdownInfo"
@@ -83,23 +84,23 @@
             />
           </svg>
         </div>
-      </div>
-      <div class="dropdown" v-show="dropdownInfo" @click.stop>
-        <div class="dropdown-container">
-          <cross-icon
-            @click.stop="hideDropdownInfo"
-            class="flex absolute text-white cursor-pointer"
-          ></cross-icon>
-          <div @click.stop="openInfoModal" class="dropdown-item">
-            Edit account
+        <div class="dropdown z-[1]" v-show="dropdownInfo" @click.stop>
+          <div class="dropdown-container">
+            <button class="absolute right-4" @click.stop="hideDropdownInfo">
+              <cross-icon></cross-icon>
+            </button>
+
+            <div @click.stop="openInfoModal" class="dropdown-item">
+              Edit account
+            </div>
+            <div @click.stop="openInfoModal" class="dropdown-item">
+              View alerts
+            </div>
+            <div @click.stop="openInfoModal" class="dropdown-item">
+              Add Guest Pass
+            </div>
+            <div @click.stop="openInfoModal">POS</div>
           </div>
-          <div @click.stop="openInfoModal" class="dropdown-item">
-            View alerts
-          </div>
-          <div @click.stop="openInfoModal" class="dropdown-item">
-            Add Guest Pass
-          </div>
-          <div @click.stop="openInfoModal">POS</div>
         </div>
       </div>
     </div>
@@ -249,10 +250,10 @@
 }
 
 .dropdown {
-  @apply bg-secondary text-white right-[160px] top-[90px] relative w-0;
+  @apply text-white absolute right-0;
 
   .dropdown-container {
-    @apply bg-secondary p-3 w-[180px] border-[2px] rounded-[20px];
+    @apply bg-secondary p-3 w-48 border-2 rounded-3xl;
   }
 }
 

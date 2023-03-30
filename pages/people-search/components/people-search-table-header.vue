@@ -1,4 +1,5 @@
 <template>
+  <!-- if making changes ensure grid columns are synchronised with rows -->
   <div
     class="border-b-2 border-primary text-secondary mb-4 pb-4 px-4 mr-4 grid grid-cols-[1fr_1fr_8rem_1fr_0.5fr_0.5fr_4rem]"
   >
