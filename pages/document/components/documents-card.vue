@@ -52,7 +52,7 @@ const documentsData = [
     {
         id: 1,
         segment: "New Employee",
-        created: "5/5 2002, 12:24:44PM",
+        created: "05/05/2002",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
@@ -61,7 +61,7 @@ const documentsData = [
     {
         id: 2,
         segment: "New Member",
-        created: "5/5 2002, 12:24:44PM",
+        created: "05/05/2002",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
@@ -70,7 +70,7 @@ const documentsData = [
     {
         id: 3,
         segment: "Training Guide",
-        created: "5/5 2002, 12:24:44PM",
+        created: "05/05/2002",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
@@ -79,7 +79,7 @@ const documentsData = [
     {
         id: 4,
         segment: "Training Guide",
-        created: "5/5 2002, 12:24:44PM",
+        created: "05/05/2002",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
@@ -88,7 +88,7 @@ const documentsData = [
     {
         id: 5,
         segment: "Job Performance",
-        created: "5/5 2002, 12:24:44PM",
+        created: "05/05/2002",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
@@ -97,7 +97,7 @@ const documentsData = [
     {
         id: 6,
         segment: "Compensation",
-        created: "5/5 2002, 12:24:44PM",
+        created: "05/05/2002",
         type_status: "secondary",
         first_name: "Kevin",
         last_name: "Buchanan",
