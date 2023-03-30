@@ -497,6 +497,53 @@ type EndUser {
   drivers_license_number: String
 }
 
+type AgreementTemplate{
+  id: ID
+  # contractTemplate {
+  #   id
+  #   name
+  #   data
+  #   data_type
+  #   created_at
+  #   updated_at
+  # }
+  # category {
+  #   id
+  #   name
+  #   created_at
+  #   updated_at
+  # }
+  billingSchedules: [BillingSchedule]
+  locations: [Location]
+  name: String
+  price: String
+  is_not_billable: String
+  availability: String
+  displayable_price: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type BillingSchedule {
+  id: ID
+  schedule_type: String
+  name: String
+  schedule_cycle_type: String
+  billable_dates: String
+  is_open_ended: String
+  is_renewable: String
+  should_renew_automatically: String
+  term_unit: String
+  term_duration: String
+  billed_on_type: String
+  billing_term_length: String
+  displayable_billable_dates: String
+  min_terms: String
+  used_in: String
+  created_at: String
+  updated_at: String
+}
+
 """A paginated list of EndUser items."""
 type EndUserPaginator {
   """Pagination information about the list of items."""

@@ -160,18 +160,8 @@ const leadsData = [
         last_name: "Sipes",
         location: "1",
         type: "platinum"
-    },
-    {
-        id: 10,
-        segment: 'PT Sessions',
-        phone: '(123) 456-7890',
-        email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "secondary",
-        first_name: "Nathan",
-        last_name: "Sipes",
-        location: "1",
-        type: "platinum"
-    },
+    }
 ];
+
+
 </script>
