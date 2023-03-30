@@ -49,7 +49,7 @@
         <div class="divider my-6 mt-1"></div>
         <!--    todo: scrollable member list, image is rounded, border different  -->
         <div class="member-list">
-          <side-bar-member v-for="(member, index) in membersData" :key="member.id" :index="index" v-bind="{...member}"/>
+          <side-bar-member-check-in v-for="(member, index) in membersData" :key="member.id" :index="index" v-bind="{...member}"/>
         </div>
       </div>
 
@@ -187,7 +187,7 @@
 }
 </style>
 <script setup>
-import {ref} from "vue";
+import {ref, onMounted, onUnmounted} from "vue";
 import {ArrowIcon, CrossIcon} from "~~/components/icons";
 import SideBarMember from "./side-bar-member.vue";
 import CheckInModal from "../check-in-modal/index.vue";
@@ -238,4 +238,20 @@ const checkInModal = ref(null);
 const showCheckInModal = () => {
   checkInModal.value.open();
 };
+
+let initialSidebarHeight= '100vh';
+let sidebarHeight= ref('100vh');
+onMounted(() => {
+  const sidebarElement = document.querySelector('.side-bar-container');
+  if (sidebarElement) {
+    sidebarHeight.value = `${sidebarElement.clientHeight}px`;
+  }
+  // const sidebarOffset = this.$refs.sidebar.getBoundingClientRect().top
+  //
+  // window.addEventListener('scroll', () => {
+  //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+  //
+  //   sidebarHeight.value = Math.max(initialSidebarHeight - scrollTop + sidebarOffset, 0) + 'px'
+  // })
+})
 </script>

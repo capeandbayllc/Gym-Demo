@@ -43,7 +43,4 @@ const props = defineProps({
     },
 });
 
-
-//console.log("notesddsssd", props.alert)
-
 </script>
