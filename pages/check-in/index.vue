@@ -17,7 +17,7 @@
                             @open-engage="showEngageModal"
                         />
                     </div>
-                    <div class="bg-secondary w-full">
+                    <div class="w-full">
                         <p
                             class="checkin-card-detail"
                             @click="toggleDetailSection"

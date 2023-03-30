@@ -11,6 +11,7 @@
 </template>
 <script setup>
 import PeopleSearchTable from "./people-search-table.vue";
+import AlertSearchTable from "./alert-search-table.vue";
 import { request } from "~/api/utils/request";
 import member from "~/api/queries/member";
 import { getRandomInt } from "~/api/utils/number";

@@ -52,7 +52,7 @@ const membersData = ref([
       location: '',
       start: '01:23 PM',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/2.png'
   },
@@ -62,7 +62,7 @@ const membersData = ref([
       location: '',
       start: '01:23 PM',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/3.png'
   },
@@ -72,7 +72,7 @@ const membersData = ref([
       location: '',
       start: 'Premium',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/4.png'
   },
@@ -82,7 +82,7 @@ const membersData = ref([
       location: '',
       start: 'Basic',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/2.png'
   },
@@ -92,7 +92,7 @@ const membersData = ref([
       location: '',
       start: 'Premium',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/3.png'
   },
@@ -102,7 +102,7 @@ const membersData = ref([
       location: '',
       start: 'Premium',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/4.png'
   },
