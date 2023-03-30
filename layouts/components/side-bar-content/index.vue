@@ -1,5 +1,6 @@
 <template>
   <transition name="fade">
+    <!--    Initial Sidebar -->
     <div class="side-bar-content-container transition-all duration-200 ease-linear overflow-x-hidden">
       <div v-if="!showCheckIn" class="">
         <arrow-icon direction="right" class="collapse-icon" @click="$emit('close')"/>
@@ -22,7 +23,7 @@
           <side-bar-member v-for="(member, index) in membersData" :key="member.id" :index="index" v-bind="{...member}"/>
         </div>
       </div>
-
+      <!--    Member Check In Sidebar -->
       <div v-else>
         <cross-icon class="cross-icon collapse-icon h-3" @click="showCheckIn = false">X</cross-icon>
         <div class="mem-checkin-btn-two" @click="showCheckIn = false">Member Check In</div>
@@ -78,14 +79,21 @@
 
   .active-members {
     @apply grid grid-cols-12 mb-2;
+  }
 
   .active-member-count {
     @apply col-span-2 text-[1.3rem] px-3 py-1 rounded-xl border-[2px] border-secondary bg-secondary/50;
   }
 
-  }
   .member-list {
     @apply flex flex-col gap-5 w-full;
+    overflow-y: scroll;
+    max-height: calc(100vh - 220px);
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .member-list::-webkit-scrollbar {
+    display: none;
   }
 
   .location-list {
@@ -131,67 +139,11 @@
 }
 
 </style>
-<style>
-#check-in-modal .modal-close-btn svg g {
-  fill: #0074c8;
-}
 
-#check-in-modal .modal-close-btn {
-  top: -18px;
-  right: -12px;
-}
-
-.checkin-action-items .w-full {
-  max-width: 100% !important;
-}
-
-.checkin-action-items .simple-card {
-  max-width: 100% !important;
-  width: auto !important;
-}
-
-@media (max-width: 2100px) {
-  #check-in-modal {
-    min-width: 65%;
-    background: none;
-  }
-
-  .check-in-modal-content {
-    overflow: auto;
-    max-height: 95vh;
-  }
-}
-
-@media (max-width: 1900px) {
-  #check-in-modal {
-    min-width: 80%;
-  }
-}
-
-@media (max-width: 1350px) {
-  #check-in-modal {
-    min-width: 85%;
-  }
-}
-
-@media (max-width: 1250px) {
-  #check-in-modal .event-list {
-    max-height: fit-content;
-  }
-}
-
-@media (max-width: 980px) {
-  #check-in-modal {
-    min-width: 85%;
-  }
-}
-</style>
 <script setup>
-import {ref, onMounted, onUnmounted} from "vue";
+import {ref} from "vue";
 import {ArrowIcon, CrossIcon} from "~~/components/icons";
 import SideBarMember from "./side-bar-member.vue";
-import CheckInModal from "../check-in-modal/index.vue";
-import SelectBox from "../../../components/select-box";
 import SelectLocation from "./select-location";
 import {request} from "~/api/utils/request";
 import member from "~/api/queries/member";
@@ -234,24 +186,5 @@ request(member.query.browse).then(({data}) => {
     membersData.value.push(member);
   });
 });
-const checkInModal = ref(null);
-const showCheckInModal = () => {
-  checkInModal.value.open();
-};
 
-let initialSidebarHeight= '100vh';
-let sidebarHeight= ref('100vh');
-onMounted(() => {
-  const sidebarElement = document.querySelector('.side-bar-container');
-  if (sidebarElement) {
-    sidebarHeight.value = `${sidebarElement.clientHeight}px`;
-  }
-  // const sidebarOffset = this.$refs.sidebar.getBoundingClientRect().top
-  //
-  // window.addEventListener('scroll', () => {
-  //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-  //
-  //   sidebarHeight.value = Math.max(initialSidebarHeight - scrollTop + sidebarOffset, 0) + 'px'
-  // })
-})
 </script>
