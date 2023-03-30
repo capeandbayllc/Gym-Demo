@@ -1,8 +1,8 @@
 <template>
   <div class="people-lead-table">
-    <PeopleSearchTableHeader :columns="columns" />
-    <div class="max-h-96 overflow-y-scroll w-full">
-      <PeopleSearchTableRow
+    <PeopleSearchTableHeader :columns="columns" class="min-w-[1050px]" />
+    <div class="max-h-96 overflow-y-scroll min-w-[1050px]">
+      <AlertSearchTableRow
         v-for="item in items"
         :key="item.id"
         :columns="columns"
@@ -19,7 +19,7 @@
 </style>
 <script setup>
 import PeopleSearchTableHeader from "./people-search-table-header.vue";
-import PeopleSearchTableRow from "./people-search-table-row.vue";
+import AlertSearchTableRow from "./alert-search-table-row.vue";
 const props = defineProps({
   columns: {
     type: Array,

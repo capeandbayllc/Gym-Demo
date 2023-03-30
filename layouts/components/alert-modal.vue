@@ -57,6 +57,7 @@
               </div>
               <search-list
                   :filter="tblFilter"
+                  :typeAlert="true"
                   @row-clicked="clickRow"
               ></search-list>
           </div>
