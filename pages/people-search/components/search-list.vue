@@ -30,31 +30,24 @@ const clickRow = (data) => {
 const columns = [
   {
     label: "Segment",
-    width: 200,
   },
   {
     label: "Alerts",
-    width: 100,
   },
   {
     label: "Name",
-    width: 200,
   },
   {
     label: "Communication",
-    width: 250,
   },
   {
     label: "Location",
-    width: 100,
   },
   {
     label: "Type",
-    width: 120,
   },
   {
     label: "Info",
-    width: 10,
   },
 ];
 
