@@ -95,6 +95,8 @@ import { ref } from "vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { CalendarIcon } from "~~/components/icons";
+import { request } from "~/api/utils/request";
+import location from "~~/api/queries/location";
 
 const format = (date) => {
   const day = date.getDate();
@@ -105,7 +107,7 @@ const format = (date) => {
 };
 
 const form = ref({
-  location: "1",
+  location: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
 });
 const fields = [
   {
@@ -134,18 +136,18 @@ const fields = [
   },
 ];
 
-const locations = [
-  {
-    value: "1",
-    label: "Gym Location 1",
-  },
-  {
-    value: "2",
-    label: "Gym Location 2",
-  },
-  {
-    value: "3",
-    label: "Gym Location 3",
-  },
-];
+const locations = ref([]);
+
+const locationsData = ref([]);
+request(location.query.browse).then(({ data }) => {
+    locationsData.value = data.data.locations;
+    locations.value = locationsData.value.data.map((e)=>{
+      return {
+        value: e.id,
+        label: e.name
+      }
+    })
+});
+
+
 </script>
