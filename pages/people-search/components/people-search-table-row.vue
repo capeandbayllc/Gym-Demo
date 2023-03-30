@@ -1,7 +1,16 @@
 <template>
   <div>
     <div class="people-lead-tbl-row mr-2 font-light text-[0.8rem]">
-      <div class="flex items-center text-base font-semibold text-green-600">
+      <div class="flex items-center gap-2">
+        <img
+          :src="data.profile_photo_path"
+          :gender="data.gender"
+          class="w-8 border-2 border-secondary rounded-lg"
+        />
+        {{ data.first_name }} {{ data.last_name }}
+      </div>
+
+      <div class="flex items-center text-base font-semibold text-green-500">
         <input
           type="checkbox"
           @click.stop=""
@@ -15,15 +24,6 @@
         <span>2</span>
       </div>
 
-      <div class="flex items-center gap-2">
-        <img
-          :src="data.profile_photo_path"
-          :gender="data.gender"
-          class="w-8 border-2 border-secondary rounded-lg"
-        />
-        {{ data.first_name }} {{ data.last_name }}
-      </div>
-
       <div class="flex items-center justify-evenly">
         <div class="">
           <SmsSquareIcon @click.stop="contactOption = 'text'" />
@@ -35,7 +35,7 @@
           <CallSquareIcon @click.stop="contactOption = 'call'" />
         </a>
       </div>
-      <div class="text-xs" :title="data.homeLocation.name">
+      <div class="text-xs px-4" :title="data.homeLocation.name">
         Club {{ Math.floor(Math.random() * 10) }}
       </div>
       <div>
@@ -204,7 +204,7 @@
 </template>
 <style scoped lang="postcss">
 .people-lead-tbl-row {
-  @apply grid grid-cols-[1fr_8rem_repeat(2,_1fr)8rem_0.5fr_4rem];
+  @apply grid grid-cols-[1fr_1fr_8rem_1fr_0.5fr_0.5fr_4rem];
   @apply bg-base-100 rounded-lg px-4 h-14 items-center my-2 cursor-pointer transition-all duration-75 border-2 border-base-100;
   @apply hover:border-secondary hover:bg-primary;
 

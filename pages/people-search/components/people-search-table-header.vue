@@ -1,7 +1,9 @@
 <template>
   <div
-    class="border-b-2 border-primary text-secondary mb-4 pb-4 px-4 mr-4 grid grid-cols-[1fr_8rem_repeat(2,_1fr)8rem_0.5fr_4rem]"
+    class="border-b-2 border-primary text-secondary mb-4 pb-4 px-4 mr-4 grid grid-cols-[1fr_1fr_8rem_1fr_0.5fr_0.5fr_4rem]"
   >
+    <span>Name</span>
+
     <div class="flex items-center">
       <input
         type="checkbox"
@@ -10,14 +12,13 @@
       <span>Segment</span>
     </div>
 
-    <div class="flex items-center gap-2 justify-self-center">
+    <div class="flex items-center gap-2 px-4">
       <AlertIcon class="text-secondary" />
       <span>Alerts</span>
     </div>
 
-    <span>Name</span>
     <span class="text-center">Communication</span>
-    <span>Location</span>
+    <span class="px-4">Location</span>
     <span class="text-center">Type</span>
     <span class="text-center">Info</span>
   </div>
