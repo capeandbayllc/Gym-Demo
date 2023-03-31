@@ -591,8 +591,8 @@ type Lead {
   first_name: String
   middle_name: String
   last_name: String
-  type: LeadType
-  status: LeadStatus!
+  type: String!
+  status: String!
   email: String!
   phone: String!
   user_id: ID
@@ -632,10 +632,10 @@ type LeadPaginator {
 }
 
 type LeadStatus {
-    id: ID!
-    status: String
-    order: String
-    active: Boolean
+  id: ID!
+  status: String
+  order: String
+  active: Boolean
 }
 
 type LeadType {
@@ -1724,7 +1724,7 @@ input LeadInput {
   user_id: String
   first_name: String
   status: String
-  type_id: ID
+  type: String
   middle_name: String
   last_name: String
   date_of_birth: String
