@@ -9,7 +9,10 @@
     <div class="p-4">
       <div class="float-left w-[215px] pt-3 pb-3 pl-10 text-2xl">Leaderboard for</div>
       <div class="float-left w-[150px] pt-3">
-        <select-box :items="items" class="bg-[#5A5A5A5A] border-2 rounded-xl ml-3 border-blue-700 "></select-box>
+        <select class="bg-[#5A5A5A5A] border-2 rounded-xl ml-3 mt-1 p-1 border-blue-700 ">
+          <option  value="">Select</option>
+          <option v-for="value in items" :value="value.value" :key="value.value">{{value.label}}</option>
+        </select>
       </div>
       <div>
         <div class="float-right close-btn" @click="closeSlider">
