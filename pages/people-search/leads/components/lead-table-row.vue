@@ -9,8 +9,8 @@
     <td> {{ data.homeLocation?.name }} </td>
     <!-- <td> Club {{ Math.floor(Math.random() * 10) }} </td> -->
     <td>
-      <div :class="'type-' + data.type">
-        {{ data.type }}
+      <div :class="'type-' + data.type?.name">
+        {{ data.type?.name }}
       </div>
     </td>
     <td class="capitalize text-accent-focus/60">{{ data?.status }} {{ contactOption }}</td>

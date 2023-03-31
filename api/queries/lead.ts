@@ -11,7 +11,9 @@ const GET_LEAD: DocumentNode = gql`
                 last_name
                 email
                 status
-                type
+                type {
+                    name
+                }
                 gender
                 phone,
                 profile_photo_path
@@ -44,7 +46,9 @@ const GET_SINGLE_LEAD: DocumentNode = gql`
             user_id
             first_name
             status
-            type
+            type{
+                name
+            }
             middle_name
             last_name
             date_of_birth
