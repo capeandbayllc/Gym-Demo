@@ -6,7 +6,8 @@
       title="Profile"
       @close="$emit('close')"
     >
-      <div class="profile-section mb-6">
+      <BasicInfo />
+      <!-- <div class="profile-section mb-6">
         <div></div>
         <h2 class="">Member Information</h2>
         <Button
@@ -24,7 +25,7 @@
         <div
           v-for="item in memberInformation"
           :key="item.key"
-          class="col-span-1 -lg:col-span-1 -md:col-span-2 -md:col-auto mx-auto w-full mb-4"
+          class="col-span-1 -lg:col-span-1 -md:col-auto mx-auto w-full mb-4"
         >
           <div class="mb-2">
             {{ item.label }}
@@ -34,21 +35,27 @@
           </div>
           <template v-if="Array.isArray(item.options)">
             <MultiSelect
-                v-model="memberInfo[item.key]"
-                :options="item.options"
-                is-single-select
-                placeholder="Select Gender"
+              v-model="memberInfo[item.key]"
+              :options="item.options"
+              is-single-select
+              placeholder="Select Gender"
             />
           </template>
           <template v-else-if="item.type === 'date'">
-            <Datepicker class="custom-date" v-model="memberInfo[item.key]" auto-apply :enable-time-picker="false" dark/>
+            <Datepicker
+              class="custom-date"
+              v-model="memberInfo[item.key]"
+              auto-apply
+              :enable-time-picker="false"
+              dark
+            />
           </template>
           <template v-else>
             <input
-                :type="item.type ?? 'text'"
-                :class="item.class"
-                class="w-full p-1 rounded-sm"
-                v-model="memberInfo[item.key]"
+              :type="item.type ?? 'text'"
+              :class="item.class"
+              class="w-full p-1 rounded-xl"
+              v-model="memberInfo[item.key]"
             />
           </template>
         </div>
@@ -60,7 +67,7 @@
           v-for="(item, index) in demographics"
           :key="item.key"
           :class="index == 0 ? 'col-span-3 -lg:col-span-2' : ''"
-          class="col-span-1 -md:col-span-2 -md:col-auto mx-auto w-full"
+          class="col-span-1 -md:col-auto mx-auto w-full"
         >
           <div class="mb-2">{{ item.label }}</div>
           <input
@@ -71,36 +78,64 @@
         </div>
       </div>
       <div class="text-center mx-5 mb-2 rounded-md p-2">
-          <Button type="button" @click.stop="updateUser" :class="[{loading: isProcessing}, 'bg-black']">
-            Update Profile
-          </Button>
-      </div>
+        <Button
+          type="button"
+          @click.stop="updateUser"
+          :class="[{ loading: isProcessing }, 'bg-black']"
+        >
+          Update Profile
+        </Button>
+      </div> -->
     </simple-card>
   </div>
 </template>
 <script setup>
+/**
+ *    [first name]      [middle name]     [last name]
+ *    [date of birth]   [gender]          [username]
+ *    [email]           [personal email]  [mobile]
+ *
+ *      [          add a connection         ]
+ *          [lead/member to conn] [rela]
+ *
+ * ----------------------------------------------------
+ *
+ *    [address*************************************]
+ *    [city]            [state]             [zip]
+ *
+ * ----------------------------------------------------
+ *
+ *        [    social media handles     ]
+ *              [ig]    [tw]
+ *              [tk]    [yt]
+ *              [sc]    [fb]
+ *
+ */
 import member from "~/api/queries/member";
-import {request} from "~/api/utils/request";
+import { request } from "~/api/utils/request";
 import user from "~/api/mutations/user";
-import {useMutation} from "@vue/apollo-composable";
-import Datepicker from '@vuepic/vue-datepicker';
-import MultiSelect from '~/components/multi-select/index.vue';
+import { useMutation } from "@vue/apollo-composable";
+import Datepicker from "@vuepic/vue-datepicker";
+import MultiSelect from "~/components/multi-select/index.vue";
 import lead from "~/api/queries/lead";
+import BasicInfo from "./partials/basic-info.vue";
 
-const emit = defineEmits(['on-profile-update'])
-const route = useRoute()
-const profileId = (route.query.id)
-const isLeadView = route.query.type === 'lead';
+const emit = defineEmits(["on-profile-update"]);
+const route = useRoute();
+const profileId = route.query.id;
+const isLeadView = route.query.type === "lead";
 
-request((isLeadView ? lead : member).query.get, { id: profileId }).then(({data}) => {
-  const user = data.data[isLeadView ? 'lead' : 'member'];
+request((isLeadView ? lead : member).query.get, { id: profileId }).then(
+  ({ data }) => {
+    const user = data.data[isLeadView ? "lead" : "member"];
 
-  const homeLocation = user.homeLocation;
-  delete user.homeLocation;
+    const homeLocation = user.homeLocation;
+    delete user.homeLocation;
 
-  memberInfo.value = {...user, ...{ id: user.user_id}};
-  demographicsObj.value = {...homeLocation, ...user};
-});
+    memberInfo.value = { ...user, ...{ id: user.user_id } };
+    demographicsObj.value = { ...homeLocation, ...user };
+  }
+);
 
 const isActiveMember = ref(false);
 const isProcessing = ref(false);
@@ -110,33 +145,29 @@ const memberInformation = [
   {
     key: "first_name",
     label: "First Name",
-    class: "secondary-input",
+    class: "neutral-input",
   },
   {
     key: "middle_name",
     label: "Middle Name",
-    class: "secondary-input",
+    class: "neutral-input",
   },
   {
     key: "last_name",
     label: "Last Name",
-    class: "secondary-input",
+    class: "neutral-input",
   },
   {
     key: "date_of_birth",
     label: "Date of Birth",
     class: "neutral-input",
-    type: 'date'
+    type: "date",
   },
   {
     key: "gender",
     label: "Gender",
     class: "neutral-input",
-    options: [
-      'male',
-      'female',
-      'other'
-    ]
+    options: ["male", "female", "other"],
   },
   {
     key: "occupation",
@@ -278,7 +309,9 @@ function updateUser() {
       state: demographicsObj.value.state,
       phone: demographicsObj.value.phone,
     },
-  }).then(() => emit('on-profile-update')).finally(() => isProcessing.value = false);
+  })
+    .then(() => emit("on-profile-update"))
+    .finally(() => (isProcessing.value = false));
 }
 </script>
 <style scoped>
@@ -295,7 +328,7 @@ function updateUser() {
   @apply bg-secondary rounded-xl py-2;
 }
 .neutral-input {
-  @apply bg-base-content/30 py-2;
+  @apply bg-base-content/20 py-2;
 }
 .readonly-input {
   @apply bg-transparent text-base-content/50;
