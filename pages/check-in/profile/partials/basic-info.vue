@@ -21,7 +21,7 @@
       <TextField id="mobile" label="Mobile" />
     </div>
 
-    <div>
+    <div class="mt-24">
       <div class="grid grid-cols-12 gap-4 py-2 mt-4">
         <div
           class="col-start-3 col-span-8 border-2 border-secondary rounded-2xl"
@@ -45,9 +45,9 @@
               >
                 <div class="mb-5">
                   <div class="mb-2">Lead Member to Connect</div>
-                  <!-- TODO:  Search key -->
+
                   <input
-                    class="neutral-input rounded-xl"
+                    class="gr-base-textfield gr-neutral-textfield"
                     v-model="form['lead-member']"
                     placeholder="Search by last name or email"
                   />
@@ -57,7 +57,7 @@
                   <div class="mb-2">Relationship:</div>
                   <select
                     id="relationship"
-                    class="neutral-input rounded-xl"
+                    class="gr-base-textfield gr-neutral-selection"
                     v-model="form['relationship']"
                   >
                     <option selected value="0" key="0">Relationship</option>

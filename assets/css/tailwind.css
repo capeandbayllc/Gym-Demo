@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-  input.gr-base-textfield {
+  .gr-base-textfield {
     @apply rounded-xl p-2 transition-all duration-75 mt-2 w-full outline-none border-2 border-transparent;
     @apply motion-reduce:transition-none;
   }
@@ -15,6 +15,14 @@
   input.gr-neutral-textfield {
     @apply bg-base-content/20;
     @apply focus-within:bg-base-content/30 focus-within:border-secondary;
+  }
+
+  select.gr-neutral-selection {
+    @apply bg-base-content/20 text-white/50;
+
+    > option {
+      @apply bg-base-content/20;
+    }
   }
 
   input.gr-neutral-shroud {
