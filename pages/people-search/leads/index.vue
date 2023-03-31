@@ -6,6 +6,8 @@
                 @click="openAddMemberPopUp"
             />
             <p class="text-xs mt-1">Add a Lead</p>
+
+            <button @click="saveLead()">Save lead</button>
         </div>
         <div class="page-leads-center-container">
             <div class="page-content custom-page-content-header">
@@ -145,8 +147,8 @@ const newMemberData = ref({
     first_name: "Pete",
     middle_name: null,
     last_name: "Schmeler",
-    status: "New",
-    type: "streaming_preview",
+    status_id: "New",
+    type_id: "streaming_preview",
     email_verified_at: null,    
     email: "Cedrick.Schmeler@yahoo.com",
     alternate_emails: null,
@@ -212,8 +214,8 @@ const saveLead = () => {
             id: newMemberData.value.id + Math.floor(Math.random() * 9000000000) + 1000000000,
             user_id: newMemberData.value.user_id,
             first_name: newMemberData.value.first_name,
-            status: newMemberData.value.status,
-            type: newMemberData.value.type,
+            status_id: newMemberData.value.status_id,
+            type_id: newMemberData.value.type_id,
             middle_name: newMemberData.value.middle_name,
             last_name: newMemberData.value.last_name,
             date_of_birth: newMemberData.value.date_of_birth,
@@ -226,7 +228,6 @@ const saveLead = () => {
             email: newMemberData.value.email,
             primary_phone: newMemberData.value.primary_phone,
             profile_photo_path: newMemberData.value.profile_photo_path,
-            // home: newMemberData.value.home,
             location_id: newMemberData.value.location_id,
             home_location_id: newMemberData.value.home_location_id,
             created_at: newMemberData.value.created_at,
@@ -267,6 +268,7 @@ const filters = ref({status: ''})
 const opportunity = ["error", "warning", "accent"];
 const getLeadsQuery = ()=>{
     request(lead.query.browse, { filter: filters.value }).then(({ data }) => {
+        console.log(data)
         leads.value = data.data.leads.data;
     });
 }

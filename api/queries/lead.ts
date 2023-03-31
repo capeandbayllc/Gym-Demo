@@ -10,7 +10,9 @@ const GET_LEAD: DocumentNode = gql`
                 first_name
                 last_name
                 email
-                status
+                status {
+                    status
+                }
                 type {
                     name
                 }

@@ -13,7 +13,7 @@
         {{ data.type?.name }}
       </div>
     </td>
-    <td class="capitalize text-accent-focus/60">{{ data?.status }} {{ contactOption }}</td>
+    <td class="capitalize text-accent-focus/60">{{ data.status?.status }} {{ contactOption }}</td>
     <td>
       <div class="dropdown dropdown-end">
         <div class="text-base-content cursor-pointer" tabindex="0" @click.prevent.stop>

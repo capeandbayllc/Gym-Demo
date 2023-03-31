@@ -8,7 +8,9 @@ const CREATE_LEAD: DocumentNode = gql`
             id
             user_id
             first_name
-            status
+            status{
+                id
+            }
             type{
                 id
             }
