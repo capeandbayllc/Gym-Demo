@@ -1,21 +1,8 @@
 <template>
-    <div
-        class="side-bar"
-        :class="{
-            collapsed: collapsed,
-            expanded: !collapsed,
-        }"
-    >
-        <div
-            class="side-bar-toggler"
-            @click="toggleCollapsed"
-            v-if="collapsed "
-        >
+    <div class="side-bar" :class="{ collapsed: collapsed, expanded: !collapsed, }">
+        <div class="side-bar-toggler" @click="toggleCollapsed" v-if="collapsed ">
             <div class="side-bar-arrow">
-                <arrow-icon
-                    direction="left"
-                    class="collapse-icon scale-150 self-end cursor-pointer mt-4"
-                />
+                <arrow-icon direction="left" class="collapse-icon scale-150 self-end cursor-pointer mt-4"/>
             </div>
             <div class="side-bar-text">Check In Button</div>
         </div>
@@ -25,13 +12,13 @@
 <style scoped>
 .side-bar {
     @apply relative right-0 z-20 h-full transition-all duration-200 ease-linear;
-    
-    /* height: calc(100vh - 6rem); */
     &.collapsed {
         @apply w-7 flex bg-secondary;
     }
     &.expanded {
         @apply w-80 border border-secondary bg-neutral;
+        max-height: 100vh;
+        position: fixed;
     }
 }
 

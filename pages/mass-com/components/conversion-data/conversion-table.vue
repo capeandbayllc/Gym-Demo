@@ -15,13 +15,15 @@
     @apply w-max md:w-full;
 
     th {
-      @apply text-secondary p-0 text-left;
+      @apply text-secondary p-0 text-left px-4;
     }
   }
 }
 </style>
 
 <script setup>
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
 import ConversionTableRow from "./conversion-table-row.vue";
 
 const columns = [
@@ -47,46 +49,41 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    id: 1,
-    name: "Chad Hodges",
-    unit: "Unit #",
-    membership: "Membership",
-    revenue: "$0.00",
-    src: "/chat-conversation/1.png",
-  },
-  {
-    id: 2,
-    name: "Chad Hodges",
-    unit: "Unit #",
-    membership: "Membership",
-    revenue: "$0.00",
-    src: "/chat-conversation/1.png",
-  },
-  {
-    id: 3,
-    name: "Chad Hodges",
-    unit: "Unit #",
-    membership: "Membership",
-    revenue: "$0.00",
-    src: "/chat-conversation/1.png",
-  },
-  {
-    id: 4,
-    name: "Chad Hodges",
-    unit: "Unit #",
-    membership: "Membership",
-    revenue: "$0.00",
-    src: "/chat-conversation/1.png",
-  },
-  {
-    id: 5,
-    name: "Chad Hodges",
-    unit: "Unit #",
-    membership: "Membership",
-    revenue: "$0.00",
-    src: "/chat-conversation/1.png",
-  },
-];
+const query = gql`
+  query MassCommsConversionDataQuery {
+    employee(first: 10) {
+      data {
+        id
+        first_name
+        last_name
+        profile_photo_path
+      }
+      paginatorInfo {
+        count
+        perPage
+        total
+      }
+    }
+  }
+`;
+const { result } = useQuery(query);
+const membershipTypes = ["platinum", "gold", "silver", "bronze"];
+const getRandomMembershipType = () => {
+  return membershipTypes[Math.floor(Math.random() * membershipTypes.length)];
+};
+
+const data = computed(() => {
+  return result?.value
+    ? result.value.employee.data.map((employee) => {
+        return {
+          ...employee,
+          name: `${employee.first_name} ${employee.last_name}`,
+          src: employee.profile_photo_path,
+          membership: getRandomMembershipType(),
+          unit: `Unit #${Math.floor(Math.random() * 10)}`,
+          revenue: `$${Number(Math.floor(Math.random() * 100).toFixed(2))}`,
+        };
+      })
+    : [];
+});
 </script>

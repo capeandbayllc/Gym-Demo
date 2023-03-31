@@ -98,10 +98,6 @@ import NewSales from './new-sales.vue'
 import Statistics from './statistics.vue'
 import Statistics1 from './statistics-1.vue'
 const tableSelected = ref('Callbacks');
-
-          
-          
-
 const getTableList = (name) => {
     tableSelected.value = name;
 }
