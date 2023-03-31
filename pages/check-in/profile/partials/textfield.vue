@@ -2,7 +2,7 @@
   <div class="block w-full group">
     <slot name="label">
       <label
-        class="capitalize"
+        class="gr-base-label"
         :class="{ 'is-required': required }"
         :for="id"
         >{{ label }}</label
