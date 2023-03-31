@@ -1,10 +1,11 @@
 <template>
-  <tr class="py-2 h-10 border-b border-white border-opacity-50">
+  <tr class="py-2 text- h-10 border-b border-white border-opacity-40">
     <!-- rank & trend -->
-    <td>
-      <div class="flex gap-4">
-        {{ leader.rank }} <TrendVisualization :direction="leader.trending" />
+    <td class="flex">
+      <div class="flex pt-1.5 pr-5">
+        {{ leader.rank }}
       </div>
+      <TrendVisualization :direction="leader.trending" />
     </td>
 
     <!-- name -->
