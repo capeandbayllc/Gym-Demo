@@ -136,63 +136,67 @@ import EmergencyInfo from "~/pages/check-in/profile-card/add-member/emergency-in
 import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today.vue";
 import { request } from "~/api/utils/request";
 import lead from "~/api/queries/lead";
-import {default as leadMutation} from "~/api/mutations/lead";
+import userMutation from "~/api/mutations/user";
 import {useMutation} from "@vue/apollo-composable";
 
 const newMemberData = ref({
-    user_id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
     id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
     first_name: "Pete",
-    middle_name: null,
-    last_name: "Schmeler",
-    status_id: "New",
-    type_id: "streaming_preview",
-    email_verified_at: null,    
-    email: "Cedrick.Schmeler@yahoo.com",
-    alternate_emails: null,
-    phone: "9846188996",
-    alternate_phone: null,
+    middle_name: "",
+    last_name: "Mahvash",
     date_of_birth: null,
     gender: "other",
     drivers_license_number: null,
-    profile_photo_path: "/images/profile/users_8.jpg",
     occupation: null,
     employer: null,
     barcode: null,
+    email: "Cedrick.Schmeler@yahoo.com",
+    home_location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
     address1: "4782 Lehner Avenue Suite 976",
     address2: "Apt. 344",
     city: "Port Wendy",
     state: "MT",
-    zip: "84678",
-    unsubscribed_email: false,
-    unsubscribed_sms: false,
-    user_type: "lead",
-    entry_source: null,
-    home_location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
-    location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
-    manager: null,
-    opportunity: null,
-    external_id: null,
-    misc: null,
-    details: {
-        contact_preference: "sms",
-        emergency_contact: {
-            ec_first_name: "",
-            ec_last_name: "",
-            ec_phone: ""
-        },
-        membership_type_id: ""
-    },
-    is_previous: false,
+    phone: "9846188996",
     created_at: "2023-03-19T20:42:50.000000Z",
     updated_at: "2023-03-19T20:42:50.000000Z",
-    started_at: null,
-    ended_at: null,
-    terminated_at: null,
-    obfuscated_at: null,
-    twilioClientConversation_ids: [],
-    note_ids: [],
-    owner: null
+    // user_id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
+    // last_name: "Schmeler",
+    // status_id: "New",
+    // type_id: "streaming_preview",
+    // email_verified_at: null,    
+    // alternate_emails: null,
+    // alternate_phone: null,
+    // profile_photo_path: "/images/profile/users_8.jpg",
+    // occupation: null,
+    // employer: null,
+    // barcode: null,
+    // zip: "84678",
+    // unsubscribed_email: false,
+    // unsubscribed_sms: false,
+    // user_type: "lead",
+    // entry_source: null,
+    // location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
+    // manager: null,
+    // opportunity: null,
+    // external_id: null,
+    // misc: null,
+    // details: {
+    //     contact_preference: "sms",
+    //     emergency_contact: {
+    //         ec_first_name: "",
+    //         ec_last_name: "",
+    //         ec_phone: ""
+    //     },
+    //     membership_type_id: ""
+    // },
+    // is_previous: false,
+    // started_at: null,
+    // ended_at: null,
+    // terminated_at: null,
+    // obfuscated_at: null,
+    // twilioClientConversation_ids: [],
+    // note_ids: [],
+    // owner: null
 });
 
 const newMemberDataReset = ref({});
@@ -206,28 +210,29 @@ const saveLead = () => {
     let formattedDate = currentDate.toLocaleDateString('en-US') + ', ' + currentDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
     newMemberData.value.created_at = formattedDate;
     newMemberData.value.updated_at = formattedDate;
-    const { mutate: createMember } = useMutation(leadMutation.mutation.createLead);
+    addMemberScreenIndex.value = 0;
+    const { mutate: createMember } = useMutation(userMutation.mutation.createUser);
     createMember({
         input: {
             id: newMemberData.value.id + Math.floor(Math.random() * 9000000000) + 1000000000,
-            user_id: newMemberData.value.user_id,
             first_name: newMemberData.value.first_name,
-            status_id: newMemberData.value.status_id,
-            type_id: newMemberData.value.type_id,
             middle_name: newMemberData.value.middle_name,
             last_name: newMemberData.value.last_name,
             date_of_birth: newMemberData.value.date_of_birth,
-            phone: newMemberData.value.phone,
             gender: newMemberData.value.gender,
             drivers_license_number: newMemberData.value.drivers_license_number,
             occupation: newMemberData.value.occupation,
             employer: newMemberData.value.employer,
             barcode: newMemberData.value.barcode,
             email: newMemberData.value.email,
-            primary_phone: newMemberData.value.primary_phone,
-            profile_photo_path: newMemberData.value.profile_photo_path,
-            location_id: newMemberData.value.location_id,
             home_location_id: newMemberData.value.home_location_id,
+            address1: newMemberData.value.address1,
+            address2: newMemberData.value.address2,
+            city: newMemberData.value.city,
+            state: newMemberData.value.state,
+            phone: newMemberData.value.phone,
+            state: newMemberData.value.state,
+            phone: newMemberData.value.phone,
             created_at: newMemberData.value.created_at,
             updated_at: newMemberData.value.updated_at
         },
