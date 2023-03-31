@@ -1,6 +1,6 @@
 <template>
   <section
-    class="grid grid-cols-3 gap-4 max-w-7xl px-8 bg-black py-8 rounded-b-3xl"
+    class="grid grid-cols-3 gap-8 max-w-7xl px-8 bg-black py-8 rounded-b-3xl"
   >
     <TextField id="first-name" :required="true" label="first name" />
     <TextField id="middle-name" label="middle name" />

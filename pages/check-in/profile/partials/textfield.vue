@@ -1,7 +1,12 @@
 <template>
   <div class="block w-full group">
     <slot name="label">
-      <label class="capitalize" :for="id">{{ label }}</label>
+      <label
+        class="capitalize"
+        :class="{ 'is-required': required }"
+        :for="id"
+        >{{ label }}</label
+      >
     </slot>
 
     <slot name="input">
@@ -14,6 +19,12 @@
     </slot>
   </div>
 </template>
+
+<style scoped lang="postcss">
+.is-required {
+  @apply after:content-['*'] after:ml-0.5 after:text-secondary;
+}
+</style>
 
 <script setup>
 const props = defineProps({
