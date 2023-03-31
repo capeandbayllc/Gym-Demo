@@ -1,15 +1,14 @@
 <template>
   <div v-for="(leader, index) in trainerData" :key="leader.first_name">
-    <div class="border-container">
-      <div class="group side-bar-leaderboard-card w-[27.5%] relative float-left border-2 border-secondary rounded p-2 m-3.5 "  @mouseenter="addCircleColor" @mouseleave="addCircleColor" v-if="index < 3">
-        <div class="relative ">
-          <img :src="leader.profile_photo_path" class="relative" />
+    <div class="border-container ">
+      <div class="group side-bar-leaderboard-card w-[27.5%] relative float-left border-2 border-secondary rounded-2xl m-3.5 "  @mouseenter="addCircleColor" @mouseleave="addCircleColor" v-if="index < 3">
+        <div class="relative py-2">
+          <img :src="leader.profile_photo_path" class="profile-img" />
           <div class="dot bg-[#FFF] group-hover:bg-[#FFD800]" >{{leader.rank}}</div>
         </div>
         <div class="leaderboard-name relative">{{leader.first_name}} {{leader.last_name}} </div>
         <div class="points bg-[#5A5A5A5A] text-white group-hover:bg-[#FFD800] group-hover:text-black">{{leader.unitSold}} PTS</div>
-        <div class="bg-[#0074C8] relative"> </div>
-        <div class="bg-secondary text-[9px] border-[#0074C8] relative pr-2 pl-2 -bottom-2 ">
+        <div class="bg-secondary text-[9px] w-full rounded-b-xl">
           <tr class="flex">
             <td class="card-header">Classes</td>
             <td class="card-header">Attendance</td>
@@ -30,9 +29,11 @@
   @apply border-transparent hover:border-0;
 }
 .side-bar-leaderboard-card {
-  @apply flex flex-col items-center self-start relative hover:border-4;
-  img {
-    @apply w-16 h-16 rounded-full mr-3;
+  @apply flex flex-col items-center self-start relative hover:border-2 cursor-pointer bg-[#5A5A5A5A];
+  .profile-img{
+    @apply w-16 h-16 rounded-3xl mr-3 relative;
+    border : 5px solid #0077ac;
+	  box-shadow : 0px 3px 10px #0077ac; 
   }
   .card-header{
     @apply flex flex-col pt-2 pb-1 pr-2 pl-2 relative;
@@ -41,10 +42,10 @@
     @apply flex flex-col pr-5 pl-5 pb-2 relative;
   }
   .dot {
-    @apply flex flex-col justify-center items-center h-[2rem] w-[2rem] rounded-full bottom-0 right-2 text-black absolute ;
+    @apply flex flex-col justify-center items-center h-[1.75rem] w-[1.75rem] rounded-full bottom-0 right-2 text-[12px] text-black absolute font-bold;
   }
   .points {
-    @apply relative rounded-full m-3 pl-2 pr-2 pb-1 pt-1 text-xs;
+    @apply relative rounded-full m-3 pl-2 pr-2 pb-1 pt-1 text-xs font-bold;
   }
 
   .leaderboard-name {

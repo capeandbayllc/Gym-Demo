@@ -1,6 +1,6 @@
 <template>
   <div
-    class="overflow-y-auto overflow-hidden absolute h-[calc(100vh-65px)] top-[62px] right-0 z-10 bg-[#191919] border-2 border-secondary transition-all duration-300 ease-linear"
+    class="overflow-y-auto overflow-hidden absolute h-[calc(100vh-65px)] top-[62px] right-0 z-10 bg-black border-2 border-secondary transition-all duration-300 ease-linear rounded-l-2xl"
     :class="{
       'w-[700px] text-[0.9rem]': isLeaderBoardVisible === true,
       'w-[0px] text-[0rem]': isLeaderBoardVisible === false,
@@ -9,7 +9,7 @@
     <div class="p-4">
       <div class="float-left w-[215px] pt-3 pb-3 pl-10 text-2xl">Leaderboard for</div>
       <div class="float-left w-[150px] pt-3">
-        <select-box :items="items"></select-box>
+        <select-box :items="items" class="bg-[#5A5A5A5A] border-2 rounded-xl ml-3 border-blue-700 "></select-box>
       </div>
       <div>
         <div class="float-right close-btn" @click="closeSlider">
