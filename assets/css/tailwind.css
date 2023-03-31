@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  input.gr-base-textfield {
+    @apply rounded-xl p-2 transition-all duration-75 mt-2 w-full outline-none border-2 border-transparent;
+    @apply motion-reduce:transition-none;
+  }
+
+  input.gr-neutral-textfield {
+    @apply bg-base-content/20;
+    @apply focus-within:bg-base-content/30 focus-within:border-secondary;
+  }
+
+  input.gr-neutral-shroud {
+    @apply bg-transparent;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 0.5em;
   height: 0.5em;
@@ -119,88 +135,98 @@
   @apply mx-auto w-full max-w-[1120px];
 }
 
-.profile-setting-gradient-bg{
-    background: -webkit-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
-    background: -o-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
-    background: -ms-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
-    background: -moz-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
-    background: linear-gradient(to bottom, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
-    background-blend-mode: multiply;
+.profile-setting-gradient-bg {
+  background: -webkit-linear-gradient(
+    top,
+    rgb(0, 117, 201) 30%,
+    rgb(0, 0, 0) 100%
+  );
+  background: -o-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+  background: -ms-linear-gradient(top, rgb(0, 117, 201) 30%, rgb(0, 0, 0) 100%);
+  background: -moz-linear-gradient(
+    top,
+    rgb(0, 117, 201) 30%,
+    rgb(0, 0, 0) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgb(0, 117, 201) 30%,
+    rgb(0, 0, 0) 100%
+  );
+  background-blend-mode: multiply;
 }
 
-.toggle-custom{
+.toggle-custom {
   @apply ml-[-20px] flex text-gray-400 font-semibold;
   animation-name: toggle-animation;
   animation-duration: 0.2s;
-  animation-fill-mode: forwards; 
+  animation-fill-mode: forwards;
 }
 
-.toggle-custom *{
+.toggle-custom * {
   @apply cursor-pointer;
 }
 
-.toggle-custom button{
+.toggle-custom button {
   @apply flex;
 }
 
-.toggle-custom .line{
+.toggle-custom .line {
   @apply w-[42px] h-[8px] rounded-[12px] mx-1 my-auto bg-gray-200;
 }
 
 @keyframes toggle-circle-animation {
   from {
-      @apply bg-secondary left-[48px];
+    @apply bg-secondary left-[48px];
   }
   to {
-      @apply bg-gray-400 left-[22px];
+    @apply bg-gray-400 left-[22px];
   }
 }
 
-
-.toggle-custom .circle{
+.toggle-custom .circle {
   @apply relative left-[22px] w-[22px] h-[22px] rounded-full bg-gray-400;
   animation-name: toggle-circle-animation;
   animation-duration: 0.2s;
-  animation-fill-mode: forwards; 
+  animation-fill-mode: forwards;
 }
-
 
 @keyframes toggle-active-animation {
   from {
-      @apply text-gray-400;
+    @apply text-gray-400;
   }
   to {
-      @apply text-secondary;
+    @apply text-secondary;
   }
 }
 
-.toggle-active{
+.toggle-active {
   animation-name: toggle-active-animation;
   animation-duration: 0.2s;
-  animation-fill-mode: forwards;   
+  animation-fill-mode: forwards;
 }
 
 @keyframes toggle-active-circle-animation {
   from {
-      @apply bg-gray-400 left-[22px];
+    @apply bg-gray-400 left-[22px];
   }
   to {
-      @apply bg-secondary left-[48px];
+    @apply bg-secondary left-[48px];
   }
 }
 
-.toggle-active .circle{
+.toggle-active .circle {
   animation-name: toggle-active-circle-animation;
   animation-duration: 0.2s;
   animation-fill-mode: forwards;
 }
 
 .border-12 {
-    border-width: 12px;
+  border-width: 12px;
 }
 :root {
-    --fc-border-color: hsl(var(--bc) / 0.5);
-    --fc-today-bg-color: hsl(var(--b3) / 0.4);
-    --fc-button-bg-color: hsl(var(--p));
-    --fc-button-active-bg-color: hsl(var(--s));
+  --fc-border-color: hsl(var(--bc) / 0.5);
+  --fc-today-bg-color: hsl(var(--b3) / 0.4);
+  --fc-button-bg-color: hsl(var(--p));
+  --fc-button-active-bg-color: hsl(var(--s));
 }

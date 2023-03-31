@@ -12,7 +12,7 @@
     <slot name="input">
       <input
         :id="id"
-        class="bg-base-content/20 border-2 border-transparent rounded-xl p-2 w-full group-hover:bg-secondary transition-all duration-75 mt-2 focus-within:bg-base-content/30 outline-none focus-within:border-secondary"
+        class="group-hover:bg-secondary gr-base-textfield gr-neutral-textfield"
         :type="inputType"
         :required="required"
       />

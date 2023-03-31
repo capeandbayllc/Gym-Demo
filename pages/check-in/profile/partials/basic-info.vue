@@ -7,7 +7,16 @@
     <TextField id="last-name" label="last name" />
     <TextField id="dob" label="date of birth" />
     <TextField id="gender" label="gender" />
-    <TextField id="username" label="username" />
+    <div class="group">
+      <label class="capitalize">Username</label>
+
+      <input
+        id="username"
+        type="text"
+        class="gr-base-textfield gr-neutral-shroud group-hover:bg-secondary focus-within:border-secondary"
+        placeholder="test@gmail.com"
+      />
+    </div>
     <TextField id="email" label="email" />
     <TextField id="email-personal" label="personal email" />
     <TextField id="mobile" label="Mobile" />
