@@ -6,8 +6,6 @@
                 @click="openAddMemberPopUp"
             />
             <p class="text-xs mt-1">Add a Lead</p>
-
-            <button @click="saveLead()">Save lead</button>
         </div>
         <div class="page-leads-center-container">
             <div class="page-content custom-page-content-header">
@@ -268,7 +266,6 @@ const filters = ref({status: ''})
 const opportunity = ["error", "warning", "accent"];
 const getLeadsQuery = ()=>{
     request(lead.query.browse, { filter: filters.value }).then(({ data }) => {
-        console.log(data)
         leads.value = data.data.leads.data;
     });
 }

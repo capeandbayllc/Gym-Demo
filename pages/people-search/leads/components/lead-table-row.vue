@@ -46,8 +46,6 @@
 
       <Options :user="data" :show="contactOption" @on:close="contactOption = null" />
 
-      {{ data }}
-
       <daisy-modal ref="noteCardModalRef" :closable="false">
         <NoteCardModal @close="closeNoteCardModal"/>
       </daisy-modal>
