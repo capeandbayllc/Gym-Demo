@@ -1,8 +1,8 @@
 <template>
   <div
-    class="overflow-y-auto overflow-hidden absolute h-[calc(100vh-65px)] top-[62px] right-0 z-10 bg-black border-2 border-secondary transition-all duration-300 ease-linear rounded-l-2xl"
+    class=" overflow-y-auto overflow-hidden absolute h-[calc(100vh-65px)] top-[62px] right-0 z-10 bg-black border-2 border-secondary transition-all duration-300 ease-linear rounded-l-2xl"
     :class="{
-      'w-[700px] text-[0.9rem]': isLeaderBoardVisible === true,
+      'w-[600px] text-[0.7rem]': isLeaderBoardVisible === true,
       'w-[0px] text-[0rem]': isLeaderBoardVisible === false,
     }"
   >
@@ -49,7 +49,7 @@
 <style>
 
 .close-btn {
-  @apply absolute top-4 right-4 cursor-pointer hover:text-blue-600 pr-4;
+  @apply absolute top-4 right-4 cursor-pointer hover:text-blue-600 border-2 rounded-full p-2;
 }
 </style>
 <script setup lang="ts">
