@@ -127,23 +127,4 @@ const initBasicForm = () => {
 };
 
 form = ref(initBasicForm());
-
-let relationships = [
-  {
-    id: 1,
-    name: "Relationship 1",
-  },
-  {
-    id: 2,
-    name: "Relationship 2",
-  },
-  {
-    id: 3,
-    name: "Relationship 3",
-  },
-  {
-    id: 4,
-    name: "Relationship 4",
-  },
-];
 </script>
