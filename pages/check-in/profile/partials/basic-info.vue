@@ -3,15 +3,26 @@
     <div class="grid grid-cols-3 gap-8">
       <TextField
         v-model="localValue['first_name']"
-        :modelValue="localValue['first_name']"
         id="first-name"
         :required="true"
         label="first name"
       />
-      <TextField id="middle-name" label="middle name" />
-      <TextField id="last-name" label="last name" />
-      <TextField id="dob" label="date of birth" />
-      <TextField id="gender" label="gender" />
+      <TextField
+        v-model="localValue['middle_name']"
+        id="middle-name"
+        label="middle name"
+      />
+      <TextField
+        v-model="localValue['last_name']"
+        id="last-name"
+        label="last name"
+      />
+      <TextField
+        v-model="localValue['date_of_birth']"
+        id="dob"
+        label="date of birth"
+      />
+      <TextField v-model="localValue['gender']" id="gender" label="gender" />
       <div class="group">
         <label for="username" class="capitalize">Username</label>
 
@@ -22,87 +33,20 @@
           placeholder="test@gmail.com"
         />
       </div>
-      <TextField id="email" label="email" />
+      <TextField v-model="localValue['email']" id="email" label="email" />
       <TextField id="email-personal" label="personal email" />
-      <TextField id="mobile" label="Mobile" />
+      <TextField v-model="localValue['phone']" id="mobile" label="Mobile" />
     </div>
 
     <AddConnections />
 
     <hr class="my-12 border-secondary" />
 
-    <AddressInfo />
+    <AddressInfo v-model="localValue['address']" />
 
     <hr class="my-12 border-secondary" />
 
     <SocialHandles />
-
-    <!-- <div
-      class="border-2 border-secondary rounded-2xl p-4 pl-24 max-w-3xl mx-auto block w-full mt-16"
-    >
-      <div class="flex justify-between items-end">
-        <h6 class="text-xl font-semibold">Add Connection</h6>
-        <div class="bg-secondary p-2 rounded-2xl ml-auto w-fit">
-          <MembersIcon />
-        </div>
-      </div>
-    </div> -->
-
-    <!-- <div>
-      <div class="grid grid-cols-12 gap-4 py-2 mt-4">
-        <div
-          class="col-start-3 col-span-8 border-2 border-secondary rounded-2xl"
-        >
-          <div
-            class="mt-4 mr-5 float-right w-12 p-2.5 pl-2 rounded-2xl bg-blue-500"
-          >
-            <MembersIcon />
-          </div>
-
-          <div class="grid grid-cols-12 p-2 -my-3 mt-3 mb-3">
-            <div class="col-start-2 col-span-10">
-              <h6 class="pt-5 font-medium text-lg pl-2">Add Connection</h6>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-12 p-2 mb-5 -mt-3">
-            <div class="col-start-2 col-span-10">
-              <div
-                class="grid grid-cols-2 lg:grid-cols-2 md:grid-cols-1 gap-2 lg:mb-0 md:mb-5"
-              >
-                <div class="mb-5">
-                  <div class="mb-2">Lead Member to Connect</div>
-
-                  <input
-                    class="neutral-input rounded-xl"
-                    v-model="form['lead-member']"
-                    placeholder="Search by last name or email"
-                  />
-                </div>
-
-                <div class="mb-5">
-                  <div class="mb-2">Relationship:</div>
-                  <select
-                    id="relationship"
-                    class="neutral-input rounded-xl"
-                    v-model="form['relationship']"
-                  >
-                    <option selected value="0" key="0">Relationship</option>
-                    <option
-                      v-for="item in relationships"
-                      :key="item.id"
-                      value="item.id"
-                    >
-                      {{ item.name }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </section>
 </template>
 
@@ -112,7 +56,7 @@ import AddConnections from "./add-connections.vue";
 import AddressInfo from "./address-letter-fmt.vue";
 import SocialHandles from "./social-handles.vue";
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "update:model-value"]);
 
 const props = defineProps({
   modelValue: {
@@ -122,7 +66,7 @@ const props = defineProps({
       username: "kevinbuchanan@email.com",
       relationship: 0,
       address: {
-        address: "302 Liberty St.",
+        address1: "302 Liberty St.",
         city: "Boston",
         state: "MA",
         zipcode: "02108",

@@ -116,7 +116,10 @@ request((isLeadView ? lead : member).query.get, { id: profileId }).then(
     const homeLocation = user.homeLocation;
     delete user.homeLocation;
 
-    memberInfo.value = { ...user, ...{ id: user.user_id } };
+    memberInfo.value = {
+      ...user,
+      ...{ id: user.user_id, address: { ...homeLocation } },
+    };
     demographicsObj.value = { ...homeLocation, ...user };
   }
 );
@@ -124,81 +127,6 @@ request((isLeadView ? lead : member).query.get, { id: profileId }).then(
 const isActiveMember = ref(false);
 const isProcessing = ref(false);
 const memberInfo = ref({});
-
-const memberInformation = [
-  {
-    key: "first_name",
-    label: "First Name",
-    class: "neutral-input",
-  },
-  {
-    key: "middle_name",
-    label: "Middle Name",
-    class: "neutral-input",
-  },
-  {
-    key: "last_name",
-    label: "Last Name",
-    class: "neutral-input",
-  },
-  {
-    key: "date_of_birth",
-    label: "Date of Birth",
-    class: "neutral-input",
-    type: "date",
-  },
-  {
-    key: "gender",
-    label: "Gender",
-    class: "neutral-input",
-    options: ["male", "female", "other"],
-  },
-  {
-    key: "occupation",
-    label: "Occupation",
-    class: "neutral-input",
-  },
-  {
-    key: "employer",
-    label: "Employer",
-    class: "neutral-input",
-  },
-  {
-    key: "barcode",
-    label: "Barcode",
-    class: "neutral-input",
-  },
-  /*{
-    key: "previous-agreement-number",
-    label: "Previous Agreement Number",
-    class: "neutral-input",
-  },
-  {
-    key: "wellness-program-id",
-    label: "Wellness Program ID",
-    class: "neutral-input",
-  },
-  {
-    key: "membership-type",
-    label: "Membership Type",
-    class: "neutral-input",
-  },
-  {
-    key: "group",
-    label: "Group",
-    class: "neutral-input",
-  },
-  {
-    key: "member-misc-1",
-    label: "Member Misc. 1",
-    class: "neutral-input",
-  },
-  {
-    key: "member-misc-2",
-    label: "Member Misc. 2",
-    class: "neutral-input",
-  },*/
-];
 
 const demographicsObj = ref({});
 const demographics = ref([
@@ -287,11 +215,12 @@ function updateUser() {
       gender: memberInfo.value.gender,
       alternate_phone: demographicsObj.value.alternate_phone,
       // location
-      address1: demographicsObj.value.address1,
-      address2: demographicsObj.value.address2,
-      city: demographicsObj.value.city,
-      state: demographicsObj.value.state,
-      phone: demographicsObj.value.phone,
+      address1: memberInfo.value.address.address1,
+      address2: memberInfo.value.address.address2,
+      city: memberInfo.value.address.city,
+      state: memberInfo.value.address.state,
+      phone: memberInfo.value.phone,
+      zip: memberInfo.value.address.zip,
     },
   })
     .then(() => emit("on-profile-update"))
