@@ -21,7 +21,19 @@
       <TextField id="mobile" label="Mobile" />
     </div>
 
-    <div class="mt-24">
+    <AddConnections />
+    <!-- <div
+      class="border-2 border-secondary rounded-2xl p-4 pl-24 max-w-3xl mx-auto block w-full mt-16"
+    >
+      <div class="flex justify-between items-end">
+        <h6 class="text-xl font-semibold">Add Connection</h6>
+        <div class="bg-secondary p-2 rounded-2xl ml-auto w-fit">
+          <MembersIcon />
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div>
       <div class="grid grid-cols-12 gap-4 py-2 mt-4">
         <div
           class="col-start-3 col-span-8 border-2 border-secondary rounded-2xl"
@@ -47,7 +59,7 @@
                   <div class="mb-2">Lead Member to Connect</div>
 
                   <input
-                    class="gr-base-textfield gr-neutral-textfield"
+                    class="neutral-input rounded-xl"
                     v-model="form['lead-member']"
                     placeholder="Search by last name or email"
                   />
@@ -57,7 +69,7 @@
                   <div class="mb-2">Relationship:</div>
                   <select
                     id="relationship"
-                    class="gr-base-textfield gr-neutral-selection"
+                    class="neutral-input rounded-xl"
                     v-model="form['relationship']"
                   >
                     <option selected value="0" key="0">Relationship</option>
@@ -75,13 +87,13 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
 </template>
 
 <script setup>
 import TextField from "./textfield.vue";
-import { MembersIcon, LockIcon, BlueClockIcon } from "@/components/icons";
+import AddConnections from "./add-connections.vue";
 
 let form = {};
 const initBasicForm = () => {

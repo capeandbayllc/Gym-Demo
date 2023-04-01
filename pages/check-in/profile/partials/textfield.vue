@@ -15,6 +15,7 @@
         class="group-hover:bg-secondary gr-base-textfield gr-neutral-textfield"
         :type="inputType"
         :required="required"
+        :placeholder="placeholder"
       />
     </slot>
   </div>
@@ -43,6 +44,10 @@ const props = defineProps({
   inputType: {
     type: String,
     default: "text",
+  },
+  placeholder: {
+    type: [String, null],
+    default: null,
   },
 });
 </script>

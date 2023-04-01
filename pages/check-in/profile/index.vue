@@ -90,27 +90,6 @@
   </div>
 </template>
 <script setup>
-/**
- *    [first name]      [middle name]     [last name]
- *    [date of birth]   [gender]          [username]
- *    [email]           [personal email]  [mobile]
- *
- *      [          add a connection         ]
- *          [lead/member to conn] [rela]
- *
- * ----------------------------------------------------
- *
- *    [address*************************************]
- *    [city]            [state]             [zip]
- *
- * ----------------------------------------------------
- *
- *        [    social media handles     ]
- *              [ig]    [tw]
- *              [tk]    [yt]
- *              [sc]    [fb]
- *
- */
 import member from "~/api/queries/member";
 import { request } from "~/api/utils/request";
 import user from "~/api/mutations/user";
@@ -314,29 +293,3 @@ function updateUser() {
     .finally(() => (isProcessing.value = false));
 }
 </script>
-<style scoped>
-.profile-wrap {
-  @apply w-full max-w-[1120px] mx-auto bg-secondary/30 mb-4;
-  .profile-section {
-    @apply grid grid-cols-3 gap-6 py-4 px-10 -lg:grid-cols-2 bg-base-300 m-4 rounded-md;
-    h2 {
-      @apply text-center leading-10 text-lg;
-    }
-  }
-}
-.secondary-input {
-  @apply bg-secondary rounded-xl py-2;
-}
-.neutral-input {
-  @apply bg-base-content/20 py-2;
-}
-.readonly-input {
-  @apply bg-transparent text-base-content/50;
-}
-.outline-input {
-  @apply bg-transparent border border-secondary;
-}
-.divider {
-  @apply border-b h-0 border-secondary col-span-3 3xl:col-span-4 -lg:col-span-2 -md:col-auto;
-}
-</style>
