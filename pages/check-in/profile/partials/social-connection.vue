@@ -2,7 +2,7 @@
   <div class="bg-neutral/50 flex items-center max-h-11 group">
     <label
       :for="id"
-      class="bg-secondary fill-white flex justify-center w-12 p-1 rounded-l-xl h-full"
+      class="bg-secondary fill-white flex justify-center w-12 p-2 rounded-l-xl h-full"
     >
       <component :is="currentPlatform.icon" />
     </label>

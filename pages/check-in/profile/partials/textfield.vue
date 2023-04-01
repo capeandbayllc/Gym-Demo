@@ -16,6 +16,7 @@
         :type="inputType"
         :required="required"
         :placeholder="placeholder"
+        v-model="localValue"
       />
     </slot>
   </div>
@@ -28,6 +29,8 @@
 </style>
 
 <script setup>
+const emit = defineEmits(["update:modelValue"]);
+
 const props = defineProps({
   label: {
     type: String,
@@ -49,5 +52,13 @@ const props = defineProps({
     type: [String, null],
     default: null,
   },
+  modelValue: {
+    type: [String, Number, null, undefined],
+    default: "",
+  },
 });
+
+const localValue = ref(props.modelValue);
+
+watch(localValue, () => emit("update:modelValue", localValue.value));
 </script>

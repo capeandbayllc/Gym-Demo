@@ -1,7 +1,12 @@
 <template>
   <section class="max-w-7xl px-8 bg-black py-8 rounded-b-3xl">
     <div class="grid grid-cols-3 gap-8">
-      <TextField id="first-name" :required="true" label="first name" />
+      <TextField
+        v-model="form['first_name']"
+        id="first-name"
+        :required="true"
+        label="first name"
+      />
       <TextField id="middle-name" label="middle name" />
       <TextField id="last-name" label="last name" />
       <TextField id="dob" label="date of birth" />
@@ -106,36 +111,68 @@ import AddConnections from "./add-connections.vue";
 import AddressInfo from "./address-letter-fmt.vue";
 import SocialHandles from "./social-handles.vue";
 
-let form = {};
-const initBasicForm = () => {
-  form.value = {
-    ...form.value,
-    username: "kevinbuchanan@email.com",
-    relationship: 0,
-    address: {
-      address: "",
-      city: "",
-      state: "",
-      zipcode: "",
-    },
-    social: {
-      instagram: "",
-      twitter: "",
-      tiktok: "",
-      youtube: "",
-      snapchat: "",
-      facebook: "",
-    },
-    homeLocations: [],
-    roles: [],
-    departments: [],
-    teams: [],
-    calendarDepartments: [],
-    notes: "",
-  };
-  console.log("form.value: ", form.value);
-  return form.value;
-};
+const emit = defineEmits("update:modelValue");
 
-form = ref(initBasicForm());
+const props = defineProps({
+  modelValue: {
+    type: Object,
+    default: {
+      first_name: "Kevin",
+      username: "kevinbuchanan@email.com",
+      relationship: 0,
+      address: {
+        address: "302 Liberty St.",
+        city: "Boston",
+        state: "MA",
+        zipcode: "02108",
+      },
+      social: {
+        instagram: "kbcanon",
+        twitter: "@kbcanon",
+        tiktok: "bkcanon",
+        youtube: "kevbuch",
+        snapchat: "kevin",
+        facebook: "kevvy",
+      },
+      notes: [],
+    },
+  },
+});
+
+const form = ref(props.modelValue);
+
+watch(form.value, (nv) => emit("update:modelValue", nv));
+
+// let form = {};
+// const initBasicForm = () => {
+//   form.value = {
+//     ...form.value,
+//     username: "kevinbuchanan@email.com",
+//     relationship: 0,
+//     address: {
+//       address: "",
+//       city: "",
+//       state: "",
+//       zipcode: "",
+//     },
+//     social: {
+//       instagram: "",
+//       twitter: "",
+//       tiktok: "",
+//       youtube: "",
+//       snapchat: "",
+//       facebook: "",
+//     },
+//     homeLocations: [],
+//     roles: [],
+//     departments: [],
+//     teams: [],
+//     calendarDepartments: [],
+//     notes: "",
+//   };
+//   console.log("form.value: ", form.value);
+//   return form.value;
+// };
+
+// form = ref(initBasicForm());
 </script>
