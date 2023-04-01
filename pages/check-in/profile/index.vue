@@ -6,7 +6,12 @@
       title="Profile"
       @close="$emit('close')"
     >
-      <BasicInfo />
+      <template v-if="Object.keys(memberInfo).length > 0">
+        <BasicInfo
+          :modelValue="memberInfo"
+          @update:modelValue="(nv) => (memberInfo = nv)"
+        />
+      </template>
       <!-- <div class="profile-section mb-6">
         <div></div>
         <h2 class="">Member Information</h2>

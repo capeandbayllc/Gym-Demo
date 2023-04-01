@@ -2,7 +2,8 @@
   <section class="max-w-7xl px-8 bg-black py-8 rounded-b-3xl">
     <div class="grid grid-cols-3 gap-8">
       <TextField
-        v-model="form['first_name']"
+        v-model="localValue['first_name']"
+        :modelValue="localValue['first_name']"
         id="first-name"
         :required="true"
         label="first name"
@@ -111,7 +112,7 @@ import AddConnections from "./add-connections.vue";
 import AddressInfo from "./address-letter-fmt.vue";
 import SocialHandles from "./social-handles.vue";
 
-const emit = defineEmits("update:modelValue");
+const emit = defineEmits(["update:modelValue"]);
 
 const props = defineProps({
   modelValue: {
@@ -139,9 +140,9 @@ const props = defineProps({
   },
 });
 
-const form = ref(props.modelValue);
+const localValue = ref(props.modelValue);
 
-watch(form.value, (nv) => emit("update:modelValue", nv));
+watch(localValue, () => emit("update:modelValue", localValue.value));
 
 // let form = {};
 // const initBasicForm = () => {
