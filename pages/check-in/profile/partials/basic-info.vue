@@ -22,6 +22,13 @@
     </div>
 
     <AddConnections />
+
+    <hr class="my-12 border-secondary" />
+
+    <AddressInfo />
+
+    <hr class="my-12 border-secondary" />
+
     <!-- <div
       class="border-2 border-secondary rounded-2xl p-4 pl-24 max-w-3xl mx-auto block w-full mt-16"
     >
@@ -94,6 +101,7 @@
 <script setup>
 import TextField from "./textfield.vue";
 import AddConnections from "./add-connections.vue";
+import AddressInfo from "./address-letter-fmt.vue";
 
 let form = {};
 const initBasicForm = () => {

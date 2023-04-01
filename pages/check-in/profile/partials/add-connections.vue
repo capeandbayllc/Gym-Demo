@@ -15,13 +15,13 @@
         placeholder="Search by last name or email"
       />
       <div class="w-full">
-        <label class="gr-base-label"> Relationship </label>
+        <label for="relationship" class="gr-base-label"> Relationship </label>
         <select
           id="relationship"
           class="gr-base-textfield gr-neutral-selection"
         >
           <option selected value="0" key="0">Relationship</option>
-          <option v-for="item in relationships" :key="item.id" value="item.id">
+          <option v-for="item in relationships" :key="item.id" :value="item.id">
             {{ item.name }}
           </option>
         </select>

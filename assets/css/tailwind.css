@@ -21,7 +21,7 @@
     @apply bg-base-content/20 text-white/50;
 
     > option {
-      @apply bg-base-content/20;
+      @apply bg-neutral;
     }
   }
 
