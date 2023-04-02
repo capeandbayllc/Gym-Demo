@@ -110,7 +110,7 @@
     </div>
 
     <div
-      class="max-w-xs bg-black p-4 rounded-2xl mx-auto mt-8 border border-secondary"
+      class="max-w-xs bg-black p-8 rounded-2xl mx-auto mt-8 border border-secondary"
     >
       <p class="text-sm">
         Once your account is deleted, all of its resources and data will be
