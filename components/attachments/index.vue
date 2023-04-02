@@ -16,6 +16,8 @@
             :id="item.id"
             :title="item.title"
             :img="item.img"
+            @save="(v) => $emit('save', v)"
+            @edit="(v) => $emit('edit', v)"
           />
         </ul>
         <button @click="scroll('right')" class="scroll-btn right-2">
@@ -42,6 +44,8 @@ button.scroll-btn {
 import GradedBorderCard from "~~/components/graded-border-card.vue";
 import AttachmentItem from "./attachment-item.vue";
 import { LockIcon, RightArrowCircleIcon } from "~~/components/icons";
+
+const emit = defineEmits(["save", "edit"]);
 
 const props = defineProps({
   items: {

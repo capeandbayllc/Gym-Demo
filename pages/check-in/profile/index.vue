@@ -131,7 +131,7 @@
     </GradedBorderCard>
 
     <h6 class="mt-24 mb-8 text-xl font-semibold">Attachments</h6>
-    <Attachments />
+    <Attachments @edit="handleEditAttachment" @save="handleSaveAttachment" />
   </div>
 </template>
 <script setup>
@@ -165,6 +165,14 @@ request((isLeadView ? lead : member).query.get, { id: profileId }).then(
     demographicsObj.value = { ...homeLocation, ...user };
   }
 );
+
+const handleEditAttachment = (v) => {
+  console.log("edit attachment with id", v);
+};
+
+const handleSaveAttachment = (v) => {
+  console.log("save attachment with id", v);
+};
 
 const isActiveMember = ref(false);
 const isProcessing = ref(false);
