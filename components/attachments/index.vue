@@ -75,7 +75,7 @@ const container = ref();
 
 const scroll = (dir = "left") => {
   let delta = container.value.clientWidth - 32;
-  let amt = dir === "left" ? -Math.abs(delta) : Math.abs(delta);
+  let amt = dir === "left" ? ~delta : delta;
   container.value.scrollBy({ behavior: "smooth", top: 0, left: amt });
 };
 </script>
