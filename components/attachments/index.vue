@@ -6,8 +6,9 @@
           <RightArrowCircleIcon />
         </button>
         <ul
+          id="attachment-container"
           ref="container"
-          class="grid grid-rows-1 grid-flow-col gap-8 max-w-4xl overflow-x-scroll"
+          class="grid grid-rows-1 grid-flow-col gap-8 max-w-4xl overflow-x-scroll px-8"
         >
           <AttachmentItem
             v-for="item in items"
@@ -29,6 +30,10 @@
 button.scroll-btn {
   @apply absolute top-1/2 -translate-y-1/2 opacity-75 transition-all duration-300;
   @apply hover:opacity-100;
+}
+
+::-webkit-scrollbar {
+  @apply hidden;
 }
 </style>
 
@@ -65,7 +70,7 @@ const props = defineProps({
 const container = ref();
 
 const scroll = (dir = "left") => {
-  let delta = container.value.clientWidth;
+  let delta = container.value.clientWidth - 32;
   let amt = dir === "left" ? -Math.abs(delta) : Math.abs(delta);
   container.value.scrollBy({ behavior: "smooth", top: 0, left: amt });
 };
