@@ -129,14 +129,9 @@
         </div>
       </template>
     </GradedBorderCard>
-    <!-- <div class="relative">
-      <Attachments />
-    </div> -->
-    <GradedBorderCard title="Attachments">
-      <template #content>
-        <p>hello</p>
-      </template>
-    </GradedBorderCard>
+
+    <h6 class="mt-24 mb-8 text-xl font-semibold">Attachments</h6>
+    <Attachments />
   </div>
 </template>
 <script setup>
@@ -148,8 +143,8 @@ import Datepicker from "@vuepic/vue-datepicker";
 import MultiSelect from "~/components/multi-select/index.vue";
 import lead from "~/api/queries/lead";
 import BasicInfo from "./partials/basic-info.vue";
-import Attachments from "~/pages/profile-setting/components/attachment.vue";
 import GradedBorderCard from "~~/components/graded-border-card.vue";
+import Attachments from "~/components/attachments";
 
 const emit = defineEmits(["on-profile-update"]);
 const route = useRoute();
