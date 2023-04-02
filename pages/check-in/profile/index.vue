@@ -103,6 +103,27 @@
         </button>
       </div>
     </simple-card>
+
+    <div class="w-fit mx-auto mt-24">
+      <h6 class="text-xl font-semibold">Delete Account</h6>
+      <span>Permanently delete your account.</span>
+    </div>
+
+    <div
+      class="max-w-xs bg-black p-4 rounded-2xl mx-auto mt-8 border border-secondary"
+    >
+      <p class="text-sm">
+        Once your account is deleted, all of its resources and data will be
+        permanently deleted.
+      </p>
+      <p class="mt-4 text-sm">
+        Before deleting your account, please download any data or informataion
+        that you wish to retain
+      </p>
+      <button class="mt-16 bg-secondary px-4 py-1 rounded mx-auto w-fit block">
+        Delete Account
+      </button>
+    </div>
   </div>
 </template>
 <script setup>
