@@ -124,6 +124,10 @@
         Delete Account
       </button>
     </div>
+
+    <div class="relative">
+      <Attachments />
+    </div>
   </div>
 </template>
 <script setup>
@@ -135,6 +139,7 @@ import Datepicker from "@vuepic/vue-datepicker";
 import MultiSelect from "~/components/multi-select/index.vue";
 import lead from "~/api/queries/lead";
 import BasicInfo from "./partials/basic-info.vue";
+import Attachments from "~/pages/profile-setting/components/attachment.vue";
 
 const emit = defineEmits(["on-profile-update"]);
 const route = useRoute();
