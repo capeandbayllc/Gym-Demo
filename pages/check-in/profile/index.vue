@@ -103,31 +103,40 @@
         </button>
       </div>
     </simple-card>
+    <GradedBorderCard>
+      <template #title>
+        <div class="w-fit mx-auto mt-24 mb-12">
+          <h6 class="text-xl font-semibold">Delete Account</h6>
+          <span>Permanently delete your account.</span>
+        </div>
+      </template>
 
-    <div class="w-fit mx-auto mt-24">
-      <h6 class="text-xl font-semibold">Delete Account</h6>
-      <span>Permanently delete your account.</span>
-    </div>
-
-    <div
-      class="max-w-xs bg-black p-8 rounded-2xl mx-auto mt-8 border border-secondary"
-    >
-      <p class="text-sm">
-        Once your account is deleted, all of its resources and data will be
-        permanently deleted.
-      </p>
-      <p class="mt-4 text-sm">
-        Before deleting your account, please download any data or informataion
-        that you wish to retain
-      </p>
-      <button class="mt-16 bg-secondary px-4 py-1 rounded mx-auto w-fit block">
-        Delete Account
-      </button>
-    </div>
-
-    <div class="relative">
+      <template #content>
+        <div class="max-w-xs bg-black p-8">
+          <p class="text-sm">
+            Once your account is deleted, all of its resources and data will be
+            permanently deleted.
+          </p>
+          <p class="mt-4 text-sm">
+            Before deleting your account, please download any data or
+            informataion that you wish to retain
+          </p>
+          <button
+            class="mt-16 bg-secondary px-4 py-1 rounded mx-auto w-fit block"
+          >
+            Delete Account
+          </button>
+        </div>
+      </template>
+    </GradedBorderCard>
+    <!-- <div class="relative">
       <Attachments />
-    </div>
+    </div> -->
+    <GradedBorderCard title="Attachments">
+      <template #content>
+        <p>hello</p>
+      </template>
+    </GradedBorderCard>
   </div>
 </template>
 <script setup>
@@ -140,6 +149,7 @@ import MultiSelect from "~/components/multi-select/index.vue";
 import lead from "~/api/queries/lead";
 import BasicInfo from "./partials/basic-info.vue";
 import Attachments from "~/pages/profile-setting/components/attachment.vue";
+import GradedBorderCard from "~~/components/graded-border-card.vue";
 
 const emit = defineEmits(["on-profile-update"]);
 const route = useRoute();
