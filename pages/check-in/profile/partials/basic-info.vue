@@ -47,6 +47,15 @@
     <hr class="my-12 border-secondary" />
 
     <SocialHandles />
+
+    <hr class="my-12 border-secondary" />
+
+    <label for="notes">Notes</label>
+    <textarea
+      id="notes"
+      class="gr-base-textfield gr-neutral-textfield"
+      rows="8"
+    />
   </section>
 </template>
 

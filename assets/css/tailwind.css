@@ -12,7 +12,7 @@
     @apply capitalize;
   }
 
-  input.gr-neutral-textfield {
+  .gr-neutral-textfield {
     @apply bg-base-content/20;
     @apply focus-within:bg-base-content/30 focus-within:border-secondary;
   }

@@ -91,6 +91,17 @@
           Update Profile
         </Button>
       </div> -->
+      <div class="flex justify-center items-center gap-6 my-6">
+        <button @click="$emit('close')" class="text-white/50 hover:text-white">
+          cancel
+        </button>
+        <button
+          @click.stop="updateUser"
+          class="bg-secondary px-4 py-1 rounded-lg"
+        >
+          Save
+        </button>
+      </div>
     </simple-card>
   </div>
 </template>
