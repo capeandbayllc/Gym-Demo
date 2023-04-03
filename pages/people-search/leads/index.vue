@@ -157,8 +157,6 @@ const newMemberData = ref({
     city: "Port Wendy",
     state: "MT",
     phone: "9846188996",
-    created_at: "2023-03-19T20:42:50.000000Z",
-    updated_at: "2023-03-19T20:42:50.000000Z",
     // user_id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
     // last_name: "Schmeler",
     // status_id: "New",
@@ -206,10 +204,6 @@ onMounted(() => {
 })
 
 const saveLead = () => {
-    let currentDate = new Date();
-    let formattedDate = currentDate.toLocaleDateString('en-US') + ', ' + currentDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
-    newMemberData.value.created_at = formattedDate;
-    newMemberData.value.updated_at = formattedDate;
     addMemberScreenIndex.value = 0;
     const { mutate: createMember } = useMutation(userMutation.mutation.createUser);
     createMember({
@@ -233,8 +227,6 @@ const saveLead = () => {
             phone: newMemberData.value.phone,
             state: newMemberData.value.state,
             phone: newMemberData.value.phone,
-            created_at: newMemberData.value.created_at,
-            updated_at: newMemberData.value.updated_at
         },
     })
     .then(() => {
