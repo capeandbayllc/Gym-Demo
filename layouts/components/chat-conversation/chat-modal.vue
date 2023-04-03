@@ -504,7 +504,7 @@ const chatItems = ref([
 
 const locationData = ref(null);
 request(location.query.browse, { first: 1 }).then(({data}) => {
-  locationDsata.value = data.data.locations.data[0];
+  locationData.value = data.data.locations.data[0];
   chatItem.value[2].name = locationData.value.name;
 });
 
