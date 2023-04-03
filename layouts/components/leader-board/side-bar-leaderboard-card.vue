@@ -10,14 +10,14 @@
         <div class="points bg-[#5A5A5A5A] text-white group-hover:bg-[#FFD800] group-hover:text-black">{{leader.unitSold}} PTS</div>
         <div class="bg-secondary text-[8px] w-full rounded-b-xl">
           <tr class="flex w-full">
-            <td class="card-header w-1/3">Classes</td>
-            <td class="card-header w-1/3">Attendance</td>
-            <td class="card-header w-1/3">Overall</td>
+            <td class="card-header m-auto">Classes</td>
+            <td class="card-header m-auto">Attendance</td>
+            <td class="card-header m-auto">Overall</td>
           </tr>
           <tr class="flex">
-            <td class="card-value w-1/3">{{leader.classes}}</td>
-            <td class="card-value w-1/3">{{leader.attendance}}</td>
-            <td class="card-value w-1/3">{{leader.overall}}</td>
+            <td class="card-value m-auto">{{leader.classes}}</td>
+            <td class="card-value m-auto">{{leader.attendance}}</td>
+            <td class="card-value m-auto">{{leader.overall}}</td>
           </tr>
         </div>
       </div>
