@@ -503,9 +503,9 @@ const chatItems = ref([
 ]);
 
 const locationData = ref(null);
-request(location.query.get, { id: 'afea5d32-ec62-480d-af29-d67fc8c9c7a3' }).then(({data}) => {
-    locationData.value = data.data.location;
-    chatItems.value[2].name = locationData.value.name;
+request(location.query.browse, { first: 1 }).then(({data}) => {
+  locationDsata.value = data.data.locations.data[0];
+  chatItem.value[2].name = locationData.value.name;
 });
 
 const user = useState("auth");
