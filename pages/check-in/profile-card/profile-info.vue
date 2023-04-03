@@ -1,8 +1,6 @@
 <template>
     <div v-if="ProfileInfo" class="profile-info-container">
-        <div
-            class="profile-avatar ring-[4px] hover:ring-[0.75rem] transition-all ring-yellow-400 duration-200 ease-in-out border-none overflow-visible"
-        >
+        <div class="profile-avatar">
             <div class="alert-badge" v-if="user.notifications.length > 0">
                 {{ user.notifications.length }}
             </div>
@@ -21,41 +19,25 @@
             <!--            <OfferUpBtn />-->
         </div>
         <div class="grid w-full">
-            <div
-                class="flex group/container justify-between items-center p-3 relative border-2 border-secondary rounded-3xl mb-4 z-[1] mx-10"
-            >
-                <button
-                    class="bg-amber-500 drawer-btn group"
-                    @click="$emit('toggle-detail', true)"
-                >
+            <div class="flex group/container justify-between items-center p-3 relative border-2 border-secondary rounded-3xl mb-4 z-[1] mx-10">
+                <button class="bg-amber-500 drawer-btn group" @click="$emit('toggle-detail', true)">
                     P
-                    <span
-                        class="edit-icon persona-style-transitioner group-hover:opacity-100"
-                        ><edit-icon
-                            class="mb-2 group-hover:opacity-100 persona-style-transitioner"
-                    /></span>
+                    <span class="edit-icon persona-style-transitioner group-hover:opacity-100">
+                      <edit-icon class="mb-2 group-hover:opacity-100 persona-style-transitioner"/>
+                    </span>
                 </button>
-                <button
-                    class="bg-lime-500 drawer-btn group"
-                    @click="$emit('toggle-detail', true)"
-                >
+                <button class="bg-lime-500 drawer-btn group" @click="$emit('toggle-detail', true)">
                     PT
-                    <span
-                        class="edit-icon persona-style-transitioner group-hover:opacity-100"
-                        ><edit-icon
-                            class="mb-2 group-hover:opacity-100 persona-style-transitioner"
-                    /></span>
+                    <span class="edit-icon persona-style-transitioner group-hover:opacity-100">
+                      <edit-icon
+                            class="mb-2 group-hover:opacity-100 persona-style-transitioner"/>
+                    </span>
                 </button>
-                <button
-                    class="bg-blue-500 drawer-btn group"
-                    @click="$emit('toggle-detail', true)"
-                >
+                <button class="bg-blue-500 drawer-btn group" @click="$emit('toggle-detail', true)">
                     FM
-                    <span
-                        class="edit-icon persona-style-transitioner group-hover:opacity-100"
-                        ><edit-icon
-                            class="mb-2 group-hover:opacity-100 persona-style-transitioner"
-                    /></span>
+                    <span class="edit-icon persona-style-transitioner group-hover:opacity-100">
+                      <edit-icon class="mb-2 group-hover:opacity-100 persona-style-transitioner"/>
+                    </span>
                 </button>
             </div>
             <div class="flex flex-row justify-between gap-5 px-[3.25rem]">
@@ -93,7 +75,7 @@
 .profile-info-container {
     @apply flex flex-col flex-1 items-center text-lg text-center;
     .profile-avatar {
-        @apply relative !rounded-full border-4 p-1.5;
+        @apply relative !rounded-full border-4 p-1.5 ring-[4px] hover:ring-[0.75rem] transition-all ring-yellow-400 duration-200 ease-in-out border-none overflow-visible;
         img {
             @apply w-36 h-36 rounded-full;
         }
