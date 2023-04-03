@@ -6,7 +6,7 @@
         </div>
     </div>
 
-    <div class="gradient-bg p-10 rounded-xl border-blue-600 border">
+    <div class="bg-gradient-to-b from-[#0075C94D] to-black p-10 rounded-2xl border-blue-600 border">
         <task-date-switcher
                 :startOfTheWeek="startOfTheWeek"
                 :setStartOfTheWeek="setStartOfTheWeek"
@@ -15,7 +15,7 @@
             />
     </div>
 
-    <div class="flex mt-10 items-stretch">
+    <div class="flex my-10 items-stretch flex-start w-1/2 text-start">
         <div class="text-secondary">Tasks filters:</div>
         <div class="tab-text active">
             All
@@ -28,8 +28,10 @@
         </div>
     </div>
 
-    <div class="mt-10">
-        datatables
+    <div class="w-[62rem] bg-[#0075C94D] rounded-2xl">
+        <TaskDataTable title="Today" ></TaskDataTable>
+        <TaskDataTable title="Overdue" ></TaskDataTable>
+        <TaskDataTable title="Completed" ></TaskDataTable>
     </div>
 
 
@@ -37,13 +39,16 @@
 </template>
 <style>
 .tab-text{
-    @apply bg-secondary text-xs text-white p-1 mx-2 rounded-md  cursor-pointer hover:bg-violet-600 active:bg-violet-700  focus:outline-none focus:ring focus:ring-violet-300 ;
+    @apply bg-secondary text-xs text-white p-1 mx-2 rounded-sm  cursor-pointer hover:bg-violet-600 active:bg-violet-700  focus:outline-none focus:ring focus:ring-violet-300 ;
+}
+.dt-layer{ 
+   
 }
 </style>
 <script setup>
 import TaskDateSwitcher from "./components/TaskDataSwitcher"
 import MonthSwitcher from "./components/MonthSwitcher";
-
+import TaskDataTable from "./components/TaskDataTable.vue";
 const selectedDate = ref(new Date());
 
         const selectedDateFormatted = computed(() =>
