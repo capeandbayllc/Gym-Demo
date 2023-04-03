@@ -9,15 +9,15 @@
         <div class="leaderboard-name relative">{{leader.first_name}} {{leader.last_name}} </div>
         <div class="points bg-[#5A5A5A5A] text-white group-hover:bg-[#FFD800] group-hover:text-black">{{leader.unitSold}} PTS</div>
         <div class="bg-secondary text-[8px] w-full rounded-b-xl">
-          <tr class="flex">
-            <td class="card-header">Classes</td>
-            <td class="card-header">Attendance</td>
-            <td class="card-header">Overall</td>
+          <tr class="flex w-full">
+            <td class="card-header w-1/3">Classes</td>
+            <td class="card-header w-1/3">Attendance</td>
+            <td class="card-header w-1/3">Overall</td>
           </tr>
           <tr class="flex">
-            <td class="card-value">{{leader.classes}}</td>
-            <td class="card-value">{{leader.attendance}}</td>
-            <td class="card-value">{{leader.overall}}</td>
+            <td class="card-value w-1/3">{{leader.classes}}</td>
+            <td class="card-value w-1/3">{{leader.attendance}}</td>
+            <td class="card-value w-1/3">{{leader.overall}}</td>
           </tr>
         </div>
       </div>
@@ -36,10 +36,10 @@
 	  box-shadow : 0px 3px 10px #0077ac; 
   }
   .card-header{
-    @apply flex flex-col pt-2 pb-1 pr-2 pl-2 relative;
+    @apply flex flex-col pt-2 pb-1 px-2 relative;
   }
   .card-value{
-    @apply flex flex-col pr-5 pl-5 pb-2 relative;
+    @apply flex flex-col px-4 pb-2 relative;
   }
   .dot {
     @apply flex flex-col justify-center items-center h-[1.75rem] w-[1.75rem] rounded-full bottom-0 right-2 text-[12px] text-black absolute font-bold;
