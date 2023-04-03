@@ -41,6 +41,14 @@
                             class="w-40 filter-selected"
                         >
                         </select-box>
+                        <select-box
+                            :items="leadStatus"
+                            @onChange="filters.status = $event"
+                            :label="'Lead Status'"
+                            :secondary="true"
+                            class="w-40 filter-selected"
+                        >
+                        </select-box>
                     </div>
                     <!-- <div class="flex gap-4">
                         <search-input
@@ -65,6 +73,8 @@
             <div class="bg-black rounded-md p-6 border border-secondary">
                 <component
                     :is="addMemberScreens[addMemberScreenIndex]"
+                    :newMemberData="newMemberData"
+                    @changeNewMemberData="newMemberData = $event"
                 ></component>
                 <div class="flex justify-end mt-6">
                     <button
@@ -124,8 +134,117 @@ import PersonalInformation from "~/pages/check-in/user-info/personal-information
 import Interests from "~/pages/check-in/profile-card/add-member/interests.vue";
 import EmergencyInfo from "~/pages/check-in/profile-card/add-member/emergency-info.vue";
 import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today.vue";
-import { request } from "~/api/utils/request";
-import lead from "~/api/queries/lead";
+import userMutation from "~/api/mutations/user";
+import {useMutation} from "@vue/apollo-composable";
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+
+const newMemberData = ref({
+    id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
+    first_name: "Pete",
+    middle_name: "",
+    last_name: "Mahvash",
+    date_of_birth: null,
+    gender: "other",
+    drivers_license_number: null,
+    occupation: null,
+    employer: null,
+    barcode: null,
+    email: "Cedrick.Schmeler@yahoo.com",
+    home_location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
+    address1: "4782 Lehner Avenue Suite 976",
+    address2: "Apt. 344",
+    city: "Port Wendy",
+    state: "MT",
+    phone: "9846188996",
+    created_at: "2023-03-19T20:42:50.000000Z",
+    updated_at: "2023-03-19T20:42:50.000000Z",
+    // user_id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
+    // last_name: "Schmeler",
+    // status_id: "New",
+    // type_id: "streaming_preview",
+    // email_verified_at: null,    
+    // alternate_emails: null,
+    // alternate_phone: null,
+    // profile_photo_path: "/images/profile/users_8.jpg",
+    // occupation: null,
+    // employer: null,
+    // barcode: null,
+    // zip: "84678",
+    // unsubscribed_email: false,
+    // unsubscribed_sms: false,
+    // user_type: "lead",
+    // entry_source: null,
+    // location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
+    // manager: null,
+    // opportunity: null,
+    // external_id: null,
+    // misc: null,
+    // details: {
+    //     contact_preference: "sms",
+    //     emergency_contact: {
+    //         ec_first_name: "",
+    //         ec_last_name: "",
+    //         ec_phone: ""
+    //     },
+    //     membership_type_id: ""
+    // },
+    // is_previous: false,
+    // started_at: null,
+    // ended_at: null,
+    // terminated_at: null,
+    // obfuscated_at: null,
+    // twilioClientConversation_ids: [],
+    // note_ids: [],
+    // owner: null
+});
+
+const newMemberDataReset = ref({});
+
+onMounted(() => {
+    newMemberDataReset.value = {...newMemberData.value};
+})
+
+const saveLead = () => {
+    let currentDate = new Date();
+    let formattedDate = currentDate.toLocaleDateString('en-US') + ', ' + currentDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+    newMemberData.value.created_at = formattedDate;
+    newMemberData.value.updated_at = formattedDate;
+    addMemberScreenIndex.value = 0;
+    const { mutate: createMember } = useMutation(userMutation.mutation.createUser);
+    createMember({
+        input: {
+            id: newMemberData.value.id + Math.floor(Math.random() * 9000000000) + 1000000000,
+            first_name: newMemberData.value.first_name,
+            middle_name: newMemberData.value.middle_name,
+            last_name: newMemberData.value.last_name,
+            date_of_birth: newMemberData.value.date_of_birth,
+            gender: newMemberData.value.gender,
+            drivers_license_number: newMemberData.value.drivers_license_number,
+            occupation: newMemberData.value.occupation,
+            employer: newMemberData.value.employer,
+            barcode: newMemberData.value.barcode,
+            email: newMemberData.value.email,
+            home_location_id: newMemberData.value.home_location_id,
+            address1: newMemberData.value.address1,
+            address2: newMemberData.value.address2,
+            city: newMemberData.value.city,
+            state: newMemberData.value.state,
+            phone: newMemberData.value.phone,
+            state: newMemberData.value.state,
+            phone: newMemberData.value.phone,
+            created_at: newMemberData.value.created_at,
+            updated_at: newMemberData.value.updated_at
+        },
+    })
+    .then(() => {
+        leads.value = [];
+        getLeadsQuery()
+    });
+    
+    newMemberData.value = {...newMemberDataReset.value}  
+};
+
 
 const isSearchEnable = ref(false);
 const addMemberPopUp = ref(null);
@@ -138,24 +257,77 @@ const addMemberScreens = ref([
     EmergencyInfo,
     BroughtToday,
 ]);
+
 const addMemberScreenIndex = ref(0);
 const leads = ref([]);
+const filters = ref({status: ''})
 
-const leadTypes = [
-    "app_referal",
-    "grand_opening",
-    "snapshot",
-    "free_trial",
-    "streaming_preview",
-];
+// const leadTypes = [
+//     "app_referal",
+//     "grand_opening",
+//     "snapshot",
+//     "free_trial",
+//     "streaming_preview",
+// ];
 const opportunity = ["error", "warning", "accent"];
+// TODO implement filters
 
-request(lead.query.browse).then(({ data }) => {
-    leads.value = data.data.leads.data;
-});
-const getRandomType = () => {
-    return leadTypes[Math.floor(Math.random() * leadTypes.length)];
-};
+const leadsQuery = gql`
+    query Leads($page: Int, $first: Int, $filter: Filter) {
+        leads(page: $page, first: $first, filter: $filter) {
+            data {
+                id
+                first_name
+                last_name
+                email
+                gender
+                phone,
+                profile_photo_path
+                created_at
+                updated_at
+                opportunity
+                locations {
+                    name
+                }
+                homeLocation {
+                    name
+                }
+            }
+            paginatorInfo {
+                currentPage
+                lastPage
+                firstItem
+                lastItem
+                perPage
+                total
+            }
+        }
+    }
+`;
+
+const getLeadsQuery = ()=>{
+    leads.value = [];
+    console.log('data')
+    const { result, onResult } = useQuery(leadsQuery, {first: 5});
+    if(result.value){
+        leads.value = result.value.leads.data;
+    }else{
+        onResult((data) => {
+            console.log(data)
+            leads.value = data.data.leads.data;
+        })
+    }
+
+}
+getLeadsQuery();
+
+watch(filters.value, ()=>{
+    leads.value = [];
+    getLeadsQuery()
+})
+// const getRandomType = () => {
+//     return leadTypes[Math.floor(Math.random() * leadTypes.length)];
+// };
 const getRandomOpportunity = () => {
     return opportunity[Math.floor(Math.random() * opportunity.length)];
 };
@@ -164,9 +336,7 @@ const leads_display = computed(() => {
   return leads.value.map((item) => {
     return {
       ...item,
-      type: getRandomType(),
       opportunity: getRandomOpportunity(),
-      status: 'available',
     };
   });
 });
@@ -175,6 +345,10 @@ const openAddMemberPopUp = () => {
     addMemberPopUp.value.open();
 };
 const nextScreen = () => {
+    if (!(addMemberScreenIndex.value < addMemberScreens.value.length - 1)) {
+        saveLead();
+        addMemberPopUp.value.close();
+    }
     addMemberScreenIndex.value =
         addMemberScreenIndex.value < addMemberScreens.value.length - 1
             ? addMemberScreenIndex.value + 1
@@ -231,6 +405,24 @@ const leadType = [
         value: "5",
         label: "Streaming Preview",
     },
+];
+const leadStatus = [
+    {
+        value: "New",
+        label: "New",
+    },
+    {
+        value: "Contacted",
+        label: "Contacted",
+    },
+    {
+        value: "Converted",
+        label: "Converted",
+    },
+    {
+        value: "Lost",
+        label: "Lost",
+    }
 ];
 const columns = [
     {
