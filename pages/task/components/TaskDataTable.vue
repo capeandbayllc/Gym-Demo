@@ -57,15 +57,7 @@
   import EmployeeTableRowToday from './employee-table-row-today.vue';
   import EmployeeTableRowOverdue from './employee-table-row-overdue.vue';
   import EmployeeTableRowCompleted from './employee-table-row-completed.vue';
-  import {AddIcon, NextIcon, SearchIcon} from '@/components/icons'
-  import Welcome from '~/pages/check-in/profile-card/add-member/welcom.vue'
-  import JoinTour from '~/pages/check-in/profile-card/add-member/join-tour.vue'
-  import Infomrmation from '~/pages/check-in/profile-card/add-member/information.vue'
-  import PersonalInformation from '~/pages/check-in/user-info/personal-information/index.vue'
-  import Interests from '~/pages/check-in/profile-card/add-member/interests.vue'
-  import EmergencyInfo from '~/pages/check-in/profile-card/add-member/emergency-info.vue'
-  import BroughtToday from '~/pages/check-in/profile-card/add-member/brought-today.vue';
-  import employee from "~/api/queries/employee";
+   import employee from "~/api/queries/employee";
   import {useQuery} from "@vue/apollo-composable";
   
   const isSearchEnable = ref(false)
@@ -107,15 +99,6 @@
     });
   });
   
-  const openAddMemberPopUp = () => {
-    addEmployeePopUp.value.open()
-  }
-  const nextScreen = () => {
-    addEmployeeScreenIndex.value = addEmployeeScreenIndex.value < (addEmployeeScreens.value.length - 1) ? addEmployeeScreenIndex.value + 1 : addEmployeeScreenIndex.value;
-  }
-  const prevScreen = () => {
-    addEmployeeScreenIndex.value = addEmployeeScreenIndex.value > 0 ? addEmployeeScreenIndex.value - 1 : addEmployeeScreenIndex.value
-  }
   
   const locationType = [
     {

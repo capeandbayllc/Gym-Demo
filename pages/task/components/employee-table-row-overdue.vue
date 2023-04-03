@@ -58,7 +58,4 @@ library.add(faEllipsisH);
 const props = defineProps<{
   data: Object
 }>()
-onMounted(()=>{
-  console.log(data)
-})
 </script>
