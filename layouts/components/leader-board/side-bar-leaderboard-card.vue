@@ -26,7 +26,7 @@
 </template>
 <style scoped>
 .border-container {
-  @apply border-transparent hover:border-0;
+  @apply border-transparent hover:border-0 ;
 }
 .side-bar-leaderboard-card {
   @apply flex flex-col items-center self-start relative hover:border-2 cursor-pointer bg-[#5A5A5A5A];
