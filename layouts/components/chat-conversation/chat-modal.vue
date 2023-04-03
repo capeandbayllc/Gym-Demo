@@ -505,7 +505,7 @@ const chatItems = ref([
 const locationData = ref(null);
 request(location.query.browse, { first: 1 }).then(({data}) => {
   locationData.value = data.data.locations.data[0];
-  chatItem.value[2].name = locationData.value.name;
+  chatItems.value[2].name = locationData.value.name;
 });
 
 const user = useState("auth");
