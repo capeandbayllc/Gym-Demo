@@ -8,7 +8,7 @@
         </div>
         <div class="leaderboard-name relative">{{leader.first_name}} {{leader.last_name}} </div>
         <div class="points bg-[#5A5A5A5A] text-white group-hover:bg-[#FFD800] group-hover:text-black">{{leader.unitSold}} PTS</div>
-        <div class="bg-secondary text-[9px] w-full rounded-b-xl">
+        <div class="bg-secondary text-[8px] w-full rounded-b-xl">
           <tr class="flex">
             <td class="card-header">Classes</td>
             <td class="card-header">Attendance</td>
