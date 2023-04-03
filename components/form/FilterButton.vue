@@ -1,5 +1,5 @@
 <template>
-  <button class=" border-2 rounded-[19px] transition-all h-[45px] text-white flex items-center justify-between overflow-hidden" :class="[isExpand ? ' w-fit px-4 bg-white' : 'w-[119px] bg-[rgba(255,255,255,0.25)]']">
+  <button class="border-2 rounded-[19px] transition-all h-[45px] text-white flex items-center justify-between overflow-hidden" :class="[isExpand ? ' w-fit px-4 bg-white absolute right-0' : 'w-[119px] bg-[rgba(255,255,255,0.25)]']">
     <Transition name="slide-fade">
       <div v-if="isExpand" class="flex justify-between items-center">
         <ArrowLeft class="rotate-180 text-[#0075C9] mr-4" @click="isExpand = false"/>

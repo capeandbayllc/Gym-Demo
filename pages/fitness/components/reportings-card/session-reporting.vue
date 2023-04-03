@@ -6,6 +6,9 @@
 </template>
 <script setup>
 import MemberSearchList from './member-session-list.vue';
+import {request} from "~/api/utils/request";
+import location from "~/api/queries/location";
+
 const props = defineProps({
   filter: {
       type : String,
@@ -42,68 +45,77 @@ const columns = [
       class: 'text-secondary text-center w-[15%]'
   }
 ];
-const membersData = [
+const membersData = ref([
   {
       id: 1,
       name: 'Aya Buchanan',
-      location: 'Club#1234',
+      location: '',
       start: '01:23 PM',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/2.png'
   },
   {
       id: 2,
       name: 'Sty Stance',
-      location: 'Club#1234',
+      location: '',
       start: '01:23 PM',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/3.png'
   },
   {
       id: 3,
       name: 'Aya Buchanan',
-      location: 'Club#1234',
+      location: '',
       start: 'Premium',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/4.png'
   },
   {
       id: 4,
       name: 'Sty Stance',
-      location: 'Club#1234',
+      location: '',
       start: 'Basic',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/2.png'
   },
   {
       id: 5,
       name: 'Henny Owens',
-      location: 'Club#1234',
+      location: '',
       start: 'Premium',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/3.png'
   },
   {
       id: 6,
       name: 'Butch Eierra',
-      location: 'Club#1234',
+      location: '',
       start: 'Premium',
       end: '02:23 PM',
-      date: '01.02.2023',
+      date: '02/01/2023',
       type: 'PT',
       img_url: 'chat-conversation/4.png'
   },
-];
+]);
+
+const locationData = ref(null);
+request(location.query.get, { id: 'afea5d32-ec62-480d-af29-d67fc8c9c7a3' }).then(({data}) => {
+    locationData.value = data.data.location;
+    membersData.value.forEach(e => {
+        e.location = locationData.value.name;
+    });
+});
+
 </script>
 <style>
 .session-container{

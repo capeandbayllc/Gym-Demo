@@ -1,7 +1,7 @@
 <template>
   <div class="people-lead-table">
-    <PeopleSearchTableHeader :columns="columns" class="min-w-[1050px]" />
-    <div class="max-h-96 overflow-y-scroll min-w-[1050px]">
+    <PeopleSearchTableHeader :columns="columns" />
+    <div class="max-h-96 overflow-y-scroll w-full">
       <PeopleSearchTableRow
         v-for="item in items"
         :key="item.id"
@@ -9,17 +9,7 @@
         :data="item"
         @click="clickRow(item)"
       />
-      <!-- @click="rowClicked(item)" -->
     </div>
-    <!-- <data-table
-            :columns="columns"
-            :data="items"
-            :header-component="PeopleSearchTableHeader"
-            :row-component="PeopleSearchTableRow"
-            :sticky-header="true"
-            class=""
-            @row-clicked="clickRow"
-        /> -->
   </div>
 </template>
 <style>

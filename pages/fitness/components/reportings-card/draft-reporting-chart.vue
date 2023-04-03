@@ -1,6 +1,6 @@
 <template>
   <div class="percentage-container p-4">
-      <div class="flex items-center justify-between mb-4">
+      <div class="flex relative items-center justify-between mb-4">
         <label class="header block text-[14px] py-2 whitespace-nowrap mr-2">Drafting Report</label>
         <FormFilterButton>
           <template v-slot:filters>

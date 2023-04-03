@@ -3,7 +3,7 @@
     <div class="circle-big">
       <div class="progress-bar">
         <div class="overlay">
-          <div class="text relative z-30">
+          <div class="text relative z-10">
             {{item.percent}}%
           </div>
         </div>

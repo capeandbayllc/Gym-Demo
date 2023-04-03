@@ -17,7 +17,7 @@
             <select-box-icon :isCollapsed="isCollapsed" :color="color" />
         </button>
         <transition name="fade">
-            <SelectBoxContent v-if="!isCollapsed">
+            <SelectBoxRadioContent v-if="!isCollapsed">
                 <SelectBoxOption
                     v-for="item in items"
                     :key="item.value"
@@ -26,7 +26,7 @@
                     :selected="item.value === value"
                     :onClick="onChange"
                 />
-            </SelectBoxContent>
+            </SelectBoxRadioContent>
         </transition>
     </div>
 </template>
@@ -51,11 +51,16 @@
     opacity: 0;
 }
 </style>
+<script>
+export default {
+  name: "select-box-radio"
+}
+</script>
 <script setup>
 import { ref, computed } from "vue";
 import SelectBoxIcon from "./select-box-icon.vue";
-import SelectBoxContent from "./select-box-content.vue";
 import SelectBoxOption from "./select-box-option.vue";
+import SelectBoxRadioContent from "./select-box-radio-content";
 
 const props = defineProps({
     formInput: {

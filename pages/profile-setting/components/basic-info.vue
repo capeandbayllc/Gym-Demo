@@ -283,7 +283,6 @@
 
       <divider/>
 
-
       <!-- CALENDAR ACCESS & AVAILABILITY SECTION -->
       <div class="grid grid-cols-1 py-2">
         <div class="grid grid-cols-12 py-2">
@@ -500,67 +499,67 @@ let profileBasic = [
   {
     key: 'first_name',
     label: 'First Name',
-    class: 'neutral-input rounded-xl',
+    class: 'neutral-input',
     required: true
   },
   {
     key: 'middle_name',
     label: 'Middle Name',
-    class: 'neutral-input rounded-xl',
+    class: 'neutral-input',
     required: false,
   },
   {
     key: 'last_name',
     label: 'Last Name',
-    class: 'neutral-input rounded-xl',
+    class: 'neutral-input',
     required: false,
   },
   {
     key: 'birthday',
     label: 'Date of Birth',
-    class: 'neutral-input rounded-xl',
+    class: 'neutral-input',
     required: false,
   },
   {
     key: 'gender',
     label: 'Gender',
-    class: 'neutral-input rounded-xl',
+    class: 'neutral-input',
     required: false,
   },
   {
     key: 'username',
     label: 'Username',
-    class: 'readonly-input rounded-xl',
+    class: 'readonly-input',
     required: false,
   },
   {
     key: 'email',
     label: 'Email',
-    class: 'neutral-input rounded-xl',
+    class: 'neutral-input',
     required: false,
   },
   {
     key: 'altenrate_email',
     label: 'Personal Email',
-    class: 'neutral-input rounded-xl',
+    class: 'neutral-input',
     required: false,
   },
   {
     key: 'phone',
     label: 'Mobile',
-    class: 'neutral-input rounded-xl',
+    class: 'neutral-input',
     required: false,
   },
   {
     key: 'employee_id',
     label: 'Employee I.D. Number',
-    class: 'neutral-input rounded-xl',
+    class: 'neutral-input',
     required: false,
   },
   {
     key: 'manager',
     label: 'Manager',
-    class: 'neutral-input rounded-xl',
+    class: 'neutral-input',
     placeholder: 'Search Manager',
     required: false,
   },

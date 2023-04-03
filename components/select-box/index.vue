@@ -1,12 +1,14 @@
 <template>
     <div :class="className" class="flex items-center w-full">
         <button
-			class="select-box-btn"
+			      class="select-box-btn"
             :class="{
                 'bg-secondary': secondary,
                 'bg-transparent': transparent && !secondary,
-                'rounded-t select-box-btn-primary': !isCollapsed,
-                'rounded': isCollapsed
+                'rounded-t': !isCollapsed,
+                'select-box-btn-primary': !isCollapsed && bgSecondaryOpened,
+                'rounded': isCollapsed,
+                [classButton]: classButton
             }"
             :onClick="toggleCollapsed"
         >
@@ -18,10 +20,10 @@
         </button>
         <transition name="fade">
             <select-box-content v-if="!isCollapsed">
-                <select-box-search-input v-if="showSearch" 
+                <select-box-search-input v-if="showSearch"
                     :secondary="false"
-                    :placeholder="placeholderSearch" 
-                    size="xs" 
+                    :placeholder="placeholderSearch"
+                    size="xs"
                 ></select-box-search-input>
                 <select-box-item
                     v-for="item in items"
@@ -42,7 +44,7 @@
   @apply relative min-w-fit;
 }
 .select-box-btn {
-  @apply flex flex-row border px-2 py-1 items-center justify-between transition-colors duration-300;
+  @apply flex flex-row px-2 py-1 items-center justify-between transition-colors duration-300;
   width: 165px;
   height: 29px;
 }
@@ -82,6 +84,11 @@
   opacity: 0;
 }
 </style>
+<script>
+export default {
+  name: "select-box"
+}
+</script>
 <script setup>
 import { ref, computed } from "vue";
 import SelectBoxIcon from "./select-box-icon.vue";
@@ -102,6 +109,14 @@ const props = defineProps({
     items: {
         type: Array,
         default: [],
+    },
+    bgSecondaryOpened:{
+      type: Boolean,
+      default: true
+    },
+    classButton:{
+      type: String,
+      default: ''
     },
     value: {
         type: String,

@@ -109,6 +109,9 @@
     import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue';
     import ClubCard from '../club-card.vue';
     import CalendarList from './calendar-list';
+    import {request} from "~/api/utils/request";
+    import location from "~/api/queries/location";
+
 
     onMounted(async () => {
         await nextTick();
@@ -147,38 +150,46 @@
         },
     ];
 
-    const items = [
+    const items = ref([
         {
             id:1,
             event_name: 'PT Class',
             event_time: '1:00 PM',
-            event_location: 'Club #1234',
+            event_location: '',
         },
         {
             id:2,
             event_name: 'PT Class',
             event_time: '1:00 PM',
-            event_location: 'Club #1234',
+            event_location: '',
         },
         {
             id:3,
             event_name: 'PT Class',
             event_time: '1:00 PM',
-            event_location: 'Club #1234',
+            event_location: '',
         },
         {
             id:4,
             event_name: 'PT Class',
             event_time: '1:00 PM',
-            event_location: 'Club #1234',
+            event_location: '',
         },
         {
             id:5,
             event_name: 'PT Class',
             event_time: '1:00 PM',
-            event_location: 'Club #1234',
+            event_location: '',
         }
-    ];
+    ]);
+
+    const locationData = ref(null);
+    request(location.query.get, { id: 'afea5d32-ec62-480d-af29-d67fc8c9c7a3' }).then(({data}) => {
+        locationData.value = data.data.location;
+        items.value.forEach(e => {
+            e.event_location = locationData.value.name;
+        });
+    });
 
     function previousMonth() {
         selectedMonth.value--;
