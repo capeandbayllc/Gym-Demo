@@ -26,9 +26,6 @@
         class="float-left"
       />
     </div>
-   <!--  <div v-for="(leader, index) in leaderbordEmployees" :key="leader.first_name">
-      <side-bar-leaderboard-card v-if="index <= 3" />
-    </div> -->
     <div class="my-10 mx-5 right-2 p-4 relative">
       <table class="w-full">
         <tr class="text-opacity-50 text-white">
