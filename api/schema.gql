@@ -48,14 +48,6 @@ type AudienceTargets {
   membership_type_id: [ID]
 }
 
-type CalendarAttendee {
-  id: ID
-  entity_type: String
-  invitation_status: String
-  entity_id: String
-  entity: User
-}
-
 type CalendarEvent {
   id: ID!
   title: String!
@@ -72,10 +64,10 @@ type CalendarEvent {
   event_completion: DateTime
   color: String
   editable: Int
-  user_attendees: [CalendarAttendee]
-  lead_attendees: [CalendarAttendee]
-  member_attendees: [CalendarAttendee]
-  attendees: [CalendarAttendee]
+  user_attendees: [EventAttendee]
+  lead_attendees: [EventAttendee]
+  member_attendees: [EventAttendee]
+  attendees: [EventAttendee]
   location_id: String
   call_task: Int
   im_attending: Boolean
@@ -293,8 +285,8 @@ type Customer {
   gender: String
   date_of_birth: DateTime
   profile_photo_path: String
-  created_at: DateTime!
-  updated_at: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
   gr_location_id: ID
   interaction_count: InteractionCount!
   homeLocation: Location
@@ -338,6 +330,8 @@ type Department {
   created_at: DateTime!
   updated_at: DateTime!
   positions: [Position]!
+  status: Boolean
+  message: String!
 }
 
 input DepartmentFilter {
@@ -442,10 +436,10 @@ type Employee {
   gender: String
   date_of_birth: DateTime
   profile_photo_path: String
-  created_at: DateTime!
-  updated_at: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
   gr_location_id: ID
-  home_location: Location
+  homeLocation: Location
   locations: [Location]
   user_type: String
   agreement_number: String
@@ -471,8 +465,9 @@ type EndUser {
   middle_name: String
   last_name: String
   email: String!
-  created_at: DateTime!
-  updated_at: DateTime!
+  phone: String
+  created_at: DateTime
+  updated_at: DateTime
   location: Location
   owner_user_id: String
   primary_phone: String
@@ -515,16 +510,29 @@ type EntrySource {
   name: String!
 
   """When the account was created."""
-  created_at: DateTime!
+  created_at: DateTime
 
   """When the account was last updated."""
-  updated_at: DateTime!
+  updated_at: DateTime
 }
 
 type Enum {
   label: String!
   value: String!
   description: String
+}
+
+interface ErrorResponse {
+  status: ResponseStatus!
+  message: String!
+}
+
+type EventAttendee {
+  id: ID!
+  entity_id: ID!
+  entity_type: String
+  invitation_status: String
+  entity_data: AttendeeDetailData
 }
 
 type File {
@@ -588,16 +596,16 @@ type InteractionCount {
 type Lead {
   id: ID!
   name: String!
+  user_id: ID
   first_name: String
   middle_name: String
   last_name: String
   type: String!
   status: String!
   email: String!
-  phone: String!
-  user_id: ID
-  created_at: DateTime!
-  updated_at: DateTime!
+  phone: String
+  created_at: DateTime
+  updated_at: DateTime
   lead_owners: [TeamUser]
   owner_user_id: String
   primary_phone: String
@@ -647,8 +655,7 @@ type Location {
   id: ID
   gymrevenue_id: String
   location_no: String
-  # location_type: LocationType
-  location_type: String
+  location_type: LocationType
   name: String
   city: String
   state: String
@@ -740,6 +747,8 @@ type Mutation {
 
   """Creates a Calendar Event"""
   createCalendarEvent(input: CreateCalendarEventInput!): CalendarEvent!
+
+  """Updates a Calendar Event"""
   updateCalendarEvent(input: PatchCalendarEventInput!): CalendarEvent!
 
   """Creates a calandar event type"""
@@ -753,8 +762,8 @@ type Mutation {
 
   """Updates a CallTemplate"""
   updateCallScriptTemplate(input: UpdateCallScriptTemplateInput): CallScriptTemplate!
-  createDepartment(name: String, positions: [ID]): Department!
-  updateDepartment(id: ID, name: String, positions: [ID]): Department!
+  createDepartment(status: Boolean, message: String, name: String, positions: [ID]): Department!
+  updateDepartment(status: Boolean, message: String, id: ID, name: String, positions: [ID]): Department!
 
   """Creates a Drip Campaign"""
   createDripCampaign(campaign: CreateDripCampaignInput): DripCampaign
@@ -822,6 +831,10 @@ type Mutation {
 
   """Create a Lead"""
   createLead(input: LeadInput): Lead!
+}
+
+interface MutationResponse {
+  status: ResponseStatus!
 }
 
 type Note {
@@ -1348,12 +1361,17 @@ input RenameFileInput {
   filename: String
 }
 
+enum ResponseStatus {
+  SUCCESS
+  FAILURE
+}
+
 type Role {
   id: ID!
   title: String!
   name: String
-  created_at: DateTime!
-  updated_at: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
   abilities: [Ability]!
   availableAbilities: [Ability]!
   group: Int
@@ -1653,8 +1671,8 @@ type User {
   address1: String
   address2: String
   email_verified_at: DateTime
-  created_at: DateTime!
-  updated_at: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
   start_date: DateTime
   end_date: DateTime
   termination_date: DateTime
@@ -1681,6 +1699,8 @@ type User {
   employer: String
   barcode: String
   drivers_license_number: String
+  status: Boolean
+  message: String
 }
 
 input UserInput {
@@ -1750,6 +1770,12 @@ type UserPaginator {
 
   """A list of User items."""
   data: [User!]!
+}
+
+type UsersResponse {
+  status: ResponseStatus!
+  total: Int!
+  users: [User!]!
 }
 
 type Widget {
