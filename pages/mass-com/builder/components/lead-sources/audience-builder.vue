@@ -44,8 +44,9 @@
 </style>
 <script setup>
 import {request} from "~/api/utils/request";
-import lead from "~/api/queries/lead";
 import member from "~/api/queries/member";
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
 import AudienceBuilderTableRow from "./audience-builder-table-row.vue";
 
 const isLoading = ref(true);
@@ -54,11 +55,44 @@ const members = ref([]);
 const currentTab = ref("leads");
 const columns = [' ', 'name', '', '', ''];
 
-request(lead.query.browse).then(({data}) => {
-  leads.value = data.data.leads.data;
 
-  isLoading.value = false;
-});
+const leadsQuery = gql`
+    query Leads($page: Int, $first: Int, $filter: Filter) {
+        leads(page: $page, first: $first, filter: $filter) {
+            data {
+                id
+                first_name
+                last_name
+                email
+                gender
+                phone,
+                profile_photo_path
+                created_at
+                updated_at
+                opportunity
+                locations {
+                    name
+                }
+                homeLocation {
+                    name
+                }
+            }
+            paginatorInfo {
+                currentPage
+                lastPage
+                firstItem
+                lastItem
+                perPage
+                total
+            }
+        }
+    }
+`;
+const { onResult } = useQuery(leadsQuery, {first: 5});
+onResult((data) => {
+    leads.value = data.data.leads.data;
+    isLoading.value = false;
+})
 
 request(member.query.browse).then(({data}) => {
   members.value = data.data.members.data;
