@@ -5,6 +5,9 @@
             <div class="bg-gradient-to-b from-secondary/80 to-black w-full rounded-[20px] border-secondary border-[2px] max-w-[600px]">
                 <h2 class="text-lg p-3">{{currentMonth}} {{currentYear}}</h2>
                 <!-- <calendar-card class="m-8"/> -->
+                <pre>
+                    {{ calendarEvents }}
+                </pre>
                 <FullCalendar :options="calendarOptions" ref="calendar" class="calendar"/>
             </div>
             <div class="px-0 md:px-3 mt-8">
@@ -39,6 +42,14 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "@vuepic/vue-datepicker/dist/main.css";
+import gql from "graphql-tag";
+import { useQuery } from "@vue/apollo-composable";
+
+const props = defineProps({
+   user: {
+		type: Object
+	},
+})
 
 const calendar = ref(null);
 const currentMonth = ref('');
@@ -52,7 +63,7 @@ const refreshCurrentDate = ()=>{
 const calendarOptions = ref({
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
     schedulerLicenseKey: "0157232768-fcs-1652392378",
-    initialView: "timeGridWeek",
+    initialView: "dayGridMonth",
     initialDate: "2022-12-01",
     slotDuration: "01:00",
     height: '500px',
@@ -124,8 +135,44 @@ const calendarOptions = ref({
     },
 });
 
-onMounted(()=>{
+const calendarEvents = ref([]);
+
+const query = gql`
+    query CalendarEventsQuery {
+        calendarEvents {
+            id
+            title
+            owner_id
+            color
+            start
+            end
+            title
+            description
+            full_day_event
+            event_type_id
+            location_id
+            location {
+                id
+                name
+            }
+        }
+    }
+`;
+
+console.clear()
+    const { result } = await useQuery(query);
+
+watchEffect(() => {
+    console.log('data')
+    console.log(result)
+    console.log(props.user)
+    
+    calendarEvents.value = result.value?.calendarEvents.filter(event => event.owner_id === props.user.id);
+})
+
+onMounted(async ()=>{
     refreshCurrentDate()
+    
 });
 
 
