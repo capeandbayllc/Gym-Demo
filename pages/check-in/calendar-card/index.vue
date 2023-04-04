@@ -2,24 +2,35 @@
     <simple-card class="checkin-calendar-card" :closable="true" title="Calendar">
         <div class="calendar-card-body card-gradient-bg">
 
-            <div class="bg-gradient-to-b from-secondary/80 to-black w-full rounded-[20px] border-secondary border-[2px] max-w-[600px]">
-                <h2 class="text-lg p-3">{{currentMonth}} {{currentYear}}</h2>
-                <!-- <calendar-card class="m-8"/> -->
-                <!-- <pre>
-                    {{ getFormattedEvents }}
-                </pre> -->
-                <FullCalendar :options="calendarOptions" ref="calendar" class="calendar"/>
-            </div>
-            <div class="px-0 md:px-3 mt-8">
+            <GrCalendar
+                :events="getFormattedEvents"
+                @clickEventNode="handleCalendarEvent"
+            ></GrCalendar>
+            
+            <!-- <div class="px-0 md:px-3 mt-8">
                 <div class="text-lg font-semibold">Today: {{today}}</div>
                 <div class="text-3xl py-4">{{month(date)}}</div>
                 <event-list
                     :data="data"
                     class="lg:w-80 w-full"
                 />
-            </div>
+            </div> -->
         </div>
     </simple-card>
+    <div
+        class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-[#fff]/[0.1] backdrop-blur-sm calendar-style-transition"
+        :class="{
+            'z-50 opacity-100': eventDetailsVisibibility,
+            '-z-50 opacity-0': !eventDetailsVisibibility,
+        }"
+    >
+        <EventDetails
+            :event="eventDetails"
+            @cancel="resetState"
+            @seemore="showMoreDetails"
+            @offerup="showOfferUp"
+        />
+    </div>
 </template>
 <style scoped>
 .checkin-calendar-card {
@@ -29,38 +40,23 @@
     }
     
 }
-
-.calendar{
-    @apply bg-black px-5 pt-5 mb-5;
-}
 </style>
 <script setup>
-import EventList from '../event-list.vue';
-import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
-import FullCalendar from "@fullcalendar/vue3";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
+
 import "@vuepic/vue-datepicker/dist/main.css";
 import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
 import user from "~/api/queries/user";
 import { request } from "~/api/utils/request";
+import EventDetails from "~/pages/calendar/components/partials/event-details.vue";
+import GrCalendar from "./components/gr-calendar.vue";
+
 
 const props = defineProps({
    user: {
 		type: Object
 	},
 })
-
-const calendar = ref(null);
-const currentMonth = ref('');
-const currentYear = ref('');
-const refreshCurrentDate = ()=>{
-    const api = calendar.value.getApi();
-    currentMonth.value = new Date(api.getDate()).toLocaleString('default', { month: 'long' });
-    currentYear.value = new Date(api.getDate()).getFullYear();
-}
 
 const query = gql`
     query CalendarEventsQuery {
@@ -168,115 +164,20 @@ watchEffect(() => {
     }
 });
 
-// watchEffect(() => {
-//     console.log('data')
-//     console.log(result)
-//     console.log(props.user)
-    
-//     calendarEvents.value = result.value?.calendarEvents.filter(event => event.owner_id === props.user.id);
-// })
 
-onMounted(async ()=>{
-    refreshCurrentDate()
-});
+const eventFormVisibility = ref(false);
+const eventDetails = ref();
+const eventDetailsVisibibility = ref(false);
 
-const calendarOptions = ref({
-    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-    schedulerLicenseKey: "0157232768-fcs-1652392378",
-    initialView: "dayGridMonth",
-    initialDate: "2022-12-01",
-    slotDuration: "01:00",
-    height: '500px',
-    // dateClick: handleDateClick,
-    headerToolbar: {
-        left: "",
-        center: "prev,today,next timeGridDay,timeGridWeek,dayGridMonth",
-        right: "",
-    },
-    events: getFormattedEvents,
-    editable: true,
-    selectable: true,
-    dayMaxEvents: true,
-    // eventClick,
-    datesSet: (params) => {
-        // listCalendar?.value?.getApi()?.gotoDate(params.start);
-        // monthCalendar?.value?.getApi()?.gotoDate(params.start);
-        // monthCalendar?.value?.getApi()?.select(params.start);
-        //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
-    },
-    dateClick: refreshCurrentDate,
-    datesSet: refreshCurrentDate,
-    timeAxis: {
-        slotDuration: "01:00:00",
-    },
-    views: {
-        timeGridDay: {
-            dayHeaderFormat: {
-                month: "long",
-                day: "numeric",
-                omitCommas: "false",
-            },
-            nowIndicator: true,
-        },
-        editable: true,
-        selectable: true,
-        dayMaxEvents: true,
-        // eventClick,
-        datesSet: (params) => {
-            // listCalendar?.value?.getApi()?.gotoDate(params.start);
-            // monthCalendar?.value?.getApi()?.gotoDate(params.start);
-            // monthCalendar?.value?.getApi()?.select(params.start);
-            //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
-        },
-        timeAxis: {
-            slotDuration: "01:00:00",
-        },
-        views: {
-            timeGridDay: {
-                dayHeaderFormat: {
-                    month: "long",
-                    day: "numeric",
-                    omitCommas: "false",
-                },
-                nowIndicator: true,
-            },
-            timeGridWeek: {
-                dayHeaderFormat: {
-                    month: "short",
-                    day: "2-digit",
-                },
-                nowIndicator: true,
-            },
-        },
-        viewDidMount: function (info) {
-            onViewChanged();
-        },
-        //eventContent: { html: '<i>some html</i>' }
-    },
-});
+const handleCalendarEvent = (e) => {
+    if (eventFormVisibility.value) return; // don't proceed if something else is in context
+    let eventInfo = {
+        ...e._def,
+        start: e._instance.range.start,
+        end: e._instance.range.end,
+    };
+    eventDetails.value = eventInfo;
+    eventDetailsVisibibility.value = true;
+};
 
-const data = [{
-    id: 2,
-    title: 'Yoga',
-    booked: false,
-    due: "Monday 5:20 - 6:10"
-}, {
-    id: 3,
-    title: 'PT Training',
-    booked: false,
-    due: "Monday 6:30 - 6:40"
-},  {
-    id: 4,
-    title: 'Yoga',
-    booked: false,
-    due: "Tuesday 6:30 - 6:40"
-}]
-const today = computed(() => {
-    const current = new Date();
-    return `${month(current)} ${current.getDate()}, ${current.getFullYear()}`;
-})
-const month = (date) => {
-    const options = { month: "long" };
-    return Intl.DateTimeFormat("en-US", options).format(date);
-}
 </script>
