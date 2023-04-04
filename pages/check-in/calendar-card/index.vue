@@ -5,9 +5,9 @@
             <div class="bg-gradient-to-b from-secondary/80 to-black w-full rounded-[20px] border-secondary border-[2px] max-w-[600px]">
                 <h2 class="text-lg p-3">{{currentMonth}} {{currentYear}}</h2>
                 <!-- <calendar-card class="m-8"/> -->
-                <pre>
-                    {{ calendarEvents }}
-                </pre>
+                <!-- <pre>
+                    {{ getFormattedEvents }}
+                </pre> -->
                 <FullCalendar :options="calendarOptions" ref="calendar" class="calendar"/>
             </div>
             <div class="px-0 md:px-3 mt-8">
@@ -44,6 +44,8 @@ import interactionPlugin from "@fullcalendar/interaction";
 import "@vuepic/vue-datepicker/dist/main.css";
 import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
+import user from "~/api/queries/user";
+import { request } from "~/api/utils/request";
 
 const props = defineProps({
    user: {
@@ -60,6 +62,124 @@ const refreshCurrentDate = ()=>{
     currentYear.value = new Date(api.getDate()).getFullYear();
 }
 
+const query = gql`
+    query CalendarEventsQuery {
+        calendarEventTypes {
+            data {
+                id
+                name
+                description
+                color
+                type
+            }
+        }
+        calendarEvents {
+            id
+            title
+            owner_id
+            color
+            start
+            end
+            title
+            description
+            full_day_event
+            event_type_id
+            location_id
+            location {
+                id
+                name
+            }
+            type {
+                id
+                name
+                description
+                color
+                type
+            }
+            attendees {
+                id
+                entity_id
+            }
+        }
+    }
+`;
+
+const events = ref([]);
+
+const { result } = await useQuery(query);
+
+const getFormattedEvents = computed(() => {
+    let formattedEvents = [];
+    for (let event of getFilteredEvents.value) {
+        formattedEvents.push({
+            title: event.title,
+            start: event.start,
+            end: event.end,
+            allDay: event.full_day_event,
+            backgroundColor: event.color,
+            extendedProps: {
+                users: [...event.attendees],
+                description: event.description,
+                color: event.color,
+                instructor: event.owner,
+                location: event.location,
+                attendees: event.attendees,
+            },
+        });
+    }
+
+    return formattedEvents;
+});
+
+const getFilteredEvents = computed(() => {
+
+    let filteredEvents = [];
+
+    for (let event of events.value) {
+        if(event.owner_id == props.user.id){
+            filteredEvents.push(event);
+        }
+    }
+
+    return filteredEvents;
+});
+
+watchEffect(() => {
+    if(!result.value) return;
+    console.log("GQL Result:", result.value);
+    let tempEventsContainer = [...result.value.calendarEvents];
+
+    for (let event of tempEventsContainer) {
+        request(user.query.findById, { id: event.owner_id }).then(
+            ({ data }) => {
+                events.value.push({
+                    ...event,
+                    owner: data.data.user,
+                    attendees: event.attendees.map((attendeeId) => ({
+                        id: attendeeId,
+                        name: null,
+                        email: null,
+                        phone: null,
+                        profile_photo_path: null,
+                    })),
+                });
+            }
+        );
+    }
+});
+
+// watchEffect(() => {
+//     console.log('data')
+//     console.log(result)
+//     console.log(props.user)
+    
+//     calendarEvents.value = result.value?.calendarEvents.filter(event => event.owner_id === props.user.id);
+// })
+
+onMounted(async ()=>{
+    refreshCurrentDate()
+});
+
 const calendarOptions = ref({
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
     schedulerLicenseKey: "0157232768-fcs-1652392378",
@@ -73,7 +193,7 @@ const calendarOptions = ref({
         center: "prev,today,next timeGridDay,timeGridWeek,dayGridMonth",
         right: "",
     },
-    // events: props.events,
+    events: getFormattedEvents,
     editable: true,
     selectable: true,
     dayMaxEvents: true,
@@ -134,48 +254,6 @@ const calendarOptions = ref({
         //eventContent: { html: '<i>some html</i>' }
     },
 });
-
-const calendarEvents = ref([]);
-
-const query = gql`
-    query CalendarEventsQuery {
-        calendarEvents {
-            id
-            title
-            owner_id
-            color
-            start
-            end
-            title
-            description
-            full_day_event
-            event_type_id
-            location_id
-            location {
-                id
-                name
-            }
-        }
-    }
-`;
-
-console.clear()
-    const { result } = await useQuery(query);
-
-watchEffect(() => {
-    console.log('data')
-    console.log(result)
-    console.log(props.user)
-    
-    calendarEvents.value = result.value?.calendarEvents.filter(event => event.owner_id === props.user.id);
-})
-
-onMounted(async ()=>{
-    refreshCurrentDate()
-    
-});
-
-
 
 const data = [{
     id: 2,
