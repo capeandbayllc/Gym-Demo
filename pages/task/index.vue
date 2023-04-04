@@ -15,9 +15,9 @@
             />
     </div>
 
-    <div class="flex my-10 items-stretch flex-start w-1/2 text-start">
+    <div class="flex my-10 items-stretch flex-start w-1/2 text-start float-right">
         <div class="text-secondary">Tasks filters:</div>
-        <div class="tab-text active">
+        <div class="tab-text">
             All
         </div>
         <div class="tab-text">
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="w-[62rem] bg-[#0075C94D] rounded-2xl">
+    <div class="dt-layer">
         <TaskDataTable title="Today" ></TaskDataTable>
         <TaskDataTable title="Overdue" ></TaskDataTable>
         <TaskDataTable title="Completed" ></TaskDataTable>
@@ -42,7 +42,7 @@
     @apply bg-secondary text-xs text-white p-1 mx-2 rounded-sm  cursor-pointer hover:bg-violet-600 active:bg-violet-700  focus:outline-none focus:ring focus:ring-violet-300 ;
 }
 .dt-layer{ 
-   
+    @apply w-[62rem] bg-gradient-to-b from-[#0075C94D] to-black  rounded-2xl border border-[#0075C9];
 }
 </style>
 <script setup>
@@ -51,26 +51,26 @@ import MonthSwitcher from "./components/MonthSwitcher";
 import TaskDataTable from "./components/TaskDataTable.vue";
 const selectedDate = ref(new Date());
 
-        const selectedDateFormatted = computed(() =>
-            transformDate(selectedDate.value)
-        );
+const selectedDateFormatted = computed(() =>
+    transformDate(selectedDate.value)
+);
 
-        let startDay = new Date();
-        let day = startDay.getDay() === 0 ? 7 : startDay.getDay();
-        startDay.setDate(startDay.getDate() - day + 1);
-        const startOfTheWeek = ref(startDay);
-        const setSelectedDate = (val) => {
-            selectedDate.value = val;
-        };
-        const setStartOfTheWeek = (val) => {
-            startOfTheWeek.value = val;
-        };
-        const switchMonth = (month) => {
-            let start_date = new Date(
-                startOfTheWeek.value.getFullYear(),
-                month,
-                startOfTheWeek.value.getDate()
-            );
-            setStartOfTheWeek(start_date);
-        };
+let startDay = new Date();
+let day = startDay.getDay() === 0 ? 7 : startDay.getDay();
+startDay.setDate(startDay.getDate() - day + 1);
+const startOfTheWeek = ref(startDay);
+const setSelectedDate = (val) => {
+    selectedDate.value = val;
+};
+const setStartOfTheWeek = (val) => {
+    startOfTheWeek.value = val;
+};
+const switchMonth = (month) => {
+    let start_date = new Date(
+        startOfTheWeek.value.getFullYear(),
+        month,
+        startOfTheWeek.value.getDate()
+    );
+    setStartOfTheWeek(start_date);
+};
 </script>

@@ -5,25 +5,25 @@
           <span>{{ title }}</span>
         </div>
         <div class="-md:px-4 page-content custom-page-content flex-col">
-          <div class="flex flex-row justify-between space-x-4 mb-4">
+          <div class="flex flex-row justify-between space-x-4">
           </div>
           <div>
             <data-table v-if="title=='Overdue'"
                 :columns="columns"
                 :data="employees_display"
-                :row-component="EmployeeTableRowOverdue"
+                :row-component="TaskTableRowOverdue"
                 class="h-60 overflow-y-auto no-scrollbar"
             />
             <data-table v-if="title=='Today'"
                 :columns="columns"
                 :data="employees_display"
-                :row-component="EmployeeTableRowToday"
+                :row-component="TaskTableRowToday"
                 class="h-60 overflow-y-auto no-scrollbar"
             />
             <data-table v-if="title=='Completed'"
                 :columns="columns"
                 :data="employees_display"
-                :row-component="EmployeeTableRowCompleted"
+                :row-component="TaskTableRowCompleted"
                 class="h-60 overflow-y-auto no-scrollbar"
             />
           </div>
@@ -42,21 +42,14 @@
     .custom-page-content-header {
       @apply bg-secondary rounded-t-lg pl-6 p-3 font-semibold;
   
-      .search-icon {
-        @apply float-right m-1 mr-6 cursor-pointer;
-      }
-  
-      .search-input {
-        @apply float-right -mt-1 mr-6 cursor-pointer bg-secondary border border-white rounded;
-      }
     }
   }
   </style>
   
   <script setup>
-  import EmployeeTableRowToday from './employee-table-row-today.vue';
-  import EmployeeTableRowOverdue from './employee-table-row-overdue.vue';
-  import EmployeeTableRowCompleted from './employee-table-row-completed.vue';
+  import TaskTableRowToday from './task-table-row-today.vue';
+  import TaskTableRowOverdue from './task-table-row-overdue.vue';
+  import TaskTableRowCompleted from './task-table-row-completed.vue';
    import employee from "~/api/queries/employee";
   import {useQuery} from "@vue/apollo-composable";
   
@@ -69,31 +62,16 @@
     title:String,
   })
   
-  //TODO: swap out with data from export
-  const positions = ["Front Desk", "Sales Manager", "Trainer", "General Manager", "Regional Manager"].map((position, idx) => ({
-    label: position,
-    value: idx
-  }));
-  const departments = ["Sales", "Personal Training", "Marketing"].map((position, idx) => ({
-    label: position,
-    value: idx
-  }));
+  
   
   const {result} = useQuery(employee.query.browse);
   const employees = computed(() => result?.value?.employee?.data);
-  const getRandomPosition = () => {
-    return positions[Math.floor(Math.random() * positions.length)].label;
-  };
-  const getRandomDepartment = () => {
-    return departments[Math.floor(Math.random() * departments.length)].label;
-  };
+  
   
   const employees_display = computed(() => {
     return employees?.value?.map((item) => {
       return {
         ...item,
-        position: getRandomPosition(),
-        department: getRandomDepartment(),
         status: 'available',
       };
     });
