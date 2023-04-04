@@ -1,5 +1,5 @@
 <template>
-    <dashboard-card :title-icon="CalendarIcon" title="December" class="flex flex-col justify-between bg-black">
+    <dashboard-card :title-icon="CalendarIcon" :title="month" class="flex flex-col justify-between bg-black">
         <Datepicker
             v-model="date"
             inline
@@ -76,10 +76,10 @@
 }
 </style>
 <script setup>
-import { CalendarIcon } from '~~/components/icons'
-import DashboardCard from '../dashboard-card.vue'
+import { CalendarIcon } from '~~/components/icons';
+import DashboardCard from '../dashboard-card.vue';
 import Datepicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import '@vuepic/vue-datepicker/dist/main.css';
 
 const date = ref(new Date());
 
@@ -93,6 +93,7 @@ const page = ref(new Date());
 const handleMonthYear = ({ instance, month, year }) => {
     page.value = new Date(year, month, 1)
 }
+
 const month = computed(() => {
     const options = { month: "long" };
     return Intl.DateTimeFormat("en-US", options).format(page.value);

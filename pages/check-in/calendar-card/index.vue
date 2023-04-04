@@ -1,8 +1,16 @@
 <template>
     <simple-card class="checkin-calendar-card" :closable="true" title="Calendar">
         <div class="calendar-card-body card-gradient-bg">
-            <h2 class="text-lg">Serivce/Events</h2>
-            <calendar-card class="m-8"/>
+
+            <div class="bg-gradient-to-b from-secondary/80 to-black w-full rounded-[20px] border-secondary border-[2px] max-w-[600px]">
+                <h2 class="text-lg p-3">Month 2023</h2>
+                <!-- <calendar-card class="m-8"/> -->
+                <FullCalendar :options="calendarOptions" ref="calendar" class="calendar">
+                    <!-- <template v-slot:eventContent="arg">
+                        <CalendarEvent :arg="arg" />
+                    </template> -->
+                </FullCalendar>
+            </div>
             <div class="px-0 md:px-3 mt-8">
                 <div class="text-lg font-semibold">Today: {{today}}</div>
                 <div class="text-3xl py-4">{{month(date)}}</div>
@@ -22,10 +30,96 @@
     }
     
 }
+
+.calendar{
+    @apply bg-black px-5 pt-5 mb-5;
+}
 </style>
 <script setup>
 import CalendarCard from '@/pages/dashboard/components/calendar-card/index.vue'
 import EventList from '../event-list.vue';
+
+import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
+import FullCalendar from "@fullcalendar/vue3";
+import listPlugin from "@fullcalendar/list";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import "@vuepic/vue-datepicker/dist/main.css";
+// import { calendarEvents as events } from "../helpers/calendar-events";
+
+const calendarOptions = ref({
+    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+    schedulerLicenseKey: "0157232768-fcs-1652392378",
+    initialView: "timeGridWeek",
+    initialDate: "2022-12-01",
+    slotDuration: "01:00",
+    height: '500px',
+    // dateClick: handleDateClick,
+    headerToolbar: {
+        left: "",
+        center: "prev,today,next timeGridDay,timeGridWeek,dayGridMonth",
+        right: "",
+    },
+    // events: props.events,
+    editable: true,
+    selectable: true,
+    dayMaxEvents: true,
+    // eventClick,
+    datesSet: (params) => {
+        // listCalendar?.value?.getApi()?.gotoDate(params.start);
+        // monthCalendar?.value?.getApi()?.gotoDate(params.start);
+        // monthCalendar?.value?.getApi()?.select(params.start);
+        //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
+    },
+    timeAxis: {
+        slotDuration: "01:00:00",
+    },
+    views: {
+        timeGridDay: {
+            dayHeaderFormat: {
+                month: "long",
+                day: "numeric",
+                omitCommas: "false",
+            },
+            nowIndicator: true,
+        },
+        editable: true,
+        selectable: true,
+        dayMaxEvents: true,
+        // eventClick,
+        datesSet: (params) => {
+            // listCalendar?.value?.getApi()?.gotoDate(params.start);
+            // monthCalendar?.value?.getApi()?.gotoDate(params.start);
+            // monthCalendar?.value?.getApi()?.select(params.start);
+            //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
+        },
+        timeAxis: {
+            slotDuration: "01:00:00",
+        },
+        views: {
+            timeGridDay: {
+                dayHeaderFormat: {
+                    month: "long",
+                    day: "numeric",
+                    omitCommas: "false",
+                },
+                nowIndicator: true,
+            },
+            timeGridWeek: {
+                dayHeaderFormat: {
+                    month: "short",
+                    day: "2-digit",
+                },
+                nowIndicator: true,
+            },
+        },
+        viewDidMount: function (info) {
+            onViewChanged();
+        },
+        //eventContent: { html: '<i>some html</i>' }
+    },
+});
 
 const data = [{
     id: 2,
