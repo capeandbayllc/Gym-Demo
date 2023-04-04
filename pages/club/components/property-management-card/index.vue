@@ -70,8 +70,8 @@
     ]);
 
     const locationData = ref(null);
-    request(location.query.get, { id: 'afea5d32-ec62-480d-af29-d67fc8c9c7a3' }).then(({data}) => {
-        locationData.value = data.data.location;
+    request(location.query.browse, { first: 1 }).then(({data}) => {
+        locationData.value = data.data.locations.data[0];
         items.value.forEach(e => {
             e.location = locationData.value.name;
         });
