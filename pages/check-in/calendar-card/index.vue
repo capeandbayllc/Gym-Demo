@@ -2,19 +2,16 @@
     <simple-card class="checkin-calendar-card" :closable="true" title="Calendar">
         <div class="calendar-card-body card-gradient-bg">
 
-            <GrCalendar
+            <GrCalendar v-if="getFormattedEvents.length || events.length"
                 :events="getFormattedEvents"
                 @clickEventNode="handleCalendarEvent"
             ></GrCalendar>
+            <div v-else
+                class="h-[76vh] flex flex-col justify-center"
+            >
+                <spinner />
+            </div>
             
-            <!-- <div class="px-0 md:px-3 mt-8">
-                <div class="text-lg font-semibold">Today: {{today}}</div>
-                <div class="text-3xl py-4">{{month(date)}}</div>
-                <event-list
-                    :data="data"
-                    class="lg:w-80 w-full"
-                />
-            </div> -->
         </div>
     </simple-card>
     <div
