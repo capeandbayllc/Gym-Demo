@@ -3,13 +3,9 @@
         <div class="calendar-card-body card-gradient-bg">
 
             <div class="bg-gradient-to-b from-secondary/80 to-black w-full rounded-[20px] border-secondary border-[2px] max-w-[600px]">
-                <h2 class="text-lg p-3">Month 2023</h2>
+                <h2 class="text-lg p-3">{{currentMonth}} {{currentYear}}</h2>
                 <!-- <calendar-card class="m-8"/> -->
-                <FullCalendar :options="calendarOptions" ref="calendar" class="calendar">
-                    <!-- <template v-slot:eventContent="arg">
-                        <CalendarEvent :arg="arg" />
-                    </template> -->
-                </FullCalendar>
+                <FullCalendar :options="calendarOptions" ref="calendar" class="calendar"/>
             </div>
             <div class="px-0 md:px-3 mt-8">
                 <div class="text-lg font-semibold">Today: {{today}}</div>
@@ -36,17 +32,22 @@
 }
 </style>
 <script setup>
-import CalendarCard from '@/pages/dashboard/components/calendar-card/index.vue'
 import EventList from '../event-list.vue';
-
 import "@fullcalendar/core/vdom"; // solves problem with Vite (hot reload related - not necessary on production)
 import FullCalendar from "@fullcalendar/vue3";
-import listPlugin from "@fullcalendar/list";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "@vuepic/vue-datepicker/dist/main.css";
-// import { calendarEvents as events } from "../helpers/calendar-events";
+
+const calendar = ref(null);
+const currentMonth = ref('');
+const currentYear = ref('');
+const refreshCurrentDate = ()=>{
+    const api = calendar.value.getApi();
+    currentMonth.value = new Date(api.getDate()).toLocaleString('default', { month: 'long' });
+    currentYear.value = new Date(api.getDate()).getFullYear();
+}
 
 const calendarOptions = ref({
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
@@ -72,6 +73,8 @@ const calendarOptions = ref({
         // monthCalendar?.value?.getApi()?.select(params.start);
         //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
     },
+    dateClick: refreshCurrentDate,
+    datesSet: refreshCurrentDate,
     timeAxis: {
         slotDuration: "01:00:00",
     },
@@ -120,6 +123,12 @@ const calendarOptions = ref({
         //eventContent: { html: '<i>some html</i>' }
     },
 });
+
+onMounted(()=>{
+    refreshCurrentDate()
+});
+
+
 
 const data = [{
     id: 2,
