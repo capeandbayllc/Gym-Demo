@@ -138,6 +138,7 @@ import userMutation from "~/api/mutations/user";
 import {useMutation} from "@vue/apollo-composable";
 import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
+import lead from "~/api/queries/lead";
 
 const newMemberData = ref({
     id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
@@ -272,43 +273,10 @@ const filters = ref({status: ''})
 const opportunity = ["error", "warning", "accent"];
 // TODO implement filters
 
-const leadsQuery = gql`
-    query Leads($page: Int, $first: Int, $filter: Filter) {
-        leads(page: $page, first: $first, filter: $filter) {
-            data {
-                id
-                first_name
-                last_name
-                email
-                gender
-                phone,
-                profile_photo_path
-                created_at
-                updated_at
-                opportunity
-                locations {
-                    name
-                }
-                homeLocation {
-                    name
-                }
-            }
-            paginatorInfo {
-                currentPage
-                lastPage
-                firstItem
-                lastItem
-                perPage
-                total
-            }
-        }
-    }
-`;
-
 const getLeadsQuery = ()=>{
     leads.value = [];
     console.log('data')
-    const { result, onResult } = useQuery(leadsQuery, {first: 5});
+    const { result, onResult } = useQuery(lead.query.browse, {first: 5});
     if(result.value){
         leads.value = result.value.leads.data;
     }else{
