@@ -208,7 +208,6 @@ const saveLead = () => {
     const { mutate: createMember } = useMutation(userMutation.mutation.createUser);
     createMember({
         input: {
-            id: newMemberData.value.id + Math.floor(Math.random() * 9000000000) + 1000000000,
             first_name: newMemberData.value.first_name,
             middle_name: newMemberData.value.middle_name,
             last_name: newMemberData.value.last_name,

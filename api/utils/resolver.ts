@@ -96,6 +96,8 @@ class QueryResolver {
 class MutationResolver {
 
     public static async make(_: null, args: InputInterface, context: object, info: GraphQLResolveInfo) {
+        console.log('EXECUTING')
+        
         const name = info.fieldName;
         let resolver: UpdateMutationResolver;
 
@@ -150,6 +152,10 @@ function getMutationResolvers(mutation: ObjectTypeDefinitionNode, server: Server
     mutation.fields?.forEach((mutation: FieldDefinitionNode) => {
         const name: string = mutation.name.value;
         if (name.startsWith('update')) {
+            // @ts-ignore
+            mutations[name] = MutationResolver.make
+        }
+        if (name == 'createUser') {
             // @ts-ignore
             mutations[name] = MutationResolver.make
         }
