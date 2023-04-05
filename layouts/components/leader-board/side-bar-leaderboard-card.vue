@@ -9,16 +9,21 @@
         <div class="leaderboard-name relative">{{leader.first_name}} {{leader.last_name}} </div>
         <div class="points bg-[#5A5A5A5A] text-white group-hover:bg-[#FFD800] group-hover:text-black">{{leader.unitSold}} PTS</div>
         <div class="bg-secondary text-[8px] w-full rounded-b-xl">
-          <tr class="flex w-full">
-            <td class="card-header text-center">Classes</td>
-            <td class="card-header text-center">Attendance</td>
-            <td class="card-header text-center">Overall</td>
-          </tr>
-          <tr class="flex gap-1.5">
+          <div class="flex w-full h-4 mt-2">
+            <div class="w-1/3 text-center">Classes</div>
+            <div class="w-1/3 text-center">Attendance</div>
+            <div class="w-1/3 text-center">Overall</div>
+          </div>
+          <div class="flex w-full h-4">
+            <div class="w-1/3 text-center">{{leader.classes}}</div>
+            <div class="w-1/3 text-center">{{leader.attendance}}</div>
+            <div class="w-1/3 text-center">{{leader.overall}}</div>
+          </div>
+          <!-- <tr class="flex gap-1.5">
             <td class="card-value text-center">{{leader.classes}}</td>
             <td class="card-value text-center">{{leader.attendance}}</td>
             <td class="card-value text-center">{{leader.overall}}</td>
-          </tr>
+          </tr> -->
         </div>
       </div>
     </div>
