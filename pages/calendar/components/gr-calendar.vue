@@ -97,10 +97,6 @@ const eventClick = (info) => {
     emit("clickEventNode", info.event);
 };
 
-watchEffect(() => {
-    console.log(props.events)
-});
-
 const calendarOptions = ref({
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
     schedulerLicenseKey: "0157232768-fcs-1652392378",

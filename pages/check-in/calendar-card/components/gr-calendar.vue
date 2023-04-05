@@ -97,7 +97,6 @@ const calendarOptions = ref({
             listCalendar?.value?.getApi()?.gotoDate(params.start);
             monthCalendar?.value?.getApi()?.gotoDate(params.start);
             monthCalendar?.value?.getApi()?.select(params.start);
-            //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
         },
         timeAxis: {
             slotDuration: "01:00:00",

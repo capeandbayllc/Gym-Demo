@@ -159,8 +159,6 @@ watchEffect(() => {
         }
     }
 
-    console.clear()
-    console.log(props.user.id)
     events.value = tempEvents
     eventsIsLoading.value = false;
 
@@ -200,8 +198,6 @@ const showMoreDetails = async () => {
         attendee.profile_photo_path = data.data.user.profile_photo_path;
     }
 
-    console.log(eventDetails.value);
-
     eventIsLoading.value = false;
 };
 
@@ -212,7 +208,6 @@ const handleCalendarEvent = (e) => {
                 ...e._def.extendedProps,
                 instructor: data.data.user
             }
-            console.log(e._def)
             if (eventFormVisibility.value) return; // don't proceed if something else is in context
             let eventInfo = {
                 ...e._def,
