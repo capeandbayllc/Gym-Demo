@@ -1,16 +1,13 @@
 <template>
-    <div class="bg-gradient-to-b from-secondary/80 to-black w-full rounded-[20px] border-secondary border-[2px] max-w-[1200px]">
-            <h2 class="text-lg p-3">{{currentMonth}} {{currentYear}}</h2>
-            <!-- <calendar-card class="m-8"/> -->
-            <!-- <pre>
-                {{ getFormattedEvents }}
-            </pre> -->
-            <FullCalendar :options="calendarOptions" ref="calendar" class="calendar">
-                <template v-slot:eventContent="arg">
-                    <CalendarEvent :arg="arg" />
-                </template>
-            </FullCalendar>
-        </div>
+    <div
+        class="bg-gradient-to-b from-secondary/80 to-black w-full rounded-[20px] border-secondary border-[2px] max-w-[1200px]">
+        <h2 class="text-lg p-3">{{ currentMonth }} {{ currentYear }}</h2>
+        <FullCalendar :options="calendarOptions" ref="calendar" class="calendar">
+            <template v-slot:eventContent="arg">
+                <CalendarEvent :arg="arg" />
+            </template>
+        </FullCalendar>
+    </div>
 </template>
 
 <script setup>
@@ -36,12 +33,12 @@ const eventClick = (info) => {
 const calendar = ref(null);
 const currentMonth = ref('');
 const currentYear = ref('');
-const refreshCurrentDate = ()=>{
+const refreshCurrentDate = () => {
     const api = calendar.value.getApi();
     currentMonth.value = new Date(api.getDate()).toLocaleString('default', { month: 'long' });
     currentYear.value = new Date(api.getDate()).getFullYear();
 }
-onMounted(async ()=>{
+onMounted(async () => {
     refreshCurrentDate()
 });
 
@@ -52,7 +49,7 @@ const calendarOptions = ref({
     initialDate: "2022-12-01",
     slotDuration: "01:00",
     height: '500px',
-    // dateClick: handleDateClick,
+    eventClick,
     headerToolbar: {
         left: "",
         center: "prev,today,next timeGridDay,timeGridWeek,dayGridMonth",
@@ -62,12 +59,6 @@ const calendarOptions = ref({
     editable: true,
     selectable: true,
     dayMaxEvents: true,
-    eventClick,
-    datesSet: (params) => {
-        // listCalendar?.value?.getApi()?.gotoDate(params.start);
-        // monthCalendar?.value?.getApi()?.gotoDate(params.start);
-        // monthCalendar?.value?.getApi()?.select(params.start);
-    },
     dateClick: refreshCurrentDate,
     datesSet: refreshCurrentDate,
     timeAxis: {
@@ -85,13 +76,7 @@ const calendarOptions = ref({
         editable: true,
         selectable: true,
         dayMaxEvents: true,
-        // eventClick,
-        datesSet: (params) => {
-            // listCalendar?.value?.getApi()?.gotoDate(params.start);
-            // monthCalendar?.value?.getApi()?.gotoDate(params.start);
-            // monthCalendar?.value?.getApi()?.select(params.start);
-            //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
-        },
+        eventClick,
         timeAxis: {
             slotDuration: "01:00:00",
         },
@@ -114,12 +99,10 @@ const calendarOptions = ref({
         },
         viewDidMount: function (info) {
             onViewChanged();
-        },
-        //eventContent: { html: '<i>some html</i>' }
+        }
     },
 });
 </script>
-
 <style>
 .fc .fc-list-sticky .fc-list-day > *,
 .fc-theme-standard .fc-list-day-cushion,
@@ -131,7 +114,6 @@ const calendarOptions = ref({
 .fc-button {
     @apply !bg-transparent !border-0 !rounded-lg !py-[2px] !capitalize transition-all duration-150 ease-linear;
 }
-/* fc-dayGridMonth-button fc-button fc-button-primary */
 .fc-button.fc-button-active {
     @apply !bg-secondary !border-[1px] !border-[#073A76];
 }
@@ -182,10 +164,6 @@ th.fc-day-today {
     div {
         @apply h-full flex items-center justify-center uppercase;
     }
-}
-
-.fc-event-time {
-    /* @apply bg-[#191919]/[0.4] contrast-200 rounded-l-full pl-2; */
 }
 
 .fc .fc-scrollgrid-section:nth-child(2) {
@@ -268,12 +246,10 @@ table {
 
 thead .fc-scroller {
     @apply !overflow-hidden bg-secondary/[0.4];
-    /* table {
-        @apply bg-gradient-to-b from-secondary/80 via-secondary;
-    } */
 }
 
 .fc-daygrid-event {
     @apply overflow-hidden;
 }
 </style>
+
