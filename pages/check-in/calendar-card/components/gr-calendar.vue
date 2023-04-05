@@ -26,6 +26,10 @@ const props = defineProps({
     }
 });
 
+const events = ref(null);
+
+
+
 const eventClick = (info) => {
     emit("clickEventNode", info.event);
 };
@@ -33,6 +37,9 @@ const eventClick = (info) => {
 const calendar = ref(null);
 const currentMonth = ref('');
 const currentYear = ref('');
+const monthCalendar = ref(null);
+const listCalendar = ref(null);
+
 const refreshCurrentDate = () => {
     const api = calendar.value.getApi();
     currentMonth.value = new Date(api.getDate()).toLocaleString('default', { month: 'long' });
@@ -42,25 +49,34 @@ onMounted(async () => {
     refreshCurrentDate()
 });
 
+watchEffect(()=>{
+    events.value = props.events;
+})
+
 const calendarOptions = ref({
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
     schedulerLicenseKey: "0157232768-fcs-1652392378",
     initialView: "dayGridMonth",
     initialDate: "2022-12-01",
     slotDuration: "01:00",
-    height: '500px',
-    eventClick,
+    // height: '500px',
+    dateClick: refreshCurrentDate,
     headerToolbar: {
         left: "",
         center: "prev,today,next timeGridDay,timeGridWeek,dayGridMonth",
         right: "",
     },
-    events: props.events,
+    events: events,
     editable: true,
     selectable: true,
     dayMaxEvents: true,
-    dateClick: refreshCurrentDate,
-    datesSet: refreshCurrentDate,
+    eventClick,
+    datesSet: (params) => {
+        refreshCurrentDate();
+        listCalendar?.value?.getApi()?.gotoDate(params.start);
+        monthCalendar?.value?.getApi()?.gotoDate(params.start);
+        monthCalendar?.value?.getApi()?.select(params.start);
+    },
     timeAxis: {
         slotDuration: "01:00:00",
     },
@@ -77,6 +93,12 @@ const calendarOptions = ref({
         selectable: true,
         dayMaxEvents: true,
         eventClick,
+        datesSet: (params) => {
+            listCalendar?.value?.getApi()?.gotoDate(params.start);
+            monthCalendar?.value?.getApi()?.gotoDate(params.start);
+            monthCalendar?.value?.getApi()?.select(params.start);
+            //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
+        },
         timeAxis: {
             slotDuration: "01:00:00",
         },
@@ -99,7 +121,8 @@ const calendarOptions = ref({
         },
         viewDidMount: function (info) {
             onViewChanged();
-        }
+        },
+        //eventContent: { html: '<i>some html</i>' }
     },
 });
 </script>

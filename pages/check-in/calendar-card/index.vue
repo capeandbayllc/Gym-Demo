@@ -1,13 +1,13 @@
 <template>
     <simple-card class="checkin-calendar-card" :closable="true" title="Calendar">
+        <!-- {{ getFormattedEvents }} -->
         <div class="calendar-card-body card-gradient-bg">
-
-            <GrCalendar v-if="getFormattedEvents.length || events.length" :events="getFormattedEvents"
-                @clickEventNode="handleCalendarEvent"></GrCalendar>
+            <GrCalendar v-if="getFormattedEvents.length || events.length || !eventsIsLoading" :events="[...getFormattedEvents]"
+                @clickEventNode="handleCalendarEvent">
+            </GrCalendar>
             <div v-else class="h-[76vh] flex flex-col justify-center">
                 <spinner />
             </div>
-
         </div>
     </simple-card>
     <div class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-[#fff]/[0.1] backdrop-blur-sm calendar-style-transition"
@@ -24,10 +24,11 @@
 <style scoped>
 .checkin-calendar-card {
     @apply m-auto bg-neutral max-w-[1120px] xl:w-[1120px] w-full ;
+
     .calendar-card-body {
         @apply flex flex-col md:flex-row py-6 px-9 md:gap-2 gap-12 justify-center;
     }
-    
+
 }
 </style>
 <script setup>
@@ -101,12 +102,13 @@ const query = gql`
 
 const events = ref([]);
 const employees = ref([]);
+const eventsIsLoading = ref(true);
 
 const { result } = await useQuery(query);
 
 const getFormattedEvents = computed(() => {
     let formattedEvents = [];
-    for (let event of getFilteredEvents.value) {
+    for (let event of events.value) {
         formattedEvents.push({
             title: event.title,
             start: event.start,
@@ -115,9 +117,10 @@ const getFormattedEvents = computed(() => {
             backgroundColor: event.color,
             extendedProps: {
                 users: [...event.attendees],
+                owner_id: event.owner_id,
                 description: event.description,
                 color: event.color,
-                instructor: event.owner,
+                // instructor: event.owner,
                 location: event.location,
                 attendees: event.attendees,
             },
@@ -125,19 +128,6 @@ const getFormattedEvents = computed(() => {
     }
 
     return formattedEvents;
-});
-
-const getFilteredEvents = computed(() => {
-
-    let filteredEvents = [];
-
-    for (let event of events.value) {
-        if (event.owner_id == props.user.id) {
-            filteredEvents.push(event);
-        }
-    }
-
-    return filteredEvents;
 });
 
 watchEffect(() => {
@@ -153,23 +143,27 @@ watchEffect(() => {
         });
     }
 
+    let tempEvents = []
     for (let event of tempEventsContainer) {
-        request(user.query.findById, { id: event.owner_id }).then(
-            ({ data }) => {
-                events.value.push({
-                    ...event,
-                    owner: data.data.user,
-                    attendees: event.attendees.map((attendeeId) => ({
-                        id: attendeeId,
-                        name: null,
-                        email: null,
-                        phone: null,
-                        profile_photo_path: null,
-                    })),
-                });
-            }
-        );
+        if (event.owner_id == props.user.id) {
+            tempEvents.push({
+                ...event,
+                attendees: event.attendees.map((attendeeId) => ({
+                    id: attendeeId,
+                    name: null,
+                    email: null,
+                    phone: null,
+                    profile_photo_path: null,
+                })),
+            });
+        }
     }
+
+    console.clear()
+    console.log(props.user.id)
+    events.value = tempEvents
+    eventsIsLoading.value = false;
+
 });
 
 const eventFormVisibility = ref(false);
@@ -212,14 +206,22 @@ const showMoreDetails = async () => {
 };
 
 const handleCalendarEvent = (e) => {
-    if (eventFormVisibility.value) return; // don't proceed if something else is in context
-    let eventInfo = {
-        ...e._def,
-        start: e._instance.range.start,
-        end: e._instance.range.end,
-    };
-    eventDetails.value = eventInfo;
-    eventDetailsVisibibility.value = true;
+    request(user.query.findById, { id: e._def.extendedProps.owner_id })
+        .then(({ data }) => {
+            e._def.extendedProps = {
+                ...e._def.extendedProps,
+                instructor: data.data.user
+            }
+            console.log(e._def)
+            if (eventFormVisibility.value) return; // don't proceed if something else is in context
+            let eventInfo = {
+                ...e._def,
+                start: e._instance.range.start,
+                end: e._instance.range.end,
+            };
+            eventDetails.value = eventInfo;
+            eventDetailsVisibibility.value = true;
+        });
 };
 
 </script>
