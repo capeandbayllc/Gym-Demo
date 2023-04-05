@@ -2,7 +2,7 @@
     <div
         class="bg-gradient-to-b from-secondary/80 to-black w-full rounded-[20px] border-secondary border-[2px] max-w-[1200px]">
         <h2 class="text-lg p-3">{{ currentMonth }} {{ currentYear }}</h2>
-        <FullCalendar :options="calendarOptions" ref="calendar" class="calendar">
+        <FullCalendar :options="calendarOptions" ref="calendar" class="calendar p-2">
             <template v-slot:eventContent="arg">
                 <CalendarEvent :arg="arg" />
             </template>
@@ -56,7 +56,7 @@ watchEffect(()=>{
 const calendarOptions = ref({
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
     schedulerLicenseKey: "0157232768-fcs-1652392378",
-    initialView: "dayGridMonth",
+    initialView: "timeGridWeek",
     initialDate: "2022-12-01",
     slotDuration: "01:00",
     // height: '500px',
@@ -126,6 +126,10 @@ const calendarOptions = ref({
 });
 </script>
 <style>
+.fc-view-harness{
+    @apply bg-[#202020]/[0.9];
+}
+
 .fc .fc-list-sticky .fc-list-day > *,
 .fc-theme-standard .fc-list-day-cushion,
 .fc .fc-cell-shaded,

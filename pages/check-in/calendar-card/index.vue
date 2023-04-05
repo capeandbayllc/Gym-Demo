@@ -1,8 +1,9 @@
 <template>
     <simple-card class="checkin-calendar-card" :closable="true" title="Calendar">
         <!-- {{ getFormattedEvents }} -->
+        <!-- {{ user }} -->
         <div class="calendar-card-body card-gradient-bg">
-            <GrCalendar v-if="getFormattedEvents.length || events.length || !eventsIsLoading" :events="[...getFormattedEvents]"
+            <GrCalendar class="bg-black" v-if="getFormattedEvents.length || events.length || !eventsIsLoading" :events="[...getFormattedEvents]"
                 @clickEventNode="handleCalendarEvent">
             </GrCalendar>
             <div v-else class="h-[76vh] flex flex-col justify-center">
@@ -36,7 +37,7 @@
 import "@vuepic/vue-datepicker/dist/main.css";
 import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
-import user from "~/api/queries/user";
+import userQuery from "~/api/queries/user";
 import { request } from "~/api/utils/request";
 import EventDetails from "~/pages/calendar/components/partials/event-details.vue";
 import GrCalendar from "./components/gr-calendar.vue";
@@ -189,7 +190,7 @@ const showMoreDetails = async () => {
     eventInformationVisibibility.value = true;
 
     for (let attendee of eventDetails.value.extendedProps.users) {
-        const { data } = await request(user.query.findById, {
+        const { data } = await request(userQuery.query.findById, {
             id: attendee.id.entity_id,
         });
         attendee.name = `${data.data.user.first_name} ${data.data.user.last_name}`;
@@ -202,7 +203,7 @@ const showMoreDetails = async () => {
 };
 
 const handleCalendarEvent = (e) => {
-    request(user.query.findById, { id: e._def.extendedProps.owner_id })
+    request(userQuery.query.findById, { id: e._def.extendedProps.owner_id })
         .then(({ data }) => {
             e._def.extendedProps = {
                 ...e._def.extendedProps,
