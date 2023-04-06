@@ -2,6 +2,7 @@
     <div class="relative">
         <h2 v-if="showDateTitle" class="text-lg p-3">{{ currentMonth }} {{ currentYear }}</h2>
         <div
+            v-if="!showDateTitle"
             class="absolute w-[18%] h-[50px] top-[10px] left-0 hidden lg:block"
             ref="calendarUserDropdown"
             @click="setShowCalendarUserDropDownToTrue()"
@@ -28,6 +29,7 @@
             />
         </div>
         <div
+            v-if="!showDateTitle"
             class="absolute w-[18%] h-[50px] top-[10px] right-0 hidden lg:block"
         >
             <div
