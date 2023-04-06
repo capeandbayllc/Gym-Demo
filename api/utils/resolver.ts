@@ -96,8 +96,6 @@ class QueryResolver {
 class MutationResolver {
 
     public static async make(_: null, args: InputInterface, context: object, info: GraphQLResolveInfo) {
-        console.log('EXECUTING')
-        
         const name = info.fieldName;
         let resolver: UpdateMutationResolver;
 
