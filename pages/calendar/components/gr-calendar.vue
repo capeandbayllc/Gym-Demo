@@ -1,5 +1,6 @@
 <template>
     <div class="relative">
+        <h2 v-if="showDateTitle" class="text-lg p-3">{{ currentMonth }} {{ currentYear }}</h2>
         <div
             class="absolute w-[18%] h-[50px] top-[10px] left-0 hidden lg:block"
             ref="calendarUserDropdown"
@@ -62,6 +63,7 @@ import "@vuepic/vue-datepicker/dist/main.css";
 import CalendarEvent from "./partials/calendar-event.vue";
 import CalendarUserDropdown from "./calendar-user-dropdown.vue";
 import { UserIcon, ArrowIcon } from "~~/components/icons";
+import dateFormat from "dateformat";
 
 const calenderView = ref("timeGridWeek");
 
@@ -70,6 +72,10 @@ const props = defineProps({
     events: {
         type: Array,
         default: [],
+    },
+    showDateTitle: {
+        type: Boolean,
+        default: false,
     },
     filterOptions: Object,
     calendarViewOptions: Array,
@@ -88,10 +94,24 @@ const start = ref(null);
 const end = ref(null);
 const currentView = ref("timeGridWeek");
 const selectedDate = ref(null);
+
+const currentMonth = ref('');
+const currentYear = ref('');
+
 const monthCalendar = ref(null);
 const listCalendar = ref(null);
 const showCalendarUserDropDown = ref(false);
 const calendarUserDropdown = ref(null);
+
+const refreshCurrentDate = () => {
+    const api = calendar.value.getApi();
+    const currentDate = new Date(api.getDate());
+    currentMonth.value = dateFormat(currentDate, 'mmmm');
+    currentYear.value = dateFormat(currentDate, 'yyyy');
+}
+onMounted(async () => {
+    refreshCurrentDate()
+});
 /** existing event click handler */
 const eventClick = (info) => {
     emit("clickEventNode", info.event);
@@ -115,6 +135,7 @@ const calendarOptions = ref({
     dayMaxEvents: true,
     eventClick,
     datesSet: (params) => {
+        refreshCurrentDate()
         listCalendar?.value?.getApi()?.gotoDate(params.start);
         monthCalendar?.value?.getApi()?.gotoDate(params.start);
         monthCalendar?.value?.getApi()?.select(params.start);

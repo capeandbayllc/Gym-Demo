@@ -3,7 +3,10 @@
         <!-- {{ getFormattedEvents }} -->
         <!-- {{ user }} -->
         <div class="calendar-card-body card-gradient-bg">
-            <GrCalendar class="bg-black" v-if="getFormattedEvents.length || events.length || !eventsIsLoading" :events="[...getFormattedEvents]"
+            <GrCalendar
+                class="bg-gradient-to-b from-secondary/80 to-black w-full rounded-[20px] border-secondary border-[2px] max-w-[1200px]"
+                v-if="getFormattedEvents.length || events.length || !eventsIsLoading" :events="[...getFormattedEvents]"
+                :show-date-title="true"
                 @clickEventNode="handleCalendarEvent">
             </GrCalendar>
             <div v-else class="h-[76vh] flex flex-col justify-center">
@@ -22,6 +25,11 @@
         :eventIsLoading="eventIsLoading" @outclick="resetState" @cancel="resetState" />
     <OfferUp :event="eventDetails" :showOfferUp="offerUpVisibibility" :employees="employees" @cancel="resetState" />
 </template>
+<style>
+.fc-view-harness{
+    @apply bg-[#202020]/[0.9];
+}
+</style>
 <style scoped>
 .checkin-calendar-card {
     @apply m-auto bg-neutral max-w-[1120px] xl:w-[1120px] w-full ;
@@ -40,7 +48,8 @@ import { useQuery } from "@vue/apollo-composable";
 import userQuery from "~/api/queries/user";
 import { request } from "~/api/utils/request";
 import EventDetails from "~/pages/calendar/components/partials/event-details.vue";
-import GrCalendar from "./components/gr-calendar.vue";
+// import GrCalendar from "./components/gr-calendar.vue";
+import GrCalendar from "~/pages/calendar/components/gr-calendar.vue";
 import OfferUp from "~/pages/calendar/components/partials/offer-up.vue";
 import EventInformation from "~/pages/calendar/components/partials/event-information.vue";
 
