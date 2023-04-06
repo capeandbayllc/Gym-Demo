@@ -56,12 +56,11 @@ const currentTab = ref("leads");
 const columns = [' ', 'name', '', '', ''];
 
 
-const { onResult } = useQuery(lead.query.browse, {first: 5});
-onResult((data) => {
-    leads.value = data.data.leads.data;
+const { result } = useQuery(lead.query.browse, {first: 5});
+watch(result, () => {
+    leads.value = result.value.leads.data;
     isLoading.value = false;
 })
-
 request(member.query.browse).then(({data}) => {
   members.value = data.data.members.data;
 

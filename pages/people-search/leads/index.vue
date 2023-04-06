@@ -213,16 +213,10 @@ const opportunity = ["error", "warning", "accent"];
 
 const getLeadsQuery = ()=>{
     leads.value = [];
-    console.log('data')
-    const { result, onResult } = useQuery(lead.query.browse, {first: 5});
-    if(result.value){
+    const { result } = useQuery(lead.query.browse, {first: 5});
+    watch(result, () => {
         leads.value = result.value.leads.data;
-    }else{
-        onResult((data) => {
-            console.log(data)
-            leads.value = data.data.leads.data;
-        })
-    }
+    })
 
 }
 getLeadsQuery();
