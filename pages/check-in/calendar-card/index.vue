@@ -1,19 +1,33 @@
 <template>
     <simple-card class="checkin-calendar-card" :closable="true" title="Calendar">
-        <!-- {{ getFormattedEvents }} -->
-        <!-- {{ user }} -->
         <div class="calendar-card-body card-gradient-bg">
             <GrCalendar
                 class="bg-gradient-to-b from-secondary/80 to-black w-full rounded-[20px] border-secondary border-[2px] max-w-[1200px]"
                 v-if="getFormattedEvents.length || events.length || !eventsIsLoading" :events="[...getFormattedEvents]"
                 :show-date-title="true"
-                @clickEventNode="handleCalendarEvent">
+                @clickEventNode="handleCalendarEvent"
+                @clickEmptyNode="handleAddNew">
             </GrCalendar>
             <div v-else class="h-[76vh] flex flex-col justify-center">
                 <spinner />
             </div>
         </div>
     </simple-card>
+    <div
+        class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-[#fff]/[0.1] backdrop-blur-sm calendar-style-transition"
+        :class="{
+            'z-50 opacity-100': eventFormVisibility,
+            '-z-50 opacity-0': !eventFormVisibility,
+        }"
+    >
+        <EventForm
+            @cancel="resetState"
+            @createEvent="handleCreateEvent"
+            :members="members"
+            :employees="employees"
+            :nodeContext="emptyNodeContext"
+        />
+    </div>
     <div class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-[#fff]/[0.1] backdrop-blur-sm calendar-style-transition"
         :class="{
             'z-50 opacity-100': eventDetailsVisibibility,
@@ -52,6 +66,7 @@ import EventDetails from "~/pages/calendar/components/partials/event-details.vue
 import GrCalendar from "~/pages/calendar/components/gr-calendar.vue";
 import OfferUp from "~/pages/calendar/components/partials/offer-up.vue";
 import EventInformation from "~/pages/calendar/components/partials/event-information.vue";
+import EventForm from "~/pages/calendar//components/event-form.vue";
 
 const props = defineProps({
     user: {
@@ -107,11 +122,21 @@ const query = gql`
                email
            }
         }
+        members {
+            data {
+                id
+                first_name
+                last_name
+                email
+                profile_photo_path
+            }
+        }
     }
 `;
 
 const events = ref([]);
 const employees = ref([]);
+const members = ref([]);
 const eventsIsLoading = ref(true);
 
 const { result, onError } = await useQuery(query, { param: {viewUser: props.user.id} });
@@ -142,6 +167,7 @@ const getFormattedEvents = computed(() => {
 watchEffect(() => {
     if (!result.value) return;
     console.log("GQL Result:", result.value);
+    members.value = result.value.members.data;
     let tempEventsContainer = [...result.value.calendarEvents];
     employees.value = [];
     for (let employee of result.value.employee.data) {
@@ -177,6 +203,7 @@ const eventDetailsVisibibility = ref(false);
 const eventInformationVisibibility = ref(false);
 const offerUpVisibibility = ref(false);
 const eventIsLoading = ref(true);
+const emptyNodeContext = ref(null);
 
 const resetState = () => {
     eventDetailsVisibibility.value = false;
@@ -184,6 +211,25 @@ const resetState = () => {
     offerUpVisibibility.value = false;
     eventFormVisibility.value = false;
     eventIsLoading.value = true;
+};
+
+const handleAddNew = (node) => {
+    if (eventDetailsVisibibility.value || eventInformationVisibibility.value) {
+        return;
+    } else {
+        const startTime = new Date(node.date);
+
+        emptyNodeContext.value = {
+            start: startTime,
+            dateStr: node.dateStr,
+            allDay: node.allDay,
+            dayEl: node.dayEl,
+            jsEvent: node.jsEvent,
+            view: node.view,
+        };
+        resetState();
+        eventFormVisibility.value = true;
+    }
 };
 
 const showOfferUp = () => {
@@ -206,6 +252,44 @@ const showMoreDetails = async () => {
     }
 
     eventIsLoading.value = false;
+};
+
+const getDateTimeString = (date) => {
+    const year = date.getFullYear();
+    const month =
+        date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+    const dateNum = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+    const hour = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+    const min =
+        date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+
+    return `${year}-${month}-${dateNum} ${hour}:${min}:00`;
+};
+
+const handleCreateEvent = (form) => {
+    const newEventObj = {
+        ...events.value[0],
+        attendees: [],
+
+        title: form.title,
+        description: form.description,
+        start: getDateTimeString(
+            new Date(
+                `${form.start.date} ${!form.allDay ? form.start.time : ""}`
+            )
+        ),
+        end: getDateTimeString(
+            new Date(
+                `${form.end.date} ${
+                    !form.allDay ? form.end.time : "11:59:59 PM"
+                }`
+            )
+        ),
+        full_day_event: form.allDay,
+    };
+
+    events.value.push(newEventObj);
+    eventFormVisibility.value = false;
 };
 
 const handleCalendarEvent = (e) => {
