@@ -2,58 +2,58 @@ import gql from "graphql-tag";
 
 export const query = gql`
     query CalendarEventsQuery {
-       calendarEventTypes {
-           data {
-               id
-               name
-               description
-               color
-               type
-           }
-       }
-       locations {
-           data {
-               id
-               name
-           }
-       }
-       employee {
-           data {
-               id
-               user_id
-               first_name
-               last_name
-               email
-           }
-       }
-       users {
-           data {
-               id
-               first_name
-               last_name
-               email
-               profile_photo_path
-           }
-       }
-       members {
-           data {
-               id
-               first_name
-               last_name
-               email
-               profile_photo_path
-           }
-       }
-       leads {
-           data {
-               id
-               first_name
-               last_name
-               email
-               profile_photo_path
-           }
-       }
-        calendarEvents {
+        calendarEventTypes {
+            data {
+                id
+                name
+                description
+                color
+                type
+            }
+        }
+        locations {
+            data {
+                id
+                name
+            }
+        }
+        employee {
+            data {
+                id
+                user_id
+                first_name
+                last_name
+                email
+            }
+        }
+        users {
+            data {
+                id
+                first_name
+                last_name
+                email
+                profile_photo_path
+            }
+        }
+        members {
+            data {
+                id
+                first_name
+                last_name
+                email
+                profile_photo_path
+            }
+        }
+        leads {
+            data {
+                id
+                first_name
+                last_name
+                email
+                profile_photo_path
+            }
+        }
+        calendarEvent {
             id
             title
             owner_id

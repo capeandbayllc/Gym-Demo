@@ -348,7 +348,7 @@ const getDayClass = (date) => {
 watch(result, async (ov, nv) => {
     if (initialized.value) return;
     console.log("GQL Result:", result.value);
-    eventTypes.value = result.value.calendarEvents.data;
+    eventTypes.value = result.value.calendarEvent;
     employees.value = [];
     for (let employee of result.value.employee.data) {
         employees.value.push({
@@ -361,7 +361,7 @@ watch(result, async (ov, nv) => {
     leads.value = result.value.leads.data;
     locations.value = result.value.locations.data;
     event_types.value = result.value.calendarEventTypes.data;
-    let tempEventsContainer = [...result.value.calendarEvents];
+    let tempEventsContainer = [...result.value.calendarEvent];
 
     for (let event of tempEventsContainer) {
         request(user.query.findById, { id: event.owner_id }).then(

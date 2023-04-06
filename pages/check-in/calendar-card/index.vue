@@ -51,7 +51,7 @@ const props = defineProps({
 })
 
 const query = gql`
-    query CalendarEventsQuery {
+    query CalendarEventsQuery($filter: Filter) {
         calendarEventTypes {
             data {
                 id
@@ -61,7 +61,7 @@ const query = gql`
                 type
             }
         }
-        calendarEvents {
+        calendarEvent(filter: $filter) {
             id
             title
             owner_id
@@ -105,7 +105,7 @@ const events = ref([]);
 const employees = ref([]);
 const eventsIsLoading = ref(true);
 
-const { result } = await useQuery(query);
+const { result } = await useQuery(query, { filter: {search: props.user.id} });
 
 const getFormattedEvents = computed(() => {
     let formattedEvents = [];
@@ -121,7 +121,6 @@ const getFormattedEvents = computed(() => {
                 owner_id: event.owner_id,
                 description: event.description,
                 color: event.color,
-                // instructor: event.owner,
                 location: event.location,
                 attendees: event.attendees,
             },
@@ -134,7 +133,7 @@ const getFormattedEvents = computed(() => {
 watchEffect(() => {
     if (!result.value) return;
     console.log("GQL Result:", result.value);
-    let tempEventsContainer = [...result.value.calendarEvents];
+    let tempEventsContainer = [...result.value.calendarEvent];
     employees.value = [];
     for (let employee of result.value.employee.data) {
         employees.value.push({
@@ -146,18 +145,16 @@ watchEffect(() => {
 
     let tempEvents = []
     for (let event of tempEventsContainer) {
-        if (event.owner_id == props.user.id) {
-            tempEvents.push({
-                ...event,
-                attendees: event.attendees.map((attendeeId) => ({
-                    id: attendeeId,
-                    name: null,
-                    email: null,
-                    phone: null,
-                    profile_photo_path: null,
-                })),
-            });
-        }
+        tempEvents.push({
+            ...event,
+            attendees: event.attendees.map((attendeeId) => ({
+                id: attendeeId,
+                name: null,
+                email: null,
+                phone: null,
+                profile_photo_path: null,
+            })),
+        });
     }
 
     events.value = tempEvents
