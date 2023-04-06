@@ -60,7 +60,7 @@ const props = defineProps({
 })
 
 const query = gql`
-    query CalendarEventsQuery($filter: Filter) {
+    query calendarEvents($param: CalendarEventInput) {
         calendarEventTypes {
             data {
                 id
@@ -70,7 +70,7 @@ const query = gql`
                 type
             }
         }
-        calendarEvent(filter: $filter) {
+        calendarEvents(param: $param) {
             id
             title
             owner_id
@@ -114,7 +114,7 @@ const events = ref([]);
 const employees = ref([]);
 const eventsIsLoading = ref(true);
 
-const { result } = await useQuery(query, { filter: {search: props.user.id} });
+const { result, onError } = await useQuery(query, { param: {viewUser: props.user.id} });
 
 const getFormattedEvents = computed(() => {
     let formattedEvents = [];
@@ -142,7 +142,7 @@ const getFormattedEvents = computed(() => {
 watchEffect(() => {
     if (!result.value) return;
     console.log("GQL Result:", result.value);
-    let tempEventsContainer = [...result.value.calendarEvent];
+    let tempEventsContainer = [...result.value.calendarEvents];
     employees.value = [];
     for (let employee of result.value.employee.data) {
         employees.value.push({

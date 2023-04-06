@@ -6,6 +6,13 @@ export interface Filter {
     state: String
 }
 
+export interface CalendarEventInput {
+    search: String
+    start: String
+    end: String
+    viewUser: String
+}
+
 export interface Filterable {
     apply: (records: Collection<any>, filter: Filter, name: string, args: object) => Collection<any>
 }
@@ -39,6 +46,6 @@ export interface PaginatorArgs {
     orderBy?: PaginatorOrderByClause
     first?: number,
     page?: number,
-
     filter?: Filter,
+    param?: CalendarEventInput,
 }

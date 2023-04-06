@@ -53,7 +53,7 @@ export const query = gql`
                 profile_photo_path
             }
         }
-        calendarEvent {
+        calendarEvents {
             id
             title
             owner_id

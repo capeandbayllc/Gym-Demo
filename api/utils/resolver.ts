@@ -19,6 +19,7 @@ import DbCollection from "miragejs/db-collection";
 import {GraphQLResolveInfo} from "graphql/type/definition";
 import * as defaultMutationResolver from "~/api/mutations/resolvers/update.default";
 import {InputInterface, UpdateMutationResolver} from "~/api/mutations/resolvers/ResolverInterfaces";
+import calendarEventsResolver from "~~/api/queries/resolver/calendarEvents";
 
 
 class QueryResolver {
@@ -63,7 +64,7 @@ class QueryResolver {
     }
 
     public async make(_: null, args: PaginatorArgs, context: object, info: GraphQLResolveInfo) {
-        // @ts-ignore
+        // @ts-ignore   
         const schema = context.mirageSchema[context.mirageSchema.toCollectionName(info.fieldName)];
         let { first = 0, page = 0, orderBy, filter } = args;
 
@@ -128,21 +129,27 @@ class MutationResolver {
 function getQueryResolvers(query: ObjectTypeDefinitionNode, server: Server): object {
     const queries: object = {};
     query.fields?.forEach((query: FieldDefinitionNode) => {
+      const type: TypeNode = query.type;
+      const name: string = query.name.value;
+      const isPaginatable: boolean = (type.kind === Kind.NAMED_TYPE && type.name.value.endsWith('Paginator'));
+  
+      if (name === 'calendarEvents') {
+        const resolver = calendarEventsResolver;
+        // @ts-ignore
+        queries[name] = resolver;
+      } else if (query.arguments) {
         // @ts-ignore
         const isFilterable: boolean = query.arguments?.some((a: FieldDefinitionNode) => a.type?.name?.value === 'Filter');
-        const type: TypeNode = query.type;
-        const name: string = query.name.value;
-        const isPaginatable: boolean = (type.kind === Kind.NAMED_TYPE && type.name.value.endsWith('Paginator'));
-
         if (isPaginatable || isFilterable) {
             const resolver = new QueryResolver(server, isFilterable, isPaginatable);
             // @ts-ignore
             queries[name] = resolver.make.bind(resolver);
         }
+      }
     });
-
+  
     return queries;
-}
+  }
 
 function getMutationResolvers(mutation: ObjectTypeDefinitionNode, server: Server): object {
     const mutations: object = {};
