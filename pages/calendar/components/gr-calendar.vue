@@ -249,6 +249,16 @@ onMounted(async () => {
 });
 </script>
 <style>
+.fc-view-harness{
+    @apply m-2 overflow-hidden rounded-xl border-[#073A76];
+}
+.fc-view-harness, .fc-scrollgrid-section, .fc-scrollgrid, .fc-scrollgrid-liquid, .fc-view tbody{
+    @apply rounded-xl;
+}
+.fc-scroller-harness{
+    @apply rounded-t-xl;
+}
+
 .fc .fc-list-sticky .fc-list-day > *,
 .fc-theme-standard .fc-list-day-cushion,
 .fc .fc-cell-shaded,
