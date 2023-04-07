@@ -36,7 +36,7 @@
     @apply p-5 w-full h-fit;
   
     .custom-page-content {
-      @apply block border border-secondary bg-black rounded-b-xl p-7;
+      @apply block border-2 border-secondary bg-black rounded-b-xl p-7;
     }
   
     .custom-page-content-header {
