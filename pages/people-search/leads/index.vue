@@ -156,6 +156,7 @@ onMounted(() => {
         newMemberData.value.home_location_id = result.value.locations.data[0].id;
         newMemberDataReset.value = {...newMemberData.value};
     })
+    getLeadsQuery()
 
 })
 
@@ -214,13 +215,8 @@ const opportunity = ["error", "warning", "accent"];
 // TODO implement filters
 
 const getLeadsQuery = ()=>{
-    // leads.value = [];
-    // request(lead.query.browse, { filter: filters.value }).then(({ data }) => {
-    //     leads.value = data.data.leads.data;
-    // });
     const { result } = useQuery(lead.query.browse, {first: 5});
-    watchEffect(() => {
-        if(!result.value) return
+    watch(result, () => {
         leads.value = result.value.leads.data;
     })
 

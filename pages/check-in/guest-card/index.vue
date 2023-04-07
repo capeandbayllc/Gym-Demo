@@ -95,9 +95,8 @@ import { ref } from "vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { CalendarIcon } from "~~/components/icons";
-import axios from "axios";
-import { print } from "graphql/language";
 import location from "~~/api/queries/location";
+import { useQuery } from '@vue/apollo-composable';
 
 const format = (date) => {
   const day = date.getDate();
@@ -140,14 +139,15 @@ const fields = [
 const locations = ref([]);
 
 const locationsData = ref([]);
-axios.post('/graphql', { query: print(location.query.browse) })
-  .then(({ data }) => {
-    locationsData.value = data.data.locations;
-    locations.value = locationsData.value.data.map((e) => {
-      return {
-        value: e.id,
-        label: e.name
-      }
-    })
-  });
+const { result } = useQuery(location.query.browse);
+watchEffect(()=>{
+  if(!result?.value)return
+  locationsData.value = result.value?.locations?.data;
+  locations.value = locationsData.value.map((e) => {
+    return {
+      value: e.id,
+      label: e.name
+    }
+  })
+})
 </script>

@@ -57,7 +57,8 @@ const membersData = ref([]);
 const types = ["platinum", "gold", "silver", "bronze"];
 
 const { result } = useQuery(member.query.browse);
-watch(result, () => {
+watchEffect(() => {
+  if(!result?.value) return
   console.info("data.data.members", result.value.members);
   result.value.members.data.forEach((member) => {
     membersData.value.push(

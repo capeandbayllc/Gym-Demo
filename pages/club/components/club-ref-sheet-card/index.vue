@@ -1,15 +1,13 @@
 <template>
     <club-card :title-icon="ClubRefSheetIcon" title="Club Reference Sheet">
-        <club-ref-sheet-list :columns="columns" :items="locationsData.data" />
-        {{ locationData }}
+        <club-ref-sheet-list :columns="columns" :items="locationsData" />
     </club-card>
 </template>
 <script setup>
     import { ClubRefSheetIcon } from '~~/components/icons'
     import ClubCard from '../club-card.vue';
     import ClubRefSheetList from './club-ref-sheet-list.vue'
-    import axios from "axios";
-    import { print } from "graphql/language";
+    import { useQuery } from '@vue/apollo-composable';
     import location from "~~/api/queries/location";
 
     onMounted(async () => {
@@ -49,8 +47,9 @@
     ];
 
     const locationsData = ref([]);
-    axios.post('/graphql', { query: print(location.query.browse) })
-        .then(({ data }) => {
-            locationsData.value = data.data.locations;
-        });
+    const { result } = useQuery(location.query.browse);
+    watchEffect(()=>{
+        if(!result?.value) return
+        locationsData.value = result.value?.locations?.data;
+    })
 </script>

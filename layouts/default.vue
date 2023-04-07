@@ -205,8 +205,9 @@ function getNotifications(user) {
   if (!user.value) return;
 
   const { result } = useQuery(notification.query.browse);
-  watch(result, () => {
-      user.value.notifications = result.value.notifications.data;
+  watchEffect(() => {
+    if(!result?.value) return
+    user.value.notifications = result.value.notifications.data;
   })
 }
 </script>
