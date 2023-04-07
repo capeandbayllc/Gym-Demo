@@ -61,7 +61,7 @@ watch(result, () => {
     isLoading.value = false;
 })
 
-const { result: memberResult } = useQuery(member.query.browse);
+const { result: memberResult } = useQuery(member.query.browse, {first: 5} );
 watch(memberResult, () => {
   members.value = memberResult.value.members.data;
   isLoading.value = false;
