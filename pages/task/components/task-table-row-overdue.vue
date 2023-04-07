@@ -10,8 +10,36 @@
     <td><div class="gap-2 border-r-2 border-[#FF0000]">18 Nov 2020</div></td>
     <td>
       <div class="flex gap-2 border-r-2 border-[#FF0000]"> 
-        <div class="text-[#5A5A5A] px-2 hover:text-[#0075C9] cursor-pointer">Project Status</div> <CheckMark/>
-
+        <div class="dropdown dropdown-end">
+              <div class="text-[#5A5A5A] ml-2 hover:text-[#0075C9] cursor-pointer flex gap-2 " tabindex="0" @click.prevent.stop>
+                  project status  <CheckMark/>
+              </div>
+              <div class="dropdown-content top-0 left-2 p-1 menu bg-white w-32 items-start text-[#5A5A5A] text-sm whitespace-nowrap cursor-pointer gap-2 rounded-md">
+                <div class="flex">
+                  <div class="text-secondary font-bold">Project Status</div>
+                </div>
+                <div class="flex ml-1">
+                  <div class=" m-auto mr-2"> <Completed/> </div>
+                  <div>Completed</div>
+                </div>
+                <div class="flex ml-1">
+                  <div class="rounded-full w-4 h-4 bg-[#A8A8A8] m-auto mr-2"></div>
+                  <div>No-Show</div>
+                </div>
+                <div class="flex ml-1">
+                  <div class="rounded-full w-4 h-4 bg-[#00A7FF] m-auto mr-2"></div>
+                  <div>Rescheduled</div>
+                </div>
+                <div class="flex ml-1">
+                  <div class="rounded-full w-4 h-4 bg-[#FF0000] m-auto mr-2"></div>
+                  <div>Canceled</div>
+                </div>
+                <div class="flex ml-1">
+                  <div class=" m-auto mr-2"> <CloseMe/> </div>
+                  <div>Overdue</div>
+                </div>
+              </div>
+          </div>
       </div>
     </td>
     <td>
@@ -50,7 +78,7 @@ td:last-child {
 <script setup lang="ts">
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
-import {CheckMark } from "@/components/icons";
+import {CheckMark,Completed,CloseMe } from "@/components/icons";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {Ref} from "vue";
 import dateFormat from "dateformat";

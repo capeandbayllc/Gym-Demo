@@ -2,7 +2,7 @@
     <div class="flex w-full mb-4">
         <div class="w-5/6"></div>
         <div class="w-2/6">
-            <month-switcher class="pl-4" :onChange="switchMonth" />
+            <month-switcher class="pl-4" :onChange="switchMonth" :startMonth="startOfTheWeek" />
         </div>
     </div>
 
@@ -15,9 +15,9 @@
             />
     </div>
 
-    <div class="flex my-10 items-stretch flex-start w-1/2 text-start float-right">
-        <div class="text-secondary">Tasks filters:</div>
-        <div class="tab-text">
+    <div class="flex my-10 gap-4 w-[60rem]">
+        <div class="text-secondary text-lg">Tasks filters:</div>
+        <div class="tab-text ">
             All
         </div>
         <div class="tab-text">
@@ -39,14 +39,14 @@
 </template>
 <style>
 .tab-text{
-    @apply bg-secondary text-xs text-white p-1 mx-2 rounded-sm  cursor-pointer hover:bg-violet-600 active:bg-violet-700  focus:outline-none focus:ring focus:ring-violet-300 ;
+    @apply bg-secondary text-sm text-white m-auto py-0.5 px-2  mx-2 rounded-sm  cursor-pointer  active:bg-transparent active:border-secondary  active:border focus:outline-none focus:ring focus:ring-violet-300 ;
 }
 .dt-layer{ 
     @apply w-[62rem] bg-gradient-to-b from-[#0075C94D] to-black  rounded-2xl border border-[#0075C9];
 }
 </style>
 <script setup>
-import TaskDateSwitcher from "./components/TaskDataSwitcher"
+import TaskDateSwitcher from "./components/TaskDateSwitcher"
 import MonthSwitcher from "./components/MonthSwitcher";
 import TaskDataTable from "./components/TaskDataTable.vue";
 const selectedDate = ref(new Date());
@@ -73,4 +73,7 @@ const switchMonth = (month) => {
     );
     setStartOfTheWeek(start_date);
 };
+ onUpdated(()=>{
+     console.log(startOfTheWeek.value.getMonth())
+}) 
 </script>

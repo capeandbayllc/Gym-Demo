@@ -1,6 +1,4 @@
 <template>
-    <!-- <select-box :items="items" :label="label" /> -->
-
     <select name="" id="" class="text-white rounded-xl p-1 bg-secondary" v-model="month_value"  @change="handleChange(month_value)" >
         <option value="" :key="index"  selected>Month</option>
         
@@ -29,11 +27,25 @@ const props = defineProps({
         type: Function,
         default: () => null,
     },
+    startMonth:{
+        type:String,
+    }
 });
-const month_value = ref("");
+
+/* watch(props.startMonth,(newStartMonth)=>{
+    month_value = items[newStartMonth.getMonth()];
+}) */
+
+let month_value =items[props.startMonth.getMonth()]
 const handleChange = (value) => {
     let ndx = items.indexOf(value);
     props.onChange(ndx);
 
 };
+/* onUpdated(()=>{
+    this.month_value =items[props.startMonth.getMonth()]
+}) */
+onUpdated(()=>{
+    month_value =items[props.startMonth.getMonth()]
+})
 </script>

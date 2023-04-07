@@ -56,13 +56,9 @@
   const isSearchEnable = ref(false)
   const addEmployeePopUp = ref(null)
  const addEmployeeScreenIndex = ref(0);
-  // const leads = ref([]);
-
   const props=defineProps({
     title:String,
   })
-  
-  
   
   const {result} = useQuery(employee.query.browse);
   const employees = computed(() => result?.value?.employee?.data);
@@ -145,7 +141,6 @@
     }
    
   ];
-  
   
   </script>
   
