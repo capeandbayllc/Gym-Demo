@@ -58,9 +58,8 @@
 </template>
 <script setup>
 import member from "~/api/queries/member";
-import { request } from "~/api/utils/request";
 import user from "~/api/mutations/user";
-import { useMutation } from "@vue/apollo-composable";
+import { useQuery, useMutation } from "@vue/apollo-composable";
 import Datepicker from "@vuepic/vue-datepicker";
 import MultiSelect from "~/components/multi-select/index.vue";
 import lead from "~/api/queries/lead";
@@ -73,20 +72,20 @@ const route = useRoute();
 const profileId = route.query.id;
 const isLeadView = route.query.type === "lead";
 
-request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-  ({ data }) => {
-    const user = data.data[isLeadView ? "lead" : "member"];
+const { result } = useQuery((isLeadView ? lead : member).query.get, {
+  id: profileId,
+});
 
-    const homeLocation = user.homeLocation;
-    delete user.homeLocation;
+watch(result, () => {
+  const user = result.value[isLeadView ? "lead" : "member"];
+  const newUser = { ...user, homeLocation: undefined };
 
-    memberInfo.value = {
-      ...user,
-      ...{ id: user.user_id, address: { ...homeLocation } },
-    };
-    demographicsObj.value = { ...homeLocation, ...user };
-  }
-);
+  memberInfo.value = {
+    ...newUser,
+    ...{ id: user.user_id, address: { ...user.homeLocation } },
+  };
+  demographicsObj.value = { ...user };
+});
 
 const handleEditAttachment = (v) => {
   console.log("edit attachment with id", v);

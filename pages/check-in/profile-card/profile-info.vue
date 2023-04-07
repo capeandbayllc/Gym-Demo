@@ -148,7 +148,7 @@ import {
     MessageIcon,
     EditIcon,
 } from "~~/components/icons";
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import member from "@/api/queries/member";
 import lead from "~/api/queries/lead";
 
@@ -216,11 +216,10 @@ getMember();
 
 function getMember() {
     if (profileId) {
-        request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-            ({ data }) => {
-                ProfileInfo.value = data.data[isLeadView ? "lead" : "member"];
-            }
-        );
+        const { result } = useQuery((isLeadView ? lead : member).query.get, { id: profileId });
+        watch(result, () => {
+            ProfileInfo.value = result.value[isLeadView ? "lead" : "member"];
+        });
     } else {
         ProfileInfo.value = user.value;
     }

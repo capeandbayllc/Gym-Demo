@@ -2,7 +2,7 @@
     <div>
         <div class="profile-image-container">
             <div class="profile-image">
-                <div class="profile-avatar">
+                <div class="profile-avatar" v-if="ProfileInfo">
                     <img :src="ProfileInfo.profile_photo_path" alt="profile image" />
                 </div>
             </div>
@@ -103,7 +103,7 @@
     </div>
 </template>
 <script setup>
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import member from "@/api/queries/member";
 
 const route = useRoute();
@@ -135,11 +135,10 @@ const personalInfoForm = ref({
 getMember();
 function getMember() {
     if (profileId) {
-        request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-            ({ data }) => {
-                ProfileInfo.value = data.data[isLeadView ? "lead" : "member"];
-            }
-        );
+        const { result } = useQuery((isLeadView ? lead : member).query.get, { id: profileId });
+        watch(result, () => {
+            ProfileInfo.value = result.value[isLeadView ? "lead" : "member"];
+        });
     } else {
         ProfileInfo.value = user.value;
     }
