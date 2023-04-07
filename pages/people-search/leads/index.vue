@@ -6,6 +6,7 @@
                 @click="openAddMemberPopUp"
             />
             <p class="text-xs mt-1">Add a Lead</p>
+            <button @click="saveLead">Save lead</button>
         </div>
         <div class="page-leads-center-container">
             <div class="page-content custom-page-content-header">
@@ -65,7 +66,7 @@
             <div class="bg-black rounded-md p-6 border border-secondary">
                 <component
                     :is="addMemberScreens[addMemberScreenIndex]"
-                    :new-member-data="newMemberData"
+                    :newMemberData="newMemberData"
                     @changeNewMemberData="newMemberData = $event"
                 ></component>
                 <div class="flex justify-end mt-6">
@@ -120,14 +121,13 @@ import Interests from "~/pages/check-in/profile-card/add-member/interests.vue";
 import EmergencyInfo from "~/pages/check-in/profile-card/add-member/emergency-info.vue";
 import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today.vue";
 import userMutation from "~/api/mutations/user";
-import {useMutation} from "@vue/apollo-composable";
+import { useMutation } from "@vue/apollo-composable";
 import { useQuery } from "@vue/apollo-composable";
-import { v4 as uuidv4 } from "uuid";
+import location from "~/api/queries/location";
 import lead from "~/api/queries/lead";
-import dateFormat from "dateformat";
+import gql from "graphql-tag";
 
 const newMemberData = ref({
-    id: "",
     first_name: "",
     middle_name: "",
     last_name: "",
@@ -143,15 +143,20 @@ const newMemberData = ref({
     address2: "",
     city: "",
     state: "",
-    phone: "",
-    created_at: "",
-    updated_at: ""
+    phone: ""
 });
 
 const newMemberDataReset = ref({});
 
 onMounted(() => {
-    newMemberDataReset.value = {...newMemberData.value};
+
+    const locationData = ref(null);
+    const { result } = useQuery(location.query.browse, { first: 1 });
+    watch(result, () => {
+        newMemberData.value.home_location_id = result.value.locations.data[0].id;
+        newMemberDataReset.value = {...newMemberData.value};
+    })
+
 })
 
 const saveLead = () => {
@@ -160,7 +165,6 @@ const saveLead = () => {
     const { mutate: createMember } = useMutation(userMutation.mutation.createUser);
     createMember({
         input: {
-            id: uuidv4(),
             first_name: newMemberData.value.first_name,
             middle_name: newMemberData.value.middle_name,
             last_name: newMemberData.value.last_name,
@@ -179,8 +183,6 @@ const saveLead = () => {
             phone: newMemberData.value.phone,
             state: newMemberData.value.state,
             phone: newMemberData.value.phone,
-            created_at: dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM:ss.l'000Z'"),
-            updated_at: dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM:ss.l'000Z'")
         },
     })
     .then(() => {
@@ -212,10 +214,41 @@ const opportunity = ["error", "warning", "accent"];
 // TODO implement filters
 
 const getLeadsQuery = ()=>{
-    leads.value = [];
+    // leads.value = [];
+    // request(lead.query.browse, { filter: filters.value }).then(({ data }) => {
+    //     leads.value = data.data.leads.data;
+    // });
     const { result } = useQuery(lead.query.browse, {first: 5});
-    watch(result, () => {
+    watchEffect(() => {
+        if(!result.value) return
         leads.value = result.value.leads.data;
+    })
+
+    const { result:resultUsers } = useQuery(gql`
+        query AllUsers {
+            users(first: 100) {
+            data {
+                id
+                first_name
+                last_name
+                email
+                phone
+                homeLocation {
+                id
+                }
+            }
+            paginatorInfo {
+                count
+                perPage
+                total
+            }
+            }
+        }
+    `);
+    watchEffect(() => {
+        if(!resultUsers.value) return
+        console.log('resultUsers')
+        console.log(resultUsers)
     })
 
 }
