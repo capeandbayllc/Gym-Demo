@@ -5,7 +5,7 @@
 </template>
 <script setup>
 import MemberSearchList from './member-search-list.vue';
-import {request} from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import location from "~/api/queries/location";
 
 const props = defineProps({
@@ -98,8 +98,9 @@ const membersData = ref([
 ]);
 
 const locationData = ref(null);
-request(location.query.browse, { first: 1 }).then(({data}) => {
-    locationData.value = data.data.locations.data[0];
+const { result } = useQuery(location.query.browse, { first: 1 });
+watch(result, () => {
+    locationData.value = result.value.locations.data[0];
     membersData.value.forEach(e => {
         e.location = locationData.value.name;
     });

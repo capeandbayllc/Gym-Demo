@@ -43,7 +43,6 @@
 }
 </style>
 <script setup>
-import {request} from "~/api/utils/request";
 import member from "~/api/queries/member";
 import { useQuery } from "@vue/apollo-composable";
 import lead from "~/api/queries/lead";
@@ -61,10 +60,11 @@ watch(result, () => {
     leads.value = result.value.leads.data;
     isLoading.value = false;
 })
-request(member.query.browse).then(({data}) => {
-  members.value = data.data.members.data;
 
+const { result: memberResult } = useQuery(member.query.browse);
+watch(memberResult, () => {
+  members.value = memberResult.value.members.data;
   isLoading.value = false;
-})
+});
 
 </script>

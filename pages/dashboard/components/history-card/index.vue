@@ -44,7 +44,7 @@ import DashboardCard from '../dashboard-card.vue'
 import { CheckInIcon } from '@/components/icons'
 import HistoryTableRow from './history-table-row.vue';
 import {ref} from 'vue'
-import {request} from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import location from "~/api/queries/location";
 
 let search=ref('search');
@@ -102,9 +102,9 @@ const getBackSearch=()=>{
 }
 
 const locationData = ref(null);
-request(location.query.browse, { first: 1 }).then(({data}) => {
-    locationData.value = data.data.locations.data[0];
+const { result } = useQuery(location.query.browse, { first: 1 });
+watch(result, () => {
+    locationData.value = result.value.locations.data[0];
 });
-
 
 </script>
