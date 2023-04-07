@@ -12,7 +12,8 @@
 <script setup>
 import PeopleSearchTable from "./people-search-table.vue";
 import AlertSearchTable from "./alert-search-table.vue";
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
+
 import member from "~/api/queries/member";
 import { getRandomInt } from "~/api/utils/number";
 const props = defineProps({
@@ -54,9 +55,11 @@ const columns = [
 
 const membersData = ref([]);
 const types = ["platinum", "gold", "silver", "bronze"];
-request(member.query.browse).then(({ data }) => {
-  console.info("data.data.members", data.data.members);
-  data.data.members.data.forEach((member) => {
+
+const { result } = useQuery(member.query.browse);
+watch(result, () => {
+  console.info("data.data.members", result.value.members);
+  result.value.members.data.forEach((member) => {
     membersData.value.push(
       Object.assign(
         {},
@@ -68,7 +71,7 @@ request(member.query.browse).then(({ data }) => {
       )
     );
   });
-});
+})
 
 const employeeData = ref([]);
 watch(

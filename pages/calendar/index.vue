@@ -153,7 +153,6 @@ import EventForm from "./components/event-form.vue";
 import GrCalendar from "./components/gr-calendar.vue";
 import OfferUp from "./components/partials/offer-up.vue";
 import user from "~/api/queries/user";
-import { request } from "~/api/utils/request";
 
 /** Component State */
 const initialized = ref(false);
@@ -364,21 +363,21 @@ watch(result, async (ov, nv) => {
     let tempEventsContainer = [...result.value.calendarEvents];
 
     for (let event of tempEventsContainer) {
-        request(user.query.findById, { id: event.owner_id }).then(
-            ({ data }) => {
-                events.value.push({
-                    ...event,
-                    owner: data.data.user,
-                    attendees: event.attendees.map((attendeeId) => ({
-                        id: attendeeId,
-                        name: null,
-                        email: null,
-                        phone: null,
-                        profile_photo_path: null,
-                    })),
-                });
-            }
-        );
+        const { result: ownerResult } = useQuery(user.query.findById, { id: event.owner_id });
+        watch(ownerResult, () => {
+            const ownerData = ownerResult.value.user;
+            events.value.push({
+                ...event,
+                owner: ownerData,
+                attendees: event.attendees.map((attendeeId) => ({
+                id: attendeeId,
+                name: null,
+                email: null,
+                phone: null,
+                profile_photo_path: null,
+                })),
+            });
+        });
     }
 
     setTimeout(() => {
@@ -458,13 +457,15 @@ const showMoreDetails = async () => {
     eventInformationVisibibility.value = true;
 
     for (let attendee of eventDetails.value.extendedProps.users) {
-        const { data } = await request(user.query.findById, {
-            id: attendee.id.entity_id,
+        const { result } = useQuery(user.query.findById, { id: attendee.id.entity_id });
+        watch(result, () => {
+            let data = result.value;
+            attendee.name = `${data.user.first_name} ${data.user.last_name}`;
+            attendee.email = data.user.email;
+            attendee.phone = data.user.phone;
+            attendee.profile_photo_path = data.user.profile_photo_path;
         });
-        attendee.name = `${data.data.user.first_name} ${data.data.user.last_name}`;
-        attendee.email = data.data.user.email;
-        attendee.phone = data.data.user.phone;
-        attendee.profile_photo_path = data.data.user.profile_photo_path;
+
     }
 
     console.log(eventDetails.value);

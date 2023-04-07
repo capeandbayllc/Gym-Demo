@@ -100,7 +100,7 @@
 </style>
 
 <script setup>
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import member from "@/api/queries/member";
 import lead from "~/api/queries/lead";
 import EventCard from "./event-card/index.vue";
@@ -223,16 +223,17 @@ const OnCheckInStatusChange = (isCheckedIn) => {
 
 const getMember = () => {
     if (profileId) {
-        request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-            ({ data }) => {
-                let user = data.data[isLeadView ? "lead" : "member"];
-                ProfileInfo.value = {
-                    ...user,
-                    name: `${user.first_name} ${user.last_name}`,
-                };
-                console.log(ProfileInfo.value);
-            }
-        );
+        const query = isLeadView ? lead.query.get : member.query.get;
+        const { result } = useQuery(query, { id: profileId });
+        const profileInfo = ref(null);
+        watch(result, () => {
+            const userData = result.value[isLeadView ? "lead" : "member"];
+            profileInfo.value = {
+                ...userData,
+                name: `${userData.first_name} ${userData.last_name}`,
+            };
+            console.log(profileInfo.value);
+        });
     } else {
         ProfileInfo.value = {
             ...user.value,
