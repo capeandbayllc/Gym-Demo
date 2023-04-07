@@ -48,31 +48,24 @@
   </tr>
 </template>
 <style scoped>
-
 .people-lead-tbl-row {
   @apply bg-base-100 h-14;
-
-td {
-  @apply border-y-2 border-[#FF0000] text-center;
-}
-
-td:first-child {
-  @apply border-l-2 rounded-l-lg px-4;
-}
-.profile_photo{
-    @apply w-7 h-7 mr-2 rounded-xl;
-    box-shadow: 2px 4px 6px #0075C964;
-
+  td {
+    @apply border-y-2 border-[#FF0000] text-center;
   }
 
-td:last-child {
-  @apply border-r-2 rounded-r-lg capitalize text-accent-focus/60 px-8;
-}
+  td:first-child {
+    @apply border-l-2 rounded-l-lg px-4;
+  }
+  .profile_photo{
+      @apply w-7 h-7 mr-2 rounded-xl;
+      box-shadow: 2px 4px 6px #0075C964;
 
-/* .table-action-menu  {
-    position: absolute;
-    top: -50%;
-} */
+    }
+
+  td:last-child {
+    @apply border-r-2 rounded-r-lg capitalize text-accent-focus/60 px-8;
+  }
 }
 </style>
 <script setup lang="ts">

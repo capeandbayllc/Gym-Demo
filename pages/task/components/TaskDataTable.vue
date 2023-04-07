@@ -1,5 +1,4 @@
 <template>
-   
       <div class="page-leads-center-container">
         <div class="page-content custom-page-content-header">
           <span>{{ title }}</span>
@@ -29,7 +28,6 @@
           </div>
         </div>
       </div>
-      
   </template>
   <style scoped>
   .page-leads-center-container {
@@ -55,7 +53,7 @@
   
   const isSearchEnable = ref(false)
   const addEmployeePopUp = ref(null)
- const addEmployeeScreenIndex = ref(0);
+  const addEmployeeScreenIndex = ref(0);
   const props=defineProps({
     title:String,
   })

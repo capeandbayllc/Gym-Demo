@@ -73,9 +73,7 @@ td:last-child {
 <script setup lang="ts">
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
-
 import {CheckMark,Completed,CloseMe } from "@/components/icons";
-
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {Ref} from "vue";
 import dateFormat from "dateformat";

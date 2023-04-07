@@ -33,13 +33,11 @@
         <TaskDataTable title="Overdue" ></TaskDataTable>
         <TaskDataTable title="Completed" ></TaskDataTable>
     </div>
-
-
-
 </template>
 <style>
 .tab-text{
-    @apply bg-secondary text-sm text-white m-auto py-0.5 px-2  mx-2 rounded-sm  cursor-pointer  active:bg-transparent active:border-secondary  active:border focus:outline-none focus:ring focus:ring-violet-300 ;
+    @apply bg-secondary text-sm text-white m-auto py-0.5 px-2  mx-2 rounded-sm  cursor-pointer
+    active:bg-transparent active:border-secondary  active:border focus:outline-none focus:ring focus:ring-violet-300 ;
 }
 .dt-layer{ 
     @apply w-[62rem] bg-gradient-to-b from-[#0075C94D] to-black  rounded-2xl border-2 border-[#0075C9];

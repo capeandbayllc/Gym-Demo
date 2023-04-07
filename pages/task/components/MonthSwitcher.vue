@@ -32,19 +32,12 @@ const props = defineProps({
     }
 });
 
-/* watch(props.startMonth,(newStartMonth)=>{
-    month_value = items[newStartMonth.getMonth()];
-}) */
-
 let month_value =items[props.startMonth.getMonth()]
 const handleChange = (value) => {
     let ndx = items.indexOf(value);
     props.onChange(ndx);
 
 };
-/* onUpdated(()=>{
-    this.month_value =items[props.startMonth.getMonth()]
-}) */
 onUpdated(()=>{
     month_value =items[props.startMonth.getMonth()]
 })

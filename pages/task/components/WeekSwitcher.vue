@@ -3,7 +3,7 @@
         class="switch-week"
         @click="$emit('onUpdate', direction === 'left' ? -1 : 1)"
     >
-        <arrow-icon :direction="direction" size="xs" />
+        <ArrowIcon :direction="direction" size="xs" />
     </div>
 </template>
 <style scoped>
@@ -12,7 +12,7 @@
 }
 </style>
 <script setup>
-import ArrowIcon from "@/Components/Icons/Arrow.vue";
+import {ArrowIcon } from "@/components/icons";
 const props = defineProps({
     direction: {
         type: String,
