@@ -63,8 +63,7 @@ class QueryResolver {
         };
     }
 
-    public async make(_: null, args: PaginatorArgs, context: object, info: GraphQLResolveInfo) {
-        // @ts-ignore   
+    public async make(_: null, args: PaginatorArgs, context: any, info: GraphQLResolveInfo) {
         const schema = context.mirageSchema[context.mirageSchema.toCollectionName(info.fieldName)];
         let { first = 0, page = 0, orderBy, filter } = args;
 
@@ -128,28 +127,31 @@ class MutationResolver {
 
 function getQueryResolvers(query: ObjectTypeDefinitionNode, server: Server): object {
     const queries: object = {};
+    const resolvers: any = {
+        calendarEvents: calendarEventsResolver
+    };
+    
     query.fields?.forEach((query: FieldDefinitionNode) => {
-      const type: TypeNode = query.type;
-      const name: string = query.name.value;
-      const isPaginatable: boolean = (type.kind === Kind.NAMED_TYPE && type.name.value.endsWith('Paginator'));
-  
-      if (name === 'calendarEvents') {
-        const resolver = calendarEventsResolver;
-        // @ts-ignore
-        queries[name] = resolver;
-      } else if (query.arguments) {
-        // @ts-ignore
-        const isFilterable: boolean = query.arguments?.some((a: FieldDefinitionNode) => a.type?.name?.value === 'Filter');
-        if (isPaginatable || isFilterable) {
-            const resolver = new QueryResolver(server, isFilterable, isPaginatable);
+        const type: TypeNode = query.type;
+        const name: string = query.name.value;
+        const isPaginatable: boolean = (type.kind === Kind.NAMED_TYPE && type.name.value.endsWith('Paginator'));
+        
+        if (resolvers.hasOwnProperty(name)) {
             // @ts-ignore
-            queries[name] = resolver.make.bind(resolver);
+            queries[name] = resolvers[name];
+        } else if (query.arguments) {
+            // @ts-ignore
+            const isFilterable: boolean = query.arguments?.some((a: FieldDefinitionNode) => a.type?.name?.value === 'Filter');
+            if (isPaginatable || isFilterable) {
+                const resolver = new QueryResolver(server, isFilterable, isPaginatable);
+                // @ts-ignore
+                queries[name] = resolver.make.bind(resolver);
+            }
         }
-      }
     });
-  
+    
     return queries;
-  }
+}
 
 function getMutationResolvers(mutation: ObjectTypeDefinitionNode, server: Server): object {
     const mutations: object = {};

@@ -57,16 +57,15 @@
 <script setup>
 
 import "@vuepic/vue-datepicker/dist/main.css";
-import gql from "graphql-tag";
 import { useQuery } from "@vue/apollo-composable";
 import userQuery from "~/api/queries/user";
 import { request } from "~/api/utils/request";
 import EventDetails from "~/pages/calendar/components/partials/event-details.vue";
-// import GrCalendar from "./components/gr-calendar.vue";
 import GrCalendar from "~/pages/calendar/components/gr-calendar.vue";
 import OfferUp from "~/pages/calendar/components/partials/offer-up.vue";
 import EventInformation from "~/pages/calendar/components/partials/event-information.vue";
-import EventForm from "~/pages/calendar//components/event-form.vue";
+import EventForm from "~/pages/calendar/components/event-form.vue";
+import { query } from "./queries";
 
 const props = defineProps({
     user: {
@@ -74,72 +73,12 @@ const props = defineProps({
     },
 })
 
-const query = gql`
-    query calendarEvents($param: CalendarEventInput) {
-        calendarEventTypes {
-            data {
-                id
-                name
-                description
-                color
-                type
-            }
-        }
-        calendarEvents(param: $param) {
-            id
-            title
-            owner_id
-            color
-            start
-            end
-            title
-            description
-            full_day_event
-            event_type_id
-            location_id
-            location {
-                id
-                name
-            }
-            type {
-                id
-                name
-                description
-                color
-                type
-            }
-            attendees {
-                id
-                entity_id
-            }
-        }
-        employee {
-           data {
-               id
-               user_id
-               first_name
-               last_name
-               email
-           }
-        }
-        members {
-            data {
-                id
-                first_name
-                last_name
-                email
-                profile_photo_path
-            }
-        }
-    }
-`;
-
 const events = ref([]);
 const employees = ref([]);
 const members = ref([]);
 const eventsIsLoading = ref(true);
 
-const { result, onError } = await useQuery(query, { param: {viewUser: props.user.id} });
+const { result } = await useQuery(query, { param: {viewUser: props.user.id} });
 
 const getFormattedEvents = computed(() => {
     let formattedEvents = [];

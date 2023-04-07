@@ -42,10 +42,14 @@ export interface PaginatorOrderByClause {
     column: string,
     order: PaginatorOrderSortOrder,
 }
+
 export interface PaginatorArgs {
     orderBy?: PaginatorOrderByClause
     first?: number,
     page?: number,
-    filter?: Filter,
-    param?: CalendarEventInput,
+    filter?: Filter
+}
+
+export interface CalendarEventArgs {
+    param?: CalendarEventInput
 }
