@@ -148,7 +148,8 @@ import {ref} from "vue";
 import {ArrowIcon, CrossIcon} from "~~/components/icons";
 import SideBarMember from "./side-bar-member.vue";
 import SelectLocation from "./select-location";
-import {request} from "~/api/utils/request";
+import axios from "axios";
+import { print } from "graphql/language";
 import member from "~/api/queries/member";
 import SideBarMemberCheckIn from "./side-bar-member-check-in";
 
@@ -183,12 +184,13 @@ const activeMembers = ref(0);
 
 const membersData = ref([]);
 const types = ["platinum", "gold", "silver", "bronze"];
-request(member.query.browse).then(({data}) => {
-  activeMembers.value = data.data.members.data.length;
-  data.data.members.data.forEach((member) => {
-    member['checkIn'] = false;
-    membersData.value.push(member);
-  });
+axios.post('/graphql', { query: print(member.query.browse) })
+  .then(({ data }) => {
+    activeMembers.value = data.data.members.data.length;
+    data.data.members.data.forEach((member) => {
+      member['checkIn'] = false;
+      membersData.value.push(member);
+    });
 });
 
 const updateActiveMembers = addRemove => {

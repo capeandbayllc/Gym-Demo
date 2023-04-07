@@ -8,7 +8,8 @@
     import { ClubRefSheetIcon } from '~~/components/icons'
     import ClubCard from '../club-card.vue';
     import ClubRefSheetList from './club-ref-sheet-list.vue'
-    import { request } from "~/api/utils/request";
+    import axios from "axios";
+    import { print } from "graphql/language";
     import location from "~~/api/queries/location";
 
     onMounted(async () => {
@@ -48,7 +49,8 @@
     ];
 
     const locationsData = ref([]);
-    request(location.query.browse).then(({ data }) => {
-        locationsData.value = data.data.locations;
-    });
+    axios.post('/graphql', { query: print(location.query.browse) })
+        .then(({ data }) => {
+            locationsData.value = data.data.locations;
+        });
 </script>
