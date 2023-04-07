@@ -127,7 +127,7 @@ class MutationResolver {
 
 function getQueryResolvers(query: ObjectTypeDefinitionNode, server: Server): object {
     const queries: object = {};
-    const resolvers: any = {
+    const customResolvers: any = {
         calendarEvents: calendarEventsResolver
     };
     
@@ -136,9 +136,9 @@ function getQueryResolvers(query: ObjectTypeDefinitionNode, server: Server): obj
         const name: string = query.name.value;
         const isPaginatable: boolean = (type.kind === Kind.NAMED_TYPE && type.name.value.endsWith('Paginator'));
         
-        if (resolvers.hasOwnProperty(name)) {
+        if (customResolvers.hasOwnProperty(name)) {
             // @ts-ignore
-            queries[name] = resolvers[name];
+            queries[name] = customResolvers[name];
         } else if (query.arguments) {
             // @ts-ignore
             const isFilterable: boolean = query.arguments?.some((a: FieldDefinitionNode) => a.type?.name?.value === 'Filter');

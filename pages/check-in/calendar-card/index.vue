@@ -65,7 +65,7 @@ import GrCalendar from "~/pages/calendar/components/gr-calendar.vue";
 import OfferUp from "~/pages/calendar/components/partials/offer-up.vue";
 import EventInformation from "~/pages/calendar/components/partials/event-information.vue";
 import EventForm from "~/pages/calendar/components/event-form.vue";
-import { query } from "./queries";
+import calendarEventsQuery from "~~/api/queries/calendarEvent";
 
 const props = defineProps({
     user: {
@@ -78,7 +78,7 @@ const employees = ref([]);
 const members = ref([]);
 const eventsIsLoading = ref(true);
 
-const { result } = await useQuery(query, { param: {viewUser: props.user.id} });
+const { result } = await useQuery(calendarEventsQuery.query.browse_by_user, { param: {viewUser: props.user.id} });
 
 const getFormattedEvents = computed(() => {
     let formattedEvents = [];

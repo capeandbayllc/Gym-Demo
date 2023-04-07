@@ -1,6 +1,5 @@
 import { GraphQLResolveInfo } from "graphql/type/definition";
-import {Collection} from "miragejs";
-import {CalendarEventInput, CalendarEventArgs} from "~/api/queries/filters/FilterInterfaces";
+import { CalendarEventArgs } from "~/api/queries/filters/FilterInterfaces";
 
 export default async function make(_: null, args: CalendarEventArgs, context: object, info: GraphQLResolveInfo) {
     // @ts-ignore
