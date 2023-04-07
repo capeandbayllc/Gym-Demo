@@ -138,7 +138,7 @@ const newMemberData = ref({
     employer: null,
     barcode: null,
     email: "",
-    home_location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
+    home_location_id: "",
     address1: "",
     address2: "",
     city: "",
