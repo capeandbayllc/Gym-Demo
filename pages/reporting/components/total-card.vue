@@ -16,7 +16,7 @@
 <style scoped lang="postcss">
 .report-total-card {
     .total-count {
-        @apply shadow shadow-secondary shadow-lg py-4 -lg:py-6  w-4/5 rounded border border-secondary inline-block;
+        @apply shadow shadow-secondary shadow-lg py-4 -lg:py-6 w-4/5 rounded-xl border border-secondary inline-block;
     }
 }
 </style>
