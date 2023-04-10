@@ -129,15 +129,14 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .page-setting-container {
     @apply py-4 w-full h-fit;
     .page-content {
         @apply bg-neutral border border-secondary rounded grid grid-cols-3 3xl:grid-cols-4 -lg:grid-cols-2 -md:grid-cols-1 gap-x-12 gap-y-8 px-8 py-10;
     }
     input {
-        @apply h-9 rounded mt-3 w-full pl-2;
-        min-width: 16rem;
+        @apply h-9 rounded mt-3 w-full pl-2 min-w-[16rem];
     }
     input:focus {
         @apply outline-none;
