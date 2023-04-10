@@ -85,7 +85,7 @@
     </card>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .active{
     @apply border-secondary bg-transparent;
 }
@@ -96,9 +96,8 @@
     @apply min-w-[300px]
 }
 .equation-icon{
-    font-size: 30px;
-    line-height: 25px;
-    padding: 0px 5px;
+    @apply text-2xl px-[6px] leading-6;
+    
 }
 .equal-to-icon {
     @apply relative z-10;
@@ -107,16 +106,9 @@
     }
 }
 .calculation-dropdown::before {
+    @apply bg-no-repeat h-[120px] w-[120px] absolute top-[-47px] left-[25px] z-[-1];
     content: '';
-    background: url(/equal_bg.png);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 50px;
-    width: 120px;
-    position: absolute;
-    top: -47px;
-    left: 25px;
-    z-index: -1;
+    background-image: url('/equal_bg.png');
 }
 </style>
 <style>

@@ -41,7 +41,7 @@
         </template>
     </card>
 </template>
-<style scoped>
+<style scoped >
     .filter-list{
         cursor: pointer;
     }

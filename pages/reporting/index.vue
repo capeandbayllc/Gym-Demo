@@ -11,13 +11,13 @@
                 <reporting-widget-member></reporting-widget-member>
             </div>
             <div class="col-span-2">
-                <!-- <create-report-card></create-report-card> -->
+                <create-report-card></create-report-card>
                 <reporting-widget-clients></reporting-widget-clients>
             </div>
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .reporting-page-content {
     @apply pb-5 pt-4 mx-auto w-full px-10;
 }

@@ -9,6 +9,8 @@
       add: true,
     }"
   >
+  
+
     <template #content>
       <div class="card-content">
         <div
@@ -204,18 +206,17 @@ const chartOptions = {
 	}
 }
 </script>
-<style scoped>
+<style scoped lang="postcss">
 .slide-fade-enter-active {
-  transition: all 0.3s ease-out;
+  @apply transition-all duration-300 ease-out;
 }
 
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  @apply transition-all duration-300;
 }
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
+  @apply transform translate-x-20 opacity-0;
 }
 </style>

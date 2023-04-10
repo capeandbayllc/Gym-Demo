@@ -67,7 +67,7 @@
         </tr>
     </tbody>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 td {
     @apply h-px py-3;
 }
