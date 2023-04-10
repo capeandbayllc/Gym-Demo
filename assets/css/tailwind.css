@@ -144,7 +144,7 @@
 }
 
 .page-content {
-  @apply mx-auto w-full max-w-[1120px];
+  @apply mx-auto w-full max-w-6xl;
 }
 
 .profile-setting-gradient-bg {

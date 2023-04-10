@@ -2,7 +2,7 @@
   <div class="page-mass-com-container">
     <div class="page-content">
       <div class="flex flex-1">
-        <h2 class="flex flex-auto">Overall/Trends</h2>
+        <h2 class="flex flex-auto text-xl font-bold pt-6">Overall/Trends</h2>
         <div class="flex gap-2 items-end pb-2">
           <Button secondary size="xs">Drip Campaigns</Button>
           <Button
@@ -14,14 +14,16 @@
         </div>
       </div>
       <div class="overall-trends">
-        <sales-show-ratio class="min-h-96 col-span-2 h-full" />
-        <sales-draft-related class="min-h-96 col-span-2 h-full" />
-        <build-campaign-card class="min-h-96 col-span-1 h-full flex flex-col" />
+        <sales-show-ratio class="min-h-96 h-full" />
+        <sales-draft-related class="min-h-96 h-full" />
+        <build-campaign-card class="min-h-96 h-full flex flex-col" />
       </div>
       <campaign-card />
       <h2 class="mb-4">Recent campaigns</h2>
       <new-member-campaigns class="mb-4" />
       <marketing />
+
+      <!-- <RecentCampaignDetails :data="recentCampaign" /> -->
     </div>
   </div>
 </template>
@@ -30,13 +32,11 @@
   @apply py-4 w-full h-fit pr-5;
   .page-content {
     @apply block border border-secondary bg-neutral p-7 rounded-3xl;
-    h2 {
-      @apply text-xl font-bold pt-6;
-    }
+
     .overall-trends {
       @apply grid grid-rows-1 grid-cols-1 py-4;
       @apply md:grid-rows-2;
-      @apply lg:grid-cols-[repeat(4,_auto)_max-content] lg:grid-rows-1 lg:grid-flow-col -lg:gap-y-5 lg:gap-5;
+      @apply lg:grid-cols-[repeat(2,_1fr)_auto] lg:grid-rows-1 lg:grid-flow-col -lg:gap-y-5 lg:gap-5;
     }
   }
 }
