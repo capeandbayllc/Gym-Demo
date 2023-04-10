@@ -20,9 +20,9 @@
         <slot />
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .simple-card {
-    @apply relative border border-[#0075c9] bg-black rounded-[19px];
+    @apply relative border border-secondary bg-black rounded-2xl;
     .simple-card-title {
         @apply flex items-center h-12 text-xl rounded-t-xl font-semibold px-6 text-base-content justify-between bg-gradient-to-b from-secondary to-base-300/30 bg-secondary bg-blend-darken;
     }
