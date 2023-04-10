@@ -18,7 +18,7 @@
   }
 
   select.gr-neutral-selection {
-    @apply bg-base-content/20 text-white/50;
+    @apply bg-base-content/20 text-base-content/50;
 
     > option {
       @apply bg-neutral;
