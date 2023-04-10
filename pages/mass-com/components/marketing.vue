@@ -1,8 +1,6 @@
 <template>
   <simple-card title="Marketing 2022" class="-lg:mb-4 mb-4">
-    <div
-      class="flex flex-row pt-4 pb-2 px-9 bg-transparent items-center w-full"
-    >
+    <div class="flex flex-row pt-4 pb-2 px-9 items-center w-full">
       <div class="grid w-full grid-cols-7 gap-5 mr-6 -lg:flex overflow-x-auto">
         <div
           v-for="doc in docs"
