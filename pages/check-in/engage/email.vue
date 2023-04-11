@@ -111,7 +111,7 @@ const emailType = [
     @apply border-b pb-2 border-base-content/50;
   }
   .content {
-    @apply border border-secondary bg-black;
+    @apply border border-secondary bg-base-300;
     .email-inner-content {
       @apply border border-secondary rounded;
     }

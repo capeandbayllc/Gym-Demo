@@ -9,7 +9,7 @@
         <span class="edit-icon hidden"><edit-icon class="mb-2" /></span>
     </button>
 </template>
-<style scoped>
+<style scoped lang="postcss">
     .membership-btn {
         @apply flex items-center justify-center capitalize btn btn-xs w-full rounded-xl;
 

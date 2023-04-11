@@ -89,19 +89,13 @@ const options = {
   },
 };
 </script>
-<style>
+<style lang="postcss">
 .statistics-1  .apx-legend-position-right {
-  justify-content: center;
+  @apply justify-center;
 }
 .statistics-1 .apexcharts-canvas::before {
+  @apply absolute w-[141px] h-[141px] rounded-full z-[9] left-[17px] top-[7px];
   content: '';
-  position: absolute;
-  width: 141px;
-  height: 141px;
   background: conic-gradient(from 90deg at 50% 50%, #0074c8 0deg, rgba(6,83,139,0 ) 360deg);
-  border-radius: 50%;
-  z-index: 9;
-  left: 17px;
-  top: 7px;
 }
 </style>

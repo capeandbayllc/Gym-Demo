@@ -47,9 +47,9 @@
         },
     ];
 </script>
-<style scoped>
+<style scoped lang="postcss">
     .leads-content-card{
-        @apply bg-black border-white
+        @apply bg-base-300 border-base-content
     }
         .left-lead{
             h5{
@@ -60,16 +60,16 @@
             }
         }
         .right-percentage{        
-            @apply bg-zinc-400 rounded w-full text-3xl font-bold border-white border-2 text-center;
+            @apply bg-zinc-400 rounded w-full text-3xl font-bold border-base-content border-2 text-center;
         
         }
     .left-lead-text{
         h5{
-            @apply text-base text-xs 
+            @apply text-base text-xs;
         }
     }
     .btn-width{
-       @apply  py-1 px-8 ;
+       @apply  py-1 px-8;
     }
     .active{
         @apply border-secondary bg-transparent;
