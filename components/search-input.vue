@@ -19,21 +19,19 @@
     />
   </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .search-input {
   @apply bg-neutral-700 w-full rounded border overflow-hidden px-2 md:ml-10 transition-all duration-300;
 }
 .search-input::placeholder {
-  @apply left-[95%] absolute transition-all duration-300;
-  top: 2px;
-  margin-left: -55px;
+  @apply left-[95%] absolute transition-all duration-300 top-[2px] ml-[-55px];
 }
 .search-input:hover::placeholder,
 .search-input:focus::placeholder {
   @apply left-[5%] pl-0 ml-0;
 }
 .search-input-lg {
-  height: 34px;
+  @apply h-[34px];
 }
 
 .search-input:hover,
@@ -43,19 +41,6 @@
 
 .search-input-wrapper {
   @apply flex items-center relative w-fit;
-}
-
-.search-submit {
-  font-size: 1.5rem;
-  margin-left: auto;
-  background: 0;
-  border: 0;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background 200ms ease-out;
-  width: calc(var(--size) - 10px);
-  height: calc(var(--size) - 10px);
-  color: var(--clr-body);
 }
 </style>
 <script setup>
