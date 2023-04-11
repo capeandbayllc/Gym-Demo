@@ -1,5 +1,5 @@
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="w-4 h-4 rounded-full">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" :class="size=='big'?'w-6 h-6 rounded-full':'w-4 h-4 rounded-full'">
         <g id="close_me_685" transform="translate(2 2)">
             <g id="Ellipse_1500" data-name="Ellipse 1500" stroke="#fff" stroke-width="2">
             <circle cx="14" cy="14" r="14" stroke="none"/>
@@ -10,3 +10,8 @@
         </g>
     </svg>
 </template>
+<script setup>
+const props=defineProps({
+    size:String,
+})
+</script>

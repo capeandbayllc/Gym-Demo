@@ -9,19 +9,19 @@
           <div>
             <data-table v-if="title=='Overdue'"
                 :columns="columns"
-                :data="employees_display"
+                :data="employees_overdue"
                 :row-component="TaskTableRowOverdue"
                 class="h-60 overflow-y-auto no-scrollbar"
             />
             <data-table v-if="title=='Today'"
                 :columns="columns"
-                :data="employees_display"
+                :data="employees_today"
                 :row-component="TaskTableRowToday"
                 class="h-60 overflow-y-auto no-scrollbar"
             />
             <data-table v-if="title=='Completed'"
                 :columns="columns"
-                :data="employees_display"
+                :data="employees_completed"
                 :row-component="TaskTableRowCompleted"
                 class="h-60 overflow-y-auto no-scrollbar"
             />
@@ -62,11 +62,27 @@
   const employees = computed(() => result?.value?.employee?.data);
   
   
-  const employees_display = computed(() => {
+  const employees_today = computed(() => {
     return employees?.value?.map((item) => {
       return {
         ...item,
-        status: 'available',
+        status: 'Project Status',
+      };
+    });
+  });
+  const employees_completed = computed(() => {
+    return employees?.value?.map((item) => {
+      return {
+        ...item,
+        status: 'Project Status',
+      };
+    });
+  });
+  const employees_overdue = computed(() => {
+    return employees?.value?.map((item) => {
+      return {
+        ...item,
+        status: 'Project Status',
       };
     });
   });

@@ -1,45 +1,62 @@
 <template>
- <tr class="people-lead-tbl-row">
+ <tr class="task-table-row-today">
     <td>
       <div class="flex gap-2 border-r-2 border-[#FF0000]">
         <img :src="data.profile_photo_path" class="profile_photo" alt=""> {{ data.first_name }} {{ data.last_name }}
       </div>
     </td>
-    <td> <div class="gap-2 border-r-2 border-[#FF0000] px-2"> Welcome Call</div></td>
+    <td> <div class=" border-r-2 border-[#FF0000] pr-3 "> Welcome Call</div></td>
     <td><div class="gap-2 border-r-2 border-[#FF0000]">Location {{ Math.floor(Math.random() * (5 - 1 + 1) + 1)}}</div></td>
-    <td><div class="gap-2 border-r-2 border-[#FF0000]">18 Nov 2020</div></td>
+    <td><div class="gap-2 border-r-2 border-[#FF0000]">18/11/2020</div></td>
     <td>
       <div class="flex gap-2 border-r-2 border-[#FF0000]"> 
         <div class="dropdown dropdown-end">
-              <div class="text-[#5A5A5A] ml-2 hover:text-[#0075C9] cursor-pointer flex gap-2 " tabindex="0" @click.prevent.stop>
-                  project status  <CheckMark/>
-              </div>
-              <div class="dropdown-content top-0 left-2 p-1 menu bg-white w-32 items-start text-[#5A5A5A] text-sm whitespace-nowrap cursor-pointer gap-2 rounded-md">
-                <div class="flex">
-                  <div class="text-secondary font-bold">Project Status</div>
-                </div>
-                <div class="flex ml-1">
-                  <div class=" m-auto mr-2"> <Completed/> </div>
-                  <div>Completed</div>
-                </div>
-                <div class="flex ml-1">
-                  <div class="rounded-full w-4 h-4 bg-[#A8A8A8] m-auto mr-2"></div>
-                  <div>No-Show</div>
-                </div>
-                <div class="flex ml-1">
-                  <div class="rounded-full w-4 h-4 bg-[#00A7FF] m-auto mr-2"></div>
-                  <div>Rescheduled</div>
-                </div>
-                <div class="flex ml-1">
-                  <div class="rounded-full w-4 h-4 bg-[#FF0000] m-auto mr-2"></div>
-                  <div>Canceled</div>
-                </div>
-                <div class="flex ml-1">
-                  <div class=" m-auto mr-2"> <CloseMe/> </div>
-                  <div>Overdue</div>
-                </div>
-              </div>
+          <div v-if="status=='Completed'" class="text-[#5A5A5A] ml-2 hover:text-[#0075C9] cursor-pointer flex gap-2 " tabindex="0" @click.prevent.stop>
+            {{status}}<CheckMark/>
           </div>
+          <div v-else-if="status=='No-Show'" class="text-[#5A5A5A] ml-2 hover:text-[#0075C9] cursor-pointer flex gap-2 " tabindex="1" @click.prevent.stop>
+            {{status}} <div class="rounded-full w-6 h-6 bg-[#A8A8A8] m-auto ml-2"></div>
+          </div>
+          <div v-else-if="status=='Rescheduled'" class="text-[#5A5A5A] ml-2 hover:text-[#0075C9] cursor-pointer flex gap-2 " tabindex="2" @click.prevent.stop>
+            {{status}}<div class="rounded-full w-6 h-6 bg-[#00A7FF] m-auto ml-2"></div>
+          </div> 
+          <div v-else-if="status=='Canceled'" class="text-[#5A5A5A] ml-2 hover:text-[#0075C9] cursor-pointer flex gap-2 " tabindex="3" @click.prevent.stop>
+            {{status}}<div class="rounded-full w-6 h-6 bg-[#FF0000] m-auto ml-2"></div>
+          </div> 
+          <div v-else-if="status=='Overdue'" class="text-[#5A5A5A] ml-2 hover:text-[#0075C9] cursor-pointer flex gap-2 " tabindex="4" @click.prevent.stop>
+            {{status}}  <div class=" m-auto ml-2"> <CloseMe size="big"/> </div>
+          </div> 
+          <div v-else class="text-[#5A5A5A] ml-2 hover:text-[#0075C9] cursor-pointer flex gap-2 " tabindex="0" @click.prevent.stop>
+                {{ status }}<CheckMark/>
+          </div>
+          
+          <div class="dropdown-content top-0 left-2 p-1 menu bg-white w-32 items-start text-[#5A5A5A] text-sm whitespace-nowrap cursor-pointer gap-2 rounded-md">
+            <div class="flex">
+              <div class="text-secondary font-bold">{{status}}</div>
+            </div>
+            
+            <button  class="flex ml-1"   @click.prevent.stop="toggleStatus('Completed')"  >
+              <div class=" m-auto mr-2"> <Completed/> </div>
+              <div>Completed</div>
+            </button >
+            <button class="flex ml-1" @click.prevent.stop="toggleStatus('No-Show')"  >
+              <div class="rounded-full w-4 h-4 bg-[#A8A8A8] m-auto mr-2"></div>
+              <div>No-Show</div>
+            </button>
+            <button class="flex ml-1" @click.prevent.stop="toggleStatus('Rescheduled')" >
+              <div class="rounded-full w-4 h-4 bg-[#00A7FF] m-auto mr-2"></div>
+              <div>Rescheduled</div>
+            </button>
+            <button class="flex ml-1" @click.prevent.stop="toggleStatus('Canceled')">
+              <div class="rounded-full w-4 h-4 bg-[#FF0000] m-auto mr-2"></div>
+              <div>Canceled</div>
+            </button>
+            <button class="flex ml-1"  @click.prevent.stop="toggleStatus('Overdue')">
+              <div class=" m-auto mr-2"> <CloseMe/> </div>
+              <div>Overdue</div>
+            </button>
+          </div>
+        </div>
       </div>
     </td>
     <td>
@@ -48,7 +65,7 @@
   </tr>
 </template>
 <style scoped>
-.people-lead-tbl-row {
+.task-table-row-today {
   @apply bg-base-100 h-14;
   td {
     @apply border-y-2 border-[#FF0000] text-center;
@@ -68,19 +85,23 @@
   }
 }
 </style>
-<script setup lang="ts">
+<script setup>
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
 import {CheckMark,Completed,CloseMe } from "@/components/icons";
+
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import {Ref} from "vue";
+import { ref } from 'vue'
 import dateFormat from "dateformat";
 
-export type Type = 'text' | 'email' | 'call' | null;
-const router = useRouter()
 
 library.add(faEllipsisH);
-const props = defineProps<{
+const props = defineProps({
   data: Object
-}>()
+})
+
+let status =ref(props.data.status);
+const toggleStatus = (text) => {
+ status.value=text;
+};
 </script>
