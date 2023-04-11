@@ -67,10 +67,10 @@ const selectedDate = ref(new Date());
 const selectedDateFormatted = computed(() =>
     transformDate(selectedDate.value)
 );
-let all_tab = ref(false);
+let all_tab = ref(true);
 
-let location_tab= ref(false);
-let employees_tab = ref(false);
+let location_tab= ref(true);
+let employees_tab = ref(true);
 
 let startDay = new Date();
 let day = startDay.getDay() === 0 ? 7 : startDay.getDay();
