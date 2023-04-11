@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  @apply motion-reduce:transition-none;
+}
+
 @layer components {
   .gr-gradient {
     @apply bg-gradient-to-b from-neutral-focus/50 to-base-300;
@@ -9,7 +13,6 @@
 
   .gr-base-textfield {
     @apply rounded-xl p-2 transition-all duration-75 mt-2 w-full outline-none border-2 border-transparent;
-    @apply motion-reduce:transition-none;
   }
 
   label.gr-base-label {

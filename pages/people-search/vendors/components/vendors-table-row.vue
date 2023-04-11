@@ -8,10 +8,11 @@
       <TableRowDropdown @email="openEmailModal" @call="openCallModal" />
 
       <daisy-modal ref="callModalRef">
-        <outgoing-call-modal
+        <CallModal
+          :user="data"
           @callNow="closeCallModal"
           @close="closeCallModal"
-        ></outgoing-call-modal>
+        />
       </daisy-modal>
       <daisy-modal ref="emailModalRef">
         <EmailModal @close="closeEmailModal" />
@@ -29,7 +30,7 @@ td {
 <script setup>
 import TableRowDropdown from "../../components/table-row-dropdown.vue";
 
-import OutgoingCallModal from "../../../call-user/components/outgoing-call-modal.vue";
+import CallModal from "../../../call-user/components/outgoing-call-modal.vue";
 import EmailModal from "../../../check-in/engage/email.vue";
 
 const props = defineProps({

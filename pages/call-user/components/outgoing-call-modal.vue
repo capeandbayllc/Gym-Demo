@@ -7,8 +7,8 @@
         </div>
         <div class="flex justify-between m-5">
           <select-box
-            :items="callType"
-            value=""
+            :items="callTypes"
+            v-model="selectedCallType"
             :label="'Call type'"
             class="max-w-[15rem]"
           >
@@ -41,26 +41,34 @@
 
 <script setup>
 import CallerCard from "./caller-card.vue";
-import {faker} from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 
 defineEmits(["call-now"]);
 const props = defineProps({
-  user: Object
-})
+  user: Object,
+});
 
-const firstName = computed(() => props.user?.first_name ?? faker.name.firstName());
+const selectedCallType = ref("");
+
+const firstName = computed(
+  () => props.user?.first_name ?? faker.name.firstName()
+);
 const lastName = computed(() => props.user?.last_name ?? faker.name.lastName());
 const phone = computed(() => props.user?.phone ?? faker.phone.phoneNumber());
-const profilePhoto = computed(() => props.user?.profile_photo_path ?? '/images/profile/member_7.jpg');
+const profilePhoto = computed(
+  () => props.user?.profile_photo_path ?? "/images/profile/member_7.jpg"
+);
 const userCallSetting = computed(() => ({
   type: "outgoing-call",
   callType: "Outgoing Call",
-  userName: `${firstName} ${lastName}`,
-  phone: (phone.value.replace(/\D+/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')),
+  userName: `${firstName.value} ${lastName.value}`,
+  phone: phone.value
+    .replace(/\D+/g, "")
+    .replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3"),
   callIcon: "/phone.png",
   callerProfileImage: profilePhoto.value,
 }));
-const callType = [
+const callTypes = [
   {
     value: "1",
     label: "Introduction",
