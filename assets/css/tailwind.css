@@ -7,11 +7,8 @@
 }
 
 @layer components {
-  /* there were a few different instances of these - please update them if
-    they're incorrect
-  */
   .gr-membership-type {
-    @apply flex items-center justify-center capitalize btn btn-xs w-full rounded-full border-none transition-all duration-100;
+    @apply flex items-center justify-center capitalize btn btn-xs w-full rounded-full border-none transition-all duration-100 font-bold;
     outline-style: solid;
   }
 
