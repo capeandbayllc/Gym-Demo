@@ -34,46 +34,30 @@
         </ul>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
     .address-container {
-        @apply py-[10px] px-[20px] border-2 border-[#0077ac]
+        @apply py-[10px] px-[20px] border-2 border-secondary;
     }
     .columns-header {
-        color : #0077ac;
-        border-bottom : 3px solid #0077ac;
-        padding: 8px 15px;
-        margin-top: 15px;
-        display: flex;
+        @apply border-b-[3px] border-secondary text-secondary py-[8px] px-[15px] mt-[15px] flex;
     }
     .column-item{
-        font-size: 12px;
+        @apply text-[12px];
     }
     .address-list{
-        margin-top: 5px;
-        overflow: auto;
-        max-height : 240px;
+        @apply mt-[5px] overflow-auto max-h-[240px];
     }
     .address-list::-webkit-scrollbar{
-        display: none;
+        @apply hidden;
     }
     .address-row{
-        display : flex;
-        margin-top: 8px;
-        background : #181916;
-        border : 3px solid #0077cb;
-        border-radius: 10px;
-        padding: 8px 15px;
-        color : lightgrey;
+        @apply flex mt-[8px] bg-base-200 border-[3px] border-solid border-secondary rounded-[10px] py-[8px] px-[15px] text-base-content/90;
     }
     .address-row .img-avatar{
-        border-radius : 15px;
-        width: 40px;
-        height: 40px;
-        border : 2px solid #0077ac;
-        box-shadow : 0px 3px 15px #0077ac;
+        @apply shadow shadow-secondary shadow-lg rounded-[15px] w-[40px] h-[40px] border-[2px] border-solid border-solid;
     }
     .address-row label{
-        margin : auto;
+        @apply m-auto;
     }
 </style>
 <script setup>
