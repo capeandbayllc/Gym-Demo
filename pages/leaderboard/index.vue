@@ -116,7 +116,7 @@
                                                 Unit Sold
                                             </p>
                                             <p
-                                                class="border border-sky-600 rounded w-4/5 mx-auto px-2 py-1 mb-2 text-center text-success"
+                                                class="border border-secondary rounded w-4/5 mx-auto px-2 py-1 mb-2 text-center text-success"
                                             >
                                                 {{ member.unitSold }}
                                             </p>
@@ -141,7 +141,7 @@
                                                 Dollar Amount
                                             </p>
                                             <p
-                                                class="border border-sky-600 rounded w-4/5 mx-auto px-2 text-center py-1 mb-2 text-success"
+                                                class="border border-secondary rounded w-4/5 mx-auto px-2 text-center py-1 mb-2 text-success"
                                             >
                                                 {{ member.dollarAmount }}
                                             </p>

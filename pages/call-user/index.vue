@@ -1,12 +1,6 @@
 <template>
     <div class="call-user-container">
         <daisy-modal ref="outgoingCallModalRef">
-            <p class="p-3 border-[2px] border-solid bg-green-400">
-                TEST
-            </p>
-            <p class="p-3 border-[2px] border-solid bg-success">
-                TEST
-            </p>
             <outgoing-call-modal @callNow="showInCallModal"></outgoing-call-modal>
         </daisy-modal>
         <daisy-modal ref="inCallModalRef">
