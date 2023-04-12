@@ -17,23 +17,23 @@
       <div class="content flex items-center justify-between w-full">
         <div class="text-left">
           <div class="statistics">
-            <span class="text-[#0075c9] text-[13px] font-bold">Statistics</span>
+            <span class="text-secondary text-[13px] font-bold">Statistics</span>
           </div>
           <div class="amount">
-            <span class="text-[20px] text-white font-bold">${{item.amount}}</span>
+            <span class="text-[20px] text-base-content font-bold">${{item.amount}}</span>
           </div>
           <div class="percent-sm">
-            <span class="text-[#5bc600] text-[11px] flex items-center">
+            <span class="text-success text-[11px] flex items-center">
               <Up class="mr-1" />
               {{item.progress}}%
             </span>
           </div>
         </div>
         <div class="flex flex-col items-center justify-center">
-          <span class="bg-[#2f6301] p-2.5 rounded-lg inline-block">
-            <ArrowUp class="text-[#5cc600]" />
+          <span class="bg-success p-2.5 rounded-lg inline-block">
+            <ArrowUp class="text-success" />
           </span>
-          <span class="text-[#5cc600] inline-block text-[13px] mt-2">
+          <span class="text-success inline-block text-[13px] mt-2">
             +{{ item.progress2 }}%
           </span>
         </div>
@@ -82,30 +82,29 @@ const options = {
 };
 
 </script>
-<style>
-
+<style lang="postcss">
 .circle-big {
-  @apply relative
+  @apply relative;
 }
 
 .circle-big .gradient {
-  @apply absolute top-[5px] left-[6px] z-0 w-[79px] h-[79px] rounded-[50%]
+  @apply absolute top-[5px] left-[6px] z-0 w-[79px] h-[79px] rounded-[50%];
 }
 
 .circle-big .overlay {
-  @apply absolute w-full h-full flex justify-center items-center ;
+  @apply absolute w-full h-full flex justify-center items-center;
 }
 
 .circle-big .text {
-  @apply text-[20px] font-bold text-white
+  @apply text-[20px] font-bold text-base-content;
 }
 
 .circle-big .prog {
-  @apply w-[90px] h-[90px] relative z-20
+  @apply w-[90px] h-[90px] relative z-20;
 }
 
 .circle-big .bg {
-  @apply fill-transparent stroke-1 stroke-white
+  @apply fill-transparent stroke-1 stroke-white;
 }
 
 .circle-big .progress {

@@ -4,47 +4,27 @@
     </button>
   </template>
    
-<style scoped>
+<style scoped lang="postcss">
 .fitness-button {
-    /* background-color: #0077CB; */
-    border: none;
-    color: white;
-    padding: 4px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 14px;
-    margin: auto;
-    cursor: pointer;
-    border-radius: 12px;
-    min-width: 90px;
-    font-weight: normal;
-    cursor : default;
-    transition : all 0.3s;
+    @apply border-none m-auto text-base-content py-[4px] px-[10px] text-center no-underline block text-[14px] font-normal mx-auto cursor-default rounded-[12px] min-w-[90px] transition-all duration-300;
 }
 .default{
-    border : 2px solid #0077CB;
-    background : #181916;
-    min-width : 70px;
-    cursor : pointer;
-    padding: 1px 10px;
-    font-size: 18px;
+    @apply border-[2px] border-solid border-secondary min-w-[70px] cursor-pointer px-[10px] py-[1px] text-[18px] bg-neutral;
 }
 .default:hover{
-    background : #0077CB;
+    @apply bg-secondary;
 }
 .Premium{
-    background : #ff9e01;
+    @apply bg-warning;
 }
 .Basic{
-    background : #5cc300;
+    @apply bg-success;
 }
 .Pending{
-    background : #5a5b58;
+    @apply bg-primary-content;
 }
 .Completed{
-    background : #181916;
-    border : 2px solid #5cc300
+    @apply bg-neutral border-[2px] border-solid border-green-300;
 }
 
 </style>

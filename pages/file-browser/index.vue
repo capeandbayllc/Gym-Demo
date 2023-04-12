@@ -1,10 +1,6 @@
 <template>
     <div class="file-browser-container">
         <div class="-md:px-4 page-content flex-col">
-            <div>
-                <p class="bg-[#292929]">Hola</p>
-                <p class="bg-base-100">Hola</p>
-            </div>
             <file-action @fileActionSelected="actionSelected"></file-action>
             <file-card :actionType="actionType"></file-card>
             <history-card class="history-title"></history-card>
