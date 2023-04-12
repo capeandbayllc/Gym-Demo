@@ -32,7 +32,7 @@
   }
 
   .gr-gradient {
-    @apply bg-gradient-to-b from-neutral-focus/50 to-base-300;
+    @apply bg-gradient-to-b from-secondary/25 to-base-300;
   }
 
   .gr-base-textfield {
