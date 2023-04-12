@@ -46,13 +46,12 @@
         </td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .history-table-row {
     td {
-        @apply border-base-content/40 text-sm;
-        background-color: #191919;
+        @apply border-base-content/40 text-sm bg-base-200;
         > div {
-            @apply my-2  border-base-content/40 text-center flex items-center justify-center h-10 px-1 m-2;
+            @apply my-2 border-base-content/40 text-center flex items-center justify-center h-10 px-1 m-2;
         }
     }
     td:last-child {
