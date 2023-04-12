@@ -11,7 +11,7 @@
                 />
                 <div
                     v-if="uploadPopUp"
-                    class="bg-white absolute p-4 w-[300px] text-right rounded border border-secondary"
+                    class="bg-base-content absolute p-4 w-[300px] text-right rounded border border-secondary"
                 >
                     <label class="mb-4 block">
                         <UploadIcon
