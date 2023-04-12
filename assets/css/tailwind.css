@@ -7,6 +7,32 @@
 }
 
 @layer components {
+  /* there were a few different instances of these - please update them if
+    they're incorrect
+  */
+  .gr-membership-type {
+    @apply flex items-center justify-center capitalize btn btn-xs w-full rounded-full;
+  }
+
+  .gr-membership-type.type-bronze {
+    @apply bg-amber-600 text-base-content border-amber-300;
+    @apply hover:bg-amber-600/50;
+  }
+  .gr-membership-type.type-silver {
+    @apply bg-info-content/50 text-neutral-focus border-neutral-content/25;
+    @apply hover:bg-info-content/25 hover:text-primary-content;
+  }
+
+  .gr-membership-type.type-gold {
+    @apply bg-amber-200 text-amber-500 border-amber-500;
+    @apply hover:bg-amber-200/50;
+  }
+
+  .gr-membership-type.type-platinum {
+    @apply bg-amber-500 text-white border-amber-900 border;
+    @apply hover:bg-amber-500/50 hover:border-info-content hover:text-amber-400;
+  }
+
   .gr-gradient {
     @apply bg-gradient-to-b from-neutral-focus/50 to-base-300;
   }
