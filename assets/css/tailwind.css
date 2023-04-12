@@ -11,26 +11,27 @@
     they're incorrect
   */
   .gr-membership-type {
-    @apply flex items-center justify-center capitalize btn btn-xs w-full rounded-full;
+    @apply flex items-center justify-center capitalize btn btn-xs w-full rounded-full border-none transition-all duration-100;
+    outline-style: solid;
   }
 
-  .gr-membership-type.type-bronze {
-    @apply bg-amber-600 text-base-content border-amber-300;
-    @apply hover:bg-amber-600/50;
+  .gr-membership-type.bronze {
+    @apply bg-[#d88501] text-neutral-focus/75 outline-1 outline-[#d88501]/50;
+    @apply hover:bg-[#d88501]/75 hover:text-neutral-focus hover:outline-[#d88501] hover:outline-2;
   }
-  .gr-membership-type.type-silver {
-    @apply bg-info-content/50 text-neutral-focus border-neutral-content/25;
-    @apply hover:bg-info-content/25 hover:text-primary-content;
-  }
-
-  .gr-membership-type.type-gold {
-    @apply bg-amber-200 text-amber-500 border-amber-500;
-    @apply hover:bg-amber-200/50;
+  .gr-membership-type.silver {
+    @apply bg-[#b4b4b4] text-neutral-focus/75 outline-1 outline-[#b4b4b4]/50;
+    @apply hover:bg-[#b4b4b4]/75 hover:text-neutral-focus hover:outline-[#b4b4b4] hover:outline-2;
   }
 
-  .gr-membership-type.type-platinum {
-    @apply bg-amber-500 text-white border-amber-900 border;
-    @apply hover:bg-amber-500/50 hover:border-info-content hover:text-amber-400;
+  .gr-membership-type.gold {
+    @apply bg-[#edba2f] text-neutral-focus/75 outline-1 outline-[#edba2f]/50;
+    @apply hover:bg-[#edba2f]/75 hover:text-neutral-focus hover:outline-[#edba2f] hover:outline-2;
+  }
+
+  .gr-membership-type.platinum {
+    @apply bg-[#8a8f95] text-neutral-focus/75 outline-1 outline-[#8a8f95]/50;
+    @apply hover:bg-[#8a8f95]/75 hover:text-neutral-focus hover:outline-[#8a8f95] hover:outline-2;
   }
 
   .gr-gradient {

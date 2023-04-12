@@ -1,5 +1,5 @@
 <template>
-  <button class="gr-membership-type" :class="['type-' + membership]">
+  <button class="gr-membership-type" :class="membership">
     <span>
       {{ membership }}
     </span>
