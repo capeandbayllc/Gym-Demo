@@ -47,7 +47,7 @@
 	@apply hidden;
 }
 .member-row{
-	@apply text-neutral-content flex mt-[8px] bg-neutral border-[3px] border-secondary rounded-[10px] py-[8px] px-[15px] text-gray-300;
+	@apply text-neutral-content flex mt-[8px] bg-neutral border-[3px] border-secondary rounded-[10px] py-[8px] px-[15px] bg-base-content/80;
 }
 .member-row .img-avatar{
 	@apply rounded-[15px] w-[40px] h-[40px] border-[2px] border-solid border-secondary shadow shadow-info-content shadow-lg;

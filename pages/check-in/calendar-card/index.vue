@@ -14,7 +14,7 @@
         </div>
     </simple-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .checkin-calendar-card {
     @apply m-auto bg-neutral max-w-[1120px] xl:w-[1120px] w-full ;
     .calendar-card-body {

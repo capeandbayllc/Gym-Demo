@@ -3,7 +3,7 @@
         <simple-card :rounded-md="true" class="select-gym">
             <div class="flex px-4 pt-4 ml-2 mr-4 justify-between">
                 <p class="text-xl">Select a Gym</p>
-                <!-- <select class="select select-sm bg-white text-black w-fit max-w-xs rounded-sm text-black" v-model="city">
+                <!-- <select class="select select-sm bg-base-content text-base-300 w-fit max-w-xs rounded-sm text-base-300" v-model="city">
                     <option value="" selected>Select City</option>
                     <option v-for="opt in cities" :value="opt.value" :key="opt.value">{{opt.label}}</option>
                 </select> -->
@@ -15,7 +15,7 @@
                     :bgSecondaryOpened="false"
                     @onChange=""
                     classButton="my-[5px] mx-[10px]"
-                    class="bg-[#5a5a5a] text-white rounded-[10px]  max-w-[200px]">
+                    class="bg-base-100 text-base-content rounded-[10px]  max-w-[200px]">
                 </select-box>
             </div>
             <div class="w-[600px] gap-4 grid grid-cols-2 p-4 my-5 h-[400px] overflow-auto m-2 width-full">
@@ -95,11 +95,11 @@ const gyms = ref([
 
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
     .select-gym{
-        background-image: linear-gradient(to bottom, #0074c8b5 -40%, #000 90%);
+        @apply bg-gradient-to-b from-secondary to-base-300;
     }
     .card-gym{
-        @apply bg-gradient-to-b from-secondary to-black bg-secondary bg-blend-darken py-[14px] px-[16px] rounded-[14px] border border-secondary;
+        @apply bg-gradient-to-b from-secondary to-base-300 bg-secondary bg-blend-darken py-[14px] px-[16px] rounded-[14px] border border-secondary;
     }
 </style>
