@@ -104,7 +104,7 @@ const options = {
 }
 
 .circle-big .bg {
-  @apply fill-transparent stroke-1 stroke-white;
+  @apply fill-transparent stroke-1 stroke-base-content;
 }
 
 .circle-big .progress {

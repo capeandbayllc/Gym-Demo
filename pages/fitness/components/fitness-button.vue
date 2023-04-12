@@ -15,13 +15,13 @@
     @apply bg-secondary;
 }
 .Premium{
-    @apply bg-warning;
+    @apply bg-warning text-base-100;
 }
 .Basic{
     @apply bg-success;
 }
 .Pending{
-    @apply bg-primary-content;
+    @apply bg-neutral-content;
 }
 .Completed{
     @apply bg-neutral border-[2px] border-solid border-green-300;
