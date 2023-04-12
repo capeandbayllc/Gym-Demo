@@ -1,6 +1,12 @@
 <template>
     <div class="call-user-container">
         <daisy-modal ref="outgoingCallModalRef">
+            <p class="p-3 border-[2px] border-solid bg-green-400">
+                TEST
+            </p>
+            <p class="p-3 border-[2px] border-solid bg-success">
+                TEST
+            </p>
             <outgoing-call-modal @callNow="showInCallModal"></outgoing-call-modal>
         </daisy-modal>
         <daisy-modal ref="inCallModalRef">
@@ -48,7 +54,7 @@ const showIncomingCallModal = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .call-user-container {
     @apply py-4 pr-5 w-full h-fit pl-16;
 }
