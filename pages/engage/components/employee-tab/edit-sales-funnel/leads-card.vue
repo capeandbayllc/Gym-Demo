@@ -60,7 +60,7 @@
             }
         }
         .right-percentage{        
-            @apply bg-zinc-400 rounded w-full text-3xl font-bold border-base-content border-2 text-center;
+            @apply bg-neutral-content rounded w-full text-3xl font-bold border-base-content border-2 text-center;
         
         }
     .left-lead-text{

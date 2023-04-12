@@ -28,7 +28,7 @@
                                         <p class="mt-4">
                                             Drag and Drop your Files here
                                         </p>
-                                        <p class="py-2 text-gray-500">OR</p>
+                                        <p class="py-2 text-neutral-content">OR</p>
                                         <p class="mt-2 text-sm text-gray-600">
                                             <label
                                                 class="py-2 px-3 rounded-md text-base-content bg-secondary hover:bg-secondary/[0] hover:border-2 border-secondary font-light tracking-widest text-[0.8rem] transition-all duration-300 ease-linear cursor-pointer"

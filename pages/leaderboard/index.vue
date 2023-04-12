@@ -9,7 +9,7 @@
                 <span>Top Employee Ranking in All Categories</span>
             </div>
             <div class="-md:px-4 custom-page-content flex-col mb-14">
-                <div class="bg-black">
+                <div class="bg-base-300">
                     <data-table
                         class="leaderboard-table"
                         :data="mock"
@@ -41,7 +41,7 @@
                 <span>Membership Sales</span>
             </div>
 
-                <div class="-md:px-4 px-12 py-3 bg-black border border-secondary">
+                <div class="-md:px-4 px-12 py-3 bg-base-300 border border-secondary">
                     <div class="flex flex-row my-4 mr-8 justify-end">
                         <Button
                             secondary
@@ -73,7 +73,7 @@
                                 <simple-card class="px-4 membership-simple-card">
                                     <span
                                         v-if="member.isFavourite"
-                                        class="text-yellow-500 text-xl absolute top-0 right-2"
+                                        class="text-warning text-xl absolute top-0 right-2"
                                         >&#9733;</span
                                     >
                                     <div
@@ -94,7 +94,7 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="p-1 border border-white rounded flex mb-4"
+                                        class="p-1 border border-base-content rounded flex mb-4"
                                     >
                                         <div class="text-center text-sm w-2/4">
                                             <p class="text-secondary my-1">
@@ -116,7 +116,7 @@
                                                 Unit Sold
                                             </p>
                                             <p
-                                                class="border border-sky-600 rounded w-4/5 mx-auto px-2 py-1 mb-2 text-center text-lime-500"
+                                                class="border border-sky-600 rounded w-4/5 mx-auto px-2 py-1 mb-2 text-center text-success"
                                             >
                                                 {{ member.unitSold }}
                                             </p>
@@ -141,7 +141,7 @@
                                                 Dollar Amount
                                             </p>
                                             <p
-                                                class="border border-sky-600 rounded w-4/5 mx-auto px-2 text-center py-1 mb-2 text-lime-500"
+                                                class="border border-sky-600 rounded w-4/5 mx-auto px-2 text-center py-1 mb-2 text-success"
                                             >
                                                 {{ member.dollarAmount }}
                                             </p>
@@ -168,29 +168,25 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .page-club-container {
     @apply py-4 w-full h-fit text-center -xl:pr-6;
     .page-content {
         @apply block;
-        /* @screen xl{
-            @apply inline-block
-        } */
         .location-filter {
             @apply flex flex-row justify-between mb-3;
         }
         .leaderboard-table {
-            @apply px-3 overflow-y-auto;
-            height: 30vh;
+            @apply px-3 overflow-y-auto h-[30vh];
         }
         .carousel-wrap {
-            position: relative;
+            @apply relative;
             .membership-simple-card {
                 @apply bg-neutral;
             }
         }
         .custom-page-content {
-            @apply block border border-secondary bg-black rounded-b p-4 mx-auto w-full max-w-[1220px];
+            @apply block border border-secondary bg-base-300 rounded-b p-4 mx-auto w-full max-w-[1220px];
         }
         .custom-page-content-header {
             @apply bg-secondary text-start rounded-t-lg pl-6 p-2 font-semibold mx-auto w-full max-w-[1220px];
@@ -198,7 +194,7 @@
     }
 }
 </style>
-<style>
+<style lang="postcss">
 .multiselect-tag-remove-icon {
     background-color: currentColor;
     -webkit-mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 320 512' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m207.6 256 107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z'/%3E%3C/svg%3E");
@@ -212,20 +208,14 @@
 }
 .multiselect-caret {
     background-color: var(--ms-caret-color, #999);
-    flex-grow: 0;
-    flex-shrink: 0;
     margin: 0 var(--ms-px, 0.875rem) 0 0;
     -webkit-mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 320 512' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z'/%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 320 512' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z'/%3E%3C/svg%3E");
-    pointer-events: none;
-    position: relative;
-    transform: rotate(0deg);
-    transition: transform 0.3s;
-    z-index: 10;
+    @apply flex-grow-0 flex-shrink-0 pointer-events-none relative transform rotate-0 transition-transform duration-300 z-10;
 }
 .custom-select-box-height {
     .select-box-btn {
-        height: 32px;
+        @apply h-[32px];
     }
 }
 </style>

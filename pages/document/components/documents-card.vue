@@ -25,7 +25,7 @@
 </style>
 <style lang="postcss">
 .document-tbl-content thead {
-    @apply top-0 bg-black h-10;
+    @apply top-0 bg-base-300 h-10;
 }
 </style>
 <script setup>

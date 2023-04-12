@@ -16,7 +16,7 @@
             <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
               <ListboxOptions class="absolute z-10 mt-1 max-h-56 w-44 overflow-auto rounded-md bg-base-content py-1 text-base shadow-lg ring-1 ring-base-300 ring-opacity-5 focus:outline-none sm:text-xs">
                 <ListboxOption as="template" v-for="person in people" :key="person.id" :value="person" v-slot="{ active, selected }">
-                  <li :class="[active ? 'bg-indigo-600 text-base-content' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                  <li :class="[active ? 'bg-primary-focus text-base-content' : 'text-neutral', 'relative cursor-default select-none py-2 pl-3 pr-9']">
                     <div class="flex items-center">
                       <span :class="[selected ? 'font-semibold' : 'font-normal', 'block']">{{ person.name }}</span>
                     </div>

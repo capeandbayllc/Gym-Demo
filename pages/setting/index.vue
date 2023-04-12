@@ -25,7 +25,7 @@
                     <Button
                         ghost
                         size="sm"
-                        class="text-black"
+                        class="text-base-300"
                         @click="uploadPopUp = false"
                         >Cancel</Button
                     >
