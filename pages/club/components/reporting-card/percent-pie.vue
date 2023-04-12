@@ -21,7 +21,7 @@
           <span class="text-secondary text-[13px] font-bold">{{item.head}}</span>
         </div>
         <div class="amount">
-          <span class="text-[30px] text-white font-bold">$ {{item.amount.toFixed(2)}}</span>
+          <span class="text-[30px] text-base-content font-bold">$ {{item.amount.toFixed(2)}}</span>
         </div>
         <div class="percent-sm">
             <span class="text-success text-[11px] flex items-center">
@@ -89,7 +89,7 @@ const options = {
 }
 
 .circle-big .text {
-  @apply text-[20px] font-bold text-white;
+  @apply text-[20px] font-bold text-base-content;
 }
 
 .circle-big .prog {
@@ -97,7 +97,7 @@ const options = {
 }
 
 .circle-big .bg {
-  @apply fill-transparent stroke-1 stroke-white;
+  @apply fill-transparent stroke-1 stroke-base-content;
 }
 
 .circle-big .progress {

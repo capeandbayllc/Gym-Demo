@@ -3,7 +3,7 @@
         <div class="percentages overflow-auto h-[288px] py-4">
             <div :key="index" class="percent-item grid grid-cols-1" v-for="(item, index) in percentages">
                 <PercentPie :item="item" />
-                <hr class="border-white border-opacity-50 my-3">
+                <hr class="border-base-content border-opacity-50 my-3">
             </div>
         </div>
     </div>

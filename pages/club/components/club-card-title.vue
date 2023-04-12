@@ -1,6 +1,6 @@
 <template>
     <div class="inspection-card-title">
-        <div class="flex items-center text-white">
+        <div class="flex items-center text-base-content">
             <div class="title-icon">
                 <component :is="titleIcon" />
             </div>

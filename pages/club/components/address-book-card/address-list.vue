@@ -7,12 +7,12 @@
         </div>
         <ul class="address-list">
             <li v-for="category in categorizedItems" :key="category.name">
-                <label class="header block text-[14px] text-white text-left pt-4 pb-2">{{ category.label }}</label>
+                <label class="header block text-[14px] text-base-content text-left pt-4 pb-2">{{ category.label }}</label>
                 <ul>
                     <li v-for="item in category.items" :key="item.id" class="address-row">
                         <div class="w-[25%] flex">
                             <div class="flex items-center gap-2">
-                                <img class="rounded-lg h-12 w-12 object-cover bg-gray-300 border-2 border-blue-400 hidden md:block" :src="item.photo" alt="{{ item.name }}">
+                                <img class="rounded-lg h-12 w-12 object-cover bg-base-content/80 border-2 border-blue-400 hidden md:block" :src="item.photo" alt="{{ item.name }}">
                                 <label class="ml-4 font-medium">{{ item.name }}</label>
                             </div>
                         </div>

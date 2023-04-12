@@ -1,7 +1,7 @@
 <template>
     <div class="subleased-area-container">
         <div class="flex items-center justify-between mb-6 h-full">
-            <div class="relative h-full flex flex-col justify-center text-left text-white">
+            <div class="relative h-full flex flex-col justify-center text-left text-base-content">
                 <label class="text-xs">Location:</label>
                 <label class="text-lg">{{clubItems.club_name}}</label>
             </div>
@@ -11,7 +11,7 @@
                         <div class="flex space-x-5">
                             <SwitchGroup as="div" class="flex items-center">
                                 <Switch v-model="filters.location" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                     <span aria-hidden="true" :class="[filters.location ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                 </Switch>
@@ -22,7 +22,7 @@
 
                             <SwitchGroup as="div" class="flex items-center">
                                 <Switch v-model="filters.type" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                     <span aria-hidden="true" :class="[filters.type ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                 </Switch>
@@ -33,7 +33,7 @@
 
                             <SwitchGroup as="div" class="flex items-center">
                                 <Switch v-model="filters.alert" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                     <span aria-hidden="true" :class="[filters.alert ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                 </Switch>
@@ -44,7 +44,7 @@
 
                             <SwitchGroup as="div" class="flex items-center">
                                 <Switch v-model="filters.segments" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                     <span aria-hidden="true" :class="[filters.segments ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                 </Switch>
@@ -73,10 +73,10 @@
                 </div>
             </div>
             <div class="text-left mt-3">
-                <label class="text-[14px] text-white">Location Information</label>
-                <div class="border-2 border-white rounded-xl text-white mt-4 p-4 text-[14px]">
+                <label class="text-[14px] text-base-content">Location Information</label>
+                <div class="border-2 border-base-content rounded-xl text-base-content mt-4 p-4 text-[14px]">
                     <div class="flex items-center gap-2">
-                        <img class="rounded-lg h-20 w-20 object-cover bg-gray-300" :src="clubItems.location_info.subleased_thumb" alt="{{ clubItems.location_info.club_number }}" />
+                        <img class="rounded-lg h-20 w-20 object-cover bg-base-content/80" :src="clubItems.location_info.subleased_thumb" alt="{{ clubItems.location_info.club_number }}" />
                         <div class="ml-4 font-medium">
                             <div class="flex gap-4">
                                 <div class="text-[16px]">Club Number:</div>
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="flex items-center mt-4">
-                        <img class="rounded-lg object-cover bg-gray-300 w-full" :src="clubItems.location_info.map_img" alt="{{ clubItems.location_info.club_number }}" />
+                        <img class="rounded-lg object-cover bg-base-content/80 w-full" :src="clubItems.location_info.map_img" alt="{{ clubItems.location_info.club_number }}" />
                     </div>
                 </div>
             </div>

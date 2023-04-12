@@ -361,15 +361,15 @@ export default {
 
 <style lang="postcss">
 #drafting-report-chart .apexcharts-legend {
-  @apply flex justify-start pt-6
+  @apply flex justify-start pt-6;
 }
 #drafting-report-chart .apexcharts-legend-series {
-  @apply bg-base-100 flex p-2 rounded-lg px-4;
+  @apply bg-base-content/90 flex p-2 rounded-lg px-4;
 }
 #drafting-report-chart .apexcharts-legend-series .apexcharts-legend-marker {
   @apply rounded-[3px] mr-2;
 }
 #drafting-report-chart .apexcharts-legend-series .apexcharts-legend-text {
-  @apply font-bold;
+  @apply font-bold text-base-300 text-[14px];
 }
 </style>

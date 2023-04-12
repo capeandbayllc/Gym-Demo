@@ -21,7 +21,7 @@
     @apply bg-success;
 }
 .Pending{
-    @apply bg-neutral-content;
+    @apply bg-neutral-content/40;
 }
 .Completed{
     @apply bg-neutral border-[2px] border-solid border-success;

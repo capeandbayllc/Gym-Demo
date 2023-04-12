@@ -2,7 +2,7 @@
     <club-card :title-icon="CalendarIcon" title="Calendars">
         <div class="calendar-container">
             <div class="col-span-1 -lg:col-span-2 m-10 mb-0">
-                <div class="flex flex-col space-y-4 justify-center items-center border rounded-lg border-white">
+                <div class="flex flex-col space-y-4 justify-center items-center border rounded-lg border-base-content">
                     <date-picker
                             dark
                             inline
@@ -20,7 +20,7 @@
                 <div class="calendar-list-container">
                     <div>
                         <div class="flex items-center justify-between h-full">
-                            <div class="relative w-1/2 flex flex-col justify-left text-left text-white">
+                            <div class="relative w-1/2 flex flex-col justify-left text-left text-base-content">
                                 <div class="grid grid-cols-3 gap-1 items-center">
                                     <div class="col-span-1 flex items-center justify-center">
                                         <arrow-icon direction="left" class="h-fit cursor-pointer" @click="previousMonth"/>
@@ -39,7 +39,7 @@
                                         <div class="flex space-x-5">
                                             <SwitchGroup as="div" class="flex items-center">
                                                 <Switch v-model="filters.location" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                                     <span aria-hidden="true" :class="[filters.location ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                                 </Switch>
@@ -50,7 +50,7 @@
 
                                             <SwitchGroup as="div" class="flex items-center">
                                                 <Switch v-model="filters.type" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                                     <span aria-hidden="true" :class="[filters.type ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                                 </Switch>
@@ -61,7 +61,7 @@
 
                                             <SwitchGroup as="div" class="flex items-center">
                                                 <Switch v-model="filters.alert" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                                     <span aria-hidden="true" :class="[filters.alert ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                                 </Switch>
@@ -72,7 +72,7 @@
 
                                             <SwitchGroup as="div" class="flex items-center">
                                                 <Switch v-model="filters.segments" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                                     <span aria-hidden="true" :class="[filters.segments ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                                 </Switch>

@@ -1,7 +1,7 @@
 <template>
     <div class="inspection-container">
         <div class="flex items-center justify-between mb-6 h-full">
-            <div class="relative h-full flex flex-col justify-center text-left text-white">
+            <div class="relative h-full flex flex-col justify-center text-left text-base-content">
                 <label class="text-xs">Location:</label>
                 <label class="text-lg">{{clubItems.club_name}}</label>
             </div>
@@ -11,7 +11,7 @@
                         <div class="flex space-x-5">
                             <SwitchGroup as="div" class="flex items-center">
                                 <Switch v-model="filters.location" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                     <span aria-hidden="true" :class="[filters.location ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                 </Switch>
@@ -22,7 +22,7 @@
 
                             <SwitchGroup as="div" class="flex items-center">
                                 <Switch v-model="filters.type" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                     <span aria-hidden="true" :class="[filters.type ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                 </Switch>
@@ -33,7 +33,7 @@
 
                             <SwitchGroup as="div" class="flex items-center">
                                 <Switch v-model="filters.alert" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                     <span aria-hidden="true" :class="[filters.alert ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                 </Switch>
@@ -44,7 +44,7 @@
 
                             <SwitchGroup as="div" class="flex items-center">
                                 <Switch v-model="filters.segments" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
-                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
+                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
                                     <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
                                     <span aria-hidden="true" :class="[filters.segments ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                 </Switch>
