@@ -9,7 +9,7 @@
                 class="relative flex flex-row gap-2 h-[40px] hover:bg-secondary/[0.3] rounded-lg px-2 transition-all duration-200 cursor-pointer"
             >
                 <span
-                    class="h-[34px] w-[34px] my-auto bg-white rounded-xl overflow-hidden border-2 border-secondary"
+                    class="h-[34px] w-[34px] my-auto bg-base-content rounded-xl overflow-hidden border-2 border-secondary"
                 >
                     <UserIcon class="w-[30px] h-[30px]" />
                 </span>
@@ -33,7 +33,7 @@
                 class="relative flex flex-row gap-2 h-[40px] rounded-lg px-2 transition-all duration-200 justify-end"
             >
                 <span
-                    class="h-[34px] w-[34px] my-auto bg-white rounded-xl overflow-hidden border-2 border-secondary"
+                    class="h-[34px] w-[34px] my-auto bg-base-content rounded-xl overflow-hidden border-2 border-secondary"
                 >
                     <UserIcon class="w-[30px] h-[30px]" />
                 </span>
@@ -225,36 +225,36 @@ onMounted(async () => {
     window.dispatchEvent(new Event("resize"));
 });
 </script>
-<style>
+<style lang="postcss">
 .fc .fc-list-sticky .fc-list-day > *,
 .fc-theme-standard .fc-list-day-cushion,
 .fc .fc-cell-shaded,
 .fc-theme-standard th,
 .fc .fc-list-event:hover td {
-    background-color: transparent !important;
+    @apply !bg-transparent;
 }
 .fc-button {
     @apply !bg-transparent !border-0 !rounded-lg !py-[2px] !capitalize transition-all duration-150 ease-linear;
 }
 /* fc-dayGridMonth-button fc-button fc-button-primary */
 .fc-button.fc-button-active {
-    @apply !bg-secondary !border-[1px] !border-[#073A76];
+    @apply !bg-secondary !border-[1px] !border-secondary-focus;
 }
 .fc-toolbar-chunk {
     @apply !flex !flex-row !gap-5 !text-[0.7rem];
 }
 .fc-toolbar-chunk .fc-button-group {
-    @apply last:bg-[#18203A] last:border-[2px] last:border-[#073A76] first:py-[2px] last:p-[2px] rounded-lg !flex !flex-row first:gap-4 last:!gap-2;
+    @apply last:bg-secondary-content last:border-[2px] last:border-secondary-focus first:py-[2px] last:p-[2px] rounded-lg !flex !flex-row first:gap-4 last:!gap-2;
 }
 .fc-today-button.fc-button.fc-button-primary {
     @apply !bg-secondary px-5;
 }
 .fc-prev-button,
 .fc-next-button {
-    @apply !px-2 !bg-[#073A76];
+    @apply !px-2 !bg-secondary-focus;
 }
 .fc-event-main {
-    @apply !border-l-[6px] border-white border-opacity-20 text-[0.7rem];
+    @apply !border-l-[6px] border-base-content border-opacity-20 text-[0.7rem];
 }
 
 .fc {
@@ -266,7 +266,7 @@ onMounted(async () => {
 }
 
 th.fc-day-today {
-    @apply !bg-[#191919]/[0.4];
+    @apply !bg-base-200/[0.4];
 }
 
 .fc-event-main-frame {
@@ -282,15 +282,11 @@ th.fc-day-today {
     }
 }
 .fc-col-header-cell.fc-day {
-    height: 4em;
+    @apply h-[4em];
     @apply bg-gradient-to-b from-secondary/80 via-secondary to-secondary/60;
     div {
         @apply h-full flex items-center justify-center uppercase;
     }
-}
-
-.fc-event-time {
-    /* @apply bg-[#191919]/[0.4] contrast-200 rounded-l-full pl-2; */
 }
 
 .fc .fc-scrollgrid-section:nth-child(2) {
@@ -303,16 +299,13 @@ th.fc-day-today {
     @apply cursor-pointer;
 }
 .fc .fc-list-event:hover td {
-    background-color: rgba(188, 232, 241, 0.3) !important;
-    @apply cursor-pointer;
+    @apply cursor-pointer !bg-info;
 }
 .month-calender .fc-daygrid-day-bottom a {
-    font-size: 0px;
-    height: 10px;
-    width: 10px;
+    @apply w-[10px] h-[10px] text-[0px];
 }
 .fc .fc-timegrid-slot {
-    height: 3.5em;
+    @apply h-[3.5em];
 }
 .fc .fc-day-today {
     @apply bg-blend-darken;
@@ -373,9 +366,6 @@ table {
 
 thead .fc-scroller {
     @apply !overflow-hidden bg-secondary/[0.4];
-    /* table {
-        @apply bg-gradient-to-b from-secondary/80 via-secondary;
-    } */
 }
 
 .fc-daygrid-event {

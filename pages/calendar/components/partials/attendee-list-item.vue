@@ -1,11 +1,11 @@
 <template>
     <li
-        class="grid py-2 px-2 grid-cols-[5rem_1fr_5rem] items-center w-full bg-[#18203A] rounded-3xl border-2 border-[#073A76]"
+        class="grid py-2 px-2 grid-cols-[5rem_1fr_5rem] items-center w-full bg-secondary-content rounded-3xl border-2 border-secondary-focus"
     >
         <div class="p-4">
             <slot name="primary">
                 <span
-                    class="w-12 h-12 bg-white rounded-2xl border-2 border-secondary block"
+                    class="w-12 h-12 bg-base-content rounded-2xl border-2 border-secondary block"
                 ></span>
             </slot>
         </div>
