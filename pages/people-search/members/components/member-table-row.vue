@@ -42,27 +42,25 @@
             <div
               class="dropdown dropdown-left dropdown-end dropdown-hover contact-menu group"
             >
-              <div class="dropdown-item" tabindex="0" @click.prevent.stop>
-                Contact Member
-              </div>
+              <div class="dropdown-item" tabindex="0">Contact Member</div>
               <ul
                 class="dropdown-content group-hover:!inline-grid menu p-2 shadow bg-base-300 rounded items-start hidden"
               >
                 <li>
-                  <button @click.stop="contactOption = 'text'">Text</button>
+                  <button @click="contactOption = 'text'">Text</button>
                 </li>
 
                 <li>
-                  <button @click.stop="contactOption = 'email'">Email</button>
+                  <button @click="contactOption = 'email'">Email</button>
                 </li>
 
                 <li>
-                  <button @click.stop="contactOption = 'call'">Call</button>
+                  <button @click="contactOption = 'call'">Call</button>
                 </li>
               </ul>
             </div>
           </div>
-          <div class="dropdown-item" tabindex="-1" @click.stop="openNoteModal">
+          <div class="dropdown-item" tabindex="-1" @click="openNoteModal">
             Add a Note
           </div>
         </div>
