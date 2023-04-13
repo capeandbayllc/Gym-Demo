@@ -24,16 +24,16 @@
         @apply bg-warning;
     }
     .type-bronze {
-        @apply bg-amber-600 text-white hover:bg-amber-600 border-amber-600;
+        @apply bg-warning/10 text-base-content hover:bg-warning/10 border-warning/70;
     }
     .type-silver {
-        @apply bg-slate-200 text-zinc-800 hover:bg-slate-200 border-slate-200;
+        @apply bg-base-content/90 text-base-100 hover:bg-base-content/90 hover:border-base-content border-base-300;
     }
     .type-gold {
-        @apply bg-amber-200 text-amber-900 hover:bg-amber-200 border-amber-200;
+        @apply bg-warning/90 text-base-100 hover:bg-warning/90 border-warning/90;
     }
     .type-platinum {
-        @apply text-white bg-amber-500 hover:bg-amber-500 border-amber-500;
+        @apply text-white bg-warning/40 hover:bg-warning/40 border-warning/80;
     }
 </style>
 <script setup>

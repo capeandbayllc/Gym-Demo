@@ -16,7 +16,7 @@
         <agreement-modal />
     </daisy-modal>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .new-agreement-card-content {
     @apply grid grid-cols-7 gap-4 py-6 px-9 bg-transparent;
     .create-option {

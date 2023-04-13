@@ -41,7 +41,7 @@
     } */
 }
 .agreement-builder-modal-card {
-    background-color: hsl(var(--n) / var(--tw-bg-opacity));
+    @apply bg-base-200;
 }
 </style>
 
