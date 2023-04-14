@@ -27,6 +27,14 @@
             <button class="border-[1px] px-2 rounded-md hover:bg-[#008AE0]" @click="showNotes = !showNotes">Notes</button>
           </div>
         </div>
+        <div class="flex justify-end mt-5" v-if="showEndCallButton">
+          <button
+              class="btn w-max bg-error border-error rounded text-base-content btn-sm font-medium"
+              @click="$emit('end-call')"
+          >
+              Hang up
+          </button>
+        </div>
       </div>
     </simple-card>
 
@@ -51,8 +59,16 @@ import Footer from './components/footer.vue';
 import Notes from './components/notes.vue';
 
 defineProps({
-  user: Object
+  user: Object,
+  showEndCallButton: {
+    type: Boolean,
+    default: false
+  }
 })
+
+defineEmits([
+  'end-call'
+])
 const showNotes = ref(false);
 </script>
 

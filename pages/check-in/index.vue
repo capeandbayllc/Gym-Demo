@@ -241,6 +241,5 @@ const getMember = () => {
         console.log(ProfileInfo.value);
     }
 };
-
 getMember();
 </script>
