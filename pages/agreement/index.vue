@@ -55,7 +55,7 @@
     <daisy-modal ref="newAgreementModal" id="newAgreementModal">
         <simple-card class="p-4">
             <component :is="newAgreementScreens[newAgreementScreenIndex]" :newAgreementData="newAgreementData"
-                @changeNewAgreementData="newAgreementData = $event" @change-type="changeType"
+                @changeNewAgreementData="newAgreementData = $event" :showTypeBadge="true" @change-type="changeType"
                 @next="nextScreenAgreementModal" ref="newAgreementComponent"></component>
             <div class="flex justify-end mt-6 mb-2">
                 <Button size="sm" class="normal-case mx-2" ghost @click="prevScreenAgreementModal"

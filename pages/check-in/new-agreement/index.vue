@@ -24,9 +24,9 @@ import PersonalInformationNext from '../user-info/personal-information/personal-
 import DueTodayPayment from '../user-info/financial-collect/due-today.vue';
 import MostlyDuesPayment from '../user-info/financial-collect/mostly-dues.vue';
 import SecondaryPayments from '../user-info/financial-collect/secondary-payments.vue';
-import AgreementModal from '../user-info/agreement-modal.vue';
-import TermsAndCondition from '../user-info/terms-condition.vue';
-import PayNow from '../user-info/pay-now.vue';;
+import AgreementModal from '~/pages/agreement/components/agreement-modal.vue';
+import TermsAndCondition from '~/pages/agreement/components/agreement-type.vue';
+import PayNow from '../user-info/pay-now.vue';
 
 const showNewAgreement = ref(false);
 const newAgreement = ()=>{
