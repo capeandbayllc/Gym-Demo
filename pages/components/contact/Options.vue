@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import MakeCall from "~/pages/check-in/side-car-split/make-call.vue";
 import SendEmail from '~/pages/check-in/engage/email.vue';
-import SendSms from "~/pages/check-in/side-car-split/send-sms.vue";
+import SendSms from "~/pages/check-in/engage/message.vue";
 import OngoingCall from "~/pages/check-in/side-car-split/ongoing-call.vue";
 
 export type Type = 'text' | 'email' | 'call' | null;
