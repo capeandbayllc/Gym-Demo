@@ -6,12 +6,12 @@
                 <div>Name</div>
             </div>
             <div class="text-center">
-                <img src="/gym-revenue-base-content.png" class="h-6 inline-block">
+                <img src="/gym-revenue-white.png" class="h-6 inline-block">
             </div>
         </div>
         <div class="bg-base-content text-base-300 rounded max-h-[60vh] overflow-auto">
             <div class="text-center py-5">
-                <img src="/gym-revenue-base-300.png" class="h-11 inline-block">
+                <img src="/gym-revenue-black.png" class="h-11 inline-block">
                 <div class="font-semibold text-xl">Type Agreement</div>
             </div>
             <div class="px-8 pb-8">
