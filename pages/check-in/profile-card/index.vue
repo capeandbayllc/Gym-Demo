@@ -17,7 +17,7 @@
 }
 @media (min-width: 1280px) {
   .checkin-profile-card {
-    @applt pl-[4.25rem];
+    @apply pl-[4.25rem];
   }
 }
 </style>
