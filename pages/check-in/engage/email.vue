@@ -1,129 +1,70 @@
 <template>
-  <simple-card title="Send an E-mail">
-    <div class="email-modal-container flex flex-col">
-      <div class="content col-span-3">
-        <div class="email-inner-content m-5 p-4 col-span-3 mb-8">
-          <div class="flex items-center mb-4">
-            <img
-                :src="user?.profile_photo_path"
-                class="w-12 border border-secondary rounded-full mr-4"
-            />
-            <div>
-              <p class="text-xl">{{ user?.first_name }} {{ user?.last_name }}</p>
-              <p class="text-sm text-slate-500">Outgoing E-mail</p>
-            </div>
-            <div
-              class="ml-auto border border-secondary rounded-full p-3 h-[60px] w-[60px]"
-            >
-              <EmailIcon class="h-full w-full" />
-            </div>
+  <div class="lg:flex space-x-3">
+      <simple-card title="Send an E-mail" class="rounded-xl">
+     <div class="bg-gradient-to-t rounded-b-xl from-[#18203A] to-[#11609E] p-6 w-[500px]">
+          <div class="bg-black p-4 border-[1px] border-[#008AE0] rounded-xl">
+              
+              <Body 
+                  @notesModal="notesModal" 
+                  :ProfileImage="user.profile_photo_path"
+                  :profileName="`${user.first_name} ${user.last_name}`"
+                  callType="outgoing E-mail"
+                  :callTypeIcon="EmailIcon"
+              >
+                  <template #displayMiddle>
+                      <div class="text-center mb-2">
+                         <div>
+                          <input type="text" placeholder="Subject" class="w-full h-10 rounded-xl bg-transparent border-[1px] px-4 placeholder-white">
+                         </div>
+                         <div class="mt-2 relative">
+                          <textarea placeholder="Body" class="w-full h-10 rounded-xl bg-transparent border-[1px] px-4 placeholder-white h-24 "></textarea>
+                          <div class="text-xs space-x-3 absolute right-3 bottom-3">
+                              <span class="cursor-pointer">+ See Scripts</span>
+                              <span class="cursor-pointer">+ Add an Attachment</span>
+                          </div>
+                         </div>
+                      </div>
+                  </template>
+              </Body>
+              
+              <Footer 
+                  @close="$emit('close')" 
+                  @saveNow="$emit('saveEmail')"
+                  @callNow="$emit('sendEmail')"
+                  selectedType="email"
+                  submitTitle="Send Now"
+              />
+              
           </div>
-          <input
-            type="text"
-            class="bg-transparent border border-gray-400 rounded w-full p-2 mb-4"
-            placeholder="Subject"
-          />
-          <textarea
-            class="bg-transparent border border-gray-400 rounded w-full p-2 mb-2"
-            placeholder="Body"
-          ></textarea>
-          <div class="flex justify-end">
-            <Button
-              size="xs"
-              class="notes h-7 min-h-0 normal-case"
-              @click="showNotes = !showNotes"
-              >Notes</Button
-            >
-          </div>
-          <textarea
-            v-if="showNotes"
-            class="neutral-input"
-            placeholder="Email Notes"
-            rows="5"
-          ></textarea>
-        </div>
-        <div class="flex justify-between m-5">
-          <select-box
-            :items="emailType"
-            value=""
-            :label="'Email type'"
-            class="max-w-[15rem]"
-          >
-          </select-box>
-          <div class="flex items-center gap-2">
-            <button
-              type="button"
-              class="rounded btn-sm font-medium"
-              error
-              outline
-              @click="$emit('close')"
-            >
-              Cancel
-            </button>
-            <button class="rounded text-base-content btn-sm font-medium">
-              Save
-            </button>
-            <button
-              class="bg-success border-success rounded text-base-content btn-sm font-medium"
-              @click="$emit('email-now')"
-            >
-              Send Now
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+     </div>
   </simple-card>
+    
+          <Notes 
+          v-if="notesModalStatus" 
+          class="md:mt-3 lg:mt-0"
+          placeholderTitle="Send E-mail"
+          /> 
+  </div>
+  
 </template>
 
-<script setup>
-import { EmailIcon } from "~~/components/icons";
-
-const showNotes = ref(false);
-defineProps({
-  user: Object
-})
-
-const emailType = [
-  {
-    value: "1",
-    label: "Introduction",
-  },
-  {
-    value: "2",
-    label: "New Membership",
-  },
-  {
-    value: "3",
-    label: "Follow Up",
-  },
-  {
-    value: "4",
-    label: "Returning Call",
-  },
-];
-</script>
-
 <style scoped>
-.email-modal-container {
-  @apply pl-8 pr-8 pt-8 pb-8 bg-neutral min-w-[40rem] rounded-b-[19px];
-  .card-title {
-    @apply border-b pb-2 border-base-content/50;
-  }
-  .content {
-    @apply border border-secondary bg-black;
-    .email-inner-content {
-      @apply border border-secondary rounded;
-    }
-    .btn.bg-success:hover {
-      @apply border-success;
-    }
-  }
-  .notes {
-    @apply border-white px-4 bg-transparent;
-  }
-  .neutral-input {
-    @apply bg-base-content/20 block w-full mt-3 rounded-md p-3;
-  }
-}
+
 </style>
+
+<script setup>
+import { EmailIcon } from '~~/components/icons';
+import Body from '../side-car-split/components/body.vue';
+import Footer from '../side-car-split/components/footer.vue';
+import Notes from '../side-car-split/components/notes.vue';
+
+
+const notesModalStatus = ref(false);
+const notesModal = ()=>{
+  notesModalStatus.value = !notesModalStatus.value;
+}
+
+defineProps({
+user: Object
+})
+</script>
