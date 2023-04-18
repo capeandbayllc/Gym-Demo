@@ -11,7 +11,7 @@
         <td>{{data.email}}</td>
         <td>{{data.location}}</td>
         <td>
-            <membership-btn :membership="data.type" class="text-sm"/>
+            <membership-status :status="data.type" class="text-sm"/>
         </td>
         <td>{{data.created}}</td>
     </tr>
@@ -29,7 +29,7 @@
     td:last-child {
         @apply border-r-2 rounded-r capitalize;
     }
-    .membership-btn {
+    .membership-status {
         @apply flex items-center justify-center rounded text-sm cursor-pointer h-full px-2 py-1;
     }
     .type-warning {
@@ -41,6 +41,7 @@
 }
 </style>
 <script setup>
+import MembershipStatus from '~~/components/buttons/membership-status.vue';
 const props = defineProps({
     data: Object
 })

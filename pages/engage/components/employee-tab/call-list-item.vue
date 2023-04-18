@@ -42,7 +42,7 @@
       </div>
     </td>
     <td class="px-4">
-      <membership-btn :membership="data.membership_type" />
+      <membership-status :status="data.membership_type" />
     </td>
     <td>
       <div class="min-h-[28px] ml-[1rem]">{{ data.updated_at }}</div>
@@ -123,7 +123,7 @@
 </style>
 <script setup>
 import { library } from "@fortawesome/fontawesome-svg-core";
-import MembershipBtn from "@/components/buttons/membership-btn.vue";
+import MembershipStatus from "@/components/buttons/membership-status.vue";
 import {
   CallIcon,
   EmailIcon,

@@ -45,25 +45,13 @@
     .filter-list{
         cursor: pointer;
     }
-    .type-bronze {
-        @apply border-2;
-    }
-    .type-silver {
-        @apply bg-accent;
-    }
-    .type-gold {
-        @apply bg-warning/80;
-    }
-    .type-platinum {
-        @apply bg-accent;
-    }
 </style>
 <style>
     @media (max-width:980px) {
         .reporting-member-tbl .reporting-members-list-item {
             font-size: 9px !important;
         }
-        .reporting-member-tbl .membership-btn{
+        .reporting-member-tbl .membership-status{
             padding-left: 8px !important;
             padding-right: 8px !important;
         }  

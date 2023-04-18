@@ -62,7 +62,7 @@
                 Club {{ Math.floor(Math.random() * 10)}}
             </div>
             <div class="" :class="`w-[${columns[5].width}px]`">
-                <membership-btn :membership="data.type" class="max-w-[100px]" />
+                <membership-status :status="data.type" class="max-w-[100px]" />
             </div>
             <div :class="`w-[${columns[6].width}px]`">
                 <div
@@ -297,7 +297,7 @@
 }
 </style>
 <script setup>
-import MembershipBtn from "~/components/buttons/membership-btn.vue";
+import MembershipStatus from "~/components/buttons/membership-status.vue";
 import {
     AlertIcon,
     ArrowIcon,

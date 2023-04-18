@@ -40,7 +40,7 @@
         Club {{ Math.floor(Math.random() * 10) }}
       </div>
       <div>
-        <membership-btn :membership="data.type" />
+        <membership-status :status="data.type" />
       </div>
       <div class="w-fit justify-self-center relative">
         <div
@@ -270,7 +270,7 @@
 }
 </style>
 <script setup>
-import MembershipBtn from "~/components/buttons/membership-btn.vue";
+import MembershipStatus from "~/components/buttons/membership-status.vue";
 import {
   AlertIcon,
   ArrowIcon,

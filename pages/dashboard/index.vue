@@ -25,4 +25,5 @@ import CampaignCard from './components/campaign-card/index.vue';
 import CalendarCard from './components/calendar-card/index.vue';
 import TransactionCard from './components/transaction-card/index.vue';
 import HistoryCard from './components/history-card/index.vue';
+
 </script>

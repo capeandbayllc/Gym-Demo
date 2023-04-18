@@ -96,7 +96,7 @@
 }
 .profile-status {
     @apply flex flex-row space-x-4 px-10 justify-between;
-    .profile-membership-btn {
+    .profile-membership-status {
         @apply text-xl w-10 h-10 text-center justify-center font-bold text-white;
     }
     > div > button {
@@ -139,7 +139,7 @@
 }
 </style>
 <script setup>
-import MembershipBtn from "~~/components/buttons/membership-btn.vue";
+import MembershipStatus from "~~/components/buttons/membership-status.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import OfferUpBtn from "~~/components/buttons/offer-up-btn.vue";
 import {
