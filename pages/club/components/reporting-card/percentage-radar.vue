@@ -34,7 +34,7 @@
 </style>
 <script setup>
     import {ref} from 'vue';
-    import PercentPie from './percent-pie.vue';
+    import PercentPie from '~/components/charts/percent-pie/index.vue';
     const percentages = ref([
         {
             color: '#3fc0ff',
