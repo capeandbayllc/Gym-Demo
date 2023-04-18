@@ -36,18 +36,12 @@
           <EffectiveDateAndPricing class="mt-12" />
         </div>
         <div class="flex items-center justify-around my-4">
-          <div class="flex items-center mr-6">
-            <div class="toggle-custom mr-2 mt-[2px]" :class="{ 'toggle-active': promotionalsTextsCheck }">
-                <div @click="changePromotionalsTextsCheck" class="circle"></div>
-                <div @click="changePromotionalsTextsCheck" class="line"></div>
-            </div>
+          <div class="flex mr-6">
+            <custom-toggle class="mt-[1px] mr-2" v-model="promotionalsTextsCheck" />
             <span>Send me promotional texts</span>
           </div>
-          <div class="flex items-center">
-            <div class="toggle-custom mr-2 mt-[2px]" :class="{ 'toggle-active': promotionalsEmailsCheck }">
-                <div @click="changePromotionalsEmailsCheck" class="circle"></div>
-                <div @click="changePromotionalsEmailsCheck" class="line"></div>
-            </div>
+          <div class="flex">
+            <custom-toggle class="mt-[1px] mr-2" v-model="promotionalsEmailsCheck" />
             <span>Send me promotional emails</span>
           </div>
         </div>
@@ -67,6 +61,7 @@
   </div>
 </template>
 <script setup>
+import CustomToggle from "~/components/toggle/custom-toggle.vue";
 import {ref} from 'vue';
 import EffectiveDateAndPricing from './components/EffectiveDateAndPricing.vue';
 
@@ -82,14 +77,6 @@ const openThankYou = ()=>{
 }
 
 const promotionalsTextsCheck = ref(false);
-const changePromotionalsTextsCheck = ()=>{
-  promotionalsTextsCheck.value = !promotionalsTextsCheck.value;
-};
-
 const promotionalsEmailsCheck = ref(false);
-const changePromotionalsEmailsCheck = ()=>{
-  promotionalsEmailsCheck.value = !promotionalsEmailsCheck.value;
-};
-
 
 </script>
