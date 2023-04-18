@@ -4,7 +4,7 @@
             <template #title>
                 <div class="document-card-title">
                     Documents
-                    <search-input neutral size="md" border="base" />
+                    <search-input neutral size="md" :border="'base'" />
                 </div>
             </template>
             <div class="p-6">

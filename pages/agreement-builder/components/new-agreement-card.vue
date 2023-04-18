@@ -8,7 +8,7 @@
             </div>
             <div class="create-option" @click="showAgreementModal">
                 <add-icon class="mb-2.5" />
-               Upload a document
+                Upload a document
             </div>
         </div>
     </simple-card>
