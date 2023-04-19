@@ -51,7 +51,7 @@
 import { WaiversIcon } from '~~/components/icons'
 import FitnessCard from '../fitness-card.vue';
 import FitnessPlusButton from '../fitness-plus-button.vue';
-import ScrollableDocs from '../scrollable-docs.vue';
+import ScrollableDocs from '~/components/scrollable-docs.vue';
 
 const doc_data = [
     {
