@@ -212,7 +212,12 @@ hr {
 </style>
 
 <script setup lang="ts">
-import { type IAssessmentFormData, assessmentFormDefaults } from "./helpers";
+import {
+  type IAssessmentFormData,
+  type KeyQuestionPair,
+  assessmentFormDefaults,
+  physicalActivityQuestions,
+} from "./helpers";
 import Ynquestion from "./ynquestion.vue";
 
 interface Props {

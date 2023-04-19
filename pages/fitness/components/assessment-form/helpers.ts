@@ -1,7 +1,3 @@
-/** this file exists due to a bug in the way vue parses ts SFC's causing default props
- * defined locally to be lexically unavailable to the parser
- */
-
 export interface IAssessmentFormData {
   first_name?: string;
   middle_name?: string;
