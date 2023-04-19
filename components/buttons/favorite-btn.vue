@@ -7,7 +7,7 @@
         }"
         @click="$emit('update:modelValue', !modelValue)"
     >
-        &#9733;
+    <star-icon clear />
     </span>
 </template>
 <style scoped>
@@ -16,6 +16,7 @@
 }
 </style>
 <script setup>
+import { StarIcon } from "~/components/icons";
 const props = defineProps({
     modelValue: {
         type: Boolean,

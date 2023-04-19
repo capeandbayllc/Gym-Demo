@@ -73,8 +73,8 @@
                                 <simple-card class="px-4 membership-simple-card">
                                     <span
                                         v-if="member.isFavourite"
-                                        class="text-yellow-500 text-xl absolute top-0 right-2"
-                                        >&#9733;</span
+                                        class="absolute top-0 right-2"
+                                        > <star-icon /> </span
                                     >
                                     <div
                                         class="flex items-center justify-center p-5"
@@ -232,6 +232,7 @@
 <script setup>
 //import { onMounted,onBeforeUnmount} from "vue";
 import 'vue3-carousel/dist/carousel.css';
+import { StarIcon } from "~/components/icons";
 import {Carousel, Slide} from 'vue3-carousel';
 import {NextIcon, PrevIcon} from '~~/components/icons';
 import LeaderboardTableRow from './components/leaderboard-table-row.vue';

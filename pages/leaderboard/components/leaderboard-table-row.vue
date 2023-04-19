@@ -6,7 +6,7 @@
             <div class="w-36 px-4">
                 Rank: 
                 <span class="text-secondary ml-2" :class="rank[data.rank - 1].textClass"> {{rank[data.rank - 1].label}}</span>
-                <span :class="[rank[data.rank - 1].iconClass,'text-lg','ml-1']">&#9733;</span>
+                <span :class="[rank[data.rank - 1].iconClass,'text-lg','ml-1']"><star-icon /></span>
             </div>
         </td>
         <td><div class="px-3">Location: <span class="text-secondary ml-2"> {{data.location}}</span></div></td>
@@ -35,6 +35,7 @@
 }
 </style>
 <script setup>
+import { StarIcon } from "~/components/icons";
 const props = defineProps({
     data: Object
 })
