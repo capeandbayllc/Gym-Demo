@@ -7,13 +7,7 @@
       <reportings-card class="col-span-2" />
     </div>
     <daisy-modal ref="assessmentFormEl">
-      <div class="bg-base-300 p-4 rounded-2xl border-secondary border">
-        <h2 class="text-2xl py-4">Fitness Assessment</h2>
-
-        <div class="p-4 border border-primary-content rounded-2xl">
-          <AssessmentForm />
-        </div>
-      </div>
+      <AssessmentForm @close="handleCloseAssessment" />
     </daisy-modal>
   </div>
 </template>
