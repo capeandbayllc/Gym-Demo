@@ -30,23 +30,13 @@
           >
             {{ item }}
           </div>
-          <div class="col-span-5">
-            <div class="font-normal text-[17px]">
-              <span> Compare: </span>
-              <span
-                class="ml-1 cursor-pointer"
-                @click.self="reportBy('prevMonth')"
-                :class="{ 'text-secondary': prevMonth }"
-                >Previous Month</span
-              >
-              <span class="mx-2">or</span>
-              <span
-                class="cursor-pointer"
-                @click="reportBy('prevYear')"
-                :class="{ 'text-secondary': prevYear }"
-                >Previous Year</span
-              >
-            </div>
+          <div class="col-span-5 mt-[-7px]">
+			<comparison-selector
+				label="Compare"
+				:items="['Previous Month', 'Previous Year']"
+				@change="reportBy($event)"
+				:compareReport="compareReport"
+			/>
           </div>
         </div>
         <div id="chart">
@@ -72,6 +62,7 @@
 </template>
 <script setup>
 import {ref} from 'vue'
+import ComparisonSelector from '../components/comparison-selector.vue';
 import ClientWidgetPopup from './client-widget-popup.vue'
 
 // Data

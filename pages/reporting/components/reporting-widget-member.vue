@@ -11,7 +11,14 @@
                 <div class="grid grid-cols-5 mt-2 font-semibold text-lg -xl:text-sm -lg:text-xs text-center">
                     <div class="filter-list" :class="{'text-secondary': activeFilter === index}" v-for="(item, index) in filterList" :key="index" @click="setFilter(index)">{{ item }}</div>
                 </div>
-                <comparison-selector @clickPreviousMonth="reportBy('Previous Month')" @clickPreviousYear="reportBy('Previous Year')" :compareReport="compareReport" />
+
+                <comparison-selector
+                    label="Compare"
+                    :items="['Previous Month', 'Previous Year']"
+                    @change="reportBy($event)"
+                    :compareReport="compareReport"
+                />
+
                 <div class="flex justify-center text-secondary text-xl -xl:text-sm font-medium mt-3">
                     NEW MEMBERS
                 </div>
