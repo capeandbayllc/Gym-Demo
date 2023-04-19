@@ -11,16 +11,7 @@
                 <div class="grid grid-cols-5 mt-2 font-semibold text-lg -xl:text-sm -lg:text-xs text-center">
                     <div class="filter-list" :class="{'text-secondary': activeFilter === index}" v-for="(item, index) in filterList" :key="index" @click="setFilter(index)">{{ item }}</div>
                 </div>
-                <div class="grid grid-cols-1 mt-2 text-base -xl:text-xs font-normal">
-                    <div>
-                        <span>
-                            Compare:
-                        </span>
-                        <span class="ml-1 cursor-pointer" @click="reportBy('Previous Month')" :class="{'text-secondary': compareReport === 'Previous Month'}">Previous Month</span>
-                        <span class="mx-2">or</span>
-                        <span class="cursor-pointer" @click="reportBy('Previous Year')" :class="{'text-secondary': compareReport === 'Previous Year'}">Previous Year</span>
-                    </div>
-                </div>
+                <comparison-selector @clickPreviousMonth="reportBy('Previous Month')" @clickPreviousYear="reportBy('Previous Year')" :compareReport="compareReport" />
                 <div class="flex justify-center text-secondary text-xl -xl:text-sm font-medium mt-3">
                     NEW MEMBERS
                 </div>
@@ -70,6 +61,7 @@
     }    
 </style>
 <script setup>
+import ComparisonSelector from '../components/comparison-selector.vue';
 import ReportingMembersLineChart from './reporting-members-line-chart.vue';
 import ReportingMembersChart from './reporting-members-chart.vue';
 import MembersList from './members-list-item.vue'
@@ -113,7 +105,9 @@ const membershipTypes = ["platinum", "gold", "silver", "bronze"];
 request(member.query.browse, {first: 15}).then((response) => {
   const members = response.data.data.members.data.map(m => ({
     ...m,
-    type: membershipTypes[getRandomInt(membershipTypes.length)]
+    type: membershipTypes[
+        getRandomInt(membershipTypes.length - 1)
+    ]
   }));
 
   data.value = members.splice(0, 6);

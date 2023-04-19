@@ -11,16 +11,7 @@
                 <div class="grid grid-cols-5 mt-2 font-semibold text-lg -xl:text-sm -lg:text-xs text-center">
                     <div class="cursor-pointer" :class="{'text-secondary': activeFilter === index}" v-for="(item, index) in filterList" :key="index" @click="setFilter(index)">{{ item }}</div>
                 </div>
-                <div class="grid grid-cols-1 mt-2 text-base -xl:text-xs font-normal">
-                    <div>
-                        <span>
-                            Compare:
-                        </span>
-                        <span class="ml-1 cursor-pointer" @click="reportBy('Previous Month')" :class="{'text-secondary': compareReport === 'Previous Month'}">Previous Month</span>
-                        <span class="mx-2">or</span>
-                        <span class="cursor-pointer" @click="reportBy('Previous Year')" :class="{'text-secondary': compareReport === 'Previous Year'}">Previous Year</span>
-                    </div>
-                </div>
+                <comparison-selector @clickPreviousMonth="reportBy('Previous Month')" @clickPreviousYear="reportBy('Previous Year')" :compareReport="compareReport" />
                 <div class="chart-wrapper relative">
                     <div v-if="showTable">
                         <div class="text-secondary flex mt-2 text-xl -xl:text-sm font-semibold justify-center">
@@ -46,6 +37,7 @@
     </card>
 </template>
 <script setup>
+import ComparisonSelector from '../components/comparison-selector.vue';
 import ReportingConversionChart from './reporting-conversion-chart.vue';
 import TotalCard from './total-card.vue';
 import FilteredReportCard from './filtered-report-card.vue';
