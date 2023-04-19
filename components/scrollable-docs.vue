@@ -9,19 +9,15 @@
     </div>
     <arrow-icon v-show="!hideRightArrow" direction="right" class="h-fit cursor-pointer" @click="RightArrowClick"/>
 </template> 
-<style scoped>
+<style scoped lang="postcss">
 .docs-list{
-    width : 100%;
-    overflow-x: scroll;
-    transition : all 0.3s;
-    margin : 0 10px;
+    @apply w-full overflow-x-scroll transition-all duration-300 mx-10;
 }
 .docs-list::-webkit-scrollbar{
-    display: none;
+    @apply hidden;
 }
 .cursor-pointer{
-    margin : auto;
-    color : white;
+    @apply m-auto text-base-content;
 }
 </style>
 <script setup>

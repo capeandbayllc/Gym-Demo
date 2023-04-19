@@ -23,7 +23,7 @@
         </ClientOnly>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .chart-area  .btn-status{
     @apply w-[15px] h-[15px] bg-[#0077ac] rounded-full text-black text-[10px] font-bold m-auto;
 }

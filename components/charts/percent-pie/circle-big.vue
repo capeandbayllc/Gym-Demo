@@ -23,13 +23,13 @@ const props = defineProps({
     }
 })
 </script>
-<style>
+<style lang="postcss">
 .circle-big {
-    @apply relative
+    @apply relative;
 }
 
 .circle-big .gradient {
-    @apply absolute top-[5px] left-[6px] z-0 w-[79px] h-[79px] rounded-[50%]
+    @apply absolute top-[5px] left-[6px] z-0 w-[79px] h-[79px] rounded-[50%];
 }
 
 .circle-big .overlay {
@@ -37,15 +37,15 @@ const props = defineProps({
 }
 
 .circle-big .text {
-    @apply text-[20px] font-bold text-white
+    @apply text-[20px] font-bold text-white;
 }
 
 .circle-big .prog {
-    @apply w-[90px] h-[90px] relative z-20
+    @apply w-[90px] h-[90px] relative z-20;
 }
 
 .circle-big .bg {
-    @apply fill-transparent stroke-1 stroke-white
+    @apply fill-transparent stroke-1 stroke-white;
 }
 
 .circle-big .progress {
