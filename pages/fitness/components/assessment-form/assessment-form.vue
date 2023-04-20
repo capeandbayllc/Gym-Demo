@@ -1,10 +1,10 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <div class="bg-base-300 p-4 rounded-2xl border-secondary border">
+    <div class="bg-base-300 p-4 rounded-2xl border-secondary border max-w-5xl">
       <h2 class="text-xl py-4">Fitness Assessment</h2>
       <div class="p-4 border border-primary-content rounded-2xl">
         <div class="mx-12 max-h-[24rem] overflow-y-auto pr-12">
-          <h3 class="text-secondary text-lg font-semibold">
+          <h3 class="text-secondary text-lg font-semibold py-4">
             Contact Information
           </h3>
 
@@ -96,7 +96,7 @@
                 type="mobile"
                 name="mobile"
                 id="mobile"
-                pattern="mobile"
+                pattern="tel"
                 class="group-hover:bg-secondary"
               />
             </div>
@@ -124,7 +124,6 @@
                 type="text"
                 name="city"
                 id="city"
-                pattern="city"
                 class="group-hover:bg-secondary"
               />
             </div>
@@ -136,7 +135,6 @@
                 type="text"
                 name="state"
                 id="state"
-                pattern="state"
                 class="group-hover:bg-secondary"
               />
             </div>
@@ -157,16 +155,63 @@
 
           <!-- Physical ability -->
           <div>
-            <h3 class="text-secondary text-lg font-semibold">
+            <h3 class="text-secondary text-lg font-semibold pb-4">
               Physical Activity Readiness Questinnaire
             </h3>
 
             <Ynquestion
-              v-for="(tup, idx) in physicalActivityQuestions"
+              v-for="(kqp, idx) in physicalActivityQuestions"
               :key="idx"
-              :model-value="form[tup.key]"
+              :model-value="form[kqp.key]"
+              :question="kqp.question"
             />
           </div>
+
+          <p class="text-secondary font-semibold text-xs mt-8">
+            if you answered "yes" to any of these questions, call your personal
+            physician or healthcare provider before increasing your physical
+            activity level.
+          </p>
+
+          <hr />
+          <h3 class="text-secondary text-lg font-semibold pb-4">
+            Wellness Center Policies
+          </h3>
+          <ul
+            class="grid grid-cols-2 gap-x-8 gap-y-4 list-disc marker:text-secondary marker:text-xl mx-4 px-4"
+          >
+            <li v-for="(policy, idx) in wellnessPolicies" :key="idx">
+              {{ policy }}
+            </li>
+          </ul>
+          <p class="text-secondary font-semibold text-xs mt-8 text-center py-6">
+            I state that I have read this document, agree with its terms and am
+            signing this contract voluntarily.
+          </p>
+
+          <div class="grid grid-cols-[1fr_0.2fr] gap-6">
+            <div class="input-group group">
+              <label class="gr-base-label" for="signature">signature</label>
+              <input
+                v-model="form.signature"
+                type="text"
+                name="signature"
+                id="signature"
+                class="group-hover:bg-secondary"
+              />
+            </div>
+            <div class="input-group group">
+              <label class="gr-base-label" for="date">date</label>
+              <input
+                v-model="form.date"
+                type="text"
+                name="date"
+                id="date"
+                class="group-hover:bg-secondary"
+              />
+            </div>
+          </div>
+          <hr />
         </div>
       </div>
 
@@ -214,9 +259,9 @@ hr {
 <script setup lang="ts">
 import {
   type IAssessmentFormData,
-  type KeyQuestionPair,
   assessmentFormDefaults,
   physicalActivityQuestions,
+  wellnessPolicies,
 } from "./helpers";
 import Ynquestion from "./ynquestion.vue";
 

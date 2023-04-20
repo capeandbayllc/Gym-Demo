@@ -11,13 +11,15 @@ export interface IAssessmentFormData {
   city?: string;
   state?: string;
   zip?: string | number;
-  heart_condition?: boolean | null;
-  chest_pain_pa?: boolean | null;
-  chest_pain_recently?: boolean | null;
-  consciousness_loss?: boolean | null;
-  bone_joint_problems?: boolean | null;
-  medication_recommeneded?: boolean | null;
-  requires_supervision?: boolean | null;
+  heart_condition?: string;
+  chest_pain_pa?: string;
+  chest_pain_recently?: string;
+  consciousness_loss?: string;
+  bone_joint_problems?: string;
+  medication_recommeneded?: string;
+  requires_supervision?: string;
+  signature?: string;
+  date?: string | Date;
 }
 
 export const assessmentFormDefaults = {
@@ -33,13 +35,15 @@ export const assessmentFormDefaults = {
   city: "",
   state: "",
   zip: "",
-  heart_condition: null,
-  chest_pain_pa: null,
-  chest_pain_recently: null,
-  consciousness_loss: null,
-  bone_joint_problems: null,
-  medication_recommeneded: null,
-  requires_supervision: null,
+  heart_condition: "",
+  chest_pain_pa: "",
+  chest_pain_recently: "",
+  consciousness_loss: "",
+  bone_joint_problems: "",
+  medication_recommeneded: "",
+  requires_supervision: "",
+  signature: "",
+  date: "",
 };
 
 export interface KeyQuestionPair {
@@ -80,4 +84,15 @@ export const physicalActivityQuestions: KeyQuestionPair[] = [
       "Are you aware, through experience, or a doctor's advice, of any physical reason that would limit you from exercising without supervision?",
     key: "requires_supervision",
   },
+];
+
+export const wellnessPolicies = [
+  "Membership required to the wellness center.",
+  "One session is good for 30 days after the original date of purchase",
+  "Session packages are available to students/members/non-members.",
+  "Five session packages are good for 60 days after the original date of purchase",
+  "The wellness center reserves the right to refuse service if deemed fit.",
+  "Ten session packages are good for 90 days after the original date of purchase",
+  "Session payments are non-refundable. Sessions are 60 minutes in length starting at your scheduled time. if you are more than 15 minutes late, it will be considered a no-show and you will be charged. You must call your personal trainer with cancellation at least 12 hours in aadvance before the session in order to reschedule.",
+  "Thirty session packages are good for 180 days after the original date of purchase.",
 ];
