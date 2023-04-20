@@ -212,6 +212,8 @@
             </div>
           </div>
           <hr />
+
+          <CostTable />
         </div>
       </div>
 
@@ -264,6 +266,7 @@ import {
   wellnessPolicies,
 } from "./helpers";
 import Ynquestion from "./ynquestion.vue";
+import CostTable from "./cost-table.vue";
 
 interface Props {
   data: IAssessmentFormData;
