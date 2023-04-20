@@ -181,10 +181,10 @@
           Total:
         </li>
         <li class="ml-20">
-          5 Days
+          {{ totalDays }} Days
         </li>
         <li>
-          40 Hours
+          {{ totalHours }} Hours
         </li>
         <li></li>
         <li>
@@ -196,41 +196,100 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { ref } from "vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 import { useQuery } from "@vue/apollo-composable";
 import employee from "~/api/queries/employee";
 import EmployeeSearchList from './components/employee-search-list.vue'
+import { query as queryCalendar  } from "./queries/queries";
+import dateFormat from "dateformat";
+
 const filters = ref({
   location: false,
   type: false,
   alert: false,
   segments: false,
 });
-let selectedEmployee = ref('All')
-let employees = ref([
-  {
-    id: 1, 
-    value: 'All',
-  }
-])
+
+let selectedEmployee = ref('')
+
+let employees = ref([]);
+
 const { result } = useQuery(employee.query.browse);
+
 watch(() => {
   employees.value = [
     {
-      id: 1, 
-      value: 'All',
+      value: '', 
+      label: 'All',
     },
     ...result?.value?.employee?.data.map((e,index) => {
       return {
-        id: e.id,
-        value: `${e.first_name} ${e.last_name}`
+        value: e.id,
+        label: `${e.first_name} ${e.last_name}`
       };
     })
-  ]; 
-
+  ];
 });
+
+let eventAttendeesData = ref([]);
+
+const { result: resultCalendarAttendee } = useQuery(queryCalendar);
+
+function getTimeDifference(start, end) {
+  const diff = new Date(end).getTime() - new Date(start).getTime();
+  const hoursDiff = diff / 3600000;
+
+  return hoursDiff;
+}
+
+watch(()=>{
+  const events = resultCalendarAttendee?.value?.calendarEvents
+  if(!events) return ;
+  const eventAttendees = [];
+  events.forEach(event => {
+    const attendees = event.attendees;
+    attendees.forEach((attendee, index) => {
+      const attendeeData = {
+        id: attendee.id,
+        location: event.location.name,
+        day: dateFormat(event.start, 'dddd, m/d/yyyy'),
+        hours: getTimeDifference(event.start, event.end),
+        in: dateFormat(event.start, 'h:MM TT'),
+        out: dateFormat(event.end, 'h:MM TT'),
+        img_url: attendee.entity.profile_photo_path,
+        profile_id: attendee.entity_id
+      };
+      eventAttendees.push(attendeeData);
+    });
+  });
+  eventAttendeesData.value = eventAttendees;
+})
+
+const employeeData = computed(() => {
+  if (selectedEmployee.value === '') {
+    return eventAttendeesData.value;
+  } else {
+    return eventAttendeesData.value.filter((event) => {
+      return event.profile_id === selectedEmployee.value;
+    });
+  }
+});
+
+const totalHours = computed(()=> {
+  const total = employeeData.value.reduce((sum, employee) => {
+    return sum + employee.hours;
+  }, 0);
+  return total;
+});
+
+const totalDays = computed(() => {
+  const uniqueDays = new Set(employeeData.value.map(employee => employee.day));
+  return uniqueDays.size;
+});
+
 const columns = [
     {
         label: 'Location',
@@ -253,64 +312,4 @@ const columns = [
         class: 'text-secondary text-center'
     },
 ];
-const employeeData = [
-    {
-        id: 1,
-        location: 'Club#1234',
-        day: 'Monday 01.02.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'checkin/avatar_random.jpg'
-    },
-    {
-        id: 2,
-        location: 'Club#1234',
-        day: 'Tuesday 01.03.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'chat-conversation/2.png'
-    },
-    {
-        id: 3,
-        location: 'Club#1234',
-        day: 'Monday 01.02.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'chat-conversation/3.png'
-    },
-    {
-        id: 4,
-        location: 'Club#1234',
-        day: 'Tuesday 01.03.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'chat-conversation/4.png'
-    },
-    {
-        id: 5,
-        location: 'Club#1234',
-        day: 'Monday 01.02.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'chat-conversation/5.png'
-    },
-    {
-        id: 6,
-        location: 'Club#1234',
-        day: 'Monday 01.02.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'chat-conversation/1.png'
-    },
-];
 </script>
-<style>
-#Timesheet {
-}
-</style>

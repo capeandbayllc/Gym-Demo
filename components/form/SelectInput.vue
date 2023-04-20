@@ -14,7 +14,8 @@
       class="w-[375px] text-base-content h-[45px] bg-transparent border-2 border-[#0075c9] rounded-[19px] px-12 focus-visible:outline-none"
     >
       <option class="text-base-300" v-for="(option, index) in options" :key="index" :value="option.value">
-      {{ option.value }}</option>
+        {{ option.label ?? option.value }}
+      </option>
     </select>
   </div>
 </template>
@@ -24,7 +25,7 @@ defineProps({
   options: Array,
   value: String,
 })
-const emit =  defineEmits(['update'])
+const emit = defineEmits(['update'])
 const updateValue = (value) => {
   emit('update', value)
 }
