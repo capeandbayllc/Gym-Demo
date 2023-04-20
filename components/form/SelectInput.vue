@@ -11,9 +11,9 @@
       @change="updateValue($event.target.value)"
       name=""
       id=""
-      class="w-[375px] h-[45px] bg-transparent border-2 border-[#0075c9] rounded-[19px] px-12 focus-visible:outline-none"
+      class="w-[375px] text-base-content h-[45px] bg-transparent border-2 border-[#0075c9] rounded-[19px] px-12 focus-visible:outline-none"
     >
-      <option v-for="(option, index) in options" :key="index" :value="option.value">
+      <option class="text-base-300" v-for="(option, index) in options" :key="index" :value="option.value">
       {{ option.value }}</option>
     </select>
   </div>
