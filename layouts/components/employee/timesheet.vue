@@ -170,7 +170,7 @@
       </div>
       <div>
         <label for="period">Employee:</label>
-        <FormSelectInput class="mt-3" :options="employees" v-model="selectedEmployee" @update="selectedEmployee = $event"/>
+        <FormSelectInput class="mt-3 text-base-300" :options="employees" :value="selectedEmployee" @update="selectedEmployee = $event"/>
       </div>
     </div>
     <div class="">
@@ -199,6 +199,8 @@
 <script setup>
 import { ref } from "vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
+import { useQuery } from "@vue/apollo-composable";
+import employee from "~/api/queries/employee";
 import EmployeeSearchList from './components/employee-search-list.vue'
 const filters = ref({
   location: false,
@@ -206,21 +208,29 @@ const filters = ref({
   alert: false,
   segments: false,
 });
-let selectedEmployee = ref(null)
+let selectedEmployee = ref('All')
 let employees = ref([
   {
     id: 1, 
     value: 'All',
-  },
-  {
-    id: 2, 
-    value: 'Employee 1',
-  },
-  {
-    id: 3, 
-    value: 'Employee 2',
   }
 ])
+const { result } = useQuery(employee.query.browse);
+watch(() => {
+  employees.value = [
+    {
+      id: 1, 
+      value: 'All',
+    },
+    ...result?.value?.employee?.data.map((e,index) => {
+      return {
+        id: e.id,
+        value: `${e.first_name} ${e.last_name}`
+      };
+    })
+  ]; 
+
+});
 const columns = [
     {
         label: 'Location',
