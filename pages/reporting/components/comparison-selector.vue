@@ -26,5 +26,5 @@ const props = defineProps({
     compareReport: {
 		type: String
 	}
-})
+});
 </script>

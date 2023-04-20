@@ -21,23 +21,19 @@
         <div
           class="grid grid-cols-10 mt-2 font-semibold text-lg -xl:text-sm -lg:text-xs text-center"
         >
-          <div
-            class="cursor-pointer hover:text-secondary hover:text-opacity-50"
-            :class="{ 'text-secondary': activeFilter === item }"
-            v-for="(item, index) in filterList"
-            :key="index"
-            @click="setFilter(item)"
-          >
-            {{ item }}
-          </div>
-          <div class="col-span-5 mt-[-7px]">
-			<comparison-selector
-				label="Compare"
-				:items="['Previous Month', 'Previous Year']"
-				@change="reportBy($event)"
-				:compareReport="compareReport"
+			<filter-list
+				@setFilter="setFilter($event)"
+				:active-filter="activeFilter"
+				:return-name="true"
 			/>
-          </div>
+			<div class="col-span-5 mt-[-7px]">
+				<comparison-selector
+					label="Compare"
+					:items="['Previous Month', 'Previous Year']"
+					@change="reportBy($event)"
+					:compareReport="compareReport"
+				/>
+			</div>
         </div>
         <div id="chart">
           <ClientOnly>
@@ -62,11 +58,11 @@
 </template>
 <script setup>
 import {ref} from 'vue'
+import FilterList from '../components/filter-list.vue';
 import ComparisonSelector from '../components/comparison-selector.vue';
 import ClientWidgetPopup from './client-widget-popup.vue'
 
 // Data
-const filterList = ref(['TODAY', 'MTD', 'QTD', 'YTD', 'RANGE']);
 const activeFilter = ref('TODAY');
 
 let prevMonth = ref(false)

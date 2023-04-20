@@ -9,7 +9,10 @@
         <template #content>
             <div class="card-content px-4 pb-3">
                 <div class="grid grid-cols-5 mt-2 font-semibold text-lg -xl:text-sm -lg:text-xs text-center">
-                    <div class="cursor-pointer" :class="{'text-secondary': activeFilter === index}" v-for="(item, index) in filterList" :key="index" @click="setFilter(index)">{{ item }}</div>
+                    <filter-list
+                        @setFilter="setFilter($event)"
+                        :active-filter="activeFilter"
+                    />
                 </div>
 
                 <comparison-selector
@@ -40,6 +43,7 @@
     </card>
 </template>
 <script setup>
+import FilterList from '../components/filter-list.vue';
 import ComparisonSelector from '../components/comparison-selector.vue';
 import ReportingConversionChart from './reporting-conversion-chart.vue';
 import TotalCard from './total-card.vue';
@@ -48,7 +52,6 @@ const title = ref('CONVERSIONS');
 const totalCount = ref('35');
 const activeFilter = ref(4);
 const filteredValue = ['35','42','21','74']
-const filterList = ['TODAY', 'MTD', 'QTD', 'YTD', 'RANGE'];
 const showTable = ref(true);
 const chartValue = [
     {
