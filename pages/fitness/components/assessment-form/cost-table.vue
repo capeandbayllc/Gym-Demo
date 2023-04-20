@@ -48,25 +48,94 @@
 
       <tr>
         <td>Group (2)</td>
-        <td>$70 + Tax</td>
-        <td>$115 + Tax</td>
-        <td>$195 + Tax</td>
-        <td>$280 + Tax</td>
+        <td>
+          <label for="two_five">$70 + Tax</label>
+          <input
+            v-model="selected.group_two.five"
+            type="checkbox"
+            id="two_five"
+          />
+        </td>
+        <td>
+          <label for="two_ten">$115 + Tax</label>
+          <input
+            v-model="selected.group_two.ten"
+            type="checkbox"
+            id="two_ten"
+          />
+        </td>
+        <td>
+          <label for="two_twenty">$195 + Tax</label>
+          <input
+            v-model="selected.group_two.twenty"
+            type="checkbox"
+            id="two_twenty"
+          />
+        </td>
+        <td>
+          <label for="two_thirty">$280 + Tax</label>
+          <input
+            v-model="selected.group_two.thirty"
+            type="checkbox"
+            id="two_thirty"
+          />
+        </td>
       </tr>
 
       <tr>
         <td>Group (3-4)</td>
-        <td>$55 + Tax</td>
-        <td>$90 + Tax</td>
-        <td>$140 + Tax</td>
-        <td>$190 + Tax</td>
+        <td>
+          <label for="three_thirty">$55 + Tax</label>
+          <input
+            v-model="selected.group_three_four.five"
+            type="checkbox"
+            id="three_thirty"
+          />
+        </td>
+        <td>
+          <label for="three_thirty">$90 + Tax</label>
+          <input
+            v-model="selected.group_three_four.ten"
+            type="checkbox"
+            id="three_thirty"
+          />
+        </td>
+        <td>
+          <label for="three_thirty">$140 + Tax</label>
+          <input
+            v-model="selected.group_three_four.twenty"
+            type="checkbox"
+            id="three_thirty"
+          />
+        </td>
+        <td>
+          <label for="three_thirty">$190 + Tax</label>
+          <input
+            v-model="selected.group_three_four.thirty"
+            type="checkbox"
+            id="three_thirty"
+          />
+        </td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script setup lang="ts">
-const selected = ref({
+interface IFeeGroup {
+  five: boolean;
+  ten: boolean;
+  twenty: boolean;
+  thirty: boolean;
+}
+
+interface ISelectionState {
+  single: IFeeGroup;
+  group_two: IFeeGroup;
+  group_three_four: IFeeGroup;
+}
+
+const selected: Ref<ISelectionState> = ref({
   single: {
     five: false,
     ten: false,
