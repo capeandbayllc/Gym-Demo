@@ -1,6 +1,6 @@
 <template>
     <div
-        class="absolute border border-secondary flex flex-col py-3 rounded-2xl text-[0.6rem] font-light tracking-wider bg-[#191919] calendar-style-transition"
+        class="absolute border border-secondary flex flex-col py-3 rounded-2xl text-[0.6rem] font-light tracking-wider bg-base-100 calendar-style-transition"
         :class="{
             'top-[55%] left-[55%]': isParent,
             'top-[-40%] left-[99.5%]': !isParent,
@@ -58,7 +58,7 @@ watch(props.showCalendarUserDropDown, () => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .calendar-style-transition {
     @apply transition-all duration-300 ease-linear;
 }

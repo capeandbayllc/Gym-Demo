@@ -14,10 +14,9 @@
         </td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .people-member-tbl-row {
     @apply bg-base-100 h-14;
-
     td {
         @apply border-y-2 border-secondary text-center;
     }

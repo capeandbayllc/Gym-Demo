@@ -17,7 +17,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .reporting-page-content {
     @apply pb-5 pt-4 mx-auto w-full px-10;
 }

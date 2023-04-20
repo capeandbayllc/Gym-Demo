@@ -23,7 +23,7 @@
         </tr>
     </thead>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 thead {
     @apply z-10;
 }

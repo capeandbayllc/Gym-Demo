@@ -11,7 +11,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .report-danger {
     @apply text-error;
 }

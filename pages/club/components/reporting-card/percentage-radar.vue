@@ -3,32 +3,26 @@
         <div class="percentages overflow-auto h-[288px] py-4">
             <div :key="index" class="percent-item grid grid-cols-1" v-for="(item, index) in percentages">
                 <PercentPie :item="item" />
-                <hr class="border-white border-opacity-50 my-3">
+                <hr class="border-base-content border-opacity-50 my-3">
             </div>
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
     .percentage-container {
-        padding: 30px 20px;
-        border: 2px solid #0077ac;
-        border-top: none;
-        border-radius: 15px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+        @apply py-[30px] px-[20px] border-[2px] border-solid border-secondary border-t-0 rounded-b-[15px];
     }
 
     .header {
-        color: white;
-        text-align: left;
+        @apply text-base-content text-left;
     }
 
     .percentages::-webkit-scrollbar {
-        display: none;
+        @apply hidden;
     }
 
     .percentages .percent-item:last-child hr {
-        display: none;
+        @apply hidden;
     }
 
 </style>

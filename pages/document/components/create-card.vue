@@ -18,7 +18,7 @@
         </div>
     </simple-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .create-card-content {
     @apply grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-4 py-6 px-9 bg-transparent;
     .create-option {

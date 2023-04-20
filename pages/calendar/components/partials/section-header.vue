@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-full from-secondary to-transparent bg-gradient-to-r py-2 px-6 border-white rounded-md font-normal"
+        class="w-full from-secondary to-transparent bg-gradient-to-r py-2 px-6 border-base-content rounded-md font-normal"
         :class="{
             'border-l-4': border,
         }"

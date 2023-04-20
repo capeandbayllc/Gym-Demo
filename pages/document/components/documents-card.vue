@@ -18,14 +18,14 @@
         </simple-card>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .document-card-title {
     @apply flex items-center h-14 text-xl rounded-t-xl font-semibold px-6 text-base-content bg-secondary justify-between;
 }
 </style>
-<style>
+<style lang="postcss">
 .document-tbl-content thead {
-    @apply top-0  bg-black h-10;
+    @apply top-0 bg-base-300 h-10;
 }
 </style>
 <script setup>

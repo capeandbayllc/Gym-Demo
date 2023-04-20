@@ -10,7 +10,7 @@
             />
             <div>
               <p class="text-xl">{{ user?.first_name }} {{ user?.last_name }}</p>
-              <p class="text-sm text-slate-500">Outgoing E-mail</p>
+              <p class="text-sm text-bg-neutral-content/80">Outgoing E-mail</p>
             </div>
             <div
               class="ml-auto border border-secondary rounded-full p-3 h-[60px] w-[60px]"
@@ -20,11 +20,11 @@
           </div>
           <input
             type="text"
-            class="bg-transparent border border-gray-400 rounded w-full p-2 mb-4"
+            class="bg-transparent border border-neutral-content rounded w-full p-2 mb-4"
             placeholder="Subject"
           />
           <textarea
-            class="bg-transparent border border-gray-400 rounded w-full p-2 mb-2"
+            class="bg-transparent border border-neutral-content rounded w-full p-2 mb-2"
             placeholder="Body"
           ></textarea>
           <div class="flex justify-end">
@@ -104,14 +104,14 @@ const emailType = [
 ];
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .email-modal-container {
   @apply pl-8 pr-8 pt-8 pb-8 bg-neutral min-w-[40rem] rounded-b-[19px];
   .card-title {
     @apply border-b pb-2 border-base-content/50;
   }
   .content {
-    @apply border border-secondary bg-black;
+    @apply border border-secondary bg-base-300;
     .email-inner-content {
       @apply border border-secondary rounded;
     }
@@ -120,7 +120,7 @@ const emailType = [
     }
   }
   .notes {
-    @apply border-white px-4 bg-transparent;
+    @apply border-base-content px-4 bg-transparent;
   }
   .neutral-input {
     @apply bg-base-content/20 block w-full mt-3 rounded-md p-3;

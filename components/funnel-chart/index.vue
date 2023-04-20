@@ -29,7 +29,7 @@
     </div>
   </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .funnel-chart {
   @apply grid grid-cols-5 border rounded-3xl overflow-hidden;
   .funnel-chart-item {
@@ -37,9 +37,6 @@
     .item-shadow {
       @apply absolute border-secondary/50 border-y-transparent;
     }
-    /* .item-chart {
-      @apply ;
-    } */
     .item-content {
       @apply flex w-full h-full z-10 items-center justify-center;
       .active-chart-section {

@@ -34,7 +34,7 @@
         </select-box>
     </div>
 </template>
-<style>
+<style lang="postcss">
 .document-center-filter-action .select-box-content {
     @apply text-sm -lg:text-xs;
 }

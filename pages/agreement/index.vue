@@ -16,7 +16,7 @@
                     <span>Pick up Template</span>
                 </button>
             </div>
-            <input type="text" placeholder="Search" class="input w-full bg-base-content text-black text-lg mb-6"
+            <input type="text" placeholder="Search" class="input w-full bg-base-content text-base-300 text-lg mb-6"
                 v-model="searchInput" />
             <FilterActions class="mb-6" />
             <simple-card title="Agreement Templates">
@@ -28,7 +28,7 @@
         <simple-card class="p-4">
             <p class="font-semibold w-full text-center mb-4">Are you sure you want to make this inactive?</p>
             <div class="text-center">
-                <button class="text-gray-500 mr-4" @click="cancelConfirmStatus">Cancel</button>
+                <button class="text-neutral-content mr-4" @click="cancelConfirmStatus">Cancel</button>
                 <button class="text-secondary" @click="confirmConfirmStatus">Confirm</button>
             </div>
         </simple-card>
@@ -37,7 +37,7 @@
         <simple-card class="p-4">
             <p class="font-semibold w-full text-center mb-4">Are you sure you want to create this agreement?</p>
             <div class="text-center">
-                <button class="text-gray-500 mr-4" @click="cancelSaveAgreement">Cancel</button>
+                <button class="text-neutral-content mr-4" @click="cancelSaveAgreement">Cancel</button>
                 <button class="text-secondary" @click="saveAgreement">Confirm</button>
             </div>
         </simple-card>
@@ -46,7 +46,7 @@
         <simple-card class="p-4">
             <p class="font-semibold w-full text-center mb-4">This name is already in use. Please choose another name.</p>
             <div class="text-center">
-                <button class="text-gray-500 mr-4" @click="closeNameIsAlreadyInUseModal">Cancel</button>
+                <button class="text-neutral-content mr-4" @click="closeNameIsAlreadyInUseModal">Cancel</button>
                 <button class="text-secondary" @click="closeNameIsAlreadyInUseModal">Rename</button>
             </div>
         </simple-card>
@@ -66,7 +66,6 @@
             </div>
         </simple-card>
     </daisy-modal>
-    <button @click="saveAgreement">Execute</button>
 </template>
 
 <script setup>
@@ -479,7 +478,7 @@ const confirmConfirmStatus = () => {
 
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .agreement-container {
     @apply py-4 pr-5 px-7 w-full h-fit;
 

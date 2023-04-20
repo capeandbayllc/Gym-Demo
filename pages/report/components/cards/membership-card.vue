@@ -25,10 +25,9 @@
         <reporting-modal />
     </daisy-modal>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .membership-card {
-    @apply w-80;
-    height: 300px;
+    @apply w-80 h-[300px];
     .total-sale {
         @apply text-secondary font-bold text-5xl;
     }

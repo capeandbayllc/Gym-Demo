@@ -71,7 +71,7 @@
                                 :bgSecondaryOpened="false"
                                 @onChange=""
                                 classButton="my-[5px] mx-[10px]"
-                                class="bg-[#5a5a5a] text-white rounded-[10px] w-full">
+                                class="bg-base-100 text-base-content rounded-[10px] w-full">
                             </select-box>
                         </div>
                         <div>
@@ -167,9 +167,9 @@ const changeOtherCheck = ()=>{
 };
 
 </script>
-<style scoped>
+<style scoped lang="postcss">
     .gray-input {
-        @apply bg-[#5a5a5a] w-full text-white py-[10px] px-[10px] outline-none rounded-[10px];
+        @apply bg-base-100 w-full text-base-content py-[10px] px-[10px] outline-none rounded-[10px];
     }
 
     .toggle-custom{
@@ -177,7 +177,7 @@ const changeOtherCheck = ()=>{
     }
 
     .profile-avatar {
-        @apply rounded-[25px] p-1 inline-block ring-[4px] bg-black ring-secondary border-none;
+        @apply rounded-[25px] p-1 inline-block ring-[4px] bg-base-300 ring-secondary border-none;
         img {
             @apply w-[72px] h-[72px] rounded-[25px];
         }

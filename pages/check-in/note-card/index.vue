@@ -21,7 +21,7 @@
               class="flex-1 normal-case mr-2"
               :class="[
                 { '!bg-secondary !border-secondary': notesType == 'recent' },
-                { 'border-slate-400 text-slate-400': notesType !== 'recent' },
+                { 'border-neutral-content text-neutral-content': notesType !== 'recent' },
               ]"
               @click="notesType = 'recent'"
               >Recent</Button
@@ -33,7 +33,7 @@
               :class="[
                 { '!bg-secondary !border-secondary': notesType == 'completed' },
                 {
-                  'border-slate-400 text-slate-400': notesType !== 'completed',
+                  'border-neutral-content text-neutral-content': notesType !== 'completed',
                 },
               ]"
               @click="notesType = 'completed'"
@@ -67,7 +67,7 @@
             outline
             size="sm"
             :maxWidth="false"
-            class="bg-black w-full mb-2 normal-case flex justify-between"
+            class="bg-base-300 w-full mb-2 normal-case flex justify-between"
           >
             <span> Folder </span> <span>{{ folder.name }}</span></Button
           >
@@ -76,8 +76,8 @@
           <div class="w-full">
             <p class="text-xs mb-2">Today</p>
             <div
-              class="bg-black border border-white rounded-md p-1 mb-4"
-              :class="{ '!bg-secondary !border-slate-400': note.completed }"
+              class="bg-base-300 border border-base-content rounded-md p-1 mb-4"
+              :class="{ '!bg-secondary !border-neutral-content': note.completed }"
               v-for="note in notes.filter((n) =>
                 notesType == 'completed' ? n.completed : !n.completed
               )"
@@ -97,7 +97,7 @@
         </div>
         <div class="w-[600px] pt-5">
           <div
-            class="relative border border-secondary rounded-lg overflow-hidden bg-black"
+            class="relative border border-secondary rounded-lg overflow-hidden bg-base-300"
           >
             <h2 class="calendar-title" @click="showDateSelectModal">
               {{ calendarTitle }}
@@ -125,7 +125,7 @@
     </daisy-modal>
   </simple-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .note-card {
   @apply m-auto bg-neutral max-w-[1120px] xl:w-[1120px] w-full;
   .note-card-container {
@@ -167,12 +167,12 @@
     input[type="radio"] {
       @apply absolute invisible left-[-9999px];
       &:checked + button {
-        @apply bg-secondary text-white;
+        @apply bg-secondary text-base-content;
       }
       + button {
-        @apply w-[100px] min-h-0 h-8 mx-3 inline-block bg-white text-secondary hover:bg-secondary hover:text-white;
+        @apply w-[100px] min-h-0 h-8 mx-3 inline-block bg-base-content text-secondary hover:bg-secondary hover:text-base-content;
         &:hover {
-          @apply bg-secondary text-white;
+          @apply bg-secondary text-base-content;
         }
       }
     }
@@ -182,7 +182,7 @@
   @apply absolute top-0 left-0 w-full flex items-center h-10 text-xl font-semibold px-6 text-base-content bg-gradient-to-b from-secondary to-base-300/30 bg-secondary bg-blend-darken;
 }
 </style>
-<style>
+<style lang="postcss">
 .note-card {
   .fc .fc-button-group {
     @apply hidden;

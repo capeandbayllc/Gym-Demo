@@ -5,9 +5,9 @@
         v-model="form.location"
     />
     <multi-select
-        :options="teams"
+        :options="roles"
         label="Role(s)"
-        v-model="form.teams"
+        v-model="form.roles"
     />
     <multi-select
         :options="departments"
@@ -20,9 +20,9 @@
         v-model="form.teams"
     />
     <multi-select
-        :options="roles"
+        :options="security_roles"
         label="Security Role(s)"
-        v-model="form.roles"
+        v-model="form.security_roles"
         :disabled="true"
     />
 </template>

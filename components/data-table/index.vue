@@ -17,10 +17,10 @@
         </table>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 table {
+    @apply w-[99.5%];
     border-spacing: 0 10px;
-    width: 99.5%;
 }
 </style>
 <script setup>

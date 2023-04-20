@@ -34,7 +34,7 @@
         </template>
     </card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .communication-card {
     @apply w-80;
     ::-webkit-scrollbar {
