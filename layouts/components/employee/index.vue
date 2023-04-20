@@ -30,7 +30,7 @@
         </div>
       </template>
     </ModalWrapper>
-    <ModalWrapper v-else-if="timesheet" title="Timesheet:" compWidth="w-[998px]" @close="close">
+    <ModalWrapper v-else-if="timesheet" title="Timesheet:" compWidth="w-[90vw] max-w-[998px]" @close="close">
       <template #body>
         <Timesheet />
       </template>

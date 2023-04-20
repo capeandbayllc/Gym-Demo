@@ -1,6 +1,6 @@
 <template>
   <div id="Timesheet" class="border border-[#0075c9] p-3 rounded-[19px]">
-    <div class="flex items-center justify-between">
+    <div class="flex-col lg:flex-row flex items-center justify-between">
       <FormIconSearchInput height="h-[45px]" />
       <div class="actions space-x-2 flex items-center relative">
         <button class="border-[#0075c9] border-2 rounded-[19px] h-[45px] px-6">
@@ -159,7 +159,7 @@
         </FormFilterButton>
       </div>
     </div>
-    <div class="flex items-center space-x-12 mt-4">
+    <div class="flex-col gap-4 lg:gap-0 lg:flex-row flex items-center space-x-12 mt-4">
       <div>
         <label for="period">Period:</label>
         <div class="flex items-center space-x-5 mt-3">

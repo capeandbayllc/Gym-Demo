@@ -50,7 +50,7 @@ const changeOpenSearchInput = (value) => {
   @apply text-white font-light;
 }
 .icon-search-input .search-input {
-  @apply pl-[45px] text-white w-full bg-primary rounded-[19px] md:w-[427px];
+  @apply pl-[45px] text-white w-full bg-primary rounded-[19px] md:w-[427px] block;
 }
 
 .icon-search-input .search-input:focus {
