@@ -23,6 +23,7 @@
     .create-option {
         @apply inline-block items-center text-xs text-center w-20 mb-4;
     }
+    
     /* .chart-content{
         @apply bg-base-300 rounded w-full text-3xl font-bold border-base-content border-2 text-center;
     } */
