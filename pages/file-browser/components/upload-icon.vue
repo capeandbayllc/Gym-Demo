@@ -3,7 +3,7 @@
     class="upload-btn-container"
     :class="{
       'text-primary': active,
-      'text-gray-500': !active,
+      'text-neutral-content': !active,
       'upload-complete': !active,
     }"
   >

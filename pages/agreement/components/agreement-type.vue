@@ -9,7 +9,7 @@
                 <img src="/gym-revenue-white.png" class="h-6 inline-block">
             </div>
         </div>
-        <div class="bg-white text-black rounded max-h-[60vh] overflow-auto">
+        <div class="bg-base-content text-base-300 rounded max-h-[60vh] overflow-auto">
             <div class="text-center py-5">
                 <img src="/gym-revenue-black.png" class="h-11 inline-block">
                 <div class="font-semibold text-xl">Type Agreement</div>
@@ -37,19 +37,19 @@
             </div>
             <div class="px-8 pb-8 w-2/3">
                 <div class="mb-2">Signature:</div>
-                <input type="text" v-model="data.signature" class="border border-black input w-full bg-base-content text-black text-lg mb-6 bg-gray-300" />
+                <input type="text" v-model="data.signature" class="border border-base-300 input w-full bg-base-content text-base-300 text-lg mb-6 bg-base-content/80" />
                 <div class="grid grid-cols-3 gap-4">
                     <div>
                         <div class="mb-2">Full name:</div>
-                        <input type="text" v-model="data.fullName" class="border border-black input w-full bg-base-content text-black text-lg mb-6" />
+                        <input type="text" v-model="data.fullName" class="border border-base-300 input w-full bg-base-content text-base-300 text-lg mb-6" />
                     </div>
                     <div>
                         <div class="mb-2">Date:</div>
-                        <input type="text" v-model="data.date" class="border border-black input w-full bg-base-content text-black text-lg mb-6" />
+                        <input type="text" v-model="data.date" class="border border-base-300 input w-full bg-base-content text-base-300 text-lg mb-6" />
                     </div>
                     <div>
                         <div class="mb-2">Id number:</div>
-                        <input type="text" v-model="data.idNumber" class="border border-black input w-full bg-base-content text-black text-lg mb-6" />
+                        <input type="text" v-model="data.idNumber" class="border border-base-300 input w-full bg-base-content text-base-300 text-lg mb-6" />
                     </div>
                 </div>
 
@@ -96,15 +96,14 @@ watch(data, () => {
 });
 
 </script>
-<style scoped>
+<style scoped lang="postcss">
     .white-input {
-        @apply bg-white text-black;
+        @apply bg-base-content text-base-300;
     }
 </style>
 <style scoped lang="postcss">
 input[type="checkbox"] {
-  @apply rounded-full bg-white appearance-none m-0 h-5 w-5 border border-[#C0BDCC] outline-none;
-  @apply focus:border;
+  @apply rounded-full bg-base-content appearance-none m-0 h-5 w-5 border border-base-content/80 outline-none focus:border;
 }
 
 input[type="checkbox"]:checked {

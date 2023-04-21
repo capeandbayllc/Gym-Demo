@@ -23,7 +23,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .alert-add-container {
     @apply flex flex-col border border-secondary p-3 bg-base-300 rounded;
     .alert-content {

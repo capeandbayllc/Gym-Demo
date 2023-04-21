@@ -27,7 +27,7 @@
     </button>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .hover-icon:deep(svg) {
 	@apply hidden;
 }

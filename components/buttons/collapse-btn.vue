@@ -6,7 +6,7 @@
         class="collapse-btn"
     />
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .collapse-btn:hover {
     @apply text-secondary;
 }

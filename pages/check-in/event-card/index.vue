@@ -1,6 +1,6 @@
 <template>
     <div
-        class="event-card-container to-primary/10 bg-gradient-to-t from-black/90 font-extralight tracking-wide"
+        class="event-card-container to-primary/10 bg-gradient-to-t from-base-300/90 font-extralight tracking-wide"
     >
         <div class="scheduled-event-container">
             <div class="events-header font-normal">Scheduled Events</div>
@@ -21,7 +21,7 @@
         />
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .event-card-container {
     @apply w-[33%] -md:w-full flex-grow-0 bg-base-300/40 !rounded-3xl;
 }

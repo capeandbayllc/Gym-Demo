@@ -9,18 +9,19 @@
         <template #content>
             <div class="card-content  px-4 pb-3">
                 <div class="grid grid-cols-5 mt-2 font-semibold text-lg -xl:text-sm -lg:text-xs text-center">
-                    <div class="cursor-pointer" :class="{'text-secondary': activeFilter === index}" v-for="(item, index) in filterList" :key="index" @click="setFilter(index)">{{ item }}</div>
+                    <filter-list
+                        @setFilter="setFilter($event)"
+                        :active-filter="activeFilter"
+                    />
                 </div>
-                <div class="grid grid-cols-1 mt-2 text-base -xl:text-xs font-normal">
-                    <div>
-                        <span>
-                            Compare:
-                        </span>
-                        <span class="ml-1 cursor-pointer" @click="reportBy('Previous Month')" :class="{'text-secondary': compareReport === 'Previous Month'}">Previous Month</span>
-                        <span class="mx-2">or</span>
-                        <span class="cursor-pointer" @click="reportBy('Previous Year')" :class="{'text-secondary': compareReport === 'Previous Year'}">Previous Year</span>
-                    </div>
-                </div>
+
+                <comparison-selector
+                    label="Compare"
+                    :items="['Previous Month', 'Previous Year']"
+                    @change="reportBy($event)"
+                    :compareReport="compareReport"
+                />
+
                 <div class="relative">
                     <div v-if="showTable">
                         <div class="text-secondary flex mt-2 text-xl -xl:text-sm font-semibold justify-center">
@@ -31,26 +32,23 @@
                     <total-card :title="title" :total-count="filteredValue[activeFilter]" v-else></total-card>
                     <filtered-report-card class="absolute top-12 -lg:left-1 bg-neutral" :title="compareReport" :report-data="comparedByReportData" v-if="compareReport"></filtered-report-card>
                 </div>
-                <div class="grid grid-cols-1 mt-2 text-base -xl:text-xs font-normal">
-                    <div>
-                        <span>
-                            Forecast:
-                        </span>
-                        <span class="ml-1 cursor-pointer" @click="reportBy('Index')" :class="{'text-secondary': compareReport === 'Index'}">Index</span>
-                        <span class="mx-2">or</span>
-                        <span class="ml-1 cursor-pointer" @click="reportBy('Straight Line')" :class="{'text-secondary': compareReport === 'Straight Line'}">Straight Line</span>
-                    </div>
-                </div>
+                <comparison-selector
+                    label="Forecast"
+                    :items="['Index', 'Straight Line']"
+                    @change="reportBy($event)"
+                    :compareReport="compareReport"
+                />
             </div>
         </template>
     </card>
 </template>
 <script setup>
+import FilterList from '../components/filter-list.vue';
+import ComparisonSelector from '../components/comparison-selector.vue';
 import TotalCard from './total-card.vue';
 import FilteredReportCard from './filtered-report-card.vue';
 import ReportingLeadsLineChart from './reporting-leads-line-chart.vue'
 const title = ref('NEW LEADS');
-const filterList = ['TODAY', 'MTD', 'QTD', 'YTD', 'RANGE'];
 const activeFilter = ref(0);
 const filteredValue = ['1,567','3,241','5,678','8,324']
 const showTable = ref(false);

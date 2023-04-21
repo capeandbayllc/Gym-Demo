@@ -19,7 +19,7 @@
     </div>
   </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .engage-today-event-container {
   @apply flex flex-col px-2 mt-2;
   .main-title {

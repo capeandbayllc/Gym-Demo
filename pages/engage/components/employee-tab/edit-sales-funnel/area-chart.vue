@@ -311,19 +311,17 @@ export default {
   },
 }
 </script>
-<style >
-
+<style lang="postcss">
 #graph-analysis-chart .apexcharts-legend {
   @apply flex justify-start pt-6;
 }
 #graph-analysis-chart .apexcharts-legend-series {
-  @apply bg-[#f7f8fa] flex px-2 py-1 rounded-lg;
+  @apply bg-base-100 flex px-2 py-1 rounded-lg;
 }
 #graph-analysis-chart .apexcharts-legend-series .apexcharts-legend-marker {
-  @apply rounded-md mr-1;
-  border-radius: 3px !important;
+  @apply rounded-md mr-1 rounded-[3px];
 }
 #graph-analysis-chart .apexcharts-legend-series .apexcharts-legend-text {
-  font-weight: bold !important;
+  @apply font-bold;
 }
 </style>

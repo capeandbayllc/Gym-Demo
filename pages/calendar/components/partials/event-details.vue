@@ -11,7 +11,7 @@
                             {{ months[new Date(event?.start).getMonth()] }}
                             {{ new Date(event?.start).getDate() }}</span
                         >
-                        <span class="h-2 w-2 bg-white rounded-full"></span>
+                        <span class="h-2 w-2 bg-base-content rounded-full"></span>
                         <span>
                             <span
                                 >{{ getTimeString(event?.start) }} -
@@ -30,7 +30,7 @@
         <ul class="mt-8 flex flex-col justify-center gap-4">
             <li class="flex gap-6 text-xl">
                 <span
-                    class="h-[34px] w-[34px] my-auto bg-white rounded-xl overflow-hidden border-2 border-secondary"
+                    class="h-[34px] w-[34px] my-auto bg-base-content rounded-xl overflow-hidden border-2 border-secondary"
                 >
                     <img
                         :src="
@@ -53,7 +53,7 @@
                     class="h-[34px] w-[34px] bg-secondary my-auto rounded-xl overflow-hidden border-2 border-secondary p-1 flex flex-col justify-center"
                 >
                     <LocationDotIcon
-                        class="w-[20px] h-[20px] fill-white mx-auto"
+                        class="w-[20px] h-[20px] fill-base-content mx-auto"
                     />
                 </span>
                 <span class="tracking-wider">
@@ -66,13 +66,13 @@
 
             <div class="flex justify-between items-center mt-8">
                 <button
-                    class="bg-[#3D7DCF] px-2 py-1 flex flex-row gap-3 rounded-xl hover:bg-secondary calendar-style-transition"
+                    class="bg-secondary px-2 py-1 flex flex-row gap-3 rounded-xl hover:bg-secondary calendar-style-transition"
                     type="button"
                     @click="offerUp"
                 >
                     <span class="my-auto">Offer Up</span>
                     <BiDirArrowIcon
-                        class="stroke-white fill-white my-auto w-7"
+                        class="stroke-base-content fill-base-content my-auto w-7"
                     />
                 </button>
 
@@ -118,7 +118,7 @@ const offerUp = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .calendar-style-transition {
     @apply transition-all duration-300 ease-linear;
 }

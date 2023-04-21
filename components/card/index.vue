@@ -33,7 +33,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .card-container {
     @apply border-2 border-secondary rounded-[18px] relative;
     .card-title-container {

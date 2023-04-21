@@ -14,7 +14,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .tab-list {
     @apply  pb-4 -lg:block -lg:w-full -lg:text-center;
     .tab-item {
@@ -25,11 +25,8 @@
     }
     .tab-item.active::after {
         content: 'x';
-        @apply absolute w-4 h-4 bg-error rounded-full flex items-center justify-center pb-0.5;
-        top: -0.5rem;
-        right: -0.5rem;
+        @apply absolute w-4 h-4 bg-error rounded-full flex items-center justify-center pb-0.5 top-[-0.5rem] right-[-0.5rem];
     }
-
 }
 </style>
 <script setup>

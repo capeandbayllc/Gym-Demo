@@ -19,7 +19,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .page-reporting-container {
     @apply py-4 pr-5 w-full h-fit;
     .page-content {

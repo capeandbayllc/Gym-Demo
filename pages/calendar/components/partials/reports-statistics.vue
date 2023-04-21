@@ -3,7 +3,7 @@
         <!-- widget label / mod -->
         <div class="flex justify-between mb-3">
             <span class="text-[1.2rem] font-semibold">Reports</span>
-            <button class="w-[0.3125rem] fill-white">
+            <button class="w-[0.3125rem] fill-base-content">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
                     <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                     <path
@@ -16,7 +16,7 @@
             <span class="capitalize border-b block text-[0.9rem]">{{
                 title
             }}</span>
-            <span class="block uppercase text-[#6fb3e4] mb-2 text-[0.7rem]">
+            <span class="block uppercase text-info-content mb-2 text-[0.7rem]">
                 {{ subtitle }}
             </span>
             <div
@@ -104,8 +104,8 @@ const props = defineProps({
 });
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .plotted-bar {
-    @apply bg-gradient-to-t to-secondary from-[#042137];
+    @apply bg-gradient-to-t to-secondary from-secondary-content;
 }
 </style>

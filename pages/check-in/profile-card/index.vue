@@ -11,13 +11,13 @@
         />
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .checkin-profile-card {
-    @apply border bg-black border-secondary rounded-3xl flex flex-col flex-1 gap-0 -lg:grow-[2]  xl:flex-row xl:space-x-16 px-3 xl:px-8 pt-7 pb-4;
+    @apply border bg-base-300 border-secondary rounded-3xl flex flex-col flex-1 gap-0 -lg:grow-[2]  xl:flex-row xl:space-x-16 px-3 xl:px-8 pt-7 pb-4;
 }
 @media (min-width: 1280px) {
   .checkin-profile-card {
-    padding-left: 4.25rem;
+    @apply pl-[4.25rem];
   }
 }
 </style>

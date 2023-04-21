@@ -65,7 +65,7 @@
     </li>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 progress[value]::-webkit-progress-bar {
     @apply bg-transparent;
 }

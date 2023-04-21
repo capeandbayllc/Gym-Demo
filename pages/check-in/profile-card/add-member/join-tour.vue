@@ -44,11 +44,11 @@ const selectOption = (opt) => {
     opt.selected = true;
 };
 </script>
-<style scoped>
+<style scoped lang="postcss">
 .options-wrap li > div {
-    transition: all 0.3s;
+    @apply transition-all duration-300;
 }
 .selected > div {
-    transform: scale(1.2);
+    @apply transform scale-125;
 }
 </style>

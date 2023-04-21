@@ -1,14 +1,14 @@
 <template>
     <div class="income-chart flex flex-col justify-between">
         <div class="grid grid-cols-10 header">
-            <label class="col-span-2 text-[12px] text-white">Income</label>
+            <label class="col-span-2 text-[12px] text-base-content">Income</label>
             <div class="col-span-5"></div>
             <div class="col-span-3 grid grid-cols-5">
                 <div class="col-span-1 flex">
                     <button class="btn-status rotate-90">></button>
                 </div>
                 <div class="col-span-4 grid grid-cols-1 ml-1">
-                    <span class="col-span-1 text-white text-[12px] text-left">Last Week</span>
+                    <span class="col-span-1 text-base-content text-[12px] text-left">Last Week</span>
                     <span class="col-span-1 text-[14px] text-left"> -0.7%</span>
                 </div>
             </div>
@@ -23,12 +23,12 @@
         </ClientOnly>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .income-chart .btn-status{
-    @apply w-[15px] h-[15px] bg-[#0077ac] rounded-full text-black text-[10px] font-bold m-auto;
+    @apply w-[15px] h-[15px] bg-info-content rounded-full text-base-300 text-[10px] font-bold m-auto;
 }
 .income-chart{
-    @apply border-2 border-[#0077ac] rounded-[15px] p-[10px];
+    @apply border-2 border-info-content rounded-[15px] p-[10px];
 }
 .income-chart .header{
     @apply mt-[5px] mb-[10px];
@@ -110,7 +110,7 @@ const options ={
         custom: function({series, seriesIndex, dataPointIndex, w}) {
             return (
                 `<div class="arrow_box p-2">
-                    <span style="color: grey;">Earning</span>
+                    <span class="text-neutral-content">Earning</span>
                     <p>$${series[seriesIndex][dataPointIndex]}</p>
                 </div>`
             );

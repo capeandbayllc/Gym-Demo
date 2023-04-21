@@ -1,15 +1,15 @@
 <template>
-  <div id="chart" class="border-2 border-[#0075C9] rounded-[15px] h-full">
+  <div id="chart" class="border-2 border-secondary rounded-[15px] h-full">
     <div class="p-4 flex justify-between items-center">
       <p class="text-xs">
         Weekly Average New Sales <br>
-        <span class="text-[#0075C9] font-bold">
+        <span class="text-secondary font-bold">
           $1213.20
         </span>
       </p>
       <p class="text-xs">
         Last Week <br>
-        <span class="text-[#0075C9] font-bold">
+        <span class="text-secondary font-bold">
           +0.12%
         </span>
       </p>

@@ -8,10 +8,10 @@
             </h3>
             <div class="flex flex-row gap-2">
                 <button class="border-secondary border-2 p-1.5 rounded-xl">
-                    <PlusIcon class="fill-white w-[15px] h-[15px]" />
+                    <PlusIcon class="fill-base-content w-[15px] h-[15px]" />
                 </button>
                 <ArrowIcon
-                    class="fill-white w-[10px] h-[10px] my-auto calendar-style-transition cursor-pointer"
+                    class="fill-base-content w-[10px] h-[10px] my-auto calendar-style-transition cursor-pointer"
                     :direction="isOpen ? 'up' : 'down'"
                     @click="toggleFilterOption(filter_id)"
                 />
@@ -43,8 +43,8 @@
                     </label>
                 </div>
                 <div class="flex flex-row gap-3">
-                    <CrossIcon class="fill-white w-[15px] my-auto" />
-                    <VerticalEllipsis class="fill-white h-[15px] my-auto" />
+                    <CrossIcon class="fill-base-content w-[15px] my-auto" />
+                    <VerticalEllipsis class="fill-base-content h-[15px] my-auto" />
                 </div>
             </div>
         </div>
@@ -78,13 +78,13 @@ const props = defineProps({
 });
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .calendar-style-transition {
     @apply transition-all duration-300 ease-linear;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+    @apply hidden;
 }
 
 .scrollbar-hide {
@@ -93,7 +93,7 @@ const props = defineProps({
 }
 
 input[type="checkbox"] {
-    @apply rounded bg-white appearance-none m-0 h-4 w-4 border border-[#C0BDCC] outline-none my-auto;
+    @apply rounded bg-base-content appearance-none m-0 h-4 w-4 border border-neutral-content outline-none my-auto;
     @apply focus:border;
 }
 
