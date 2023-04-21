@@ -318,21 +318,8 @@
                 </div>
 
                 <div>
-                  <div class="grid grid-cols-12">
-                    <div class="col-span-3 lg:col-span-3 md:col-span-4">
-                      <label class="mr-3">Daily Times Set:</label>
-                    </div>
-                    <div class="col-span-9 lg:col-span-9 md:col-span-8">
-                        <span class="availability-time-span">
-                          <BlueClockIcon class="inline-block mr-1"/> 10:20 am
-                        </span>
-                      <span class="availability-time-span">
-                          <BlueClockIcon class="inline-block mr-1"/> 1:00 pm
-                        </span>
-                      <span class="availability-time-span">
-                          <BlueClockIcon class="inline-block mr-1"/> 3:00 pm
-                        </span>
-                    </div>
+                  <div class="border border-secondary rounded p-4 w-full mb-4 bg-transparent">
+                      <availability-clocks :is-blue="true" :display-label-block="true" />
                   </div>
                 </div>
 
@@ -453,8 +440,9 @@ input:hover {
 
 <script setup>
 import {ref} from 'vue';
+import AvailabilityClocks from '~/pages/setting/components/availability-clocks.vue';
 import '@vueform/multiselect/themes/default.css'
-import {MembersIcon, LockIcon, BlueClockIcon} from "@/components/icons";
+import {MembersIcon, LockIcon} from "@/components/icons";
 import Divider from "./divider";
 import MultiSelectDropdown from "./multi-select-dropdown";
 

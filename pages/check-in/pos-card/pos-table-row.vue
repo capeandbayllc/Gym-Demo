@@ -15,7 +15,7 @@
         </td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .club-table-row {
     td {
         @apply border-y border-secondary h-12 py-2.5 bg-base-100/60;

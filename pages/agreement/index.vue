@@ -16,8 +16,9 @@
                     <span>Pick up Template</span>
                 </button>
             </div>
-            <input type="text" placeholder="Search" class="input w-full bg-base-content text-black text-lg mb-6"
-                v-model="searchInput" />
+            <search-white-input
+                :searchValue="searchInput"
+                @update="searchInput=$event" />
             <FilterActions class="mb-6" />
             <simple-card title="Agreement Templates">
                 <agreement-search-table @showConfirmStatusModal="showConfirmStatusModal" :columns="columns" :items="agreements" class="p-6"/>
@@ -28,7 +29,7 @@
         <simple-card class="p-4">
             <p class="font-semibold w-full text-center mb-4">Are you sure you want to make this inactive?</p>
             <div class="text-center">
-                <button class="text-gray-500 mr-4" @click="cancelConfirmStatus">Cancel</button>
+                <button class="text-neutral-content mr-4" @click="cancelConfirmStatus">Cancel</button>
                 <button class="text-secondary" @click="confirmConfirmStatus">Confirm</button>
             </div>
         </simple-card>
@@ -37,7 +38,7 @@
         <simple-card class="p-4">
             <p class="font-semibold w-full text-center mb-4">Are you sure you want to create this agreement?</p>
             <div class="text-center">
-                <button class="text-gray-500 mr-4" @click="cancelSaveAgreement">Cancel</button>
+                <button class="text-neutral-content mr-4" @click="cancelSaveAgreement">Cancel</button>
                 <button class="text-secondary" @click="saveAgreement">Confirm</button>
             </div>
         </simple-card>
@@ -46,7 +47,7 @@
         <simple-card class="p-4">
             <p class="font-semibold w-full text-center mb-4">This name is already in use. Please choose another name.</p>
             <div class="text-center">
-                <button class="text-gray-500 mr-4" @click="closeNameIsAlreadyInUseModal">Cancel</button>
+                <button class="text-neutral-content mr-4" @click="closeNameIsAlreadyInUseModal">Cancel</button>
                 <button class="text-secondary" @click="closeNameIsAlreadyInUseModal">Rename</button>
             </div>
         </simple-card>
@@ -54,7 +55,7 @@
     <daisy-modal ref="newAgreementModal" id="newAgreementModal">
         <simple-card class="p-4">
             <component :is="newAgreementScreens[newAgreementScreenIndex]" :newAgreementData="newAgreementData"
-                @changeNewAgreementData="newAgreementData = $event" @change-type="changeType"
+                @changeNewAgreementData="newAgreementData = $event" :showTypeBadge="true" @change-type="changeType"
                 @next="nextScreenAgreementModal" ref="newAgreementComponent"></component>
             <div class="flex justify-end mt-6 mb-2">
                 <Button size="sm" class="normal-case mx-2" ghost @click="prevScreenAgreementModal"
@@ -66,7 +67,6 @@
             </div>
         </simple-card>
     </daisy-modal>
-    <button @click="saveAgreement">Execute</button>
 </template>
 
 <script setup>
@@ -83,6 +83,7 @@ import ContractModal from './components/contract-modal.vue';
 import EditPaymentPlan from './components/edit-payment-plan.vue';
 import AgreementType from './components/agreement-type.vue';
 import SaveModal from './components/save-modal.vue';
+import SearchWhiteInput from '~/components/search-white-input.vue';
 
 const authToken = useCookie("auth");
 
@@ -479,7 +480,7 @@ const confirmConfirmStatus = () => {
 
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .agreement-container {
     @apply py-4 pr-5 px-7 w-full h-fit;
 

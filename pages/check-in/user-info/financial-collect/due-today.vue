@@ -32,13 +32,8 @@ const props = defineProps({
     }
 })
 </script>
-<style scoped>
-.mx-0{
-  margin-inline: 0px !important;
-}
-</style>
-<style>
+<style lang="postcss">
 .gray-input {
-  @apply bg-[#5a5a5a] w-full text-white py-[10px] px-[10px] outline-none rounded-[10px];
+  @apply bg-base-100 w-full text-base-content py-[10px] px-[10px] outline-none rounded-[10px];
 }
 </style>

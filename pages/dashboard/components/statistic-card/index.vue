@@ -24,10 +24,9 @@
         <div class="absolute bottom-3 left-4 text-sm">View full details</div>
     </dashboard-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .statistic-chart-container {
-    margin-left: -10px;
-    margin-bottom: -30px;
+    @apply ml-[-10px] mb-[-30px];
 }
 .statistic-data-list {
     @apply flex flex-col border-t-4 border-secondary px-5 mb-7 -lg:px-5;
@@ -39,9 +38,6 @@
         .item-value {
             @apply flex flex-col justify-center items-end bg-secondary/30 px-3 rounded;
         }
-    }
-    .statistic-data-row:not(:last-child) {
-        
     }
 }
 </style>

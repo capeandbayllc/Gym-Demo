@@ -73,8 +73,8 @@
                                 <simple-card class="px-4 membership-simple-card">
                                     <span
                                         v-if="member.isFavourite"
-                                        class="text-warning text-xl absolute top-0 right-2"
-                                        >&#9733;</span
+                                        class="absolute top-0 right-2"
+                                        > <star-icon /> </span
                                     >
                                     <div
                                         class="flex items-center justify-center p-5"
@@ -116,7 +116,7 @@
                                                 Unit Sold
                                             </p>
                                             <p
-                                                class="border border-sky-600 rounded w-4/5 mx-auto px-2 py-1 mb-2 text-center text-success"
+                                                class="border border-secondary rounded w-4/5 mx-auto px-2 py-1 mb-2 text-center text-success"
                                             >
                                                 {{ member.unitSold }}
                                             </p>
@@ -141,7 +141,7 @@
                                                 Dollar Amount
                                             </p>
                                             <p
-                                                class="border border-sky-600 rounded w-4/5 mx-auto px-2 text-center py-1 mb-2 text-success"
+                                                class="border border-secondary rounded w-4/5 mx-auto px-2 text-center py-1 mb-2 text-success"
                                             >
                                                 {{ member.dollarAmount }}
                                             </p>
@@ -222,6 +222,7 @@
 <script setup>
 //import { onMounted,onBeforeUnmount} from "vue";
 import 'vue3-carousel/dist/carousel.css';
+import { StarIcon } from "~/components/icons";
 import {Carousel, Slide} from 'vue3-carousel';
 import {NextIcon, PrevIcon} from '~~/components/icons';
 import LeaderboardTableRow from './components/leaderboard-table-row.vue';

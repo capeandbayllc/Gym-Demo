@@ -4,7 +4,7 @@
         <div class="w-full text-left">
             <div v-for="(field,index) in emergencyInfo" :key="index" class="inline-block w-2/4 px-4 mb-4">
                 <label class="mb-2 inline-block">{{field.label}}</label>
-                <input :type="field.type" class="bg-white p-2 rounded w-full text-black" v-model="field.value">
+                <input :type="field.type" class="bg-base-content p-2 rounded w-full text-base-300" v-model="field.value">
             </div>
         </div>
     </simple-card>

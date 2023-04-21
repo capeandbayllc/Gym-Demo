@@ -1,12 +1,10 @@
 <template>
     <div class="page-alerts-notifications-container">
         <div class="-md:px-4 page-content flex-col">
-            <input
-                type="text"
-                placeholder="Search"
-                class="input w-full bg-base-content text-black text-lg mb-8"
-                v-model="searchInput"
-            />
+            <search-input></search-input>
+            <search-white-input
+                :searchValue="searchInput"
+                @update="searchInput=$event" />
             <filter-actions></filter-actions>
             <div class="mt-5">
                 <simple-card
@@ -26,7 +24,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .page-alerts-notifications-container {
     @apply py-4 pr-5 w-full h-fit;
     .page-content {
@@ -34,15 +32,18 @@
     }
 }
 </style>
-<style>
+<style lang="postcss">
 .recent-alerts-datatable thead {
-    @apply top-0 sticky bg-black h-10;
+    @apply top-0 sticky bg-base-300 h-10;
 }
 
 </style>
 <script setup>
 import FilterActions from './components/filter-actions.vue';
 import RecentAlertsTableRow from './components/recent-alerts-table-row.vue';
+import SearchWhiteInput from '~/components/search-white-input.vue';
+
+const searchInput = ref('example');
 const columns = [
     {
         label: 'Segment',

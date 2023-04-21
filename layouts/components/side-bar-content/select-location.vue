@@ -38,14 +38,12 @@
   </div>
 </template>
 
-<style>
+<style lang="postcss">
 .select-box-wrapper {
   @apply relative min-w-fit;
 }
 .select-box-btn {
-  @apply flex flex-row border px-2 py-1 items-center justify-between transition-colors duration-300;
-  width: 165px;
-  height: 29px;
+  @apply flex flex-row border px-2 py-1 items-center justify-between transition-colors duration-300 w-full h-[29px];
 }
 
 .select-box-filter-size{

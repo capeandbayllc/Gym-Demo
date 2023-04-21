@@ -16,7 +16,7 @@
                 :showSearch="false"
                 :showClearList="false"
                 @onChange="data.billingScheduleType = $event"
-                class="bg-white text-black rounded border border-white w-full">
+                class="bg-base-content text-base-300 rounded border border-base-content w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
@@ -32,7 +32,7 @@
                 :showSearch="false"
                 :showClearList="false"
                 @onChange="data.billingFrequency = $event"
-                class="bg-white text-black rounded border border-white w-full">
+                class="bg-base-content text-base-300 rounded border border-base-content w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
@@ -52,7 +52,7 @@
                 :showSearch="false"
                 :showClearList="false"
                 @onChange="data.terms = $event"
-                class="bg-white text-black rounded border border-white w-full">
+                class="bg-base-content text-base-300 rounded border border-base-content w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full flex">
@@ -68,7 +68,7 @@
                     :showSearch="false"
                     :showClearList="false"
                     @onChange="data.autoRenew = $event"
-                    class="bg-white text-black rounded border border-white w-full">
+                    class="bg-base-content text-base-300 rounded border border-base-content w-full">
                 </select-box>
             </div>
             <div>
@@ -83,7 +83,7 @@
                     :showSearch="false"
                     :showClearList="false"
                     @onChange="data.introductoryOffer = $event"
-                    class="bg-white text-black rounded border border-white w-full">
+                    class="bg-base-content text-base-300 rounded border border-base-content w-full">
                 </select-box>
             </div>
         </div>
@@ -104,7 +104,7 @@
                     :showSearch="false"
                     :showClearList="false"
                     @onChange="data.chooesePreferredDueDay = $event"
-                    class="bg-white text-black rounded border border-white w-full">
+                    class="bg-base-content text-base-300 rounded border border-base-content w-full">
                 </select-box>
             </div>
             <div>
@@ -128,7 +128,7 @@
                 :showSearch="false"
                 :showClearList="false"
                 @onChange="data.memberPaySigning = $event"
-                class="bg-white text-black rounded border border-white w-full">
+                class="bg-base-content text-base-300 rounded border border-base-content w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full" />
@@ -204,15 +204,15 @@ const termsLabel = computed(()=>{
 
 
 </script>
-<style scoped>
+<style scoped lang="postcss">
     .white-input {
-        @apply bg-white text-black;
+        @apply bg-base-content text-base-300;
     }
 </style>
-<style>
+<style lang="postcss">
     .custom-date-input {
         .dp__input {
-            height: 28px;
+            @apply h-[29px];
         }
     }
 </style>

@@ -9,7 +9,7 @@
     <td class="px-4">{{ data.email }}</td>
     <td>{{ data.location }}</td>
     <td>
-      <membership-btn :membership="data.membership_type" />
+      <membership-status :status="data.membership_type" />
     </td>
     <td>
       <addon-btn :value="data.addOns" class="!rounded-full" />
@@ -112,18 +112,6 @@
   td:last-child {
     @apply border-r-2 rounded-r-2xl;
   }
-  .type-bronze {
-    @apply border border-white;
-  }
-  .type-silver {
-    @apply bg-orange-400;
-  }
-  .type-gold {
-    @apply bg-yellow-400;
-  }
-  .type-platinum {
-    @apply bg-orange-400;
-  }
 }
 </style>
 <script setup>
@@ -132,7 +120,7 @@ import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
-import MembershipBtn from "~~/components/buttons/membership-btn.vue";
+import MembershipStatus from "~~/components/buttons/membership-status.vue";
 import AddNoteModel from "./add-note-modal.vue";
 import dateFormat from "dateformat";
 

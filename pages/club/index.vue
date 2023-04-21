@@ -18,11 +18,11 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .page-clubhub-container {
     @apply py-4 pr-5 w-full h-fit -xl:pr-6;
     .page-content {
-        @apply text-center text-secondary p-6 border-[#1b70b1] border-2 rounded-[26px] bg-[#054171] max-w-[85vw];
+        @apply text-center text-secondary p-6 border-secondary border-2 rounded-[26px] bg-secondary-focus max-w-[85vw];
     }
 }
 </style>

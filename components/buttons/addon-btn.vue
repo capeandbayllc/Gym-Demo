@@ -9,14 +9,13 @@
     <span class="edit-icon"><edit-icon class="mb-2" /></span>
   </button>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .add-ons {
-  background-color: #5bc600;
-
+  @apply bg-accent-focus;
   @apply w-fit border flex flex-row items-center justify-center rounded-xl cursor-pointer;
   &:hover {
     .add-ons-text {
-      font-size: 0;
+      @apply text-[0px];
     }
     .edit-icon {
       @apply flex visible;

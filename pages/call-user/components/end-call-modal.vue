@@ -42,16 +42,16 @@ const userCallSetting = {
 };
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .outgoing-call-modal-container {
 	@apply pl-8 pr-8 pt-8 pb-8 bg-neutral;
     .card-title {
         @apply border-b pb-2 border-base-content/50;
     }
     .content {
-        @apply border border-secondary bg-black;
+        @apply border border-secondary bg-base-300;
         .call-inner-content {
-            @apply border border-gray-50
+            @apply border border-base-content/90
         }
         .btn.bg-secondary:hover {
             @apply border-secondary;

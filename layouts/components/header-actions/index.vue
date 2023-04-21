@@ -22,7 +22,7 @@
       /> -->
     </div>
     <div class="relative">
-      <person-add-icon @click="showUserMenu" />
+      <person-add-icon @click="showUserMenu" /> 
       <user-add-menu ref="userMenu" />
     </div>
     <div class="alert-container mt-1">

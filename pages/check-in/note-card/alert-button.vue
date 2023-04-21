@@ -15,15 +15,14 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .alert-container {
-    @apply flex flex-row items-center space-x-2 h-[30px] w-fit pr-4 py-1 cursor-pointer bg-white rounded-full text-black;
+    @apply flex flex-row items-center space-x-2 h-[30px] w-fit pr-4 py-1 cursor-pointer bg-base-content rounded-full text-base-300;
     .checker {
         @apply p-1 rounded-full;
-        /* bg-accent-focus */
     }
     &.checked {
-        @apply bg-[#ff0000] border border-white !text-white;
+        @apply bg-error border border-base-content !text-base-content;
     }
 }
 

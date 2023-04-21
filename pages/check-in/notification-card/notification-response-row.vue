@@ -16,7 +16,7 @@
         <div
           class="tag"
           :class="{
-            'bg-orange-500': data.tag === 'warning',
+            'bg-warning/80': data.tag === 'warning',
             'bg-error': data.tag === 'error',
           }"
         />
@@ -50,7 +50,7 @@
     </td>
   </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .notification-table-row {
   @apply bg-neutral;
   td {
@@ -64,7 +64,7 @@
     .note-btn {
       @apply px-2;
       .btn {
-        @apply bg-base-content text-neutral text-sm hover:text-base-content hover:bg-black;
+        @apply bg-base-content text-neutral text-sm hover:text-base-content hover:bg-base-300;
       }
     }
     .notification-member {

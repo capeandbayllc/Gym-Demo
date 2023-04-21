@@ -39,7 +39,7 @@
         </div>
     </simple-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .checkin-pos-card {
     @apply m-auto w-full max-w-[1120px] xl:w-[1120px] bg-neutral-focus/30;
     .profile-info {
@@ -55,8 +55,7 @@
         }
     }
     .past-purchase {
-        @apply border-2 border-secondary rounded p-5 bg-base-300 w-96;
-        margin-top: -2rem;
+        @apply border-2 border-secondary rounded p-5 bg-base-300 w-96 mt-[-2rem];
     }
     .retail-store-container {
         @apply flex flex-col lg:items-center w-full h-96 border rounded;
