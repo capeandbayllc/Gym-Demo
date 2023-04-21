@@ -11,7 +11,7 @@
         </td>
         <td>
             <div class="conversion-data">
-                <membership-btn :membership="data.membership" />
+                <membership-status :status="data.membership" />
             </div>
         </td>
         <td>
@@ -40,7 +40,7 @@
 </style>
 
 <script setup>
-import MembershipBtn from "@/components/buttons/membership-btn.vue";
+import MembershipStatus from "@/components/buttons/membership-status.vue";
 
 const props = defineProps({
     data: Object,

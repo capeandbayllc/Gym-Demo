@@ -185,7 +185,6 @@ const backToTop = () => {
         behavior: "smooth",
     });
 };
-
 const subSections = [
     { key: "profile", component: Profile },
     { key: "pos", component: PosWindow },

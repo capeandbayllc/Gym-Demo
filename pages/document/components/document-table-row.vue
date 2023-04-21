@@ -1,8 +1,8 @@
 <template>
     <tr class="document-tbl-row">
         <td>{{data.segment}}</td>
-        <td class="w-[50px]">
-            <membership-btn :membership="data.type"/>
+        <td width="50px">
+            <membership-status :status="data.type"/>
         </td>
         <td>{{data.created}}</td>
         <td>
@@ -34,7 +34,7 @@
 }
 </style>
 <script setup>
-import MembershipBtn from '~~/components/buttons/membership-btn.vue';
+import MembershipStatus from '~~/components/buttons/membership-status.vue';
 const props = defineProps({
     data: Object
 })

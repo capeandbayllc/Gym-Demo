@@ -18,10 +18,10 @@
                     <Button outline size="sm" class="my-1 border-primary text-secondary" @click="outgoingCall">+ Call</Button>
                 </div> -->
                 <daisy-modal ref="outgoingCallModalRef">
-                    <outgoing-call-modal @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal>
+                    <outgoing-call-modal :user="data" @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal>
                 </daisy-modal>
                 <daisy-modal ref="emailModalRef">
-                    <EmailModal @close="closeEmailModal"/>
+                    <EmailModal :user="data" @close="closeEmailModal"/>
                 </daisy-modal>
             </div> 
         </td>
