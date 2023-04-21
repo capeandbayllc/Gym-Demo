@@ -9,7 +9,7 @@
         />
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .engage-break-down-container {
     @apply col-span-3 border border-secondary rounded p-3 pb-1;
     h3 {

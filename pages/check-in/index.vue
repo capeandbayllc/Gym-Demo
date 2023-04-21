@@ -72,7 +72,7 @@
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .page-checkin-container {
     @apply py-4 px-5 w-full h-fit;
     .page-title {
@@ -81,7 +81,7 @@
     .page-content {
         @apply flex flex-col-reverse md:flex-row gap-5 flex-wrap justify-center;
         .wrapper {
-            background: #0074c8;
+            @apply bg-secondary;
         }
         .account-box {
             ul {

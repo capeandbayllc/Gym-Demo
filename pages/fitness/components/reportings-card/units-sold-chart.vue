@@ -1,14 +1,14 @@
 <template>
     <div class="units-sold flex flex-col justify-between">
         <div class="grid grid-cols-10 header">
-            <label class="col-span-2 text-[12px] text-white">Units Sold</label>
+            <label class="col-span-2 text-[12px] text-base-content">Units Sold</label>
             <div class="col-span-5"></div>
             <div class="col-span-3 grid grid-cols-5">
                 <div class="col-span-1 flex">
                     <button class="btn-status -rotate-90">></button>
                 </div>
                 <div class="col-span-4 grid grid-cols-1 ml-1">
-                    <span class="col-span-1 text-white text-[12px] text-left">Last Week</span>
+                    <span class="col-span-1 text-base-content text-[12px] text-left">Last Week</span>
                     <span class="col-span-1 text-[14px] text-left"> +0.10%</span>
                 </div>
             </div>
@@ -23,25 +23,15 @@
         </ClientOnly>
     </div>
 </template>
-<style>
+<style lang="postcss">
 .units-sold  .btn-status{
-    width: 15px;
-    height: 15px;
-    background : #0077ac;
-    border-radius: 50%;
-    color: black;
-    font-size: 10px;
-    font-weight: bold;
-    margin : auto;
+    @apply w-[15px] h-[15px] bg-info-content rounded-full text-base-300 text-[10px] font-bold m-auto;
 }
 .units-sold{
-    border : 2px solid #0077ac;
-    border-radius : 15px;
-    padding: 10px;
+    @apply border-[2px] border-solid border-secondary rounded-[15px] p-[10px];
 }
 .units-sold .header{
-    margin-top: 5px;
-    margin-bottom: 10px;
+    @apply mt-[5px] mb-[10px];
 }
 
 </style>
@@ -136,7 +126,7 @@ const options ={
         custom: function({series, seriesIndex, dataPointIndex, w}) {
             return (
                 `<div class="arrow_box p-2">
-                    <span style="color: grey;">Earning</span>
+                    <span class="text-neutral-content">Earning</span>
                     <p>$${series[seriesIndex][dataPointIndex]}</p>
                 </div>`
             )

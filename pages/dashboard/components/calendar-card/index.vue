@@ -1,5 +1,5 @@
 <template>
-    <dashboard-card :title-icon="CalendarIcon" title="December" class="flex flex-col justify-between bg-black">
+    <dashboard-card :title-icon="CalendarIcon" title="December" class="flex flex-col justify-between bg-base-300">
         <Datepicker
             v-model="date"
             inline
@@ -31,9 +31,9 @@
         </div>
     </dashboard-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .calendar-footer {
-    @apply h-12 bg-black flex justify-between items-center px-5 rounded-b-xl;
+    @apply h-12 bg-base-300 flex justify-between items-center px-5 rounded-b-xl;
     .calendar-footer-labels {
         @apply flex items-center gap-5;
     }

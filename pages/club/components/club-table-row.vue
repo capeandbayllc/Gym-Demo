@@ -11,7 +11,7 @@
         </td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .club-table-row {
     td {
         @apply border-y h-14 py-3;
@@ -33,9 +33,6 @@
     td {
         @apply border-y-2 border-secondary px-3;
     }
-    /* td:first-child {
-        @apply border-l-2 rounded-l text-accent-focus;
-    } */
     td:last-child {
         @apply border-r-2 rounded-r capitalize;
     }
@@ -50,7 +47,7 @@
     }
 }
 </style>
-<style>
+<style lang="postcss">
 .club-search-tbl-content thead{
     @apply top-0 bg-neutral h-10;
 }

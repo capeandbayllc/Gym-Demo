@@ -10,7 +10,7 @@
         </div>
     </simple-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .folder-card-content {
     @apply flex flex-row pt-4 pb-2 px-9 bg-transparent items-center w-full;
     .folder-docs {

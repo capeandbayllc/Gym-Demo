@@ -16,7 +16,7 @@
         <td>{{data.created}}</td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .people-lead-tbl-row {
     @apply bg-base-100 h-14;
 
@@ -33,16 +33,16 @@
         @apply flex items-center justify-center rounded text-sm cursor-pointer h-full px-2 py-1;
     }
     .type-warning {
-        @apply bg-orange-400;
+        @apply bg-warning/70;
     }
     .type-secondary {
         @apply bg-secondary;
     }
 }
 </style>
-<style>
+<style lang="postcss">
     .people-search-tbl-content thead {
-        @apply top-0 sticky bg-black h-10;
+        @apply top-0 sticky bg-base-300 h-10;
     }
 </style>
 <script setup>

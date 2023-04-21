@@ -56,7 +56,7 @@ const fileType = [
     }
 ];
 </script>
-<style scoped>
+<style scoped lang="postcss">
 .folder-name-input{        
     label {
         @apply mr-2 

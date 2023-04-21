@@ -58,7 +58,7 @@
     </div>
   </simple-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .guest-pass-card {
   @apply bg-neutral m-auto;
   @screen -lg {
@@ -75,7 +75,7 @@
   }
 }
 </style>
-<style>
+<style lang="postcss">
 .dp-custom-input {
   @apply bg-transparent border-none text-secondary mt-1;
   &::placeholder {

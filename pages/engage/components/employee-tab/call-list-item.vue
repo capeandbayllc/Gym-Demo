@@ -1,6 +1,6 @@
 <template>
   <tr
-    class="relative call-list-item bg-[#1A1A1A] hover:bg-secondary hover:bg-opacity-30"
+    class="relative call-list-item bg-base-200 hover:bg-secondary hover:bg-opacity-30"
   >
     <td>
       <div class="flex items-center min-h-[28px]">
@@ -57,7 +57,7 @@
         >
           <font-awesome-icon
             icon="ellipsis-h"
-            class="text-[#0075C9]"
+            class="text-secondary"
             size="lg"
           />
         </div>
@@ -65,7 +65,7 @@
           class="dropdown-content menu p-2 bg-secondary border-1 rounded items-start"
         >
           <cross-icon
-            class="flex absolute text-white h-[15px] w-[15px] top-2 right-2 cursor-pointer"
+            class="flex absolute text-base-content h-[15px] w-[15px] top-2 right-2 cursor-pointer"
           ></cross-icon>
           <div class="dropdown-item" tabindex="-1">Edit Account</div>
           <div class="dropdown-item" tabindex="-1">View Alerts</div>
@@ -78,7 +78,7 @@
 
     <Options :user="data" :show="contactOption" @on:close="contactOption = null" />
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .call-list-item {
   @apply h-12 text-xs;
 
@@ -101,13 +101,13 @@
     }
   }
   .type-warning {
-    @apply bg-orange-400;
+    @apply bg-warning;
   }
   .dot {
     @apply float-left h-[.5rem] w-[.5rem] rounded-full bottom-0 right-2 mr-[2px];
   }
   .contact-button {
-    @apply bg-[#0089FF] border-white border rounded-xl p-1;
+    @apply bg-secondary border-base-content border rounded-xl p-1;
   }
   .icon {
     @apply fill-white w-4 h-4;
@@ -117,7 +117,7 @@
     @apply mt-[8rem] border-2 rounded-xl flex;
   }
   .dropdown-item {
-    @apply flex flex-col hover:text-opacity-50 uppercase hover:text-black text-left text-xs h-[1.5rem] w-[8rem] text-white transition rounded  inline-block my-1 border-primary px-2 py-1 cursor-pointer;
+    @apply flex flex-col hover:text-opacity-50 uppercase hover:text-base-300 text-left text-xs h-[1.5rem] w-[8rem] text-base-content transition rounded  inline-block my-1 border-primary px-2 py-1 cursor-pointer;
   }
 }
 </style>

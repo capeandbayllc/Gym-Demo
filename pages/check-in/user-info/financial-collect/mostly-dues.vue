@@ -6,8 +6,8 @@
               <p class="text-lg font-semibold">Mostly due*</p>
           </div>
           <div class="flex gap-3 justify-between items-center mb-3">
-            <Button size="sm" class="border-gray-400 bg-transparent text-sm normal-case hover:!bg-secondary hover:text-white hover:!border-secondary rounded-[10px]" :class="{'!bg-secondary text-white !border-secondary': payWith == 'checking'}" @click="payWith = 'checking'">Pay with Checking</Button>
-            <Button size="sm" class="border-gray-400 bg-transparent text-sm normal-case hover:!bg-secondary hover:text-white hover:!border-secondary rounded-[10px]" :class="{'!bg-secondary text-white !border-secondary': payWith == 'card'}" @click="payWith = 'card'">Pay with Card</Button>
+            <Button size="sm" class="border-neutral-content bg-transparent text-sm normal-case hover:!bg-secondary hover:text-white hover:!border-secondary rounded-[10px]" :class="{'!bg-secondary text-white !border-secondary': payWith == 'checking'}" @click="payWith = 'checking'">Pay with Checking</Button>
+            <Button size="sm" class="border-neutral-content bg-transparent text-sm normal-case hover:!bg-secondary hover:text-white hover:!border-secondary rounded-[10px]" :class="{'!bg-secondary text-white !border-secondary': payWith == 'card'}" @click="payWith = 'card'">Pay with Card</Button>
             <custom-toggle v-model="defaultMembershipPaymentCheck" title="" />
             <p class="text-sm">Make this my default membership payment.</p>
           </div>
@@ -15,7 +15,7 @@
           <PayWithCard v-if="payWith == 'card'"/>
       </div>
       <div class="flex justify-end">
-        <button class="text-[#6d6d6d] hover:text-secondary mt-3 mr-3 -mb-2">Add a secondary method of payment</button>
+        <button class="text-neutral-content hover:text-secondary mt-3 mr-3 -mb-2">Add a secondary method of payment</button>
       </div>
       <slot></slot>
     </div>
@@ -42,13 +42,8 @@ const props = defineProps({
 const defaultMembershipPaymentCheck = ref(false);
 
 </script>
-<style scoped>
-.mx-0{
-  margin-inline: 0px !important;
-}
-</style>
-<style>
+<style lang="postcss">
 .gray-input {
-  @apply bg-[#5a5a5a] w-full text-white py-[10px] px-[10px] outline-none rounded-[10px];
+  @apply bg-base-100 w-full text-base-content py-[10px] px-[10px] outline-none rounded-[10px];
 }
 </style>

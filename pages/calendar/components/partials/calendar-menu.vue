@@ -10,7 +10,7 @@
             <!-- button group -->
             <div class="flex gap-2">
                 <!-- chevron btn -->
-                <button class="fill-white p-2 w-8 rotate-180">
+                <button class="fill-base-content p-2 w-8 rotate-180">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 512 512"
@@ -25,7 +25,7 @@
                 <div class="relative">
                     <button
                         @click="enableDropdown"
-                        class="fill-white border-secondary hover:bg-secondary border-2 p-2 w-8 rounded-md"
+                        class="fill-base-content border-secondary hover:bg-secondary border-2 p-2 w-8 rounded-md"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,7 @@
                     >
                 </div>
                 <div class="flex items-center gap-4">
-                    <!-- <button class="w-3 fill-gray-300">
+                    <!-- <button class="w-3 fill-base-content/80">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 320 512"
@@ -74,7 +74,7 @@
                         />
                     </svg>
                 </button> -->
-                    <button class="w-[0.3125rem] fill-gray-300">
+                    <button class="w-[0.3125rem] fill-base-content/80">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 128 512"
@@ -113,10 +113,9 @@ const disableDropdown = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 input[type="checkbox"] {
-    @apply rounded bg-white appearance-none m-0 h-4 w-4 border border-[#C0BDCC] outline-none;
-    @apply focus:border;
+    @apply rounded bg-base-content appearance-none m-0 h-4 w-4 border border-neutral-content outline-none focus:border;
 }
 
 input[type="checkbox"]:checked {

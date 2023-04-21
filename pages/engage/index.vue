@@ -12,12 +12,11 @@
                     v-else
                 />
             </div> -->
-
       <!-- New UI start-->
       <div class="grid grid-cols-3 gap-2 p-2">
         <div class="p-2">
           <engage-calendar-events
-            class="-md:col-span-3 -mdd:grid-row-1 bg-black rounded-3xl"
+            class="-md:col-span-3 -mdd:grid-row-1 bg-base-300 rounded-3xl"
           />
         </div>
         <div class="col-span-2 p-2">
@@ -28,12 +27,11 @@
     </div>
   </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .page-engage-container {
   @apply py-4 pr-5 w-full h-fit -md:px-6;
   .page-content {
     @apply flex flex-col items-center;
-    /* margin-top: -2.25rem; */
     .tab-view {
       @apply grid grid-rows-3 gap-4 py-5 px-4 max-w-[1120px] w-full;
     }

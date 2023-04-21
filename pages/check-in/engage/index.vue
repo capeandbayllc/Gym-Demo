@@ -140,7 +140,7 @@ const saveNow = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .engage-card {
     @apply mx-auto max-w-[1120px] xl:w-[1120px] w-full;
 }

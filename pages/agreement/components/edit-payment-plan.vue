@@ -13,7 +13,7 @@
                 :showSearch="false"
                 :showClearList="false"
                 @onChange="data.totalContractValue = $event"
-                class="bg-white text-black rounded border border-white w-full">
+                class="bg-base-content text-base-300 rounded border border-base-content w-full">
             </select-box>
         </div>
         <div class="col-span-1 mx-auto w-full">
@@ -25,7 +25,7 @@
         <div class="col-span-1 mx-auto w-full">
             <div class="mb-2">Clubs</div>
         </div>
-        <div class="col-span-3 bg-white text-black rounded mx-auto w-full grid grid-cols-3 px-2 pt-2 gap-4">
+        <div class="col-span-3 bg-base-content text-base-300 rounded mx-auto w-full grid grid-cols-3 px-2 pt-2 gap-4">
             <div class="col-span-1 mx-auto w-full">
                 <div class="mb-2">FL ACD 30 Day 7%</div>
             </div>
@@ -33,7 +33,7 @@
                 <div class="mb-2">$53.49</div>
             </div>
             <div class="col-span-1 mx-auto w-full">
-                <textarea class="border border-black rounded p-1 w-full resize-none" rows="5" readonly>#668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668</textarea>
+                <textarea class="border border-base-300 rounded p-1 w-full resize-none" rows="5" readonly>#668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668 #668</textarea>
             </div>
         </div>
     </simple-card>
@@ -80,15 +80,15 @@ watch(data, () => {
 });
 
 </script>
-<style scoped>
+<style scoped lang="postcss">
     .white-input {
-        @apply bg-white text-black;
+        @apply bg-base-content text-base-300;
     }
 </style>
-<style>
+<style lang="postcss">
     .custom-date-input {
         .dp__input {
-            height: 28px;
+            @apply h-[28px];
         }
     }
 </style>

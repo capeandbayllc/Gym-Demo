@@ -16,7 +16,7 @@
         <td>{{data.created}}</td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .recent-alerts-tbl-row {
     @apply bg-base-100 h-14;
 
@@ -33,7 +33,7 @@
         @apply flex items-center justify-center rounded text-sm cursor-pointer h-full px-2 py-1;
     }
     .type-warning {
-        @apply bg-orange-400;
+        @apply bg-warning/90;
     }
     .type-secondary {
         @apply bg-secondary;

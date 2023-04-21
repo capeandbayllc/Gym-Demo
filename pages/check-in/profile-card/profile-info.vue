@@ -1,4 +1,4 @@
-<template>
+6<template>
     <div v-if="ProfileInfo" class="profile-info-container">
         <div class="profile-avatar">
             <div class="alert-badge" v-if="user.notifications.length > 0">
@@ -20,20 +20,20 @@
         </div>
         <div class="grid w-full">
             <div class="flex group/container justify-between items-center p-3 relative border-2 border-secondary rounded-3xl mb-4 z-[1] mx-10">
-                <button class="bg-amber-500 drawer-btn group" @click="$emit('toggle-detail', true)">
+                <button class="bg-warning/80 drawer-btn group" @click="$emit('toggle-detail', true)">
                     P
                     <span class="edit-icon persona-style-transitioner group-hover:opacity-100">
                       <edit-icon class="mb-2 group-hover:opacity-100 persona-style-transitioner"/>
                     </span>
                 </button>
-                <button class="bg-lime-500 drawer-btn group" @click="$emit('toggle-detail', true)">
+                <button class="bg-success drawer-btn group" @click="$emit('toggle-detail', true)">
                     PT
                     <span class="edit-icon persona-style-transitioner group-hover:opacity-100">
                       <edit-icon
                             class="mb-2 group-hover:opacity-100 persona-style-transitioner"/>
                     </span>
                 </button>
-                <button class="bg-blue-500 drawer-btn group" @click="$emit('toggle-detail', true)">
+                <button class="bg-secondary drawer-btn group" @click="$emit('toggle-detail', true)">
                     FM
                     <span class="edit-icon persona-style-transitioner group-hover:opacity-100">
                       <edit-icon class="mb-2 group-hover:opacity-100 persona-style-transitioner"/>
@@ -56,7 +56,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .edit-on-hover {
     &:hover {
         font-size: 0;
@@ -80,15 +80,11 @@
             @apply w-36 h-36 rounded-full;
         }
         .alert-badge {
-            @apply absolute flex items-center justify-center w-12 h-12 rounded-full bg-error text-3xl font-semibold;
-            left: -0.5rem;
-            top: -0.375rem;
+            @apply absolute flex items-center justify-center w-12 h-12 rounded-full bg-error text-3xl font-semibold left-[-0.5rem] top-[-0.375rem];
         }
     }
     .alert-badge {
-        @apply absolute flex items-center justify-center w-12 h-12 rounded-full bg-error text-3xl font-semibold;
-        left: -0.5rem;
-        top: -0.375rem;
+        @apply absolute flex items-center justify-center w-12 h-12 rounded-full bg-error text-3xl font-semibold left-[-0.5rem] top-[-0.375rem];
     }
 }
 .profile-name {
@@ -106,7 +102,7 @@
 .femily-member {
     @apply relative bg-secondary flex items-center justify-center;
     &:hover {
-        font-size: 0;
+        @apply text-[0px];
         @apply px-4;
         .edit-icon {
             @apply opacity-100;

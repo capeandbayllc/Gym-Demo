@@ -29,7 +29,7 @@
         </td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .call-list-item {
     @apply h-10 text-xs;
 

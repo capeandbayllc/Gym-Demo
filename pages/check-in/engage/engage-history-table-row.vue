@@ -2,14 +2,14 @@
     <tr class="engage-history-tbl-row">
         <td>{{data.type}}</td>
         <td>{{data.date_time}}</td>
-        <td><div class="w-fit border border-white px-4 py-1 rounded-md">{{data.status}}</div></td>
+        <td><div class="w-fit border border-base-content px-4 py-1 rounded-md">{{data.status}}</div></td>
         <td>{{data.completed_by}}</td>
         <td><Button size="sm" secondary>View</Button></td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .engage-history-tbl-row {
-    @apply bg-black h-14;
+    @apply bg-base-300 h-14;
 
     td {
         @apply border-y-2 border-secondary text-left px-3;
@@ -21,16 +21,16 @@
         @apply border-r-2 rounded-r capitalize;
     }
     .type-warning {
-        @apply bg-orange-400;
+        @apply bg-warning/70;
     }
     .type-secondary {
         @apply bg-secondary;
     }
 }
 </style>
-<style>
+<style lang="postcss">
     .people-search-tbl-content thead {
-        @apply top-0 sticky bg-black h-10;
+        @apply top-0 sticky bg-base-300 h-10;
     }
 </style>
 <script setup>

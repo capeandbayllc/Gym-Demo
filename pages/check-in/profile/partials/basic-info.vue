@@ -1,5 +1,5 @@
 <template>
-  <section class="max-w-7xl px-8 bg-black py-8 rounded-b-3xl">
+  <section class="max-w-7xl px-8 bg-base-300 py-8 rounded-b-3xl">
     <div class="grid grid-cols-3 gap-8">
       <TextField
         v-model="localValue['first_name']"

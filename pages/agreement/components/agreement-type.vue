@@ -103,15 +103,14 @@ watch(data, () => {
 });
 
 </script>
-<style scoped>
+<style scoped lang="postcss">
     .white-input {
-        @apply bg-white text-black;
+        @apply bg-base-content text-base-300;
     }
 </style>
 <style scoped lang="postcss">
 input[type="checkbox"] {
-  @apply rounded-full bg-white appearance-none m-0 h-5 w-5 border border-[#C0BDCC] outline-none;
-  @apply focus:border;
+  @apply rounded-full bg-base-content appearance-none m-0 h-5 w-5 border border-neutral-content outline-none focus:border;
 }
 
 input[type="checkbox"]:checked {

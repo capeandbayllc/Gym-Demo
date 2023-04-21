@@ -24,7 +24,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .page-alerts-notifications-container {
     @apply py-4 pr-5 w-full h-fit;
     .page-content {
@@ -32,9 +32,9 @@
     }
 }
 </style>
-<style>
+<style lang="postcss">
 .recent-alerts-datatable thead {
-    @apply top-0 sticky bg-black h-10;
+    @apply top-0 sticky bg-base-300 h-10;
 }
 
 </style>

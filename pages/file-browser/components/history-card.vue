@@ -17,7 +17,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .history-folder-icon {
     @apply grid grid-cols-5 gap-4 py-6 px-9 bg-neutral;
     .create-option {

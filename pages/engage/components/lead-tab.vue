@@ -4,7 +4,7 @@
     <div class="lead-content col-span-2"></div>
     <div class="lead-content col-span-2"></div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .lead-content {
     @apply border border-secondary rounded;
 }
