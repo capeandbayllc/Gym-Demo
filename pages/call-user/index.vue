@@ -48,7 +48,7 @@ const showIncomingCallModal = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .call-user-container {
     @apply py-4 pr-5 w-full h-fit pl-16;
 }

@@ -3,25 +3,21 @@
     <div class="docs-list flex ">
         <div v-for="doc in docs" :key="doc.id" class="member-doc">
             <normal-doc class="mb-2 w-[120px] h-[120px]" />
-            <div class="text-white text-[14px] ">{{doc.name}}</div>
+            <div class="text-base-content text-[14px] ">{{doc.name}}</div>
             <div class="text-secondary text-[14px]">{{doc.date}}</div>
         </div>
     </div>
     <arrow-icon direction="right" class="h-fit cursor-pointer" @click="RightArrowClick"/>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .docs-list{
-    width : 100%;
-    overflow-x: scroll;
-    transition : all 0.3s;
-    margin : 0 10px;
+    @apply w-full overflow-x-scroll transition-all duration-300 my-0 mx-[10px];
 }
 .docs-list::-webkit-scrollbar{
-    display: none;
+    @apply hidden;
 }
 .cursor-pointer{
-    margin : auto;
-    color : white;
+    @apply m-auto text-base-content;
 }
 </style>
 <script setup>

@@ -27,7 +27,7 @@
         </div>
     </dashboard-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .member-history-container {
     @apply pt-6 px-5;
     .history-meta {
@@ -35,8 +35,7 @@
     }
 }
 .help-search{
-        @apply rounded-md w-full m-auto text-base pl-3 hover:placeholder-opacity-0 mt-2;
-        background-color: #0075C9;
+    @apply rounded-md w-full m-auto text-base pl-3 hover:placeholder-opacity-0 mt-2 bg-secondary;
 }
 </style>
 <script setup>

@@ -1,10 +1,10 @@
 <template>
     <div class="call-image-container">
         <div class="profile-avatar">
-            <img :src="user.profile_photo_path" class="rounded-full" alt=""/>
+            <img :src="user?.profile_photo_path" class="rounded-full" alt=""/>
         </div>
         <div class="profile-info">
-            <div class="profile-name">{{ user.first_name }} {{ user.last_name }}</div>
+            <div class="profile-name">{{ user?.first_name }} {{ user?.last_name }}</div>
             <div class="text-secondary">New Membership Call</div>
         </div>
         <div class="profile-calling">
@@ -31,17 +31,17 @@ defineProps({
 const showNotes = ref(false);
 </script>
  
-<style scoped>
+<style scoped lang="postcss">
 .call-image-container{
     @apply p-4;
     .profile-avatar {
-        @apply relative rounded-full bg-base-content p-0.5 inline-block ;
+        @apply relative rounded-full bg-base-content p-0.5 inline-block;
         img {
             @apply w-20 h-20;
         }
     }
     .audio-track{
-        @apply border py-3 border-zinc-500 my-3;
+        @apply border py-3 border-base-content/40 my-3;
     }
     .profile-info{
         @apply inline-block px-5 align-top;
@@ -55,7 +55,7 @@ const showNotes = ref(false);
     .profile-calling{
         @apply w-20 text-center float-right;
         .profile-call{
-            @apply inline-block w-14 h-14 align-top rounded-full border-2 border-green-400 bg-green-400 bg-opacity-40 text-center pt-3 ;
+            @apply inline-block w-14 h-14 align-top rounded-full border-2 bg-success bg-green-400 bg-opacity-40 text-center pt-3 ;
             img{
                 @apply inline-block ;
             }
@@ -65,7 +65,7 @@ const showNotes = ref(false);
         }
     }
     .notes{
-        @apply border-white px-4 bg-transparent;
+        @apply border-base-content px-4 bg-transparent;
     }
     .neutral-input {
         @apply bg-base-content/20 block w-full mt-3 rounded-md p-3;

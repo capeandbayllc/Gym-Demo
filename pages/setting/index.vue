@@ -11,7 +11,7 @@
                 />
                 <div
                     v-if="uploadPopUp"
-                    class="bg-white absolute p-4 w-[300px] text-right rounded border border-secondary"
+                    class="bg-base-content absolute p-4 w-[300px] text-right rounded border border-secondary"
                 >
                     <label class="mb-4 block">
                         <UploadIcon
@@ -25,7 +25,7 @@
                     <Button
                         ghost
                         size="sm"
-                        class="text-black"
+                        class="text-base-300"
                         @click="uploadPopUp = false"
                         >Cancel</Button
                     >
@@ -71,22 +71,8 @@
                 />
             </div>
             <div class="col-span-2 3xl:col-span-3 -lg:col-span-1 -md:col-auto">
-                <div
-                    class="border border-secondary rounded p-4 w-full mb-4 bg-transparent"
-                >
-                    <h4 class="mb-1 inline-block font-bold w-full">
-                        Availability
-                    </h4>
-                    <label class="mr-3">Daily Times Set:</label>
-                    <span class="mx-2 inline-block">
-                        <ClockIcon class="inline-block mr-1" /> 10:20 am
-                    </span>
-                    <span class="mx-2 inline-block">
-                        <ClockIcon class="inline-block mr-1" /> 1:00 pm
-                    </span>
-                    <span class="mx-2 inline-block">
-                        <ClockIcon class="inline-block mr-1" /> 3:00 pm
-                    </span>
+                <div class="border border-secondary rounded p-4 w-full mb-4 bg-transparent">
+                    <availability-clocks title="Availability" />
                 </div>
                 <Button
                     secondary
@@ -129,15 +115,14 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .page-setting-container {
     @apply py-4 w-full h-fit;
     .page-content {
         @apply bg-neutral border border-secondary rounded grid grid-cols-3 3xl:grid-cols-4 -lg:grid-cols-2 -md:grid-cols-1 gap-x-12 gap-y-8 px-8 py-10;
     }
     input {
-        @apply h-9 rounded mt-3 w-full pl-2;
-        min-width: 16rem;
+        @apply h-9 rounded mt-3 w-full pl-2 min-w-[16rem];
     }
     input:focus {
         @apply outline-none;
@@ -162,7 +147,8 @@
 <script setup>
 import {ref} from 'vue';
 import ProfileRelation from './components/profile-relation.vue';
-import {ClockIcon, LockIcon, UploadIcon} from '~~/components/icons';
+import AvailabilityClocks from './components/availability-clocks.vue';
+import { LockIcon, UploadIcon} from '~~/components/icons';
 const form = ref({
     username: 'kevinbuchanan@email.com',
 });

@@ -9,7 +9,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .agreement-builder-modal-container {
 	@apply pl-2 pr-2 pt-6 pb-6;
     .card-title {
@@ -23,11 +23,11 @@
     }
 }
 .agreement-builder-modal-card {
-    background-color: hsl(var(--n) / var(--tw-bg-opacity));
+    @apply bg-base-200;
 }
 
 .white-input {
-    @apply bg-white text-black;
+    @apply bg-base-content text-base-300;
 }
 </style>
 

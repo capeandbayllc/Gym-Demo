@@ -16,7 +16,7 @@
                                         onUploadDragoverEvent($event)
                                     "
                                     @drop.prevent="onUploadDropEvent($event)"
-                                    class="w-full flex justify-center items-center px-6 pt-5 pb-6 bg-[#292929] rounded-lg h-128 transition-colors"
+                                    class="w-full flex justify-center items-center px-6 pt-5 pb-6 bg-base-100 rounded-lg h-128 transition-colors"
                                     :class="{
                                         'bg-base-100': uploadDragoverTracking,
                                     }"
@@ -28,10 +28,10 @@
                                         <p class="mt-4">
                                             Drag and Drop your Files here
                                         </p>
-                                        <p class="py-2 text-gray-500">OR</p>
+                                        <p class="py-2 text-neutral-content">OR</p>
                                         <p class="mt-2 text-sm text-gray-600">
                                             <label
-                                                class="py-2 px-3 rounded-md text-white bg-secondary hover:bg-secondary/[0] hover:border-2 border-secondary font-light tracking-widest text-[0.8rem] transition-all duration-300 ease-linear cursor-pointer"
+                                                class="py-2 px-3 rounded-md text-base-content bg-secondary hover:bg-secondary/[0] hover:border-2 border-secondary font-light tracking-widest text-[0.8rem] transition-all duration-300 ease-linear cursor-pointer"
                                                 ><span>Browse Files</span
                                                 ><input
                                                     @input="

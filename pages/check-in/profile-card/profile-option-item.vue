@@ -18,7 +18,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .profile-option-item {
     @apply relative flex flex-row cursor-pointer text-base lg:text-lg m-1 transition-all duration-150 ease-linear w-auto lg:w-[45%] xl:w-auto;
     .checker {
@@ -29,9 +29,7 @@
         @apply text-[0.9rem];
     }
     .alert-badge {
-        @apply badge-error rounded-full flex w-4 h-4 text-xs items-center justify-center absolute transition-all duration-75 ease-linear;
-        left: -0.5rem;
-        top: -0.375rem;
+        @apply badge-error rounded-full flex w-4 h-4 text-xs items-center justify-center absolute transition-all duration-75 ease-linear left-[-0.5rem] top-[-0.375rem];
     }
 
     &:hover:not(.selected) {
@@ -40,7 +38,7 @@
             @apply bg-transparent;
         }
         .alert-badge {
-            @apply badge-error flex items-center justify-center w-5 h-5 min-w-[24px] min-h-[24px] lg:w-7 lg:h-7 text-xs top-0 left-0 border-2 border-white;
+            @apply badge-error flex items-center justify-center w-5 h-5 min-w-[24px] min-h-[24px] lg:w-7 lg:h-7 text-xs top-0 left-0 border-2 border-base-content;
         }
     }
 }

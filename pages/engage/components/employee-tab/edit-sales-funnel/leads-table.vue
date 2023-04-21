@@ -16,9 +16,9 @@
         </Button>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .leads-list-container {
-    @apply border rounded p-3 pb-1 bg-black border-white;
+    @apply border rounded p-3 pb-1 bg-base-300 border-base-content;
     h3 {
         @apply font-semibold text-secondary;
     }

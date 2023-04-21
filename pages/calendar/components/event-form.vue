@@ -16,7 +16,7 @@
             <input
                 v-model="form.title"
                 type="text"
-                class="!rounded-b-none mb-3 p-2 !text-black !bg-white rounded-xl mt-2 placeholder:!text-[#aaa]"
+                class="!rounded-b-none mb-3 p-2 !text-base-300 !bg-base-content rounded-xl mt-2 placeholder:!text-neutral-content"
                 placeholder="Title"
             />
             <div class="w-full mx-auto">
@@ -27,7 +27,7 @@
         <div class="w-full flex flex-col">
             <label>Member</label>
             <select v-model="form.member" placeholder="Member">
-                <option class="text-white/[0.7]" :value="null">Member</option>
+                <option class="text-base-content/[0.7]" :value="null">Member</option>
                 <option v-for="mem in members" :key="mem.id">
                     {{ mem.first_name }} {{ mem.last_name }}
                 </option>
@@ -36,7 +36,7 @@
         <div class="w-full flex flex-col">
             <label>Instructor</label>
             <select v-model="form.instructor" placeholder="Instructor">
-                <option class="text-white/[0.7]" :value="null">
+                <option class="text-base-content/[0.7]" :value="null">
                     Instructor
                 </option>
                 <option v-for="employee in employees" :key="employee.id">
@@ -50,7 +50,7 @@
             <div class="flex flex-row">
                 <input
                     v-model="form.start.date"
-                    class="border-[#191919] calendar-style-transition"
+                    class="border-base-200 calendar-style-transition"
                     :class="{
                         'basis-2/3 !rounded-r-none border-r': !form.allDay,
                         'basis-[100%]': form.allDay,
@@ -60,7 +60,7 @@
                 />
                 <input
                     v-model="form.start.time"
-                    class="!rounded-l-none basis-1/3 border-l border-[#191919] calendar-style-transition"
+                    class="!rounded-l-none basis-1/3 border-l border-base-200 calendar-style-transition"
                     :class="{
                         'basis-1/3': !form.allDay,
                         'basis-[0%] !p-0': form.allDay,
@@ -76,7 +76,7 @@
             <div class="flex flex-row">
                 <input
                     v-model="form.end.date"
-                    class="border-[#191919] calendar-style-transition"
+                    class="border-base-200 calendar-style-transition"
                     :class="{
                         'basis-2/3 !rounded-r-none border-r': !form.allDay,
                         'basis-[100%]': form.allDay,
@@ -86,7 +86,7 @@
                 />
                 <input
                     v-model="form.end.time"
-                    class="!rounded-l-none basis-1/3 border-l border-[#191919] calendar-style-transition"
+                    class="!rounded-l-none basis-1/3 border-l border-base-200 calendar-style-transition"
                     :class="{
                         'basis-1/3': !form.allDay,
                         'basis-[0%] !p-0': form.allDay,
@@ -222,11 +222,11 @@ const resetInputs = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 input,
 textarea,
 select {
-    @apply w-full p-2 rounded-xl text-white mt-1 placeholder:text-black/[0.8] bg-[#555] text-[0.8rem];
+    @apply w-full p-2 rounded-xl text-base-content mt-1 placeholder:text-base-300/[0.8] bg-base-content/20 text-[0.8rem];
     color-scheme: dark;
 }
 .calendar-style-transition {

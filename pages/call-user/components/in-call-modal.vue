@@ -22,16 +22,16 @@
 import OngoingCallCard from './ongoing-call-card.vue';
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .in-call-modal-container {
 	@apply pl-8 pr-8 pt-8 pb-8 bg-neutral;
     .card-title {
         @apply border-b pb-2 border-base-content/50;
     }
     .content {
-        @apply border border-secondary bg-black;
+        @apply border border-secondary bg-base-300;
         .call-inner-content {
-            @apply border border-green-400;
+            @apply border border-success;
         }
         .btn.bg-error:hover {
             @apply border-error;

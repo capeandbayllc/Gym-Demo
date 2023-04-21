@@ -18,7 +18,7 @@
     </div>
   </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .multi-select {
     @apply flex flex-col gap-2;
     .multi-select-tags {

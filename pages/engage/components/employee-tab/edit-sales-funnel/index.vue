@@ -25,9 +25,9 @@
                         <DataGraphAnalysis  />
                     </div>
                 </div>
-                <div class="grid grid-cols-12 gap-x-6 mt-4 border-2 border-white p-4 rounded-[14px] mx-4">
+                <div class="grid grid-cols-12 gap-x-6 mt-4 border-2 border-base-content p-4 rounded-[14px] mx-4">
                     <div class="col-span-12">
-                        <p class="text-[#0075c9] pb-2">September 2022 Membership Sales</p>
+                        <p class="text-primary pb-2">September 2022 Membership Sales</p>
                     </div>
                     <div class="col-span-4">
                         <Statistics1 />
@@ -39,7 +39,7 @@
                         />
                     </div>
                     <div class="w-full col-span-12 flex justify-end">
-                        <button class="bg-[#0075c9] rounded-md px-3 py-1 mt-2 text-sm">
+                        <button class="bg-secondary rounded-md px-3 py-1 mt-2 text-sm">
                             + Add to page
                         </button>
                     </div>
@@ -48,7 +48,7 @@
         </template>
     </card>
 </template>
-<style>
+<style lang="postcss">
 #editFunnelCard .edit-funnel-container {
 	@apply pl-2 pr-2 pt-2 pb-6;
     .card-title {
@@ -56,7 +56,7 @@
     }
     
     .chart-content{
-        @apply bg-black rounded w-full text-3xl font-bold border-white border-2 text-center;
+        @apply bg-base-300 rounded w-full text-3xl font-bold border-base-content border-2 text-center;
     }
    
 }
@@ -81,7 +81,7 @@
             @apply ml-2 text-secondary;
            }
            .percent {
-            @apply block leading-[32px] w-[32px] h-[32px] border border-white bg-black rounded-full;
+            @apply block leading-[32px] w-[32px] h-[32px] border border-base-content bg-base-300 rounded-full;
            }
         }
     }

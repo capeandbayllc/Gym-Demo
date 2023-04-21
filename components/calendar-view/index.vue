@@ -18,16 +18,16 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .calender-view-wrap {
     input[type="radio"] {
         @apply absolute invisible left-[-9999px];
         &:checked + button {
-            @apply bg-secondary text-white
+            @apply bg-secondary text-accent-content
         }
         + button {
-            @apply w-[100px] min-h-0 h-8 mx-3 inline-block bg-white text-secondary hover:bg-secondary hover:text-white;
-            &:hover { @apply bg-secondary text-white; }
+            @apply w-[100px] min-h-0 h-8 mx-3 inline-block bg-accent-content text-secondary hover:bg-secondary hover:text-accent-content;
+            &:hover { @apply bg-secondary text-accent-content; }
         }
     }
 }
