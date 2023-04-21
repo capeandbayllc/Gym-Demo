@@ -220,13 +220,17 @@
             >
               <div>
                 <label for="total-due">Total Due:</label>
-                <input
-                  class="bg-secondary"
-                  v-model="employeeInput.total"
-                  type="number"
-                  name="total due"
-                  id="total-due"
-                />
+                <div
+                  class="mt-2 before:content-['$'] before:absolute before:top-1/2 before:-translate-y-1/2 before:ml-2 before:opacity-60 before:text-base relative"
+                >
+                  <input
+                    class="bg-secondary"
+                    v-model="employeeInput.total"
+                    type="number"
+                    name="total due"
+                    id="total-due"
+                  />
+                </div>
               </div>
 
               <fieldset>
@@ -319,7 +323,7 @@ input[type="number"] {
 }
 
 .finalize input[type="number"] {
-  @apply pl-6;
+  @apply pl-4 m-0;
 }
 
 .input-group {
