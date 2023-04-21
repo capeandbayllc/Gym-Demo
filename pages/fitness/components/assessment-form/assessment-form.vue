@@ -221,7 +221,7 @@
               <div>
                 <label for="total-due">Total Due:</label>
                 <input
-                  class="min-w-[5rem]"
+                  class="bg-secondary"
                   v-model="employeeInput.total"
                   type="number"
                   name="total due"
@@ -231,7 +231,7 @@
 
               <fieldset>
                 <legend>Paid By:</legend>
-                <div>
+                <div class="flex items-center gap-2">
                   <input
                     value="cash"
                     type="radio"
@@ -241,7 +241,7 @@
                   />
                   <label for="payment-method-cash">Cash</label>
                 </div>
-                <div>
+                <div class="flex items-center gap-2 mt-1">
                   <input
                     value="credit_card"
                     type="radio"
@@ -313,7 +313,7 @@ input[type="number"] {
 
 .finalize input[type="text"],
 .finalize input[type="number"] {
-  @apply min-w-[3rem];
+  @apply min-w-[4rem] bg-secondary;
 }
 
 .input-group {
@@ -322,6 +322,19 @@ input[type="number"] {
 
 hr {
   @apply border-secondary my-12;
+}
+
+input[type="radio"] {
+  @apply rounded-md bg-primary-content appearance-none m-0 h-5 w-5 border border-primary-content/50 outline-none;
+  @apply focus:border;
+}
+
+input[type="radio"]:checked {
+  @apply bg-secondary border-primary;
+}
+
+label {
+  @apply capitalize;
 }
 </style>
 
