@@ -1,7 +1,7 @@
 <template>
     <div class="page-document-container">
+        <filter-actions class="filter-actions"></filter-actions>
         <div class="page-content">
-            <filter-actions></filter-actions>
             <div class="document-container">
                 <create-card />
                 <documents-card />
@@ -12,6 +12,9 @@
     </div>
 </template>
 <style scoped lang="postcss">
+.filter-actions{
+    @apply max-w-full lg:max-w-[1120px] lg:mx-auto px-1;
+}
 .page-document-container {
     @apply py-4 pr-5 w-full h-fit -md:pl-0;
     .page-content {
