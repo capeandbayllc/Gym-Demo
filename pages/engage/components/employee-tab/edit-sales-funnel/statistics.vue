@@ -1,5 +1,5 @@
 <template>
-  <div class="border-2 border-[#0075C9] rounded-[15px] h-full">
+  <div class="border-2 border-secondary rounded-[15px] h-full">
     <radialChart />
     <div class="text-center md:px-12 relative -top-6">
         <h3>Statistics Title</h3>

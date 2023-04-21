@@ -17,7 +17,7 @@
                             Decline
                         </button>
                         <button
-                            class="btn  w-max rounded bg-success text-base-content btn-sm font-medium mr-3"
+                            class="btn w-max rounded bg-success text-base-content btn-sm font-medium mr-3"
                             @click="$emit('call-now')"
                         >
                             Answer
@@ -41,16 +41,16 @@ const userCallSetting = {
 };
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .outgoing-call-modal-container {
 	@apply pl-8 pr-8 pt-8 pb-8 bg-neutral;
     .card-title {
         @apply border-b pb-2 border-base-content/50;
     }
     .content {
-        @apply border border-secondary bg-black;
+        @apply border border-secondary bg-base-300;
         .call-inner-content {
-            @apply border border-gray-50
+            @apply border border-base-content/90;
         }
         .btn.bg-success:hover {
             @apply border-success;

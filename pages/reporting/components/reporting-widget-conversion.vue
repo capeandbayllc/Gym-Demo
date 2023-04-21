@@ -9,18 +9,19 @@
         <template #content>
             <div class="card-content px-4 pb-3">
                 <div class="grid grid-cols-5 mt-2 font-semibold text-lg -xl:text-sm -lg:text-xs text-center">
-                    <div class="cursor-pointer" :class="{'text-secondary': activeFilter === index}" v-for="(item, index) in filterList" :key="index" @click="setFilter(index)">{{ item }}</div>
+                    <filter-list
+                        @setFilter="setFilter($event)"
+                        :active-filter="activeFilter"
+                    />
                 </div>
-                <div class="grid grid-cols-1 mt-2 text-base -xl:text-xs font-normal">
-                    <div>
-                        <span>
-                            Compare:
-                        </span>
-                        <span class="ml-1 cursor-pointer" @click="reportBy('Previous Month')" :class="{'text-secondary': compareReport === 'Previous Month'}">Previous Month</span>
-                        <span class="mx-2">or</span>
-                        <span class="cursor-pointer" @click="reportBy('Previous Year')" :class="{'text-secondary': compareReport === 'Previous Year'}">Previous Year</span>
-                    </div>
-                </div>
+
+                <comparison-selector
+                    label="Compare"
+                    :items="['Previous Month', 'Previous Year']"
+                    @change="reportBy($event)"
+                    :compareReport="compareReport"
+                />
+
                 <div class="chart-wrapper relative">
                     <div v-if="showTable">
                         <div class="text-secondary flex mt-2 text-xl -xl:text-sm font-semibold justify-center">
@@ -31,21 +32,19 @@
                     <total-card :title="title" :total-count="filteredValue[activeFilter]" v-else></total-card>
                     <filtered-report-card class="absolute top-12 bg-neutral" :title="compareReport" :report-data="comparedByReportData" v-if="compareReport"></filtered-report-card>
                 </div>
-                <div class="grid grid-cols-1 mt-2 text-base -xl:text-xs font-normal">
-                    <div>
-                        <span>
-                            Forecast:
-                        </span>
-                        <span class="ml-1 cursor-pointer" @click="reportBy('Index')" :class="{'text-secondary': compareReport === 'Index'}">Index</span>
-                        <span class="mx-2">or</span>
-                        <span class="ml-1 cursor-pointer" @click="reportBy('Straight Line')" :class="{'text-secondary': compareReport === 'Straight Line'}">Straight Line</span>
-                    </div>
-                </div>
+                <comparison-selector
+                    label="Forecast"
+                    :items="['Index', 'Straight Line']"
+                    @change="reportBy($event)"
+                    :compareReport="compareReport"
+                />
             </div>
         </template>
     </card>
 </template>
 <script setup>
+import FilterList from '../components/filter-list.vue';
+import ComparisonSelector from '../components/comparison-selector.vue';
 import ReportingConversionChart from './reporting-conversion-chart.vue';
 import TotalCard from './total-card.vue';
 import FilteredReportCard from './filtered-report-card.vue';
@@ -53,7 +52,6 @@ const title = ref('CONVERSIONS');
 const totalCount = ref('35');
 const activeFilter = ref(4);
 const filteredValue = ['35','42','21','74']
-const filterList = ['TODAY', 'MTD', 'QTD', 'YTD', 'RANGE'];
 const showTable = ref(true);
 const chartValue = [
     {
@@ -69,6 +67,7 @@ const setFilter = (index)  => {
 const compareReport = ref(null);
 const comparedByReportData = ref([]);
 const reportBy = (type) => {
+    console.log(type)
     if(type !== compareReport.value) {
         const result = compareBy.find(item => {
             return item.variation === type;

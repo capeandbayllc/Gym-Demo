@@ -7,7 +7,7 @@
  </template>
 <script setup>
 </script>
-<style>
+<style lang="postcss">
 .setting-base-card {
     @apply grid grid-cols-3 gap-6 py-4 px-10 -lg:!grid-cols-2 -md:!grid-cols-1;
     h2 {

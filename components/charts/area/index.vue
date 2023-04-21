@@ -1,14 +1,14 @@
 <template>
     <div class="chart-area flex flex-col justify-between">
         <div class="grid grid-cols-10 header">
-            <label class="col-span-2 text-[12px] text-white">{{ title }}</label>
+            <label class="col-span-2 text-[12px] text-base-content">{{ title }}</label>
             <div class="col-span-5"></div>
             <div class="col-span-3 grid grid-cols-5">
                 <div class="col-span-1 flex">
                     <button class="btn-status" :class="lastWeek < 0 ?'rotate-90':'-rotate-90'">></button>
                 </div>
                 <div class="col-span-4 grid grid-cols-1 ml-1">
-                    <span class="col-span-1 text-white text-[12px] text-left">Last Week</span>
+                    <span class="col-span-1 text-base-content text-[12px] text-left">Last Week</span>
                     <span class="col-span-1 text-[14px] text-left"> {{ (lastWeek < 0 ? "-" : "+") + Math.abs(lastWeek).toFixed(2) }}%</span>
                 </div>
             </div>
@@ -25,7 +25,7 @@
 </template>
 <style scoped lang="postcss">
 .chart-area  .btn-status{
-    @apply w-[15px] h-[15px] bg-[#0077ac] rounded-full text-black text-[10px] font-bold m-auto;
+    @apply w-[15px] h-[15px] bg-[#0077ac] rounded-full text-base-300 text-[10px] font-bold m-auto;
 }
 .chart-area{
     @apply border-2 border-[#0077ac] rounded-[15px] p-[10px];
@@ -146,7 +146,7 @@ const options ={
         custom: function({series, seriesIndex, dataPointIndex, w}) {
             return (
                 `<div class="arrow_box p-2">
-                    <span style="color: grey;">Earning</span>
+                    <span class="text-neutral-content">Earning</span>
                     <p>$${series[seriesIndex][dataPointIndex]}</p>
                 </div>`
             )

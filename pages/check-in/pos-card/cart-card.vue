@@ -28,7 +28,7 @@
         <Button accent class="m-auto">Purchase</Button>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .cart-card {
     @apply flex flex-col border border-secondary rounded px-4 py-6 mt-2 h-full;
     h3 {

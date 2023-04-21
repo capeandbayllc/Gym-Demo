@@ -14,7 +14,7 @@
       </template>
 
       <div class="flex justify-center items-center gap-6 my-6">
-        <button @click="$emit('close')" class="text-white/50 hover:text-white">
+        <button @click="$emit('close')" class="text-base-content/50 hover:text-base-content">
           cancel
         </button>
         <button
@@ -34,7 +34,7 @@
       </template>
 
       <template #content>
-        <div class="max-w-xs bg-black p-8">
+        <div class="max-w-xs bg-base-300 p-8">
           <p class="text-sm">
             Once your account is deleted, all of its resources and data will be
             permanently deleted.

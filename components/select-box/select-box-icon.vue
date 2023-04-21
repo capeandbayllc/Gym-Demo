@@ -15,7 +15,7 @@
         />
     </span>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .select-box-icon {
 	@apply transform transition transition-transform ml-2 mt-[2px];
 }

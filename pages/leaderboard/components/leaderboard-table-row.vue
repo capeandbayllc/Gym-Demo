@@ -14,7 +14,7 @@
         <td><div class="px-3">Revenue Genrated: <span class="text-secondary ml-2">{{data.revenue_genrated}}</span></div></td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .club-table-row {
     @apply bg-neutral;
     td {
@@ -40,10 +40,10 @@ const props = defineProps({
     data: Object
 })
 const rank = ref([
-{"label":"First", "textClass": "text-lime-500", "iconClass": "text-yellow-500"},
-{"label":"Second", "textClass": "text-lime-500", "iconClass": "text-yellow-400"},
-{"label":"Third", "textClass": "text-lime-500", "iconClass": "text-yellow-400"},
-{"label":"Fourth", "textClass": "text-lime-500", "iconClass": "text-yellow-400"},
-{"label":"Fifth", "textClass": "text-lime-500", "iconClass": "text-yellow-400"}
+{"label":"First", "textClass": "text-success", "iconClass": "text-warning"},
+{"label":"Second", "textClass": "text-success", "iconClass": "text-warning"},
+{"label":"Third", "textClass": "text-success", "iconClass": "text-warning"},
+{"label":"Fourth", "textClass": "text-success", "iconClass": "text-warning"},
+{"label":"Fifth", "textClass": "text-success", "iconClass": "text-warning"}
 ]);
 </script>

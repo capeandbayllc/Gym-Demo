@@ -1,7 +1,7 @@
 <template>
     <div class="mb-4">
         <label class="text-sm font-bold mb-2 inline-block">Name on Account</label>
-        <input type="text" class="gray-input w-full py-1 px-2 rounded-sm text-black"/>
+        <input type="text" class="gray-input w-full py-1 px-2 rounded-sm text-base-300"/>
     </div>
     <div class="flex items-center mb-4">
         <label class="mr-4">Type of Account*</label>
@@ -24,15 +24,15 @@
     </div>
     <div class="mb-4">
         <label class="text-sm font-bold mb-2 inline-block">Bank Name</label>
-        <input type="text" class="gray-input w-full py-1 px-2 rounded-sm text-black"/>
+        <input type="text" class="gray-input w-full py-1 px-2 rounded-sm text-base-300"/>
     </div>
     <div class="mb-4">
         <label class="text-sm font-bold mb-2 inline-block">Bank Routing Number*</label>
-        <input type="password" class="gray-input w-full py-1 px-2 rounded-sm text-black"/>
+        <input type="password" class="gray-input w-full py-1 px-2 rounded-sm text-base-300"/>
     </div>
     <div class="mb-6">
         <label class="text-sm font-bold mb-2 inline-block">Bank Account Number</label>
-        <input type="text" class="gray-input w-full py-1 px-2 rounded-sm text-black"/>
+        <input type="text" class="gray-input w-full py-1 px-2 rounded-sm text-base-300"/>
     </div>
     <div class="mb-4 text-right">
         <img src="/checkin/check_scaled_for_resolution.png" class="w-[300px] inline-block">

@@ -10,7 +10,7 @@
     <star-icon clear />
     </span>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .favorite-btn {
     @apply text-2xl select-none;
 }

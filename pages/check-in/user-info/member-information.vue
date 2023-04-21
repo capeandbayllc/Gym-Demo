@@ -1,10 +1,10 @@
 <template>
   <user-info-card>
     <Button
-      class="text-white capitalize"
+      class="text-base-content capitalize"
       :class="
         isActiveMember
-          ? 'bg-slate-400 hover:bg-slate-500'
+          ? 'bg-neutral-content hover:bg-neutral-content/80'
           : 'bg-lime-500 hover:bg-lime-600'
       "
       @click="isActiveMember = !isActiveMember"

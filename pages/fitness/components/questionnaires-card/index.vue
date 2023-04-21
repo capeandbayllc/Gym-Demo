@@ -16,35 +16,23 @@
         </div>
     </fitness-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .page-container{
-    padding: 10px 20px;
+    @apply py-[10px] px-[20px];
 }
 .search-input{
-    min-height: 36px;
-    width: 100%;
-    border-radius: 10px;
-    background : #002f53;
-    margin : auto;
-    color : white;
-    float : right;
-    margin-top: 4px;
-    padding: 2px 10px;
-    transition: all 0.3s;
+    @apply bg-primary min-h-[36px] w-full rounded-[10px] bg-primary mx-auto text-base-content float-right mt-[4px] py-[2px] px-[10px] transition-all duration-300 text-[16px];
 }
 .search-input:hover,
 .search-input:focus{
-    background : #0077cb;
+    @apply bg-secondary;
 }
 .search-input:focus{
     box-shadow: none;
     outline: none;
 }
 .slide-docs{
-    border : 2px solid #0077cb;
-    border-radius: 8px;
-    padding : 18px 10px;
-    margin-top: 15px;
+    @apply border-[2px] border-solid border-secondary rounded-[8px] py-[18px] px-[10px] mt-[15px];
 }
 </style>
 <script setup>

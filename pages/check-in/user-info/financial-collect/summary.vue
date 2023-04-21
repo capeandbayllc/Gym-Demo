@@ -7,7 +7,7 @@
                 <span class="text-[17px]">Tampa, Florida</span>
             </p>
         </div>
-        <div class="border border-secondary rounded-[14px] bg-black">
+        <div class="border border-secondary rounded-[14px] bg-base-300">
             <div class="px-[10px] py-[1px]">
                 <p class="p-2 text-lg mb-1 font-semibold">Primary Member</p>
                 <div class="px-8 mb-4">

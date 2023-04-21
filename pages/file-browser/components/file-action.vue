@@ -16,12 +16,12 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .active{
     @apply border-secondary bg-transparent;
 }
 .filter-selected {
-    z-index: 30;
+    @apply z-[30];
 }
 </style>
 <script setup>

@@ -9,7 +9,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .event-list {
     @apply flex flex-col gap-5;
     .event-item {

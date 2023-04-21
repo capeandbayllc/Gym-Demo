@@ -9,8 +9,6 @@
 		</div> 
 	</fitness-card>
 </template>
-<style scoped>
-</style>
 <script setup>
 import { ReportingIcon } from '~~/components/icons';
 import IncomeChart from '~/components/charts/area/index.vue';

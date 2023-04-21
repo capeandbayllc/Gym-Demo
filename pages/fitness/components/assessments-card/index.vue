@@ -8,15 +8,15 @@
                 </div>
                 <div class="px-3 py-2 bottom-3 columns-3 flex grid grid-cols-3">
                     <div class="status-div col-span-1">
-                        <div class="circled-div bg-[#00375b]"></div>
+                        <div class="circled-div bg-primary"></div>
                         <span>Scheduled</span>
                     </div>
                     <div class="status-div col-span-1">
-                        <div class="circled-div bg-[#0077ac]"></div>
+                        <div class="circled-div bg-info-content"></div>
                         <span>Shown</span>
                     </div>
                     <div class="status-div col-span-1">
-                        <div class="circled-div bg-[#cbccc9]"></div>
+                        <div class="circled-div bg-neutral-content"></div>
                         <span>Closed</span>
                     </div>
                 </div>
@@ -35,59 +35,44 @@
         </div>
     </fitness-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .assessments-search{
-    min-height: 44px;
+    @apply min-h-[44px];
 }
 .assessments-search .search-input{
-    min-height: 36px;
-    border-radius: 10px;
-    background : #002f53;
-    margin : auto;
-    color : white;
-    float : right;
-    margin-top: 4px;
-    padding: 2px 10px;
-    transition: all 0.3s;
+    @apply min-w-[210px] min-h-[36px] rounded-[10px] bg-primary text-base-content float-right mt-[4px] py-[2px] px-[10px] transition-all duration-300 text-[16px];
 }
 .assessments-search .search-input:hover,
 .assessments-search .search-input:focus{
-    background : #0077cb;
+    @apply bg-secondary;
 }
 .assessments-search .search-input:focus{
     box-shadow: none;
     outline: none;
 }
 .div-search{
-    padding: 5px;
+    @apply p-[5px];
 }
 .assessments-right{
-    padding-left:20px;
+    @apply pl-[20px];
 }
 .assessment-container{
-    padding: 20px 30px;
+    @apply py-[20px] px-[30px];
 }
 .chart-header{
-    color : white;
+    @apply text-base-content;
 }
 .assessments-chart{
-    border : 2px solid #0077cb;
-    border-radius: 15px;
+    @apply border-[2px] border-secondary rounded-[15px];
 }
 .status-div{
-    margin : auto;
-    display: flex;
+    @apply m-auto flex;
 }
 .status-div span{
-    font-size: 11px;
-    color: #ffffff;
-    padding-left: 2px;
+    @apply text-base-content pl-[2px] text-[11px];
 }
 .circled-div{
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    margin: auto 3px;
+    @apply w-[14px] h-[14px] rounded-full my-auto mx-[3px];
 }
 </style>
 <script setup>

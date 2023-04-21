@@ -34,9 +34,8 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 li {
-  @apply py-2 px-4;
-  @apply hover:bg-white hover:bg-opacity-10;
+  @apply py-2 px-4 hover:bg-base-content hover:bg-opacity-10;
 }
 </style>

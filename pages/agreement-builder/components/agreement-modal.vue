@@ -36,7 +36,7 @@
                 <div class="flex justify-end mt-11">
                     <button
                         type="button"
-                        class="btn w-max rounded btn-sm font-medium mr-3"
+                        class="btn w-max rounded btn-sm font-medium mr-3 bg-base-200 border-base-200"
                         error
                         outline
                     >
@@ -52,7 +52,7 @@
         </template>
     </card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .agreement-builder-modal-container {
 	@apply pl-2 pr-2 pt-6 pb-6;
     .card-title {
@@ -63,7 +63,7 @@
     }
     
     .chart-content{
-        @apply bg-black rounded w-full text-3xl font-bold border-white border-2 text-center;
+        @apply bg-base-300 rounded w-full text-3xl font-bold border-base-content border-2 text-center;
     }
     .content {
         @apply border border-secondary;
@@ -79,7 +79,7 @@
     }
 }
 .agreement-builder-modal-card {
-    background-color: hsl(var(--n) / var(--tw-bg-opacity));
+    @apply bg-base-200;
 }
 </style>
 
