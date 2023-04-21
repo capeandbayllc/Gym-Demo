@@ -313,7 +313,13 @@ input[type="number"] {
 
 .finalize input[type="text"],
 .finalize input[type="number"] {
-  @apply min-w-[4rem] bg-secondary;
+  @apply min-w-[4rem] bg-secondary text-primary-content/60;
+  @apply focus-within:border-primary-content focus-within:text-primary-content;
+  @apply selection:bg-neutral;
+}
+
+.finalize input[type="number"] {
+  @apply pl-6;
 }
 
 .input-group {
