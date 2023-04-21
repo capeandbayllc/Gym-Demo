@@ -213,66 +213,65 @@
           </div>
           <hr />
 
-          <div class="finalize grid grid-cols-[1fr_0.2fr]">
+          <div class="finalize grid grid-cols-[1fr_0.2fr] gap-6 pb-4">
             <CostTable v-model="priceTableSelections" />
-            <div class="flex min-w-[16rem]">
-              <div class="flex flex-col">
-                <div>
-                  <label for="total-due">Total Due:</label>
-                  <input
-                    class="min-w-[5rem]"
-                    v-model="employeeInput.total"
-                    type="number"
-                    name="total due"
-                    id="total-due"
-                  />
-                </div>
+            <div
+              class="grid grid-cols-2 min-w-[16rem] gap-4 p-2 border-2 border-secondary rounded-xl"
+            >
+              <div>
+                <label for="total-due">Total Due:</label>
+                <input
+                  class="min-w-[5rem]"
+                  v-model="employeeInput.total"
+                  type="number"
+                  name="total due"
+                  id="total-due"
+                />
+              </div>
 
+              <fieldset>
+                <legend>Paid By:</legend>
                 <div>
-                  <label for="date-paid">Date Paid:</label>
                   <input
-                    v-model="employeeInput.date_paid"
-                    class="min-w-[5rem]"
-                    type="text"
-                    name="date paid"
-                    id="date-paid"
+                    value="cash"
+                    type="radio"
+                    name="cash"
+                    id="payment-method-cash"
+                    v-model="employeeInput.payment_method"
                   />
+                  <label for="payment-method-cash">Cash</label>
                 </div>
+                <div>
+                  <input
+                    value="credit_card"
+                    type="radio"
+                    name="credit card"
+                    id="payment-method-cc"
+                    v-model="employeeInput.payment_method"
+                  />
+                  <label for="payment-method-cc">Credit Card</label>
+                </div>
+              </fieldset>
+
+              <div>
+                <label for="date-paid">Date Paid:</label>
+                <input
+                  v-model="employeeInput.date_paid"
+                  class="min-w-[5rem]"
+                  type="text"
+                  name="date paid"
+                  id="date-paid"
+                />
               </div>
 
               <div>
-                <fieldset>
-                  <legend>Paid By:</legend>
-                  <div>
-                    <input
-                      value="cash"
-                      type="radio"
-                      name="cash"
-                      id="payment-method"
-                      v-model="employeeInput.payment_method"
-                    />
-                    <label for="payment-method">Cash</label>
-                  </div>
-                  <div>
-                    <input
-                      value="credit_card"
-                      type="radio"
-                      name="credit card"
-                      id="payment-method"
-                      v-model="employeeInput.payment_method"
-                    />
-                    <label for="payment-method">Credit Card</label>
-                  </div>
-                </fieldset>
-                <div>
-                  <label for="staff-initials">Staff Initials:</label>
-                  <input
-                    v-model="employeeInput.staff_initials"
-                    type="text"
-                    name="staff initials"
-                    id="staff-initials"
-                  />
-                </div>
+                <label for="staff-initials">Staff Initials:</label>
+                <input
+                  v-model="employeeInput.staff_initials"
+                  type="text"
+                  name="staff initials"
+                  id="staff-initials"
+                />
               </div>
             </div>
           </div>
@@ -314,7 +313,7 @@ input[type="number"] {
 
 .finalize input[type="text"],
 .finalize input[type="number"] {
-  @apply min-w-[6rem];
+  @apply min-w-[3rem];
 }
 
 .input-group {
