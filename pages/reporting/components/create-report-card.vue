@@ -36,9 +36,9 @@
                             >
                             </select-box>
                             <div class="relative w-9 h-9" :class="{'equal-to-icon': calculateByDropDown === item.id}"  ref="componentRef">
-                                <span class="equation-icon flex w-9 h-9 rounded-full text-center border-white bg-secondary cursor-pointer border-[3px] border-opacity-50" @click="showCalculateByDropDown(item.id)">{{ item.equation }}</span>
+                                <span class="equation-icon flex w-9 h-9 rounded-full text-center border-base-content bg-secondary cursor-pointer border-[3px] border-opacity-50" @click="showCalculateByDropDown(item.id)">{{ item.equation }}</span>
                                 <div class="calculation-dropdown" v-if="calculateByDropDown === item.id"> 
-                                    <div class="gradient-bg border-4 border-white border-opacity-75 flex justify-between w-full py-3 px-2 rounded-xl">                                 
+                                    <div class="gradient-bg border-4 border-base-content border-opacity-75 flex justify-between w-full py-3 px-2 rounded-xl">                                 
                                         <a class="dropdown-item cursor-pointer">
                                             <img src="/equal.png" alt="" />
                                         </a>
@@ -85,7 +85,7 @@
     </card>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .active{
     @apply border-secondary bg-transparent;
 }
@@ -96,9 +96,8 @@
     @apply min-w-[300px]
 }
 .equation-icon{
-    font-size: 30px;
-    line-height: 25px;
-    padding: 0px 5px;
+    @apply text-2xl px-[6px] leading-6;
+    
 }
 .equal-to-icon {
     @apply relative z-10;
@@ -107,16 +106,9 @@
     }
 }
 .calculation-dropdown::before {
+    @apply bg-no-repeat h-[120px] w-[120px] absolute top-[-47px] left-[25px] z-[-1];
     content: '';
-    background: url(/equal_bg.png);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    height: 50px;
-    width: 120px;
-    position: absolute;
-    top: -47px;
-    left: 25px;
-    z-index: -1;
+    background-image: url('/equal_bg.png');
 }
 </style>
 <style>

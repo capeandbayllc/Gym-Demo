@@ -25,7 +25,7 @@
         <div class="footer-detail">All transactions</div>
     </dashboard-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .transaction-data-list {
     @apply flex flex-col border-t-4 border-secondary px-5 mb-7 max-h-56 overflow-y-scroll overscroll-auto ;
     .transaction-data-row {

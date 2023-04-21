@@ -18,7 +18,7 @@
                             {{ months[new Date(event?.start).getMonth()] }}
                             {{ new Date(event?.start).getDate() }}</span
                         >
-                        <span class="h-2 w-2 bg-white rounded-full"></span>
+                        <span class="h-2 w-2 bg-base-content rounded-full"></span>
                         <span>
                             {{ getTimeString(event?.start) }} -
                             {{ getTimeString(event?.end) }}
@@ -46,7 +46,7 @@
                 <div class="flex flex-col gap-5 mt-5">
                     <div class="flex gap-4">
                         <span
-                            class="w-12 h-12 my-auto p-1 bg-white rounded-xl overflow-hidden border-2 border-secondary"
+                            class="w-12 h-12 my-auto p-1 bg-base-content rounded-xl overflow-hidden border-2 border-secondary"
                         >
                             <img
                                 :src="
@@ -65,7 +65,7 @@
                             />
                         </span>
                         <span class="flex flex-col tracking-wider">
-                            <span class="text-[0.8rem] text-white/50"
+                            <span class="text-[0.8rem] text-base-content/50"
                                 >Instructor</span
                             >
                             <span class="line-clamp-1 text-[0.9rem]">
@@ -78,14 +78,14 @@
                     </div>
                     <div class="flex gap-4">
                         <span
-                            class="w-12 h-12 my-auto p-1 bg-[#2F72C4E2] rounded-xl overflow-hidden border-2 border-secondary"
+                            class="w-12 h-12 my-auto p-1 bg-secondary rounded-xl overflow-hidden border-2 border-secondary"
                         >
                             <LocationDotIcon
-                                class="w-[calc(3rem-12px)] h-[calc(3rem-12px)] fill-white"
+                                class="w-[calc(3rem-12px)] h-[calc(3rem-12px)] fill-base-content"
                             />
                         </span>
                         <span class="flex flex-col tracking-wider">
-                            <span class="text-[0.8rem] text-white/50"
+                            <span class="text-[0.8rem] text-base-content/50"
                                 >Address</span
                             >
                             <span class="line-clamp-1 text-[0.9rem]">{{
@@ -100,7 +100,7 @@
                 </div>
                 <div class="flex flex-row justify-center">
                     <div
-                        class="border-2 border-secondary bg-[#18203A] px-5 gap-5 py-1.5 rounded-xl flex flex-row justify-center text-[0.7rem]"
+                        class="border-2 border-secondary bg-secondary-content px-5 gap-5 py-1.5 rounded-xl flex flex-row justify-center text-[0.7rem]"
                     >
                         <span
                             class="w-[60px] py-1 xl:w-[70px] text-center calendar-style-transition rounded-lg cursor-pointer"
@@ -134,7 +134,7 @@
                         <select
                             name="confirmed"
                             id="slct_confirm"
-                            class="bg-[#555] px-2 py-1 rounded-2xl text-white"
+                            class="bg-neutral-content px-2 py-1 rounded-2xl text-base-content"
                         >
                             <option>No</option>
                             <option>Yes</option>
@@ -150,14 +150,14 @@
                         <select
                             name="payroll"
                             id="slct_payroll"
-                            class="bg-[#555] px-2 py-1 rounded-2xl text-white"
+                            class="bg-neutral-content px-2 py-1 rounded-2xl text-base-content"
                         >
                             <option>No</option>
                             <option>Yes</option>
                         </select>
                     </div>
                     <select
-                        class="bg-[#555] px-4 py-3 rounded-2xl text-white w-full mt-3"
+                        class="bg-neutral-content px-4 py-3 rounded-2xl text-base-content w-full mt-3"
                         name="completed"
                         id="slct_completed"
                     >
@@ -181,14 +181,14 @@
                             <template #tertiary>
                                 <div class="flex gap-2">
                                     <button
-                                        class="p-2 border-2 border-secondary fill-white rounded-xl"
+                                        class="p-2 border-2 border-secondary fill-base-content rounded-xl"
                                     >
                                         <span class="block w-3">
                                             <MessageIcon class="w-3 h-3" />
                                         </span>
                                     </button>
                                     <button
-                                        class="p-2 border-2 border-secondary fill-white rounded-xl"
+                                        class="p-2 border-2 border-secondary fill-base-content rounded-xl"
                                     >
                                         <span class="block w-3">
                                             <EmailIcon class="w-3 h-3" />
@@ -256,14 +256,14 @@ const buttonChoices = ["is_over", "show", "personal", "physical"];
 const selectedStatus = ref("is_over");
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .calendar-style-transition {
     @apply transition-all duration-300 ease-linear;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+    @apply hidden;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */

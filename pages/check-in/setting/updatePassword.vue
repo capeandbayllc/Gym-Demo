@@ -15,7 +15,7 @@
                 <div class="mb-2">Confirm Password</div>
                 <input type="password" class="neutral-input w-full p-1 rounded-sm" v-model="updatePassword.confirmPass"/>
             </div>
-            <p v-if="updatePassword.newPass !== updatePassword.confirmPass" class="text-sm text-red-500 mb-2">New Password and Confirm password dose not matched!</p>
+            <p v-if="updatePassword.newPass !== updatePassword.confirmPass" class="text-sm text-error mb-2">New Password and Confirm password dose not matched!</p>
             <div class="col-span-3 mx-auto w-full text-center">
                 <Button ghost size="sm" class="capitalize mr-4">Cancel</Button>
                 <Button secondary size="sm" class="capitalize" :disabled="updatePassword.currentPass == '' || updatePassword.newPass == '' || updatePassword.confirmPass == '' || updatePassword.newPass !== updatePassword.confirmPass">Save</Button>

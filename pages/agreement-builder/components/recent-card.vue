@@ -11,7 +11,7 @@
         </div>
     </simple-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .recent-card-content {
     @apply flex flex-row pt-4 pb-2 px-9 bg-transparent items-center w-full;
     .recent-docs {
@@ -19,8 +19,7 @@
         .recent-doc {
             @apply flex flex-col items-center;
             .doc-date {
-                @apply text-secondary;
-                font-size: 9px;
+                @apply text-secondary text-[9px];
             }
         }
     }

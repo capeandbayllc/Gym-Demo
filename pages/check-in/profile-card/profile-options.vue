@@ -4,7 +4,7 @@
         <!--    <CheckInButton @click="handleCheckIn" />-->
         <!-- </div> -->
         <div
-            class="profile-options to-primary/75 bg-gradient-to-t from-[#191919]/90"
+            class="profile-options to-primary/75 bg-gradient-to-t from-base-200"
         >
             <profile-option-item
                 v-for="item in options"
@@ -17,7 +17,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .profile-options-container {
     @apply flex flex-row gap-5 xl:flex-col xl:space-y-6 items-center;
     .profile-options {

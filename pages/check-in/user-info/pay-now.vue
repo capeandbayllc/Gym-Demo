@@ -9,7 +9,7 @@
             <span class="text-[17px]">Tampa, Florida</span>
           </p>
         </div>
-        <div class="border border-secondary rounded-[14px] flex items-start bg-black px-[10px] py-[1px] pb-[20px]">
+        <div class="border border-secondary rounded-[14px] flex items-start bg-base-300 px-[10px] py-[1px] pb-[20px]">
           <div class="flex-1 pr-12">
             <div class="mb-3">
                 <p class="p-2 text-lg mb-1 font-semibold">Primary Member</p>
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="flex-1 mt-12">
-            <div class="bg-gradient-to-b from-secondary to-[#003255] rounded-t-[14px] text-center py-1">
+            <div class="bg-gradient-to-b from-secondary to-secondary-content rounded-t-[14px] text-center py-1">
                 <p class="font-light text-sm -mb-1">Effective Date</p>
                 <p class="text-xl font-semibold">22 Dec 2022</p>
             </div>
@@ -60,7 +60,7 @@
                 <span class="text-secondary font-semibold w-3/12">$9.48</span>
             </div>
             </div>
-            <div class="bg-gradient-to-b from-secondary to-[#003255] rounded-b-[14px] text-center py-3">
+            <div class="bg-gradient-to-b from-secondary to-secondary-content rounded-b-[14px] text-center py-3">
                 <p class="font-light text-sm -mb-1">PROMO CODE</p>
                 <p class="text-xl font-semibold">XMAS DAY <span class="ml-10">-$9.48</span></p>
             </div>
@@ -85,10 +85,10 @@
         <button class="border-2 py-2 px-10 rounded-[16px] mx-auto block text-[22px] font-semibold" @click="openThankYou"> Pay Now </button>
       </div>
       <daisy-modal id="thankYouPopUp" ref="thankYouPopUp" class="w-fit">
-        <div class="bg-black rounded-md p-6 border border-secondary">
+        <div class="bg-base-300 rounded-md p-6 border border-secondary">
           Thank you for your purchase and Welcome to Fitness Plus.
           <div class="flex justify-center" @click="thankYouPopUp.close()">
-            <button class="text-[#6d6d6d] hover:text-secondary mt-3 mr-3 -mb-">Close</button>
+            <button class="text-neutral-content hover:text-secondary mt-3 mr-3 -mb-">Close</button>
           </div>
         </div>
         

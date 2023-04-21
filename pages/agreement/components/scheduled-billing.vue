@@ -27,7 +27,7 @@
           :showSearch="false"
           :showClearList="false"
           @onChange="data.primary.grProfitCenter = $event"
-          class="bg-white text-black rounded border border-white w-full">
+          class="bg-base-content text-base-300 rounded border border-base-content w-full">
       </select-box>
     </div>
     <div class="col-span-4 w-full flex items-center">
@@ -50,7 +50,7 @@
             :showSearch="false"
             :showClearList="false"
             @onChange="data[`addOn${n}`].grProfitCenter= $event"
-            class="bg-white text-black rounded border border-white w-full">
+            class="bg-base-content text-base-300 rounded border border-base-content w-full">
         </select-box>
       </div>
       <div class="col-span-4 w-full flex items-center">
@@ -115,8 +115,8 @@ watch(data, () => {
 });
 
 </script>
-<style scoped>
+<style scoped lang="postcss">
     .white-input {
-        @apply bg-white text-black;
+        @apply bg-base-content text-base-300;
     }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="bg-[#191919] absolute top-0 right-0 h-full rounded-l-3xl border-2 border-r-0 border-secondary z-50 overflow-hidden font-light tracking-wide"
+        class="bg-base-200 absolute top-0 right-0 h-full rounded-l-3xl border-2 border-r-0 border-secondary z-50 overflow-hidden font-light tracking-wide"
         :class="{
             'w-[50%] opacity-100 p-8': showOfferUp,
             'w-[0%] opacity-0 p-0': !showOfferUp,
@@ -17,7 +17,7 @@
                             {{ months[new Date(event?.start).getMonth()] }}
                             {{ new Date(event?.start).getDate() }}</span
                         >
-                        <span class="h-2 w-2 bg-white rounded-full"></span>
+                        <span class="h-2 w-2 bg-base-content rounded-full"></span>
                         <span>
                             {{ getTimeString(event?.start) }} -
                             {{ getTimeString(event?.end) }}
@@ -33,7 +33,7 @@
         <div class="flex flex-row gap-8 mt-5">
             <div class="flex gap-4">
                 <span
-                    class="w-12 h-12 my-auto p-1 bg-white rounded-xl overflow-hidden border-2 border-secondary"
+                    class="w-12 h-12 my-auto p-1 bg-base-content rounded-xl overflow-hidden border-2 border-secondary"
                 >
                     <img
                         :src="
@@ -50,7 +50,7 @@
                     />
                 </span>
                 <span class="flex flex-col tracking-wider">
-                    <span class="text-[0.8rem] text-white/50">Instructor</span>
+                    <span class="text-[0.8rem] text-base-content/50">Instructor</span>
                     <span class="line-clamp-1 text-[0.9rem]">
                         {{ event?.extendedProps.instructor.first_name }}
                         {{ event?.extendedProps.instructor.last_name }}</span
@@ -59,14 +59,14 @@
             </div>
             <div class="flex gap-4">
                 <span
-                    class="w-12 h-12 my-auto p-1 bg-[#2F72C4E2] rounded-xl overflow-hidden border-2 border-secondary"
+                    class="w-12 h-12 my-auto p-1 bg-secondary rounded-xl overflow-hidden border-2 border-secondary"
                 >
                     <LocationDotIcon
-                        class="w-[calc(3rem-12px)] h-[calc(3rem-12px)] fill-white"
+                        class="w-[calc(3rem-12px)] h-[calc(3rem-12px)] fill-base-content"
                     />
                 </span>
                 <span class="flex flex-col tracking-wider">
-                    <span class="text-[0.8rem] text-white/50">Address</span>
+                    <span class="text-[0.8rem] text-base-content/50">Address</span>
                     <span class="line-clamp-1 text-[0.9rem]">{{
                         event?.extendedProps.location.name
                     }}</span>
@@ -81,7 +81,7 @@
                 class="flex flex-col gap-5 max-h-[50vh] overflow-y-scroll no-scrollbar"
             >
                 <div
-                    class="flex flex-col p-3 border-2 border-secondary bg-[#18203A] rounded-2xl cursor-pointer"
+                    class="flex flex-col p-3 border-2 border-secondary bg-secondary-content rounded-2xl cursor-pointer"
                     v-for="(employee, index) in employees"
                     @click="setOpenIndex(index)"
                 >
@@ -219,14 +219,14 @@ const setOpenIndex = (index) => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .calendar-style-transition {
     @apply transition-all duration-300 ease-linear;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+    @apply hidden;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */

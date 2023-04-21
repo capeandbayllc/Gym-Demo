@@ -19,10 +19,9 @@
         </template>
     </card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .goal-card {
-    height: 300px;
-    @apply w-80;
+    @apply w-80 h-[300px];
     .total-sale {
         @apply text-secondary font-bold text-5xl;
     }
