@@ -8,10 +8,7 @@
           <div class="flex gap-3 justify-between items-center mb-3">
             <Button size="sm" class="border-neutral-content bg-transparent text-sm normal-case hover:!bg-secondary hover:text-base-content hover:!border-secondary rounded-[10px]" :class="{'!bg-secondary text-base-content !border-secondary': payWith == 'checking'}" @click="payWith = 'checking'">Pay with Checking</Button>
             <Button size="sm" class="border-neutral-content bg-transparent text-sm normal-case hover:!bg-secondary hover:text-base-content hover:!border-secondary rounded-[10px]" :class="{'!bg-secondary text-base-content !border-secondary': payWith == 'card'}" @click="payWith = 'card'">Pay with Card</Button>
-            <div class="toggle-custom" :class="{ 'toggle-active': defaultMembershipPaymentCheck }">
-                <div @click="changeDefaultMembershipPaymentCheck" class="circle"></div>
-                <div @click="changeDefaultMembershipPaymentCheck" class="line"></div>
-            </div>
+            <custom-toggle v-model="defaultMembershipPaymentCheck" title="" />
             <p class="text-sm">Make this my default membership payment.</p>
           </div>
           <PayWithChecking v-if="payWith == 'checking'"/>
@@ -29,6 +26,7 @@
 </template>
 
 <script setup>
+import CustomToggle from "~/components/toggle/custom-toggle.vue";
 import PayWithCard from './pay-with-card.vue';
 import PayWithChecking from './pay-with-checking.vue';
 import Summary from './summary.vue';
@@ -42,9 +40,7 @@ const props = defineProps({
 })
 
 const defaultMembershipPaymentCheck = ref(false);
-const changeDefaultMembershipPaymentCheck = ()=>{
-  defaultMembershipPaymentCheck.value = !defaultMembershipPaymentCheck.value;
-};
+
 </script>
 <style lang="postcss">
 .gray-input {

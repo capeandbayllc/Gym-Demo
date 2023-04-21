@@ -27,18 +27,13 @@
     </div>
     <div class="flex gap-4">
         <div>
-            <!-- <input type="checkbox" class="toggle toggle-info" checked /> -->
-            <div class="toggle-custom" :class="{ 'toggle-active': fitnessConnectionCheck }">
-                <div @click="changeFitnessConnectionCheck" class="circle"></div>
-                <div @click="changeFitnessConnectionCheck" class="line"></div>
-            </div>
+            <custom-toggle v-model="fitnessConnectionCheck" />
+
         </div>
         <p class="text-sm">By checking this box, you agree to allow Fitness Connection to charge the credit card provided above in lieu of presenting it for in club purchases.</p>
     </div>
 </template>
 <script setup>
-const fitnessConnectionCheck = ref(false);
-const changeFitnessConnectionCheck = ()=>{
-    fitnessConnectionCheck.value = !fitnessConnectionCheck.value;
-};
+    import CustomToggle from "~/components/toggle/custom-toggle.vue";
+    const fitnessConnectionCheck = ref(false);
 </script>
