@@ -213,7 +213,69 @@
           </div>
           <hr />
 
-          <CostTable />
+          <div class="finalize grid grid-cols-[1fr_0.2fr]">
+            <CostTable v-model="priceTableSelections" />
+            <div class="flex min-w-[16rem]">
+              <div class="flex flex-col">
+                <div>
+                  <label for="total-due">Total Due:</label>
+                  <input
+                    class="min-w-[5rem]"
+                    v-model="employeeInput.total"
+                    type="number"
+                    name="total due"
+                    id="total-due"
+                  />
+                </div>
+
+                <div>
+                  <label for="date-paid">Date Paid:</label>
+                  <input
+                    v-model="employeeInput.date_paid"
+                    class="min-w-[5rem]"
+                    type="text"
+                    name="date paid"
+                    id="date-paid"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <fieldset>
+                  <legend>Paid By:</legend>
+                  <div>
+                    <input
+                      value="cash"
+                      type="radio"
+                      name="cash"
+                      id="payment-method"
+                      v-model="employeeInput.payment_method"
+                    />
+                    <label for="payment-method">Cash</label>
+                  </div>
+                  <div>
+                    <input
+                      value="credit_card"
+                      type="radio"
+                      name="credit card"
+                      id="payment-method"
+                      v-model="employeeInput.payment_method"
+                    />
+                    <label for="payment-method">Credit Card</label>
+                  </div>
+                </fieldset>
+                <div>
+                  <label for="staff-initials">Staff Initials:</label>
+                  <input
+                    v-model="employeeInput.staff_initials"
+                    type="text"
+                    name="staff initials"
+                    id="staff-initials"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -245,8 +307,14 @@
 
 input[type="text"],
 input[type="email"],
-input[type="mobile"] {
+input[type="mobile"],
+input[type="number"] {
   @apply gr-base-textfield gr-neutral-textfield min-w-[16rem];
+}
+
+.finalize input[type="text"],
+.finalize input[type="number"] {
+  @apply min-w-[6rem];
 }
 
 .input-group {
@@ -264,6 +332,10 @@ import {
   assessmentFormDefaults,
   physicalActivityQuestions,
   wellnessPolicies,
+  sessionSelectionDefault,
+  ISelectionState,
+  IEmployeeSection,
+  employeeSectionDefaults,
 } from "./helpers";
 import Ynquestion from "./ynquestion.vue";
 import CostTable from "./cost-table.vue";
@@ -277,6 +349,8 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const form: Ref<IAssessmentFormData> = ref(props.data);
+const priceTableSelections: Ref<ISelectionState> = ref(sessionSelectionDefault);
+const employeeInput: Ref<IEmployeeSection> = ref(employeeSectionDefaults);
 
 function handleSubmit() {
   console.log("assessment submitted", form.value);

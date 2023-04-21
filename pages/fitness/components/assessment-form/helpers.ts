@@ -96,3 +96,58 @@ export const wellnessPolicies = [
   "Session payments are non-refundable. Sessions are 60 minutes in length starting at your scheduled time. if you are more than 15 minutes late, it will be considered a no-show and you will be charged. You must call your personal trainer with cancellation at least 12 hours in aadvance before the session in order to reschedule.",
   "Thirty session packages are good for 180 days after the original date of purchase.",
 ];
+
+export interface ISessionPrice {
+  group_size: 1 | 2 | (3 | 4); // (3 | 4) is to make it clear they're both part of the same price point
+  session_count: number;
+  price: number;
+  tax_rate: number;
+}
+
+export interface IFeeGroup {
+  five: boolean;
+  ten: boolean;
+  twenty: boolean;
+  thirty: boolean;
+}
+
+export interface ISelectionState {
+  single: IFeeGroup;
+  group_two: IFeeGroup;
+  group_three_four: IFeeGroup;
+}
+
+export const sessionSelectionDefault: ISelectionState = {
+  single: {
+    five: false,
+    ten: false,
+    twenty: false,
+    thirty: false,
+  },
+  group_two: {
+    five: false,
+    ten: false,
+    twenty: false,
+    thirty: false,
+  },
+  group_three_four: {
+    five: false,
+    ten: false,
+    twenty: false,
+    thirty: false,
+  },
+};
+
+export interface IEmployeeSection {
+  total?: number;
+  date_paid?: number | string | Date;
+  payment_method?: "cash" | "credit_card";
+  staff_initials?: "";
+}
+
+export const employeeSectionDefaults: IEmployeeSection = {
+  total: 0,
+  date_paid: new Date(),
+  payment_method: undefined,
+  staff_initials: "",
+};
