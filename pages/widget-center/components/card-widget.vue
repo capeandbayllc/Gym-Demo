@@ -10,7 +10,7 @@
                 <div>
                     <slot name="content"></slot>
                 </div>
-                <button class="absolute right-[10px] bottom-[-10px] text-white text-right my-4" :class="buttonSecondary ? 'bg-secondary px-3 rounded py-1' : ''">
+                <button v-if="buttonText != ''" class="absolute right-[10px] bottom-[-10px] text-white text-right my-4" :class="buttonSecondary ? 'bg-secondary px-3 rounded py-1' : ''">
                     {{ buttonText }}
                 </button>
             </div>
@@ -19,7 +19,7 @@
 </template>
 <style lang="postcss">
 .statistics-card {
-    @apply w-full h-[370px] flex flex-col;
+    @apply w-full h-[380px] flex flex-col;
     .total-sale {
         @apply text-secondary font-bold text-6xl mb-6 flex justify-center items-center;
     }

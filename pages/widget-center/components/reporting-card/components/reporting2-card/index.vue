@@ -9,7 +9,9 @@
                 <div>
                     <div class="mb-3">
                         <h5 class="text-xl">Goal One</h5>
-                        <p class="text-base-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ad tempore similique.</p>
+                        <p class="text-base-content">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure quis expedita, eius laborum inventore.
+                        </p>
                     </div>
     
                     <div>
