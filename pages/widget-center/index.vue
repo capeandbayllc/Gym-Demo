@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-5 pt-4 mx-auto w-full px-10 max-w-[1400px]">
+    <div class="pb-5 pt-4 mx-auto w-full px-10 max-w-[1600px]">
         <div class="pl-10 pr-4 mb-2 flex justify-content">
             <div class="flex flex-auto">Goals</div>
             <div class="flex gap-3 items-end pb-2 pr-10">
@@ -21,8 +21,8 @@
         </div>
         <div class="page-content grid grid-cols-2 gap-5">
             <dashboard-card class="col-span-2"/>
-            <!-- <reporting-card class="col-span-2"/>
-            <sales-funel-card class="col-span-2"/>
+            <reporting-card class="col-span-2"/>
+            <!-- <sales-funel-card class="col-span-2"/>
             <statics-card class="col-span-2"/> -->
         </div>
     </div>
@@ -37,6 +37,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import DashboardCard from './components/dashboard-card/index.vue';
+import ReportingCard from './components/reporting-card/index.vue';
 
 library.add(faPlusCircle);
 </script>
