@@ -1,0 +1,65 @@
+<template>
+    <card :title="title" :options="{favorite: false, collapse:true}" class="statistics-card">
+        <template #summary>
+            <div class="statistics-info">
+                <slot name="summary"></slot>
+            </div>
+        </template>
+        <template #content>
+            <div class="statistics-info">
+                <div>
+                    <slot name="content"></slot>
+                </div>
+                <div class="absolute right-[10px] bottom-[-10px] text-white text-right py-4">
+                    <button>View more</button>
+                </div>
+            </div>
+        </template>
+    </card>
+</template>
+<style lang="postcss">
+.statistics-card {
+    @apply w-full h-[350px] flex flex-col;
+    .total-sale {
+        @apply text-secondary font-bold text-6xl text-center mb-6;
+    }
+    .total-sale {
+        @apply text-secondary font-bold text-6xl text-center mb-6;
+    }
+    .total-symbol {
+        @apply text-[30px] inline-block align-top;
+    }
+    .statistics-info {
+        @apply p-4;
+        .statistics-list {
+            @apply flex flex-col space-y-2;
+            div {
+                @apply text-secondary text-sm;
+            }
+        }
+        .statistics-sum-up {
+            @apply flex flex-row justify-between text-lg font-bold text-secondary;
+        }
+    }
+}
+.assessments-chart{
+    @apply border-[2px] border-secondary rounded-[15px];
+}
+.status-div{
+    @apply m-auto flex w-full;
+}
+.status-div span{
+    @apply text-base-content pl-[2px] text-[11px];
+}
+.circled-div{
+    @apply w-[14px] h-[14px] rounded-full my-auto mx-[3px];
+}
+</style>
+<script setup>
+const props = defineProps({
+   title: {
+		type: String,
+		default: '',
+	},
+})
+</script>
