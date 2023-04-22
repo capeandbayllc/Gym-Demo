@@ -16,8 +16,9 @@
                     <span>Pick up Template</span>
                 </button>
             </div>
-            <input type="text" placeholder="Search" class="input w-full bg-base-content text-base-300 text-lg mb-6"
-                v-model="searchInput" />
+            <search-white-input
+                :searchValue="searchInput"
+                @update="searchInput=$event" />
             <FilterActions class="mb-6" />
             <simple-card title="Agreement Templates">
                 <agreement-search-table @showConfirmStatusModal="showConfirmStatusModal" :columns="columns" :items="agreements" class="p-6"/>
@@ -54,7 +55,7 @@
     <daisy-modal ref="newAgreementModal" id="newAgreementModal">
         <simple-card class="p-4">
             <component :is="newAgreementScreens[newAgreementScreenIndex]" :newAgreementData="newAgreementData"
-                @changeNewAgreementData="newAgreementData = $event" @change-type="changeType"
+                @changeNewAgreementData="newAgreementData = $event" :showTypeBadge="true" @change-type="changeType"
                 @next="nextScreenAgreementModal" ref="newAgreementComponent"></component>
             <div class="flex justify-end mt-6 mb-2">
                 <Button size="sm" class="normal-case mx-2" ghost @click="prevScreenAgreementModal"
@@ -82,6 +83,7 @@ import ContractModal from './components/contract-modal.vue';
 import EditPaymentPlan from './components/edit-payment-plan.vue';
 import AgreementType from './components/agreement-type.vue';
 import SaveModal from './components/save-modal.vue';
+import SearchWhiteInput from '~/components/search-white-input.vue';
 
 const authToken = useCookie("auth");
 

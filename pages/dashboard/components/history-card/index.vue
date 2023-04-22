@@ -39,14 +39,14 @@
 }
 </style>
 <script setup>
-import DashboardCard from '../dashboard-card.vue'
-import { CheckInIcon } from '@/components/icons'
+import DashboardCard from '../dashboard-card.vue';
+import { CheckInIcon } from '@/components/icons';
 import HistoryTableRow from './history-table-row.vue';
-import {ref} from 'vue'
+import {ref} from 'vue';
 import {request} from "~/api/utils/request";
 import location from "~/api/queries/location";
 
-let search=ref('search');
+let search = ref('Search');
 const columns = ["Date and Time", "Member Name", "Event", "Membership Status", ""]
 const mock = [{
     id: 1,
@@ -97,7 +97,7 @@ const replacePlaceholder = ()=>{
 	search.value ='';
 }
 const getBackSearch=()=>{
-	search.value='search';
+	search.value='Search';
 }
 
 const locationData = ref(null);

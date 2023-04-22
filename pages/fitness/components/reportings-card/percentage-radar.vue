@@ -27,9 +27,10 @@
 </style>
 <script setup>
 import { ref } from 'vue';
-import PercentPie from './percent-pie.vue';
+import PercentPie from '~/components/charts/percent-pie/index.vue';
 const percentages = ref([
     {
+        head: 'Statistics',
         color: '#3fc0ff',
         percent: 86,
         amount: 332.1,
@@ -38,6 +39,7 @@ const percentages = ref([
         gradient: "conic-gradient(from 360deg at 50% 50%, #3fc0ff 0deg, rgba(6,83,139,0 ) 360deg)"
     },
     {
+        head: 'Statistics',
         color: '#005490',
         percent: 56,
         amount: 282.1,
@@ -46,6 +48,7 @@ const percentages = ref([
         gradient: "conic-gradient(from 360deg at 50% 50%, #005490 0deg, rgba(6,83,139,0 ) 360deg)"
     },
     {
+        head: 'Statistics',
         color: '#04365c',
         percent: 76,
         amount: 432.1,

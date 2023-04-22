@@ -18,7 +18,7 @@
         </td>
         <td>
             <div>
-                <membership-btn :membership="data?.membership" class="w-28"/>
+                <membership-status :status="data?.membership" class="w-28"/>
             </div>
         </td>
        <!--  <td>
@@ -28,8 +28,8 @@
         </td> -->
         <!-- <td>
             <div>
-                <membership-btn
-                    :membership="data.membership"
+                <membership-status
+                    :status="data.membership"
                     class="w-28"
                 />
             </div>
@@ -63,7 +63,7 @@
 }
 </style>
 <script setup>
-import MembershipBtn from '~~/components/buttons/membership-btn.vue';
+import MembershipStatus from '~~/components/buttons/membership-status.vue';
 import { ref, onMounted } from 'vue'
 const props = defineProps({
     data: Object,

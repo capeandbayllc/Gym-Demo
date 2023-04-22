@@ -26,27 +26,9 @@
                         <input class="gray-input" v-model="personalInfoForm.birthDate"/>
                     </div>
                     <div class="col-span-1 -lg:col-span-2 -md:col-auto mr-auto flex flex-wrap items-center">
-                        <div class="toggle-custom mb-2" :class="{ 'toggle-active': maleCheck }">
-                            <div @click="changeMaleCheck" class="circle"></div>
-                            <div @click="changeMaleCheck" class="line"></div>
-                            <span @click="changeMaleCheck">
-                                Male
-                            </span>
-                        </div>
-                        <div class="toggle-custom mb-2" :class="{ 'toggle-active': femaleCheck }">
-                            <div @click="changeFemaleCheck" class="circle"></div>
-                            <div @click="changeFemaleCheck" class="line"></div>
-                            <span @click="changeFemaleCheck">
-                                Female
-                            </span>
-                        </div>
-                        <div class="toggle-custom mb-2" :class="{ 'toggle-active': otherCheck }">
-                            <div @click="changeOtherCheck" class="circle"></div>
-                            <div @click="changeOtherCheck" class="line"></div>
-                            <span @click="changeOtherCheck">
-                                Other
-                            </span>
-                        </div>
+                        <custom-toggle v-model="maleCheck" title="Male" />
+                        <custom-toggle v-model="femaleCheck" title="Female" />
+                        <custom-toggle v-model="otherCheck" title="Other" />
                     </div>
                     <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
                         <div class="mb-2">Home Address 1*</div>
@@ -105,6 +87,8 @@
 <script setup>
 import { request } from "~/api/utils/request";
 import member from "@/api/queries/member";
+import CustomToggle from "~/components/toggle/custom-toggle.vue";
+import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 
 const route = useRoute();
 const profileId = route.query.id;
@@ -152,19 +136,8 @@ const props = defineProps({
 })
 
 const maleCheck = ref(false);
-const changeMaleCheck = ()=>{
-    maleCheck.value = !maleCheck.value;
-};
-
 const femaleCheck = ref(false);
-const changeFemaleCheck = ()=>{
-    femaleCheck.value = !femaleCheck.value;
-};
-
 const otherCheck = ref(false);
-const changeOtherCheck = ()=>{
-    otherCheck.value = !otherCheck.value;
-};
 
 </script>
 <style scoped lang="postcss">

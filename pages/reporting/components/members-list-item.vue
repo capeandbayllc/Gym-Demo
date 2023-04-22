@@ -8,7 +8,7 @@
     </td>
     <td>
       <div class="px-2">
-        <membership-btn :membership="data.type" class="px-4 py-1 reporting-btn-member"/>
+        <membership-status :status="data.type" class="px-4 py-1 reporting-btn-member"/>
       </div>
     </td>
     <td>
@@ -41,7 +41,7 @@
 }
 </style>
 <script setup>
-import MembershipBtn from '@/components/buttons/membership-btn.vue';
+import MembershipStatus from '@/components/buttons/membership-status.vue';
 import dateformat from "dateformat";
 const props = defineProps({
     data: Object

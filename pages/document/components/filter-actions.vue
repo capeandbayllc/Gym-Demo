@@ -1,5 +1,5 @@
 <template>
-    <div class="document-center-filter-action grid grid-cols-6 gap-3 mb-2 text-sm font-semibold -lg:flex -lg:text-xs">
+    <div class="document-center-filter-action">
         <select-box
             :items="categoriesList"
             value=""
@@ -35,6 +35,12 @@
     </div>
 </template>
 <style lang="postcss">
+.document-center-filter-action {
+    @apply mb-2 text-sm flex -lg:text-xs flex-wrap justify-center;
+}
+.document-center-filter-action .select-box-wrapper {
+    @apply max-w-[20px] mr-[10px] mb-[10px];
+}
 .document-center-filter-action .select-box-content {
     @apply text-sm -lg:text-xs;
 }

@@ -4,12 +4,8 @@
 
         <div class="flex gap-3">
             <div class="block-border templates-block">
-                <div class="flex w-full max-w-">
-                    <div v-for="doc in docs" :key="doc.id" class="templates-doc">
-                        <normal-doc class="mb-2 h-40 w-auto" />
-                        <div class="templates-doc-title">{{doc.name}}</div>
-                        <div class="templates-doc-date">{{doc.date}}</div>
-                    </div>
+                <div class="slide-docs flex w-full">
+                    <ScrollableDocs :docs="docs"/>
                 </div>
             </div>
             <div class="block-border add-block">
@@ -36,16 +32,6 @@
     }
     .templates-block {
         @apply flex flex-grow overflow-y-auto gap-3 p-3;
-
-        .templates-doc {
-            @apply text-center p-2;
-            .templates-doc-title {
-                @apply text-secondary text-sm;
-            }
-            .templates-doc-date {
-                @apply text-xs;
-            }
-        }
     }
     .add-block {
         @apply px-8 flex flex-col flex-grow justify-center items-center max-w-[8rem];
@@ -54,6 +40,7 @@
 </style>
 
 <script setup>
+import ScrollableDocs from '~/components/scrollable-docs.vue';
 import NormalDoc from '~/pages/mass-com/components/normal-doc.vue';
 import AddCampaignIcon from '~/pages/mass-com/components/build-campaign-card/add-campaign-icon.vue';
 import RightArrowIcon from "~/components/icons/arrow.vue";
