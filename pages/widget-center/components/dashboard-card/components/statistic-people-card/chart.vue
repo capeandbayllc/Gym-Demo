@@ -43,12 +43,12 @@ const options = {
         pie: {
             expandOnClick: false,
             donut: {
-                background: '#0074c863',
+                offsetY:100,
                 labels: {
                     show: true,
                     name: {
                         show: true,
-                        offsetY: 15,
+                        offsetY: 10,
                     },
                     value: {
                         show: false,
@@ -61,12 +61,12 @@ const options = {
                         show: true,
                         showAlways: true,
                         label: '30%',
-                        fontSize: '32px',
-                        fontWeight: 600,
+                        fontSize: '30px',
+                        fontWeight: 500,
                         color: 'hsl(var(--bc))',
                     }
                 },
-            },
+            }
         },
     },
 };

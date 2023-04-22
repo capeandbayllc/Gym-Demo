@@ -5,6 +5,8 @@
             <div class="statistics-fields">
                 <statistic-people-card />
                 <recent-location-card />
+                <recent-statistics-card />
+                <!-- <statistics-progression-card /> -->
             </div>
         </div>
     </div>
@@ -24,36 +26,10 @@
     }
 }
 </style>
-<style lang="postcss">
-.statistics-card {
-    @apply w-full h-[350px] flex flex-col;
-    .total-sale {
-        @apply text-secondary font-bold text-6xl text-center mb-6;
-    }
-    .total-sale {
-        @apply text-secondary font-bold text-6xl text-center mb-6;
-    }
-    .total-symbol {
-        @apply text-[30px] inline-block align-top;
-    }
-    .statistics-info {
-        @apply p-4;
-        .statistics-list {
-            @apply flex flex-col space-y-2;
-            div {
-                @apply text-secondary text-sm;
-            }
-        }
-        .statistics-sum-up {
-            @apply flex flex-row justify-between text-lg font-bold text-secondary;
-        }
-    }
-}
-.assessments-chart{
-    @apply border-[2px] border-secondary rounded-[15px];
-}
-</style>
+
 <script setup>
-import StatisticPeopleCard from './components/statistic-people-card.vue';
-import RecentLocationCard from './components/recent-location-card.vue';
+import StatisticPeopleCard from './components/statistic-people-card/index.vue';
+import RecentLocationCard from './components/recent-location-card/index.vue';
+import RecentStatisticsCard from './components/recent-statistics-card/index.vue';
+
 </script>
