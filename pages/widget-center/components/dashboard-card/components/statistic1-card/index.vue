@@ -1,10 +1,10 @@
 <template>
-    <card-widget title="Statistics 2">
+    <card-widget title="Statistics 1">
         <template #summary>
-            <div class="total-sale">102</div>
+            <div class="total-sale"><statistic1-icon class="statistic-icon" /> 102</div>
         </template>
         <template #content>
-            <div class="total-sale">102</div>
+            <div class="total-sale"><statistic1-icon class="statistic-icon" /> 102</div>
             <div class="flex flex-row justify-center pr-5 items-center py-2 rounded-xl border border-base-content border">
                 <div>
                     <chart />
@@ -31,4 +31,5 @@
 <script setup>
 import Chart from './chart';
 import CardWidget from '../../../card-widget.vue';
+import { Statistic1Icon } from "~/components/icons";
 </script>

@@ -1,10 +1,10 @@
 <template>
     <card-widget title="Statistics 3">
         <template #summary>
-            <div class="total-sale"><span class="total-symbol">$</span>44,000</div>
+            <div class="total-sale"><statistic3-icon class="statistic-icon" /><span class="total-symbol">$</span>44,000</div>
         </template>
         <template #content>
-            <div class="total-sale"><span class="total-symbol">$</span>44,000</div>
+            <div class="total-sale"><statistic3-icon class="statistic-icon" /><span class="total-symbol">$</span>44,000</div>
             <div class="flex flex-row items-center py-2 rounded-xl border border-base-content border">
                 <div class="px-3">
                     <p>Recent Statistics</p>
@@ -44,4 +44,5 @@
 <script setup>
 import CardWidget from '../../../card-widget.vue';
 import Chart from './chart.vue';
+import { Statistic3Icon } from '~/components/icons';
 </script>

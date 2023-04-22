@@ -21,7 +21,7 @@
 .statistics-card {
     @apply w-full h-[370px] flex flex-col;
     .total-sale {
-        @apply text-secondary font-bold text-6xl text-center mb-6;
+        @apply text-secondary font-bold text-6xl mb-6 flex justify-center items-center;
     }
     .total-sale {
         @apply text-secondary font-bold text-6xl text-center mb-6;
@@ -53,6 +53,9 @@
 }
 .circled-div{
     @apply w-[14px] h-[14px] rounded-full my-auto mx-[3px];
+}
+.statistic-icon{
+    @apply mt-2 mr-1;
 }
 </style>
 <script setup>

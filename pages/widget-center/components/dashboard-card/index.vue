@@ -3,10 +3,10 @@
         <div class="page-content">
             <h3 class="text-base-content text-xl">Dashboard</h3>
             <div class="statistics-fields">
-                <statistic-people-card />
-                <recent-location-card />
-                <recent-statistics-card />
-                <statistics-progression-card />
+                <statistic1-card />
+                <statistic2-card />
+                <statistic3-card />
+                <statistic4-card />
             </div>
         </div>
     </div>
@@ -28,9 +28,9 @@
 </style>
 
 <script setup>
-import StatisticPeopleCard from './components/statistic-people-card/index.vue';
-import RecentLocationCard from './components/recent-location-card/index.vue';
-import RecentStatisticsCard from './components/recent-statistics-card/index.vue';
-import StatisticsProgressionCard from './components/statistic-progression-card/index.vue';
+import Statistic1Card from './components/statistic1-card/index.vue';
+import Statistic2Card from './components/statistic2-card/index.vue';
+import Statistic3Card from './components/statistic3-card/index.vue';
+import Statistic4Card from './components/statistic4-card/index.vue';
 
 </script>
