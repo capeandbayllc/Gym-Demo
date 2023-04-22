@@ -8,6 +8,12 @@
                 <statistic3-card />
                 <statistic4-card />
             </div>
+            <div class="flex justify-end">
+                <Button secondary="" size="xs" class="hover:border-2 hover:bg-base-300">
+                    <font-awesome-icon :icon="['fas', 'plus']" size="md" class="mr-1 focus:outline-none" tabindex="0" @click.prevent.stop/>
+                    Add to page
+                </Button>
+            </div>
         </div>
     </div>
 </template>
@@ -28,6 +34,7 @@
 </style>
 
 <script setup>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Statistic1Card from './components/statistic1-card/index.vue';
 import Statistic2Card from './components/statistic2-card/index.vue';
 import Statistic3Card from './components/statistic3-card/index.vue';
