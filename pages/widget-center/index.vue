@@ -19,11 +19,11 @@
                 </Button>
             </div>
         </div>
-        <div class="page-content grid grid-cols-2 gap-5">
-            <dashboard-card class="col-span-2"/>
-            <reporting-card class="col-span-2"/>
-            <sales-funnel-card class="col-span-2"/>
-            <!-- <statics-card class="col-span-2"/> -->
+        <div class="page-content gap-5">
+            <dashboard-card />
+            <reporting-card />
+            <sales-funnel-card />
+            <statistics-card />
         </div>
     </div>
 </template>
@@ -39,6 +39,7 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import DashboardCard from './components/dashboard-card/index.vue';
 import ReportingCard from './components/reporting-card/index.vue';
 import SalesFunnelCard from './components/sales-funnel-card/index.vue';
+import StatisticsCard from './components/statistics/index.vue';
 
 library.add(faPlusCircle);
 </script>
