@@ -1,11 +1,16 @@
 <template>
-    <div class="text-center text-xl mt-4 font-semibold mb-6">
-        Select your Agreement Type
-    </div>
-    <div class="flex justify-around cursor-pointer gradient-bg w-fit w-[450px] p-6 mx-auto rounded border border-secondary">
-        <div v-for="(type, ndx) in filesTypes" :key="ndx" class="create-option mx-6" :class="{'transition-all scale-[1.2]': activeTab == ndx}" @click="activeTab = ndx">
-            <empty-file-icon class="mb-2 mx-auto w-14" />
-            <span class="mb-4">{{type}}</span>
+    <div :class="modalClass">
+        <div>
+            <div class="text-center text-xl mt-4 font-semibold mb-6">
+                Select your Agreement Type
+            </div>
+            <div class="flex justify-around cursor-pointer gradient-bg w-fit w-[450px] p-6 mx-auto rounded border border-secondary">
+                <div v-for="(type, ndx) in filesTypes" :key="ndx" class="create-option mx-6" :class="{'transition-all scale-[1.2]': activeTab == ndx}" @click="activeTab = ndx">
+                    <empty-file-icon class="mb-2 mx-auto w-14" />
+                    <span class="mb-4">{{type}}</span>
+                </div>
+            </div>
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -19,7 +24,7 @@
         @apply inline-block items-center text-xs text-center w-20 mb-4;
     }
     
-  /*   .chart-content{
+    /* .chart-content{
         @apply bg-base-300 rounded w-full text-3xl font-bold border-base-content border-2 text-center;
     } */
     .content {
@@ -44,6 +49,10 @@
 import { EmptyFileIcon } from '~~/components/icons';
 
 const props = defineProps({
+    modalClass:{
+        type: String,
+        default: ''
+    },
     newAgreementData: {
 		type: Object,
 		default: null,
@@ -53,9 +62,11 @@ const props = defineProps({
 const activeTab = ref(null);
 
 const changeNewAgreementData = ()=>{
-    let changeNewAgreementData = props.newAgreementData;
-    changeNewAgreementData.type = filesTypes[activeTab.value]
-    emit('changeNewAgreementData', changeNewAgreementData)
+    if(props.newAgreementData){
+        let changeNewAgreementData = props.newAgreementData;
+        changeNewAgreementData.type = filesTypes[activeTab.value]
+        emit('changeNewAgreementData', changeNewAgreementData)
+    }
 };
 
 watch(activeTab, () => {

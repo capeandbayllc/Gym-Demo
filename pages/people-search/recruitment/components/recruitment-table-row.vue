@@ -18,10 +18,10 @@
                     <Button outline size="sm" class="my-1 border-primary text-secondary" tabindex="-1" @click="openEmailModal">+ Email</Button>
                 </div> -->
                 <daisy-modal ref="outgoingCallModalRef">
-                    <outgoing-call-modal @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal>
+                    <outgoing-call-modal :user="data" @callNow="showInCallModal" @close="closeOutgoingCall"></outgoing-call-modal>
                 </daisy-modal>
                 <daisy-modal ref="emailModalRef">
-                    <EmailModal @close="closeEmailModal"/>
+                    <EmailModal :user="data" @close="closeEmailModal"/>
                 </daisy-modal>
             </div> 
         </td>
@@ -49,7 +49,7 @@
 <script setup>
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-import OutgoingCallModal from '../../../call-user/components/outgoing-call-modal.vue';
+import OutgoingCallModal from "~/pages/check-in/side-car-split/make-call.vue";
 import EmailModal from '../../../check-in/engage/email.vue';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 

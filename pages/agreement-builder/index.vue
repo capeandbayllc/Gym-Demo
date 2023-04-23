@@ -78,7 +78,7 @@
 </style>
 <script setup>
 import RecentCard from './components/recent-card.vue';
-import LastMonthCard from './components/last-month-card';
+import LastMonthCard from './components/last-month-card.vue';
 import FolderCard from './components/folder-card.vue';
 import SeachFilterActionCard from './components/seach-filter-action-card.vue';
 import NewAgreementCard from './components/new-agreement-card.vue';

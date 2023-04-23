@@ -1,16 +1,16 @@
 <template>
     <button
-        class="membership-btn"
-        :class="['type-' + membership , editIconOnHover ? 'edit-hover-icon': '']"
+        class="status-btn"
+        :class="['type-' + status , editIconOnHover ? 'edit-hover-icon': '']"
     >
-        <span class="membership-status">
-            {{membership}}
+        <span class="status-status">
+            {{status}}
         </span>
         <span class="edit-icon hidden"><edit-icon class="mb-2" /></span>
     </button>
 </template>
 <style scoped lang="postcss">
-    .membership-btn {
+    .status-btn {
         @apply flex items-center justify-center capitalize btn btn-xs w-full rounded-xl;
 
         .edit-icon {
@@ -41,7 +41,7 @@
 import { EditIcon } from '~~/components/icons';
 
 const props = defineProps({
-    membership: String,
+    status: String,
     editIconOnHover: {
         type: Boolean,
         default: false,

@@ -82,7 +82,7 @@ import SelectGym from "./select-gym";
 import PersonalInformation from "./personal-information";
 import PersonalInformationNext from "./personal-information/personal-info-next.vue";
 import FinancialCollect from "./financial-collect/due-today.vue";
-import TermsAndCondition from "./terms-condition.vue";
+import TermsAndCondition from "~/pages/agreement/components/agreement-type.vue";
 import PayNow from "./pay-now.vue";
 import UserInfoCard from "./user-info-card.vue";
 const isActiveMember = ref(false);
