@@ -22,8 +22,8 @@
         <div class="page-content grid grid-cols-2 gap-5">
             <dashboard-card class="col-span-2"/>
             <reporting-card class="col-span-2"/>
-            <!-- <sales-funel-card class="col-span-2"/>
-            <statics-card class="col-span-2"/> -->
+            <sales-funnel-card class="col-span-2"/>
+            <!-- <statics-card class="col-span-2"/> -->
         </div>
     </div>
 </template>
@@ -38,6 +38,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import DashboardCard from './components/dashboard-card/index.vue';
 import ReportingCard from './components/reporting-card/index.vue';
+import SalesFunnelCard from './components/sales-funnel-card/index.vue';
 
 library.add(faPlusCircle);
 </script>

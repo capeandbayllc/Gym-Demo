@@ -3,7 +3,7 @@
         <template #summary>
         </template>
         <template #content>
-            <div class="flex flex-col p-7 rounded-xl border border-base-content border prices-card">
+            <div class="flex flex-col p-7 mx-auto rounded-xl border border-base-content border prices-card">
                 <div class="prices-list">
                     <div v-for="i in 7" :key="i" class="prices-item">
                         <div class="total-sale !text-4xl pt-4"><span class="total-symbol !text-lg mb-3">$</span>18,000</div>

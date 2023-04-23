@@ -1,8 +1,8 @@
 <template>
-    <div class="page-statistics-container">
+    <div class="page-dashboard-container">
         <div class="page-content">
             <h3 class="text-base-content text-xl">Dashboard</h3>
-            <div class="statistics-fields">
+            <div class="dashboard-fields">
                 <statistic1-card />
                 <statistic2-card />
                 <statistic3-card />
@@ -18,15 +18,15 @@
     </div>
 </template>
 <style scoped lang="postcss">
-.page-statistics-container {
+.page-dashboard-container {
     @apply py-4 pr-5 w-full;
     .page-content {
         @apply border border-secondary rounded-2xl bg-base-300 px-8 py-5 text-left w-full max-w-[1600px];
-        .statistics-fields-container {
+        .dashboard-fields-container {
             @apply bg-neutral;
         }
 
-        .statistics-fields {
+        .dashboard-fields {
             @apply grid grid-cols-3 4xl:grid-cols-4 -md:grid-cols-1 -xl:grid-cols-2 gap-y-8 gap-x-5 py-8;
         }
     }
