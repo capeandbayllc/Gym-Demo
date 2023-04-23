@@ -84,7 +84,7 @@ const chartOptions = {
 const chartSeries = [
     {
         name: 'Statistic 1',
-        data: [40, 45, 35, 30]
+        data: [40, 50, 43, 36]
     },
     {
         name: 'Statistic 2',

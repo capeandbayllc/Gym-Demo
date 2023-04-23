@@ -3,12 +3,14 @@
         <template #summary>
         </template>
         <template #content>
-            <div class="flex flex-col p-7 mx-auto rounded-xl border border-base-content border prices-card">
-                <div class="prices-list">
-                    <div v-for="i in 7" :key="i" class="prices-item">
-                        <div class="total-sale !text-4xl pt-4"><span class="total-symbol !text-lg mb-3">$</span>18,000</div>
-                        <div>
-                            <p class="text-base-content text-lg">Name</p>
+            <div class="flex flex-col p-7 mx-auto rounded-xl border border-base-content border">
+                <div class="prices-card">
+                    <div class="prices-list">
+                        <div v-for="i in 7" :key="i" class="prices-item">
+                            <div class="total-sale !text-4xl pt-4"><span class="total-symbol !text-lg mb-3">$</span>18,000</div>
+                            <div>
+                                <p class="text-base-content text-lg">Name</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -19,7 +21,7 @@
 
 <style scoped lang="postcss">
 .prices-card {
-    @apply w-80;
+    @apply w-80 max-w-full;
     ::-webkit-scrollbar {
         @apply w-0 h-0;
     }

@@ -5,8 +5,8 @@
         </template>
         <template #content>
             <div class="total-sale"><span class="total-symbol">$</span>16,000</div>
-            <div class="flex flex-row justify-center pl-5 items-center py-2 mx-auto rounded-xl border border-base-content border communication-card">
-                <div class="flex flex-row justify-between">
+            <div class="flex flex-row justify-center items-center py-2 mx-auto rounded-xl border border-base-content border">
+                <div class="flex flex-row justify-center communication-card">
                     <div class="communication-list">
                         <div
                             class="communication-item"
