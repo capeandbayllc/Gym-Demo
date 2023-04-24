@@ -7,17 +7,16 @@
         <td class="px-4">{{data.email}}</td>
         <td>{{data.location}}</td>
         <td>
-            <membership-btn :membership="data.type" class="text-sm"/>
+            <membership-status :status="data.type" class="text-sm"/>
         </td>
         <td>
             <addon-btn :value="data.addOns" class="!rounded-full"/>
         </td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .people-member-tbl-row {
     @apply bg-base-100 h-14;
-
     td {
         @apply border-y-2 border-secondary text-center;
     }
@@ -30,7 +29,7 @@
 }
 </style>
 <script setup>
-import MembershipBtn from '~~/components/buttons/membership-btn.vue';
+import MembershipStatus from '~~/components/buttons/membership-status.vue';
 import AddonBtn from '~~/components/buttons/addon-btn.vue';
 const props = defineProps({
     data: Object

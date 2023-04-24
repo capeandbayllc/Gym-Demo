@@ -21,7 +21,7 @@
         </template>
     </card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .sales-funnel-card {
     @apply w-80;
     .total-sale {

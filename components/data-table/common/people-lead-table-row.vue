@@ -15,7 +15,7 @@
         <td>{{data.status}}</td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .people-lead-tbl-row {
     @apply bg-base-100 h-14;
 

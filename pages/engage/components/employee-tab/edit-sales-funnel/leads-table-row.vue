@@ -11,7 +11,7 @@
         </td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .leads-list-item {
     @apply h-8 text-xs ;
 

@@ -2,7 +2,7 @@
     <simple-card title="Agreements" class="agreements-card" closable>
         <div class="p-8 card-gradient-bg"> 
             <CurrentAgreement v-if="!showNewAgreement" @new-agreement="newAgreement"/>
-            <component v-else :is="agreementScreens[agreementScreenIndex]" :modalClass="'bg-black w-fit mx-auto p-[17px] border border-secondary new-agreements-wrapper '+(agreementScreenIndex==0?'rounded-[8px]':'rounded-[19px]')">
+            <component v-else :is="agreementScreens[agreementScreenIndex]" :modalClass="'bg-base-300 w-fit mx-auto p-[17px] border border-secondary new-agreements-wrapper '+(agreementScreenIndex==0?'rounded-[8px]':'rounded-[19px]')">
                 <div class="flex justify-end mt-6">
                     <button class="button-simple mr-auto" @click="prevScreen" v-if="agreementScreenIndex > 0">Back</button>
                     <button class="button-simple" @click="showNewAgreement = false">Cancel</button>
@@ -24,9 +24,9 @@ import PersonalInformationNext from '../user-info/personal-information/personal-
 import DueTodayPayment from '../user-info/financial-collect/due-today.vue';
 import MostlyDuesPayment from '../user-info/financial-collect/mostly-dues.vue';
 import SecondaryPayments from '../user-info/financial-collect/secondary-payments.vue';
-import AgreementModal from '../user-info/agreement-modal.vue';
-import TermsAndCondition from '../user-info/terms-condition.vue';
-import PayNow from '../user-info/pay-now.vue';;
+import AgreementModal from '~/pages/agreement/components/agreement-modal.vue';
+import TermsAndCondition from '~/pages/agreement/components/agreement-type.vue';
+import PayNow from '../user-info/pay-now.vue';
 
 const showNewAgreement = ref(false);
 const newAgreement = ()=>{
@@ -48,23 +48,24 @@ const prevScreen = ()=>{
 
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .agreements-card {
     @apply m-auto w-full max-w-[1120px];
 }
 .button-simple{
-    @apply normal-case px-2 text-[#6d6d6d] my-auto hover:text-primary transition-colors duration-300;
+    @apply normal-case px-2 text-neutral-content my-auto hover:text-primary transition-colors duration-300;
 }
 </style>
-<style>
+<style lang="postcss">
 @media (max-width:1152px){
     .new-agreements-wrapper {
-        width:100%;
+        @apply w-full;
         .width-full{
-            width:100%;
+            @apply w-full;
         }
-        .display-flex-column{flex-direction: column;}
+        .display-flex-column{
+            @apply flex-col;
+        }
     }
 }
-
 </style>

@@ -15,7 +15,7 @@
         <td>{{data.dateCreated}}</td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .people-lead-tbl-row {
     @apply bg-base-100 h-14;
     td {
@@ -31,7 +31,7 @@
         @apply border-r-2 rounded-r capitalize;
     }
     .type-warning {
-        @apply bg-orange-400;
+        @apply bg-warning/80;
     }
     .type-secondary {
         @apply bg-secondary;

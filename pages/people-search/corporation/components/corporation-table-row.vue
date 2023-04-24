@@ -36,9 +36,8 @@ import TableRowDropdown from "../../components/table-row-dropdown.vue";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-import OutgoingCallModal from "../../../call-user/components/outgoing-call-modal.vue";
+import OutgoingCallModal from "~/pages/check-in/side-car-split/make-call.vue";
 import EmailModal from "../../../check-in/engage/email.vue";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faEllipsisH);
 const props = defineProps({

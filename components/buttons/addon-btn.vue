@@ -16,7 +16,13 @@
     /></span>
   </button>
 </template>
-<style scoped lang="postcss"></style>
+
+<style scoped lang="postcss">
+.add-ons-active {
+  @apply bg-accent-focus border-accent-focus;
+}
+</style>
+
 <script setup>
 import { EditIcon } from "~~/components/icons";
 

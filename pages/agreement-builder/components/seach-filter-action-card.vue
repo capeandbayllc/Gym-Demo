@@ -33,16 +33,12 @@
         </div>
     </simple-card>
 </template>
-<style>
+<style lang="postcss">
     .agreement-search .search-input  {
-        background-color: transparent !important;
-        border: 0;
-        padding-right: 0;
-        text-align: left;
-        font-size: 20px !important;
+        @apply bg-transparent border-0 pr-0 text-left text-[20px];
     }
 </style>
-<style scoped>
+<style scoped lang="postcss">
 .search-filer-action-card-content {
     @apply pt-1 pb-2 px-3 bg-transparent items-center w-full;
     .search-filer-action-title {
@@ -52,7 +48,7 @@
         }
     }
     .search-filer-action {
-        @apply flex flex-row space-x-8 justify-end mb-2 mt-5
+        @apply flex flex-row space-x-8 justify-end mb-2 mt-5;
     }
 }
 </style>

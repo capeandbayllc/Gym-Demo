@@ -1,6 +1,6 @@
 <template>
   <div class="session-container">
-    <label class="header block text-[14px] text-white text-left py-2">Session Reporting</label>
+    <label class="header block text-[14px] text-base-content text-left py-2">Session Reporting</label>
       <member-search-list :columns="columns" :items="membersData" filter="id" />
   </div>
 </template>
@@ -117,7 +117,7 @@ request(location.query.browse, { first: 1 }).then(({data}) => {
 });
 
 </script>
-<style>
+<style lang="postcss">
 .session-container{
-  @apply py-[10px] px-[20px] border-2 border-[#0077ac] rounded-[15px]
+  @apply py-[10px] px-[20px] border-[2px] border-solid border-info-content rounded-[15px]
 }</style>

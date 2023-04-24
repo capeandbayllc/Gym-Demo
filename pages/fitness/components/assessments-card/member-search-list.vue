@@ -33,40 +33,24 @@
 	</div>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .columns-header{
-	color : #0077ac;
-	border-bottom : 3px solid #0077ac;
-	padding: 8px 15px;
-	margin-top: 15px;
-	display: flex;
+	@apply text-secondary border-b-[3px] border-secondary py-[8px] px-[15px] mt-[15px] flex;
 }
 .column-item{
-	font-size: 12px;
+	@apply text-[12px];
 }
 .member-list{
-	margin-top: 5px;
-	overflow-y: auto;
-	max-height : 180px;
+	@apply mt-[5px] overflow-y-auto max-h-[180px];
 }
 .member-list::-webkit-scrollbar{
-	display: none;
+	@apply hidden;
 }
 .member-row{
-	display : flex;
-	margin-top: 8px;
-	background : #181916;
-	border : 3px solid #0077cb;
-	border-radius: 10px;
-	padding: 8px 15px;
-	color : lightgrey;
+	@apply text-neutral-content flex mt-[8px] bg-neutral border-[3px] border-secondary rounded-[10px] py-[8px] px-[15px];
 }
 .member-row .img-avatar{
-	border-radius : 15px;
-	width: 40px;
-	height: 40px;
-	border : 2px solid #0077ac;
-	box-shadow : 0px 3px 15px #0077ac; 
+	@apply rounded-[15px] w-[40px] h-[40px] border-[2px] border-solid border-secondary shadow shadow-info-content shadow-lg;
 }
 .member-row label{
 	margin : auto;

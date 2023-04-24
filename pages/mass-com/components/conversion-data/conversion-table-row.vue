@@ -1,21 +1,21 @@
 <template>
-  <tr>
-    <td class="grid items-center justify-center">
-      <img :src="data.src" alt="User Photo" />
+  <tr class="conversion-table-row">
+    <td>
+      <img :src="data.src" alt="User Photo" height="40" width="40" />
     </td>
     <td>
-      <div>{{ data.name }}</div>
+      <div class="conversion-data">{{ data.name }}</div>
     </td>
     <td>
-      <div>{{ data.unit }}</div>
+      <div class="conversion-data">{{ data.unit }}</div>
     </td>
     <td>
-      <div>
-        <membership-btn :membership="data.membership" />
+      <div class="conversion-data">
+        <membership-status :status="data.membership" />
       </div>
     </td>
     <td>
-      <div>{{ data.revenue }}</div>
+      <div class="conversion-data">{{ data.revenue }}</div>
     </td>
   </tr>
 </template>
@@ -33,7 +33,7 @@ tr td {
 </style>
 
 <script setup>
-import MembershipBtn from "@/components/buttons/membership-btn.vue";
+import MembershipStatus from "@/components/buttons/membership-status.vue";
 
 const props = defineProps({
   data: Object,

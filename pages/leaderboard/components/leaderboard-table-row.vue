@@ -6,7 +6,7 @@
             <div class="w-36 px-4">
                 Rank: 
                 <span class="text-secondary ml-2" :class="rank[data.rank - 1].textClass"> {{rank[data.rank - 1].label}}</span>
-                <span :class="[rank[data.rank - 1].iconClass,'text-lg','ml-1']">&#9733;</span>
+                <span :class="[rank[data.rank - 1].iconClass,'text-lg','ml-1']"><star-icon /></span>
             </div>
         </td>
         <td><div class="px-3">Location: <span class="text-secondary ml-2"> {{data.location}}</span></div></td>
@@ -14,7 +14,7 @@
         <td><div class="px-3">Revenue Genrated: <span class="text-secondary ml-2">{{data.revenue_genrated}}</span></div></td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .club-table-row {
     @apply bg-neutral;
     td {
@@ -35,14 +35,15 @@
 }
 </style>
 <script setup>
+import { StarIcon } from "~/components/icons";
 const props = defineProps({
     data: Object
 })
 const rank = ref([
-{"label":"First", "textClass": "text-lime-500", "iconClass": "text-yellow-500"},
-{"label":"Second", "textClass": "text-lime-500", "iconClass": "text-yellow-400"},
-{"label":"Third", "textClass": "text-lime-500", "iconClass": "text-yellow-400"},
-{"label":"Fourth", "textClass": "text-lime-500", "iconClass": "text-yellow-400"},
-{"label":"Fifth", "textClass": "text-lime-500", "iconClass": "text-yellow-400"}
+{"label":"First", "textClass": "text-success", "iconClass": "text-warning"},
+{"label":"Second", "textClass": "text-success", "iconClass": "text-warning"},
+{"label":"Third", "textClass": "text-success", "iconClass": "text-warning"},
+{"label":"Fourth", "textClass": "text-success", "iconClass": "text-warning"},
+{"label":"Fifth", "textClass": "text-success", "iconClass": "text-warning"}
 ]);
 </script>

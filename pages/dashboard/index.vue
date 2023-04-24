@@ -11,7 +11,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .page-dashboard-container {
     @apply py-4 pr-5 w-full h-fit -xl:pr-6;
     .page-content {
@@ -25,4 +25,5 @@ import CampaignCard from './components/campaign-card/index.vue';
 import CalendarCard from './components/calendar-card/index.vue';
 import TransactionCard from './components/transaction-card/index.vue';
 import HistoryCard from './components/history-card/index.vue';
+
 </script>

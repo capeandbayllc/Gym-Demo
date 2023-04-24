@@ -7,15 +7,16 @@
         }"
         @click="$emit('update:modelValue', !modelValue)"
     >
-        &#9733;
+    <star-icon clear />
     </span>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .favorite-btn {
     @apply text-2xl select-none;
 }
 </style>
 <script setup>
+import { StarIcon } from "~/components/icons";
 const props = defineProps({
     modelValue: {
         type: Boolean,

@@ -1,10 +1,10 @@
 <template>
     <div class="call-user-container">
         <daisy-modal ref="outgoingCallModalRef">
-            <outgoing-call-modal @callNow="showInCallModal"></outgoing-call-modal>
+            <MakeCall :user="ProfileInfo" @callNow="showInCallModal" />
         </daisy-modal>
         <daisy-modal ref="inCallModalRef">
-            <in-call-modal @endCall="showEndCallModal"></in-call-modal>
+            <OngoingCall :showEndCallButton="true" @endCall="showEndCallModal" :user="user" />
         </daisy-modal>
         <daisy-modal ref="endCallModalRef">
             <end-call-modal @incomingCall="showIncomingCallModal"></end-call-modal>
@@ -16,10 +16,19 @@
 </template>
 
 <script setup>
-import OutgoingCallModal from './components/outgoing-call-modal.vue';
-import InCallModal from './components/in-call-modal.vue';
+import MakeCall from "~/pages/check-in/side-car-split/make-call.vue";
+import OngoingCall from "~/pages/check-in/side-car-split/ongoing-call.vue";
 import EndCallModal from './components/end-call-modal.vue';
 import IncomingCallModal from './components/incoming-call-modal.vue';
+import { request } from "~/api/utils/request";
+import member from "@/api/queries/member";
+import lead from "~/api/queries/lead";
+
+const route = useRoute();
+const user = useState("auth");
+const profileId = route.query.id;
+const isLeadView = route.query.type === "lead";
+const ProfileInfo = ref(null);
 
 const outgoingCallModalRef = ref(null);
 const inCallModalRef = ref(null);
@@ -46,9 +55,29 @@ const showIncomingCallModal = () => {
     endCallModalRef.value.close();
     incomingCallModalRef.value.open();
 };
+
+const getMember = () => {
+    if (profileId) {
+        request((isLeadView ? lead : member).query.get, { id: profileId }).then(
+            ({ data }) => {
+                let user = data.data[isLeadView ? "lead" : "member"];
+                ProfileInfo.value = {
+                    ...user,
+                    name: `${user.first_name} ${user.last_name}`,
+                };
+            }
+        );
+    } else {
+        ProfileInfo.value = {
+            ...user.value,
+            name: `${user.value.first_name} ${user.value.last_name}`,
+        };
+    }
+};
+getMember();
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .call-user-container {
     @apply py-4 pr-5 w-full h-fit pl-16;
 }

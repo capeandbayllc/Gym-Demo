@@ -32,7 +32,7 @@
         </template>
     </card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .company-card {
     @apply w-80;
     .company-summary {

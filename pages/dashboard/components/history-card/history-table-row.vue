@@ -18,7 +18,7 @@
         </td>
         <td>
             <div>
-                <membership-btn :membership="data?.membership" class="w-28"/>
+                <membership-status :status="data?.membership" class="w-28"/>
             </div>
         </td>
        <!--  <td>
@@ -28,8 +28,8 @@
         </td> -->
         <!-- <td>
             <div>
-                <membership-btn
-                    :membership="data.membership"
+                <membership-status
+                    :status="data.membership"
                     class="w-28"
                 />
             </div>
@@ -46,13 +46,12 @@
         </td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .history-table-row {
     td {
-        @apply border-base-content/40 text-sm;
-        background-color: #191919;
+        @apply border-base-content/40 text-sm bg-base-200;
         > div {
-            @apply my-2  border-base-content/40 text-center flex items-center justify-center h-10 px-1 m-2;
+            @apply my-2 border-base-content/40 text-center flex items-center justify-center h-10 px-1 m-2;
         }
     }
     td:last-child {
@@ -64,7 +63,7 @@
 }
 </style>
 <script setup>
-import MembershipBtn from '~~/components/buttons/membership-btn.vue';
+import MembershipStatus from '~~/components/buttons/membership-status.vue';
 import { ref, onMounted } from 'vue'
 const props = defineProps({
     data: Object,

@@ -1,15 +1,15 @@
 <template>
-    <div class="units-sold flex flex-col justify-between">
+    <div class="chart-area flex flex-col justify-between">
         <div class="grid grid-cols-10 header">
-            <label class="col-span-2 text-[12px] text-white">Units Sold</label>
+            <label class="col-span-2 text-[12px] text-base-content">{{ title }}</label>
             <div class="col-span-5"></div>
             <div class="col-span-3 grid grid-cols-5">
                 <div class="col-span-1 flex">
-                    <button class="btn-status -rotate-90">></button>
+                    <button class="btn-status" :class="lastWeek < 0 ?'rotate-90':'-rotate-90'">></button>
                 </div>
                 <div class="col-span-4 grid grid-cols-1 ml-1">
-                    <span class="col-span-1 text-white text-[12px] text-left">Last Week</span>
-                    <span class="col-span-1 text-[14px] text-left"> +0.10%</span>
+                    <span class="col-span-1 text-base-content text-[12px] text-left">Last Week</span>
+                    <span class="col-span-1 text-[14px] text-left"> {{ (lastWeek < 0 ? "-" : "+") + Math.abs(lastWeek).toFixed(2) }}%</span>
                 </div>
             </div>
         </div>
@@ -23,39 +23,49 @@
         </ClientOnly>
     </div>
 </template>
-<style>
-.units-sold  .btn-status{
-    width: 15px;
-    height: 15px;
-    background : #0077ac;
-    border-radius: 50%;
-    color: black;
-    font-size: 10px;
-    font-weight: bold;
-    margin : auto;
+<style scoped lang="postcss">
+.chart-area  .btn-status{
+    @apply w-[15px] h-[15px] bg-[#0077ac] rounded-full text-base-300 text-[10px] font-bold m-auto;
 }
-.units-sold{
-    border : 2px solid #0077ac;
-    border-radius : 15px;
-    padding: 10px;
+.chart-area{
+    @apply border-2 border-[#0077ac] rounded-[15px] p-[10px];
 }
-.units-sold .header{
-    margin-top: 5px;
-    margin-bottom: 10px;
+.chart-area .header{
+    @apply mt-[5px] mb-[10px];
 }
 
 </style>
 <script setup>
 
+const props = defineProps({
+    data: {
+        type: Array,
+        default: [],
+    },
+    title: {
+        type: Array,
+        default: [],
+    },
+    lastWeek: {
+        type: Number,
+        default: 0.10,
+    },
+    colorLightBlue: {
+        type: Boolean,
+        default: false
+    }
+})
+
 const series= [{
     name: 'comming',
-    data: [12,68,25,48,11]
-    }];
+    data: props.data
+}];
+
 const options ={
     chart:{
         height : 350,
         type: 'area',
-        background: 'linear-gradient(180deg, rgba(4,55,92,0 ) 0.00%, rgba(63,192,255,0.72 ) 100.00%)',
+        background: props.colorLightBlue ? 'linear-gradient(180deg, rgba(4,55,92,0 ) 0.00%, rgba(63,192,255,0.72 ) 100.00%)' : 'linear-gradient(180deg, rgba(4,55,92,0 ) 0.00%, #04375c 100.00%)',
         toolbar:{
             show: false,
         },
@@ -109,15 +119,15 @@ const options ={
     },
     fill:{
         type: 'gradient',
-        colors: '#3FC0FF',
+        colors: props.colorLightBlue ? '#3FC0FF' : '#008efa',
         gradient:{
-            shade : 'light',
+            shade : props.colorLightBlue ? 'light' : 'dark',
             type: 'vertical',
-            shadeIntensity : 10,
-            gradientToColors: ['#003650', '#3FC0FF'],
+            shadeIntensity : props.colorLightBlue ? 10 : 1,
+            gradientToColors: props.colorLightBlue ? ['#003650', '#3FC0FF'] : ['#0C1C31', '#0077ac'],
             inverseColors : true,
-            opacityTo : 6,
-            opacityFrom : 10,
+            opacityTo : props.colorLightBlue ? 6 : 1,
+            opacityFrom : props.colorLightBlue ? 10 : 1,
         }
     },
     markers: {
@@ -136,7 +146,7 @@ const options ={
         custom: function({series, seriesIndex, dataPointIndex, w}) {
             return (
                 `<div class="arrow_box p-2">
-                    <span style="color: grey;">Earning</span>
+                    <span class="text-neutral-content">Earning</span>
                     <p>$${series[seriesIndex][dataPointIndex]}</p>
                 </div>`
             )

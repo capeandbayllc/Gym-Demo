@@ -9,18 +9,20 @@
         <template #content>
             <div class="card-content  px-4 pb-3">
                 <div class="grid grid-cols-5 mt-2 font-semibold text-lg -xl:text-sm -lg:text-xs text-center">
-                    <div class="filter-list" :class="{'text-secondary': activeFilter === index}" v-for="(item, index) in filterList" :key="index" @click="setFilter(index)">{{ item }}</div>
+                    <!-- <div class="filter-list" :class="{'text-secondary': activeFilter === index}" v-for="(item, index) in filterList" :key="index" @click="setFilter(index)">{{ item }}</div> -->
+                    <filter-list
+                        @setFilter="setFilter($event)"
+                        :active-filter="activeFilter"
+                    />
                 </div>
-                <div class="grid grid-cols-1 mt-2 text-base -xl:text-xs font-normal">
-                    <div>
-                        <span>
-                            Compare:
-                        </span>
-                        <span class="ml-1 cursor-pointer" @click="reportBy('Previous Month')" :class="{'text-secondary': compareReport === 'Previous Month'}">Previous Month</span>
-                        <span class="mx-2">or</span>
-                        <span class="cursor-pointer" @click="reportBy('Previous Year')" :class="{'text-secondary': compareReport === 'Previous Year'}">Previous Year</span>
-                    </div>
-                </div>
+
+                <comparison-selector
+                    label="Compare"
+                    :items="['Previous Month', 'Previous Year']"
+                    @change="reportBy($event)"
+                    :compareReport="compareReport"
+                />
+
                 <div class="flex justify-center text-secondary text-xl -xl:text-sm font-medium mt-3">
                     NEW MEMBERS
                 </div>
@@ -41,21 +43,9 @@
         </template>
     </card>
 </template>
-<style scoped>
+<style scoped >
     .filter-list{
         cursor: pointer;
-    }
-    .type-bronze {
-        @apply border-2;
-    }
-    .type-silver {
-        @apply bg-accent;
-    }
-    .type-gold {
-        @apply bg-warning/80;
-    }
-    .type-platinum {
-        @apply bg-accent;
     }
 </style>
 <style>
@@ -63,13 +53,15 @@
         .reporting-member-tbl .reporting-members-list-item {
             font-size: 9px !important;
         }
-        .reporting-member-tbl .membership-btn{
+        .reporting-member-tbl .membership-status{
             padding-left: 8px !important;
             padding-right: 8px !important;
         }  
     }    
 </style>
 <script setup>
+import FilterList from '../components/filter-list.vue';
+import ComparisonSelector from '../components/comparison-selector.vue';
 import ReportingMembersLineChart from './reporting-members-line-chart.vue';
 import ReportingMembersChart from './reporting-members-chart.vue';
 import MembersList from './members-list-item.vue'
@@ -77,7 +69,6 @@ import {request} from "~/api/utils/request";
 import member from "~/api/queries/member";
 import {getRandomInt} from "~/api/utils/number";
 const columns = ["Members Name", "Members Type", "Date"]
-const filterList = ['TODAY', 'MTD', 'QTD', 'YTD', 'RANGE'];
 const activeFilter = ref(0);
 const filterByRange = ref(false);
 const totalCount = ref([12]); 
@@ -113,7 +104,9 @@ const membershipTypes = ["platinum", "gold", "silver", "bronze"];
 request(member.query.browse, {first: 15}).then((response) => {
   const members = response.data.data.members.data.map(m => ({
     ...m,
-    type: membershipTypes[getRandomInt(membershipTypes.length)]
+    type: membershipTypes[
+        getRandomInt(membershipTypes.length - 1)
+    ]
   }));
 
   data.value = members.splice(0, 6);

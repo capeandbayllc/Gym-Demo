@@ -29,8 +29,7 @@ td {
 
 <script setup>
 import TableRowDropdown from "../../components/table-row-dropdown.vue";
-
-import CallModal from "../../../call-user/components/outgoing-call-modal.vue";
+import CallModal from "~/pages/check-in/side-car-split/make-call.vue";
 import EmailModal from "../../../check-in/engage/email.vue";
 
 const props = defineProps({

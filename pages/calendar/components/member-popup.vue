@@ -4,19 +4,19 @@
       <Button
         outline
         size="xs"
-        class="text-secondary hover:text-white hover:bg-secondary hover:border-secondary text-xs mr-2"
+        class="text-secondary hover:text-base-content hover:bg-secondary hover:border-secondary text-xs mr-2"
         >Leads</Button
       >
       <Button
         outline
         size="xs"
-        class="text-secondary hover:text-white hover:bg-secondary hover:border-secondary text-xs"
+        class="text-secondary hover:text-base-content hover:bg-secondary hover:border-secondary text-xs"
         >Members</Button
       >
       <Button
         outline
         size="xs"
-        class="text-secondary hover:text-white hover:bg-secondary hover:border-secondary text-xs float-right"
+        class="text-secondary hover:text-base-content hover:bg-secondary hover:border-secondary text-xs float-right"
         >+ Add new</Button
       >
     </div>

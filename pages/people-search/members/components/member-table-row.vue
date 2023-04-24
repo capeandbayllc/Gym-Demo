@@ -9,7 +9,7 @@
     <td class="px-4">{{ data.email }}</td>
     <td>{{ data.location }}</td>
     <td>
-      <membership-btn :membership="data.membership_type" />
+      <membership-status :status="data.membership_type" />
     </td>
     <td>
       <addon-btn :value="data.addOns" />
@@ -83,7 +83,6 @@
   @apply text-secondary uppercase border transition rounded border-secondary my-1 px-2 py-1 w-full whitespace-nowrap;
   @apply hover:bg-base-content hover:text-base-300;
 }
-
 ul.dropdown-content {
   li {
     @apply w-full whitespace-nowrap;
@@ -112,7 +111,7 @@ import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
-import MembershipBtn from "~~/components/buttons/membership-btn.vue";
+import MembershipStatus from "~~/components/buttons/membership-status.vue";
 import AddNoteModel from "./add-note-modal.vue";
 import dateFormat from "dateformat";
 

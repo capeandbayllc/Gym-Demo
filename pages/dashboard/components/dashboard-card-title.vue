@@ -9,7 +9,7 @@
         <plus-circle-icon />
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .dashboard-card-title {
     @apply flex bg-secondary justify-between h-12 items-center text-lg font-normal px-4;
     .title-icon {

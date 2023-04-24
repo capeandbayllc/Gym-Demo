@@ -15,7 +15,7 @@
                     :bgSecondaryOpened="false"
                     @onChange=""
                     classButton="my-[5px] mx-[10px]"
-                    class="bg-[#5a5a5a] text-white rounded-[10px] w-full">
+                    class="bg-base-100 text-base-content rounded-[10px] w-full">
                 </select-box>
     
             </div>
@@ -80,9 +80,9 @@ const cities = ref([
 ])
 
 </script>
-<style scoped>
+<style scoped lang="postcss">
     .white-input {
-        @apply bg-white text-black;
+        @apply bg-base-content text-base-300;
     }
     
 </style>

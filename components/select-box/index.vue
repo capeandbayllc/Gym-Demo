@@ -46,14 +46,12 @@
     </transition>
   </div>
 </template>
-<style>
+<style lang="postcss">
 .select-box-wrapper {
   @apply relative min-w-fit;
 }
 .select-box-btn {
-  @apply flex flex-row px-2 py-1 items-center justify-between transition-colors duration-300;
-  width: 165px;
-  height: 29px;
+  @apply flex flex-row px-2 py-1 items-center justify-between transition-colors duration-300 w-[165px] h-[29px];
 }
 
 .select-box-filter-size {
@@ -68,13 +66,13 @@
 }
 
 .btn-xs {
-  height: 1.5rem;
+  @apply h-[1.5rem];
 }
 .btn-sm {
-  height: 2rem;
+  @apply h-[2rem];
 }
 .btn-lg {
-  height: 4rem;
+  @apply h-[4rem];
 }
 
 .select-box-btn-primary {
@@ -83,12 +81,12 @@
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s;
+  @apply opacity-100 duration-300 transition;
 }
 
 .fade-enter-from,
 .fade-leave-to {
-  opacity: 0;
+  @apply opacity-0;
 }
 </style>
 <script>

@@ -1,10 +1,10 @@
 <template>
   <user-info-card>
     <Button
-      class="text-white capitalize"
+      class="text-base-content capitalize"
       :class="
         isActiveMember
-          ? 'bg-slate-400 hover:bg-slate-500'
+          ? 'bg-neutral-content hover:bg-neutral-content/80'
           : 'bg-lime-500 hover:bg-lime-600'
       "
       @click="isActiveMember = !isActiveMember"
@@ -82,7 +82,7 @@ import SelectGym from "./select-gym";
 import PersonalInformation from "./personal-information";
 import PersonalInformationNext from "./personal-information/personal-info-next.vue";
 import FinancialCollect from "./financial-collect/due-today.vue";
-import TermsAndCondition from "./terms-condition.vue";
+import TermsAndCondition from "~/pages/agreement/components/agreement-type.vue";
 import PayNow from "./pay-now.vue";
 import UserInfoCard from "./user-info-card.vue";
 const isActiveMember = ref(false);

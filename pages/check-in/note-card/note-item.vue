@@ -12,7 +12,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .note-item {
     @apply w-full lg:w-72 border rounded p-3 cursor-pointer;
 }

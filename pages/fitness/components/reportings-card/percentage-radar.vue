@@ -4,35 +4,33 @@
         <div class="percentages overflow-auto h-[288px] py-4">
             <div v-for="(item, index) in percentages" :key="index" class="percent-item grid grid-cols-1">
                 <PercentPie class="" :item="item" />
-                <hr class="border-white border-opacity-50 my-3">
+                <hr class="border-base-content border-opacity-50 my-3">
             </div>
         </div>
         
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .percentage-container{
-    padding: 10px 20px;
-    border : 2px solid #0077ac;
-    border-radius: 15px;
+    @apply py-[10px] px-[20px] border-[2px] border-solid border-info-content rounded-[15px];
 }
 .header{
-    color : white;
-    text-align: left;
+    @apply text-base-content text-left;
 }
 .percentages::-webkit-scrollbar {
-    display: none;
+    @apply hidden;
 }
 .percentages .percent-item:last-child hr{
-    display: none;
+    @apply hidden;
 }
 
 </style>
 <script setup>
 import { ref } from 'vue';
-import PercentPie from './percent-pie.vue';
+import PercentPie from '~/components/charts/percent-pie/index.vue';
 const percentages = ref([
     {
+        head: 'Statistics',
         color: '#3fc0ff',
         percent: 86,
         amount: 332.1,
@@ -41,6 +39,7 @@ const percentages = ref([
         gradient: "conic-gradient(from 360deg at 50% 50%, #3fc0ff 0deg, rgba(6,83,139,0 ) 360deg)"
     },
     {
+        head: 'Statistics',
         color: '#005490',
         percent: 56,
         amount: 282.1,
@@ -49,6 +48,7 @@ const percentages = ref([
         gradient: "conic-gradient(from 360deg at 50% 50%, #005490 0deg, rgba(6,83,139,0 ) 360deg)"
     },
     {
+        head: 'Statistics',
         color: '#04365c',
         percent: 76,
         amount: 432.1,
