@@ -14,6 +14,11 @@
         <statistic8 class="col-span-6" />
         <statistic9 class="statistic-item" />
     </div>
+    <div class="grid grid-cols-6 gap-y-8 gap-x-5 py-8">
+        <statistic10 class="statistic-item" />
+        <statistic11 class="statistic-item" />
+        <statistic12 class="statistic-item" />
+    </div>
 
 </template>
 
@@ -33,4 +38,7 @@ import statistic6 from './components/statistic6.vue';
 import statistic7 from './components/statistic7.vue';
 import statistic8 from './components/statistic8.vue';
 import statistic9 from './components/statistic9.vue';
+import statistic10 from './components/statistic10.vue';
+import statistic11 from './components/statistic11.vue';
+import statistic12 from './components/statistic12.vue';
 </script>

@@ -41,50 +41,78 @@
   
 <script setup>
 const chartOptions = {
-    series: [44, 55, 67, 83],
     chart: {
         type: 'radialBar',
     },
+    
+    legend: {
+        show: false,
+        position: 'bottom',
+        labels: {
+            colors: ['#fff', '#fff', '#fff'],
+        },
+        fill: {
+            colors: ['#04375c', '#0075c9', '#3fc0ff']
+        },
+        markers: {
+            width: 12,
+            height: 12,
+            strokeColor: '#fff',
+            fillColors: ['#04375c', '#0075c9', '#3fc0ff']
+        },
+    },
     plotOptions: {
         radialBar: {
+            inverseOrder: true,
             dataLabels: {
                 name: {
-                    offsetY: 10,
-                    fontSize: '22px',
+                    
+                    show: false,
                 },
                 value: {
-                    show: false,
+                    show: true,
+                    fontSize: '20px',
+                    fontWeight: 500,
+                    color: '#fff',
+                    offsetY: 6,
+                    formatter: function (val) {
+                        return val + '%'
+                    }
                 },
                 total: {
                     show: true,
-                    label: '48%',
-                    fontSize: '27px',
-                    fontWeight: 600,
-                    color: 'hsl(var(--bc))',
+                    label: '',
+                    style: {
+                        color: '#fff'
+                    },
                     formatter: function (w) {
-                        return 249
+                        return w.globals.initialSeries[0] + '%'
                     }
                 }
-            }
-        }
-    },
-    labels: ['48%', '48%', '48%'],
-    fill: {
-        colors: ['#04375c', '#0075c9', '#3fc0ff']
-    },
-    xaxis: {
-        labels: {
-            show: false
-        }
-    },
-    yaxis: {
-        labels: {
-            show: false
+            },
+            track: {
+                show: true,
+                background: '#0075c9',
+                strokeWidth: '200px',
+                opacity: 0.25,
+                margin: 5,
+                dropShadow: {
+                    enabled: false,
+                    top: 0,
+                    left: 0,
+                    blur: 3,
+                    opacity: 0.5
+                }
+            },
         },
-    },
 
+    },
+    fill: {
+        colors: ['#3fc0ff', '#0075c9', '#04375c']
+    },
+    labels: ['Marketing', 'Finance', 'Influence'],
 }
 
-const series = [80, 50, 35]
+const series = [48, 65, 85]
 </script>
   
