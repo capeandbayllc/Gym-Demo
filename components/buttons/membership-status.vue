@@ -8,7 +8,10 @@
 
 <script setup>
 const props = defineProps({
-  membership: String,
+  membership: {
+    type: String,
+    default: "bronze",
+  },
   status: String,
   editIconOnHover: {
     type: Boolean,

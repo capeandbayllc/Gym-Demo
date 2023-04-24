@@ -9,7 +9,7 @@
     <td class="px-4">{{ data.email }}</td>
     <td>{{ data.location }}</td>
     <td>
-      <membership-status :status="data.membership_type" />
+      <membership-status :membership="data.membership_type" />
     </td>
     <td>
       <addon-btn :value="data.addOns" />
