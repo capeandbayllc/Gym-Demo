@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-between  mt-5 mx-3">
         <div>
-            <select v-model="selectedoption" name="" id="" class="text-base-content bg-info-content px-4 py-1 border rounded-2xl">
+            <select v-model="selectedoption" name="" id="" class="text-base-content bg-secondary-focus px-4 py-1 border rounded-2xl">
                 <option value="default">Default</option>
                 <option value="call" class="text-base-300" :selected="selectedType === 'call'">Call Type</option>
                 <option value="sms" class="text-base-300" :selected="selectedType === 'sms'">SMS Type</option>

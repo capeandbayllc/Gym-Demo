@@ -57,7 +57,7 @@
         
       </daisy-modal>
     </div>
-    <!-- <slot></slot> -->
+    <slot></slot>
   </div>
 </template>
 <script setup>

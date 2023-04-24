@@ -25,10 +25,10 @@
 </template>
 <style scoped lang="postcss">
 .chart-area  .btn-status{
-    @apply w-[15px] h-[15px] bg-[#0077ac] rounded-full text-base-300 text-[10px] font-bold m-auto;
+    @apply w-[15px] h-[15px] bg-info-content rounded-full text-base-300 text-[10px] font-bold m-auto;
 }
 .chart-area{
-    @apply border-2 border-[#0077ac] rounded-[15px] p-[10px];
+    @apply border-2 border-secondary rounded-[15px] p-[10px];
 }
 .chart-area .header{
     @apply mt-[5px] mb-[10px];

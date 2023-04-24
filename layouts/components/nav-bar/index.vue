@@ -78,6 +78,10 @@ let navItems = shallowRef([]);
 
 const reporting = [
   {
+    icon: WidgetIcon,
+    url: null,
+  },
+  {
     label: "Financial Reporting",
     icon: ReportIcon,
     url: null,
@@ -93,13 +97,7 @@ const reporting = [
     icon: FavoriteCircleIcon,
   },
   {
-    label: "Point Of Sale",
-    url: null,
-    icon: PosIcon,
-    modalComponent: PosWindow,
-  },
-  {
-    label: "Fitness",
+    label: "Physical Therapy",
     url: null,
     icon: FitnessIcon,
   },
@@ -138,52 +136,11 @@ const navList = [
   },
   {
     type: "reporting",
-    navigation: [
-      {
-        icon: WidgetIcon,
-        url: null,
-      },
-      {
-        label: "Financial Reporting",
-        icon: ReportIcon,
-        url: null,
-      },
-      {
-        label: "Communications",
-        url: null,
-        icon: MassComIcon,
-      },
-      {
-        label: "Favorites",
-        url: null,
-        icon: FavoriteCircleIcon,
-      },
-      {
-        label: "Physical Therapy",
-        url: null,
-        icon: FitnessIcon,
-      },
-      {
-        label: "KPIS",
-        url: null,
-        icon: SpeedMeterIcon,
-      },
-      {
-        label: "Employee Tracking",
-        url: null,
-        icon: LocationIcon,
-      },
-      {
-        label: "Company Inbox",
-        url: null,
-        icon: DownloadIcon,
-      },
-      {
-        label: "Marketing",
-        url: null,
-        icon: MarketingIcon,
-      },
-    ],
+    navigation: reporting
+  },
+  {
+    type: "widget-center",
+    navigation: reporting
   },
   {
     type: "document",
