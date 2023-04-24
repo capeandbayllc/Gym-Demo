@@ -78,16 +78,13 @@
         }
         .tag{
             @apply rounded-full w-7 h-7;
-            content: ""
+            content: "";
         }
         .tag-tick-icon::before{
             content: "✓";
-            width: 28px;
-            height: 28px;
-            text-align: center;
+            @apply w-[28px] h-[28px] text-center font-bold;
             display: inherit;
             line-height: 28px;
-            font-weight: bolder;
         }
     }
     td:first-child {

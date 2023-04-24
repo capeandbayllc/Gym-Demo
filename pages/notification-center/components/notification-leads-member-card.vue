@@ -4,20 +4,20 @@
 			<div class="notification-title">
 				<div class="notification-actions">
 					<select-box
-						class="w-36"
+						class="max-w-[200px]"
 						label="Call type"
 						:items="leadsList"
 						transparent
 						:secondary="true"
 					/>
 					<select-box
-						class="w-36"
+						class="max-w-[200px]"
 						label="Call type"
 						:items="membersList"
 						:secondary="true"
 						transparent
 					/>
-					<FormAppInput height="!h-[29px]" width="w-[400px]" placeholder="Search" />	
+					<FormAppInput height="h-[25px] md:h-[32px]" width="w-full max-w-[300px]" placeholder="Search" />	
 				</div>
 			</div>
 			<div class="overflow-x-scroll">
@@ -40,7 +40,7 @@
 		@apply rounded-xl;
 	}
 	.notification-table-row{
-		@apply bg-base-300;	
+		@apply bg-base-300;
 	}
 	.notification-table-row {
 		td, td > div {
@@ -62,7 +62,7 @@
 		}
 	}
     .notification-actions {
-    	@apply flex flex-row space-x-3 justify-end mb-2 mt-5;
+    	@apply w-full flex flex-wrap gap-3 flex-row justify-end items-center mb-2 mt-5;
     }
 }
 </style>

@@ -4,41 +4,48 @@
 			<div class="notification-title">
 				<div class="notification-actions">
 					<select-box
-						class="w-36"
-						label="State"
+						class="max-w-[200px]"
+						label="Call type"
 						:items="stateList"
 						transparent
-						:secondary="false"
+						:secondary="true"
 					/>
 					<select-box
-						class="w-36"
-						label="Clubs"
+						class="max-w-[200px]"
+						label="Call type"
 						:items="clubsList"
-						:secondary="false"
+						:secondary="true"
 						transparent
 					/>
-					<search-input size="lg" border="neutral" neutral/>
+					<FormAppInput height="h-[25px] md:h-[32px]" width="w-full max-w-[300px]" placeholder="Search" />	
 				</div>
 			</div>
-			<data-table
-                class="notification-location-table"
-				:data="mockLeads"
-				:row-component="NotificationTableRow"
-				:columns="columns"
-			/>
+			<div class="overflow-x-scroll">
+				<data-table
+					class="notification-location-table"
+					:data="mockLeads"
+					:row-component="NotificationTableRow"
+					:columns="columns"
+				/>
+			</div>
 		</div>
     </simple-card>
 </template>
-<style>
-.notification-location-table .notification-table-row {
-	td, td > div {
-		@apply border-secondary;
+<style lang="postcss">
+.notification-location-card {
+	.notification-actions .select-box-btn{
+		@apply rounded-xl;
+	}
+	.notification-table-row {
+		td, td > div {
+			@apply border-secondary;
+		}
 	}
 }
 </style>
-<style scoped>
+<style scoped lang="postcss">
 .notification-location-card {
-    @apply m-auto bg-neutral mt-5;
+    @apply m-auto bg-base-300 mt-5;
 	.notification-container {
 		@apply p-4;
 	}
@@ -46,7 +53,7 @@
 		@apply flex flex-row justify-end items-center;
 	}
     .notification-actions {
-    	@apply flex flex-row space-x-8 justify-end mb-2 mt-5;
+    	@apply w-full flex flex-wrap gap-3 flex-row justify-end items-center mb-2 mt-5;
     }
 }
 </style>
