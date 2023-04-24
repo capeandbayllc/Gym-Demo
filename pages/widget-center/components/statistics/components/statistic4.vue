@@ -2,7 +2,7 @@
     <card title="Statistic Title" class="bg-base-300" :options="{ favorite: false, collapse: false }">
         <template #content>
             <div class="px-5 pl-3" style="width: 100%;">
-                <apexchart id="drafting-report-chart" type="bar" width="100%" height="300" :options="chartOptions"
+                <apexchart id="drafting-report-chart" type="bar" width="100%" height="400" :options="chartOptions"
                     :series="chartSeries"></apexchart>
             </div>
         </template>
@@ -11,7 +11,7 @@
 <script setup>
 const chartOptions = {
     chart: {
-        type: 'area',
+        type: 'bar',
         toolbar: {
             show: false
         },
@@ -19,13 +19,13 @@ const chartOptions = {
             enabled: true,
             type: '',
         }
-    },  
+    },
     plotOptions: {
         bar: {
 			horizontal: false,
 			columnWidth: '100%',
 			barHeight: '0%',
-			borderRadius: 10,
+			borderRadius: 4.5,
 			borderRadiusApplication: 'around',
 		},
     },
@@ -33,9 +33,7 @@ const chartOptions = {
         enabled: false
     },
     stroke: {
-		show: true,
-		width: 10,
-		colors: ['transparent']
+		show: false,
 	},
     fill: {
         colors: ['#0275c9', '#293e4d'],
@@ -85,11 +83,11 @@ const chartOptions = {
 const chartSeries = [
     {
         name: 'Statistic 1',
-        data: [40, 50, 43, 36]
+        data: [10, 20, 37, 30, 47, 25, 20, 10, 15, 20, 30, 15, 20, 10, 23, 30, 17, 20, 42, 10, 20, 25, 20, 45, 48, 52, 55, 50, 55, 60, 45, 30, 40, 37, 27, 17, 7, 25, 28, 32, 27, 30, 26, 23, 19, 23, 12]
     },
     {
         name: 'Statistic 2',
-        data: [30, 45, 37, 27]
+        data: [25, 43, 55, 30, 22, 18, 13, 47, 58, 33, 41, 54, 15, 23, 34, 21, 36, 17, 16, 26, 47, 36, 18, 10, 42, 49, 47, 51, 36, 28, 12, 29, 22, 57, 56, 39, 19, 27, 12, 18, 25, 41, 19, 60, 33, 47, 12]
     }
 ]
 </script>
