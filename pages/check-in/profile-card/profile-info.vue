@@ -1,4 +1,4 @@
-<template>
+6<template>
     <div v-if="ProfileInfo" class="profile-info-container">
         <div class="profile-avatar">
             <div class="alert-badge" v-if="user.notifications.length > 0">
