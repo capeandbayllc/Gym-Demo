@@ -1,97 +1,94 @@
 <template>
-    <tr class="campaign-table-row">
-        <td>
-            <div class="campaign-data">
-                <action-icon :action="data.action" />
-            </div>
-        </td>
-        <td><div class="campaign-data">{{data.title}}</div></td>
-        <td>
-            <div class="campaign-data gap-2">
-                <div class="deployment-circle">
-                    {{data.deployment_days}}
-                </div>
+  <tr class="campaign-table-row group hover:bg-primary">
+    <td>
+      <div>
+        <action-icon :action="data.action" />
+      </div>
+    </td>
+    <td>
+      <div>{{ data.title }}</div>
+    </td>
+    <td>
+      <div class="campaign-data gap-2">
+        <div
+          class="grid items-center bg-error rounded-full aspect-square min-h-6 justify-center text-base-content text-sm"
+        >
+          {{ data.deployment_days }}
+        </div>
 
-                <Button secondary class="text-base-content" size="xs" @click.stop="openCampaignDetailModal(data)">View All</Button>
-            </div>
-        </td>
-        <td>
-            <div class="campaign-data">
-                <status-select-box :status="data.status" />
-            </div>
-        </td>
-        <td>
-            <div class="campaign-data campaign-view">
-                <Button secondary class="text-base-content" size="xs" @click.stop="openCampaignDetailModal(data)">View</Button>
+        <Button
+          secondary
+          class="text-base-content group-hover:rounded-xl"
+          size="xs"
+          @click.stop="openCampaignDetailModal(data)"
+          >View All</Button
+        >
+      </div>
+    </td>
+    <td>
+      <div>
+        <status-select-box :status="data.status" />
+      </div>
+    </td>
+    <td>
+      <div>
+        <Button
+          secondary
+          class="text-base-content group-hover:rounded-xl"
+          size="xs"
+          @click.stop="openCampaignDetailModal(data)"
+          >View</Button
+        >
 
-                <DaisyModal ref="campaignDetailModalRef">
-                    <CampaignDetailsModal @close="closeCampaignDetailModal" :data="data"></CampaignDetailsModal>
-                </DaisyModal>
-            </div>
-        </td>
-        <td>
-            <div class="campaign-data">
-                <diagram-icon class="text-accent-focus/80" />
-            </div>
-        </td>
-    </tr>
+        <DaisyModal ref="campaignDetailModalRef">
+          <CampaignDetailsModal
+            @close="closeCampaignDetailModal"
+            :data="data"
+          ></CampaignDetailsModal>
+        </DaisyModal>
+      </div>
+    </td>
+    <td>
+      <div>
+        <diagram-icon class="text-accent-focus/80" />
+      </div>
+    </td>
+  </tr>
 </template>
-<style>
-.campaign-table-row .status-select-box .select-box-btn {
-    @apply border-none;
-}
-</style>
-<style scoped>
+
+<style scoped lang="postcss">
 .campaign-table-row:first-child {
-    td {
-        @apply border-t border-secondary;
-        > div {
-            @apply mt-1.5;
-        }
+  td {
+    @apply border-t border-secondary;
+    > div {
+      @apply mt-2;
     }
+  }
 }
 .campaign-table-row {
-    td {
-        @apply border-b border-secondary;
-        > div {
-            @apply mb-1.5 border-l border-secondary;
-        }
-        .campaign-title {
-            
-        }
-        .campaign-data {
-            @apply flex items-center justify-center py-1 min-h-[2.5rem];
-        }
-        .status-select-box {
-            @apply flex justify-center;
-        }
-        .campaign-view {
-            @apply flex flex-row items-center justify-center space-x-2;
-        }
-        .deployment-circle {
-            @apply inline-flex items-center bg-error rounded-full min-w-[30px] min-h-[30px] justify-center text-white text-sm;
-        }
+  td {
+    @apply border-b border-secondary;
+    > div {
+      @apply mb-2 border-l border-secondary flex items-center justify-center;
+      > div {
+        @apply w-auto;
+      }
     }
-    td:first-child {
-        > div {
-            @apply border-none text-left;
-        }
-    }
-    td:last-child {
-        @apply text-center;
+  }
 
-        > svg {
-            display: inline-flex;
-        }
+  td:first-child {
+    > div {
+      @apply border-none text-left;
     }
-}
-.campaign-table-row:hover {
-    @apply bg-[#0074c8bf];
-    td {
-        button {
-            @apply rounded-xl;
-        }
+  }
+
+  td:last-child {
+    @apply text-center;
+
+    > svg {
+      display: inline-flex;
     }
+  }
 }
 </style>
 <script setup>
@@ -101,30 +98,35 @@ import DiagramIcon from "../../components/campaign-card/diagram-icon.vue";
 import CampaignDetailsModal from "../../components/campaign-details/index.vue";
 
 const props = defineProps({
-    data: Object
-})
+  data: Object,
+});
 
-const status_items = [{
-    value: 'in_progress',
-    label: 'In Progress'
-}, {
-    value: 'pause',
-    label: 'Pause'
-}, {
-    value: 'rescheduled',
-    label: 'Rescheduled'
-}, {
-    value: 'completed',
-    label: 'Completed'
-}];
+const status_items = [
+  {
+    value: "in_progress",
+    label: "In Progress",
+  },
+  {
+    value: "pause",
+    label: "Pause",
+  },
+  {
+    value: "rescheduled",
+    label: "Rescheduled",
+  },
+  {
+    value: "completed",
+    label: "Completed",
+  },
+];
 
 const campaignDetailModalRef = ref(null);
 
 const openCampaignDetailModal = (data) => {
-    campaignDetailModalRef.data = data;
-    campaignDetailModalRef.value.open();
-}
+  campaignDetailModalRef.data = data;
+  campaignDetailModalRef.value.open();
+};
 const closeCampaignDetailModal = () => {
-    campaignDetailModalRef.value.close();
-}
+  campaignDetailModalRef.value.close();
+};
 </script>

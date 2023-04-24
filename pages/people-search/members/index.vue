@@ -2,33 +2,32 @@
   <div>
     <div class="text-center mb-4">
       <AddIcon
-        class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold cursor-pointer"
+        class="aspect-square w-10 h-auto border inline-block border-secondary rounded-full font-semibold cursor-pointer"
       />
       <p class="text-xs mt-1">Update Member</p>
     </div>
-    <div class="page-members-center-container">
-      <div class="custom-page-content-header">
+    <div class="py-4 pr-5 w-full h-fit">
+      <div
+        class="bg-secondary flex justify-between rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-7xl"
+      >
         <span>Members</span>
-        <search-icon
-          v-if="!isSearchEnable"
-          class="search-icon"
-          @click="isSearchEnable = !isSearchEnable"
-        />
-        <input
-          v-else
-          type="text"
-          placeholder="Search"
-          class="input input-sm max-w-xs search-input"
-        />
+        <div class="flex items-center h-8">
+          <button class="mx-4" @click="isSearchEnable = !isSearchEnable">
+            <SearchIcon />
+          </button>
+          <input
+            v-if="isSearchEnable"
+            type="text"
+            placeholder="Search"
+            class="input input-sm max-w-xs bg-secondary border border-base-content rounded"
+          />
+        </div>
       </div>
-      <div class="-md:px-4 custom-page-content flex-col">
+      <div
+        class="-md:px-4 block border border-secondary bg-base-300 rounded-b p-7 mx-auto w-full max-w-7xl flex-col"
+      >
         <div class="flex flex-row justify-between space-x-4 mb-4">
           <div class="flex gap-4">
-            <!--            <select-box-search-input-->
-            <!--                :secondary="false"-->
-            <!--                :placeholder="Filter"-->
-            <!--                size="xs"-->
-            <!--            ></select-box-search-input>-->
             <select-box
               :items="filterBy"
               value=""
@@ -40,7 +39,6 @@
           </div>
         </div>
         <div>
-          <!--          {{ result }}-->
           <data-table
             :columns="columns"
             :data="members"
@@ -52,30 +50,7 @@
     </div>
   </div>
 </template>
-<style scoped>
-.page-members-center-container {
-  @apply py-4 pr-5 w-full h-fit;
-  .custom-page-content {
-    @apply block border border-secondary bg-black rounded-b p-7 mx-auto w-full max-w-7xl;
-  }
-  .custom-page-content-header {
-    @apply bg-secondary rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-7xl;
-    .search-icon {
-      @apply float-right m-1 mr-6 cursor-pointer;
-    }
-    .search-input {
-      @apply float-right -mt-1 mr-6 cursor-pointer bg-secondary border border-white rounded;
-    }
-  }
-}
-</style>
-<style>
-/* @media (max-width: 1300px) {
-    .page-content {
-        width: 90% !important;
-    }
-} */
-</style>
+
 <script setup>
 import MemberTableRow from "./components/member-table-row.vue";
 import { SearchIcon, AddIcon } from "@/components/icons";
