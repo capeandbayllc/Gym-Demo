@@ -1,6 +1,6 @@
 <template>
   <div id="Timesheet" class="border border-[#0075c9] p-3 rounded-[19px]">
-    <div class="flex items-center justify-between">
+    <div class="flex-col lg:flex-row flex items-center justify-between">
       <FormIconSearchInput height="h-[45px]" />
       <div class="actions space-x-2 flex items-center relative">
         <button class="border-[#0075c9] border-2 rounded-[19px] h-[45px] px-6">
@@ -159,7 +159,7 @@
         </FormFilterButton>
       </div>
     </div>
-    <div class="flex items-center space-x-12 mt-4">
+    <div class="flex-col gap-4 lg:gap-0 lg:flex-row flex items-center space-x-12 mt-4">
       <div>
         <label for="period">Period:</label>
         <div class="flex items-center space-x-5 mt-3">
@@ -170,7 +170,7 @@
       </div>
       <div>
         <label for="period">Employee:</label>
-        <FormSelectInput class="mt-3" :options="employees" v-model="selectedEmployee" @update="selectedEmployee = $event"/>
+        <FormSelectInput class="mt-3 text-base-300" :options="employees" :value="selectedEmployee" @update="selectedEmployee = $event"/>
       </div>
     </div>
     <div class="">
@@ -181,10 +181,10 @@
           Total:
         </li>
         <li class="ml-20">
-          5 Days
+          {{ totalDays }} Days
         </li>
         <li>
-          40 Hours
+          {{ totalHours }} Hours
         </li>
         <li></li>
         <li>
@@ -196,31 +196,100 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { ref } from "vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
+import { useQuery } from "@vue/apollo-composable";
+import employee from "~/api/queries/employee";
 import EmployeeSearchList from './components/employee-search-list.vue'
+import { query as queryCalendar  } from "./queries/queries";
+import dateFormat from "dateformat";
+
 const filters = ref({
   location: false,
   type: false,
   alert: false,
   segments: false,
 });
-let selectedEmployee = ref(null)
-let employees = ref([
-  {
-    id: 1, 
-    value: 'All',
-  },
-  {
-    id: 2, 
-    value: 'Employee 1',
-  },
-  {
-    id: 3, 
-    value: 'Employee 2',
+
+let selectedEmployee = ref('')
+
+let employees = ref([]);
+
+const { result } = useQuery(employee.query.browse);
+
+watch(() => {
+  employees.value = [
+    {
+      value: '', 
+      label: 'All',
+    },
+    ...result?.value?.employee?.data.map((e,index) => {
+      return {
+        value: e.id,
+        label: `${e.first_name} ${e.last_name}`
+      };
+    })
+  ];
+});
+
+let eventAttendeesData = ref([]);
+
+const { result: resultCalendarAttendee } = useQuery(queryCalendar);
+
+function getTimeDifference(start, end) {
+  const diff = new Date(end).getTime() - new Date(start).getTime();
+  const hoursDiff = diff / 3600000;
+
+  return hoursDiff;
+}
+
+watch(()=>{
+  const events = resultCalendarAttendee?.value?.calendarEvents
+  if(!events) return ;
+  const eventAttendees = [];
+  events.forEach(event => {
+    const attendees = event.attendees;
+    attendees.forEach((attendee, index) => {
+      const attendeeData = {
+        id: attendee.id,
+        location: event.location.name,
+        day: dateFormat(event.start, 'dddd, m/d/yyyy'),
+        hours: getTimeDifference(event.start, event.end),
+        in: dateFormat(event.start, 'h:MM TT'),
+        out: dateFormat(event.end, 'h:MM TT'),
+        img_url: attendee.entity.profile_photo_path,
+        profile_id: attendee.entity_id
+      };
+      eventAttendees.push(attendeeData);
+    });
+  });
+  eventAttendeesData.value = eventAttendees;
+})
+
+const employeeData = computed(() => {
+  if (selectedEmployee.value === '') {
+    return eventAttendeesData.value;
+  } else {
+    return eventAttendeesData.value.filter((event) => {
+      return event.profile_id === selectedEmployee.value;
+    });
   }
-])
+});
+
+const totalHours = computed(()=> {
+  const total = employeeData.value.reduce((sum, employee) => {
+    return sum + employee.hours;
+  }, 0);
+  return total;
+});
+
+const totalDays = computed(() => {
+  const uniqueDays = new Set(employeeData.value.map(employee => employee.day));
+  return uniqueDays.size;
+});
+
 const columns = [
     {
         label: 'Location',
@@ -243,64 +312,4 @@ const columns = [
         class: 'text-secondary text-center'
     },
 ];
-const employeeData = [
-    {
-        id: 1,
-        location: 'Club#1234',
-        day: 'Monday 01.02.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'checkin/avatar_random.jpg'
-    },
-    {
-        id: 2,
-        location: 'Club#1234',
-        day: 'Tuesday 01.03.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'chat-conversation/2.png'
-    },
-    {
-        id: 3,
-        location: 'Club#1234',
-        day: 'Monday 01.02.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'chat-conversation/3.png'
-    },
-    {
-        id: 4,
-        location: 'Club#1234',
-        day: 'Tuesday 01.03.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'chat-conversation/4.png'
-    },
-    {
-        id: 5,
-        location: 'Club#1234',
-        day: 'Monday 01.02.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'chat-conversation/5.png'
-    },
-    {
-        id: 6,
-        location: 'Club#1234',
-        day: 'Monday 01.02.2023',
-        hours: '8.00',
-        in: '9:00 AM',
-        out: '5:00 PM',
-        img_url: 'chat-conversation/1.png'
-    },
-];
 </script>
-<style>
-#Timesheet {
-}
-</style>
