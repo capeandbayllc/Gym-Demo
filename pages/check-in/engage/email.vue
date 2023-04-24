@@ -47,10 +47,6 @@
   </div>
 </template>
 
-<style scoped>
-
-</style>
-
 <script setup>
 import { EmailIcon } from '~~/components/icons';
 import Body from '../side-car-split/components/body.vue';

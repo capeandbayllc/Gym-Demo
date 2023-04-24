@@ -6,8 +6,8 @@
               <p class="text-lg font-semibold">Mostly due*</p>
           </div>
           <div class="flex gap-3 justify-between items-center mb-3">
-            <Button size="sm" class="border-neutral-content bg-transparent text-sm normal-case hover:!bg-secondary hover:text-white hover:!border-secondary rounded-[10px]" :class="{'!bg-secondary text-white !border-secondary': payWith == 'checking'}" @click="payWith = 'checking'">Pay with Checking</Button>
-            <Button size="sm" class="border-neutral-content bg-transparent text-sm normal-case hover:!bg-secondary hover:text-white hover:!border-secondary rounded-[10px]" :class="{'!bg-secondary text-white !border-secondary': payWith == 'card'}" @click="payWith = 'card'">Pay with Card</Button>
+            <Button size="sm" class="border-neutral-content bg-transparent text-sm normal-case hover:!bg-secondary hover:text-base-content hover:!border-secondary rounded-[10px]" :class="{'!bg-secondary text-base-content !border-secondary': payWith == 'checking'}" @click="payWith = 'checking'">Pay with Checking</Button>
+            <Button size="sm" class="border-neutral-content bg-transparent text-sm normal-case hover:!bg-secondary hover:text-base-content hover:!border-secondary rounded-[10px]" :class="{'!bg-secondary text-base-content !border-secondary': payWith == 'card'}" @click="payWith = 'card'">Pay with Card</Button>
             <custom-toggle v-model="defaultMembershipPaymentCheck" title="" />
             <p class="text-sm">Make this my default membership payment.</p>
           </div>

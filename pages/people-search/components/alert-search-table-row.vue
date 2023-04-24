@@ -107,24 +107,13 @@
                     </svg>
                 </div>
             </div>
-            <div class="dropdown" v-show="dropdownInfo" @click.stop>
-                <div class="dropdown-container">
-                    <cross-icon
-                        @click.stop="hideDropdownInfo"
-                        class="flex absolute text-white h-[15px] w-[15px] top-[15px] left-[150px] cursor-pointer"
-                    ></cross-icon>
-                    <div @click.stop="openInfoModal" class="dropdown-item">
-                        Edit account
-                    </div>
-                    <div @click.stop="openInfoModal" class="dropdown-item">
-                        View alerts
-                    </div>
-                    <div @click.stop="openInfoModal" class="dropdown-item">
-                        Add Guest Pass
-                    </div>
-                    <div @click.stop="openInfoModal">POS</div>
-                </div>
-            </div>
+            <people-dropdown 
+                v-show="dropdownInfo"
+                @edit-account="openInfoModal"
+                @view-alerts="openInfoModal"
+                @add-guest-pass="openInfoModal"
+                @pos="openInfoModal"
+            />
         </div>
         <daisy-modal ref="alertModal" id="alertModal" :closable="false">
             <simple-card class="p-4 w-[400px] mx-auto alert-modal">
@@ -275,15 +264,6 @@
     @apply bg-cover bg-center text-center;
     background-image: url("/info-modal-background.png");
 }
-
-.dropdown {
-    @apply bg-secondary text-white right-[160px] top-[90px] relative w-0;
-
-    .dropdown-container {
-        @apply bg-secondary p-3 w-[180px] border-[2px] rounded-[20px];
-    }
-}
-
 .arrow-icon {
     @apply cursor-pointer h-6 w-6 ml-auto mt-3;
 }
@@ -291,13 +271,10 @@
 .arrow-icon svg {
     @apply h-12 w-12;
 }
-
-.dropdown-item {
-    @apply mb-2;
-}
 </style>
 <script setup>
 import MembershipStatus from "~/components/buttons/membership-status.vue";
+import PeopleDropdown from "./people-dropdown.vue";
 import {
     AlertIcon,
     ArrowIcon,

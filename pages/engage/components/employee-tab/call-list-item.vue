@@ -61,17 +61,7 @@
             size="lg"
           />
         </div>
-        <div
-          class="dropdown-content menu p-2 bg-secondary border-1 rounded items-start"
-        >
-          <cross-icon
-            class="flex absolute text-base-content h-[15px] w-[15px] top-2 right-2 cursor-pointer"
-          ></cross-icon>
-          <div class="dropdown-item" tabindex="-1">Edit Account</div>
-          <div class="dropdown-item" tabindex="-1">View Alerts</div>
-          <div class="dropdown-item" tabindex="-1">Add Guest Pass</div>
-          <div class="dropdown-item" tabindex="-1">POS</div>
-        </div>
+          <people-dropdown class="dropdown-content" />
       </div>
     </td>
   </tr>
@@ -110,11 +100,10 @@
     @apply bg-secondary border-base-content border rounded-xl p-1;
   }
   .icon {
-    @apply fill-white w-4 h-4;
+    @apply fill-base-content w-4 h-4;
   }
   .dropdown-content {
-    display: block !important;
-    @apply mt-[8rem] border-2 rounded-xl flex;
+    @apply !block text-left w-[130px] right-[110px] text-[14px] top-[0px];
   }
   .dropdown-item {
     @apply flex flex-col hover:text-opacity-50 uppercase hover:text-base-300 text-left text-xs h-[1.5rem] w-[8rem] text-base-content transition rounded  inline-block my-1 border-primary px-2 py-1 cursor-pointer;
@@ -122,6 +111,7 @@
 }
 </style>
 <script setup>
+import PeopleDropdown from "~/pages/people-search/components/people-dropdown.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import MembershipStatus from "@/components/buttons/membership-status.vue";
 import {
@@ -134,6 +124,7 @@ import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 
+const dropdownInfo = ref(false);
 
 library.add(faEllipsisH);
 

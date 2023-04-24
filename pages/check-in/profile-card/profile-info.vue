@@ -93,7 +93,7 @@
 .profile-status {
     @apply flex flex-row space-x-4 px-10 justify-between;
     .profile-membership-status {
-        @apply text-xl w-10 h-10 text-center justify-center font-bold text-white;
+        @apply text-xl w-10 h-10 text-center justify-center font-bold text-base-content;
     }
     > div > button {
         @apply relative;

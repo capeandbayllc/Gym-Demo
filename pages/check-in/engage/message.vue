@@ -43,10 +43,6 @@
   </div>
 </template>
 
-<style scoped>
-
-</style>
-
 <script setup>
 import { MessageIcon } from '~~/components/icons';
 import Body from '../side-car-split/components/body.vue';
@@ -54,7 +50,7 @@ import Footer from '../side-car-split/components/footer.vue';
 import Notes from '../side-car-split/components/notes.vue';
 
 defineProps({
-user: Object
+  user: Object
 })
 const notesModalStatus = ref(false);
 const notesModal = ()=>{
