@@ -30,25 +30,32 @@
         </td>
         <td>
             <div class="note-btn">
-                <Button size="sm">Notes</Button>
+                <Button size="sm" class="rounded-xl">Notes</Button>
             </div>
         </td>
         <td>
             <div class="px-4">
                 Response: Text
-                <Button secondary size="sm" class="ml-3">Reply</Button>
+                <Button secondary size="sm" class="ml-3 rounded-xl">Reply</Button>
             </div>
         </td>
-        <td>
+        <td >
             <div class="px-4 flex gap-2">
                 <Button ghost size="sm">Edit</Button>
-                <Button secondary size="sm">View</Button>
+                <Button secondary size="sm" class="rounded-xl">View</Button>
             </div>
         </td>
     </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
+.notification-table-row > td:first-child {
+    @apply rounded-l-xl;
+}
+.notification-table-row > td:last-child {
+    @apply !rounded-r-xl;
+}
 .notification-table-row {
+    @apply bg-base-200;
     td {
         @apply border-y h-14 py-2 text-sm;
         .notification-time {

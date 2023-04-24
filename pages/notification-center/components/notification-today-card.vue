@@ -4,41 +4,46 @@
 			<div class="notification-title">
 				<div class="notification-actions">
 					<select-box
-						class="w-36"
-						label="Locations"
+						class="w-36 h-[32px]"
+						label="Call type"
 						:items="locationsList"
 						transparent
-						:secondary="false"
+						:secondary="true"
 					/>
 					<select-box
 						class="w-36"
-						label="Names"
+						label="Call type"
 						:items="namesList"
-						:secondary="false"
+						:secondary="true"
 						transparent
 					/>
-					<search-input size="lg" border="neutral" neutral/>
+					<FormAppInput height="!h-[29px]" width="w-[400px]" placeholder="Search" />	
 				</div>
 			</div>
-			<data-table
-				class="notification-today-table"
-				:data="mockToday"
-				:row-component="NotificationTableRow"
-				:columns="columns"
-			/>
+			<div class="overflow-x-scroll">
+				<data-table
+					class="notification-today-table"
+					:data="mockToday"
+					:row-component="NotificationTableRow"
+					:columns="columns"
+				/>
+			</div>
 		</div>
     </simple-card>
 </template>
-<style>
+<style lang="postcss">
+.notification-actions .select-box-btn{
+	@apply rounded-xl;
+}
 .notification-today-table .notification-table-row {
 	td, td > div {
 		@apply border-error;
 	}
 }
 </style>
-<style scoped>
+<style scoped lang="postcss">
 .notification-today-card {
-    @apply m-auto bg-neutral;
+    @apply m-auto bg-base-300;
 	.notification-container {
 		@apply p-4;
 	}
@@ -46,7 +51,7 @@
 		@apply flex flex-row justify-end items-center;
 	}
     .notification-actions {
-    	@apply flex flex-row space-x-8 justify-end mb-2 mt-5;
+    	@apply flex flex-row space-x-3 justify-end items-center mb-2 mt-5;
     }
 }
 </style>
@@ -78,7 +83,7 @@ const namesList = [{
 	value: 3,
 	label: "Name",
 }];
-const columns = ["Type", "Date/ Time", "Tags", "Members", "", "", ""]
+const columns = ["Notification", "Date/ Time", "Tags", "Members", "", "", ""]
 const mockToday = [{
 	id: 1,
 	type: "Promo Response",
