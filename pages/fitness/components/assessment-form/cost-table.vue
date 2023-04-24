@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full border-2 border-primary-content rounded-xl">
-    <table class="h-full w-full">
+    <table id="cost-table" class="h-full w-full">
       <thead>
         <tr>
           <td></td>
@@ -150,6 +150,11 @@
 </template>
 
 <style scoped lang="postcss">
+table#cost-table {
+  tr td {
+    @apply border-primary-content;
+  }
+}
 tr td {
   @apply border-2 border-collapse border-primary-content text-center;
 }

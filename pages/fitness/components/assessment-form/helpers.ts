@@ -140,6 +140,27 @@ export const sessionSelectionDefault: ISelectionState = {
   },
 };
 
+export const priceMap = {
+  single: {
+    five: 120,
+    ten: 205,
+    twenty: 395,
+    thirty: 550,
+  },
+  group_two: {
+    five: 70,
+    ten: 115,
+    twenty: 195,
+    thirty: 280,
+  },
+  group_three_four: {
+    five: 55,
+    ten: 90,
+    twenty: 140,
+    thirty: 190,
+  },
+};
+
 export interface IEmployeeSection {
   total?: number;
   date_paid?: number | string | Date;

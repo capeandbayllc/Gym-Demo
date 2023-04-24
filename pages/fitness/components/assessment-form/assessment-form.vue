@@ -288,7 +288,9 @@
       <!-- form actions -->
       <div class="flex justify-end gap-4 pr-12 py-6">
         <button type="button">cancel</button>
-        <button type="submit">save</button>
+        <button class="btn btn-sm text-primary-content" type="submit">
+          save
+        </button>
       </div>
     </div>
   </form>
@@ -309,6 +311,10 @@
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-secondary/60 outline-secondary/60;
+}
+
+button[type="submit"] {
+  @apply bg-secondary px-2 py-1 rounded-md;
 }
 
 input[type="text"],
@@ -378,6 +384,7 @@ const priceTableSelections: Ref<ISelectionState> = ref(sessionSelectionDefault);
 const employeeInput: Ref<IEmployeeSection> = ref(employeeSectionDefaults);
 
 function handleSubmit() {
-  console.log("assessment submitted", form.value);
+  let fullForm = { ...form.value, ...employeeInput.value };
+  console.log("assessment submitted", fullForm);
 }
 </script>
