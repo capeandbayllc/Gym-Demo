@@ -1,5 +1,5 @@
 <template>
-    <card title="Statistic Title" class="bg-base-300" :options="{ favorite: false, collapse: false }">
+    <card title="Statistic 1" class="bg-base-300" :options="{ favorite: false, collapse: false }">
         <template #content>
             <div class="bar-container">
                 <div v-for="(item, k) in data" :key="k">

@@ -1,5 +1,5 @@
 <template>
-    <card title="Statistic Title" class="bg-base-300" :options="{ favorite: false, collapse: false }">
+    <card title="Statistic 1" class="bg-base-300" :options="{ favorite: false, collapse: false }">
         <template #content>
             <div>
                 <div class="chart-area flex flex-col justify-between">
@@ -18,6 +18,7 @@
                     </div>
                     <ClientOnly class="col-span-5">
                         <apexchart 
+                            height="225px"
                             type="area"
                             class="unit-sold-apex-chart"
                             :options="options"
@@ -69,7 +70,6 @@ const series= [{
 
 const options ={
     chart:{
-        height : 350,
         type: 'area',
         background: '',
         toolbar:{
