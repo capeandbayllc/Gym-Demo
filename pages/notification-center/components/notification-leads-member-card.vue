@@ -5,40 +5,53 @@
 				<div class="notification-actions">
 					<select-box
 						class="w-36"
-						label="Leads"
+						label="Call type"
 						:items="leadsList"
 						transparent
-						:secondary="false"
+						:secondary="true"
 					/>
 					<select-box
 						class="w-36"
-						label="Members"
+						label="Call type"
 						:items="membersList"
-						:secondary="false"
+						:secondary="true"
 						transparent
 					/>
-					<search-input size="lg" border="neutral" neutral/>
+					<FormAppInput height="!h-[29px]" width="w-[400px]" placeholder="Search" />	
 				</div>
 			</div>
-			<data-table
-                class="notification-leads-member-table"
-				:data="mockLeads"
-				:row-component="NotificationTableRow"
-				:columns="columns"
-			/>
+			<div class="overflow-x-scroll">
+				<data-table
+					class="notification-leads-member-table"
+					:data="mockLeads"
+					:row-component="NotificationTableRow"
+					:columns="columns"
+				/>
+			</div>
 		</div>
     </simple-card>
 </template>
-<style>
-.notification-leads-member-table .notification-table-row {
-	td, td > div {
-		@apply border-secondary;
+<style lang="postcss">
+.notification-leads-member-card {
+	.notification-actions .select-box-btn{
+		@apply rounded-xl;
+	}
+	.notification-actions .select-box-btn{
+		@apply rounded-xl;
+	}
+	.notification-table-row{
+		@apply bg-base-300;	
+	}
+	.notification-table-row {
+		td, td > div {
+			@apply border-secondary;
+		}
 	}
 }
 </style>
-<style scoped>
+<style scoped lang="postcss">
 .notification-leads-member-card {
-    @apply m-auto mt-5 bg-neutral;
+    @apply m-auto mt-5 bg-base-300;
 	.notification-container {
 		@apply p-4;
 	}
@@ -49,7 +62,7 @@
 		}
 	}
     .notification-actions {
-    	@apply flex flex-row space-x-8 justify-end mb-2 mt-5;
+    	@apply flex flex-row space-x-3 justify-end mb-2 mt-5;
     }
 }
 </style>

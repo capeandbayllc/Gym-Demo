@@ -32,12 +32,14 @@
     </simple-card>
 </template>
 <style lang="postcss">
-.notification-actions .select-box-btn{
-	@apply rounded-xl;
-}
-.notification-today-table .notification-table-row {
-	td, td > div {
-		@apply border-error;
+.notification-today-card {
+	.notification-actions .select-box-btn{
+		@apply rounded-xl;
+	}
+	.notification-table-row {
+		td, td > div {
+			@apply border-error;
+		}
 	}
 }
 </style>
