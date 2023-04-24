@@ -15,7 +15,7 @@
         />
       </daisy-modal>
       <daisy-modal ref="emailModalRef">
-        <EmailModal @close="closeEmailModal" />
+        <EmailModal :user="data" @close="closeEmailModal" />
       </daisy-modal>
     </td>
   </tr>
