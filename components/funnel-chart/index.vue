@@ -7,6 +7,7 @@
           :label="item.label"
           :value="item.value"
           :percent="item.percent"
+          v-if="!item.disable"
           :class="{ 'active-chart-section': item.activeContent }"
         />
       </div>

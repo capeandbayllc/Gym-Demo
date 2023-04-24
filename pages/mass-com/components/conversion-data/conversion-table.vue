@@ -8,7 +8,7 @@
   />
 </template>
 
-<style>
+<style lang="postcss">
 .conversion-table {
   @apply h-80 overflow-x-auto w-full;
   table {

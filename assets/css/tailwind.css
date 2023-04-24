@@ -2,10 +2,101 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  @apply motion-reduce:transition-none;
+}
+
 @layer components {
+  /*
+    quick note on shared component styles
+
+    it's important these not be so opinionated, so that they may be extended for aditional use cases
+    if the need arises, while also being useful for a wide variety of use cases. this is essentially
+    just building upon the foundation that tailwind has set for us and learning from the lessons it teachs.
+
+    take the bare minimum for unionized styles and leave the rest up to the implementation
+    taking this approach ensures maximum reusage and style usage
+
+    if the style doesn't fit, add to the elements inline class attribute - the style specificity for these
+    are purposefully insignifigant
+  */
+
+  /* gym membership type base  */
+  .gr-membership-type {
+    @apply flex items-center justify-center capitalize btn btn-xs w-full rounded-full border-none transition-all duration-100 font-bold;
+    outline-style: solid;
+  }
+
+  /* gym membership types variants */
+  .gr-membership-type.bronze {
+    @apply bg-[#d88501] text-neutral-focus/75 outline-1 outline-[#d88501]/50;
+    @apply hover:bg-[#d88501]/75 hover:text-neutral-focus hover:outline-[#d88501] hover:outline-2;
+  }
+  .gr-membership-type.silver {
+    @apply bg-[#b4b4b4] text-neutral-focus/75 outline-1 outline-[#b4b4b4]/50;
+    @apply hover:bg-[#b4b4b4]/75 hover:text-neutral-focus hover:outline-[#b4b4b4] hover:outline-2;
+  }
+
+  .gr-membership-type.gold {
+    @apply bg-[#edba2f] text-neutral-focus/75 outline-1 outline-[#edba2f]/50;
+    @apply hover:bg-[#edba2f]/75 hover:text-neutral-focus hover:outline-[#edba2f] hover:outline-2;
+  }
+
+  .gr-membership-type.platinum {
+    @apply bg-[#8a8f95] text-neutral-focus/75 outline-1 outline-[#8a8f95]/50;
+    @apply hover:bg-[#8a8f95]/75 hover:text-neutral-focus hover:outline-[#8a8f95] hover:outline-2;
+  }
+
+  /* lead type base */
+  .gr-lead-type {
+    @apply rounded-xl text-sm mx-2 p-1 flex items-center justify-center whitespace-nowrap capitalize;
+  }
+
+  /* lead type variants */
+  .gr-lead-type.app_referal {
+    @apply border;
+  }
+
+  .gr-lead-type.grand_opening {
+    @apply bg-secondary/40 text-info;
+  }
+
+  .gr-lead-type.snapshot {
+    @apply bg-error/10 text-error;
+  }
+
+  .gr-lead-type.free_trial {
+    @apply bg-secondary/90;
+  }
+
+  .gr-lead-type.streaming_preview {
+    @apply bg-accent-focus/80;
+  }
+
+  /* opportunity level type base */
+  .gr-opportunity {
+    @apply aspect-square rounded-full w-full;
+  }
+
+  .gr-opportunity.accent {
+    @apply bg-accent-focus;
+  }
+
+  .gr-opportunity.error {
+    @apply bg-error;
+  }
+
+  .gr-opportunity.warning {
+    @apply bg-warning;
+  }
+
+  /* content background gradient */
+  .gr-gradient {
+    @apply bg-gradient-to-b from-secondary/25 to-base-300;
+  }
+
   .gr-base-textfield {
     @apply rounded-xl p-2 transition-all duration-75 mt-2 w-full outline-none border-2 border-transparent;
-    @apply motion-reduce:transition-none;
   }
 
   label.gr-base-label {
@@ -18,7 +109,7 @@
   }
 
   select.gr-neutral-selection {
-    @apply bg-base-content/20 text-white/50;
+    @apply bg-base-content/20 text-base-content/50;
 
     > option {
       @apply bg-neutral;
@@ -144,7 +235,7 @@
 }
 
 .page-content {
-  @apply mx-auto w-full max-w-[1120px];
+  @apply mx-auto w-full max-w-6xl;
 }
 
 .profile-setting-gradient-bg {

@@ -1,6 +1,7 @@
 <template>
     <ClientOnly>
         <apexchart
+            :height="height"
             type="area"
             :options="options"
             :series="mock"
@@ -13,6 +14,10 @@ const props = defineProps({
         type: Array,
         default: [],
     },
+    height: {
+        type: String,
+        default: 'auto'
+    }
 });
 
 const mock = [

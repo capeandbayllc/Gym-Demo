@@ -26,7 +26,7 @@
       <ClientOnly>
           <apexchart
           type="bar"
-          height="200"
+          :height="height"
           :options="chartOptions"
           :series="series"
           ></apexchart>
@@ -34,6 +34,12 @@
       </div>
 </template>
 <script setup>
+const props = defineProps({
+    height: {
+        type: String,
+        default: '200'
+    }
+});
 const series = [{
   name: 'Earning',
   data: [2, 4.8, 3, 1.2, 3.4, 2.4, 4]
