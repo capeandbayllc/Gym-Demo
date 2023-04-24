@@ -161,8 +161,8 @@
 
             <Ynquestion
               v-for="(kqp, idx) in physicalActivityQuestions"
+              v-model="form[kqp.key]"
               :key="idx"
-              :model-value="form[kqp.key]"
               :question="kqp.question"
             />
           </div>
@@ -213,6 +213,9 @@
           </div>
           <hr />
 
+          <h3 class="text-secondary font-semibold text-sm mb-4">
+            For office use only.
+          </h3>
           <div class="finalize grid grid-cols-[1fr_0.2fr] gap-6 pb-4">
             <CostTable v-model="priceTableSelections" />
             <div
