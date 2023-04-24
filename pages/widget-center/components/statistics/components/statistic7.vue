@@ -44,7 +44,9 @@ const chartOptions = {
     chart: {
         type: 'radialBar',
     },
-    
+    stroke: {
+        lineCap: "round"
+    },
     legend: {
         show: false,
         position: 'bottom',

@@ -2,7 +2,7 @@
     <card title="Statistic 1" class="bg-base-300 text-base-content text-left" :options="{ favorite: false, collapse: false }">
         <template #content>
             <div class="statistic-chart-container">
-                <statistic-chart />
+                <statistic-chart height="170" />
             </div>
             <div class="statistic-data-list max-h-40 overflow-y-scroll no-scrollbar">
                 <div class="statistic-data-row" v-for="item in mock" :key="item.id">

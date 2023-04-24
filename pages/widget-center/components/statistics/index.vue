@@ -5,19 +5,21 @@
         <statistic3 class="statistic-item" />
         <statistic4 class="col-span-6" />
     </div>
-    <div class="grid grid-cols-11    4xl:grid-cols-5 -md:grid-cols-1 -xl:grid-cols-2 gap-y-8 gap-x-5 py-8">
-        <statistic5 class="col-span-12 md:col-span-8 xl:col-span-5" />
+    <div class="grid grid-cols-10 gap-y-8 gap-x-5 py-8">
+        <statistic5 class="col-span-12 lg:col-span-4" />
         <statistic6 :data="[31, 80, 68, 109, 92]" title="Income" :last-week="-0.07" class="col-span-12 md:col-span-3" />
-        <statistic7 class="col-span-12 md:col-span-3"/>
+        <statistic7 class="col-span-12 lg:col-span-3"/>
     </div>
     <div class="grid grid-cols-6 gap-y-8 gap-x-5 py-8">
         <statistic8 class="col-span-6" />
         <statistic9 class="statistic-item" />
-    </div>
-    <div class="grid grid-cols-6 gap-y-8 gap-x-5 py-8">
         <statistic10 class="statistic-item" />
         <statistic11 class="statistic-item" />
+    </div>
+    <div class="grid grid-cols-6 gap-y-8 gap-x-5 py-8">
         <statistic12 class="statistic-item" />
+        <statistic13 class="statistic-item" />
+        <statistic14 class="statistic-item" />
     </div>
 
 </template>
@@ -41,4 +43,6 @@ import statistic9 from './components/statistic9.vue';
 import statistic10 from './components/statistic10.vue';
 import statistic11 from './components/statistic11.vue';
 import statistic12 from './components/statistic12.vue';
+import statistic13 from './components/statistic13.vue';
+import statistic14 from './components/statistic14.vue';
 </script>

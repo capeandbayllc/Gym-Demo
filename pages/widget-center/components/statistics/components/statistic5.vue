@@ -8,7 +8,7 @@
                         <p>{{dateFormat(item.date, 'mmm')}}</p>
                     </div>
                     <div class="bar-item" :class="`${item.bg}`" :style="`margin-top: ${250-item.height}px; height: ${item.height}px;`">
-                        <div class="text-base-content mb-1">{{item.price}}</div>
+                        <div class="text-base-content mb-1 text-xs">{{item.price}}</div>
                     </div>
                 </div>
             </div>
