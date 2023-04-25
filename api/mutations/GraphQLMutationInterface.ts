@@ -1,3 +1,3 @@
 export interface GraphQLMutationInterface<M> {
-    mutation: M
+  mutation: M;
 }

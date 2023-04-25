@@ -29,7 +29,9 @@
         </button>
       </div>
       <div class="flex justify-center items-end">
-        <button class="text-[#0075c9]" @click="$emit('gotoAddHours')">Add Hours</button>
+        <button class="text-[#0075c9]" @click="$emit('gotoAddHours')">
+          Add Hours
+        </button>
         <CircleProgress label="Hours" value="40" />
         <button class="text-[#0075c9]" @click="$emit('gotoTimesheet')">
           Timesheet

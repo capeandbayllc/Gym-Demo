@@ -60,7 +60,9 @@
                 <div v-if="leader.trending === '-'" class="solid"></div>
               </td>
               <td>
-                <div class="px-1">{{ leader.first_name }} {{ leader.last_name }}</div>
+                <div class="px-1">
+                  {{ leader.first_name }} {{ leader.last_name }}
+                </div>
               </td>
               <td>
                 <div class="px-1 text-right">{{ leader.unitSold }}</div>
@@ -155,7 +157,7 @@ import { useQuery } from "@vue/apollo-composable";
 
 const { result } = useQuery(employee.query.browse);
 const selected = ref("trainers");
-const leaderbordEmployees= ref([]);
+const leaderbordEmployees = ref([]);
 const locationData = ref([
   {
     name: "Ames",
@@ -260,7 +262,6 @@ const locationData = ref([
 ]);
 const trainerData = ref([
   {
-    
     rank: "1st",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -368,15 +369,13 @@ const breakpoints = ref({
   },
 });
 
-
 watch(() => {
-  leaderbordEmployees.value= result?.value?.employee?.data.map((e,index) => {
+  leaderbordEmployees.value = result?.value?.employee?.data.map((e, index) => {
     return {
       ...e,
-      ...trainerData.value[index]
+      ...trainerData.value[index],
     };
   });
-
 });
 
 const emit = defineEmits(["show-leader-board"]);

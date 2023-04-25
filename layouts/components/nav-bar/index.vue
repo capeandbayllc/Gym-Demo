@@ -1,31 +1,31 @@
 <template>
   <div
-      class="nav-bar-container"
-      :class="{ 'mt-[3.25rem]': windowWidth > 1250 }"
-      v-if="navItems.length > 0"
+    class="nav-bar-container"
+    :class="{ 'mt-[3.25rem]': windowWidth > 1250 }"
+    v-if="navItems.length > 0"
   >
     <div
-        class="nav-bar-toggler"
-        @click="toggleCollapse"
-        v-if="windowWidth <= 1250"
+      class="nav-bar-toggler"
+      @click="toggleCollapse"
+      v-if="windowWidth <= 1250"
     ></div>
     <div class="nav-bar-items" v-if="collapsed">
       <nav-item
-          v-if="windowWidth <= 1250"
-          :icon="UpperArrowIcon"
-          @click.prevent="toggleCollapse"
+        v-if="windowWidth <= 1250"
+        :icon="UpperArrowIcon"
+        @click.prevent="toggleCollapse"
       />
       <nav-item
-          v-for="(item, ndx) in navItems"
-          :key="ndx"
-          v-bind="{ ...item }"
+        v-for="(item, ndx) in navItems"
+        :key="ndx"
+        v-bind="{ ...item }"
       />
     </div>
   </div>
 </template>
 <style scoped>
 .nav-bar-container {
-  @apply w-16 z-20 top-0 left-0 -xl:absolute z-[999]
+  @apply w-16 z-20 top-0 left-0 -xl:absolute z-[999];
 }
 
 .nav-bar-toggler {
@@ -37,7 +37,7 @@
 }
 </style>
 <script setup>
-import {onMounted, ref} from "vue";
+import { onMounted, ref } from "vue";
 import {
   BackDocument,
   ContractEditIcon,
@@ -63,7 +63,7 @@ import {
   UpperArrowIcon,
   VendorIcon,
   WidgetIcon,
-    PeopleSearchIcon
+  PeopleSearchIcon,
 } from "@/components/icons";
 import NavItem from "./nav-item.vue";
 import PosWindow from "~~/pages/pos/components/pos-window.vue";
@@ -136,11 +136,11 @@ const navList = [
   },
   {
     type: "reporting",
-    navigation: reporting
+    navigation: reporting,
   },
   {
     type: "widget-center",
-    navigation: reporting
+    navigation: reporting,
   },
   {
     type: "document",
@@ -376,7 +376,7 @@ const navList = [
         url: "/engage",
       },
     ],
-  }
+  },
 ];
 
 const route = useRoute();
@@ -387,8 +387,8 @@ watch(route, () => {
 
 const getNavList = () => {
   const result = navList.find((data) => {
-    if(route.name.includes('people-search')){
-      return data.type === 'people-search';//temp hack workaround
+    if (route.name.includes("people-search")) {
+      return data.type === "people-search"; //temp hack workaround
     }
     return data.type === route.name;
   });

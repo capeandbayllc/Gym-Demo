@@ -22,7 +22,7 @@
       /> -->
     </div>
     <div class="relative">
-      <person-add-icon @click="showUserMenu" /> 
+      <person-add-icon @click="showUserMenu" />
       <user-add-menu ref="userMenu" />
     </div>
     <div class="alert-container mt-1">
@@ -152,5 +152,5 @@ const closeLeaderboardPopover = () => {
 
 const showUserMenu = () => userMenu.value.open();
 const user = useState("auth");
-console.log(user, 'user')
+console.log(user, "user");
 </script>

@@ -1,40 +1,36 @@
 <template>
-  <div :class="className" class="flex items-center w-32 col-start-1 col-span-4 ">
+  <div :class="className" class="flex items-center w-32 col-start-1 col-span-4">
     <button
-        class="select-box-btn btn-test rounded-lg bg-[#0075C9]"
-        :class="{
-                'rounded-t': !isCollapsed,
-                'rounded': isCollapsed
-            }"
-        :onClick="toggleCollapsed"
+      class="select-box-btn btn-test rounded-lg bg-[#0075C9]"
+      :class="{
+        'rounded-t': !isCollapsed,
+        rounded: isCollapsed,
+      }"
+      :onClick="toggleCollapsed"
     >
-      {{ value ? selected : (!isCollapsed && labelOpened ? labelOpened : label)  }}
-      <select-box-icon
-          :isCollapsed="isCollapsed"
-          :color="color"
-      />
+      {{ value ? selected : !isCollapsed && labelOpened ? labelOpened : label }}
+      <select-box-icon :isCollapsed="isCollapsed" :color="color" />
     </button>
 
     <transition name="fade">
       <select-box-content v-if="!isCollapsed">
         <select-box-search-input
-                                 :secondary="false"
-                                 :placeholder="Search"
-                                 size="xs"
-                                 @update:modelValue="updateSearchTerm"
+          :secondary="false"
+          :placeholder="Search"
+          size="xs"
+          @update:modelValue="updateSearchTerm"
         ></select-box-search-input>
         <select-box-item
-            v-for="item in items"
-            :key="item.value"
-            :value="item.value"
-            :label="item.label"
-            :selected="item.value === value"
-            :onClick="onChange"
+          v-for="item in items"
+          :key="item.value"
+          :value="item.value"
+          :label="item.label"
+          :selected="item.value === value"
+          :onClick="onChange"
         />
-<!--        <p class="select-box-clear-btn" v-if="showClearList" :onClick="clearList">Clear List</p>-->
+        <!--        <p class="select-box-clear-btn" v-if="showClearList" :onClick="clearList">Clear List</p>-->
       </select-box-content>
     </transition>
-
   </div>
 </template>
 
@@ -46,7 +42,7 @@
   @apply flex flex-row border px-2 py-1 items-center justify-between transition-colors duration-300 w-full h-[29px];
 }
 
-.select-box-filter-size{
+.select-box-filter-size {
   @apply w-[165px] h-[29px];
 }
 
@@ -63,15 +59,13 @@
 .fade-leave-to {
   opacity: 0;
 }
-
 </style>
 
 <script>
 export default {
-  name: "select-location"
-}
+  name: "select-location",
+};
 </script>
-
 
 <script setup>
 import { ref, computed } from "vue";
@@ -79,7 +73,7 @@ import SelectBoxIcon from "~~/components/select-box/select-box-icon.vue";
 import SelectBoxContent from "~~/components/select-box/SelectBoxContent.vue";
 import SelectBoxItem from "~~/components/select-box/SelectBoxItem.vue";
 
-const emit = defineEmits(['onChange']);
+const emit = defineEmits(["onChange"]);
 
 const props = defineProps({
   items: {
@@ -87,7 +81,7 @@ const props = defineProps({
     default: [],
   },
   label: {
-    type: String
+    type: String,
   },
   value: {
     type: String,
@@ -121,13 +115,13 @@ const toggleCollapsed = () => {
 
 const clearList = () => {
   toggleCollapsed();
-  emit('onChange', '');
+  emit("onChange", "");
 };
 
 const onChange = (value) => {
   toggleCollapsed();
-  console.info('value: ', value);
-  emit('onChange', value);
+  console.info("value: ", value);
+  emit("onChange", value);
 };
 
 const handleOutClick = (e) => {
@@ -156,6 +150,6 @@ const className = computed({
 });
 
 const selected = computed(
-    () => props.items?.filter((item) => item.value === props.value)[0]?.label
+  () => props.items?.filter((item) => item.value === props.value)[0]?.label
 );
 </script>

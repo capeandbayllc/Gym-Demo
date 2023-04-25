@@ -24,7 +24,6 @@
           'border-right-color': item.color ? item.color : '#0074C8',
           'border-left-color': item.color ? item.color : '#0074C8',
           ...getStyle(item, 70),
-         
         }"
       ></div>
     </div>
