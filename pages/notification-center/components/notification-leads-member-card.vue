@@ -38,11 +38,11 @@
 	}
 }
 </style>
-<style scoped lang="postcss">
+<style scoped lang="postcss">	
 .notification-leads-member-card {
     @apply m-auto mt-5 bg-base-300;
 	.notification-container {
-		@apply p-4;
+		@apply p-4 lg:px-10;
 	}
 	.notification-title {
 		@apply flex flex-row justify-end items-center;

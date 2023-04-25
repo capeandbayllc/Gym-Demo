@@ -20,7 +20,7 @@
 					<FormAppInput height="h-[25px] md:h-[32px]" width="w-full max-w-[300px]" placeholder="Search" />
 				</div>
 			</div>
-			<div class="overflow-auto max-h-[250px]" ref="containerTable">
+			<div class="overflow-auto max-h-[250px] mx-auto" ref="containerTable">
 				<data-table
 					class="notification-today-table"
 					:data="mockToday"
@@ -43,7 +43,7 @@
 	@apply m-auto bg-base-300;
 
 	.notification-container {
-		@apply p-4;
+		@apply p-4 px-10;
 	}
 
 	.notification-title {

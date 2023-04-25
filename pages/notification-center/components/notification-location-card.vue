@@ -42,7 +42,7 @@
 .notification-location-card {
     @apply m-auto bg-base-300 mt-5;
 	.notification-container {
-		@apply p-4;
+		@apply p-4 lg:px-10;
 	}
 	.notification-title {
 		@apply flex flex-row justify-end items-center;

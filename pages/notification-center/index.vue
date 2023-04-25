@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-5 pt-4 mx-auto w-full px-10 max-w-[1600px]">
+    <div class="pb-5 pt-4 mx-auto w-full pr-4 pl-1 lg:pr-12 max-w-[1600px]">
         <div class="page-content gap-5">
             <notification-today-card></notification-today-card>
             <notification-leads-member-card></notification-leads-member-card>
@@ -9,7 +9,7 @@
 </template>
 <style scoped lang="postcss">
 .page-content {
-    @apply p-6 border-secondary border-2 rounded-[26px] bg-secondary-focus max-w-[85vw];
+    @apply p-6 border-secondary border-2 rounded-[26px] bg-secondary-focus max-w-[1020px];
 }
 </style>
 <style></style>
