@@ -5,14 +5,14 @@
 				<div class="notification-actions">
 					<select-box
 						class="max-w-[200px]"
-						label="Call type"
+						label="Call Type"
 						:items="locationsList"
 						transparent
 						:secondary="true" 
 					/>
 					<select-box
 						class="max-w-[200px]"
-						label="Call type"
+						label="Call Type"
 						:items="namesList"
 						:secondary="true"
 						transparent
@@ -108,7 +108,6 @@ const mockToday = computed(() => {
 				time: "10:20 pm",
 				tag: 'error',
 				name: userData?.value.first_name + ' ' + userData?.value.last_name,
-
 				text: e.text,
 				entity_type: e.entity_type,
 				entity_id: e.entity_id,

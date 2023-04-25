@@ -35,7 +35,8 @@
         </td>
         <td :class="statusTdClass">
             <div class="px-4">
-                Response: Text
+                <p class="w-[100px]">Response: Text</p>
+                
                 <Button secondary size="sm" class="ml-3 rounded-xl">Reply</Button>
             </div>
         </td>
@@ -71,7 +72,7 @@
             }
         }
         .notification-member {
-            @apply flex flex-row justify-between px-4 w-52;
+            @apply flex flex-row justify-between px-4 w-[250px];
         }
         > div {
             @apply flex items-center justify-center text-sm border-r h-full;

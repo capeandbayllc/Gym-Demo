@@ -5,14 +5,14 @@
 				<div class="notification-actions">
 					<select-box
 						class="max-w-[200px]"
-						label="Call type"
+						label="Call Type"
 						:items="leadsList"
 						transparent
 						:secondary="true"
 					/>
 					<select-box
 						class="max-w-[200px]"
-						label="Call type"
+						label="Call Type"
 						:items="membersList"
 						:secondary="true"
 						transparent
