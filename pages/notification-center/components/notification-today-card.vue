@@ -3,15 +3,28 @@
 		<div class="notification-container">
 			<div class="notification-title">
 				<div class="notification-actions">
-					<select-box class="max-w-[200px]" label="Call type" :items="locationsList" transparent
-						:secondary="true" />
-					<select-box class="max-w-[200px]" label="Call type" :items="namesList" :secondary="true" transparent />
+					<select-box class="max-w-[200px]"
+						label="Call type"
+						:items="locationsList"
+						transparent
+						:secondary="true" 
+					/>
+					<select-box class="max-w-[200px]"
+						label="Call type"
+						:items="namesList"
+						:secondary="true"
+						transparent
+					/>
 					<FormAppInput height="h-[25px] md:h-[32px]" width="w-full max-w-[300px]" placeholder="Search" />
 				</div>
 			</div>
 			<div class="overflow-auto max-h-[250px]" ref="containerTable">
-				<data-table class="notification-today-table" :data="mockToday" :row-component="NotificationTableRow"
-					:columns="columns" />
+				<data-table
+					class="notification-today-table"
+					:data="mockToday"
+					:row-component="NotificationTableRow"
+					:columns="columns"
+				/>
 			</div>
 		</div>
 	</simple-card>
@@ -22,13 +35,13 @@
 		@apply rounded-xl;
 	}
 
-	.notification-table-row {
+	/* .notification-table-row {
 
 		td,
 		td>div {
 			@apply border-error;
 		}
-	}
+	} */
 }
 </style>
 <style scoped lang="postcss">
@@ -52,7 +65,6 @@
 import NotificationTableRow from './notification-table-row.vue';
 import notification from "~/api/queries/notification";
 import { request } from "~/api/utils/request";
-import user from '~~/api/mutations/user';
 
 const currentPage = ref(1)
 const notifications = ref([]);
@@ -76,7 +88,7 @@ const containerTable = ref(null)
 function handleScroll() {
 	const container = containerTable.value
 	const isScrollingDown = container.scrollTop > scrollPosition.value
- 
+
 	if (isScrollingDown && container.scrollTop + container.clientHeight >= container.scrollHeight) {
 		currentPage.value++;
 		getNotifications(useState("auth"));
@@ -127,8 +139,14 @@ const mockToday = computed(() => {
 				type: "Promo Response",
 				date: "2022-09-23",
 				time: "10:20 pm",
-				tag: e.state	,
+				tag: 'error',
 				name: userData?.value.first_name + ' ' + userData?.value.last_name,
+
+				text: e.text,
+				entity_type: e.entity_type,
+				entity_id: e.entity_id,
+				entity: e.entity,
+				misc: e.misc
 			}
 		});
 	} else {

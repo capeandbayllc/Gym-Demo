@@ -1,26 +1,26 @@
 <template>
     <tr class="notification-table-row">
-        <td><div class="text-base font-semibold w-40 text-center">{{data.type}}</div></td>
-        <td>
+        <td :class="statusTdClass"><div class="text-base font-semibold w-40 text-center">{{data.type}}</div></td>
+        <td :class="statusTdClass">
             <div class="notification-time">
-                <div><calendar-icon class="w-4 mr-1"/> {{data.date}}</div>
+                <div><calendar-icon class="w-4 mr-1"/> {{data.date}} </div>
                 <div><clock-icon class="w-4 mr-1"/> {{data.time}}</div>
             </div>
         </td>
-        <td>
+        <td :class="statusTdClass">
             <div class="w-12">
                 <div
                     class="tag" 
                     :class="{
-                        'bg-warning border-warning': data.tag === 'warning',
-                        'bg-error border-error': data.tag === 'error',
-                        'bg-green-500 border-green-500 tag-tick-icon': data.tag === 'success',
+                        'bg-warning border-warning': status === 'warning',
+                        'bg-error border-error': status === 'error',
+                        'bg-green-500 border-green-500 tag-tick-icon': status === 'success',
                     }"
                 />
 
             </div>
         </td>
-        <td>
+        <td :class="statusTdClass">
             <div class="notification-member">
                 <div class="flex items-center">
                     <img src="/account.png" class="w-7 rounded-full mr-2"/> {{data.name}}
@@ -28,21 +28,21 @@
                 <Button size="sm" primary>	&#8230;</Button>
             </div>
         </td>
-        <td>
+        <td :class="statusTdClass">
             <div class="note-btn">
                 <Button size="sm" class="rounded-xl">Notes</Button>
             </div>
         </td>
-        <td>
+        <td :class="statusTdClass">
             <div class="px-4">
                 Response: Text
                 <Button secondary size="sm" class="ml-3 rounded-xl">Reply</Button>
             </div>
         </td>
-        <td >
+        <td :class="statusTdClass">
             <div class="px-4 flex gap-2">
                 <Button ghost size="sm">Edit</Button>
-                <Button secondary size="sm" class="rounded-xl">View</Button>
+                <Button secondary size="sm" class="rounded-xl" @click="readNotification()">View</Button>
             </div>
         </td>
     </tr>
@@ -100,8 +100,33 @@
 </style>
 <script setup>
 import { CalendarIcon, ClockIcon } from '~~/components/icons';
-import NotificationTableRow from './notification-table-row.vue';
+import { useMutation } from "@vue/apollo-composable";
+import notification from "~/api/mutations/notification";
 const props = defineProps({
     data: Object
 })
+const status = ref(props.data.tag);
+const statusTdClass = computed(() => {
+    if(status.value == 'error') return 'border-error'
+    if(status.value == 'warning') return 'border-warning'
+    if(status.value == 'success') return 'border-success'
+})
+
+function readNotification() {
+    const { mutate: updateData } = useMutation(notification.mutation.updateNotification);
+    updateData({
+        input: {
+            id: props.data.id,
+            state: 'success',
+            text: props.data.text,
+            entity_type: props.data.entity_type,
+            entity_id: props.data.entity_id,
+            entity: props.data.entity,
+            misc: props.data.misc
+        },
+    })
+    .then(() => {
+        status.value = 'success';
+    });
+}
 </script>
