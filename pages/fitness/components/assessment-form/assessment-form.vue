@@ -287,7 +287,7 @@
 
       <!-- form actions -->
       <div class="flex justify-end gap-4 pr-12 py-6">
-        <button type="button">cancel</button>
+        <button type="button">Cancel</button>
         <button class="btn btn-sm text-primary-content" type="submit">
           save
         </button>

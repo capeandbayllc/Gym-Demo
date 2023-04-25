@@ -23,7 +23,7 @@ export interface IAssessmentFormData {
 }
 
 export const assessmentFormDefaults = {
-  first_name: "fred",
+  first_name: "",
   middle_name: "",
   last_name: "",
   date_of_birth: "",
