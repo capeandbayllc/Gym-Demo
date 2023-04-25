@@ -3,13 +3,15 @@
 		<div class="notification-container">
 			<div class="notification-title">
 				<div class="notification-actions">
-					<select-box class="max-w-[200px]"
+					<select-box
+						class="max-w-[200px]"
 						label="Call type"
 						:items="locationsList"
 						transparent
 						:secondary="true" 
 					/>
-					<select-box class="max-w-[200px]"
+					<select-box
+						class="max-w-[200px]"
 						label="Call type"
 						:items="namesList"
 						:secondary="true"
@@ -34,14 +36,6 @@
 	.notification-actions .select-box-btn {
 		@apply rounded-xl;
 	}
-
-	/* .notification-table-row {
-
-		td,
-		td>div {
-			@apply border-error;
-		}
-	} */
 }
 </style>
 <style scoped lang="postcss">
@@ -103,6 +97,30 @@ onMounted(() => {
 	containerTable.value.addEventListener('scroll', handleScroll)
 })
 
+const mockToday = computed(() => {
+	if (notifications.value) {
+		return notifications?.value.map((e, i) => {
+			console.log(e)
+			return {
+				id: e.id,
+				type: "Promo Response",
+				date: "2022-09-23",
+				time: "10:20 pm",
+				tag: 'error',
+				name: userData?.value.first_name + ' ' + userData?.value.last_name,
+
+				text: e.text,
+				entity_type: e.entity_type,
+				entity_id: e.entity_id,
+				entity: e.entity,
+				misc: e.misc
+			}
+		});
+	} else {
+		return []
+	}
+});
+
 const locationsList = [{
 	id: 1,
 	label: "Location",
@@ -130,27 +148,5 @@ const namesList = [{
 	label: "Name",
 }];
 const columns = ["Notification", "Date/ Time", "Tags", "Members", "", "", ""]
-const mockToday = computed(() => {
-	if (notifications.value) {
-		return notifications?.value.map((e, i) => {
-			console.log(e)
-			return {
-				id: e.id,
-				type: "Promo Response",
-				date: "2022-09-23",
-				time: "10:20 pm",
-				tag: 'error',
-				name: userData?.value.first_name + ' ' + userData?.value.last_name,
 
-				text: e.text,
-				entity_type: e.entity_type,
-				entity_id: e.entity_id,
-				entity: e.entity,
-				misc: e.misc
-			}
-		});
-	} else {
-		return []
-	}
-});
 </script>
