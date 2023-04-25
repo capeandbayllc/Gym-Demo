@@ -1,57 +1,124 @@
 <template>
-    <simple-card class="notification-today-card -md:text-xs" :closable="false" title="Today">
-        <div class="notification-container">
+	<simple-card class="notification-today-card -md:text-xs" :closable="false" title="Today">
+		<div class="notification-container">
 			<div class="notification-title">
 				<div class="notification-actions">
 					<select-box
-						class="w-36"
-						label="Locations"
+						class="max-w-[200px]"
+						label="Call Type"
 						:items="locationsList"
 						transparent
-						:secondary="false"
+						:secondary="true" 
 					/>
 					<select-box
-						class="w-36"
-						label="Names"
+						class="max-w-[200px]"
+						label="Call Type"
 						:items="namesList"
-						:secondary="false"
+						:secondary="true"
 						transparent
 					/>
-					<search-input size="lg" border="neutral" neutral/>
+					<FormAppInput height="h-[25px] md:h-[32px]" width="w-full max-w-[300px]" placeholder="Search" />
 				</div>
 			</div>
-			<data-table
-				class="notification-today-table"
-				:data="mockToday"
-				:row-component="NotificationTableRow"
-				:columns="columns"
-			/>
+			<div class="overflow-auto max-h-[250px] mx-auto" ref="containerTable">
+				<data-table
+					class="notification-today-table"
+					:data="mockToday"
+					:row-component="NotificationTableRow"
+					:columns="columns"
+				/>
+			</div>
 		</div>
-    </simple-card>
+	</simple-card>
 </template>
-<style>
-.notification-today-table .notification-table-row {
-	td, td > div {
-		@apply border-error;
+<style lang="postcss">
+.notification-today-card {
+	.notification-actions .select-box-btn {
+		@apply rounded-xl;
 	}
 }
 </style>
-<style scoped>
+<style scoped lang="postcss">
 .notification-today-card {
-    @apply m-auto bg-neutral;
+	@apply m-auto bg-base-300;
+
 	.notification-container {
-		@apply p-4;
+		@apply p-4 px-10;
 	}
+
 	.notification-title {
 		@apply flex flex-row justify-end items-center;
 	}
-    .notification-actions {
-    	@apply flex flex-row space-x-8 justify-end mb-2 mt-5;
-    }
+
+	.notification-actions {
+		@apply w-full flex flex-wrap gap-3 flex-row justify-end items-center mb-2 mt-5;
+	}
 }
 </style>
 <script setup>
 import NotificationTableRow from './notification-table-row.vue';
+import notification from "~/api/queries/notification";
+import { request } from "~/api/utils/request";
+
+const currentPage = ref(1)
+const notifications = ref([]);
+const noMoreData = ref(false);
+const userData = ref(null);
+getNotifications(useState("auth"));
+function getNotifications(user) {
+	if (!user.value) return;
+	userData.value = user.value;
+	request(notification.query.browse, { user_id: user.value.id, page: currentPage.value }).then(({ data }) => {
+		if (data?.data?.notifications?.data.length && !noMoreData.value) {
+			notifications.value = [...notifications?.value, ...data.data.notifications.data];
+		} else {
+			noMoreData.value = true;
+		}
+	});
+}
+
+const containerTable = ref(null)
+
+function handleScroll() {
+	const container = containerTable.value
+	const isScrollingDown = container.scrollTop > scrollPosition.value
+
+	if (isScrollingDown && container.scrollTop + container.clientHeight >= container.scrollHeight) {
+		currentPage.value++;
+		getNotifications(useState("auth"));
+	}
+
+	scrollPosition.value = container.scrollTop
+}
+
+const scrollPosition = ref(0)
+
+onMounted(() => {
+	containerTable.value.addEventListener('scroll', handleScroll)
+})
+
+const mockToday = computed(() => {
+	if (notifications.value) {
+		return notifications?.value.map((e, i) => {
+			return {
+				id: e.id,
+				type: "Promo Response",
+				date: "2022-09-23",
+				time: "10:20 pm",
+				tag: 'error',
+				name: userData?.value.first_name + ' ' + userData?.value.last_name,
+				text: e.text,
+				entity_type: e.entity_type,
+				entity_id: e.entity_id,
+				entity: e.entity,
+				misc: e.misc
+			}
+		});
+	} else {
+		return []
+	}
+});
+
 const locationsList = [{
 	id: 1,
 	label: "Location",
@@ -78,27 +145,6 @@ const namesList = [{
 	value: 3,
 	label: "Name",
 }];
-const columns = ["Type", "Date/ Time", "Tags", "Members", "", "", ""]
-const mockToday = [{
-	id: 1,
-	type: "Promo Response",
-	date: "2022-09-23",
-	time: "10:20 pm",
-	tag: "error",
-	name: "Jack Smith",
-}, {
-	id: 2,
-	type: "Promo Response",
-	date: "2022-09-25",
-	time: "7:20 pm",
-	tag: "error",
-	name: "George W.",
-}, {
-	id: 3,
-	type: "Promo Response",
-	date: "2022-09-23",
-	time: "5:30 pm",
-	tag: "error",
-	name: "Jason Richards",
-}];
+const columns = ["Notification", "Date/ Time", "Tags", "Members", "", "", ""]
+
 </script>

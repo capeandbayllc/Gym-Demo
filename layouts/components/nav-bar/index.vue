@@ -78,8 +78,9 @@ let navItems = shallowRef([]);
 
 const reporting = [
   {
+    label: "Widget Center",
     icon: WidgetIcon,
-    url: null,
+    url: "/widget-center",
   },
   {
     label: "Financial Reporting",
@@ -141,6 +142,16 @@ const navList = [
   {
     type: "widget-center",
     navigation: reporting,
+  },
+  {
+    type: "notification-center",
+    navigation: [
+      {
+        label: "Widget Center",
+        icon: WidgetIcon,
+        url: "/widget-center",
+      }
+    ]
   },
   {
     type: "document",
