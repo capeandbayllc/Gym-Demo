@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const query = gql`
-query QueryEmployeeEvents {
+  query QueryEmployeeEvents {
     calendarEvents {
       id
       owner_id
@@ -10,15 +10,15 @@ query QueryEmployeeEvents {
       full_day_event
       location_id
       location {
-          id
-          name
+        id
+        name
       }
       attendees {
-          id
-          entity_id
-          entity { 
-            profile_photo_path
-          }
+        id
+        entity_id
+        entity {
+          profile_photo_path
+        }
       }
     }
   }

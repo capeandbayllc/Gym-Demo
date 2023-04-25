@@ -37,8 +37,8 @@
 import { ref } from "vue";
 
 defineProps({
-  height: String || Number
-})
+  height: String || Number,
+});
 
 const openSearchInput = ref(false);
 const changeOpenSearchInput = (value) => {

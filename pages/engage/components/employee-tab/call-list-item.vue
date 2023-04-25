@@ -28,7 +28,7 @@
 
     <td class="">
       <div class="flex justify-evenly gap-2">
-        <button class="contact-button" @click.stop="contactOption='call'">
+        <button class="contact-button" @click.stop="contactOption = 'call'">
           <CallIcon class="icon"></CallIcon>
         </button>
 
@@ -61,12 +61,16 @@
             size="lg"
           />
         </div>
-          <people-dropdown class="dropdown-content" />
+        <people-dropdown class="dropdown-content" />
       </div>
     </td>
   </tr>
 
-    <Options :user="data" :show="contactOption" @on:close="contactOption = null" />
+  <Options
+    :user="data"
+    :show="contactOption"
+    @on:close="contactOption = null"
+  />
 </template>
 <style scoped lang="postcss">
 .call-list-item {

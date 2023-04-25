@@ -1,20 +1,29 @@
 <template>
-    <card title="Statistic Title" class="bg-base-300 text-base-content text-left" :options="{ favorite: false, collapse: false }">
-        <template #content>
-            <div class="px-5 pl-3" style="width: 100%;">
-                <div class="py-7">
-                    <div class="px-4 flex flex-col justify-end">
-                        <span class="text-sm">Page Views</span>
-                        <span class="text-2xl"> 45,332 </span>
-                        <span class="text-xs text-secondary"> +0.8% </span>
-                    </div>
-                    <div class="">
-                        <apexchart type="radialBar" height="220px" :options="options" :series="data" />
-                    </div>
-                </div>
-            </div>
-        </template>
-    </card>
+  <card
+    title="Statistic Title"
+    class="bg-base-300 text-base-content text-left"
+    :options="{ favorite: false, collapse: false }"
+  >
+    <template #content>
+      <div class="px-5 pl-3" style="width: 100%">
+        <div class="py-7">
+          <div class="px-4 flex flex-col justify-end">
+            <span class="text-sm">Page Views</span>
+            <span class="text-2xl"> 45,332 </span>
+            <span class="text-xs text-secondary"> +0.8% </span>
+          </div>
+          <div class="">
+            <apexchart
+              type="radialBar"
+              height="220px"
+              :options="options"
+              :series="data"
+            />
+          </div>
+        </div>
+      </div>
+    </template>
+  </card>
 </template>
 <script setup>
 const props = defineProps({
@@ -56,7 +65,7 @@ const options = {
       },
       dataLabels: {
         name: {
-            show: false,
+          show: false,
         },
         value: {
           show: true,
