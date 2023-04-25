@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full max-w-7xl">
     <div class="text-center mb-4">
       <AddIcon
         class="aspect-square w-10 h-auto border inline-block border-secondary rounded-full font-semibold cursor-pointer"
@@ -7,22 +7,7 @@
       <p class="text-xs mt-1">Update Member</p>
     </div>
     <div class="py-4 pr-5 w-full h-fit">
-      <div
-        class="bg-secondary flex justify-between rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-7xl"
-      >
-        <span>Members</span>
-        <div class="flex items-center h-8">
-          <button class="mx-4" @click="isSearchEnable = !isSearchEnable">
-            <SearchIcon />
-          </button>
-          <input
-            v-if="isSearchEnable"
-            type="text"
-            placeholder="Search"
-            class="input input-sm max-w-xs bg-secondary border border-base-content rounded"
-          />
-        </div>
-      </div>
+      <SearchTableToggler heading="Members" />
       <div
         class="-md:px-4 block border border-secondary bg-base-300 rounded-b p-7 mx-auto w-full max-w-7xl flex-col"
       >
@@ -56,6 +41,7 @@ import MemberTableRow from "./components/member-table-row.vue";
 import { SearchIcon, AddIcon } from "@/components/icons";
 import { useQuery } from "@vue/apollo-composable";
 import member from "~/api/queries/member";
+import SearchTableToggler from "../components/search-table-toggler.vue";
 
 const { result } = useQuery(member.query.browse);
 const members = ref([]);
@@ -73,7 +59,6 @@ watch(() => {
   });
 });
 
-const isSearchEnable = ref(false);
 const filterBy = [
   {
     value: "1",

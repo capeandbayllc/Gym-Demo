@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full max-w-7xl">
     <div class="text-center mb-4">
       <button @click="openAddMemberPopUp">
         <AddIcon
@@ -9,22 +9,7 @@
       <p class="text-xs mt-1">Add an Employee</p>
     </div>
     <div class="py-4 pr-5 w-full h-fit;">
-      <div
-        class="bg-secondary flex justify-between rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-7xl page-content items-center"
-      >
-        <span>Employees</span>
-        <div class="flex items-center h-8">
-          <button class="mx-4" @click="isSearchEnable = !isSearchEnable">
-            <SearchIcon />
-          </button>
-          <input
-            v-if="isSearchEnable"
-            type="text"
-            placeholder="Search"
-            class="input input-sm max-w-xs bg-secondary border border-base-content rounded"
-          />
-        </div>
-      </div>
+      <SearchTableToggler heading="Employees" />
       <div
         class="-md:px-4 page-content block border border-secondary bg-base-300 rounded-b p-7 flex-col"
       >
@@ -105,6 +90,7 @@ import Interests from "~/pages/check-in/profile-card/add-member/interests.vue";
 import EmergencyInfo from "~/pages/check-in/profile-card/add-member/emergency-info.vue";
 import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today.vue";
 import employee from "~/api/queries/employee";
+import SearchTableToggler from "../components/search-table-toggler.vue";
 import { useQuery } from "@vue/apollo-composable";
 
 const isSearchEnable = ref(false);

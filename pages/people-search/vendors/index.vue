@@ -1,26 +1,8 @@
 <template>
-  <div class="py-4 pr-5 w-full h-fit">
+  <div class="w-full max-w-7xl">
     <div>
-      <div
-        class="page-content py-4 bg-secondary rounded-t-lg pl-6 p-3 font-semibold flex justify-between items-center"
-      >
-        <span>Vendors</span>
-
-        <div class="flex items-center h-8">
-          <button class="mx-4" @click="isSearchEnable = !isSearchEnable">
-            <search-icon />
-          </button>
-          <input
-            v-if="isSearchEnable"
-            type="text"
-            placeholder="Search"
-            class="input input-sm max-w-xs bg-secondary border border-base-content rounded"
-          />
-        </div>
-      </div>
-      <div
-        class="-md:px-4 page-content border border-secondary bg-base-300 rounded-b p-7 flex-col"
-      >
+      <SearchTableToggler heading="Vendors" />
+      <div class="border border-secondary bg-base-300 rounded-b p-7 flex-col">
         <div>
           <data-table
             :columns="columns"
@@ -36,9 +18,7 @@
 
 <script setup>
 import VendorsTableRow from "./components/vendors-table-row.vue";
-import { SearchIcon, AddIcon } from "@/components/icons";
-
-const isSearchEnable = ref(false);
+import SearchTableToggler from "../components/search-table-toggler.vue";
 
 const columns = [
   {
