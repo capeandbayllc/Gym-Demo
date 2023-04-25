@@ -100,7 +100,6 @@ onMounted(() => {
 const mockToday = computed(() => {
 	if (notifications.value) {
 		return notifications?.value.map((e, i) => {
-			console.log(e)
 			return {
 				id: e.id,
 				type: "Promo Response",

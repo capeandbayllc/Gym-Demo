@@ -114,17 +114,13 @@ const statusTdClass = computed(() => {
 })
 
 function readNotification() {
-    const { mutate: updateData } = useMutation(notification.mutation.updateNotification);
+    const { mutate: updateData } = useMutation(notification.mutation.updateNotificationState);
     updateData({
-        input: {
+        input:{
             id: props.data.id,
-            state: 'success',
-            text: props.data.text,
-            entity_type: props.data.entity_type,
-            entity_id: props.data.entity_id,
-            entity: props.data.entity,
-            misc: props.data.misc
-        },
+            user_id: props.data.user_id,
+            state: 'success'
+        }
     })
     .then(() => {
         status.value = 'success';

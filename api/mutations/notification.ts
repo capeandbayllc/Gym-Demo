@@ -2,27 +2,23 @@ import gql from "graphql-tag";
 import {DocumentNode} from "graphql/language";
 import {GraphQLMutationInterface} from "~/api/mutations/GraphQLMutationInterface";
 
-const UPDATE_NOTIFICATION = gql`
-    mutation UpdateNotification($input: NotificationInput) {
+const UPDATE_NOTIFICATION_STATE = gql`
+    mutation UpdateNotificationState($input: NotificationInput) {
         updateNotification(input: $input) {
             id
+            user_id
             state
-            text
-            entity_type
-            entity_id
-            entity
-            misc
         }
     }
 `;
 
 export interface NotificationMutation {
-    updateNotification: DocumentNode;
+    updateNotificationState: DocumentNode;
 }
 
 const notification: GraphQLMutationInterface<NotificationMutation> = {
     mutation: {
-        updateNotification: UPDATE_NOTIFICATION,
+        updateNotificationState: UPDATE_NOTIFICATION_STATE,
     },
 };
 

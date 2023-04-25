@@ -7,6 +7,7 @@ const GET_ALL_NOTIFICATIONS: DocumentNode = gql`
     notifications(user_id: $user_id, page: $page, first: $first) {
       data {
         id
+        user_id
         state
         text
         entity_type
