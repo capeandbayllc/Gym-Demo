@@ -1,5 +1,7 @@
 <template>
-  <button class="bg-white hover:opacity-70 text-secondary w-[20px] h-[20px] flex justify-center items-center rounded-full">
+  <button
+    class="bg-white hover:opacity-70 text-secondary w-[20px] h-[20px] flex justify-center items-center rounded-full"
+  >
     <PlusIcon />
   </button>
 </template>
@@ -9,5 +11,5 @@
 }
 </style>
 <script setup>
-import {PlusIcon} from '~~/components/icons'
+import { PlusIcon } from "~~/components/icons";
 </script>

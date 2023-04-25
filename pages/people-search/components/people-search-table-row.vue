@@ -84,7 +84,7 @@
             />
           </svg>
         </div>
-        <people-dropdown 
+        <people-dropdown
           v-show="dropdownInfo"
           @edit-account="openInfoModal"
           @view-alerts="openInfoModal"
@@ -245,7 +245,6 @@
 .arrow-icon svg {
   @apply h-12 w-12;
 }
-
 </style>
 <script setup>
 import MembershipStatus from "~/components/buttons/membership-status.vue";

@@ -1,22 +1,16 @@
 <template>
-    <div class="dropdown" @click.stop>
-      <div class="dropdown-container">
-        <cross-icon
-          @click.stop="hideDropdownInfo"
-          class="flex absolute text-white h-[15px] w-[15px] top-[15px] left-[150px] cursor-pointer"
-        ></cross-icon>
-        <div @click="emitEditAccount" class="dropdown-item">
-          Edit account
-        </div>
-        <div @click="emitViewAlerts" class="dropdown-item">
-          View alerts
-        </div>
-        <div @click="emitAddGuestPass" class="dropdown-item">
-          Add Guest Pass
-        </div>
-        <div @click="emitPOS">POS</div>
-      </div>
+  <div class="dropdown" @click.stop>
+    <div class="dropdown-container">
+      <cross-icon
+        @click.stop="hideDropdownInfo"
+        class="flex absolute text-white h-[15px] w-[15px] top-[15px] left-[150px] cursor-pointer"
+      ></cross-icon>
+      <div @click="emitEditAccount" class="dropdown-item">Edit account</div>
+      <div @click="emitViewAlerts" class="dropdown-item">View alerts</div>
+      <div @click="emitAddGuestPass" class="dropdown-item">Add Guest Pass</div>
+      <div @click="emitPOS">POS</div>
     </div>
+  </div>
 </template>
 <style scoped lang="postcss">
 .dropdown {
@@ -29,23 +23,28 @@
 .dropdown-item {
   @apply mb-2 cursor-pointer;
 }
-</style>  
+</style>
 <script setup>
-const emit = defineEmits(['edit-account', 'view-alerts', 'add-guest-pass', 'pos']);
+const emit = defineEmits([
+  "edit-account",
+  "view-alerts",
+  "add-guest-pass",
+  "pos",
+]);
 
 function emitEditAccount() {
-    emit('edit-account');
+  emit("edit-account");
 }
 
 function emitViewAlerts() {
-    emit('view-alerts');
+  emit("view-alerts");
 }
 
 function emitAddGuestPass() {
-    emit('add-guest-pass');
+  emit("add-guest-pass");
 }
 
 function emitPOS() {
-    emit('pos');
+  emit("pos");
 }
 </script>

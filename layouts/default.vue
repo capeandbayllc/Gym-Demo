@@ -50,40 +50,42 @@
     Quick Test to confirm Amplify deployments are working
   </div>
   <Transition name="slide-fade">
-    <div v-if="isBreak" class="break-popup absolute -right-12 top-24 z-[9999] bg-[#0075c9] rounded-[18px] py-2 text-left px-8 w-[312px] min-h-fit">
+    <div
+      v-if="isBreak"
+      class="break-popup absolute -right-12 top-24 z-[9999] bg-[#0075c9] rounded-[18px] py-2 text-left px-8 w-[312px] min-h-fit"
+    >
       <div class="close cursor-pointer w-8 h-8" @click="isBreak = false">
-          <span></span>
-          <span></span>
-        </div>
-      <div class="py-2">
-          <p class="text-[21px]">
-          You are on break.
-          </p>
-          <button class="text-white bg-black rounded-full text-[12px] py-1 px-4 mt-2">
-          View your calander
-          </button>
+        <span></span>
+        <span></span>
       </div>
-  </div>
+      <div class="py-2">
+        <p class="text-[21px]">You are on break.</p>
+        <button
+          class="text-white bg-black rounded-full text-[12px] py-1 px-4 mt-2"
+        >
+          View your calander
+        </button>
+      </div>
+    </div>
   </Transition>
-
 </template>
 <style scoped>
 .break-popup {
   .close {
-        @apply absolute -left-4 -top-4 rotate-45 border border-white rounded-full bg-black;
-        span {
-          @apply absolute left-[7px] top-[14px] h-0.5 w-4 bg-white rounded-lg rotate-0 transition-all;
-        }
-        span:last-child {
-          @apply absolute left-[7px] top-[14px] h-0.5 w-4 bg-white rounded-lg rotate-90 transition-all;
-        }
-      }
-      .close:hover {
-        @apply bg-[#0075c9];
-        span:first-child {
-          @apply rotate-90;
-        }
-      }
+    @apply absolute -left-4 -top-4 rotate-45 border border-white rounded-full bg-black;
+    span {
+      @apply absolute left-[7px] top-[14px] h-0.5 w-4 bg-white rounded-lg rotate-0 transition-all;
+    }
+    span:last-child {
+      @apply absolute left-[7px] top-[14px] h-0.5 w-4 bg-white rounded-lg rotate-90 transition-all;
+    }
+  }
+  .close:hover {
+    @apply bg-[#0075c9];
+    span:first-child {
+      @apply rotate-90;
+    }
+  }
 }
 .app-layout {
   @apply w-screen /* overflow-x-hidden */;
@@ -150,12 +152,12 @@ provide("floating-modal", (text, style = {}) => {
   }
 });
 
-const breakPopup = ()=> {
-  isBreak.value = true
+const breakPopup = () => {
+  isBreak.value = true;
   setTimeout(() => {
-    isBreak.value = false
+    isBreak.value = false;
   }, 10000);
-}
+};
 
 const toggleCircularMenu = () => {
   showCircularMenu.value = !showCircularMenu.value;
