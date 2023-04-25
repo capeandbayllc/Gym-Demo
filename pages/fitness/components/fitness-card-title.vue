@@ -1,6 +1,6 @@
 <template>
     <div class="fitness-card-title">
-        <div class="flex items-center text-white">
+        <div class="flex items-center text-base-content">
             <div class="title-icon">
                 <component :is="titleIcon" />
             </div>
@@ -8,7 +8,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .fitness-card-title {
     @apply flex bg-secondary justify-between h-12 items-center text-lg font-normal px-[20px] rounded-[15px] rounded-b-none;
 }

@@ -4,7 +4,7 @@
     <engage-today-event />
   </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .engage-calendar-events {
   @apply row-span-2 border border-secondary rounded-3xl p-2;
 }

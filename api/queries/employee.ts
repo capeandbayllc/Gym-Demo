@@ -1,37 +1,37 @@
 import gql from "graphql-tag";
-import {DocumentNode} from "graphql/language";
-import {GraphQLQueryInterface} from "~/api/queries/GraphQLQueryInterface";
+import { DocumentNode } from "graphql/language";
+import { GraphQLQueryInterface } from "~/api/queries/GraphQLQueryInterface";
 
 const GET_EMPLOYEES: DocumentNode = gql`
-    query Employees($page: Int, $first: Int, $filter: Filter) {
-        employee(page: $page, first: $first, filter: $filter) {
-            data {
-                id
-                first_name
-                last_name
-                email
-                gender
-                profile_photo_path
-                phone
-                created_at
-                updated_at
-                locations {
-                    name
-                }
-#                homeLocation {
-#                    name
-#                }
-            }
-            paginatorInfo {
-                currentPage
-                lastPage
-                firstItem
-                lastItem
-                perPage
-                total
-            }
+  query Employees($page: Int, $first: Int, $filter: Filter) {
+    employee(page: $page, first: $first, filter: $filter) {
+      data {
+        id
+        first_name
+        last_name
+        email
+        gender
+        profile_photo_path
+        phone
+        created_at
+        updated_at
+        locations {
+          name
         }
+        #                homeLocation {
+        #                    name
+        #                }
+      }
+      paginatorInfo {
+        currentPage
+        lastPage
+        firstItem
+        lastItem
+        perPage
+        total
+      }
     }
+  }
 `;
 
 // const GET_SINGLE_EMPLOYEE: DocumentNode = gql`
@@ -61,15 +61,15 @@ const GET_EMPLOYEES: DocumentNode = gql`
 // `;
 
 export interface EmployeeQuery {
-    browse: DocumentNode
-    get: DocumentNode
+  browse: DocumentNode;
+  get: DocumentNode;
 }
 
 const employee: GraphQLQueryInterface<EmployeeQuery> = {
-    query: {
-        browse: GET_EMPLOYEES,
-        // get: GET_SINGLE_EMPLOYEE
-    },
-}
+  query: {
+    browse: GET_EMPLOYEES,
+    // get: GET_SINGLE_EMPLOYEE
+  },
+};
 
 export default employee;

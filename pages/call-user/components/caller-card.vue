@@ -1,18 +1,18 @@
 <template>
    <div class="call-image-container">
-        <div class="profile-avatar" :class="{'bg-secondary': userCallSetting.type === 'outgoing-call' || userCallSetting.type === 'incoming-call', 'bg-gray-600': userCallSetting.type === 'end-call'}">
+        <div class="profile-avatar" :class="{'bg-secondary': userCallSetting.type === 'outgoing-call' || userCallSetting.type === 'incoming-call', 'bg-base-content/20': userCallSetting.type === 'end-call'}">
             <img :src="userCallSetting.callerProfileImage" class="rounded-full" alt=""/>
         </div>
         <div class="profile-info">
             <div class="profile-name">{{ userCallSetting.userName }}</div>
-            <div class="call-type" :class="{'text-zinc-500': userCallSetting.type === 'outgoing-call', 'text-secondary': userCallSetting.type === 'end-call', 'text-success': userCallSetting.type === 'incoming-call'}">{{ userCallSetting.callType }}</div>
+            <div class="call-type" :class="{'text-base-content/10': userCallSetting.type === 'outgoing-call', 'text-secondary': userCallSetting.type === 'end-call', 'text-success': userCallSetting.type === 'incoming-call'}">{{ userCallSetting.callType }}</div>
             <div class="phone-number" :class="{'text-secondary': userCallSetting.type === 'outgoing-call'}">{{ userCallSetting.phone }}</div>
             <div class="date-time" v-if="userCallSetting.type !== 'incoming-call'">
                 <span :class="{'text-secondary': userCallSetting.type === 'end-call'}">Date</span>
                 <span :class="{'text-secondary': userCallSetting.type === 'end-call'}">Time</span>
             </div>
         </div>
-        <div class="profile-call" :class="{'border-secondary bg-primary bg-opacity-40': userCallSetting.type === 'outgoing-call', 'border-gray-600 bg-base-100': userCallSetting.type === 'end-call', 'border-green-400 bg-green-400 bg-opacity-40':userCallSetting.type === 'incoming-call' }">
+        <div class="profile-call" :class="{'border-secondary bg-primary bg-opacity-40': userCallSetting.type === 'outgoing-call', 'border-base-content/20 bg-base-100': userCallSetting.type === 'end-call', 'border-success bg-success bg-opacity-40':userCallSetting.type === 'incoming-call' }">
             <img :src="userCallSetting.callIcon"/>
         </div>
         <div class="grid grid-cols-2 mt-6" v-if="userCallSetting.type !== 'incoming-call'">
@@ -39,7 +39,7 @@ const props = defineProps({
 const showNotes = ref(false);
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
     .call-image-container{
         @apply p-4;
         .profile-avatar {
@@ -62,7 +62,7 @@ const showNotes = ref(false);
             .date-time {
                 @apply mt-1;
                 span {
-                    @apply text-sm mb-3 mr-5 text-white;
+                    @apply text-sm mb-3 mr-5 text-base-content;
                 }
             }
             
@@ -74,7 +74,7 @@ const showNotes = ref(false);
             }
         }
         .notes{
-            @apply border-white px-4 bg-transparent;
+            @apply border-base-content px-4 bg-transparent;
         }
         .neutral-input {
             @apply bg-base-content/20 block w-full mt-3 rounded-md p-3;

@@ -189,35 +189,29 @@ const membershipTable = ref([
 ]);
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
     .membership-table tbody tr th, .membership-table tbody tr td{
         @apply px-4;
     }
     .membership-table tbody tr td{
-        @apply border;
-        border-style: none solid solid none;
+        @apply border border-solid border-t-0 border-l-0;
     }
     .membership-table thead tr th:not(:first-child){
-        width:7rem;
+        @apply w-[7rem];
     }
     .shadow-layer{
-        width:28rem;
+        @apply w-[28rem];
     }
     .top-left-corner{
-        border-top-left-radius: 20px;
-        border-top-style: solid !important;
-        border-left-style: solid !important;
+        @apply rounded-tl-[20px] border-t border-l;
     }
     .top-right-corner{
-        border-top-right-radius: 20px;
-        border-left: none !important;
+        @apply rounded-tr-[20px] border-l-0;
     }
     .bottom-left-corner{
-        border-bottom-left-radius: 20px;
-        border-bottom-style: solid !important;
-        border-left-style: solid !important;
+        @apply rounded-bl-[20px] border-b border-l;
     }
     .bottom-right-corner{
-        border-bottom-right-radius: 20px;
+        @apply rounded-br-[20px] border-l-0;
     }
 </style>

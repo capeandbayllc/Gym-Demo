@@ -14,7 +14,7 @@
         </div>
         <!-- 1 Initialition fee -->
         <div class="col-span-3 w-full flex">
-            <p class="pl-4" :class="{'text-gray-400':!data.activeInitiationFee}">1. Initialition Fee</p>
+            <p class="pl-4" :class="{'text-neutral-content':!data.activeInitiationFee}">1. Initialition Fee</p>
         </div>
         <div class="col-span-3 mx-auto w-full">
             <input :disabled="!data.activeInitiationFee" type="number" class="white-input w-full p-1 rounded-sm" v-model="data.initialitionFeePrice" />
@@ -26,28 +26,28 @@
         <div class="col-span-3 w-full flex justify-center">
             <div>
                 <button v-if="data.activeInitiationFee" @click="buttonActiveInitiationFee.click()" class="pt-1">Remove</button>
-                <button :class="{'text-gray-400':!data.activeInitiationFee}" v-else class="pt-1" @click="buttonActiveInitiationFee.click()">Add</button>
+                <button :class="{'text-neutral-content':!data.activeInitiationFee}" v-else class="pt-1" @click="buttonActiveInitiationFee.click()">Add</button>
             </div>
         </div>
         <!-- 2 First months dues -->
         <div class="col-span-3 w-full flex">
-            <p class="pl-4" :class="{'text-gray-400':!data.activeFirstMonthsDues}">2. First Months Dues</p>
+            <p class="pl-4" :class="{'text-neutral-content':!data.activeFirstMonthsDues}">2. First Months Dues</p>
         </div>
         <div class="col-span-4 mx-auto w-full">
             <input :disabled="!data.activeFirstMonthsDues" value="Pro Rate Monthly PTM" class="white-input w-full p-1 rounded-sm" />
         </div>
         <div class="col-span-2 w-full flex">
-            <p class="pt-1" :class="{'text-gray-400':!data.activeFirstMonthsDues}">First Month Only</p>
+            <p class="pt-1" :class="{'text-neutral-content':!data.activeFirstMonthsDues}">First Month Only</p>
         </div>
         <div class="col-span-3 w-full flex justify-center">
             <div>
                 <button v-if="data.activeFirstMonthsDues" @click="buttonActiveFirstMonthsDues.click()" class="pt-1">Remove</button>
-                <button :class="{'text-gray-400':!data.activeFirstMonthsDues}" v-else class="pt-1" @click="buttonActiveFirstMonthsDues.click()">Add</button>
+                <button :class="{'text-neutral-content':!data.activeFirstMonthsDues}" v-else class="pt-1" @click="buttonActiveFirstMonthsDues.click()">Add</button>
             </div>
         </div>
         <!-- 3 Total Amount Paid Today -->
         <div class="col-span-3 w-full flex">
-            <p class="pl-4" :class="{'text-gray-400':!data.activeTotalAmountPaid}">3. *Total Amount Paid Today</p>
+            <p class="pl-4" :class="{'text-neutral-content':!data.activeTotalAmountPaid}">3. *Total Amount Paid Today</p>
         </div>
         <div class="col-span-6  mx-auto w-full">
             <select-box
@@ -60,8 +60,8 @@
                 labelOpened="Limited Availability"
                 :showSearch="false"
                 :showClearList="false"
-                :class="data.activeTotalAmountPaid?'bg-white border-white':'bg-gray-400 border-gray-400'"
-                class="text-black rounded border w-full">
+                :class="data.activeTotalAmountPaid?'bg-base-content border-base-content':'bg-neutral-content border-neutral-content'"
+                class="text-base-300 rounded border w-full">
             </select-box>
             <!-- <select :disabled="!data.activeTotalAmountPaid" placeholder="POS Total" class="white-input w-full p-1 rounded-sm" v-model="data.totalAmountPaidToday">
                 <option value="" disabled selected hidden>POS Total</option>
@@ -72,7 +72,7 @@
         <div class="col-span-3 w-full flex justify-center">
             <div>
                 <button v-if="data.activeTotalAmountPaid" @click="buttonActiveTotalAmountPaid.click()" class="pt-1">Remove</button>
-                <button v-else :class="{'text-gray-400':!data.activeTotalAmountPaid}" class="pt-1" @click="buttonActiveTotalAmountPaid.click()">Add</button>
+                <button v-else :class="{'text-neutral-content':!data.activeTotalAmountPaid}" class="pt-1" @click="buttonActiveTotalAmountPaid.click()">Add</button>
             </div>
         </div>
         <div class="col-span-12 flex justify-center">
@@ -127,14 +127,11 @@ const buttonActiveTotalAmountPaid = ref(null);
 
 
 </script>
-<style scoped>
+<style scoped lang="postcss">
     .white-input {
-        @apply bg-white text-black;
+        @apply bg-base-content text-base-300;
     }
-
     .white-input:disabled{
-        @apply bg-gray-400;
+        @apply bg-neutral-content;
     }
-
-
 </style>

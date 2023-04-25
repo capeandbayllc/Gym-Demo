@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-between bg-[#0074c8] p-2 px-3 mb-10 rounded-md cursor-pointer border-2 border-transparent hover:border-white"
+    class="flex justify-between bg-secondary p-2 px-3 mb-10 rounded-md cursor-pointer border-2 border-transparent hover:border-secondary"
     v-if="shared"
   >
     <p>Shared</p>
@@ -8,7 +8,7 @@
   </div>
 
   <div
-    class="flex justify-between bg-black p-2 px-3 mb-3 rounded-md border-2 border-white cursor-pointer hover:border-[#0074c8]"
+    class="flex justify-between bg-base-300 p-2 px-3 mb-3 rounded-md border-2 border-primary-content cursor-pointer hover:border-secondary"
     v-else
   >
     <p>Folder</p>

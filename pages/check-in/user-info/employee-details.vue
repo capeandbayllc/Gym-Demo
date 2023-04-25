@@ -19,11 +19,7 @@
         </div>
         <div class="col-span-2 3xl:col-span-3 -lg:col-span-1 -md:col-auto">
             <div class="border border-secondary rounded p-4 w-full mb-4 bg-transparent">
-                <h4 class="mb-1 inline-block font-bold w-full">Availability</h4>
-                <label class="mr-3">Daily Times Set:</label>
-                <span class="mx-2 inline-block"> <ClockIcon class="inline-block mr-1"/> 10:20 am </span>
-                <span class="mx-2 inline-block"> <ClockIcon class="inline-block mr-1"/> 1:00 pm </span>
-                <span class="mx-2 inline-block"> <ClockIcon class="inline-block mr-1"/> 3:00 pm </span>
+                <availability-clocks title="Availability" />
             </div>
             <Button secondary size="sm" class="float-right capitalize">+ New</Button>
             <Button ghost size="sm" class="float-right mr-2 capitalize">Edit</Button>
@@ -32,7 +28,7 @@
 </template>
 <script setup>
 import {ref} from 'vue';
-import {ClockIcon} from '~~/components/icons';
+import AvailabilityClocks from '~/pages/setting/components/availability-clocks.vue';
 import ProfileRelation from './profile-relation.vue';
 import UserInfoCard from './user-info-card.vue';
 const employeeForm = ref({})

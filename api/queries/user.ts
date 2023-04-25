@@ -16,28 +16,28 @@ const FIND_BY_MAIL: DocumentNode = gql`
 `;
 
 const FIND_BY_ID: DocumentNode = gql`
-    query User($id: ID!) {
-        user(id: $id) {
-            id
-            first_name
-            last_name
-            email
-            profile_photo_path
-            phone
-        }
+  query User($id: ID!) {
+    user(id: $id) {
+      id
+      first_name
+      last_name
+      email
+      profile_photo_path
+      phone
     }
+  }
 `;
 
 export interface UserQuery {
-    findByMail: DocumentNode;
-    findById: DocumentNode;
+  findByMail: DocumentNode;
+  findById: DocumentNode;
 }
 
 const user: GraphQLQueryInterface<UserQuery> = {
-    query: {
-        findByMail: FIND_BY_MAIL,
-        findById: FIND_BY_ID,
-    }
+  query: {
+    findByMail: FIND_BY_MAIL,
+    findById: FIND_BY_ID,
+  },
 };
 
 export default user;

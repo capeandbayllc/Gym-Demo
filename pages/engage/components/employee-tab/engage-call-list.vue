@@ -10,7 +10,7 @@
     />
   </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .engage-call-list-container {
   @apply col-span-2 pb-1 -md:col-span-3;
 }

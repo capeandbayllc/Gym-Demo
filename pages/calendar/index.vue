@@ -2,7 +2,7 @@
     <div class="px-8 w-full h-fit">
         <!-- main content wrapper  -->
         <div
-            class="border border-secondary bg-[#202020]/[0.9] rounded-3xl p-7 max-w-none flex gap-4"
+            class="border border-secondary bg-base-100/[0.9] rounded-3xl p-7 max-w-none flex gap-4"
         >
             <!-- left sidebar -->
             <div
@@ -63,7 +63,7 @@
                             <span class="!font-light !tracking-wider"
                                 >Add New
                             </span>
-                            <PlusIcon class="w-4 fill-white" />
+                            <PlusIcon class="w-4 fill-base-content" />
                         </button>
                         <input
                             placeholder="Search"
@@ -90,7 +90,7 @@
         </div>
     </div>
     <div
-        class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-[#fff]/[0.1] backdrop-blur-sm calendar-style-transition"
+        class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-base-content/[0.1] backdrop-blur-sm calendar-style-transition"
         :class="{
             'z-50 opacity-100': eventFormVisibility,
             '-z-50 opacity-0': !eventFormVisibility,
@@ -105,7 +105,7 @@
         />
     </div>
     <div
-        class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-[#fff]/[0.1] backdrop-blur-sm calendar-style-transition"
+        class="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-base-content/[0.1] backdrop-blur-sm calendar-style-transition"
         :class="{
             'z-50 opacity-100': eventDetailsVisibibility,
             '-z-50 opacity-0': !eventDetailsVisibibility,
@@ -478,9 +478,9 @@ const showOfferUp = () => {
 };
 </script>
 
-<style>
+<style lang="postcss">
 .search-input {
-    @apply !text-white py-1 p-2 rounded-xl border-2 border-transparent text-[0.8rem] !font-light !tracking-wider w-[50%] bg-secondary/[0.4] placeholder:!text-white/[0.8] calendar-style-transition hidden lg:block;
+    @apply !text-base-content py-1 p-2 rounded-xl border-2 border-transparent text-[0.8rem] !font-light !tracking-wider w-[50%] bg-secondary/[0.4] placeholder:!text-base-content/[0.8] calendar-style-transition hidden lg:block;
 }
 
 .calendar-style-transition {

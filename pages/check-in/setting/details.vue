@@ -39,7 +39,7 @@
 <script setup>
 import { LockIcon } from '~~/components/icons';
 </script>
-<style scoped>
+<style scoped lang="postcss">
 .detail-card {
     @apply p-4 flex flex-col w-full h-full mb-4;
     h3 {

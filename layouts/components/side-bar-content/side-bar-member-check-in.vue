@@ -1,17 +1,17 @@
 <template>
-  <div class="side-bar-member" >
+  <div class="side-bar-member">
     <div class="member-content">
-      <img :src="profile_photo_path" class="member-image" :class="getImageBorder()"/>
-      <div class="member-name">
-        {{first_name}} {{ last_name }}
-      </div>
+      <img
+        :src="profile_photo_path"
+        class="member-image"
+        :class="getImageBorder()"
+      />
+      <div class="member-name">{{ first_name }} {{ last_name }}</div>
       <!--  this is right  <div v-if="unread" class="unread-badge">{{unread}}</div>  -->
       <!--   temporary condition, just to show badge in demo -->
       <div v-if="isEvenIndex" class="unread-badge">{{ props.unread ?? 3 }}</div>
     </div>
-
   </div>
-
 </template>
 <style scoped>
 .side-bar-member {
@@ -20,22 +20,23 @@
     @apply w-10 h-10 rounded-3xl border-2 mr-3;
   }
   .img-one {
-    border-color: #0A00FF ;
+    border-color: #0a00ff;
   }
   .img-two {
-    border-color: #00C7F7 ;
+    border-color: #00c7f7;
   }
   .img-three {
-    border-color: #FFD800 ;
+    border-color: #ffd800;
   }
   .img-four {
-    border-color: #B908FB ;
+    border-color: #b908fb;
   }
 
   .member-name {
     @apply cursor-pointer px-2 rounded-lg border border-secondary h-8;
     border: 1px solid transparent;
-    transition: padding-left 0.2s ease-in-out, border-color 0.2s ease-in-out 0.2s;
+    transition: padding-left 0.2s ease-in-out,
+      border-color 0.2s ease-in-out 0.2s;
     font-size: 0.875rem;
     line-height: 2rem;
     margin-top: 3px;
@@ -50,29 +51,28 @@
     @apply flex w-44 ml-0;
   }
 }
-
 </style>
 
 <script>
 export default {
-  'name': 'side-bar-member-check-in'
-}
+  name: "side-bar-member-check-in",
+};
 </script>
 
 <script setup>
-import {computed} from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
   profile_photo_path: {
     type: String,
-    default: "/account-lg.png"
+    default: "/account-lg.png",
   },
   id: String,
   first_name: String,
   last_name: String,
   unread: Number,
-  index: Number
-})
+  index: Number,
+});
 
 /**
  * this is a temporary condition only for demo
@@ -89,10 +89,14 @@ const isFirstIndex = computed(() => {
 });
 
 const getImageBorder = () => {
-  if (props.index % 2 === 0) { return "img-two"; }
-  else if (props.index % 3 === 0) { return "img-three"; }
-  else if (props.index % 4 === 0) { return "img-four"; }
-  else { return "img-one"; }
-}
-
+  if (props.index % 2 === 0) {
+    return "img-two";
+  } else if (props.index % 3 === 0) {
+    return "img-three";
+  } else if (props.index % 4 === 0) {
+    return "img-four";
+  } else {
+    return "img-one";
+  }
+};
 </script>

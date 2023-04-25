@@ -4,7 +4,7 @@
     <div class="member-content col-span-2"></div>
     <div class="member-content col-span-3"></div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .member-content {
     @apply border border-secondary rounded;
 }

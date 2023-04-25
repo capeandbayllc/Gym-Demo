@@ -16,7 +16,7 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .note-add-container {
     @apply flex flex-col border border-secondary p-3 bg-base-300 rounded;
     .note-content {
