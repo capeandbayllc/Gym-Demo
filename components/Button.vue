@@ -9,7 +9,7 @@
       'btn-circle': circle,
       'btn-square': square,
       loading: loading,
-      'btn-primary': primary,
+      'btn-primary hover:bg-secondary hover:border-secondary': primary,
       'btn-secondary text-base-content': secondary,
       'btn-accent': accent,
       'btn-info': info,
