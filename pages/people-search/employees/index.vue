@@ -81,7 +81,7 @@
 
 <script setup>
 import EmployeeTableRow from "./components/employee-table-row.vue";
-import { AddIcon, NextIcon, SearchIcon } from "@/components/icons";
+import { AddIcon, NextIcon } from "@/components/icons";
 import Welcome from "~/pages/check-in/profile-card/add-member/welcom.vue";
 import JoinTour from "~/pages/check-in/profile-card/add-member/join-tour.vue";
 import Infomrmation from "~/pages/check-in/profile-card/add-member/information.vue";
@@ -93,7 +93,6 @@ import employee from "~/api/queries/employee";
 import SearchTableToggler from "../components/search-table-toggler.vue";
 import { useQuery } from "@vue/apollo-composable";
 
-const isSearchEnable = ref(false);
 const addEmployeePopUp = ref(null);
 const addEmployeeScreens = ref([
   Welcome,

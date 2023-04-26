@@ -1,5 +1,4 @@
 <template>
-  <!-- if making changes ensure grid columns are synchronised with headers -->
   <div>
     <div class="people-lead-tbl-row mr-2 font-light text-[0.8rem]">
       <div class="flex items-center gap-2">

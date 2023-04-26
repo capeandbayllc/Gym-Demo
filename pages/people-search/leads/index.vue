@@ -75,7 +75,7 @@
 
 <script setup>
 import LeadTableRow from "./components/lead-table-row.vue";
-import { SearchIcon, AddIcon, NextIcon } from "@/components/icons";
+import { AddIcon, NextIcon } from "@/components/icons";
 import Welcome from "~/pages/check-in/profile-card/add-member/welcom.vue";
 import JoinTour from "~/pages/check-in/profile-card/add-member/join-tour.vue";
 import Infomrmation from "~/pages/check-in/profile-card/add-member/information.vue";
