@@ -125,11 +125,9 @@ td:last-child {
 <script setup lang="ts">
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import NoteCardModal from "~/pages/check-in/note-card/index.vue";
-import { Ref } from "vue";
 import dateFormat from "dateformat";
 
 interface Employee {
