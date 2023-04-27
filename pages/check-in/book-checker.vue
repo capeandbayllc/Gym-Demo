@@ -12,12 +12,12 @@
                 <check-circle-icon v-else />
             </span>
         </div>
-        <div class="font-normal" :class="{ 'text-black': modelValue }">
+        <div class="font-normal" :class="{ 'text-base-300': modelValue }">
             {{ modelValue ? "Booked" : "Book Event" }}
         </div>
     </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .book-checker-container {
     @apply flex flex-row items-center p-1 rounded-full space-x-2 w-28 cursor-pointer transition-all duration-300 ease-linear;
     .checker {

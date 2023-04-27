@@ -8,14 +8,14 @@
   />
 </template>
 
-<style>
+<style lang="postcss">
 .conversion-table {
   @apply h-80 overflow-x-auto w-full;
   table {
     @apply w-max md:w-full;
 
     th {
-      @apply text-secondary p-0 text-left;
+      @apply text-secondary p-0 text-left px-4;
     }
   }
 }

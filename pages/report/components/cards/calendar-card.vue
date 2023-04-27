@@ -40,7 +40,7 @@
         </template>
     </card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .calendar-card {
     @apply w-80;
     .calendar-summary, .calendar-total-scheduled {
@@ -56,8 +56,7 @@
         @apply flex flex-row gap-4 pt-3;
 
         ::-webkit-scrollbar {
-            width: 0em;
-            height: 0em;
+            @apply w-0 h-0;
         }
         .calendar-day-list {
             @apply w-12 flex flex-col gap-2 flex-shrink-0 h-56 overflow-y-auto;

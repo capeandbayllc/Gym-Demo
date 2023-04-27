@@ -4,7 +4,7 @@
     <engage-call-list />
     <engage-break-down />
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .engage-events {
     @apply row-span-2 w-64 border border-secondary rounded;
 }

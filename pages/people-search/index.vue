@@ -1,13 +1,13 @@
 <template>
   <div
     id="ppl-search"
-    class="p-6 w-full max-w-7xl rounded-2xl border-2 border-secondary bg-gradient-to-b from-[#031222]/75 to-black mt-8"
+    class="p-6 w-full max-w-7xl rounded-2xl border-2 border-secondary gr-gradient mt-8"
   >
     <div>
       <input
         type="text"
         placeholder="Search"
-        class="input w-2/4 bg-secondary/50 text-white text-lg"
+        class="input w-full max-w-md bg-secondary/50 text-primary-content text-lg"
         v-model="searchInput"
       />
     </div>
@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<style>
+<style lang="postcss">
 .app-body-content:has(#ppl-search) {
   @apply pl-20 pr-4;
 }

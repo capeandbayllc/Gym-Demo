@@ -1,10 +1,15 @@
 <template>
   <div class="side-bar-member">
     <div :class="[isFirstIndex ? 'member-normal-content' : 'member-content']">
-      <img :src="profile_photo_path" class="member-image"/>
+      <img :src="profile_photo_path" class="member-image" />
       <!--    temporary condition for demo-->
-      <div :class="[isFirstIndex ? 'member-name-one' : 'member-name', isMemberSelected ? 'bg-member' : '']"
-           @click="showMemberDetails(id)">
+      <div
+        :class="[
+          isFirstIndex ? 'member-name-one' : 'member-name',
+          isMemberSelected ? 'bg-member' : '',
+        ]"
+        @click="showMemberDetails(id)"
+      >
         {{ first_name }} {{ last_name }}
       </div>
       <!--  this is right  <div v-if="unread" class="unread-badge">{{unread}}</div>  -->
@@ -13,15 +18,15 @@
     </div>
 
     <div v-if="!isFirstIndex" class="member-check-out-outer">
-      <div class="member-check-out"
-           :class="[!checkIn && !isCheckedOut ? 'check-out' : 'checked-out']"
-           @click="toggleCheckOutStatus">
-        {{ !checkIn && !isCheckedOut ? 'Check out' : 'Checked out' }}
+      <div
+        class="member-check-out"
+        :class="[!checkIn && !isCheckedOut ? 'check-out' : 'checked-out']"
+        @click="toggleCheckOutStatus"
+      >
+        {{ !checkIn && !isCheckedOut ? "Check out" : "Checked out" }}
       </div>
     </div>
-
   </div>
-
 </template>
 <style scoped>
 .side-bar-member {
@@ -31,10 +36,12 @@
     @apply w-10 h-10 rounded-lg border-2 border-[#0075C9] mr-3;
   }
 
-  .member-name, .member-name-one {
+  .member-name,
+  .member-name-one {
     @apply cursor-pointer px-2 rounded-lg border border-secondary h-8;
     border: 1px solid transparent;
-    transition: padding-left 0.2s ease-in-out, border-color 0.2s ease-in-out 0.2s;
+    transition: padding-left 0.2s ease-in-out,
+      border-color 0.2s ease-in-out 0.2s;
     font-size: 0.875rem;
     line-height: 2rem;
     margin-top: 3px;
@@ -45,7 +52,7 @@
   }
 
   .bg-member {
-    background-color: #0075C9;
+    background-color: #0075c9;
   }
 
   .unread-badge {
@@ -54,12 +61,13 @@
     left: -0.25rem;
   }
 
-  .check-out, .checked-out {
+  .check-out,
+  .checked-out {
     @apply text-xs text-black bg-white rounded-lg p-1 ml-10 cursor-pointer;
   }
 
   .checked-out {
-    @apply bg-error text-white px-2
+    @apply bg-error text-white px-2;
   }
 
   .member-normal-content {
@@ -80,7 +88,8 @@
   }
 
   &:hover {
-    .member-content, .member-content > .unread-badge {
+    .member-content,
+    .member-content > .unread-badge {
       margin-left: -3.5rem;
     }
     .member-check-out-outer {
@@ -118,30 +127,29 @@
     }
   }
 }
-
 </style>
 
 <script>
 export default {
-  'name': 'side-bar-member'
-}
+  name: "side-bar-member",
+};
 </script>
 
 <script setup>
-import {computed, ref} from "vue";
+import { computed, ref } from "vue";
 
 const props = defineProps({
   profile_photo_path: {
     type: String,
-    default: "/account-lg.png"
+    default: "/account-lg.png",
   },
   id: String,
   first_name: String,
   last_name: String,
   unread: Number,
   index: Number,
-  checkIn: Boolean
-})
+  checkIn: Boolean,
+});
 
 /**
  * temporary condition only for demo
@@ -164,7 +172,7 @@ const showMemberDetails = (id) => {
     isMemberSelected.value = true;
     navigateTo(`/check-in?id=${id}&preview=true`);
   }
-}
+};
 
 const isCheckOutVisible = ref(false);
 const isCheckedOut = ref(false);
@@ -181,10 +189,9 @@ const hideCheckOut = () => {
   }
 };
 
-const emit = defineEmits(['update:activeMembers']);
+const emit = defineEmits(["update:activeMembers"]);
 const toggleCheckOutStatus = () => {
   isCheckedOut.value = !isCheckedOut.value;
-  emit('update:activeMembers', isCheckedOut.value);
+  emit("update:activeMembers", isCheckedOut.value);
 };
-
 </script>

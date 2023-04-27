@@ -1,6 +1,6 @@
 <template>
     <div
-        class="inline-block bg-[#18203A] py-1 px-2 border-2 border-[#073A76] rounded-xl mx-auto"
+        class="inline-block bg-secondary-content py-1 px-2 border-2 border-secondary-focus rounded-xl mx-auto"
     >
         <button
             type="button"
@@ -58,8 +58,8 @@ const emit = defineEmits(["update:modelValue"]);
 watch(currentValue, (nv, ov) => emit("update:modelValue", nv));
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .selected-button {
-    @apply bg-[#0074C8] border-2 border-[#073A76] !rounded-lg;
+    @apply bg-secondary border-2 border-secondary-focus !rounded-lg;
 }
 </style>

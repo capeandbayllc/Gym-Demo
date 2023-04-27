@@ -1,8 +1,8 @@
 <template>
     <div class="lg:flex space-x-3">
         <simple-card title="Make a Call" class="rounded-xl">
-            <div class="bg-gradient-to-t rounded-b-xl from-[#18203A] to-[#11609E] p-6 w-[500px]">
-                    <div class="bg-black p-4 border-[1px] border-[#008AE0] rounded-xl">
+            <div class="bg-gradient-to-t rounded-b-xl from-secondary-content to-secondary/60 p-6 w-[500px]">
+                    <div class="bg-base-300 p-4 border-[1px] border-info-content rounded-xl">
                         
                         <Body 
                             @notesModal="notesModal" 
@@ -13,7 +13,7 @@
                         >
                             <template #displayMiddle>
                                 <div class="text-center mb-2">
-                                    <p class="text-2xl text-[#008AE0] font-medium">+ 1 {{ call.phone }}</p>
+                                    <p class="text-2xl text-info-content font-medium">+ 1 {{ call.phone }}</p>
                                     <p class="text-sm mt-2">{{ dateFormat(new Date(), 'mmmm yyyy, h:MM TT') }}</p>
                                 </div>
                             </template>
@@ -38,10 +38,6 @@
     </div>
     
 </template>
-
-<style scoped>
-
-</style>
 
 <script setup>
 import ProfileImage from '@/public/images/profile/users_2.jpg';

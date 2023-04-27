@@ -26,15 +26,12 @@
     </div>
   </teleport>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .modal {
-  @apply items-center overflow-x-hidden;
-  max-width: 100vw;
+  @apply items-center overflow-x-hidden max-w-[100vw];
 }
 .modal-close-btn {
-  @apply absolute;
-  top: -40px;
-  right: -52px;
+  @apply absolute top-[-40px] right-[-52px];
 }
 .modal-box {
   @apply overflow-visible shadow-none p-0 min-w-fit bg-transparent w-fit max-w-[unset];

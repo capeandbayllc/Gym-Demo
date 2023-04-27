@@ -1,15 +1,28 @@
 <template>
   <div
-    class="overflow-y-auto overflow-hidden absolute h-[calc(100vh-65px)] top-[62px] right-0 z-10 bg-[#191919] border-2 border-secondary transition-all duration-300 ease-linear"
+    class="overflow-y-auto overflow-hidden absolute h-[calc(100vh-65px)] top-[62px] right-0 z-10 bg-black border-2 border-secondary transition-all duration-300 ease-linear rounded-l-2xl"
     :class="{
-      'w-[700px] text-[0.9rem]': isLeaderBoardVisible === true,
+      'w-[600px] text-[0.7rem]': isLeaderBoardVisible === true,
       'w-[0px] text-[0rem]': isLeaderBoardVisible === false,
     }"
   >
     <div class="p-4">
-      <div class="float-left w-[215px] pt-3 pb-3 pl-10 text-2xl">Leaderboard for</div>
+      <div class="float-left w-[215px] pt-3 pb-3 pl-10 text-2xl">
+        Leaderboard for
+      </div>
       <div class="float-left w-[150px] pt-3">
-        <select-box :items="items"></select-box>
+        <select
+          class="bg-[#5A5A5A5A] border-2 rounded-xl ml-3 mt-1 p-1 border-blue-700"
+        >
+          <option value="">Select</option>
+          <option
+            v-for="value in items"
+            :value="value.value"
+            :key="value.value"
+          >
+            {{ value.label }}
+          </option>
+        </select>
       </div>
       <div>
         <div class="float-right close-btn" @click="closeSlider">
@@ -17,16 +30,13 @@
         </div>
       </div>
     </div>
-    <div class="m-6 p-4 w-[100%]">
+    <div class="relative right-6 m-6 p-4 w-[100%] h-20rem">
       <side-bar-leaderboard-card
-        :trainerData="trainerData"
+        :trainerData="leaderbordEmployees"
         class="float-left"
       />
     </div>
-    <div v-for="(leader, index) in trainerData" :key="leader.name">
-      <side-bar-leaderboard-card v-if="index <= 3" />
-    </div>
-    <div class="m-10 p-4">
+    <div class="my-10 mx-5 right-2 p-4 relative">
       <table class="w-full">
         <tr class="text-opacity-50 text-white">
           <td>Place</td>
@@ -36,7 +46,7 @@
         </tr>
         <tr class="border-t-2 border-[#FFF]"></tr>
         <LeaderRowDetails
-          v-for="leader in trainerData"
+          v-for="leader in leaderbordEmployees"
           :key="leader.rank"
           :leader="leader"
           :contextId="currentListItemContext?.rank"
@@ -47,16 +57,20 @@
   </div>
 </template>
 <style>
-
 .close-btn {
-  @apply absolute top-4 right-4 cursor-pointer hover:text-blue-600 pr-4;
+  @apply absolute top-4 right-4 cursor-pointer hover:text-blue-600 border-2 rounded-full p-2;
 }
 </style>
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import SideBarLeaderboardCard from "~/layouts/components/leader-board/side-bar-leaderboard-card.vue";
 import { CrossIcon } from "~~/components/icons";
+import { useQuery } from "@vue/apollo-composable";
 import LeaderRowDetails from "./partials/leader-row-details.vue";
+import employee from "~/api/queries/employee";
+
+const { result } = useQuery(employee.query.browse);
+const leaderbordEmployees = ref([]);
 
 const props = defineProps({
   isLeaderBoardVisible: { type: Boolean, default: false },
@@ -69,7 +83,6 @@ const toggleLeaderBoard = () => {
 
 const trainerData = ref([
   {
-    name: "Caleb Grill",
     rank: "1st",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -81,10 +94,8 @@ const trainerData = ref([
     attendance: "98%",
     overall: "9.9",
     stars: "5",
-    avatar: "/account-lg.png",
   },
   {
-    name: "Gabe Kalsheur",
     rank: "2nd",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -96,10 +107,8 @@ const trainerData = ref([
     attendance: "94%",
     overall: "9.2",
     stars: "5",
-    avatar: "/account-lg.png",
   },
   {
-    name: "Aljaz Kunc",
     rank: "3rd",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -111,10 +120,8 @@ const trainerData = ref([
     attendance: "90%",
     overall: "8.7",
     stars: "5",
-    avatar: "/account-lg.png",
   },
   {
-    name: "Osun Osunniyi",
     rank: "4th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -126,10 +133,8 @@ const trainerData = ref([
     attendance: "88%",
     overall: "8.6",
     stars: "5",
-    avatar: "/account-lg.png",
   },
   {
-    name: "Jaren Holmes",
     rank: "5th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -141,10 +146,8 @@ const trainerData = ref([
     attendance: "79%",
     overall: "7.2",
     stars: "4",
-    avatar: "/account-lg.png",
   },
   {
-    name: "Tre King",
     rank: "6th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -156,10 +159,8 @@ const trainerData = ref([
     attendance: "71%",
     overall: "7.1",
     stars: "4",
-    avatar: "/account-lg.png",
   },
   {
-    name: "Tamin Lipsey",
     rank: "7th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -171,10 +172,8 @@ const trainerData = ref([
     attendance: "77%",
     overall: "6.8",
     stars: "3",
-    avatar: "/account-lg.png",
   },
   {
-    name: "Rob Jones",
     rank: "8th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -186,10 +185,8 @@ const trainerData = ref([
     attendance: "72%",
     overall: "6",
     stars: "3",
-    avatar: "/account-lg.png",
   },
   {
-    name: "Demarion Watson",
     rank: "9th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -201,10 +198,8 @@ const trainerData = ref([
     attendance: "42%",
     overall: "4.7",
     stars: "2",
-    avatar: "/account-lg.png",
   },
   {
-    name: "Hason Ward",
     rank: "10th",
     clubLocation: 65,
     goalUnitSold: 90,
@@ -216,7 +211,6 @@ const trainerData = ref([
     attendance: "43%",
     overall: "2.1",
     stars: "1",
-    avatar: "/account-lg.png",
   },
 ]);
 const items = [
@@ -250,6 +244,14 @@ const handleListItemClick = (ctx = null) => {
   currentListItemContext.value = ctx;
 };
 
+watch(() => {
+  leaderbordEmployees.value = result?.value?.employee?.data.map((e, index) => {
+    return {
+      ...e,
+      ...trainerData.value[index],
+    };
+  });
+});
 const toggleCollapsed = () => {
   isCollapsed.value = !isCollapsed.value;
 };

@@ -38,7 +38,7 @@
                 :showSearch="false"
                 :showClearList="false"
                 @onChange="data.limitedAvailability = $event"
-                class="bg-white text-black rounded border border-white w-full">
+                class="bg-base-content text-base-300 rounded border border-base-content w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
@@ -53,7 +53,7 @@
                 :showSearch="false"
                 :showClearList="false"
                 @onChange="data.introductoryOffer = $event"
-                class="bg-white text-black rounded border border-white w-full">
+                class="bg-base-content text-base-300 rounded border border-base-content w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
@@ -72,7 +72,7 @@
                 :showSearch="false"
                 :showClearList="false"
                 @onChange="data.promotionSegment = $event"
-                class="bg-white text-black rounded border border-white w-full">
+                class="bg-base-content text-base-300 rounded border border-base-content w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
@@ -91,7 +91,7 @@
                 :showSearch="false"
                 :showClearList="false"
                 @onChange="data.availableForPresale = $event"
-                class="bg-white text-black rounded border border-white w-full">
+                class="bg-base-content text-base-300 rounded border border-base-content w-full">
             </select-box>
         </div>
         <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
@@ -159,15 +159,15 @@ watch(data, () => {
 });
 
 </script>
-<style scoped>
+<style scoped lang="postcss">
     .white-input {
-        @apply bg-white text-black;
+        @apply bg-base-content text-base-300;
     }
 </style>
-<style>
+<style lang="postcss">
     .custom-date-input {
         .dp__input {
-            height: 28px;
+            @apply h-[28px];
         }
     }
 </style>

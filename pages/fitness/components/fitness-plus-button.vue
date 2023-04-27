@@ -1,47 +1,29 @@
 <template>
-    <button class='fitness-plus-button'>
-        <span>+</span>
-        <label>{{ label }}</label>
-    </button>
+  <button @click="$emit('click')" class="fitness-plus-button">
+    <span>+</span>
+    <label>{{ label }}</label>
+  </button>
 </template>
-   
-<style scoped>
+
+<style scoped lang="postcss">
 .fitness-plus-button {
-    background : transparent;
-    border: 2px solid #0077cb;
-    border-radius: 50px;
-    display: flex;
-    min-height : 44px;
-    max-width: 200px;
-    min-width: 120px;
-    color : white;
-    cursor : pointer;
-    transition : all 0.3s;
+    @apply bg-transparent border-[2px] border-secondary rounded-full flex min-h-[44px] max-w-[200px] min-w-[120px] text-base-content cursor-pointer transition-all duration-300;
 }
 .fitness-plus-button:hover{
-    background : #0077cb;
+    @apply bg-secondary;
 }
 .fitness-plus-button span{
-    width: 30px;
-    height :30px;
-    min-width: 30px;
-    min-height: 30px;
-    border : 2px solid lightgrey;
-    border-radius : 50%;
-    margin: auto 7px;
+    @apply w-[30px] h-[30px] min-w-[30px] min-h-[30px] border-[2px] border-solid border-base-content rounded-full mx-[7px] my-auto;
 }
 .fitness-plus-button label{
-    margin: auto 7px;
+    @apply my-auto mx-[7px];
 }
-
 </style>
 <script setup>
-
 const props = defineProps({
-    label :{
-        type : String,
-        default : "View"
-    }
+  label: {
+    type: String,
+    default: "View",
+  },
 });
-
 </script>

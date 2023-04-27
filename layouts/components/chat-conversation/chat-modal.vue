@@ -1,20 +1,20 @@
 <template>
   <div class="chat-conversation-container" v-if="selectedConversation === null">
     <div
-        class="chat-content border-2 gradient-bg bg-white m-1 p-4 z-22 rounded-md"
+      class="chat-content border-2 gradient-bg bg-white m-1 p-4 z-22 rounded-md"
     >
       <div class="left-side-chat-container border-black-700 h-10 rounded-md">
         <div class="justify-center bg-transparent">
-          <chat-search-input transparent size="xs" border="1px solid #fff"/>
+          <chat-search-input transparent size="xs" border="1px solid #fff" />
         </div>
         <div
-            class="scroll-chat relative overflow-y-scroll scroll-smooth scroll-mr-1"
+          class="scroll-chat relative overflow-y-scroll scroll-smooth scroll-mr-1"
         >
           <div class="w-full justify-start bg-black rounded-md flex mt-4">
             <div class="pl-4 inline-block py-2 justify-start">
               <img
-                  :src="user.profile_photo_path"
-                  class="w-16 h-16 rounded-full"
+                :src="user.profile_photo_path"
+                class="w-16 h-16 rounded-full"
               />
             </div>
             <div class="inline-block place-self-center pl-8 ml-2">
@@ -32,18 +32,18 @@
               </div>
               <div class="flex">
                 <div
-                    class="relative cursor-pointer pl-2"
-                    v-for="(item, index) in chatItems"
-                    :key="index"
+                  class="relative cursor-pointer pl-2"
+                  v-for="(item, index) in chatItems"
+                  :key="index"
                 >
                   <div class="p-2 inline">
                     <div class="chat-icons m-1">
                       <font-awesome-icon
-                          :class="[
+                        :class="[
                           'w-4 h-4 -lg:w-4 -lg:h-4 m-auto border rounded-full p-3',
                           item.name == 'New Channel' ? 'hover-icon' : '',
                         ]"
-                          :icon="item.icon"
+                        :icon="item.icon"
                       />
                     </div>
                     <div class="text-min -xs:text-xs pt-1 pr-2">
@@ -57,29 +57,29 @@
               <div class="text-xl -lg:text-lg font-semibold">Favorites</div>
               <div class="flex">
                 <div
-                    class="relative cursor-pointer ml-1"
-                    v-for="(item, index) in onlineMembers"
-                    :key="index"
+                  class="relative cursor-pointer ml-1"
+                  v-for="(item, index) in onlineMembers"
+                  :key="index"
                 >
                   <div class="inline">
                     <div class="p-2 m-1 relative">
                       <img
-                          class="w-12 h-12 -lg:w-12 -lg:h-12 m-auto rounded-full"
-                          :src="item.profile_photo_path"
-                          alt=""
-                          @click="selectedConversation = item"
+                        class="w-12 h-12 -lg:w-12 -lg:h-12 m-auto rounded-full"
+                        :src="item.profile_photo_path"
+                        alt=""
+                        @click="selectedConversation = item"
                       />
                       <div
-                          v-if="index === 1"
-                          class="rounded-full w-3 h-3 bg-red-700 absolute right-3 bottom-2"
+                        v-if="index === 1"
+                        class="rounded-full w-3 h-3 bg-red-700 absolute right-3 bottom-2"
                       ></div>
                       <div
-                          v-else
-                          class="rounded-full w-3 h-3 bg-accent-focus/80 absolute right-3 bottom-2"
+                        v-else
+                        class="rounded-full w-3 h-3 bg-accent-focus/80 absolute right-3 bottom-2"
                       ></div>
                     </div>
                     <div
-                        class="text-min -xs:text-xs pr-1 h-auto justify-center"
+                      class="text-min -xs:text-xs pr-1 h-auto justify-center"
                     >
                       {{ item.name }}
                     </div>
@@ -89,12 +89,12 @@
                   <div class="inline">
                     <div class="p-2 m-1 relative">
                       <font-awesome-icon
-                          class="hover-icon w-5 h-5 -lg:w-5 -lg:h-5 m-auto border rounded-full p-3"
-                          :icon="['fas', 'fa-plus-circle']"
+                        class="hover-icon w-5 h-5 -lg:w-5 -lg:h-5 m-auto border rounded-full p-3"
+                        :icon="['fas', 'fa-plus-circle']"
                       />
                     </div>
                     <div
-                        class="text-min -xs:text-xs pr-1 h-auto justify-center"
+                      class="text-min -xs:text-xs pr-1 h-auto justify-center"
                     >
                       New Favorite
                     </div>
@@ -108,63 +108,61 @@
           </div>
           <div class="inline">
             <template v-for="(chat, index) in conversations">
-
-            <div
+              <div
                 class="conversation-block justify-start bg-white rounded-md flex mt-4"
                 v-if="conversationMessages[chat.id]?.length"
                 :key="index"
                 @click="selectedConversation = chat"
-            >
-              <div class="relative flex p-2">
-                <img
+              >
+                <div class="relative flex p-2">
+                  <img
                     :src="chat.profile_photo_path"
                     class="w-[43px] h-[43px] rounded-full"
                     alt=""
-                />
-                <div
+                  />
+                  <div
                     class="rounded-full w-2 h-2 absolute right-2 bottom-3"
                     :class="chat.active ? 'bg-accent-focus/80' : 'bg-red-700'"
-                />
-              </div>
+                  />
+                </div>
 
-              <div class="grid p-2">
-                <div class="flex">
-                  <div
+                <div class="grid p-2">
+                  <div class="flex">
+                    <div
                       class="text-sm -xs:text-xs text-black font-semibold inline"
-                  >
-                    {{ chat.name }}
-                  </div>
-                  <div
+                    >
+                      {{ chat.name }}
+                    </div>
+                    <div
                       v-if="index === 1"
                       class="text-extra-small text-white bg-blue-500 rounded-full ml-1 font-semibold"
-                  >
-                    +2
+                    >
+                      +2
+                    </div>
                   </div>
-                </div>
-                <div class="flex text-end w-64">
-                  <div
+                  <div class="flex text-end w-64">
+                    <div
                       class="text-xs -xs:text-xs items-start text-start text-black justify-start overflow-hidden text-ellipsis inline w-2/3 whitespace-nowrap"
-                  >
-                    {{ chat.message }}
-                  </div>
-                  <div
+                    >
+                      {{ chat.message }}
+                    </div>
+                    <div
                       v-if="index === 3 || index === 4"
                       class="text-xs -xs:text-xs text-end items-end text-black justify-end w-1/3"
-                  >
-                    yesterday
-                  </div>
-                  <div
+                    >
+                      yesterday
+                    </div>
+                    <div
                       v-else
                       class="text-xs -xs:text-xs text-end items-end text-black justify-end w-1/3"
-                  >
-                    {{ new Date().toJSON().slice(12, 16).replace(/-/g, "/") }}
-                    pm
+                    >
+                      {{ new Date().toJSON().slice(12, 16).replace(/-/g, "/") }}
+                      pm
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
             </template>
-
           </div>
         </div>
       </div>
@@ -172,71 +170,71 @@
   </div>
 
   <div
-      class="chat-conversation-container max-h-screen"
-      v-if="selectedConversation !== null"
+    class="chat-conversation-container max-h-screen"
+    v-if="selectedConversation !== null"
   >
     <div class="chat-message-block flex">
       <div
-          class="pills-body grid w-1/16 bg-black relative border-white-800 border rounded-t-full rounded-b-full"
+        class="pills-body grid w-1/16 bg-black relative border-white-800 border rounded-t-full rounded-b-full"
       >
         <div class="mx-auto mt-3 max-h-1/6">
           <div>
             <font-awesome-icon
-                class="hover-icon w-4 h-4 -lg:w-4 -lg:h-4 border rounded-full p-3"
-                :icon="['fas', 'fa-plus-circle']"
+              class="hover-icon w-4 h-4 -lg:w-4 -lg:h-4 border rounded-full p-3"
+              :icon="['fas', 'fa-plus-circle']"
             />
           </div>
           <div class="py-2" @click="selectedConversation = null">
             <font-awesome-icon
-                class="hover-icon w-4 h-4 -lg:w-4 -lg:h-4 border rounded-full p-3"
-                :icon="['fas', 'fa-message']"
+              class="hover-icon w-4 h-4 -lg:w-4 -lg:h-4 border rounded-full p-3"
+              :icon="['fas', 'fa-message']"
             />
           </div>
         </div>
         <div
-            class="mx-2 max-h-5/6 pb-2 mb-3 overflow-x-visible overflow-y-auto no-scrollbar overscroll-true"
+          class="mx-2 max-h-5/6 pb-2 mb-3 overflow-x-visible overflow-y-auto no-scrollbar overscroll-true"
         >
           <div
-              class="py-2 floating-tooltip"
-              v-for="(item, index) in onlineMembers"
-              :key="index"
-              :data-name="item.name"
-              @mouseover="showName"
-              @mouseleave="hideName"
+            class="py-2 floating-tooltip"
+            v-for="(item, index) in onlineMembers"
+            :key="index"
+            :data-name="item.name"
+            @mouseover="showName"
+            @mouseleave="hideName"
           >
             <div class="relative chat-imag-container">
               <img
-                  id="chat-head"
-                  :class="[
+                id="chat-head"
+                :class="[
                   'sticky w-12 h-12 -lg:w-12 -lg:h-12 border-blue-700 border-2 rounded-full z-20 opacity-40',
                 ]"
-                  :src="item.profile_photo_path"
-                  alt=""
-                  @click="selectedConversation = item"
+                :src="item.profile_photo_path"
+                alt=""
+                @click="selectedConversation = item"
               />
             </div>
           </div>
           <hr
-              v-if="offlineMembers.length > 0 && onlineMembers.length > 0"
-              class="mx-1 my-2"
+            v-if="offlineMembers.length > 0 && onlineMembers.length > 0"
+            class="mx-1 my-2"
           />
           <div
-              class="py-2"
-              v-for="(item, index) in offlineMembers"
-              :key="index"
-              :data-name="item.name"
-              @mouseover="showName"
-              @mouseleave="hideName"
+            class="py-2"
+            v-for="(item, index) in offlineMembers"
+            :key="index"
+            :data-name="item.name"
+            @mouseover="showName"
+            @mouseleave="hideName"
           >
             <div class="relative chat-imag-container">
               <img
-                  id="chat-head"
-                  :class="[
+                id="chat-head"
+                :class="[
                   'sticky w-12 h-12 -lg:w-12 -lg:h-12 border-blue-700 border-2 rounded-full opacity-40 z-10',
                 ]"
-                  :src="item.profile_photo_path"
-                  alt=""
-                  @click="chatItems = item"
+                :src="item.profile_photo_path"
+                alt=""
+                @click="chatItems = item"
               />
             </div>
             <div class="chat-names invisible">
@@ -244,8 +242,8 @@
             </div>
             <div class="relative">
               <div
-                  v-if="index === 2"
-                  class="text-extra-small text-white bg-blue-500 rounded-full absolute right-0 font-semibold z-20"
+                v-if="index === 2"
+                class="text-extra-small text-white bg-blue-500 rounded-full absolute right-0 font-semibold z-20"
               >
                 +2
               </div>
@@ -257,13 +255,13 @@
         <div class="flex bg-black m-2">
           <div class="relative p-3">
             <img
-                :src="selectedConversation.profile_photo_path"
-                class="w-12 h-12 -lg:w-14 -lg:h-14 rounded-full"
+              :src="selectedConversation.profile_photo_path"
+              class="w-12 h-12 -lg:w-14 -lg:h-14 rounded-full"
             />
           </div>
           <div class="align-top mb-1 ml-2 mr-2">
             <div
-                class="text-xl -lg:text-sm font-semibold pt-2 overflo overflow-hidden text-ellipsis w-[200px] whitespace-nowrap"
+              class="text-xl -lg:text-sm font-semibold pt-2 overflo overflow-hidden text-ellipsis w-[200px] whitespace-nowrap"
             >
               {{ selectedConversation.name }}
             </div>
@@ -272,62 +270,71 @@
           <div class="align-middle ml-auto justify-end mt-3 pt-4 px-2">
             <div class="flex justify-between gap-4 -lg:gap-4">
               <img
-                  src="/chat-conversation/call.svg"
-                  class="w-4 h-4 -lg:w-4 -lg:h-4"
+                src="/chat-conversation/call.svg"
+                class="w-4 h-4 -lg:w-4 -lg:h-4"
               />
               <img
-                  src="/chat-conversation/video.svg"
-                  class="w-4 h-4 -lg:w-4 -lg:h-4"
-                  @click="toggleDropdown"
+                src="/chat-conversation/video.svg"
+                class="w-4 h-4 -lg:w-4 -lg:h-4"
+                @click="toggleDropdown"
               />
               <img
-                  src="/chat-conversation/menu.svg"
-                  class="w-4 h-4 -lg:w-4 -lg:h-4"
-                  @click="toggleDropdown"
+                src="/chat-conversation/menu.svg"
+                class="w-4 h-4 -lg:w-4 -lg:h-4"
+                @click="toggleDropdown"
               />
             </div>
           </div>
-          <DropdownCard v-if="showDropDown" @closeDropdown="toggleDropdown"/>
+          <DropdownCard v-if="showDropDown" @closeDropdown="toggleDropdown" />
         </div>
         <div
-            class="message-body px-7 pb-4 -lg:px-2 -lg:py-2 -lg:pr-6 overflow-auto"
+          class="message-body px-7 pb-4 -lg:px-2 -lg:py-2 -lg:pr-6 overflow-auto"
         >
           <div class="relative">
             <ChatMessagesCard
-                :me="me"
-                :with="selectedConversation"
-                :messages="selectedChatMessages"
+              :me="me"
+              :with="selectedConversation"
+              :messages="selectedChatMessages"
             />
           </div>
         </div>
         <div class="bg-base-content p-4 py-2 -lg:p-2 rounded-b-md">
           <div class="flex justify-between">
             <input
-                v-if="selectedConversation.id !== alChatBot.id"
-                type="text"
-                placeholder="Type here"
-                class="input w-full max-w-md -lg:max-w-max bg-base-content text-base-300"
-                v-model="newMessage"
-                @keyup.enter="handleSendNewMessage"
+              v-if="selectedConversation.id !== alChatBot.id"
+              type="text"
+              placeholder="Type here"
+              class="input w-full max-w-md -lg:max-w-max bg-base-content text-base-300"
+              v-model="newMessage"
+              @keyup.enter="handleSendNewMessage"
             />
             <select
-                v-else
-                class="input w-full max-w-md -lg:max-w-max bg-base-content text-base-300"
-                :class="{'opacity-50': !newMessage}"
-                v-model="newMessage"
-                @keyup.enter="handleSendNewMessage"
-                @input="handleQuestionChangeForChatBot"
+              v-else
+              class="input w-full max-w-md -lg:max-w-max bg-base-content text-base-300"
+              :class="{ 'opacity-50': !newMessage }"
+              v-model="newMessage"
+              @keyup.enter="handleSendNewMessage"
+              @input="handleQuestionChangeForChatBot"
             >
               <option :value="null" selected>Select a question...</option>
-              <option v-for="({question}, idx) in alChatBotTrainingSet" :value="question">{{ question }}</option>
+              <option
+                v-for="({ question }, idx) in alChatBotTrainingSet"
+                :value="question"
+              >
+                {{ question }}
+              </option>
             </select>
             <div class="gap-5 flex">
-              <img src="/chat-conversation/image.svg" class="w-5"/>
-              <button ref="sendNewMessageNode" class="w-10" @click="handleSendNewMessage">
+              <img src="/chat-conversation/image.svg" class="w-5" />
+              <button
+                ref="sendNewMessageNode"
+                class="w-10"
+                @click="handleSendNewMessage"
+              >
                 <img
-                    src="/chat-conversation/send.svg"
-                    alt="Send Message"
-                    class="w-5"
+                  src="/chat-conversation/send.svg"
+                  alt="Send Message"
+                  class="w-5"
                 />
               </button>
             </div>
@@ -361,9 +368,9 @@
       .message-body {
         height: calc(106vh - 380px);
         background: linear-gradient(
-            0deg,
-            rgba(0, 116, 200, 1) 0%,
-            rgba(0, 0, 0, 1) 100%
+          0deg,
+          rgba(0, 116, 200, 1) 0%,
+          rgba(0, 0, 0, 1) 100%
         );
       }
     }
@@ -454,15 +461,15 @@
 <script setup>
 import ChatMessagesCard from "./components/chat-messages-card.vue";
 import DropdownCard from "./components/dropdown-card.vue";
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import {far} from "@fortawesome/pro-regular-svg-icons";
-import {library} from "@fortawesome/fontawesome-svg-core";
-import {fas} from "@fortawesome/pro-solid-svg-icons";
-import {request} from "~/api/utils/request";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { far } from "@fortawesome/pro-regular-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/pro-solid-svg-icons";
+import { request } from "~/api/utils/request";
 import member from "~/api/queries/member";
 import location from "~/api/queries/location";
-import {getRandomInt} from "~/api/utils/number";
-import {faker} from "@faker-js/faker";
+import { getRandomInt } from "~/api/utils/number";
+import { faker } from "@faker-js/faker";
 
 library.add(far, fas);
 const selectedConversation = ref(null);
@@ -503,16 +510,16 @@ const chatItems = ref([
 ]);
 
 const locationData = ref(null);
-request(location.query.get, { id: 'afea5d32-ec62-480d-af29-d67fc8c9c7a3' }).then(({data}) => {
-    locationData.value = data.data.location;
-    chatItems.value[2].name = locationData.value.name;
+request(location.query.browse, { first: 1 }).then(({ data }) => {
+  locationData.value = data.data.locations.data[0];
+  chatItems.value[2].name = locationData.value.name;
 });
 
 const user = useState("auth");
 const floatingTooltip = inject("floating-modal");
 const status = ["online", "offline"];
 
-request(member.query.browse, {first: 50}).then(({data}) => {
+request(member.query.browse, { first: 50 }).then(({ data }) => {
   data.data.members.data.forEach((member) => {
     members.value.push({
       ...member,
@@ -527,13 +534,13 @@ request(member.query.browse, {first: 50}).then(({data}) => {
 });
 
 const offlineMembers = computed(() =>
-    pluckRandom(members.value.filter((m) => !m.active))
+  pluckRandom(members.value.filter((m) => !m.active))
 );
 const onlineMembers = computed(() => [
   alChatBot,
   ...pluckRandom(
-      members.value.filter((m) => m.active),
-      2
+    members.value.filter((m) => m.active),
+    2
   ),
 ]);
 
@@ -550,14 +557,14 @@ const test_message_list = [
     id: 3,
     from: me.value,
     message:
-        "Also, I have a friend Wanda that would like to join. Can she come too?",
+      "Also, I have a friend Wanda that would like to join. Can she come too?",
     created_at: "4:46 PM",
   },
   {
     id: 4,
     from: null,
     message:
-        "Hi George, We have mats available but you can bring your own. Yes, Wanda can attend.  There are a few spots available.",
+      "Hi George, We have mats available but you can bring your own. Yes, Wanda can attend.  There are a few spots available.",
     created_at: "4:50 PM",
   },
 ];
@@ -569,12 +576,12 @@ watch(conversations, () => {
     let defaultMessages = [];
     if (c.id !== alChatBot.id) {
       defaultMessages = test_message_list.map((m) =>
-          m.from ? m : {...m, from: c}
+        m.from ? m : { ...m, from: c }
       );
     }
     conversationMessages.value[c.id] = defaultMessages;
   });
-  conversationMessages.value = {...conversationMessages.value};
+  conversationMessages.value = { ...conversationMessages.value };
 });
 
 const selectedChatMessages = computed(() => {
@@ -596,8 +603,8 @@ const toggleChatOpen = () => {
 
 function showName(e) {
   const imageContainer = e.currentTarget
-      .querySelector(".chat-imag-container")
-      .getBoundingClientRect();
+    .querySelector(".chat-imag-container")
+    .getBoundingClientRect();
   floatingTooltip(e.currentTarget.getAttribute("data-name"), {
     left: (container) => imageContainer.left - container.offsetWidth - 2 + "px",
     top: imageContainer.top + 10 + "px",
@@ -624,7 +631,7 @@ const addMessageToConversation = (from, message) => {
   const conversationId = selectedConversation.value.id;
 
   //add in new conversation if not exists
-  if(!conversationMessages.value[conversationId]) {
+  if (!conversationMessages.value[conversationId]) {
     conversationMessages.value[conversationId] = [];
   }
 
@@ -648,28 +655,59 @@ const addMessageToConversation = (from, message) => {
 };
 
 const alChatBotTrainingSet = [
-  {question: "What is my daily membership sales needed for goal?", answer: "484 new members per day; $14,520 in new EFT per day"},
-  {question: "How many specific memberships sold month to date?", answer: "10,162 new members this month"},
-  {question: "What am I forecasting this month?", answer: "15,000 New Members; 375 New Personal Training Clients"},
-  {question: "What is my membership net change month to date?", answer: "1,350 net members"},
-  {question: "What is my draft collection MTD", answer: "$575,800 in Personal Training Draft; $9,145,161 in Membership Draft"},
-  {question: "What are my draft projections?", answer: "$13,500,000 in Membership; $2,137,500 in Personal Training"},
-  {question: "How many past due members?", answer: "12,500 past due members"},
-  {question: "How many frozen accounts", answer: "1,875 frozen accounts"},
-  {question: "How much weight has been lost MTD", answer: "18,500lbs lost MTD"},
-  {question: "How many training sessions are scheduled today", answer: "1,612 training sessions are scheduled today"},
-  {question: "What is my Revenue per member Month to date", answer: "$30 Revenue per Member MTD"},
-  {question: "What is the average length of member", answer: "13 months is the average length of member"},
+  {
+    question: "What is my daily membership sales needed for goal?",
+    answer: "484 new members per day; $14,520 in new EFT per day",
+  },
+  {
+    question: "How many specific memberships sold month to date?",
+    answer: "10,162 new members this month",
+  },
+  {
+    question: "What am I forecasting this month?",
+    answer: "15,000 New Members; 375 New Personal Training Clients",
+  },
+  {
+    question: "What is my membership net change month to date?",
+    answer: "1,350 net members",
+  },
+  {
+    question: "What is my draft collection MTD",
+    answer:
+      "$575,800 in Personal Training Draft; $9,145,161 in Membership Draft",
+  },
+  {
+    question: "What are my draft projections?",
+    answer: "$13,500,000 in Membership; $2,137,500 in Personal Training",
+  },
+  { question: "How many past due members?", answer: "12,500 past due members" },
+  { question: "How many frozen accounts", answer: "1,875 frozen accounts" },
+  {
+    question: "How much weight has been lost MTD",
+    answer: "18,500lbs lost MTD",
+  },
+  {
+    question: "How many training sessions are scheduled today",
+    answer: "1,612 training sessions are scheduled today",
+  },
+  {
+    question: "What is my Revenue per member Month to date",
+    answer: "$30 Revenue per Member MTD",
+  },
+  {
+    question: "What is the average length of member",
+    answer: "13 months is the average length of member",
+  },
 ];
 
 const handleAlChatBotResponse = () => {
   let message = "Oops... Something went wrong. Please try again.";
 
-  const response = alChatBotTrainingSet.find(({question}) =>
-    question === lastMessage.value
+  const response = alChatBotTrainingSet.find(
+    ({ question }) => question === lastMessage.value
   );
 
-  if(response){
+  if (response) {
     message = response.answer;
   }
   conversationMessages.value[alChatBot.id].push({
@@ -682,10 +720,13 @@ const handleAlChatBotResponse = () => {
       hour12: true,
     }),
   });
-}
+};
 
 const handleQuestionChangeForChatBot = () => {
-  console.log('handleQuestionChangeForChatBot', {newMessage, sendNewMessageNode});
+  console.log("handleQuestionChangeForChatBot", {
+    newMessage,
+    sendNewMessageNode,
+  });
   sendNewMessageNode.value.focus();
-}
+};
 </script>

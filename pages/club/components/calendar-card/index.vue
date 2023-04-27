@@ -2,7 +2,7 @@
     <club-card :title-icon="CalendarIcon" title="Calendars">
         <div class="calendar-container">
             <div class="col-span-1 -lg:col-span-2 m-10 mb-0">
-                <div class="flex flex-col space-y-4 justify-center items-center border rounded-lg border-white">
+                <div class="flex flex-col space-y-4 justify-center items-center border rounded-lg border-base-content">
                     <date-picker
                             dark
                             inline
@@ -20,7 +20,7 @@
                 <div class="calendar-list-container">
                     <div>
                         <div class="flex items-center justify-between h-full">
-                            <div class="relative w-1/2 flex flex-col justify-left text-left text-white">
+                            <div class="relative w-1/2 flex flex-col justify-left text-left text-base-content">
                                 <div class="grid grid-cols-3 gap-1 items-center">
                                     <div class="col-span-1 flex items-center justify-center">
                                         <arrow-icon direction="left" class="h-fit cursor-pointer" @click="previousMonth"/>
@@ -38,46 +38,46 @@
                                     <template v-slot:filters>
                                         <div class="flex space-x-5">
                                             <SwitchGroup as="div" class="flex items-center">
-                                                <Switch v-model="filters.location" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-[#0275c9] focus:ring-offset-2">
-                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
-                                                    <span aria-hidden="true" :class="['bg-[#ECEBEF] pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
-                                                    <span aria-hidden="true" :class="[filters.location ? 'translate-x-5 bg-[#0275c9] border-[#0275c9]' : 'translate-x-0 bg-[#cbcbcb] border-[#cbcbcb]', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
+                                                <Switch v-model="filters.location" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
+                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
+                                                    <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
+                                                    <span aria-hidden="true" :class="[filters.location ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                                 </Switch>
                                                 <SwitchLabel as="span" class="ml-3 text-sm">
-                                                    <span class="font-medium" :class="filters.location ? 'text-[#0275c9]': 'text-[#bababa]'">Location</span>
+                                                    <span class="font-medium" :class="filters.location ? 'text-secondary': 'text-neutral-content'">Location</span>
                                                 </SwitchLabel>
                                             </SwitchGroup>
 
                                             <SwitchGroup as="div" class="flex items-center">
-                                                <Switch v-model="filters.type" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-[#0275c9] focus:ring-offset-2">
-                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
-                                                    <span aria-hidden="true" :class="['bg-[#ECEBEF] pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
-                                                    <span aria-hidden="true" :class="[filters.type ? 'translate-x-5 bg-[#0275c9] border-[#0275c9]' : 'translate-x-0 bg-[#cbcbcb] border-[#cbcbcb]', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
+                                                <Switch v-model="filters.type" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
+                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
+                                                    <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
+                                                    <span aria-hidden="true" :class="[filters.type ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                                 </Switch>
                                                 <SwitchLabel as="span" class="ml-3 text-sm">
-                                                    <span class="font-medium" :class="filters.type ? 'text-[#0275c9]': 'text-[#bababa]'">Type</span>
+                                                    <span class="font-medium" :class="filters.type ? 'text-secondary': 'text-neutral-content'">Type</span>
                                                 </SwitchLabel>
                                             </SwitchGroup>
 
                                             <SwitchGroup as="div" class="flex items-center">
-                                                <Switch v-model="filters.alert" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-[#0275c9] focus:ring-offset-2">
-                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
-                                                    <span aria-hidden="true" :class="['bg-[#ECEBEF] pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
-                                                    <span aria-hidden="true" :class="[filters.alert ? 'translate-x-5 bg-[#0275c9] border-[#0275c9]' : 'translate-x-0 bg-[#cbcbcb] border-[#cbcbcb]', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
+                                                <Switch v-model="filters.alert" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
+                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
+                                                    <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
+                                                    <span aria-hidden="true" :class="[filters.alert ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                                 </Switch>
                                                 <SwitchLabel as="span" class="ml-3 text-sm">
-                                                    <span class="font-medium" :class="filters.alert ? 'text-[#0275c9]': 'text-[#bababa]'">Alert</span>
+                                                    <span class="font-medium" :class="filters.alert ? 'text-secondary': 'text-neutral-content'">Alert</span>
                                                 </SwitchLabel>
                                             </SwitchGroup>
 
                                             <SwitchGroup as="div" class="flex items-center">
-                                                <Switch v-model="filters.segments" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-[#0275c9] focus:ring-offset-2">
-                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white" />
-                                                    <span aria-hidden="true" :class="['bg-[#ECEBEF] pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
-                                                    <span aria-hidden="true" :class="[filters.segments ? 'translate-x-5 bg-[#0275c9] border-[#0275c9]' : 'translate-x-0 bg-[#cbcbcb] border-[#cbcbcb]', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
+                                                <Switch v-model="filters.segments" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-secondary focus:ring-offset-2">
+                                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-base-content" />
+                                                    <span aria-hidden="true" :class="['bg-base-content pointer-events-none absolute mx-auto h-2 w-9 rounded-full transition-colors duration-200 ease-in-out']" />
+                                                    <span aria-hidden="true" :class="[filters.segments ? 'translate-x-5 bg-secondary border-secondary' : 'translate-x-0 bg-base-content/80 border-base-content/80', 'pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border   shadow ring-0 transition-transform duration-200 ease-in-out']" />
                                                 </Switch>
                                                 <SwitchLabel as="span" class="ml-3 text-sm">
-                                                    <span class="font-medium" :class="filters.segments ? 'text-[#0275c9]': 'text-[#bababa]'">Segments</span>
+                                                    <span class="font-medium" :class="filters.segments ? 'text-secondary': 'text-neutral-content'">Segments</span>
                                                 </SwitchLabel>
                                             </SwitchGroup>
                                         </div>
@@ -184,8 +184,8 @@
     ]);
 
     const locationData = ref(null);
-    request(location.query.get, { id: 'afea5d32-ec62-480d-af29-d67fc8c9c7a3' }).then(({data}) => {
-        locationData.value = data.data.location;
+    request(location.query.browse, { first: 1 }).then(({data}) => {
+        locationData.value = data.data.locations.data[0];
         items.value.forEach(e => {
             e.event_location = locationData.value.name;
         });
@@ -219,19 +219,17 @@
 
 
 </script>
-<style scoped>
+<style scoped lang="postcss">
     :deep(.dp__calendar) {
-        width: 100%;
+        @apply w-full;
     }
 
     :deep(.club-calender-card-menu) {
-        background: transparent;
-        border: none;
+        @apply bg-transparent border-0;
     }
 
     :deep(.dp__menu_disabled) {
-        background: transparent;
-        cursor: default;
+        @apply bg-transparent cursor-default;
     }
 
     .calendar-container {
@@ -239,6 +237,6 @@
     }
 
     .calendar-list-container {
-        @apply py-[30px] pb-[0] px-[20px]
+        @apply py-[30px] pb-[0] px-[20px];
     }
 </style>
