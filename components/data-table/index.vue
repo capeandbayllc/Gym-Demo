@@ -15,6 +15,7 @@
                 />
             </tbody>
         </table>
+        <p class="pl-3 mt-3" v-show="!data.length">{{ noDataMessage }}</p>
     </div>
 </template>
 <style scoped>
@@ -34,6 +35,10 @@ const props = defineProps({
     columns: {
         type: Array,
         default: [],
+    },
+    noDataMessage:{
+        type: String,
+        default: ''
     },
     rowComponent: Object,
     headerComponent: {

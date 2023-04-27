@@ -174,6 +174,8 @@ const newAgreementData = ref({
     agreementName: '',
     createdBy: '',
     dateCreated: '',
+
+
     // id: 0,
     // name: '',
     // price: '',
@@ -453,7 +455,8 @@ const agreements = ref([
             date: '',
             idNumber: ''
         },
-    }
+        
+    },
 ]);
 
 

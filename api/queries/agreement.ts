@@ -10,38 +10,16 @@ const GET_AGREEMENTS: DocumentNode = gql`
                 user {
                     id
                     first_name
+                    profile_photo_path
                     last_name
                     email
+                    phone
                 }
-                category {
+                agreement_category {
                     id
                     name
                 }
-                location {
-                    id
-                    name
-                    address
-                    city
-                    state
-                    country
-                    zip_code
-                }
-                agreement_template_id
-                template {
-                    id
-                    name
-                    content
-                }
-                billing_schedule_id
-                billingSchedule {
-                    id
-                    name
-                    description
-                }
-                contract {
-                    id
-                    name
-                }
+                gr_location_id
                 contract_file_url
                 active
                 terms_completed

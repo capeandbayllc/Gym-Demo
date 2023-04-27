@@ -10,13 +10,17 @@
         </button>
     </div>
     <simple-card title="Current Agreements">
-        <people-search-table :columns="columns" :items="leadsData" class="p-6 text-sm"/>
+        <people-search-table :columns="columns" :items="agreements" class="p-6 text-sm"/>
     </simple-card>
 </template>
 
-<script setup>
+<script setup>                                                      
 import PeopleSearchTable from './people-search-table.vue';
 import { NewAgreementIcon, AddIcon } from "@/components/icons"
+import agreement from "~/api/queries/agreement";
+import { useQuery } from "@vue/apollo-composable";
+import dateFormat from "dateformat";
+
 const columns = [
     {
         label: "Segment",
@@ -51,117 +55,32 @@ const columns = [
         class: "text-secondary text-left"
     }
 ];
-
-const leadsData = [
-    {
-        id: 1,
-        segment: 'New Member',
-        phone: '(123) 456-7890',
-        email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "secondary",
-        first_name: "Caleb",
-        last_name: "Sauer",
-        location: "1",
-        type: "gold"
-    },
-    {
-        id: 2,
-        segment: 'New Member',
-        phone: '(123) 456-7890',
-        email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "secondary",
-        first_name: "Nathan",
-        last_name: "Sipes",
-        location: "1",
-        type: "platinum"
-    },
-    {
-        id: 3,
-        segment: 'New Member',
-        phone: '(123) 456-7890',
-        email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "secondary",
-        first_name: "Nathan",
-        last_name: "Sipes",
-        location: "1",
-        type: "platinum"
-    },
-    {
-        id: 4,
-        segment: 'Marketing Campaign',
-        phone: '(123) 456-7890',
-        email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "secondary",
-        first_name: "Nathan",
-        last_name: "Sipes",
-        location: "1",
-        type: "platinum"
-    },  
-    {
-        id: 5,
-        segment: 'Marketing Campaign',
-        phone: '(123) 456-7890',
-        email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "secondary",
-        first_name: "Nathan",
-        last_name: "Sipes",
-        location: "1",
-        type: "platinum"
-    },
-    {
-        id: 6,
-        segment: 'PT Sessions',
-        phone: '(123) 456-7890',
-        email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "secondary",
-        first_name: "Nathan",
-        last_name: "Sipes",
-        location: "1",
-        type: "bronze"
-    },
-    {
-        id: 7,
-        segment: 'PT Sessions',
-        phone: '(123) 456-7890',
-        email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "secondary",
-        first_name: "Nathan",
-        last_name: "Sipes",
-        location: "1",
-        type: "silver"
-    },
-    {
-        id: 8,
-        segment: 'PT Sessions',
-        phone: '(123) 456-7890',
-        email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "secondary",
-        first_name: "Nathan",
-        last_name: "Sipes",
-        location: "1",
-        type: "platinum"
-    },
-    {
-        id: 9,
-        segment: 'PT Sessions',
-        phone: '(123) 456-7890',
-        email: 'email@email.com',
-        created: "5/5 2002, 12:24:44PM",
-        type_status: "secondary",
-        first_name: "Nathan",
-        last_name: "Sipes",
-        location: "1",
-        type: "platinum"
-    }
-];
+const getType = () => {
+  const types = ['bronze', 'silver', 'gold', 'platinum'];
+  const randomIndex = Math.floor(Math.random() * types.length);
+  return types[randomIndex];
+}
+const agreements = ref([]);
+onMounted(()=>{
+})
+const { result } = useQuery(agreement.query.browse);
+watchEffect(() => {
+    console.log(result?.value?.agreements)
+    agreements.value = result?.value?.agreements.data.map(agreement => {
+        return {
+            id: agreement.id,
+            segment: agreement.agreement_category.name,
+            phone: agreement.user.phone,
+            photo: agreement.user.profile_photo_path,
+            email: agreement.user.email,
+            created: dateFormat(new Date(agreement.created_at), 'm/d yyyy, h:MM:ssTT'),
+            first_name: agreement.user.first_name,
+            last_name: agreement.user.last_name,
+            location: agreement.gr_location_id,
+            type: getType()
+        }
+    });
+});
 
 
 </script>

@@ -4,6 +4,7 @@
             :columns="columns"
             :data="items"
             :row-component="PeopleSearchTableRow"
+            no-data-message="No new agreements are currently available."
             class="h-56 overflow-y-auto"
         />
     </div>

@@ -3,7 +3,7 @@
         <td>{{data.segment}}</td>
         <td>
             <div class="flex items-center">
-                <img src="/checkin/kevin.png" class="w-7 rounded-full mr-2"/> {{data.first_name}}
+                <img :src="data.photo" class="w-7 rounded-full mr-2"/> {{data.first_name}}
             </div>
         </td>
         <td class="text-center">{{data.last_name}}</td>
