@@ -64,7 +64,6 @@ onMounted(()=>{
 })
 const { result } = useQuery(agreement.query.browse);
 watchEffect(() => {
-    console.log(result?.value?.agreements)
     agreements.value = result?.value?.agreements.data.map(agreement => {
         return {
             id: agreement.id,
