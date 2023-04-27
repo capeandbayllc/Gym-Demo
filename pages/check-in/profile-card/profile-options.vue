@@ -64,7 +64,7 @@ const options = reactive([
     selected: false,
   },
   {
-    label: "Agreement",
+    label: "Agreements",
     key: "newAgreement",
     selected: false,
   },
