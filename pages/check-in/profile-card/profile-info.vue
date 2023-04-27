@@ -14,7 +14,7 @@
     <div class="pb-5">
       Member since 2022
       <br />
-      Membership ID 123456789
+      Membership ID# 123456789
     </div>
     <div class="flex items-center justify-between w-full mb-4">
       <!--            <OfferUpBtn />-->
