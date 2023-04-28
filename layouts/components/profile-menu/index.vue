@@ -13,8 +13,8 @@
               class="submenu-items"
               v-for="(child, sub_ndx) in item.children"
               :key="sub_ndx"
-              >
-              <div v-if="child.label=='Help'" @click="handleClickActions">
+            >
+              <div v-if="child.label == 'Help'" @click="handleClickActions">
                 {{ child.label }}
               </div>
               <div v-else @click="handleProfileMenuNavigate(child.url)">
@@ -31,17 +31,17 @@
   </context-menu>
 
   <daisy-modal :overlay="true" id="helpModal" ref="helpModal">
-            <help-modal />
-        </daisy-modal>
+    <help-modal />
+  </daisy-modal>
 </template>
 
 <style scoped>
 .profile-menu-container {
   @apply z-[30] absolute right-8 p-3 text-sm w-72;
-  background: linear-gradient(to bottom right, #004285, #00254C);
+  background: linear-gradient(to bottom right, #004285, #00254c);
   > div {
     @apply border-4 rounded-3xl -m-4;
-    border-color: #D4D8DD;
+    border-color: #d4d8dd;
   }
   .menu-list {
     @apply m-6 mb-0 mt-4;
@@ -57,14 +57,14 @@
   }
   .menu-items {
     @apply border-b last:border-b-0;
-    border-bottom-color: #A6B8CB;
+    border-bottom-color: #a6b8cb;
   }
   .submenu-items {
     @apply my-1 font-normal w-fit;
     > div {
       @apply text-white py-1 px-4 hover:bg-blue-500;
       border-radius: 0.75rem;
-      background-color: #0075C9;
+      background-color: #0075c9;
     }
   }
 }
@@ -104,7 +104,7 @@ const menu = [
       },
       {
         label: "Settings",
-        url: '/profile-setting',
+        url: "/profile-setting",
       },
       {
         label: "User Management",
@@ -136,8 +136,8 @@ const menu = [
     children: [
       {
         label: "Help",
-      }
-    ]
+      },
+    ],
   },
 ];
 
@@ -153,7 +153,7 @@ const handleClickActions = () => {
   helpModal.value.open();
 };
 
-const handleProfileMenuNavigate = url => {
+const handleProfileMenuNavigate = (url) => {
   navigateTo(url);
   close();
 };

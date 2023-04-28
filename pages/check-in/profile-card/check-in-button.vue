@@ -5,7 +5,7 @@
   >
     <!-- green back -->
     <div
-      class="bg-lime-500 absolute h-full w-full -z-[1] top-0 left-0 right-0 bottom-0 rounded-3xl"
+      class="bg-success absolute h-full w-full -z-[1] top-0 left-0 right-0 bottom-0 rounded-3xl"
     ></div>
 
     <!-- blue back -->
@@ -15,7 +15,7 @@
 
     <div class="relative">
       <span
-        class="h-6 w-6 absolute top-1/2 -translate-y-1/2 left-0 transition-all duration-500 translate-x-8 group-hover:translate-x-36 group-hover:fill-white"
+        class="h-6 w-6 absolute top-1/2 -translate-y-1/2 left-0 transition-all duration-500 translate-x-8 group-hover:translate-x-36 group-hover:fill-base-content"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -26,7 +26,7 @@
       </span>
 
       <span
-        class="text-black text-2xl uppercase font-semibold whitespace-nowrap group-hover:text-white -translate-x-12 group-hover:-translate-x-20 right-0 absolute top-1/2 -translate-y-1/2 transition-all duration-500"
+        class="text-base-300 text-2xl uppercase font-semibold whitespace-nowrap group-hover:text-base-content -translate-x-12 group-hover:-translate-x-20 right-0 absolute top-1/2 -translate-y-1/2 transition-all duration-500"
         >Check in</span
       >
     </div>

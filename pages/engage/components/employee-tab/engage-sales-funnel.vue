@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-secondary rounded-3xl p-3 pt-6 bg-black">
+  <div class="border border-secondary rounded-3xl p-3 pt-6 bg-base-300">
     <div class="engage-sales-funnel-container px-2">
       <div class="engage-sales-funnel-header">
         <h3>Acquisition & Sales Funnel</h3>
@@ -18,20 +18,15 @@
     </div>
     <engage-call-list />
   </div>
-      <daisy-modal
-        id="editSalesFunnelModal"
-        ref="editSalesFunnelModal"
-        class=""
-      >
-      <div class="modal-bg p-[18px] rounded-[18px] border-2 border-[#0075c9]">
-        <edit-sales-funnel-modal class="max-w-[1152px]" />
-      </div>
-      </daisy-modal>
+  <daisy-modal id="editSalesFunnelModal" ref="editSalesFunnelModal" class="">
+    <div class="modal-bg">
+      <edit-sales-funnel-modal class="max-w-[1152px]" />
+    </div>
+  </daisy-modal>
 </template>
-<style scoped>
-
+<style scoped lang="postcss">
 .modal-bg {
-  background-image:  linear-gradient(180deg, rgba(0,117,201,0.3 ) 0.00%, #000000 100.00%)
+  @apply p-[18px] rounded-[18px] border-2 border-secondary bg-opacity-40 bg-primary;
 }
 .engage-sales-funnel-container {
   @apply col-span-2 -md:col-span-3 mb-10;
@@ -44,7 +39,7 @@
 }
 </style>
 <script setup>
-import {ref} from 'vue';
+import { ref } from "vue";
 import ChartContent from "./chart-content.vue";
 import EditSalesFunnelModal from "./edit-sales-funnel/index.vue";
 import EngageCallList from "./engage-call-list.vue";

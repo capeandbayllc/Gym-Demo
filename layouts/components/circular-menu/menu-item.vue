@@ -1,15 +1,12 @@
 <template>
-	<NuxtLink
-		class="menu-item"
-		:to="url"
-		:style="`transform: rotate(${rotation}deg) translate(18vw) scale(${scale})`"
-		@click="toggleMenu"
-	>
-		<component
-			:is="icon"
-			:style="`transform: rotate(${-rotation}deg)`"
-		/>
-	</NuxtLink>
+  <NuxtLink
+    class="menu-item"
+    :to="url"
+    :style="`transform: rotate(${rotation}deg) translate(18vw) scale(${scale})`"
+    @click="toggleMenu"
+  >
+    <component :is="icon" :style="`transform: rotate(${-rotation}deg)`" />
+  </NuxtLink>
 </template>
 <style scoped>
 .menu-item {
@@ -22,17 +19,17 @@
 </style>
 <script setup>
 const props = defineProps({
-	url: String,
-	icon: Object,
-	rotation: Number,
-	scale: {
-		type: Number,
-		default: .75
-	}
-})
-const emit = defineEmits(['toggleMenu']);
+  url: String,
+  icon: Object,
+  rotation: Number,
+  scale: {
+    type: Number,
+    default: 0.75,
+  },
+});
+const emit = defineEmits(["toggleMenu"]);
 
 const toggleMenu = () => {
-	emit('toggleMenu');
-}
+  emit("toggleMenu");
+};
 </script>

@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import {createServer} from "miragejs";
+import { createServer } from "miragejs";
 import { createGraphQLHandler } from "@miragejs/graphql";
 import { parse } from "graphql/language";
 import data from "~/api/data/data";
@@ -14,8 +14,7 @@ import { getRandomInt } from "~/api/utils/number";
 import registerResolver from "~/api/utils/resolver";
 import graphQLSchema from "~/api/schema.gql?raw";
 import { UUIDManager } from "~/api/utils/UUIDManager";
-import {underscore} from "miragejs/lib/utils/inflector";
-
+import { underscore } from "miragejs/lib/utils/inflector";
 
 // Mirage GraphQL README:
 // https://github.com/miragejs/graphql
@@ -32,17 +31,20 @@ const server = createServer({
 
         association.getForeignKey = function () {
           if (cache[this.name] === undefined) {
-            cache[this.name] = association.type === 'belongsTo'
+            cache[this.name] =
+              association.type === "belongsTo"
                 ? `${underscore(this.name)}_id`
-                : `${this._container.inflector.singularize(underscore(this.name))}_ids`;
+                : `${this._container.inflector.singularize(
+                    underscore(this.name)
+                  )}_ids`;
           }
 
           return cache[this.name];
-        }
+        };
       }
 
       return registerModel.bind(this)(type, ModelClass);
-    }
+    };
 
     const parsed = parse(graphQLSchema);
     const graphQLHandler = createGraphQLHandler(parsed, this.schema, {
@@ -64,7 +66,9 @@ const server = createServer({
     server.db.users.forEach((u) =>
       server.createList("notification", getRandomInt(10), { user_id: u.id })
     );
-    server.db.members.forEach(m => server.createList("note", getRandomInt(10), { entity_id: m.id }));
+    server.db.members.forEach((m) =>
+      server.createList("note", getRandomInt(10), { entity_id: m.id })
+    );
   },
 });
 

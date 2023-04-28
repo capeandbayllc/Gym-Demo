@@ -1,41 +1,37 @@
 <template>
   <button
-    class="add-ons"
+    @click="$emit(action)"
+    class="border bg-accent-focus group flex flelx-row items-center justify-center rounded-full aspect-square w-8 relative mx-auto"
     :class="{
       'add-ons-active': value,
     }"
   >
-    <span class="add-ons-text">PT</span>
-    <span class="edit-icon"><edit-icon class="mb-2" /></span>
+    <span
+      class="group-hover:scale-0 group-hover:opacity-0 scale-100 opacity-100 transition-all duration-300 absolute h-full flex items-center"
+      >PT</span
+    >
+    <span
+      class="group-hover:scale-100 group-hover:opacity-100 opacity-0 scale-0 transition-all duration-300 absolute h-full flex items-center"
+      ><edit-icon class="aspect-square h-4"
+    /></span>
   </button>
 </template>
-<style scoped>
-.add-ons {
-  background-color: #5bc600;
 
-  @apply w-fit border flex flex-row items-center justify-center rounded-xl cursor-pointer;
-  &:hover {
-    .add-ons-text {
-      font-size: 0;
-    }
-    .edit-icon {
-      @apply flex visible;
-    }
-  }
-  .edit-icon {
-    @apply h-5 w-5 hidden mx-auto;
-    svg {
-      @apply h-full w-full;
-    }
-  }
-}
-.add-ons.add-ons-active {
+<style scoped lang="postcss">
+.add-ons-active {
   @apply bg-accent-focus border-accent-focus;
 }
 </style>
+
 <script setup>
 import { EditIcon } from "~~/components/icons";
+
+/** emit 'action' on click */
 const props = defineProps({
   value: Boolean,
+  action: {
+    type: String,
+    default: "click",
+  },
 });
 </script>

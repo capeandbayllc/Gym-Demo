@@ -10,11 +10,11 @@
 </template>
 
 <script setup>
-  const props = defineProps({
-    ref: String,
-    placeholder: String,
-    modelValue: String,
-    width: String,
-    height: String
-  })
+const props = defineProps({
+  ref: String,
+  placeholder: String,
+  modelValue: String,
+  width: String,
+  height: String,
+});
 </script>
