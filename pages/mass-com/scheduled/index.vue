@@ -35,7 +35,7 @@
         </div>
       </div>
 
-      <h3 class="mt-4">In-Active Campaigns</h3>
+      <h3 class="mt-4">Inactive Campaigns</h3>
       <div class="page-content-block">
         <p class="text-sm p-4">
           A look at your current month to month campaign and communications.
