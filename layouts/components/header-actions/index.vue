@@ -1,11 +1,5 @@
 <template>
   <div class="header-actions">
-    <!-- <Button outline size="sm" class="hover:text-secondary"><pos-icon />POS</Button>
-		<Button outline size="sm" class="hover:text-secondary"
-			@click="$emit('show-people-search')"
-		>
-			<people-icon />People
-		</Button> -->
     <div @mouseover="showFocus" @mouseleave="hideFocus">
       <FormAppInput
         ref="globalSearchInput"
@@ -13,13 +7,6 @@
         v-model="globalSearch"
         @click="$emit('show-global-search')"
       />
-      <!-- <input
-        ref="globalSearchInput"
-        type="text"
-        placeholder="Search"
-        class="input global-search-input w-80 -xl:w-40 -lg:w-80 -md:w-40 -lg:mr-0 mr-9 bg-base-content rounded text-black text-lg h-9"
-        @click="$emit('show-global-search')"
-      /> -->
     </div>
     <div class="relative">
       <person-add-icon @click="showUserMenu" />
@@ -32,14 +19,11 @@
       />
       <alert-list :list="user.notifications" class="alert-list" />
     </div>
-    <!-- <div class="setting-icon">
-			<setting-icon />
-		</div> -->
-    <!--    <div class="relative z-10">-->
-    <!--      <question-round-icon @click="$emit('show-help')" />-->
-    <!--    </div>-->
+
     <div class="leader-board-container relative z-10">
-      <button class="w-6">
+      <button
+        class="w-8 h-8 bg-secondary p-1 rounded-lg border-2 border-primary-content"
+      >
         <TrophyIcon
           @mouseover="openLeaderboardPopover"
           @click="$router.push('/leaderboard')"
@@ -60,7 +44,7 @@
     </div>
   </div>
 </template>
-<style>
+<style lang="postcss">
 .alert-container:hover svg {
   @apply rotate-12;
 }
@@ -70,12 +54,6 @@
 .person-add-icon:hover path {
   @apply opacity-100;
 }
-/* .setting-icon:hover{
-		animation: spin 1s linear 0.5; opacity: 0.5;
-	} */
-/*.leader-board-container:hover svg{*/
-/*  @apply rotate-12;*/
-/*}*/
 .leader-board-container:hover .notification {
   @apply -right-2 left-auto z-10 ease-linear;
 }

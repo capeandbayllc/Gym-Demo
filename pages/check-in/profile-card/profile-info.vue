@@ -20,7 +20,7 @@
       <!--            <OfferUpBtn />-->
     </div>
     <div class="grid w-full">
-      <div
+      <!-- <div
         class="flex group/container justify-between items-center p-3 relative border-2 border-secondary rounded-3xl mb-4 z-[1] mx-10"
       >
         <button
@@ -62,7 +62,12 @@
             />
           </span>
         </button>
-      </div>
+      </div> -->
+      <ButtonPanel
+        @P="$emit('toggle-detail', true)"
+        @PT="$emit('toggle-detail', true)"
+        @FM="$emit('toggle-detail', true)"
+      />
       <div class="flex flex-row justify-between gap-5 px-[3.25rem]">
         <button
           v-for="({ icon }, ndx) in engageOptions"
@@ -161,6 +166,7 @@
 import MembershipStatus from "~~/components/buttons/membership-status.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
 import OfferUpBtn from "~~/components/buttons/offer-up-btn.vue";
+import ButtonPanel from "./button-panel.vue";
 import {
   CallIcon,
   EmailIcon,
