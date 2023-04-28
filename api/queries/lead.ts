@@ -10,21 +10,18 @@ const GET_LEAD: DocumentNode = gql`
         first_name
         last_name
         email
-        status {
+        leadStatus {
           status
         }
-        type {
-          name
-        }
+        # type {
+        #   name
+        # }
         gender
         phone
         profile_photo_path
         created_at
         updated_at
         opportunity
-        location {
-          name
-        }
         homeLocation {
           name
         }
