@@ -63,6 +63,7 @@ import Interests from "../../../pages/check-in/profile-card/add-member/interests
 import EmergencyInfo from "../../../pages/check-in/profile-card/add-member/emergency-info.vue";
 import BroughtToday from "../../../pages/check-in/profile-card/add-member/brought-today.vue";
 import MembershipType from "../../../pages/check-in/new-agreement/membership-type.vue";
+import isThisYou from "~~/pages/check-in/profile-card/add-member/is-this-you.vue";
 import { NextIcon, AddLead } from "@/components/icons";
 
 const props = defineProps({
@@ -89,6 +90,7 @@ const addMemberScreens = ref([
   Welcome,
   JoinTour,
   Infomrmation,
+  isThisYou,
   PersonalInformation,
   Interests,
   EmergencyInfo,

@@ -7,20 +7,6 @@
 }
 
 @layer components {
-  /*
-    quick note on shared component styles
-
-    it's important these not be so opinionated, so that they may be extended for aditional use cases
-    if the need arises, while also being useful for a wide variety of use cases. this is essentially
-    just building upon the foundation that tailwind has set for us and learning from the lessons it teachs.
-
-    take the bare minimum for unionized styles and leave the rest up to the implementation
-    taking this approach ensures maximum reusage and style usage
-
-    if the style doesn't fit, add to the elements inline class attribute - the style specificity for these
-    are purposefully insignifigant
-  */
-
   /* gym membership type base  */
   .gr-membership-type {
     @apply flex items-center justify-center capitalize btn btn-xs w-full rounded-full border-none transition-all duration-100 font-bold;
@@ -106,6 +92,11 @@
   .gr-neutral-textfield {
     @apply bg-base-content/20;
     @apply focus-within:bg-base-content/30 focus-within:border-secondary;
+  }
+
+  .gr-secondary-textfield {
+    @apply bg-secondary text-primary-content;
+    @apply focus-within:border-primary-content focus-within:text-base-content;
   }
 
   select.gr-neutral-selection {
