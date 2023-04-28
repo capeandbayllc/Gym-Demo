@@ -7,68 +7,6 @@
       />
       <p class="text-xs mt-1">Add a Lead</p>
     </div>
-    <div class="page-leads-center-container">
-      <div class="page-content custom-page-content-header">
-        <span>Leads</span>
-        <search-icon
-          v-if="!isSearchEnable"
-          class="search-icon"
-          @click="isSearchEnable = !isSearchEnable"
-        />
-        <input
-          v-else
-          type="text"
-          placeholder="Search"
-          class="input input-sm max-w-xs search-input"
-        />
-      </div>
-      <div class="-md:px-4 page-content custom-page-content flex-col">
-        <div class="flex flex-row justify-between space-x-4 mb-4">
-          <div class="flex gap-4">
-            <select-box
-              :items="locationType"
-              value=""
-              :label="'Locations'"
-              :secondary="true"
-              class="w-40 filter-selected"
-            >
-            </select-box>
-            <select-box
-              :items="leadType"
-              value=""
-              :label="'Lead Type'"
-              :secondary="true"
-              class="w-40 filter-selected"
-            >
-            </select-box>
-            <select-box
-              :items="leadStatus"
-              @onChange="filters.status = $event"
-              :label="'Lead Status'"
-              :secondary="true"
-              class="w-40 filter-selected"
-            >
-            </select-box>
-          </div>
-          <!-- <div class="flex gap-4">
-                        <search-input
-                            neutral
-                            size="md"
-                            border="neutral"
-                            class="w-52"
-                        />
-                    </div> -->
-        </div>
-        <div>
-          <data-table
-            :columns="columns"
-            :data="leads_display"
-            :row-component="LeadTableRow"
-            class="h-96 overflow-y-auto"
-          />
-        </div>
-      </div>
-    </div>
     <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit">
       <div class="bg-black rounded-md p-6 border border-secondary">
         <component
@@ -130,9 +68,18 @@
           >
           </select-box>
           <select-box
-            :items="leadType"
+            :items="leadTypes"
             value=""
             :label="'Lead Type'"
+            :secondary="true"
+            class="w-40 filter-selected"
+          >
+          </select-box>
+          <select-box
+            :items="leadStatuses"
+            value=""
+            @onChange="filters.status = $event"
+            :label="'Lead Status'"
             :secondary="true"
             class="w-40 filter-selected"
           >
@@ -186,8 +133,11 @@ import EmergencyInfo from "~/pages/check-in/profile-card/add-member/emergency-in
 import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today.vue";
 import { useQuery } from "@vue/apollo-composable";
 import lead from "~/api/queries/lead";
+import leadStatusQuery from "~/api/queries/leadStatus";
 import userMutation from "~/api/mutations/user";
 import { useMutation } from "@vue/apollo-composable";
+import location from "~~/api/queries/location";
+import gql from "graphql-tag";
 
 const newMemberData = ref({
   id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
@@ -207,47 +157,20 @@ const newMemberData = ref({
   city: "Port Wendy",
   state: "MT",
   phone: "9846188996",
-  // user_id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
-  // last_name: "Schmeler",
-  // status_id: "New",
-  // type_id: "streaming_preview",
-  // email_verified_at: null,
-  // alternate_emails: null,
-  // alternate_phone: null,
-  // profile_photo_path: "/images/profile/users_8.jpg",
-  // occupation: null,
-  // employer: null,
-  // barcode: null,
-  // zip: "84678",
-  // unsubscribed_email: false,
-  // unsubscribed_sms: false,
-  // user_type: "lead",
-  // entry_source: null,
-  // location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
-  // manager: null,
-  // opportunity: null,
-  // external_id: null,
-  // misc: null,
-  // details: {
-  //     contact_preference: "sms",
-  //     emergency_contact: {
-  //         ec_first_name: "",
-  //         ec_last_name: "",
-  //         ec_phone: ""
-  //     },
-  //     membership_type_id: ""
-  // },
-  // is_previous: false,
-  // started_at: null,
-  // ended_at: null,
-  // terminated_at: null,
-  // obfuscated_at: null,
-  // twilioClientConversation_ids: [],
-  // note_ids: [],
-  // owner: null
 });
 
 const newMemberDataReset = ref({});
+const leadStatuses = ref([]);
+
+const { result: resultLocation } = useQuery(location.query.browse, {
+  first: 1,
+});
+watchEffect(() => {
+  if (!resultLocation.value?.locations?.data[0]) return;
+  newMemberData.value.home_location_id =
+    resultLocation.value?.locations?.data[0].id;
+  newMemberDataReset.value.home_location_id = { ...newMemberData.value };
+});
 
 onMounted(() => {
   newMemberDataReset.value = { ...newMemberData.value };
@@ -279,13 +202,27 @@ const saveLead = () => {
       state: newMemberData.value.state,
       phone: newMemberData.value.phone,
     },
-  }).then(() => {
+  }).then((response) => {
+    console.log(response);
     leads.value = [];
     getLeadsQuery();
   });
 
   newMemberData.value = { ...newMemberDataReset.value };
 };
+
+let { result } = useQuery(leadStatusQuery.query.browse);
+watchEffect(() => {
+  if (!result.value?.lead_statuses) return;
+
+  let statuses = result.value?.lead_statuses.slice();
+  statuses.sort((a, b) => a.order - b.order);
+  const mappedStatuses = statuses.map((status) => ({
+    value: status.id,
+    label: status.status,
+  }));
+  leadStatuses.value = mappedStatuses;
+});
 
 const isSearchEnable = ref(false);
 const addMemberPopUp = ref(null);
@@ -302,34 +239,25 @@ const addMemberScreens = ref([
 const addMemberScreenIndex = ref(0);
 const leads = ref([]);
 const filters = ref({ status: "" });
-
-// const leadTypes = [
-//     "app_referal",
-//     "grand_opening",
-//     "snapshot",
-//     "free_trial",
-//     "streaming_preview",
-// ];
 const opportunity = ["error", "warning", "accent"];
+
 const getLeadsQuery = () => {
-  console.log("EXECUTING");
   let { result } = useQuery(lead.query.browse, { filter: filters.value });
   watchEffect(() => {
-    console.log("result");
-    console.log(result);
     if (!result.value?.leads.data) return;
-    console.log("ADD DATA");
     leads.value = result.value?.leads.data;
   });
 };
 getLeadsQuery();
+
 watch(filters.value, () => {
   leads.value = [];
   getLeadsQuery();
 });
-// const getRandomType = () => {
-//     return leadTypes[Math.floor(Math.random() * leadTypes.length)];
-// };
+
+const getRandomType = () => {
+  return leadTypes[Math.floor(Math.random() * leadTypes.length)];
+};
 const getRandomOpportunity = () => {
   return opportunity[Math.floor(Math.random() * opportunity.length)];
 };
@@ -338,6 +266,7 @@ const leads_display = computed(() => {
   return leads.value.map((item) => {
     return {
       ...item,
+      type: getRandomType(),
       opportunity: getRandomOpportunity(),
     };
   });
@@ -386,7 +315,7 @@ const locationType = [
     label: "Location 5",
   },
 ];
-const leadType = [
+const leadTypes = [
   {
     value: "1",
     label: "App Referal",
@@ -408,24 +337,24 @@ const leadType = [
     label: "Streaming Preview",
   },
 ];
-const leadStatus = [
-  {
-    value: "New",
-    label: "New",
-  },
-  {
-    value: "Not Interested",
-    label: "Not Interested",
-  },
-  {
-    value: "No Show",
-    label: "No Show",
-  },
-  {
-    value: "Missed",
-    label: "Missed",
-  },
-];
+// const leadStatus = [
+//   {
+//     value: "New",
+//     label: "New",
+//   },
+//   {
+//     value: "Not Interested",
+//     label: "Not Interested",
+//   },
+//   {
+//     value: "No Show",
+//     label: "No Show",
+//   },
+//   {
+//     value: "Missed",
+//     label: "Missed",
+//   },
+// ];
 const columns = [
   {
     label: "Created",

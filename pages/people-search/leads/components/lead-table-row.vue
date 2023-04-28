@@ -9,12 +9,12 @@
     <td>{{ data.homeLocation?.name }}</td>
     <!-- <td> Club {{ Math.floor(Math.random() * 10) }} </td> -->
     <td>
-      <div :class="'type-' + data.type?.name">
-        {{ data.type?.name }}
+      <div :class="'type-' + data.type">
+        {{ data.type.label }}
       </div>
     </td>
     <td class="capitalize text-accent-focus/60">
-      {{ data.status?.status }} {{ contactOption }}
+      {{ data.leadStatus?.status }} {{ contactOption }}
     </td>
     <td>
       <div class="dropdown dropdown-end">
