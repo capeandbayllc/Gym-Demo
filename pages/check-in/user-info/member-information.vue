@@ -10,7 +10,7 @@
       @click="isActiveMember = !isActiveMember"
       size="sm"
     >
-      {{ isActiveMember ? "In-Active" : "Active" }}
+      {{ isActiveMember ? "Inactive" : "Active" }}
     </Button>
     <h2 class="!col-span-1">Member Information</h2>
     <Button
