@@ -11,5 +11,5 @@
   </simple-card>
 </template>
 <script setup>
-const inputValue = ref("kevinbucanan@gmail.com");
+const inputValue = ref("");
 </script>
