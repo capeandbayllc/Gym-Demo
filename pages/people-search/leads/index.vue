@@ -134,7 +134,7 @@ import PersonalInformation from "~/pages/check-in/user-info/personal-information
 import Interests from "~/pages/check-in/profile-card/add-member/interests.vue";
 import EmergencyInfo from "~/pages/check-in/profile-card/add-member/emergency-info.vue";
 import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today.vue";
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import lead from "~/api/queries/lead";
 import userMutation from "~/api/mutations/user";
 import {useMutation} from "@vue/apollo-composable";
@@ -261,9 +261,15 @@ const filters = ref({status: ''})
 // ];
 const opportunity = ["error", "warning", "accent"];
 const getLeadsQuery = ()=>{
-    request(lead.query.browse, { filter: filters.value }).then(({ data }) => {
-        leads.value = data.data.leads.data;
-    });
+    console.log('EXECUTING')
+    let { result } = useQuery(lead.query.browse, { filter: filters.value });
+    watchEffect(()=>{
+        console.log('result')
+        console.log(result)
+        if(!result.value?.leads.data) return;
+        console.log('ADD DATA')
+        leads.value = result.value?.leads.data;
+    })
 }
 getLeadsQuery();
 watch(filters.value, ()=>{
@@ -357,16 +363,16 @@ const leadStatus = [
         label: "New",
     },
     {
-        value: "Contacted",
-        label: "Contacted",
+        value: "Not Interested",
+        label: "Not Interested",
     },
     {
-        value: "Converted",
-        label: "Converted",
+        value: "No Show",
+        label: "No Show",
     },
     {
-        value: "Lost",
-        label: "Lost",
+        value: "Missed",
+        label: "Missed",
     }
 ];
 const columns = [

@@ -47,7 +47,9 @@ const GET_SINGLE_LEAD: DocumentNode = gql`
             id
             user_id
             first_name
-            status
+            status{
+                name
+            }
             type{
                 name
             }
