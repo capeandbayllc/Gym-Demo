@@ -35,9 +35,9 @@ const props = defineProps({
     type: Array,
     default: [],
   },
-  noDataMessage:{
+  noDataMessage: {
     type: String,
-    default: ''
+    default: "",
   },
   rowComponent: Object,
   headerComponent: {

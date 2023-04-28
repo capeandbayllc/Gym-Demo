@@ -55,30 +55,30 @@ const columns = [
   },
 ];
 const getType = () => {
-  const types = ['bronze', 'silver', 'gold', 'platinum'];
+  const types = ["bronze", "silver", "gold", "platinum"];
   const randomIndex = Math.floor(Math.random() * types.length);
   return types[randomIndex];
-}
+};
 const agreements = ref([]);
-onMounted(()=>{
-})
+onMounted(() => {});
 const { result } = useQuery(agreement.query.browse);
 watchEffect(() => {
-    agreements.value = result?.value?.agreements.data.map(agreement => {
-        return {
-            id: agreement.id,
-            segment: agreement.agreement_category.name,
-            phone: agreement.user.phone,
-            photo: agreement.user.profile_photo_path,
-            email: agreement.user.email,
-            created: dateFormat(new Date(agreement.created_at), 'm/d yyyy, h:MM:ssTT'),
-            first_name: agreement.user.first_name,
-            last_name: agreement.user.last_name,
-            location: agreement.gr_location_id,
-            type: getType()
-        }
-    });
+  agreements.value = result?.value?.agreements.data.map((agreement) => {
+    return {
+      id: agreement.id,
+      segment: agreement.agreement_category.name,
+      phone: agreement.user.phone,
+      photo: agreement.user.profile_photo_path,
+      email: agreement.user.email,
+      created: dateFormat(
+        new Date(agreement.created_at),
+        "m/d yyyy, h:MM:ssTT"
+      ),
+      first_name: agreement.user.first_name,
+      last_name: agreement.user.last_name,
+      location: agreement.gr_location_id,
+      type: getType(),
+    };
+  });
 });
-
-
 </script>
