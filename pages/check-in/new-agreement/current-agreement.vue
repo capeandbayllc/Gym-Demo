@@ -6,17 +6,14 @@
     </button>
   </div>
   <simple-card title="Current Agreements">
-    <people-search-table
-      :columns="columns"
-      :items="leadsData"
-      class="p-6 text-sm"
-    />
+    <AgreementTable :columns="columns" :items="leadsData" class="p-6 text-sm" />
   </simple-card>
 </template>
 
 <script setup>
-import PeopleSearchTable from "./people-search-table.vue";
+import AgreementTable from "./agreement-table.vue";
 import { NewAgreementIcon, AddIcon } from "@/components/icons";
+
 const columns = [
   {
     label: "Agreement Name",

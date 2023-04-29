@@ -1,11 +1,15 @@
 import { GraphQLResolveInfo } from "graphql/type/definition";
 
-export interface IdentifiableInput {
-  id?: string;
+interface User {
+  id: string;
 }
 
+export type IdentifiableInput<T, K extends keyof T> = {
+  [k in K]: T[K];
+};
+
 export interface InputInterface {
-  input?: IdentifiableInput;
+  input: IdentifiableInput<User, "id">;
 }
 
 export interface UpdateMutationResolver {
