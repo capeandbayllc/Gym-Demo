@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center items-center gap-10 pt-8 pb-16">
     <button class="flex flex-col items-center" @click="$emit('newAgreement')">
-      <NewAgreementIcon class="w-[140px] h-[45px] mb-2" />
+      <NewAgreementIcon class="w-36 h-11 mb-2" />
       <span class="font-semibold">Start a New Agreement</span>
     </button>
   </div>
@@ -19,35 +19,27 @@ import PeopleSearchTable from "./people-search-table.vue";
 import { NewAgreementIcon, AddIcon } from "@/components/icons";
 const columns = [
   {
-    label: "Segment",
+    label: "Agreement Name",
     class: "text-secondary text-left",
   },
   {
-    label: "First Name",
+    label: "Agreement Category",
     class: "text-secondary text-left",
   },
   {
-    label: "Last Name",
+    label: "Created Date",
     class: "text-secondary text-left",
   },
   {
-    label: "Mobile",
+    label: "Invoice Amount",
     class: "text-secondary text-left",
   },
   {
-    label: "Email",
+    label: "Total Agreement Value",
     class: "text-secondary text-left",
   },
   {
-    label: "Location",
-    class: "text-secondary text-left",
-  },
-  {
-    label: "Type",
-    class: "text-secondary text-left",
-  },
-  {
-    label: "Created",
+    label: "Billing Schedule Type",
     class: "text-secondary text-left",
   },
 ];
