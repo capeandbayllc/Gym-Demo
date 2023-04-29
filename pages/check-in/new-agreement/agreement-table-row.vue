@@ -11,7 +11,7 @@
 
 <style scoped lang="postcss">
 td {
-  @apply border-y-2 border-secondary px-3;
+  @apply border-y-2 border-secondary px-3 text-center;
 }
 td:first-child {
   @apply border-l-2 rounded-l text-accent-focus;
