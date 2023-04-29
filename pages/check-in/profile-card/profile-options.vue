@@ -53,12 +53,6 @@ const options = reactive([
     key: "calendar",
     selected: false,
   },
-  //   {
-  //     label: "Notifications",
-  //     key: "notification",
-  //     selected: false,
-  //     unread: notificationCount,
-  //   },
   {
     label: "Add a Guest",
     key: "guest-pass",
@@ -70,16 +64,12 @@ const options = reactive([
     selected: false,
   },
   {
-    label: "New Agreement",
+    label: "Agreements",
     key: "newAgreement",
     selected: false,
   },
 ]);
-
-const checkIn = ref(false);
-
 const handleCheckIn = () => {
-  checkIn.value = !checkIn;
   emit("update:check-in", checkIn);
 };
 

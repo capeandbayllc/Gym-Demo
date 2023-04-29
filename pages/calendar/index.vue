@@ -6,6 +6,13 @@
     >
       <!-- left sidebar -->
       <div class="flex flex-col gap-5 font-light !text-[0.8rem] w-[220px]">
+        <button
+          @click="handleAddNew"
+          class="hover:bg-secondary justify-center px-5 py-1.5 rounded-xl border-2 border-secondary flex items-center gap-2 font-light text-[0.8rem] calendar-style-transition"
+        >
+          <span class="!font-light !tracking-wider">Add New </span>
+          <PlusIcon class="w-4 fill-base-content" />
+        </button>
         <Datepicker
           class="calendar-date-picker"
           menu-class-name="!bg-transparent !border-none"
@@ -52,13 +59,6 @@
           <h1 class="font-light text-xl my-auto w-full">December 2022</h1>
           <!-- filters/page actions -->
           <div class="flex gap-2 w-full justify-end">
-            <button
-              @click="handleAddNew"
-              class="hover:bg-secondary px-5 py-1.5 rounded-xl border-2 border-secondary flex items-center gap-2 font-light text-[0.8rem] calendar-style-transition"
-            >
-              <span class="!font-light !tracking-wider">Add New </span>
-              <PlusIcon class="w-4 fill-base-content" />
-            </button>
             <input placeholder="Search" class="search-input" type="text" />
           </div>
         </div>
