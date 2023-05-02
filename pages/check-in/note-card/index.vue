@@ -72,6 +72,11 @@
           >
           </select-box>
         </div>
+        <FormAppInput
+          height="h-[31px] max-w-full"
+          placeholder="Search"
+          v-model="search"
+        />
       </div>
       <div class="flex flex-col lg:flex-row w-full gap-6 mt-2">
         <div class="w-full lg:w-fit min-w-[300px] max-h-min overflow-auto">
@@ -177,14 +182,16 @@ const activeNote = ref({
   tags: [],
 });
 
+const search = ref("");
 const selectedCategory = ref("");
 const selectedTag = ref("");
 
 const notesFiltered = computed(() => {
-  if (selectedCategory.value || selectedTag.value) {
+  if (selectedCategory.value || selectedTag.value || search.value) {
     return notes.value.filter((note) => {
       let categoryMatch = true;
       let tagMatch = true;
+      let searchMatch = true;
 
       if (selectedCategory.value) {
         categoryMatch = note.categories.includes(selectedCategory.value);
@@ -194,7 +201,14 @@ const notesFiltered = computed(() => {
         tagMatch = note.tags.includes(selectedTag.value);
       }
 
-      return categoryMatch && tagMatch;
+      if (search.value) {
+        const searchTerm = search.value.toLowerCase();
+        const titleMatch = note.title.toLowerCase().includes(searchTerm);
+        const contentMatch = note.content.toLowerCase().includes(searchTerm);
+        searchMatch = titleMatch || contentMatch;
+      }
+
+      return categoryMatch && tagMatch && searchMatch;
     });
   } else {
     return notes.value;
