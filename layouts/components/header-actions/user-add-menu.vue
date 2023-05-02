@@ -66,6 +66,7 @@ import MembershipType from "../../../pages/check-in/new-agreement/membership-typ
 import isThisYou from "~~/pages/check-in/profile-card/add-member/is-this-you.vue";
 import { NextIcon, AddLead } from "@/components/icons";
 
+const router = useRouter();
 const props = defineProps({
   mode: {
     type: String,
@@ -116,7 +117,14 @@ const nextScreen = () => {
   addMemberScreenIndex.value =
     addMemberScreenIndex.value < addMemberScreens.value.length - 1
       ? addMemberScreenIndex.value + 1
-      : addMemberScreenIndex.value;
+      : (() => {
+          router.push({
+            path: "/check-in",
+            query: { openDetail: "newAgreement" },
+          });
+          closeAddMemberPopUp();
+          return addMemberScreenIndex.value;
+        })();
   console.log("addMemberScreenIndex", addMemberScreenIndex.value);
 };
 const prevScreen = () => {

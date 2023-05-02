@@ -97,7 +97,6 @@ import lead from "~/api/queries/lead";
 import EventCard from "./event-card/index.vue";
 import ProfileCard from "./profile-card/index.vue";
 import Profile from "./profile/index.vue";
-import PosCard from "./pos-card/index.vue";
 import PosWindow from "../pos/components/pos-window.vue";
 import CalendarCard from "./calendar-card/index.vue";
 import NotificationCard from "./notification-card/index.vue";
@@ -123,6 +122,7 @@ const option = ref(null);
 const route = useRoute();
 const profileId = route.query.id;
 const isPreview = route.query.preview;
+const openDetail = route.query.openDetail;
 const isLeadView = route.query.type === "lead";
 const ProfileInfo = ref(null);
 
@@ -147,6 +147,17 @@ onMounted(() => {
     setTimeout(() => {
       window.scroll({
         top: 600,
+        left: 0,
+        behavior: "smooth",
+      });
+    }, 0);
+  }
+
+  if (openDetail) {
+    detailView.value = openDetail;
+    setTimeout(() => {
+      window.scroll({
+        top: 900,
         left: 0,
         behavior: "smooth",
       });
