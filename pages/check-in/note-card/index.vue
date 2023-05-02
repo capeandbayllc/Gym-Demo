@@ -180,6 +180,7 @@ const activeNote = ref({
   alert: false,
   categories: [],
   tags: [],
+  files: [],
 });
 
 const search = ref("");
@@ -222,6 +223,7 @@ onMounted(() => {
 const newNote = () => {
   newNoteData.value.categories = [];
   newNoteData.value.tags = [];
+  newNoteData.value.files = [];
   activeNote.value = { ...newNoteData.value };
 };
 
@@ -279,6 +281,7 @@ const notes = ref([
     alert: true,
     categories: ["Health", "Finance", "Entertainment", "History", "Politics"],
     tags: ["Cooking", "Books", "Movies", "Fashion", "Fitness"],
+    files: [],
   },
   {
     id: 2,
@@ -292,6 +295,7 @@ const notes = ref([
     alert: false,
     categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
     tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
+    files: [],
   },
   {
     id: 3,
@@ -305,6 +309,7 @@ const notes = ref([
     alert: false,
     categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
     tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
+    files: [],
   },
   {
     id: 4,
@@ -318,6 +323,7 @@ const notes = ref([
     alert: true,
     categories: ["Health", "Finance", "Entertainment", "History", "Politics"],
     tags: ["Cooking", "Books", "Movies", "Fashion", "Fitness"],
+    files: [],
   },
   {
     id: 5,
@@ -331,6 +337,7 @@ const notes = ref([
     alert: true,
     categories: ["Technology", "Business", "Art", "Science", "Food"],
     tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
+    files: [],
   },
   {
     id: 6,
@@ -344,6 +351,7 @@ const notes = ref([
     alert: true,
     categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
     tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
+    files: [],
   },
   {
     id: 7,
@@ -357,6 +365,7 @@ const notes = ref([
     alert: true,
     categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
     tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
+    files: [],
   },
   {
     id: 8,
@@ -370,6 +379,7 @@ const notes = ref([
     alert: true,
     categories: ["Technology", "Business", "Art", "Science", "Food"],
     tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
+    files: [],
   },
   {
     id: 9,
@@ -383,6 +393,7 @@ const notes = ref([
     alert: true,
     categories: ["Technology", "Business", "Art", "Science", "Food"],
     tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
+    files: [],
   },
   {
     id: 10,
@@ -396,6 +407,7 @@ const notes = ref([
     alert: true,
     categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
     tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
+    files: [],
   },
   {
     id: 11,
@@ -409,6 +421,7 @@ const notes = ref([
     alert: false,
     categories: ["Technology", "Business", "Art", "Science", "Food"],
     tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
+    files: [],
   },
 ]);
 const tags = computed(() => {

@@ -15,11 +15,43 @@
       <h5 class="text-xl font-semibold">Paragraph Notes</h5>
       <textarea
         v-model="note.content"
-        class="w-full h-80 rounded my-3 focus:outline-none text-base-300/80 resize-none"
+        class="w-full h-80 rounded mt-3 focus:outline-none text-base-300/80 resize-none"
         placeholder="Paragraph Notes"
       ></textarea>
     </div>
 
+    <div class="flex">
+      <label class="mb-4 block">
+        <UploadIcon
+          class="h-12 w-12 bg-secondary rounded-full text-center relative z-10 text-secondary block mx-auto cursor-pointer"
+        />
+        <input
+          type="file"
+          class="absolute z-0 top-0 left-0 hidden"
+          ref="fileInput"
+          @change="handleFileSelect"
+          multiple
+        />
+      </label>
+      <div class="flex flex-col mx-2">
+        <div class="flex flex-wrap gap-2">
+          <div
+            v-for="(file, index) in note.files"
+            :key="file.name"
+            class="bg-white border border-neutral-content/40 rounded-lg p-2 flex items-center"
+          >
+            <span class="mr-2">{{ file.name }}</span>
+            <button @click="removeFile(index)">
+              <font-awesome-icon
+                class="mt-2 text-neutral-content hover:text-base-100 cursor-pointer"
+                :icon="['fas', 'times']"
+                size="sm"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="text-base-100 space-y-2">
       <div class="flex flex-wrap">
         <div class="flex flex-wrap mt-[2px] gap-1 mr-2">
@@ -34,19 +66,21 @@
             <span>{{ category }}</span>
           </div>
         </div>
-        <input
-          class="focus:outline-none max-w-[120px]"
-          placeholder="Add categories"
-          v-model="newCategory"
-          @keydown.enter="addCategory"
-        />
-        <button
-          class="font-bold text-secondary"
-          v-if="newCategory.length"
-          @click="addCategory"
-        >
-          <font-awesome-icon :icon="['fas', 'plus']" size="md" />
-        </button>
+        <div>
+          <input
+            class="focus:outline-none max-w-[120px]"
+            placeholder="Add categories"
+            v-model="newCategory"
+            @keydown.enter="addCategory"
+          />
+          <button
+            class="font-bold text-secondary"
+            v-if="newCategory.length"
+            @click="addCategory"
+          >
+            <font-awesome-icon :icon="['fas', 'plus']" size="md" />
+          </button>
+        </div>
       </div>
       <div class="flex flex-wrap">
         <div class="flex flex-wrap mt-[2px] gap-1 mr-2">
@@ -61,19 +95,21 @@
             <span>{{ tag }}</span>
           </div>
         </div>
-        <input
-          class="focus:outline-none max-w-[120px]"
-          placeholder="Add tag"
-          v-model="newTag"
-          @keydown.enter="addTag"
-        />
-        <button
-          class="font-bold text-secondary"
-          v-if="newTag.length"
-          @click="addTag"
-        >
-          <font-awesome-icon :icon="['fas', 'plus']" size="md" />
-        </button>
+        <div>
+          <input
+            class="focus:outline-none max-w-[120px]"
+            placeholder="Add tag"
+            v-model="newTag"
+            @keydown.enter="addTag"
+          />
+          <button
+            class="font-bold text-secondary"
+            v-if="newTag.length"
+            @click="addTag"
+          >
+            <font-awesome-icon :icon="['fas', 'plus']" size="md" />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -107,6 +143,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlusCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 import AlertButton from "../alert-button.vue";
 import CustomToggle from "~/components/toggle/custom-toggle.vue";
+import { UploadIcon } from "@/components/icons";
 library.add(faTimes);
 library.add(faPlusCircle);
 const props = defineProps({
@@ -143,6 +180,17 @@ const deleteTag = (index) => {
   note.value.tags.splice(index, 1);
 };
 
+const handleFileSelect = (event) => {
+  const files = event.target.files;
+  for (let i = 0; i < files.length; i++) {
+    note.value.files.push(files[i]);
+  }
+};
+
+const removeFile = (index) => {
+  note.value.files.splice(index, 1);
+};
+
 const note = ref({
   title: "",
   content: "",
@@ -150,14 +198,17 @@ const note = ref({
   alert: false,
   categories: [],
   tags: [],
+  files: [],
 });
 watchEffect(() => {
   note.value = { ...props.activeNote };
 });
 const saveNote = () => {
+  newTag.value = "";
   emit("saveNote", note.value);
 };
 const deleteNote = () => {
+  newTag.value = "";
   emit("deleteNote", note.value);
 };
 </script>
