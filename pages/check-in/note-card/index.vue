@@ -51,10 +51,33 @@
           </div>
         </div>
       </div>
+      <div
+        class="flex md:flex-row flex-col justify-between items-center gap-3 my-3"
+      >
+        <div class="flex w-full gap-3 md:flex-row flex-col items-center">
+          <select-box
+            :items="categories"
+            :label="selectedCategory ? selectedCategory : 'Select category'"
+            :showSearch="false"
+            @onChange="selectedCategory = $event"
+            class="bg-base-content text-base-300 rounded border border-base-content max-w-[300px]"
+          >
+          </select-box>
+          <select-box
+            :items="tags"
+            :label="selectedTag ? selectedTag : 'Select tag'"
+            :showSearch="false"
+            @onChange="selectedTag = $event"
+            class="bg-base-content text-base-300 rounded border border-base-content max-w-[300px]"
+          >
+          </select-box>
+        </div>
+      </div>
       <div class="flex flex-col lg:flex-row w-full gap-6 mt-2">
         <div class="w-full lg:w-fit min-w-[300px] max-h-min overflow-auto">
           <notes-list
-            :notes="notes"
+            :notes="notesFiltered"
+            :notes-type="notesType"
             @clickedNote="activeNote = $event"
           ></notes-list>
         </div>
@@ -150,6 +173,32 @@ const activeNote = ref({
   content: "",
   completed: false,
   alert: false,
+  categories: [],
+  tags: [],
+});
+
+const selectedCategory = ref("");
+const selectedTag = ref("");
+
+const notesFiltered = computed(() => {
+  if (selectedCategory.value || selectedTag.value) {
+    return notes.value.filter((note) => {
+      let categoryMatch = true;
+      let tagMatch = true;
+
+      if (selectedCategory.value) {
+        categoryMatch = note.categories.includes(selectedCategory.value);
+      }
+
+      if (selectedTag.value) {
+        tagMatch = note.tags.includes(selectedTag.value);
+      }
+
+      return categoryMatch && tagMatch;
+    });
+  } else {
+    return notes.value;
+  }
 });
 
 onMounted(() => {
@@ -157,6 +206,8 @@ onMounted(() => {
 });
 
 const newNote = () => {
+  newNoteData.value.categories = [];
+  newNoteData.value.tags = [];
   activeNote.value = { ...newNoteData.value };
 };
 
@@ -196,6 +247,11 @@ const deleteNote = (data) => {
 };
 
 const notesType = ref("recent");
+watch(notesType, () => {
+  selectedCategory.value = "";
+  selectedTag.value = "";
+});
+
 const notes = ref([
   {
     id: 1,
@@ -207,6 +263,8 @@ const notes = ref([
       "ipsum dolor sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: false,
     alert: true,
+    categories: ["Health", "Finance", "Entertainment", "History", "Politics"],
+    tags: ["Cooking", "Books", "Movies", "Fashion", "Fitness"],
   },
   {
     id: 2,
@@ -218,6 +276,8 @@ const notes = ref([
       "dolor sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: false,
     alert: false,
+    categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
+    tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
   },
   {
     id: 3,
@@ -229,6 +289,8 @@ const notes = ref([
       "sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: false,
+    categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
+    tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
   },
   {
     id: 4,
@@ -240,6 +302,8 @@ const notes = ref([
       "amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: false,
     alert: true,
+    categories: ["Health", "Finance", "Entertainment", "History", "Politics"],
+    tags: ["Cooking", "Books", "Movies", "Fashion", "Fitness"],
   },
   {
     id: 5,
@@ -251,6 +315,8 @@ const notes = ref([
       "consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Technology", "Business", "Art", "Science", "Food"],
+    tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
   },
   {
     id: 6,
@@ -262,6 +328,8 @@ const notes = ref([
       "Lorem adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
+    tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
   },
   {
     id: 7,
@@ -273,6 +341,8 @@ const notes = ref([
       "Lorem adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
+    tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
   },
   {
     id: 8,
@@ -284,6 +354,8 @@ const notes = ref([
       "amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Technology", "Business", "Art", "Science", "Food"],
+    tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
   },
   {
     id: 9,
@@ -295,6 +367,8 @@ const notes = ref([
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Technology", "Business", "Art", "Science", "Food"],
+    tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
   },
   {
     id: 10,
@@ -306,6 +380,8 @@ const notes = ref([
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
+    tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
   },
   {
     id: 11,
@@ -317,8 +393,54 @@ const notes = ref([
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: false,
+    categories: ["Technology", "Business", "Art", "Science", "Food"],
+    tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
   },
 ]);
+const tags = computed(() => {
+  const uniqueTags = new Set();
+
+  notes.value
+    .filter(
+      (note) => (note.completed ? "completed" : "recent") == notesType.value
+    )
+    .forEach((note) => {
+      note.tags.forEach((tag) => {
+        uniqueTags.add(tag);
+      });
+    });
+
+  return Array.from(uniqueTags)
+    .sort()
+    .map((tag) => {
+      return {
+        value: tag,
+        label: tag,
+      };
+    });
+});
+
+const categories = computed(() => {
+  const uniqueCategories = new Set();
+  notes.value
+    .filter(
+      (note) => (note.completed ? "completed" : "recent") == notesType.value
+    )
+    .forEach((note) => {
+      note.categories.forEach((category) => {
+        uniqueCategories.add(category);
+      });
+    });
+
+  return Array.from(uniqueCategories)
+    .sort()
+    .map((category) => {
+      return {
+        value: category,
+        label: category,
+      };
+    });
+});
 
 const today = computed(() => {
   const date = new Date();

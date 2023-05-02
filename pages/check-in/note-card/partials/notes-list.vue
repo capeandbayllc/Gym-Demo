@@ -1,6 +1,5 @@
 <template>
   <div class="w-full">
-    <p class="text-xs mb-2">Today</p>
     <button
       class="block w-full text-left bg-base-300 border border-base-content rounded-xl py-1 px-2 mb-4 duration-300 transition-all hover:bg-gradient-to-b from-base-300 to-secondary/40"
       @click="clickedNote(note)"
@@ -27,6 +26,7 @@
 import AlertButton from "../alert-button.vue";
 const props = defineProps({
   notes: Array,
+  notesType: String,
 });
 const emit = defineEmits(["clickedNote"]);
 const clickedNote = (note) => {
