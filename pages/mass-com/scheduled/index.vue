@@ -1,23 +1,18 @@
 <template>
-  <div class="pb-4 w-full h-fit pr-5">
+  <div class="pb-4 w-full h-fit pr-12 pl-9">
     <div class="pl-10 pr-4 mb-2 flex flex-1">
       <div class="flex flex-auto">Mass Comms</div>
       <div class="flex gap-2 items-end pb-2 pr-10">
-        <Button
-          outline
-          size="xs"
-          @click.stop="$router.push('/mass-com')"
-          class="rounded-full"
-        >
-          Drip Campaigns
+        <Button secondary size="xs" class="rounded-full">
+          Build an Email
         </Button>
         <Button
           secondary
           size="xs"
-          @click.stop="$router.push('/mass-com/scheduled')"
+          @click.stop="$router.push('/mass-com')"
           class="rounded-full"
         >
-          Scheduled Campaigns
+          Build a Campaign
         </Button>
       </div>
     </div>
