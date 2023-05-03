@@ -12,7 +12,6 @@
     ref="addMemberPopUp"
     class="w-fit"
     @close="addMemberScreenIndex = 0"
-    :class="addMemberScreenIndex == 7 ? 'h-full' : ''"
     :closable="mode !== 'page'"
   >
     <div

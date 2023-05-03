@@ -13,7 +13,7 @@
           Personal Information (Profile)
         </div>
         <div
-          class="max-h-[70vh] overflow-x-hidden overflow-y-scroll grid pr-2 grid-cols-2 gap-4 w-[650px] text-sm width-full"
+          class="max-h-[50vh] xl:max-h-[70vh] overflow-x-hidden overflow-y-scroll grid pr-2 grid-cols-2 gap-4 w-[650px] text-sm width-full"
         >
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">First Name</div>
