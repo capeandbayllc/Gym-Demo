@@ -4,6 +4,18 @@
       <div class="text-center text-xl mt-4 font-semibold mb-6">
         Select your Agreement Type
       </div>
+      <div class="flex mb-3 items-center">
+        <p>Location: St Petersburg. Fla.</p>
+        <Button
+          size="sm"
+          class="normal-case mx-2 ml-auto rounded-lg"
+          outline
+          hoverSecondary
+          @click="showSelectGymModal"
+        >
+          Change Location
+        </Button>
+      </div>
       <div
         class="flex justify-around cursor-pointer gradient-bg w-fit w-[450px] p-6 mx-auto rounded border border-secondary"
       >
@@ -19,6 +31,9 @@
         </div>
       </div>
       <slot></slot>
+      <daisy-modal :overlay="true" ref="selectGymModal" class="w-fit">
+        <SelectGym></SelectGym>
+      </daisy-modal>
     </div>
   </div>
 </template>
@@ -52,9 +67,16 @@
   @apply bg-base-200;
 }
 </style>
-
 <script setup>
 import { EmptyFileIcon } from "~~/components/icons";
+import SelectGym from "~/pages/check-in/user-info/select-gym";
+const selectGymModal = ref(null);
+const showSelectGymModal = () => {
+  selectGymModal.value.open();
+};
+const closeSelectGymModal = () => {
+  selectGymModal.value.close();
+};
 
 const props = defineProps({
   modalClass: {
