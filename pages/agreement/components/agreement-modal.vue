@@ -1,11 +1,11 @@
 <template>
-  <div :class="modalClass">
+  <div :class="modalClass" class="max-w-[500px]">
     <div>
       <div class="text-center text-xl mt-4 font-semibold mb-6">
         Select your Agreement Type
       </div>
-      <div class="flex mb-3 items-center">
-        <p>Location: St Petersburg. Fla.</p>
+      <div class="flex mb-3 items-center" v-if="enableLocationSelection">
+        <p>Location: {{ locationSelected?.name }}</p>
         <Button
           size="sm"
           class="normal-case mx-2 ml-auto rounded-lg"
@@ -31,8 +31,13 @@
         </div>
       </div>
       <slot></slot>
-      <daisy-modal :overlay="true" ref="selectGymModal" class="w-fit">
-        <SelectGym></SelectGym>
+      <daisy-modal
+        v-if="enableLocationSelection"
+        :overlay="true"
+        ref="selectGymModal"
+        class="w-fit"
+      >
+        <SelectGym @selectGym="selectGym" />
       </daisy-modal>
     </div>
   </div>
@@ -46,22 +51,9 @@
   .create-option {
     @apply inline-block items-center text-xs text-center w-20 mb-4;
   }
-
-  /* .chart-content{
-        @apply bg-base-300 rounded w-full text-3xl font-bold border-base-content border-2 text-center;
-    } */
   .content {
     @apply border border-secondary;
   }
-  /* .tab-list {
-        @apply flex flex-row space-x-5 pb-4;
-        .tab-item {
-            @apply px-4 py-1 rounded bg-base-content text-secondary text-base cursor-pointer;
-        }
-        .tab-item.active {
-            @apply bg-secondary text-base-content relative;
-        }
-    } */
 }
 .agreement-builder-modal-card {
   @apply bg-base-200;
@@ -70,13 +62,8 @@
 <script setup>
 import { EmptyFileIcon } from "~~/components/icons";
 import SelectGym from "~/pages/check-in/user-info/select-gym";
-const selectGymModal = ref(null);
-const showSelectGymModal = () => {
-  selectGymModal.value.open();
-};
-const closeSelectGymModal = () => {
-  selectGymModal.value.close();
-};
+import { useQuery } from "@vue/apollo-composable";
+import location from "~/api/queries/location";
 
 const props = defineProps({
   modalClass: {
@@ -87,7 +74,34 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+  enableLocationSelection: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const locationSelected = ref(null);
+
+const { result } = useQuery(location.query.browse, { first: 1 });
+watchEffect(() => {
+  if (!result.value?.locations?.data[0]) return;
+  locationSelected.value = result.value.locations.data[0];
+});
+
+const selectGym = (newLocation) => {
+  closeSelectGymModal();
+  locationSelected.value = newLocation;
+};
+
+const selectGymModal = ref(null);
+
+const showSelectGymModal = () => {
+  selectGymModal.value.open();
+};
+
+const closeSelectGymModal = () => {
+  selectGymModal.value.close();
+};
 
 const activeTab = ref(null);
 

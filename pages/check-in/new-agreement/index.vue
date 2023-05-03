@@ -8,6 +8,7 @@
       <component
         v-else
         :is="agreementScreens[agreementScreenIndex]"
+        :enableLocationSelection="true"
         :modalClass="
           'bg-base-300 w-fit mx-auto p-[17px] border border-secondary new-agreements-wrapper ' +
           (agreementScreenIndex == 0 ? 'rounded-[8px]' : 'rounded-[19px]')
