@@ -94,6 +94,7 @@
 import { request } from "~/api/utils/request";
 import member from "@/api/queries/member";
 import lead from "~/api/queries/lead";
+import userQuery from "~/api/queries/user";
 import EventCard from "./event-card/index.vue";
 import ProfileCard from "./profile-card/index.vue";
 import Profile from "./profile/index.vue";
@@ -123,7 +124,7 @@ const route = useRoute();
 const profileId = route.query.id;
 const isPreview = route.query.preview;
 const openDetail = route.query.openDetail;
-const isLeadView = route.query.type === "lead";
+const typeView = route.query.type ? route.query.type : "member";
 const ProfileInfo = ref(null);
 
 const appLayout = useLayoutElement();
@@ -224,16 +225,16 @@ const OnCheckInStatusChange = (isCheckedIn) => {
 
 const getMember = () => {
   if (profileId) {
-    request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-      ({ data }) => {
-        let user = data.data[isLeadView ? "lead" : "member"];
-        ProfileInfo.value = {
-          ...user,
-          name: `${user.first_name} ${user.last_name}`,
-        };
-        console.log(ProfileInfo.value);
-      }
-    );
+    const view =
+      typeView === "lead" ? lead : typeView === "user" ? userQuery : member;
+    request(view.query.get, { id: profileId }).then(({ data }) => {
+      let user = data.data[typeView];
+      ProfileInfo.value = {
+        ...user,
+        name: `${user.first_name} ${user.last_name}`,
+      };
+      console.log(ProfileInfo.value);
+    });
   } else {
     ProfileInfo.value = {
       ...user.value,

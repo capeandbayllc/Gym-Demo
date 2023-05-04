@@ -176,12 +176,13 @@ import {
 import { request } from "~/api/utils/request";
 import member from "@/api/queries/member";
 import lead from "~/api/queries/lead";
+import userQuery from "~/api/queries/user";
 
 const user = useState("auth");
 
 const route = useRoute();
 const profileId = route.query.id;
-const isLeadView = route.query.type === "lead";
+const typeView = route.query.type ? route.query.type : "member";
 const ProfileInfo = ref(null);
 const guests = [
   {
@@ -241,11 +242,11 @@ getMember();
 
 function getMember() {
   if (profileId) {
-    request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-      ({ data }) => {
-        ProfileInfo.value = data.data[isLeadView ? "lead" : "member"];
-      }
-    );
+    const view =
+      typeView === "lead" ? lead : typeView === "user" ? userQuery : member;
+    request(view.query.get, { id: profileId }).then(({ data }) => {
+      ProfileInfo.value = data.data[typeView];
+    });
   } else {
     ProfileInfo.value = user.value;
   }
