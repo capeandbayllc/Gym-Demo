@@ -7,10 +7,15 @@ export function onCompleted(
   { mirageSchema }: any
 ) {
   const now = new Date();
+  const photoPhotoPath = "/default-user.jpg";
   const createdAt = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
   const updatedAt = createdAt;
 
-  user.update({ created_at: createdAt, updated_at: updatedAt });
+  user.update({
+    created_at: createdAt,
+    updated_at: updatedAt,
+    profile_photo_path: photoPhotoPath,
+  });
 }
 
 export function onError() {
