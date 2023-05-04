@@ -1,27 +1,32 @@
 <template>
   <simple-card title="Notes" class="note-card" closable>
     <div class="flex flex-col w-full p-6 card-gradient-bg">
-      <div class="flex flex-row w-full gap-6">
-        <div class="w-[140px]">
-          <button class="create-note-btn" @click="createNote">
+      <div
+        class="flex flex-row md:justify-between justify-center flex-wrap w-full gap-6"
+      >
+        <div>
+          <button class="create-note-btn" @click="newNote">
             <div class="btn-normal">
               <NewAgreementIcon class="mb-2" />
               <span>Create a new note</span>
             </div>
-            <div class="btn-hover">
-              <NewAgreementHoverIcon />
-            </div>
           </button>
         </div>
-        <div class="flex-auto">
+        <div class="flex justify-end items-center">
           <div class="flex w-[270px]">
             <Button
               size="sm"
               outline
-              class="flex-1 normal-case mr-2"
+              class="flex-1 normal-case mr-2 rounded-[10px]"
               :class="[
-                { '!bg-secondary !border-secondary': notesType == 'recent' },
-                { 'border-neutral-content text-neutral-content': notesType !== 'recent' },
+                {
+                  '!bg-secondary !border-secondary hover:text-white':
+                    notesType == 'recent',
+                },
+                {
+                  'border-neutral-content text-neutral-content':
+                    notesType !== 'recent',
+                },
               ]"
               @click="notesType = 'recent'"
               >Recent</Button
@@ -29,11 +34,15 @@
             <Button
               size="sm"
               outline
-              class="flex-1 normal-case ml-2"
+              class="flex-1 normal-case ml-2 rounded-[10px]"
               :class="[
-                { '!bg-secondary !border-secondary': notesType == 'completed' },
                 {
-                  'border-neutral-content text-neutral-content': notesType !== 'completed',
+                  '!bg-secondary !border-secondary hover:text-white':
+                    notesType == 'completed',
+                },
+                {
+                  'border-neutral-content text-neutral-content':
+                    notesType !== 'completed',
                 },
               ]"
               @click="notesType = 'completed'"
@@ -42,92 +51,55 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-row w-full gap-6 mt-2">
-        <div class="w-[140px]">
-          <p class="text-xs mb-2">Folders and Segments</p>
-          <Button
-            secondary
-            size="sm"
-            :maxWidth="false"
-            class="w-full mb-6 normal-case flex justify-between"
+      <div
+        class="flex md:flex-row flex-col justify-between items-center gap-3 my-3"
+      >
+        <div class="flex w-full gap-3 md:flex-row flex-col items-center">
+          <select-box
+            :items="categories"
+            :label="selectedCategory ? selectedCategory : 'Select category'"
+            :showSearch="false"
+            @onChange="selectedCategory = $event"
+            class="bg-base-content text-base-300 rounded border border-base-content max-w-[300px]"
           >
-            <span> Shared </span> <span>21</span></Button
+          </select-box>
+          <select-box
+            :items="tags"
+            :label="selectedTag ? selectedTag : 'Select tag'"
+            :showSearch="false"
+            @onChange="selectedTag = $event"
+            class="bg-base-content text-base-300 rounded border border-base-content max-w-[300px]"
           >
-          <Button
-            secondary
-            size="sm"
-            :maxWidth="false"
-            class="w-full mb-6 normal-case flex justify-between"
-          >
-            <span> Admin Notes </span> <span>3</span></Button
-          >
-          <Button
-            v-for="folder in folders"
-            :key="folder.id"
-            outline
-            size="sm"
-            :maxWidth="false"
-            class="bg-base-300 w-full mb-2 normal-case flex justify-between"
-          >
-            <span> Folder </span> <span>{{ folder.name }}</span></Button
-          >
+          </select-box>
         </div>
-        <div class="w-fit max-h-min overflow-auto">
-          <div class="w-full">
-            <p class="text-xs mb-2">Today</p>
-            <div
-              class="bg-base-300 border border-base-content rounded-md p-1 mb-4"
-              :class="{ '!bg-secondary !border-neutral-content': note.completed }"
-              v-for="note in notes.filter((n) =>
-                notesType == 'completed' ? n.completed : !n.completed
-              )"
-              :key="note.id"
-            >
-              <div class="flex justify-between">
-                <span>{{ note.title }}</span>
-                <AlertButton v-model="note.alert" class="w-[250px]" />
-              </div>
-              <div>
-                <span class="text-xs mr-4">{{ note.date }}</span>
-                <span class="text-xs mr-4">{{ note.time }}</span>
-                <span class="text-xs mr-4">{{ note.content }}</span>
-              </div>
-            </div>
-          </div>
+        <FormAppInput
+          height="h-[31px] max-w-full"
+          placeholder="Search"
+          v-model="search"
+        />
+      </div>
+      <div class="flex flex-col lg:flex-row w-full gap-6 mt-2">
+        <div class="w-full lg:w-fit min-w-[300px] max-h-min overflow-auto">
+          <notes-list
+            :notes="notesFiltered"
+            :notes-type="notesType"
+            @clickedNote="activeNote = $event"
+          ></notes-list>
         </div>
-        <div class="w-[600px] pt-5">
-          <div
-            class="relative border border-secondary rounded-lg overflow-hidden bg-base-300"
-          >
-            <h2 class="calendar-title" @click="showDateSelectModal">
-              {{ calendarTitle }}
-              <arrow-icon direction="right" class="h-9 items-center" />
-            </h2>
-            <FullCalendar :options="calendarOptions" ref="calendar" />
-          </div>
+        <div class="w-full p-4 rounded-xl bg-base-200">
+          <note-editor
+            :active-note="activeNote"
+            @saveNote="saveNote"
+            @deleteNote="deleteNote"
+          ></note-editor>
         </div>
       </div>
     </div>
-    <daisy-modal class="w-fit" id="noteModal" ref="noteModal">
-      <div class="p-4 w-[600px]">
-        <h3 class="text-center mb-4">{{ today }}</h3>
-        <textarea
-          v-model="activeNote.title"
-          class="w-full h-80 rounded p-2 mb-4"
-          placeholder="New Note Name"
-        ></textarea>
-        <div class="note-actions flex justify-end">
-          <AlertButton v-model="activeNote.alert" class="w-[250px] mr-4" />
-          <Button size="sm" class="normal-case mr-4" ghost>Delete</Button>
-          <Button size="sm" class="normal-case" secondary>Save</Button>
-        </div>
-      </div>
-    </daisy-modal>
   </simple-card>
 </template>
 <style scoped lang="postcss">
 .note-card {
-  @apply m-auto bg-neutral max-w-[1120px] xl:w-[1120px] w-full;
+  @apply bg-neutral w-full rounded-2xl;
   .note-card-container {
     @apply flex flex-col lg:flex-row m-8 gap-2 relative py-10;
     .note-list {
@@ -139,9 +111,6 @@
     textarea {
       @apply text-neutral p-2 rounded h-full w-full;
     }
-    .note-actions {
-      @apply flex flex-row flex-wrap justify-end gap-2 mt-2 ml-4;
-    }
   }
   .create-note-btn {
     @apply w-full mb-6 h-16;
@@ -149,18 +118,7 @@
       @apply w-full;
     }
     .btn-normal {
-      @apply flex flex-col items-center;
-    }
-    .btn-hover {
-      @apply hidden;
-    }
-    &:hover {
-      .btn-normal {
-        @apply hidden;
-      }
-      .btn-hover {
-        @apply flex w-full items-center justify-center;
-      }
+      @apply flex flex-col items-center w-[300px];
     }
   }
   .calender-view-wrap {
@@ -206,111 +164,310 @@ import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import NotesList from "./partials/notes-list.vue";
+import NoteEditor from "./partials/note-editor.vue";
+import dateFormat from "dateformat";
+import { v4 as uuidv4 } from "uuid";
 
 const noteModal = ref(null);
+const noteComplete = ref(false);
+const newNoteData = ref(null);
+const activeNote = ref({
+  title: "",
+  creator: "Cecil Ellington",
+  content: "",
+  completed: false,
+  alert: false,
+  categories: [],
+  tags: [],
+  files: [],
+});
+
+const search = ref("");
+const selectedCategory = ref("");
+const selectedTag = ref("");
+
+const notesFiltered = computed(() => {
+  if (selectedCategory.value || selectedTag.value || search.value) {
+    return notes.value.filter((note) => {
+      let categoryMatch = true;
+      let tagMatch = true;
+      let searchMatch = true;
+
+      if (selectedCategory.value) {
+        categoryMatch = note.categories.includes(selectedCategory.value);
+      }
+
+      if (selectedTag.value) {
+        tagMatch = note.tags.includes(selectedTag.value);
+      }
+
+      if (search.value) {
+        const searchTerm = search.value.toLowerCase();
+        const titleMatch = note.title.toLowerCase().includes(searchTerm);
+        const contentMatch = note.content.toLowerCase().includes(searchTerm);
+        searchMatch = titleMatch || contentMatch;
+      }
+
+      return categoryMatch && tagMatch && searchMatch;
+    });
+  } else {
+    return notes.value;
+  }
+});
+
+onMounted(() => {
+  newNoteData.value = { ...activeNote.value };
+});
+
+const newNote = () => {
+  newNoteData.value.categories = [];
+  newNoteData.value.tags = [];
+  newNoteData.value.files = [];
+  activeNote.value = { ...newNoteData.value };
+};
+
+const saveNote = (data) => {
+  const notesArray = notes.value;
+
+  // If the note has an id, update the existing note in the array
+  if (data.id) {
+    const noteIndex = notesArray.findIndex((note) => note.id === data.id);
+    if (noteIndex !== -1) {
+      // If the note exists, update its properties
+      const updatedNote = { ...notesArray[noteIndex], ...data };
+      notesArray.splice(noteIndex, 1, updatedNote);
+    }
+  } else {
+    // Otherwise, generate a new id and add the note to the end of the array
+    const newId = uuidv4();
+    const newNote = {
+      id: newId,
+      date: today,
+      time: dateFormat(new Date(), "h:MM TT"),
+      ...data,
+    };
+    notesArray.push(newNote);
+  }
+  newNote();
+};
+
+const deleteNote = (data) => {
+  if (data.id) {
+    const index = notes.value.findIndex((note) => note.id == data.id);
+    if (index !== -1) {
+      notes.value.splice(index, 1);
+    }
+  }
+  newNote();
+};
+
 const notesType = ref("recent");
-const activeNote = ref({ title: "" });
+watch(notesType, () => {
+  selectedCategory.value = "";
+  selectedTag.value = "";
+});
+
 const notes = ref([
   {
     id: 1,
     title: "Note #16",
-    date: "Month 1, 2022",
+    date: "Month 2, 2022",
     time: "0:00 PM",
     content: "Cecil Ellington",
+    content:
+      "ipsum dolor sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: false,
     alert: true,
+    categories: ["Health", "Finance", "Entertainment", "History", "Politics"],
+    tags: ["Cooking", "Books", "Movies", "Fashion", "Fitness"],
+    files: [],
   },
   {
     id: 2,
     title: "Note #17",
-    date: "Month 1, 2022",
+    date: "Month 3, 2022",
     time: "0:00 PM",
     content: "Cecil Ellington",
+    content:
+      "dolor sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: false,
     alert: false,
+    categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
+    tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
+    files: [],
   },
   {
     id: 3,
     title: "Note #18",
     date: "Month 1, 2022",
     time: "0:00 PM",
-    content: "Cecil Ellington",
+    creator: "Cecil Ellington",
+    content:
+      "sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: false,
+    categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
+    tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
+    files: [],
   },
   {
     id: 4,
     title: "Note #19",
     date: "Month 1, 2022",
     time: "0:00 PM",
-    content: "Cecil Ellington",
+    creator: "Cecil Ellington",
+    content:
+      "amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: false,
     alert: true,
+    categories: ["Health", "Finance", "Entertainment", "History", "Politics"],
+    tags: ["Cooking", "Books", "Movies", "Fashion", "Fitness"],
+    files: [],
   },
   {
     id: 5,
     title: "Note #20",
     date: "Month 1, 2022",
     time: "0:00 PM",
-    content: "Cecil Ellington",
+    creator: "Cecil Ellington",
+    content:
+      "consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Technology", "Business", "Art", "Science", "Food"],
+    tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
+    files: [],
   },
   {
     id: 6,
     title: "Note #21",
     date: "Month 1, 2022",
     time: "0:00 PM",
-    content: "Cecil Ellington",
+    creator: "Cecil Ellington",
+    content:
+      "Lorem adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
+    tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
+    files: [],
   },
   {
     id: 7,
     title: "Note #22",
     date: "Month 1, 2022",
     time: "0:00 PM",
-    content: "Cecil Ellington",
+    creator: "Cecil Ellington",
+    content:
+      "Lorem adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
+    tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
+    files: [],
   },
   {
     id: 8,
     title: "Note #23",
     date: "Month 1, 2022",
     time: "0:00 PM",
-    content: "Cecil Ellington",
+    creator: "Cecil Ellington",
+    content:
+      "amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Technology", "Business", "Art", "Science", "Food"],
+    tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
+    files: [],
   },
   {
     id: 9,
     title: "Note #25",
     date: "Month 1, 2022",
     time: "0:00 PM",
-    content: "Cecil Ellington",
+    creator: "Cecil Ellington",
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Technology", "Business", "Art", "Science", "Food"],
+    tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
+    files: [],
   },
   {
     id: 10,
     title: "Note #26",
     date: "Month 1, 2022",
     time: "0:00 PM",
-    content: "Cecil Ellington",
+    creator: "Cecil Ellington",
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: true,
+    categories: ["Sports", "Travel", "Music", "Fashion", "Education"],
+    tags: ["Fitness", "Gardening", "Pets", "Environment", "DIY"],
+    files: [],
   },
   {
     id: 11,
     title: "Note #27",
     date: "Month 1, 2022",
     time: "0:00 PM",
-    content: "Cecil Ellington",
+    creator: "Cecil Ellington",
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto iure, voluptatem accusamus, ullam libero saepe doloribus earum excepturi similique corporis perferendis laboriosam! Quos omnis tempore quibusdam. Rem error inventore tempora?",
     completed: true,
     alert: false,
+    categories: ["Technology", "Business", "Art", "Science", "Food"],
+    tags: ["Web Development", "Marketing", "Photography", "Biology", "Recipes"],
+    files: [],
   },
 ]);
+const tags = computed(() => {
+  const uniqueTags = new Set();
+
+  notes.value
+    .filter(
+      (note) => (note.completed ? "completed" : "recent") == notesType.value
+    )
+    .forEach((note) => {
+      note.tags.forEach((tag) => {
+        uniqueTags.add(tag);
+      });
+    });
+
+  return Array.from(uniqueTags)
+    .sort()
+    .map((tag) => {
+      return {
+        value: tag,
+        label: tag,
+      };
+    });
+});
+
+const categories = computed(() => {
+  const uniqueCategories = new Set();
+  notes.value
+    .filter(
+      (note) => (note.completed ? "completed" : "recent") == notesType.value
+    )
+    .forEach((note) => {
+      note.categories.forEach((category) => {
+        uniqueCategories.add(category);
+      });
+    });
+
+  return Array.from(uniqueCategories)
+    .sort()
+    .map((category) => {
+      return {
+        value: category,
+        label: category,
+      };
+    });
+});
 
 const today = computed(() => {
   const date = new Date();
@@ -331,10 +488,6 @@ const today = computed(() => {
   return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 });
 
-const createNote = () => {
-  noteModal.value.open();
-};
-
 const folders = [
   { id: 1, name: 12 },
   { id: 2, name: 12 },
@@ -343,115 +496,4 @@ const folders = [
   { id: 5, name: 12 },
   { id: 6, name: 12 },
 ];
-
-const events = [
-  {
-    title: "Priority One",
-    start: "2022-12-01T06:00:00",
-    backgroundColor: "red",
-    extendedProps: {
-      department: "BioChemistry",
-    },
-    description: "Lecture",
-    parth: "jasani",
-    data: {
-      foo: "bar",
-    },
-  },
-  {
-    title: "To Do Two",
-    start: "2022-12-01T07:00:00",
-    backgroundColor: "blue",
-  },
-  {
-    title: "To Do Three",
-    start: "2022-12-01T08:30:00",
-    extendedProps: {
-      status: "done",
-    },
-    backgroundColor: "lime",
-  },
-  {
-    title: "Birthday Party",
-    start: "2022-12-01T10:00:00",
-    backgroundColor: "green",
-  },
-];
-
-const eventClick = (info) => {
-  alert("event Clicked");
-};
-
-const calendar = ref(null);
-const currentView = ref("timeGridWeek");
-const calenderView = ref("timeGridWeek");
-const start = ref(null);
-const end = ref(null);
-
-const calendarTitle = computed(() => {
-  let option = {
-    year: "numeric",
-    month: "long",
-  };
-  if (currentView.value === "timeGridDay") {
-    option["day"] = "numeric";
-  }
-  return start.value?.toLocaleString("default", option);
-});
-
-const handleDateClick = (arg) => {
-  console.log("date click! " + arg.dateStr);
-};
-const handleChangeView = (value) => {
-  calenderView.value = value;
-  console.log("calenderView", calenderView.value);
-  calendar.value.getApi().changeView(value);
-  onViewChanged();
-};
-
-const onViewChanged = () => {
-  start.value = calendar.value.getApi().view.currentStart;
-  start.end = calendar.value.getApi().view.currentEnd;
-  console.log({
-    start,
-    end,
-    calendarView: calendar.value.getApi().view,
-  });
-};
-
-const calendarOptions = ref({
-  plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-  initialView: "dayGridMonth",
-  dateClick: handleDateClick,
-  headerToolbar: {
-    left: "",
-    center: "",
-    right: "today",
-  },
-  events,
-  editable: true,
-  selectable: true,
-  dayMaxEvents: true,
-  eventClick,
-  datesSet: (params) => {
-    /* listCalendar?.value?.getApi()?.gotoDate(params.start);
-        monthCalendar?.value?.getApi()?.gotoDate(params.start);
-        monthCalendar?.value?.getApi()?.select(params.start) */
-    //console.log("view-->",monthCalendar?.value?.getApi()?.view.getCurrentData().currentDate)
-  },
-  views: {
-    timeGridDay: {
-      dayHeaderFormat: {
-        month: "long",
-        day: "numeric",
-        omitCommas: "false",
-      },
-      nowIndicator: true,
-    },
-  },
-  viewDidMount: function (info) {
-    console.log("viewDidMount");
-    onViewChanged();
-  },
-});
 </script>
