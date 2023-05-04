@@ -16,6 +16,15 @@ const props = defineProps({
 
 const modelValue = ref(false);
 
+watchEffect(() => {
+  if (props.modelValue || !props.modelValue)
+    setTimeout(() => {
+      if (props.modelValue != modelValue.value) {
+        modelValue.value = props.modelValue;
+      }
+    }, 10);
+});
+
 const toggle = () => {
   modelValue.value = !modelValue.value;
 };
