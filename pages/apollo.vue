@@ -49,6 +49,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { UserFactory } from "../api/data/users/UserFactory";
+import { v4 as uuidv4 } from "uuid";
 
 library.add(faUser);
 // const query = gql`
@@ -69,6 +70,8 @@ const query = gql`
         last_name
         email
         phone
+        created_at
+        updated_at
         homeLocation {
           id
         }
@@ -89,6 +92,9 @@ const mutation = gql`
       id
       first_name
       last_name
+      email
+      created_at
+      updated_at
     }
   }
 `;
@@ -101,7 +107,13 @@ const mutation = gql`
  * will automatically update due to Apollo.
  */
 const addRandomUser = async () => {
-  const variables = new UserFactory().build("test");
+  // const variables = new UserFactory().build("test");
+  const variables = {
+    id: uuidv4(),
+    first_name: "Kevin",
+    last_name: "Buchanan",
+    email: "admin@gymrevenuee.com",
+  };
   const { mutate } = useMutation(mutation, {
     refetchQueries: [
       { query },
@@ -110,6 +122,9 @@ const addRandomUser = async () => {
   });
 
   const response = await mutate({ input: variables });
-  console.log({ response, UserFactory: new UserFactory().build() });
+  const { result } = useQuery(query, { first: 100 });
+  watchEffect(() => {
+    console.log(result);
+  });
 };
 </script>
