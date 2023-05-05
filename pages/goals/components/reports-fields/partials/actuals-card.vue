@@ -3,16 +3,14 @@
     <template #header>
       <h3 class="text-base-content text-xl">
         Actuals
-        <span class="text-secondary font-light text-base ml-1"
-          >April Focus Points</span
-        >
+        <span class="text-secondary font-light text-base ml-1">
+          April Focus Points
+        </span>
       </h3>
     </template>
     <template #content>
-      <div class="overflow-auto max-w-full max-h-[340px]">
-        <div
-          class="border-t my-3 border-neutral-content font-light w-full min-w-[500px]"
-        >
+      <div class="overflow-auto max-w-full h-[400px]">
+        <div class="items-container">
           <div class="item" v-for="item in data" :key="i">
             <div class="col-span-4 item-detail !border-0">
               {{ item.title }}
@@ -34,10 +32,13 @@
 </template>
 
 <style scoped lang="postcss">
-.item {
-  @apply border-b-[2px] border-neutral-content text-center py-4 grid grid-cols-12 items-center;
-  .item-detail {
-    @apply px-1 my-1 border-l h-[40px] border-white flex w-full justify-center items-center;
+.items-container {
+  @apply border-t my-3 border-neutral-content font-light w-full min-w-[500px];
+  .item {
+    @apply border-b-[2px] border-neutral-content text-center py-4 grid grid-cols-12 items-center;
+    .item-detail {
+      @apply px-1 my-1 border-l h-[50px] border-white flex w-full justify-center items-center;
+    }
   }
 }
 </style>

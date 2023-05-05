@@ -16,7 +16,7 @@
 </template>
 <style scoped lang="postcss">
 .card-container {
-  @apply py-4 pr-5 w-full;
+  @apply py-4 overflow-auto w-full;
   .card-content {
     @apply border border-secondary rounded-2xl bg-base-300 px-8 py-5 text-left w-full max-w-[1600px];
   }
