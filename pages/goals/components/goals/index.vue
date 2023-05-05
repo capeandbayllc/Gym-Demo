@@ -1,20 +1,34 @@
 <template>
   <div class="text-left mt-8">
     <h3 class="text-base-content text-xl">Goals</h3>
-    <Filters />
+    <Filters @openGoalModal="openGoalModal" />
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-4"
     >
       <goal-card v-for="(goal, i) in goals" :key="i" :goal="goal" />
     </div>
     <location-table type="future" />
+    <div class="text-center mt-5">
+      <Button size="sm" secondary class="normal-case"> Edit All Goals </Button>
+    </div>
   </div>
+
+  <daisy-modal ref="goalModal">
+    <goal-modal />
+  </daisy-modal>
 </template>
 
 <script setup>
 import GoalCard from "./partials/goal-card.vue";
 import Filters from "./partials/filters.vue";
 import LocationTable from "./partials/location-table.vue";
+import GoalModal from "../new-goal-modal/index.vue";
+
+const goalModal = ref(null);
+
+const openGoalModal = () => {
+  goalModal.value.open();
+};
 
 const goals = [
   {

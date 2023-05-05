@@ -181,7 +181,5 @@ const chartOptions = {
   },
   labels: ["Marketing", "Finance", "Influence"],
 };
-
 const series = [82, 65, 85, 32, 54];
-// const series = [82, 65, 85, 32, 54, 23];
 </script>

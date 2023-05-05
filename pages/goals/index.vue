@@ -11,7 +11,7 @@
 </template>
 <style scoped lang="postcss">
 .page-content {
-  @apply text-center p-6 border-secondary border-2 rounded-[26px] bg-secondary-focus max-w-[85vw];
+  @apply text-center p-6 border-secondary border-2 rounded-[26px] bg-gradient-to-b from-secondary-focus to-base-300/30 max-w-[85vw];
 }
 </style>
 <script setup>

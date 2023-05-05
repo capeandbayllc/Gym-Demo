@@ -35,7 +35,12 @@
       </select-box>
     </div>
     <div class="flex md:justify-end flex-wrap items-start gap-3 sm:w-[400px]">
-      <Button secondary="" size="sm">
+      <Button
+        secondary=""
+        size="sm"
+        @click="emit('openGoalModal')"
+        class="normal-case"
+      >
         <font-awesome-icon
           :icon="['fas', 'plus']"
           size="md"
@@ -69,6 +74,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faPlusCircle);
+
+const emit = defineEmits(["openGoalModal"]);
 
 const timePeriodes = [
   { label: "Time Period 1", value: 1 },

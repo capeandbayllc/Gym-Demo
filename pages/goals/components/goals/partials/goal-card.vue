@@ -46,7 +46,7 @@
           class="select-box"
         >
         </select-box>
-        <Button secondary="" size="sm"> Edit </Button>
+        <Button secondary="" size="sm" class="normal-case">Edit</Button>
       </div>
     </div>
   </div>

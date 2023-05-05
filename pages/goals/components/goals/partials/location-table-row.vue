@@ -1,7 +1,7 @@
 <template>
   <tr class="campaign-table-row group hover:bg-primary">
     <td>
-      <div>
+      <div class="w-[100px]">
         {{ data.location }}
       </div>
     </td>
@@ -29,7 +29,7 @@
         <Button
           v-for="amount in data.overview_amount"
           size="xs"
-          class="rounded-xl border-0"
+          class="rounded-xl border-0 normal-case"
           :success="amount > data.goal_amount"
           :warning="amount < data.goal_amount"
           :error="amount < data.goal_amount * 0.85"
@@ -95,10 +95,10 @@
   }
 }
 .percent-to-goals-button {
-  @apply rounded-xl border-0 bg-neutral-content/80 text-base-content hover:bg-neutral-content/80 hover:text-base-content;
+  @apply rounded-xl border-0 bg-neutral-content/80 text-base-content hover:bg-neutral-content/80 hover:text-base-content normal-case;
 }
 .notes-button {
-  @apply rounded-xl bg-base-content text-base-100/80 px-2 mx-2 hover:text-base-100/80 hover:bg-base-content hover:border-secondary;
+  @apply rounded-xl bg-base-content text-base-100/80 px-2 mx-2 hover:text-base-100/80 hover:bg-base-content hover:border-secondary normal-case;
   .unread {
     @apply rounded-full !h-[10px] !w-[10px] bg-secondary relative bottom-[12px];
   }
