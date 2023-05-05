@@ -5,10 +5,7 @@
     </div>
     <div class="page-content gap-5">
       <report-fields />
-      <!-- <dashboard-card />
-        <reporting-card />
-        <sales-funnel-card />
-        <statistics-card /> -->
+      <goals />
     </div>
   </div>
 </template>
@@ -19,7 +16,5 @@
 </style>
 <script setup>
 import ReportFields from "./components/reports-fields/index.vue";
-//   import ReportingCard from "./components/reporting-card/index.vue";
-//   import SalesFunnelCard from "./components/sales-funnel-card/index.vue";
-//   import StatisticsCard from "./components/statistics/index.vue";
+import Goals from "./components/goals/index.vue";
 </script>
