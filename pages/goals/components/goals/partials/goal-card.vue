@@ -64,7 +64,7 @@
   }
 }
 .select-box {
-  @apply bg-base-content text-base-300 rounded border border-base-content !w-[150px];
+  @apply bg-base-300 text-secondary rounded mt-1 border border-secondary !w-[150px];
 }
 </style>
 <script setup>

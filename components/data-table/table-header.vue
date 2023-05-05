@@ -7,11 +7,21 @@
         class="px-3 capitalize font-normal whitespace-nowrap"
         :class="column.class"
       >
-        <div v-if="column.label === 'Action'">
-          <font-awesome-icon :icon="['fas', 'align-left']" size="lg" />
+        <div v-if="column.title" class="text-secondary text-center">
+          <span class="font-semibold">
+            {{ column.title }}
+          </span>
+          <div v-if="column.label" class="text-white text-xs">
+            {{ column.label }}
+          </div>
         </div>
         <div v-else>
-          {{ column.label ? column.label : column }}
+          <div v-if="column.label === 'Action'">
+            <font-awesome-icon :icon="['fas', 'align-left']" size="lg" />
+          </div>
+          <div v-else>
+            {{ column.label ? column.label : column }}
+          </div>
         </div>
       </th>
     </tr>
