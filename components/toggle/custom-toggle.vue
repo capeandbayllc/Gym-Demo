@@ -15,6 +15,9 @@ const props = defineProps({
 });
 
 const modelValue = ref(false);
+watchEffect(() => {
+  modelValue.value = props.modelValue;
+});
 
 watchEffect(() => {
   if (props.modelValue || !props.modelValue)

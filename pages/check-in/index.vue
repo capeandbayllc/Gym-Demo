@@ -47,18 +47,20 @@
         </div>
       </div>
     </div>
-    <div class="page-content">
-      <template v-for="{ key, component } in subSections" :key="key">
-        <component
-          v-if="detailView === key"
-          @close="detailView = null"
-          :user="ProfileInfo"
-          @on-profile-update="refreshIndex++"
-          :key="key"
-          :is="component"
-          :member="ProfileInfo"
-        />
-      </template>
+    <div class="px-5 w-full h-fit">
+      <div class="page-content">
+        <template v-for="{ key, component } in subSections" :key="key">
+          <component
+            v-if="detailView === key"
+            @close="detailView = null"
+            :user="ProfileInfo"
+            @on-profile-update="refreshIndex++"
+            :key="key"
+            :is="component"
+            :member="ProfileInfo"
+          />
+        </template>
+      </div>
     </div>
   </div>
 </template>
