@@ -14,7 +14,7 @@
   </div>
 
   <daisy-modal ref="goalModal">
-    <goal-modal />
+    <new-goal-modal />
   </daisy-modal>
 </template>
 
@@ -22,7 +22,7 @@
 import GoalCard from "./partials/goal-card.vue";
 import Filters from "./partials/filters.vue";
 import LocationTable from "./partials/location-table.vue";
-import GoalModal from "../new-goal-modal/index.vue";
+import NewGoalModal from "../new-goal-modal/index.vue";
 
 const goalModal = ref(null);
 

@@ -1,7 +1,9 @@
 <template>
   <card>
     <template #header>
-      <h3 class="text-base-content text-secondary text-lg">Description</h3>
+      <h3 class="text-base-content text-secondary text-lg font-semibold">
+        Description
+      </h3>
     </template>
     <template #content>
       <div class="overflow-auto max-w-full">
