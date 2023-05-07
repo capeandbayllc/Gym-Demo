@@ -38,13 +38,13 @@
   }
 }
 .dropdown {
-  @apply text-white absolute top-[28px] right-[-50px] h-auto;
+  @apply absolute top-[28px] right-[-50px] h-auto;
   .dropdown-container {
     @apply bg-base-content text-base-300 p-3 w-[110px];
+    .dropdown-item {
+      @apply mb-2 cursor-pointer;
+    }
   }
-}
-.dropdown-item {
-  @apply mb-2 cursor-pointer;
 }
 </style>
 <script setup>

@@ -9,7 +9,7 @@
         <collapse-btn :size-full="true" v-model="isCollapsed" />
       </div>
     </button>
-    <div class="gap-3 flex flex-wrap" v-if="!isCollapsed">
+    <div class="gap-3 flex flex-wrap relative" v-if="!isCollapsed">
       <Button
         v-for="(item, i) in staff"
         size="sm"
@@ -25,12 +25,16 @@
           </div>
         </div>
       </Button>
-      <button class="text-base-content flex items-center gap-2 mb-2">
+      <button
+        @click.stop="toggleDropdown"
+        class="text-base-content flex items-center gap-2 mb-2"
+      >
         <span> New </span>
         <div class="w-4">
           <collapse-btn :size-full="true" />
         </div>
       </button>
+      <staff-new-dropdown v-show="showDropdown" @close="showDropdown = false" />
     </div>
   </div>
 </template>
@@ -50,7 +54,15 @@
 <script setup>
 import { CrossIcon } from "~~/components/icons";
 import CollapseBtn from "~~/components/buttons/collapse-btn.vue";
+import StaffNewDropdown from "./staff-new-dropdown.vue";
+
 const isCollapsed = ref(false);
+
+const showDropdown = ref(false);
+
+const toggleDropdown = () => {
+  showDropdown.value = !showDropdown.value;
+};
 
 const staff = ref([
   { label: "Ed Dupree", selected: false },
