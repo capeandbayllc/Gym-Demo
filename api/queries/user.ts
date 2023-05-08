@@ -31,12 +31,14 @@ const FIND_BY_ID: DocumentNode = gql`
 export interface UserQuery {
   findByMail: DocumentNode;
   findById: DocumentNode;
+  get: DocumentNode;
 }
 
 const user: GraphQLQueryInterface<UserQuery> = {
   query: {
     findByMail: FIND_BY_MAIL,
     findById: FIND_BY_ID,
+    get: FIND_BY_ID,
   },
 };
 

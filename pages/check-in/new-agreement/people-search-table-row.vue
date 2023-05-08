@@ -3,7 +3,7 @@
     <td>{{ data.segment }}</td>
     <td>
       <div class="flex items-center">
-        <img src="/checkin/kevin.png" class="w-7 rounded-full mr-2" />
+        <img :src="data.photo" class="w-7 rounded-full mr-2" />
         {{ data.first_name }}
       </div>
     </td>
@@ -12,7 +12,7 @@
     <td>{{ data.email }}</td>
     <td class="text-center">{{ data.location }}</td>
     <td>
-      <membership-status :status="data.type" />
+      <membership-status :membership="data.type" />
     </td>
     <td>{{ data.created }}</td>
   </tr>
