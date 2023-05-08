@@ -58,7 +58,7 @@
     </div>
   </simple-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .guest-pass-card {
   @apply bg-neutral m-auto;
   @screen -lg {
@@ -75,7 +75,7 @@
   }
 }
 </style>
-<style>
+<style lang="postcss">
 .dp-custom-input {
   @apply bg-transparent border-none text-secondary mt-1;
   &::placeholder {
@@ -96,7 +96,7 @@ import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { CalendarIcon } from "~~/components/icons";
 import location from "~~/api/queries/location";
-import { useQuery } from '@vue/apollo-composable';
+import { useQuery } from "@vue/apollo-composable";
 
 const format = (date) => {
   const day = date.getDate();
@@ -140,14 +140,14 @@ const locations = ref([]);
 
 const locationsData = ref([]);
 const { result } = useQuery(location.query.browse);
-watchEffect(()=>{
-  if(!result?.value)return
+watchEffect(() => {
+  if (!result?.value) return;
   locationsData.value = result.value?.locations?.data;
   locations.value = locationsData.value.map((e) => {
     return {
       value: e.id,
-      label: e.name
-    }
-  })
-})
+      label: e.name,
+    };
+  });
+});
 </script>

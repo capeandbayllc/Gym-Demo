@@ -1,14 +1,14 @@
 <template>
   <div
     id="event-popup"
-    class="w-fit m-auto bg-white text-slate-600 p-4 rounded"
+    class="w-fit m-auto bg-base-content text-slate-600 p-4 rounded"
   >
     <div class="flex items-center">
       <span>All Day</span> <Switch v-model="allDay"></Switch>
       <select-box
         :items="options"
         label="Outcome"
-        class="w-36 mx-2 text-white ml-auto"
+        class="w-36 mx-2 text-base-content ml-auto"
       />
     </div>
     <div>
@@ -17,7 +17,7 @@
           <calendar-icon class="inline-block mr-2" /><span>2022-01-19</span>
         </div>
         <div class="mr-6 flex items-center">
-          <clock-icon class="inline-block text-white mr-1" />
+          <clock-icon class="inline-block text-base-content mr-1" />
           <span> 10:20 am</span>
         </div>
       </div>
@@ -26,7 +26,7 @@
           <calendar-icon class="inline-block mr-2" /><span>2022-01-19</span>
         </div>
         <div class="mr-6 flex items-center">
-          <clock-icon class="inline-block text-white mr-1" />
+          <clock-icon class="inline-block text-base-content mr-1" />
           <span> 10:20 am</span>
         </div>
       </div>
@@ -53,11 +53,11 @@
     </div>
     <div class="flex items-center">
       <label class="mr-2">Discription </label>
-      <input type="text" class="bg-gray-100 w-full h-7" />
+      <input type="text" class="bg-base-content/90 w-full h-7" />
     </div>
     <div class="flex items-center">
       <label class="mr-2">Notes </label>
-      <input type="text" class="bg-gray-100 w-full h-7" />
+      <input type="text" class="bg-base-content/90 w-full h-7" />
     </div>
     <div>
       <label class="align-middle mr-2">Attachments </label>
@@ -69,7 +69,7 @@
       </button>
       <div
         v-if="uploadPopup"
-        class="absolute flex items-center p-4 bg-white w-fit shadow-xl"
+        class="absolute flex items-center p-4 bg-base-content w-fit shadow-xl"
       >
         <div v-if="!isSearchOpen" class="w-full relative flex items-center">
           <span class="w-[120px]">Drag or find your attachment</span>
@@ -133,7 +133,7 @@ const addMember = () => {
 const uploadPopup = ref(false);
 const isSearchOpen = ref(false);
 </script>
-<style scoped>
+<style scoped lang="postcss">
 #event-popup {
   @apply text-sm;
   & > div {
@@ -141,16 +141,16 @@ const isSearchOpen = ref(false);
   }
   .contact-wrap {
     Button {
-      @apply text-xs capitalize leading-none border-2 px-2 border-secondary min-h-0 h-8 mx-1 inline-block text-secondary hover:bg-secondary hover:text-white;
+      @apply text-xs capitalize leading-none border-2 px-2 border-secondary min-h-0 h-8 mx-1 inline-block text-secondary hover:bg-secondary hover:text-base-content;
     }
   }
   .action-wrap {
     @apply flex justify-end;
     Button {
-      @apply text-xs capitalize leading-none px-2 w-auto min-h-0 h-8 text-gray-500 inline-block hover:text-secondary;
+      @apply text-xs capitalize leading-none px-2 w-auto min-h-0 h-8 text-neutral-content inline-block hover:text-secondary;
 
       &:last-child {
-        @apply text-white;
+        @apply text-base-content;
       }
     }
   }
@@ -162,23 +162,23 @@ const isSearchOpen = ref(false);
         @apply inline-block;
       }
       &:checked:nth-of-type(1) ~ .right {
-        left: 42px;
+        @apply left-[42px];
       }
       &:checked:nth-of-type(2) ~ .right {
-        left: 70px;
+        @apply left-[42px];
       }
       &:checked:nth-of-type(3) ~ .right {
-        left: 98px;
+        @apply left-[98px];
       }
       &:checked:nth-of-type(4) ~ .right {
-        left: 126px;
+        @apply left-[126px];
       }
       &:checked:nth-of-type(5) ~ .right {
-        left: 154px;
+        @apply left-[154px];
       }
     }
     .right {
-      @apply hidden absolute h-4 w-4 top-[2px] left-0 text-white;
+      @apply hidden absolute h-4 w-4 top-[2px] left-0 text-base-content;
     }
   }
   .guests-wrap {

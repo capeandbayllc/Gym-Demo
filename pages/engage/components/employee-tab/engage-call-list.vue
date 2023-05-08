@@ -10,7 +10,7 @@
     />
   </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .engage-call-list-container {
   @apply col-span-2 pb-1 -md:col-span-3;
 }
@@ -42,8 +42,7 @@ const members2 = computed(() => {
     return {
       ...item,
       membership_type: getRandomMembershipType(),
-      updated_at: new Date(item.updated_at)
-        .toLocaleDateString('en-GB')
+      updated_at: new Date(item.updated_at).toLocaleDateString("en-GB"),
     };
   });
 });

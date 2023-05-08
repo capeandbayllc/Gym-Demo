@@ -40,7 +40,7 @@
         Club {{ Math.floor(Math.random() * 10) }}
       </div>
       <div>
-        <membership-btn :membership="data.type" />
+        <membership-status :status="data.type" />
       </div>
       <div class="w-fit justify-self-center relative">
         <div
@@ -84,24 +84,13 @@
             />
           </svg>
         </div>
-        <div class="dropdown z-[1]" v-show="dropdownInfo" @click.stop>
-          <div class="dropdown-container">
-            <button class="absolute right-4" @click.stop="hideDropdownInfo">
-              <cross-icon></cross-icon>
-            </button>
-
-            <div @click.stop="openInfoModal" class="dropdown-item">
-              Edit account
-            </div>
-            <div @click.stop="openInfoModal" class="dropdown-item">
-              View alerts
-            </div>
-            <div @click.stop="openInfoModal" class="dropdown-item">
-              Add Guest Pass
-            </div>
-            <div @click.stop="openInfoModal">POS</div>
-          </div>
-        </div>
+        <people-dropdown
+          v-show="dropdownInfo"
+          @edit-account="openInfoModal"
+          @view-alerts="openInfoModal"
+          @add-guest-pass="openInfoModal"
+          @pos="openInfoModal"
+        />
       </div>
     </div>
     <daisy-modal ref="alertModal" id="alertModal" :closable="false">
@@ -249,14 +238,6 @@
   background-image: url("/info-modal-background.png");
 }
 
-.dropdown {
-  @apply text-white absolute right-0;
-
-  .dropdown-container {
-    @apply bg-secondary p-3 w-48 border-2 rounded-3xl;
-  }
-}
-
 .arrow-icon {
   @apply cursor-pointer h-6 w-6 ml-auto mt-3;
 }
@@ -264,13 +245,10 @@
 .arrow-icon svg {
   @apply h-12 w-12;
 }
-
-.dropdown-item {
-  @apply mb-2;
-}
 </style>
 <script setup>
-import MembershipBtn from "~/components/buttons/membership-btn.vue";
+import MembershipStatus from "~/components/buttons/membership-status.vue";
+import PeopleDropdown from "./people-dropdown.vue";
 import {
   AlertIcon,
   ArrowIcon,

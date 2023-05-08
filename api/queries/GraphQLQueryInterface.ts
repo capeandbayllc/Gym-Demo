@@ -1,3 +1,3 @@
 export interface GraphQLQueryInterface<Q> {
-    query: Q,
+  query: Q;
 }

@@ -1,31 +1,35 @@
 <template>
-    <thead class="top-0 text-base-content bg-black">
-        <tr>
-            <th
-                v-for="(column, ndx) in columns"
-                :key="column.field ? column.field : ndx"
-                class="px-3 capitalize font-normal whitespace-nowrap"
-                :class="column.class"
-            >
-            <div v-if="column.label === 'Action'">
-                <font-awesome-icon
-                    :icon="[
-                        'fas',
-                        'align-left',
-                    ]"
-                    size="lg"
-                />
-            </div>
-            <div v-else>
-                {{ column.label ? column.label: column }}
-            </div>
-            </th>
-        </tr>
-    </thead>
+  <thead class="top-0 text-base-content bg-black">
+    <tr>
+      <th
+        v-for="(column, ndx) in columns"
+        :key="column.field ? column.field : ndx"
+        class="px-3 capitalize font-normal whitespace-nowrap"
+        :class="column.class"
+      >
+        <div v-if="column.title" class="text-secondary text-center">
+          <span class="font-semibold">
+            {{ column.title }}
+          </span>
+          <div v-if="column.label" class="text-white text-xs">
+            {{ column.label }}
+          </div>
+        </div>
+        <div v-else>
+          <div v-if="column.label === 'Action'">
+            <font-awesome-icon :icon="['fas', 'align-left']" size="lg" />
+          </div>
+          <div v-else>
+            {{ column.label ? column.label : column }}
+          </div>
+        </div>
+      </th>
+    </tr>
+  </thead>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 thead {
-    @apply z-10;
+  @apply z-10;
 }
 </style>
 <script setup>
@@ -36,9 +40,9 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faAlignLeft);
 const props = defineProps({
-    columns: {
-        type: Array,
-        default: [],
-    },
+  columns: {
+    type: Array,
+    default: [],
+  },
 });
 </script>
