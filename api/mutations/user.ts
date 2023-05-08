@@ -26,13 +26,33 @@ const UPDATE_USER = gql`
   }
 `;
 
+const CREATE_USER = gql`
+  mutation CreateUser($input: UserInput) {
+    createUser(input: $input) {
+      id
+      first_name
+      last_name
+      date_of_birth
+      gender
+      email
+      address1
+      address2
+      city
+      state
+      phone
+    }
+  }
+`;
+
 export interface UserMutation {
   updateUser: DocumentNode;
+  createUser: DocumentNode;
 }
 
 const user: GraphQLMutationInterface<UserMutation> = {
   mutation: {
     updateUser: UPDATE_USER,
+    createUser: CREATE_USER,
   },
 };
 
