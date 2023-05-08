@@ -41,7 +41,11 @@
       @close="closeModel"
     >
       <div class="bg-base-300 rounded-md p-6 border border-secondary">
-        <component :is="agreementScreens[agreementScreenIndex]"></component>
+        <component
+          :is="agreementScreens[agreementScreenIndex]"
+          :profile-info="profileInfo"
+        >
+        </component>
         <div class="flex justify-end mt-6">
           <Button
             size="sm"
@@ -85,6 +89,14 @@ import FinancialCollect from "./financial-collect/due-today.vue";
 import TermsAndCondition from "~/pages/agreement/components/agreement-type.vue";
 import PayNow from "./pay-now.vue";
 import UserInfoCard from "./user-info-card.vue";
+import { request } from "~/api/utils/request";
+import member from "@/api/queries/member";
+
+const route = useRoute();
+const profileId = route.query.id;
+const isLeadView = route.query.type === "lead";
+const user = useState("auth");
+
 const isActiveMember = ref(false);
 
 const memberInfo = ref({});
@@ -201,4 +213,18 @@ const prevScreen = () => {
       ? agreementScreenIndex.value - 1
       : agreementScreenIndex.value;
 };
+
+const profileInfo = ref(null);
+getMember();
+function getMember() {
+  if (profileId) {
+    request((isLeadView ? lead : member).query.get, { id: profileId }).then(
+      ({ data }) => {
+        profileInfo.value = data.data[isLeadView ? "lead" : "member"];
+      }
+    );
+  } else {
+    profileInfo.value = user.value;
+  }
+}
 </script>

@@ -9,6 +9,7 @@
         v-else
         :is="agreementScreens[agreementScreenIndex]"
         :enableLocationSelection="true"
+        :profile-info="profileInfo"
         :modalClass="
           'bg-base-300 w-fit mx-auto p-[17px] border border-secondary new-agreements-wrapper ' +
           (agreementScreenIndex == 0 ? 'rounded-[8px]' : 'rounded-[19px]')
@@ -54,6 +55,13 @@ import SecondaryPayments from "../user-info/financial-collect/secondary-payments
 import AgreementModal from "~/pages/agreement/components/agreement-modal.vue";
 import TermsAndCondition from "~/pages/agreement/components/agreement-type.vue";
 import PayNow from "../user-info/pay-now.vue";
+import { request } from "~/api/utils/request";
+import member from "@/api/queries/member";
+
+const route = useRoute();
+const profileId = route.query.id;
+const isLeadView = route.query.type === "lead";
+const user = useState("auth");
 
 const showNewAgreement = ref(false);
 const newAgreement = () => {
@@ -88,6 +96,20 @@ const prevScreen = () => {
       ? agreementScreenIndex.value - 1
       : agreementScreenIndex.value;
 };
+
+const profileInfo = ref(null);
+getMember();
+function getMember() {
+  if (profileId) {
+    request((isLeadView ? lead : member).query.get, { id: profileId }).then(
+      ({ data }) => {
+        profileInfo.value = data.data[isLeadView ? "lead" : "member"];
+      }
+    );
+  } else {
+    profileInfo.value = user.value;
+  }
+}
 </script>
 
 <style scoped lang="postcss">

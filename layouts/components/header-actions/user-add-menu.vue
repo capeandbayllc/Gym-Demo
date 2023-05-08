@@ -18,7 +18,10 @@
     <div
       class="bg-black rounded-md p-6 border border-secondary h-full overflow-auto"
     >
-      <component :is="addMemberScreens[addMemberScreenIndex]"></component>
+      <component
+        :is="addMemberScreens[addMemberScreenIndex]"
+        :profile-info="profileInfo"
+      ></component>
       <div class="flex justify-end mt-6">
         <button
           class="normal-case mx-2"
@@ -65,6 +68,13 @@ import BroughtToday from "../../../pages/check-in/profile-card/add-member/brough
 import MembershipType from "../../../pages/check-in/new-agreement/membership-type.vue";
 import isThisYou from "~~/pages/check-in/profile-card/add-member/is-this-you.vue";
 import { NextIcon, AddLead } from "@/components/icons";
+import { request } from "~/api/utils/request";
+import member from "@/api/queries/member";
+
+const route = useRoute();
+const profileId = route.query.id;
+const isLeadView = route.query.type === "lead";
+const user = useState("auth");
 
 const props = defineProps({
   mode: {
@@ -125,6 +135,20 @@ const prevScreen = () => {
       ? addMemberScreenIndex.value - 1
       : addMemberScreenIndex.value;
 };
+
+const profileInfo = ref(null);
+getMember();
+function getMember() {
+  if (profileId) {
+    request((isLeadView ? lead : member).query.get, { id: profileId }).then(
+      ({ data }) => {
+        profileInfo.value = data.data[isLeadView ? "lead" : "member"];
+      }
+    );
+  } else {
+    profileInfo.value = user.value;
+  }
+}
 
 defineExpose({ open, close });
 </script>
