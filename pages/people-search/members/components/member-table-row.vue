@@ -1,5 +1,5 @@
 <template>
-  <tr class="people-member-tbl-row rounded-2xl">
+  <tr class="bg-base-100 h-14 rounded-2xl">
     <td class="whitespace-nowrap">
       {{ new Date(data.created_at).toLocaleString() }}
     </td>
@@ -9,10 +9,10 @@
     <td class="px-4">{{ data.email }}</td>
     <td>{{ data.location }}</td>
     <td>
-      <membership-btn :membership="data.membership_type" />
+      <membership-status :membership="data.membership_type" />
     </td>
     <td>
-      <addon-btn :value="data.addOns" class="!rounded-full" />
+      <addon-btn :value="data.addOns" />
     </td>
     <td>
       <div class="dropdown dropdown-end">
@@ -23,12 +23,9 @@
         >
           <font-awesome-icon icon="ellipsis-h" size="lg" />
         </div>
-        <!-- <div class="dropdown-content menu p-2 shadow bg-black rounded w-52 items-start">
-                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1"  @click.stop="openEmailModal">+ Email</div>
-                    <div class="hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary" tabindex="-1" @click.stop="outgoingCall">+ Call</div>
-                </div> -->
+
         <div
-          class="dropdown-content menu p-2 shadow bg-black rounded w-52 items-start"
+          class="dropdown-content menu p-2 shadow bg-base-300 rounded w-fit items-start"
         >
           <div
             class="dropdown-item"
@@ -43,39 +40,27 @@
           <div class="dropdown-item" tabindex="-1">Trash</div>
           <div class="" tabindex="-1">
             <div
-              class="dropdown dropdown-left dropdown-end dropdown-hover contact-menu"
+              class="dropdown dropdown-left dropdown-end dropdown-hover contact-menu group"
             >
-              <div class="dropdown-item" tabindex="0" @click.prevent.stop>
-                Contact Member
-              </div>
-              <div
-                class="dropdown-content menu p-2 shadow bg-black rounded w-40 items-start hidden"
+              <div class="dropdown-item" tabindex="0">Contact Member</div>
+              <ul
+                class="dropdown-content group-hover:!inline-grid menu p-2 shadow bg-base-300 rounded items-start hidden"
               >
-                <Button
-                  outline
-                  size="sm"
-                  class="my-1 border-primary"
-                  @click.stop="contactOption = 'text'"
-                  >Text</Button
-                >
-                <Button
-                  outline
-                  size="sm"
-                  class="my-1 border-primary"
-                  @click.stop="contactOption = 'email'"
-                  >Email</Button
-                >
-                <Button
-                  outline
-                  size="sm"
-                  class="my-1 border-primary"
-                  @click.stop="contactOption = 'call'"
-                  >Call</Button
-                >
-              </div>
+                <li>
+                  <button @click="contactOption = 'text'">Text</button>
+                </li>
+
+                <li>
+                  <button @click="contactOption = 'email'">Email</button>
+                </li>
+
+                <li>
+                  <button @click="contactOption = 'call'">Call</button>
+                </li>
+              </ul>
             </div>
           </div>
-          <div class="dropdown-item" tabindex="-1" @click.stop="openNoteModal">
+          <div class="dropdown-item" tabindex="-1" @click="openNoteModal">
             Add a Note
           </div>
         </div>
@@ -93,37 +78,31 @@
     </td>
   </tr>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .dropdown-item {
-  @apply hover:bg-white uppercase hover:text-black border transition rounded border-secondary inline-block my-1 border-primary px-2 py-1 cursor-pointer text-secondary;
+  @apply text-secondary uppercase border transition rounded border-secondary my-1 px-2 py-1 w-full whitespace-nowrap;
+  @apply hover:bg-base-content hover:text-base-300;
 }
-.contact-menu:hover .dropdown-content {
-  display: inline-grid !important;
+ul.dropdown-content {
+  li {
+    @apply w-full whitespace-nowrap;
+    button {
+      @apply uppercase border w-full transition whitespace-nowrap rounded border-primary px-2 py-1 text-secondary;
+      @apply hover:bg-base-content hover:text-base-300;
+      @apply focus:bg-base-content focus:text-base-300;
+      @apply motion-reduce:transition-none;
+    }
+  }
 }
-.people-member-tbl-row {
-  @apply bg-base-100 h-14;
 
-  td {
-    @apply border-y-2 border-secondary text-center px-4;
-  }
-  td:first-child {
-    @apply border-l-2 rounded-l-2xl;
-  }
-  td:last-child {
-    @apply border-r-2 rounded-r-2xl;
-  }
-  .type-bronze {
-    @apply border border-white;
-  }
-  .type-silver {
-    @apply bg-orange-400;
-  }
-  .type-gold {
-    @apply bg-yellow-400;
-  }
-  .type-platinum {
-    @apply bg-orange-400;
-  }
+td {
+  @apply border-y-2 border-secondary text-center px-4;
+}
+td:first-child {
+  @apply border-l-2 rounded-l px-4;
+}
+td:last-child {
+  @apply border-r-2 rounded-r capitalize px-8;
 }
 </style>
 <script setup>
@@ -132,7 +111,7 @@ import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import AddonBtn from "~~/components/buttons/addon-btn.vue";
-import MembershipBtn from "~~/components/buttons/membership-btn.vue";
+import MembershipStatus from "~~/components/buttons/membership-status.vue";
 import AddNoteModel from "./add-note-modal.vue";
 import dateFormat from "dateformat";
 

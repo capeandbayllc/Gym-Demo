@@ -60,7 +60,7 @@
     </div>
   </simple-card>
 </template>
-<style>
+<style lang="postcss">
 .notification-today,
 .notification-leads {
   @apply h-64 overflow-y-auto;
@@ -96,7 +96,7 @@
   }
 }
 </style>
-<style scoped>
+<style scoped lang="postcss">
 .checkin-notification-card {
   @apply m-auto max-w-[1120px] xl:w-[1120px] w-full;
   .notification-container {

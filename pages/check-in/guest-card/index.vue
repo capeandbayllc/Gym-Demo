@@ -58,7 +58,7 @@
     </div>
   </simple-card>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .guest-pass-card {
   @apply bg-neutral m-auto;
   @screen -lg {
@@ -75,7 +75,7 @@
   }
 }
 </style>
-<style>
+<style lang="postcss">
 .dp-custom-input {
   @apply bg-transparent border-none text-secondary mt-1;
   &::placeholder {
@@ -140,14 +140,12 @@ const locations = ref([]);
 
 const locationsData = ref([]);
 request(location.query.browse).then(({ data }) => {
-    locationsData.value = data.data.locations;
-    locations.value = locationsData.value.data.map((e)=>{
-      return {
-        value: e.id,
-        label: e.name
-      }
-    })
+  locationsData.value = data.data.locations;
+  locations.value = locationsData.value.data.map((e) => {
+    return {
+      value: e.id,
+      label: e.name,
+    };
+  });
 });
-
-
 </script>

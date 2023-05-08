@@ -49,19 +49,19 @@
     <div class="calendar-date">December 6</div>
   </div>
 </template>
-<style>
+<style lang="postcss">
 .custom-date {
   .dp__theme_dark {
     --dp-background-color: #000000;
     --dp-menu-border-color: #ffffff;
   }
   .dp__calendar_header {
-    width: 100%;
+    @apply w-full;
   }
   .dp__calendar {
-    width: 100%;
+    @apply w-full;
     .dp__calendar_row {
-      padding-left: 8px;
+      @apply pl-[8px];
     }
   }
   .dp__menu {
@@ -69,7 +69,7 @@
   }
 }
 </style>
-<style scoped>
+<style scoped lang="postcss">
 /* .calendar-card {
     @apply border rounded py-2 px-4;
     .calendar-swiper {
