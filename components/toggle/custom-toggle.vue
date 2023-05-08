@@ -15,6 +15,9 @@ const props = defineProps({
 });
 
 const modelValue = ref(false);
+watchEffect(() => {
+  modelValue.value = props.modelValue;
+});
 
 const toggle = () => {
   modelValue.value = !modelValue.value;

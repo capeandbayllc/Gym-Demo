@@ -35,6 +35,7 @@ export { default as MarketingIcon } from "./marketing.vue";
 export { default as MassComIcon } from "./mass-com.vue";
 export { default as PeopleIcon } from "./people.vue";
 export { default as PersonAddIcon } from "./person-add.vue";
+export { default as PersonWalkIcon } from "./person-walk-icon.vue";
 export { default as PersonInHandIcon } from "./person-in-hand.vue";
 export { default as PersonIcon } from "./person.vue";
 export { default as PlusCircleIcon } from "./plus-circle.vue";

@@ -62,6 +62,7 @@ import {
   TrainingIcon,
   UpperArrowIcon,
   VendorIcon,
+  ComTowerIcon,
   WidgetIcon,
   PeopleSearchIcon,
 } from "@/components/icons";
@@ -150,8 +151,8 @@ const navList = [
         label: "Widget Center",
         icon: WidgetIcon,
         url: "/widget-center",
-      }
-    ]
+      },
+    ],
   },
   {
     type: "document",
@@ -385,6 +386,36 @@ const navList = [
       {
         icon: WidgetIcon,
         url: "/engage",
+      },
+    ],
+  },
+  {
+    type: "mass-com-scheduled",
+    navigation: [
+      {
+        label: "Mass Comms",
+        icon: ComTowerIcon,
+        url: "/mass-com",
+      },
+    ],
+  },
+  {
+    type: "mass-com-builder",
+    navigation: [
+      {
+        label: "Mass Comms",
+        icon: ComTowerIcon,
+        url: "/mass-com",
+      },
+    ],
+  },
+  {
+    type: "goals",
+    navigation: [
+      {
+        label: "Widget Center",
+        icon: WidgetIcon,
+        url: "/widget-center",
       },
     ],
   },
