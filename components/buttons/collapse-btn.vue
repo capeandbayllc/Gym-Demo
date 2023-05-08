@@ -2,7 +2,7 @@
   <arrow-icon
     :direction="modelValue ? 'up' : 'down'"
     @click="$emit('update:modelValue', !modelValue)"
-    size="xs"
+    :size-full="sizeFull"
     class="collapse-btn"
   />
 </template>
@@ -18,6 +18,10 @@ const props = defineProps({
   modelValue: {
     type: Boolean,
     default: true,
+  },
+  sizeFull: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
