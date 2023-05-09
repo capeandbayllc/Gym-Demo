@@ -1,19 +1,26 @@
 <template>
-  <div
+  <button
     class="alert-container"
     :class="{
       checked: modelValue,
+      '!bg-base-200 !text-base-content border border-base-content':
+        alertOutline && !modelValue,
     }"
     @click="$emit('update:modelValue', !modelValue)"
   >
     <div class="checker">
-      <!-- <plus-circle-icon v-if="!modelValue"/> -->
       <check-circle-icon v-if="modelValue" />
     </div>
     <div class="font-normal text-xs">
-      {{ modelValue ? "Alert" : "Create an Alert" }}
+      {{
+        modelValue
+          ? alertCreatedLabel
+            ? alertCreatedLabel
+            : "Alert"
+          : "Create an Alert"
+      }}
     </div>
-  </div>
+  </button>
 </template>
 <style scoped lang="postcss">
 .alert-container {
@@ -30,5 +37,7 @@
 import { PlusCircleIcon, CheckCircleIcon } from "~~/components/icons";
 const props = defineProps({
   modelValue: Boolean,
+  alertCreatedLabel: String,
+  alertOutline: Boolean,
 });
 </script>

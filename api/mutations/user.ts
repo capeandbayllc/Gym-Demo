@@ -31,26 +31,15 @@ const CREATE_USER = gql`
     createUser(input: $input) {
       id
       first_name
-      middle_name
       last_name
       date_of_birth
       gender
-      drivers_license_number
-      occupation
-      employer
-      barcode
       email
-      alternate_phone
-      homeLocation {
-        id
-      }
       address1
       address2
       city
       state
       phone
-      created_at
-      updated_at
     }
   }
 `;

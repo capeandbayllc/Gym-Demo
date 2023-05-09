@@ -47,18 +47,20 @@
         </div>
       </div>
     </div>
-    <div class="page-content">
-      <template v-for="{ key, component } in subSections" :key="key">
-        <component
-          v-if="detailView === key"
-          @close="detailView = null"
-          :user="ProfileInfo"
-          @on-profile-update="refreshIndex++"
-          :key="key"
-          :is="component"
-          :member="ProfileInfo"
-        />
-      </template>
+    <div class="px-5 w-full h-fit">
+      <div class="page-content">
+        <template v-for="{ key, component } in subSections" :key="key">
+          <component
+            v-if="detailView === key"
+            @close="detailView = null"
+            :user="ProfileInfo"
+            @on-profile-update="refreshIndex++"
+            :key="key"
+            :is="component"
+            :member="ProfileInfo"
+          />
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -94,10 +96,10 @@
 import { request } from "~/api/utils/request";
 import member from "@/api/queries/member";
 import lead from "~/api/queries/lead";
+import userQuery from "~/api/queries/user";
 import EventCard from "./event-card/index.vue";
 import ProfileCard from "./profile-card/index.vue";
 import Profile from "./profile/index.vue";
-import PosCard from "./pos-card/index.vue";
 import PosWindow from "../pos/components/pos-window.vue";
 import CalendarCard from "./calendar-card/index.vue";
 import NotificationCard from "./notification-card/index.vue";
@@ -123,7 +125,8 @@ const option = ref(null);
 const route = useRoute();
 const profileId = route.query.id;
 const isPreview = route.query.preview;
-const isLeadView = route.query.type === "lead";
+const openDetail = route.query.openDetail;
+const typeView = route.query.type ? route.query.type : "member";
 const ProfileInfo = ref(null);
 
 const appLayout = useLayoutElement();
@@ -147,6 +150,17 @@ onMounted(() => {
     setTimeout(() => {
       window.scroll({
         top: 600,
+        left: 0,
+        behavior: "smooth",
+      });
+    }, 0);
+  }
+
+  if (openDetail) {
+    detailView.value = openDetail;
+    setTimeout(() => {
+      window.scroll({
+        top: 900,
         left: 0,
         behavior: "smooth",
       });
@@ -213,16 +227,16 @@ const OnCheckInStatusChange = (isCheckedIn) => {
 
 const getMember = () => {
   if (profileId) {
-    request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-      ({ data }) => {
-        let user = data.data[isLeadView ? "lead" : "member"];
-        ProfileInfo.value = {
-          ...user,
-          name: `${user.first_name} ${user.last_name}`,
-        };
-        console.log(ProfileInfo.value);
-      }
-    );
+    const view =
+      typeView === "lead" ? lead : typeView === "user" ? userQuery : member;
+    request(view.query.get, { id: profileId }).then(({ data }) => {
+      let user = data.data[typeView];
+      ProfileInfo.value = {
+        ...user,
+        name: `${user.first_name} ${user.last_name}`,
+      };
+      console.log(ProfileInfo.value);
+    });
   } else {
     ProfileInfo.value = {
       ...user.value,

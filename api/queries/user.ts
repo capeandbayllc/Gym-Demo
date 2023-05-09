@@ -54,6 +54,7 @@ export interface UserQuery {
   findByMail: DocumentNode;
   findById: DocumentNode;
   browse: DocumentNode;
+  get: DocumentNode;
 }
 
 const user: GraphQLQueryInterface<UserQuery> = {
@@ -61,6 +62,7 @@ const user: GraphQLQueryInterface<UserQuery> = {
     findByMail: FIND_BY_MAIL,
     findById: FIND_BY_ID,
     browse: GET_USERS,
+    get: FIND_BY_ID,
   },
 };
 

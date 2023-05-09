@@ -13,7 +13,7 @@
           Personal Information (Profile)
         </div>
         <div
-          class="max-h-[70vh] overflow-x-hidden overflow-y-scroll grid pr-2 grid-cols-2 gap-4 w-[650px] text-sm width-full"
+          class="max-h-[50vh] xl:max-h-[70vh] overflow-x-hidden overflow-y-scroll grid pr-2 grid-cols-2 gap-4 w-[650px] text-sm width-full"
         >
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">First Name</div>
@@ -33,30 +33,21 @@
           <div
             class="col-span-1 -lg:col-span-2 -md:col-auto mr-auto flex flex-wrap items-center"
           >
-            <div
-              class="toggle-custom mb-2"
-              :class="{ 'toggle-active': maleCheck }"
-            >
-              <div @click="changeMaleCheck" class="circle"></div>
-              <div @click="changeMaleCheck" class="line"></div>
-              <span @click="changeMaleCheck"> Male </span>
-            </div>
-            <div
-              class="toggle-custom mb-2"
-              :class="{ 'toggle-active': femaleCheck }"
-            >
-              <div @click="changeFemaleCheck" class="circle"></div>
-              <div @click="changeFemaleCheck" class="line"></div>
-              <span @click="changeFemaleCheck"> Female </span>
-            </div>
-            <div
-              class="toggle-custom mb-2"
-              :class="{ 'toggle-active': otherCheck }"
-            >
-              <div @click="changeOtherCheck" class="circle"></div>
-              <div @click="changeOtherCheck" class="line"></div>
-              <span @click="changeOtherCheck"> Other </span>
-            </div>
+            <custom-toggle
+              :modelValue="personalInfoForm.gender == 'male'"
+              @update:modelValue="updateGender($event, 'male')"
+              title="Male"
+            />
+            <custom-toggle
+              :modelValue="personalInfoForm.gender == 'female'"
+              @update:modelValue="updateGender($event, 'female')"
+              title="Female"
+            />
+            <custom-toggle
+              :modelValue="personalInfoForm.gender === 'other'"
+              @update:modelValue="updateGender($event, 'other')"
+              title="Other"
+            />
           </div>
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Home Address 1*</div>
@@ -146,30 +137,45 @@ import member from "@/api/queries/member";
 import CustomToggle from "~/components/toggle/custom-toggle.vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 
+const emit = defineEmits(["change", "changeNewMemberData"]);
+const props = defineProps({
+  modalClass: {
+    type: String,
+  },
+  value: {
+    Object,
+  },
+  newMemberData: {
+    type: Object,
+    default: null,
+  },
+});
+
+onMounted(() => {
+  if (props.value) {
+    personalInfoForm.value = props.value;
+  }
+});
+
+const updateGender = (value, gender) => {
+  if (value) {
+    personalInfoForm.value.gender = gender;
+  }
+};
+
 const route = useRoute();
 const profileId = route.query.id;
 const isLeadView = route.query.type === "lead";
 const ProfileInfo = ref(null);
 const user = useState("auth");
 
-const props = defineProps({
-  newMemberData: {
-    type: Object,
-    default: null,
-  },
-  modalClass: {
-    type: String,
-  },
-});
-const emit = defineEmits(["changeNewMemberData"]);
-
 const personalInfoForm = ref({
-  first_name: "",
-  last_name: "",
-  date_of_birth: "",
+  firstName: "",
+  lastName: "",
+  birthDate: "",
   gender: "",
-  address1: "",
-  address2: "",
+  homeAddress1: "",
+  homeAddress2: "",
   city: "",
   state: "",
   zip: "",
@@ -181,13 +187,8 @@ const personalInfoForm = ref({
   sendMePromotionalEmails: "",
 });
 
-watch(personalInfoForm.value, () => {
-  let changeNewMemberData = props.newMemberData;
-  Object.keys(personalInfoForm.value).forEach((key) => {
-    changeNewMemberData[key] = personalInfoForm.value[key];
-  });
-  console.log(changeNewMemberData);
-  emit("changeNewMemberData", changeNewMemberData);
+watchEffect(() => {
+  emit("change", personalInfoForm);
 });
 
 getMember();
@@ -202,30 +203,6 @@ function getMember() {
     ProfileInfo.value = user.value;
   }
 }
-
-const maleCheck = ref(false);
-const changeMaleCheck = () => {
-  maleCheck.value = !maleCheck.value;
-  if (maleCheck.value) {
-    personalInfoForm.value.gender = "male";
-  }
-};
-
-const femaleCheck = ref(false);
-const changeFemaleCheck = () => {
-  femaleCheck.value = !femaleCheck.value;
-  if (femaleCheck.value) {
-    personalInfoForm.value.gender = "female";
-  }
-};
-
-const otherCheck = ref(false);
-const changeOtherCheck = () => {
-  otherCheck.value = !otherCheck.value;
-  if (otherCheck.value) {
-    personalInfoForm.value.gender = "other";
-  }
-};
 </script>
 <style scoped lang="postcss">
 .gray-input {

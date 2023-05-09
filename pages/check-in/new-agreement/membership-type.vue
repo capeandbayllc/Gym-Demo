@@ -1,5 +1,8 @@
 <template>
-  <simple-card title="Select your membership type below:">
+  <simple-card
+    title="Select your membership type below:"
+    class="max-h-[70vh] overflow-auto"
+  >
     <div class="px-10 relative">
       <div
         class="shadow-layer absolute z-[1] gradient-bg overflow-auto right-10 rounded-[18px] top-[100px] bottom-0"
