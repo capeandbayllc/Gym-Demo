@@ -189,7 +189,7 @@ function getMutationResolvers(
 
   mutation.fields?.forEach((mutation: FieldDefinitionNode) => {
     const name: string = mutation.name.value;
-    if (name.startsWith("update")) {
+    if (name.startsWith("update") || name.startsWith("create")) {
       // @ts-ignore
       mutations[name] = MutationResolver.make;
     }

@@ -45,7 +45,6 @@
 
 <script setup>
 import CurrentAgreement from "./current-agreement.vue";
-import MembershipType from "./membership-type.vue";
 import SelectGym from "../user-info/select-gym";
 import PersonalInformation from "../user-info/personal-information";
 import PersonalInformationNext from "../user-info/personal-information/personal-info-next.vue";
@@ -62,6 +61,15 @@ const route = useRoute();
 const profileId = route.query.id;
 const isLeadView = route.query.type === "lead";
 const user = useState("auth");
+
+const openDetail = route.query.openDetail;
+
+onMounted(() => {
+  if (openDetail == "newAgreement") {
+    showNewAgreement.value = true;
+    agreementScreenIndex.value = 5;
+  }
+});
 
 const showNewAgreement = ref(false);
 const newAgreement = () => {

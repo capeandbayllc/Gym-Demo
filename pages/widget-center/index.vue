@@ -1,7 +1,7 @@
 <template>
   <div class="pb-5 pt-4 mx-auto w-full px-10 max-w-[1600px]">
     <div class="pl-10 pr-4 mb-2 flex justify-content">
-      <div class="flex flex-auto">Goals</div>
+      <div class="flex flex-auto">Widget Center</div>
       <div class="flex gap-3 items-end pb-2 pr-10">
         <div class="dropdown dropdown-end">
           <Button secondary="" size="xs">
