@@ -4,6 +4,105 @@ type Ability {
   title: String
 }
 
+type Agreement {
+  id: ID!
+  user_id: ID
+  user: User
+  agreement_category_id: ID
+  agreementCategory: AgreementCategory!
+  gr_location_id: String!
+  location: Location!
+  agreement_template_id: ID
+  template: AgreementTemplate!
+  billing_schedule_id: ID
+  billingSchedule: BillingSchedule!
+  contract: Contract!
+  contract_file_url: String
+  active: Boolean!
+  terms_completed: Int
+  last_billed_on: DateTime
+  signed_at: DateTime
+  template_name: String!
+  user_email: String!
+  payment_status: String!
+  status: String!
+  next_billable_on: DateTime
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+type AgreementCategory {
+  id: ID!
+  name: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+"""
+A paginated list of AgreementCategory items.
+"""
+type AgreementCategoryPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of AgreementCategory items.
+  """
+  data: [AgreementCategory!]!
+}
+
+"""
+A paginated list of Agreement items.
+"""
+type AgreementPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Agreement items.
+  """
+  data: [Agreement!]!
+}
+
+type AgreementTemplate {
+  id: ID!
+  contractTemplate: ContractTemplate!
+  category: AgreementCategory!
+  name: String!
+  price: Int!
+  location_ids: [ID]
+  billing_schedule_ids: [ID]
+  agreement_category_id: ID
+  contract_template_id: ID
+  is_sold_individually: Boolean!
+  is_not_billable: Boolean!
+  availability: String!
+  displayable_price: String!
+  billingSchedules: [BillingSchedule!]!
+  locations: [Location!]!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+"""
+A paginated list of AgreementTemplate items.
+"""
+type AgreementTemplatePaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of AgreementTemplate items.
+  """
+  data: [AgreementTemplate!]!
+}
+
 type Announcement {
   id: ID!
   version: String!
@@ -54,12 +153,40 @@ type AudienceTargets {
   membership_type_id: [ID]
 }
 
-type CalendarAttendee {
+type BillingSchedule {
   id: ID
-  entity_type: String
-  invitation_status: String
-  entity_id: String
-  entity: User
+  schedule_type: String!
+  name: String!
+  schedule_cycle_type: String!
+  billable_dates: [Int]!
+  is_open_ended: Boolean!
+  is_renewable: Boolean!
+  should_renew_automatically: Boolean!
+  term_unit: String!
+  term_duration: Int!
+  billed_on_type: String!
+  billing_term_length: String!
+  displayable_billable_dates: String
+  min_terms: Int
+  used_in: [String!]!
+  agreementTemplates: [AgreementTemplate!]!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+"""
+A paginated list of BillingSchedule items.
+"""
+type BillingSchedulePaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of BillingSchedule items.
+  """
+  data: [BillingSchedule!]!
 }
 
 type CalendarEvent {
@@ -78,10 +205,10 @@ type CalendarEvent {
   event_completion: DateTime
   color: String
   editable: Int
-  user_attendees: [CalendarAttendee]
-  lead_attendees: [CalendarAttendee]
-  member_attendees: [CalendarAttendee]
-  attendees: [CalendarAttendee]
+  user_attendees: [EventAttendee]
+  lead_attendees: [EventAttendee]
+  member_attendees: [EventAttendee]
+  attendees: [EventAttendee]
   location_id: String
   call_task: Int
   im_attending: Boolean
@@ -173,10 +300,87 @@ type ContactPreference {
   value: String
 }
 
+type Contract {
+  id: ID
+  file: File!
+}
+
+"""
+A paginated list of Contract items.
+"""
+type ContractPaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of Contract items.
+  """
+  data: [Contract!]!
+}
+
+type ContractTemplate {
+  id: ID!
+  name: String!
+  data: String!
+  data_type: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+"""
+A paginated list of ContractTemplate items.
+"""
+type ContractTemplatePaginator {
+  """
+  Pagination information about the list of items.
+  """
+  paginatorInfo: PaginatorInfo!
+
+  """
+  A list of ContractTemplate items.
+  """
+  data: [ContractTemplate!]!
+}
+
+input CreateAgreementInput {
+  user_id: ID
+  gr_location_id: String
+  agreement_template_id: ID
+  billing_schedule_id: ID
+  agreement_json: String
+}
+
+input CreateAgreementTemplateInput {
+  contract_template_id: ID
+  agreement_category_id: ID
+  billing_schedule_ids: [ID]
+  location_ids: [ID]
+  is_sold_individually: Boolean
+  name: String
+  price: Float
+  is_not_billable: Boolean
+  availability: String
+}
+
 input CreateAudienceInput {
   name: String
   filters: AudienceFiltersInput
   entity: String
+}
+
+input CreateBillingScheduleInput {
+  type: String
+  cycle_type: String
+  billable_dates: [Int]
+  name: String
+  is_open_ended: Boolean
+  is_renewable: Boolean
+  should_renew_automatically: Boolean
+  term_unit: String
+  term_duration: Int
+  min_terms: Int
 }
 
 input CreateCalendarEventInput {
@@ -206,11 +410,18 @@ input CreateCallScriptTemplateInput {
   use_once: Boolean
 }
 
+input CreateContractTemplateInput {
+  name: String!
+  data: String!
+  data_type: String!
+}
+
 input CreateDripCampaignInput {
   name: String
   audience_id: String
   campaignType: String
   days: [CampaignDayInput]
+  is_draft: Boolean
   type: String
 }
 
@@ -249,8 +460,8 @@ input CreateLocationInput {
   poc_last: String
   opened_at: DateTime
   closed_at: DateTime
-  latitude: Int
-  longitude: Int
+  latitude: Float
+  longitude: Float
   capacity: Int
 }
 
@@ -260,6 +471,17 @@ input CreateNoteInput {
   entity_type: String
   note: String
   active: Boolean
+}
+
+input CreatePaymentMethodInput {
+  user_id: ID!
+  type_id: String!
+  card_number: String
+  expiration_date: String
+  cvc: String
+  account_number: String
+  routing_number: String
+  account_type: String
 }
 
 input CreatePositionInput {
@@ -311,8 +533,8 @@ type Customer {
   gender: String
   date_of_birth: DateTime
   profile_photo_path: String
-  created_at: DateTime!
-  updated_at: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
   gr_location_id: ID
   interaction_count: InteractionCount!
   homeLocation: Location
@@ -362,6 +584,8 @@ type Department {
   created_at: DateTime!
   updated_at: DateTime!
   positions: [Position]!
+  status: Boolean
+  message: String!
 }
 
 input DepartmentFilter {
@@ -468,32 +692,95 @@ type EmergencyContact {
   ec_phone: String
 }
 
+input EmergencyContactInput {
+  ec_first_name: String
+  ec_last_name: String
+  ec_phone: String
+}
+
 type Employee {
   id: ID!
   user_id: ID!
+  name: String
   first_name: String
   last_name: String
   middle_name: String
   email: String
+  alternate_email: String
+  address1: String
+  address2: String
+  created_at: DateTime
+  updated_at: DateTime
+  start_date: DateTime
+  end_date: DateTime
+  termination_date: DateTime
+  manager: String
+  email_verified_at: DateTime
   phone: String
   alternate_phone: String
-  address1: String
   zip: String
   city: String
   state: String
   gender: String
   date_of_birth: DateTime
   profile_photo_path: String
-  created_at: DateTime!
-  updated_at: DateTime!
+  isClientUser: Boolean
   gr_location_id: ID
-  home_location: Location
-  locations: [Location]
+  homeLocation: Location
+  locations: [Location!]!
   user_type: String
   agreement_number: String
   external_id: String
   misc: String
   notes: [Note]
+  defaultTeam: Team
+  roles: [Role]
+  teams: [Team]
+  contact_preference: String
+  emergency_contact: EmergencyContact
+  departments: [Department]
+  positions: [Position]
+  files: [File]!
+  occupation: String
+  employer: String
+  barcode: String
+  drivers_license_number: String
+}
+
+input EmployeeInput {
+  id: ID
+  first_name: String
+  middle_name: String
+  last_name: String
+  email: String
+  alternate_email: String
+  address1: String
+  address2: String
+  phone: String
+  alternate_phone: String
+  city: String
+  state: String
+  zip: String
+  gender: String
+  contact_preference: String
+  started_at: String
+  ended_at: String
+  terminated_at: String
+  notes: NoteInput
+  team_id: ID
+  role_id: ID
+  external_id: ID
+  home_location_id: ID
+  date_of_birth: DateTime
+  agreement_number: Int
+  manager: String
+  user_type: String
+  departments: [Departments]
+  positions: [ID]
+  occupation: String
+  employer: String
+  barcode: String
+  drivers_license_number: String
 }
 
 """
@@ -521,8 +808,9 @@ type EndUser {
   middle_name: String
   last_name: String
   email: String!
-  created_at: DateTime!
-  updated_at: DateTime!
+  phone: String
+  created_at: DateTime
+  updated_at: DateTime
   location: Location
   owner_user_id: String
   primary_phone: String
@@ -579,18 +867,37 @@ type EntrySource {
   """
   When the account was created.
   """
-  created_at: DateTime!
+  created_at: DateTime
 
   """
   When the account was last updated.
   """
-  updated_at: DateTime!
+  updated_at: DateTime
 }
 
 type Enum {
   label: String!
   value: String!
   description: String
+}
+
+type EnumObject {
+  key: String!
+  value: String!
+  description: String
+}
+
+interface ErrorResponse {
+  status: ResponseStatus!
+  message: String!
+}
+
+type EventAttendee {
+  id: ID!
+  entity_id: ID!
+  entity_type: String
+  invitation_status: String
+  entity_data: AttendeeDetailData
 }
 
 type File {
@@ -603,12 +910,13 @@ type File {
   fileable: Fileable!
 }
 
-union Fileable = User | Lead | Member | Customer
+union Fileable = User | Lead | Member | Customer | Contract
 
 input Filter {
   search: String
   trashed: String
   state: String
+  status: String
 }
 
 type Folder {
@@ -655,14 +963,14 @@ Leads
 type Lead {
   id: ID!
   name: String!
+  user_id: ID
   first_name: String
   middle_name: String
   last_name: String
   email: String!
-  phone: String!
-  user_id: ID
-  created_at: DateTime!
-  updated_at: DateTime!
+  phone: String
+  created_at: DateTime
+  updated_at: DateTime
   lead_owners: [TeamUser]
   owner_user_id: String
   primary_phone: String
@@ -673,11 +981,12 @@ type Lead {
   interaction_count: InteractionCount!
   homeLocation: Location
   locations: [Location]
+  leadType: LeadType
+  leadStatus: LeadStatus
   opportunity: String
   agreement_number: String
   misc: String
   external_id: String
-  lead_status_id: String
   notes: [Note]
   gr_location_id: ID
   user_type: String
@@ -718,8 +1027,7 @@ type Location {
   id: ID
   gymrevenue_id: String
   location_no: String
-  # location_type: LocationType
-  location_type: String
+  location_type: LocationType
   name: String
   city: String
   state: String
@@ -730,8 +1038,8 @@ type Location {
   phone: String
   open_date: DateTime
   close_date: DateTime
-  latitude: Int
-  longitude: Int
+  latitude: Float
+  longitude: Float
   poc_first: String
   poc_last: String
   poc_phone: String
@@ -776,6 +1084,10 @@ enum LocationType {
   Locations that are considered corporate headquarter offices
   """
   HQ
+}
+
+input MarkTaskCompleteCalendarEventInput {
+  id: ID!
 }
 
 type Member {
@@ -824,6 +1136,30 @@ type MemberPaginator {
 
 type Mutation {
   """
+  Create an Agreement
+  """
+  createAgreement(input: CreateAgreementInput): Agreement
+
+  """
+  Update an Agreement
+  """
+  updateAgreement(input: UpdateAgreementInput): Agreement
+
+  """
+  Create an Agreement Template
+  """
+  createAgreementTemplate(
+    input: CreateAgreementTemplateInput
+  ): AgreementTemplate
+
+  """
+  Update an Agreement Template
+  """
+  updateAgreementTemplate(
+    input: UpdateAgreementTemplateInput
+  ): AgreementTemplate
+
+  """
   Create an Audience
   """
   createAudience(input: CreateAudienceInput): Audience
@@ -834,10 +1170,29 @@ type Mutation {
   updateAudience(input: UpdateAudienceInput): Audience
 
   """
+  Create a Billing Schedule
+  """
+  createBillingSchedule(input: CreateBillingScheduleInput): BillingSchedule
+
+  """
+  Update an Billing Schedule
+  """
+  updateBillingSchedule(input: UpdateBillingScheduleInput): BillingSchedule
+
+  """
   Creates a Calendar Event
   """
   createCalendarEvent(input: CreateCalendarEventInput!): CalendarEvent!
+
+  """
+  Updates a Calendar Event
+  """
   updateCalendarEvent(input: PatchCalendarEventInput!): CalendarEvent!
+
+  """
+  Mark Calendar Event as Completed
+  """
+  markTaskComplete(input: MarkTaskCompleteCalendarEventInput!): CalendarEvent!
 
   """
   Creates a calandar event type
@@ -866,8 +1221,29 @@ type Mutation {
   updateCallScriptTemplate(
     input: UpdateCallScriptTemplateInput
   ): CallScriptTemplate!
-  createDepartment(name: String, positions: [ID]): Department!
-  updateDepartment(id: ID, name: String, positions: [ID]): Department!
+
+  """
+  Create a Contract Template
+  """
+  createContractTemplate(input: CreateContractTemplateInput): ContractTemplate
+
+  """
+  Update a Contract Template
+  """
+  updateContractTemplate(input: UpdateContractTemplateInput): ContractTemplate
+  createDepartment(
+    status: Boolean
+    message: String
+    name: String
+    positions: [ID]
+  ): Department!
+  updateDepartment(
+    status: Boolean
+    message: String
+    id: ID
+    name: String
+    positions: [ID]
+  ): Department!
 
   """
   Creates a Drip Campaign
@@ -893,6 +1269,8 @@ type Mutation {
   Updates a EmailTemplate
   """
   updateEmailTemplate(input: UpdateEmailTemplateInput): EmailTemplate!
+  updateEmployee(input: EmployeeInput): User!
+  createEmployee(input: EmployeeInput): User!
   createFile(file: CreateFileInput): File!
   renameFile(input: RenameFileInput): File!
   updateFileFolder(input: UpdateFileFolderInput): File!
@@ -918,6 +1296,17 @@ type Mutation {
   updateLocation(location: UpdateLocationInput!): Location!
   createNote(input: CreateNoteInput): Note!
   updateNote(input: UpdateNoteInput): Note!
+  updateNotification(input: NotificationInput): Notification!
+
+  """
+  Create a Payment Method
+  """
+  createPciVaultPaymentMethod(input: CreatePaymentMethodInput): PciVault
+
+  """
+  Update an a Payment Method
+  """
+  updatePciVaultPaymentMethod(input: UpdatePaymentMethodInput): PciVault
 
   """
   Creates a Position
@@ -966,6 +1355,10 @@ type Mutation {
   deleteRole(id: ID!): Role!
 }
 
+interface MutationResponse {
+  status: ResponseStatus!
+}
+
 type Note {
   id: ID!
   title: String
@@ -1007,6 +1400,12 @@ type Notification {
   misc: String
   created_at: DateTime
   updated_at: DateTime
+}
+
+input NotificationInput {
+  id: ID
+  user_id: String
+  state: String
 }
 
 """
@@ -1188,6 +1587,23 @@ input PatchCalendarEventInput {
   location_id: String
 }
 
+type PaymentMethod {
+  id: ID!
+  method: String!
+  method_type: String!
+  is_vault_default: Boolean!
+  number: String!
+  add_info: String!
+}
+
+type PciVault {
+  id: ID!
+  user: User!
+  provider: String!
+  vault_identifier: String
+  payment_methods: [PaymentMethod!]!
+}
+
 type Position {
   id: ID!
   name: String!
@@ -1237,7 +1653,16 @@ type Query {
   reminder(id: ID): Reminder
   tasksQuery(param: TaskParam, pagination: PaginationInput): Tasks
   widgetsQuery: [Widget]!
+  agreementCategory(id: ID!): AgreementCategory
+  agreement(id: ID): Agreement!
+  agreementTemplate(id: ID): AgreementTemplate
+  agreementTemplateAvailabilityOptions: [EnumObject!]!
   audience(id: ID): Audience
+  billingSchedule(id: ID): BillingSchedule!
+  billingScheduleCycleTypes: [EnumObject!]!
+  billingScheduleTypes: [EnumObject!]!
+  billingScheduleTermUnits: [String!]!
+  billingScheduleBillableDates: [String!]!
   calendarEvents(param: CalendarEventInput): [CalendarEvent!]!
   calendarEventById(id: ID): CalendarEvent
 
@@ -1255,6 +1680,8 @@ type Query {
   Find a single Call Template by an identifying attribute.
   """
   callTemplate(id: ID): CallScriptTemplate
+  contract(id: ID!): Contract!
+  contractTemplate(id: ID): ContractTemplate!
   department(id: ID): Department
 
   """
@@ -1290,6 +1717,7 @@ type Query {
   Find a single notification by ID and User ID
   """
   notification(id: ID, user_id: String!): Location
+  paymentMethods: [PaymentMethod!]!
   position(id: ID): Position
 
   """
@@ -1343,6 +1771,17 @@ type Query {
   Find a single user by an identifying attribute.
   """
   member(id: ID): Member
+  employee(
+    """
+    Find a single employee by an identifying attribute.
+    """
+    id: ID
+
+    """
+    Search by email address.
+    """
+    email: String
+  ): Employee
   role(id: ID): Role
   availableAbilities: [Ability]!
   securityGroups: [SecurityGroups]!
@@ -1364,6 +1803,48 @@ type Query {
     """
     page: Int
   ): ReminderPaginator
+  agreementCategories(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): AgreementCategoryPaginator
+  agreements(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): AgreementPaginator
+  agreementTemplates(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): AgreementTemplatePaginator
   audiences(
     filter: Filter
     orderBy: [OrderByClause!]
@@ -1378,6 +1859,20 @@ type Query {
     """
     page: Int
   ): AudiencePaginator
+  billingSchedules(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): BillingSchedulePaginator
 
   """
   Queries Calendar Event Types
@@ -1414,6 +1909,34 @@ type Query {
     """
     page: Int
   ): CallScriptTemplatePaginator
+  contracts(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): ContractPaginator
+  contractTemplates(
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): ContractTemplatePaginator
   departments(
     """
     Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
@@ -1602,20 +2125,6 @@ type Query {
     """
     page: Int
   ): UserPaginator
-  employee(
-    filter: Filter
-    orderBy: [OrderByClause!]
-
-    """
-    Limits number of fetched items.
-    """
-    first: Int = 10
-
-    """
-    The offset from which items are returned.
-    """
-    page: Int
-  ): EmployeePaginator
   leads(
     filter: Filter
     orderBy: [OrderByClause!]
@@ -1672,6 +2181,23 @@ type Query {
     """
     page: Int
   ): MemberPaginator
+  employees(
+    """
+    Filters by name. Accepts SQL LIKE wildcards `%` and `_`.
+    """
+    filter: Filter
+    orderBy: [OrderByClause!]
+
+    """
+    Limits number of fetched items.
+    """
+    first: Int = 10
+
+    """
+    The offset from which items are returned.
+    """
+    page: Int
+  ): EmployeePaginator
   roles(
     filter: Filter
     orderBy: [OrderByClause!]
@@ -1716,12 +2242,17 @@ input RenameFileInput {
   filename: String
 }
 
+enum ResponseStatus {
+  SUCCESS
+  FAILURE
+}
+
 type Role {
   id: ID!
   title: String!
   name: String
-  created_at: DateTime!
-  updated_at: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
   abilities: [Ability]!
   availableAbilities: [Ability]!
   group: Int
@@ -1940,11 +2471,47 @@ enum Trashed {
   WITHOUT
 }
 
+input UpdateAgreementInput {
+  id: ID
+  user_id: ID
+  gr_location_id: String
+  agreement_template_id: ID
+  billing_schedule_id: ID
+  agreement_json: String
+}
+
+input UpdateAgreementTemplateInput {
+  id: ID
+  contract_template_id: ID
+  agreement_category_id: ID
+  billing_schedule_ids: [ID]
+  location_ids: [ID]
+  is_sold_individually: Boolean
+  name: String
+  price: Float
+  is_not_billable: Boolean
+  availability: String
+}
+
 input UpdateAudienceInput {
   id: ID
   name: String
   filters: AudienceFiltersInput
   entity: String
+}
+
+input UpdateBillingScheduleInput {
+  id: ID
+  type: String
+  cycle_type: String
+  billable_dates: [Int]
+  name: String
+  is_open_ended: Boolean
+  is_renewable: Boolean
+  should_renew_automatically: Boolean
+  term_unit: String
+  term_duration: Int
+  min_terms: Int
 }
 
 input UpdateCalendarEventTypeInput {
@@ -1962,12 +2529,20 @@ input UpdateCallScriptTemplateInput {
   use_once: Boolean
 }
 
+input UpdateContractTemplateInput {
+  id: ID
+  name: String
+  data: String
+  data_type: String
+}
+
 input UpdateDripCampaignInput {
   id: ID
   name: String
   audience_id: String
   campaignType: String
   days: [CampaignDayInput]
+  is_draft: Boolean
 }
 
 input UpdateEmailTemplateInput {
@@ -2020,6 +2595,18 @@ input UpdateNoteInput {
   active: Boolean
 }
 
+input UpdatePaymentMethodInput {
+  id: ID!
+  user_id: ID!
+  type_id: String!
+  card_number: String
+  expiration_date: String
+  cvc: String
+  account_number: String
+  routing_number: String
+  account_type: String
+}
+
 input UpdatePositionInput {
   id: ID
   name: String
@@ -2060,6 +2647,11 @@ input UpdateSmsTemplateInput {
 }
 
 """
+Can be used as an argument to upload files using https://github.com/jaydenseric/graphql-multipart-request-spec
+"""
+scalar Upload
+
+"""
 Account of a person who utilizes this application.
 """
 type User {
@@ -2073,8 +2665,8 @@ type User {
   address1: String
   address2: String
   email_verified_at: DateTime
-  created_at: DateTime!
-  updated_at: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
   start_date: DateTime
   end_date: DateTime
   termination_date: DateTime
@@ -2101,6 +2693,8 @@ type User {
   employer: String
   barcode: String
   drivers_license_number: String
+  status: Boolean
+  message: String
 }
 
 input UserInput {
@@ -2139,6 +2733,12 @@ input UserInput {
   drivers_license_number: String
 }
 
+input UserInteractionCountInput {
+  calledCount: Int
+  emailedCount: Int
+  smsCount: Int
+}
+
 """
 A paginated list of User items.
 """
@@ -2152,6 +2752,12 @@ type UserPaginator {
   A list of User items.
   """
   data: [User!]!
+}
+
+type UsersResponse {
+  status: ResponseStatus!
+  total: Int!
+  users: [User!]!
 }
 
 type Widget {
