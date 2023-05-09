@@ -43,7 +43,6 @@
 
 <script setup>
 import CurrentAgreement from "./current-agreement.vue";
-import MembershipType from "./membership-type.vue";
 import SelectGym from "../user-info/select-gym";
 import PersonalInformation from "../user-info/personal-information";
 import PersonalInformationNext from "../user-info/personal-information/personal-info-next.vue";
@@ -53,6 +52,16 @@ import SecondaryPayments from "../user-info/financial-collect/secondary-payments
 import AgreementModal from "~/pages/agreement/components/agreement-modal.vue";
 import TermsAndCondition from "~/pages/agreement/components/agreement-type.vue";
 import PayNow from "../user-info/pay-now.vue";
+
+const route = useRoute();
+const openDetail = route.query.openDetail;
+
+onMounted(() => {
+  if (openDetail == "newAgreement") {
+    showNewAgreement.value = true;
+    agreementScreenIndex.value = 5;
+  }
+});
 
 const showNewAgreement = ref(false);
 const newAgreement = () => {

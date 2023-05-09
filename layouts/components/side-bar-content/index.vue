@@ -119,6 +119,7 @@
     @apply flex flex-col gap-5 w-full;
     overflow-y: scroll;
     max-height: calc(100vh - 220px);
+    padding-bottom: 110px;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
@@ -210,7 +211,7 @@ const activeMembers = ref(0);
 
 const membersData = ref([]);
 const types = ["platinum", "gold", "silver", "bronze"];
-request(member.query.browse).then(({ data }) => {
+request(member.query.browse, { first: 100 }).then(({ data }) => {
   activeMembers.value = data.data.members.data.length;
   data.data.members.data.forEach((member) => {
     member["checkIn"] = false;

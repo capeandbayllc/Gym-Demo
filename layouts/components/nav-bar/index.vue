@@ -409,6 +409,16 @@ const navList = [
       },
     ],
   },
+  {
+    type: "goals",
+    navigation: [
+      {
+        label: "Widget Center",
+        icon: WidgetIcon,
+        url: "/widget-center",
+      },
+    ],
+  },
 ];
 
 const route = useRoute();

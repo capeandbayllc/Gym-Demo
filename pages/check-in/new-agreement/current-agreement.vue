@@ -8,7 +8,7 @@
   <simple-card title="Current Agreements">
     <AgreementTable
       :columns="columns"
-      :items="currentAgreements"
+      :items="agreements"
       class="p-6 text-sm"
     />
   </simple-card>
@@ -17,6 +17,10 @@
 <script setup>
 import AgreementTable from "./agreement-table.vue";
 import { NewAgreementIcon } from "@/components/icons";
+import agreement from "~/api/queries/agreement";
+import { useQuery } from "@vue/apollo-composable";
+import dateFormat from "dateformat";
+
 
 const columns = [
   {
@@ -45,96 +49,31 @@ const columns = [
   },
 ];
 
-const currentAgreements = [
-  {
-    id: 1,
-    name: "Agreement #1",
-    category: "membership",
-    created_at: new Date().toLocaleDateString(),
-    invoice_amount: "$500.00",
-    agreement_value: "$600.00",
-    billing_schedule_type: "monthly",
-  },
-  {
-    id: 2,
-    name: "Agreement #2",
-    category: "membership",
-    created_at: new Date().toLocaleDateString(),
-    invoice_amount: "$500.00",
-    agreement_value: "$600.00",
-    billing_schedule_type: "yearly",
-  },
-  {
-    id: 3,
-    name: "Agreement #3",
-    category: "membership",
-    created_at: new Date().toLocaleDateString(),
-    invoice_amount: "$500.00",
-    agreement_value: "$600.00",
-    billing_schedule_type: "monthly",
-  },
-  {
-    id: 4,
-    name: "Agreement #4",
-    category: "membership",
-    created_at: new Date().toLocaleDateString(),
-    invoice_amount: "$500.00",
-    agreement_value: "$600.00",
-    billing_schedule_type: "monthly",
-  },
-  {
-    id: 5,
-    name: "Agreement #5",
-    category: "membership",
-    created_at: new Date().toLocaleDateString(),
-    invoice_amount: "$500.00",
-    agreement_value: "$600.00",
-    billing_schedule_type: "yearly",
-  },
-  {
-    id: 6,
-    name: "Agreement #6",
-    category: "membership",
-    created_at: new Date().toLocaleDateString(),
-    invoice_amount: "$500.00",
-    agreement_value: "$600.00",
-    billing_schedule_type: "yearly",
-  },
-  {
-    id: 7,
-    name: "Agreement #7",
-    category: "membership",
-    created_at: new Date().toLocaleDateString(),
-    invoice_amount: "$500.00",
-    agreement_value: "$600.00",
-    billing_schedule_type: "monthly",
-  },
-  {
-    id: 8,
-    name: "Agreement #8",
-    category: "membership",
-    created_at: new Date().toLocaleDateString(),
-    invoice_amount: "$500.00",
-    agreement_value: "$600.00",
-    billing_schedule_type: "monthly",
-  },
-  {
-    id: 9,
-    name: "Agreement #9",
-    category: "membership",
-    created_at: new Date().toLocaleDateString(),
-    invoice_amount: "$500.00",
-    agreement_value: "$600.00",
-    billing_schedule_type: "monthly",
-  },
-  {
-    id: 10,
-    name: "Agreement #10",
-    category: "membership",
-    created_at: new Date().toLocaleDateString(),
-    invoice_amount: "$500.00",
-    agreement_value: "$600.00",
-    billing_schedule_type: "monthly",
-  },
-];
+const getType = () => {
+  const types = ["bronze", "silver", "gold", "platinum"];
+  const randomIndex = Math.floor(Math.random() * types.length);
+  return types[randomIndex];
+};
+const agreements = ref([]);
+onMounted(() => {});
+const { result } = useQuery(agreement.query.browse);
+watchEffect(() => {
+  agreements.value = result?.value?.agreements.data.map((agreement) => {
+    return {
+      id: agreement.id,
+      segment: agreement.agreement_category.name,
+      phone: agreement.user.phone,
+      photo: agreement.user.profile_photo_path,
+      email: agreement.user.email,
+      created: dateFormat(
+        new Date(agreement.created_at),
+        "m/d yyyy, h:MM:ssTT"
+      ),
+      first_name: agreement.user.first_name,
+      last_name: agreement.user.last_name,
+      location: agreement.gr_location_id,
+      type: getType(),
+    };
+  });
+});
 </script>

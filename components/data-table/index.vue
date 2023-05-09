@@ -3,7 +3,6 @@
     <table class="border-separate">
       <table-header :columns="columns" :stickyHeader="stickyHeader" />
       <table-body v-if="!rowComponent" />
-
       <tbody>
         <component
           v-for="item in data"
@@ -15,6 +14,7 @@
         />
       </tbody>
     </table>
+    <p class="pl-3 mt-3" v-show="!data.length">{{ noDataMessage }}</p>
   </div>
 </template>
 <style scoped lang="postcss">
@@ -34,6 +34,10 @@ const props = defineProps({
   columns: {
     type: Array,
     default: [],
+  },
+  noDataMessage: {
+    type: String,
+    default: "",
   },
   rowComponent: Object,
   headerComponent: {
