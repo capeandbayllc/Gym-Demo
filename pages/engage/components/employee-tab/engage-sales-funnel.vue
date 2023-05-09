@@ -18,11 +18,7 @@
     </div>
     <engage-call-list />
   </div>
-  <daisy-modal
-    id="editSalesFunnelModal"
-    ref="editSalesFunnelModal"
-    class=""
-  >
+  <daisy-modal id="editSalesFunnelModal" ref="editSalesFunnelModal" class="">
     <div class="modal-bg">
       <edit-sales-funnel-modal class="max-w-[1152px]" />
     </div>
@@ -43,7 +39,7 @@
 }
 </style>
 <script setup>
-import {ref} from 'vue';
+import { ref } from "vue";
 import ChartContent from "./chart-content.vue";
 import EditSalesFunnelModal from "./edit-sales-funnel/index.vue";
 import EngageCallList from "./engage-call-list.vue";

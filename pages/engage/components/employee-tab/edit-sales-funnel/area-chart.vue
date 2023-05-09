@@ -1,41 +1,47 @@
 <template>
-  <apexchart id="graph-analysis-chart" type="area" height="230" :options="chartOptions" :series="chartSeries" />
+  <apexchart
+    id="graph-analysis-chart"
+    type="area"
+    height="230"
+    :options="chartOptions"
+    :series="chartSeries"
+  />
 </template>
 <script>
 const chartOptions = {
   chart: {
-    type: 'area',
+    type: "area",
     toolbar: {
-      show: false
+      show: false,
     },
     zoom: {
       enabled: true,
-      type: '',
-    }
+      type: "",
+    },
   },
   legend: {
-    position: 'bottom',
-    fontSize: '8px',
-    markers:  {
+    position: "bottom",
+    fontSize: "8px",
+    markers: {
       width: 10,
-      height: 10
-    }
+      height: 10,
+    },
   },
   dataLabels: {
-    enabled: false
+    enabled: false,
   },
   stroke: {
     show: false,
   },
   grid: {
-    borderColor: 'rgba(255,255,255,0.2)'
+    borderColor: "rgba(255,255,255,0.2)",
   },
   fill: {
-    colors: [ '#04365c', '#0275c9' , '#40c0ff'],
+    colors: ["#04365c", "#0275c9", "#40c0ff"],
     gradient: {
-      shade: 'dark',
+      shade: "dark",
       type: "vertical",
-      shadeIntensity: .1,
+      shadeIntensity: 0.1,
       gradientToColors: undefined,
       inverseColors: true,
       opacityFrom: 1,
@@ -43,14 +49,14 @@ const chartOptions = {
       stops: [0, 50, 100],
     },
   },
-  colors: ['#40c0ff', '#0275c9', '#04365c'],
+  colors: ["#40c0ff", "#0275c9", "#04365c"],
   xaxis: {
-    type: 'months',
+    type: "months",
     labels: {
       style: {
-        fontSize: '7px',
-        colors: '#fff',
-      }
+        fontSize: "7px",
+        colors: "#fff",
+      },
     },
     axisBorder: {
       show: false,
@@ -61,56 +67,55 @@ const chartOptions = {
     crosshairs: {
       show: true,
       width: 40,
-      position: 'front',
-      opacity: 0.9,        
+      position: "front",
+      opacity: 0.9,
       stroke: {
-          color: '#D8E3F0',
-          width: 0,
-          dashArray: 0,
+        color: "#D8E3F0",
+        width: 0,
+        dashArray: 0,
       },
       fill: {
-        type: 'gradient',
-        color: '#B1B9C4',
+        type: "gradient",
+        color: "#B1B9C4",
         gradient: {
-            colorFrom: '#D8E3F0',
-            colorTo: '#BED1E6',
-            stops: [0, 100],
-            opacityFrom: 0,
-            opacityTo: 0.8,
+          colorFrom: "#D8E3F0",
+          colorTo: "#BED1E6",
+          stops: [0, 100],
+          opacityFrom: 0,
+          opacityTo: 0.8,
         },
       },
     },
   },
   yaxis: {
+    show: true,
+    showAlways: true,
+    showForNullSeries: true,
+    opposite: false,
+    reversed: false,
+    tickAmount: 9,
+    min: 0,
+    max: 45,
+    forceNiceScale: false,
+    floating: false,
+    labels: {
       show: true,
-      showAlways: true,
-      showForNullSeries: true,
-      opposite: false,
-      reversed: false,
-      tickAmount: 9,
-      min:0,
-      max:45,
-      forceNiceScale: false,
-      floating: false,
-      labels: {
-          show: true,
-          formatter: function (val) {
-              return val + "k"
-            },
-          style: {
-              colors: ['#fff'],
-              fontSize: '10px',
-              fontFamily: 'Helvetica, Arial, sans-serif',
-              fontWeight: 400,
-              cssClass: 'apexcharts-yaxis-label',
-          },
+      formatter: function (val) {
+        return val + "k";
       },
-      
+      style: {
+        colors: ["#fff"],
+        fontSize: "10px",
+        fontFamily: "Helvetica, Arial, sans-serif",
+        fontWeight: 400,
+        cssClass: "apexcharts-yaxis-label",
+      },
+    },
   },
   markers: {
     size: 0,
     colors: undefined,
-    strokeColors: '#fff',
+    strokeColors: "#fff",
     strokeWidth: 2,
     strokeOpacity: 0.9,
     strokeDashArray: 0,
@@ -125,10 +130,10 @@ const chartOptions = {
     showNullDataPoints: true,
     hover: {
       size: undefined,
-      sizeOffset: 3
-    }
-}
-}
+      sizeOffset: 3,
+    },
+  },
+};
 export default {
   data() {
     return {
@@ -148,168 +153,168 @@ export default {
       },
       chartSeries: [
         {
-          name: 'Statistics 1',
+          name: "Statistics 1",
           data: [
             {
               x: "January",
-              y: '16',
+              y: "16",
             },
             {
               x: "February",
-              y: '37',
+              y: "37",
             },
             {
               x: "March",
-              y: '45',
+              y: "45",
             },
             {
               x: "April",
-              y: '34',
+              y: "34",
             },
             {
               x: "May",
-              y: '23',
+              y: "23",
             },
             {
               x: "June",
-              y: '22',
+              y: "22",
             },
             {
               x: "July",
-              y: '43',
+              y: "43",
             },
             {
               x: "August",
-              y: '33',
+              y: "33",
             },
             {
               x: "September",
-              y: '28',
+              y: "28",
             },
             {
               x: "October",
-              y:'31',
+              y: "31",
             },
             {
               x: "November",
-              y: '29',
+              y: "29",
             },
             {
               x: "December",
-              y: '43',
-            }
+              y: "43",
+            },
           ],
         },
         {
-          name: 'Statistics 2',
+          name: "Statistics 2",
           data: [
             {
               x: "January",
-              y: '15',
+              y: "15",
             },
             {
               x: "February",
-              y: '28',
+              y: "28",
             },
             {
               x: "March",
-              y: '23',
+              y: "23",
             },
             {
               x: "April",
-              y: '34',
+              y: "34",
             },
             {
               x: "May",
-              y: '29',
+              y: "29",
             },
             {
               x: "June",
-              y: '12',
+              y: "12",
             },
             {
               x: "July",
-              y: '40',
+              y: "40",
             },
             {
               x: "August",
-              y: '39',
+              y: "39",
             },
             {
               x: "September",
-              y: '25',
+              y: "25",
             },
             {
               x: "October",
-              y:'39',
+              y: "39",
             },
             {
               x: "November",
-              y: '29',
+              y: "29",
             },
             {
               x: "December",
-              y: '33',
-            }
+              y: "33",
+            },
           ],
         },
         {
-          name: 'Statistics 3',
+          name: "Statistics 3",
           data: [
             {
               x: "January",
-              y: '8',
+              y: "8",
             },
             {
               x: "February",
-              y: '40',
+              y: "40",
             },
             {
               x: "March",
-              y: '35',
+              y: "35",
             },
             {
               x: "April",
-              y: '24',
+              y: "24",
             },
             {
               x: "May",
-              y: '13',
+              y: "13",
             },
             {
               x: "June",
-              y: '22',
+              y: "22",
             },
             {
               x: "July",
-              y: '23',
+              y: "23",
             },
             {
               x: "August",
-              y: '33',
+              y: "33",
             },
             {
               x: "September",
-              y: '18',
+              y: "18",
             },
             {
               x: "October",
-              y:'31',
+              y: "31",
             },
             {
               x: "November",
-              y: '29',
+              y: "29",
             },
             {
               x: "December",
-              y: '23',
-            }
+              y: "23",
+            },
           ],
         },
-      ]
+      ],
     };
   },
-}
+};
 </script>
 <style lang="postcss">
 #graph-analysis-chart .apexcharts-legend {

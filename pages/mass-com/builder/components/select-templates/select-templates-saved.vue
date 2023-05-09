@@ -1,5 +1,3 @@
 <template>
-    <div>
-        Saved Templates
-    </div>
+  <div>Saved Templates</div>
 </template>

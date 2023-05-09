@@ -321,7 +321,7 @@ input[type="text"],
 input[type="email"],
 input[type="mobile"],
 input[type="number"] {
-  @apply gr-base-textfield gr-neutral-textfield min-w-[16rem];
+  @apply rounded-xl p-2 transition-all duration-75 mt-2 w-full outline-none border-2 border-transparent bg-base-content/20 focus-within:bg-base-content/30 focus-within:border-secondary min-w-[16rem];
 }
 
 .finalize input[type="text"],

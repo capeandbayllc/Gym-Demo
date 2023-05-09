@@ -14,7 +14,10 @@
       </template>
 
       <div class="flex justify-center items-center gap-6 my-6">
-        <button @click="$emit('close')" class="text-base-content/50 hover:text-base-content">
+        <button
+          @click="$emit('close')"
+          class="text-base-content/50 hover:text-base-content"
+        >
           cancel
         </button>
         <button
