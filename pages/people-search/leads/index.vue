@@ -1,53 +1,19 @@
 <template>
   <div class="w-full max-w-7xl">
     <div class="text-center mb-4">
-      <button @click="openAddMemberPopUp">
-        <AddIcon
-          class="aspect-square w-10 h-auto border inline-block border-secondary rounded-full font-semibold cursor-pointer"
-        />
-      </button>
-
+      <AddIcon
+        class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold cursor-pointer"
+        @click="openAddMemberPopUp"
+      />
       <p class="text-xs mt-1">Add a Lead</p>
     </div>
-    <div class="py-4 pr-5 w-full h-fit">
-      <SearchTableToggler heading="Leads" />
-
-      <div
-        class="block border border-secondary bg-base-300 rounded-b p-7 flex-col"
-      >
-        <div class="flex flex-row justify-between space-x-4 mb-4">
-          <div class="flex gap-4">
-            <select-box
-              :items="locationType"
-              value=""
-              :label="'Locations'"
-              :secondary="true"
-              class="w-40 filter-selected"
-            >
-            </select-box>
-            <select-box
-              :items="leadType"
-              value=""
-              :label="'Lead Type'"
-              :secondary="true"
-              class="w-40 filter-selected"
-            >
-            </select-box>
-          </div>
-        </div>
-        <div v-if="leads">
-          <data-table
-            :columns="columns"
-            :data="leads_display"
-            :row-component="LeadTableRow"
-            class="h-96 overflow-y-auto"
-          />
-        </div>
-      </div>
-    </div>
     <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit">
-      <div class="bg-base-300 rounded-md p-6 border border-secondary">
-        <component :is="addMemberScreens[addMemberScreenIndex]"></component>
+      <div class="bg-black rounded-md p-6 border border-secondary">
+        <component
+          :is="addMemberScreens[addMemberScreenIndex]"
+          :newMemberData="newMemberData"
+          @changeNewMemberData="newMemberData = $event"
+        ></component>
         <div class="flex justify-end mt-6">
           <button
             class="normal-case mx-2"
@@ -71,6 +37,77 @@
       </div>
     </daisy-modal>
   </div>
+  <div class="py-4 pr-5 w-full h-fit">
+    <SearchTableToggler class="page-content" heading="Leads" />
+
+    <div
+      class="-md:px-4 page-content block border border-secondary bg-base-300 rounded-b p-7 flex-col"
+    >
+      <div class="flex flex-row justify-between space-x-4 mb-4">
+        <div class="flex gap-4">
+          <select-box
+            :items="locationType"
+            value=""
+            :label="'Locations'"
+            :secondary="true"
+            class="w-40 filter-selected"
+          >
+          </select-box>
+          <select-box
+            :items="leadTypes"
+            value=""
+            :label="'Lead Type'"
+            :secondary="true"
+            class="w-40 filter-selected"
+          >
+          </select-box>
+          <select-box
+            :items="leadStatuses"
+            value=""
+            @onChange="filters.status = $event"
+            :label="'Lead Status'"
+            :secondary="true"
+            class="w-40 filter-selected"
+          >
+          </select-box>
+        </div>
+      </div>
+      <div>
+        <data-table
+          :columns="columns"
+          :data="leads_display"
+          :row-component="LeadTableRow"
+          class="h-96 overflow-y-auto"
+        />
+      </div>
+    </div>
+  </div>
+  <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit">
+    <div class="bg-base-300 rounded-md p-6 border border-secondary">
+      <component
+        :is="addMemberScreens[addMemberScreenIndex]"
+        @change="newMemberData = $event"
+      ></component>
+      <div class="flex justify-end mt-6">
+        <button
+          class="normal-case mx-2"
+          ghost
+          @click="prevScreen"
+          v-if="addMemberScreenIndex > 0"
+        >
+          <NextIcon />
+        </button>
+        <Button size="sm" class="normal-case mx-2 ml-auto" ghost>Cancel</Button>
+        <Button
+          size="sm"
+          class="normal-case mx-2 border border-secondary"
+          outline
+          @click="nextScreen"
+          >Continue ></Button
+        >
+      </div>
+    </div>
+  </daisy-modal>
 </template>
 <script setup>
 import LeadTableRow from "./components/lead-table-row.vue";
@@ -82,11 +119,12 @@ import PersonalInformation from "~/pages/check-in/user-info/personal-information
 import Interests from "~/pages/check-in/profile-card/add-member/interests.vue";
 import EmergencyInfo from "~/pages/check-in/profile-card/add-member/emergency-info.vue";
 import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today.vue";
-import userMutation from "~/api/mutations/user";
-import { useMutation } from "@vue/apollo-composable";
-import { useQuery } from "@vue/apollo-composable";
-import location from "~/api/queries/location";
+import { useQuery, useMutation } from "@vue/apollo-composable";
 import lead from "~/api/queries/lead";
+import leadStatusQuery from "~/api/queries/leadStatus";
+import userMutation from "~/api/mutations/user";
+import location from "~~/api/queries/location";
+import { v4 as uuidv4 } from "uuid";
 import SearchTableToggler from "../components/search-table-toggler.vue";
 
 const newMemberData = ref({
@@ -109,6 +147,62 @@ const newMemberData = ref({
 });
 
 const newMemberDataReset = ref({});
+const leadStatuses = ref([]);
+
+const { result: resultLocation } = useQuery(location.query.browse, {
+  first: 1,
+});
+watchEffect(() => {
+  if (!resultLocation.value?.locations?.data[0]) return;
+  newMemberData.value.home_location_id =
+    resultLocation.value?.locations?.data[0].id;
+  newMemberDataReset.value.home_location_id = { ...newMemberData.value };
+});
+
+onMounted(() => {
+  newMemberDataReset.value = { ...newMemberData.value };
+});
+
+const saveLead = () => {
+  addMemberScreenIndex.value = 0;
+  const { mutate: createMember } = useMutation(
+    userMutation.mutation.createUser
+  );
+  createMember({
+    input: {
+      id: uuidv4(),
+      first_name: newMemberData.value.firstName,
+      last_name: newMemberData.value.lastName,
+      date_of_birth: newMemberData.value.birthDate,
+      gender: newMemberData.value.gender,
+      email: newMemberData.value.email,
+      address1: newMemberData.value.homeAddress1,
+      address2: newMemberData.value.homeAddress2,
+      city: newMemberData.value.city,
+      state: newMemberData.value.state,
+      phone: newMemberData.value.phone,
+    },
+  }).then((response) => {
+    console.log(response);
+    leads.value = [];
+    getLeadsQuery();
+  });
+
+  newMemberData.value = { ...newMemberDataReset.value };
+};
+
+let { result } = useQuery(leadStatusQuery.query.browse);
+watchEffect(() => {
+  if (!result.value?.lead_statuses) return;
+
+  let statuses = result.value?.lead_statuses.slice();
+  statuses.sort((a, b) => a.order - b.order);
+  const mappedStatuses = statuses.map((status) => ({
+    value: status.id,
+    label: status.status,
+  }));
+  leadStatuses.value = mappedStatuses;
+});
 
 onMounted(() => {
   const locationData = ref(null);
@@ -119,41 +213,6 @@ onMounted(() => {
   });
   getLeadsQuery();
 });
-
-const saveLead = () => {
-  let currentDate = new Date();
-  addMemberScreenIndex.value = 0;
-  const { mutate: createMember } = useMutation(
-    userMutation.mutation.createUser
-  );
-  createMember({
-    input: {
-      first_name: newMemberData.value.first_name,
-      middle_name: newMemberData.value.middle_name,
-      last_name: newMemberData.value.last_name,
-      date_of_birth: newMemberData.value.date_of_birth,
-      gender: newMemberData.value.gender,
-      drivers_license_number: newMemberData.value.drivers_license_number,
-      occupation: newMemberData.value.occupation,
-      employer: newMemberData.value.employer,
-      barcode: newMemberData.value.barcode,
-      email: newMemberData.value.email,
-      home_location_id: newMemberData.value.home_location_id,
-      address1: newMemberData.value.address1,
-      address2: newMemberData.value.address2,
-      city: newMemberData.value.city,
-      state: newMemberData.value.state,
-      phone: newMemberData.value.phone,
-      state: newMemberData.value.state,
-      phone: newMemberData.value.phone,
-    },
-  }).then(() => {
-    leads.value = [];
-    getLeadsQuery();
-  });
-
-  newMemberData.value = { ...newMemberDataReset.value };
-};
 
 const addMemberPopUp = ref(null);
 const addMemberScreens = ref([
@@ -170,13 +229,6 @@ const addMemberScreenIndex = ref(0);
 const leads = ref([]);
 const filters = ref({ status: "" });
 
-const leadTypes = [
-  "app_referal",
-  "grand_opening",
-  "snapshot",
-  "free_trial",
-  "streaming_preview",
-];
 const opportunity = ["error", "warning", "accent"];
 // TODO implement filters
 
@@ -192,6 +244,7 @@ watch(filters.value, () => {
   leads.value = [];
   getLeadsQuery();
 });
+
 const getRandomType = () => {
   return leadTypes[Math.floor(Math.random() * leadTypes.length)];
 };
@@ -214,6 +267,10 @@ const openAddMemberPopUp = () => {
   addMemberPopUp.value.open();
 };
 const nextScreen = () => {
+  if (!(addMemberScreenIndex.value < addMemberScreens.value.length - 1)) {
+    saveLead();
+    addMemberPopUp.value.close();
+  }
   addMemberScreenIndex.value =
     addMemberScreenIndex.value < addMemberScreens.value.length - 1
       ? addMemberScreenIndex.value + 1
@@ -249,7 +306,7 @@ const locationType = [
     label: "Location 5",
   },
 ];
-const leadType = [
+const leadTypes = [
   {
     value: "1",
     label: "App Referal",

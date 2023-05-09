@@ -69,11 +69,7 @@ const options = reactive([
     selected: false,
   },
 ]);
-
-const checkIn = ref(false);
-
 const handleCheckIn = () => {
-  checkIn.value = !checkIn;
   emit("update:check-in", checkIn);
 };
 
