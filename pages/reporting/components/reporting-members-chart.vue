@@ -1,71 +1,77 @@
 <template>
-    <ClientOnly>
-        <apexchart class="mt-2" type="radialBar" height="250" :options="options" :series="totalCount"></apexchart>
-    </ClientOnly>
+  <ClientOnly>
+    <apexchart
+      class="mt-2"
+      type="radialBar"
+      height="250"
+      :options="options"
+      :series="totalCount"
+    ></apexchart>
+  </ClientOnly>
 </template>
 <script setup>
 const props = defineProps({
-   totalCount: Array
+  totalCount: Array,
 });
 const series = [75];
 const options = {
-    chart: {
-        type: 'radialBar',
-        toolbar: {
-            show: false
-        }
+  chart: {
+    type: "radialBar",
+    toolbar: {
+      show: false,
     },
-    plotOptions: {
-        radialBar: {
-            startAngle: 0,
-            endAngle: 360,
-            hollow: {
-                margin: 0,
-                size: '70%',
-                background: '#1a4d72',
-            },
-            track: {
-                background: '#fff',
-                strokeWidth: '67%',
-                margin: 0, // margin is in pixels
-                dropShadow: {
-                    enabled: true,
-                    top: -3,
-                    left: 0,
-                    blur: 4,
-                    opacity: 0.35
-                }
-            },
-        
-            dataLabels: {
-                show: true,
-                name: {
-                    offsetY: -25,
-                    show: true,
-                    color: '#ffffff',
-                    fontSize: '18px'
-                },
-                value: {
-                    formatter: function(val) {
-                        return parseInt(val);
-                    },
-                    color: '#ffffff',
-                    fontSize: '60px',
-                    show: true,
-                }
-            }
-        }
-    },
-    fill: {
-        opacity: 0.1,
-        type: "gradient",
-        gradient: {
-            gradientToColors: ['#0074C8'],
+  },
+  plotOptions: {
+    radialBar: {
+      startAngle: 0,
+      endAngle: 360,
+      hollow: {
+        margin: 0,
+        size: "70%",
+        background: "#1a4d72",
+      },
+      track: {
+        background: "#fff",
+        strokeWidth: "67%",
+        margin: 0, // margin is in pixels
+        dropShadow: {
+          enabled: true,
+          top: -3,
+          left: 0,
+          blur: 4,
+          opacity: 0.35,
         },
+      },
+
+      dataLabels: {
+        show: true,
+        name: {
+          offsetY: -25,
+          show: true,
+          color: "#ffffff",
+          fontSize: "18px",
+        },
+        value: {
+          formatter: function (val) {
+            return parseInt(val);
+          },
+          color: "#ffffff",
+          fontSize: "60px",
+          show: true,
+        },
+      },
     },
-    stroke: {
-        lineCap: 'round'
+  },
+  fill: {
+    opacity: 0.1,
+    type: "gradient",
+    gradient: {
+      gradientToColors: ["#0074C8"],
     },
-    labels: ['Total:'],
-}
+  },
+  stroke: {
+    lineCap: "round",
+  },
+  labels: ["Total:"],
+};
 </script>
