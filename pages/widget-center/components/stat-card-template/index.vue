@@ -5,7 +5,7 @@
     :title="title"
     :button-text="buttonText"
   >
-    <template #summary>
+    <template #summary v-if="hasSummary">
       <stat-header
         :icon="icon"
         :statValue="statValue"
@@ -18,6 +18,7 @@
         :icon="icon"
         :statValue="statValue"
         :hideStatValue="hideStatValue"
+        :contentClasses="contentClasses"
       >
         <slot></slot>
       </stat-content>
@@ -60,6 +61,13 @@ const props = defineProps({
   cardClasses: {
     type: String,
     default: "",
+  },
+  hasSummary: {
+    type: Boolean,
+    default: true,
+  },
+  contentClasses: {
+    type: String,
   },
 });
 </script>

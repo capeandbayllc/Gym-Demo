@@ -1,7 +1,7 @@
 <template>
   <div class="page-reporting-container slim-text">
     <div class="page-content">
-      <h3 class="text-base-content text-xl">Reporting</h3>
+      <h3 class="text-base-content text-xl slim-text">Reporting</h3>
       <div class="reporting-fields">
         <reporting1-card />
         <reporting2-card />

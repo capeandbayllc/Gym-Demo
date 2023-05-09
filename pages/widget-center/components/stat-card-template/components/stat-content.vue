@@ -7,6 +7,7 @@
     />
     <div
       class="rounded-3xl bg-gray-600/60 w-full h-[12rem] flex flex-col justify-center px-5 overflow-y-scroll no-scrollbar"
+      :class="contentClasses"
     >
       <div class="">
         <slot>
@@ -47,6 +48,9 @@ const props = defineProps({
   },
   hideStatValue: {
     type: Boolean,
+  },
+  contentClasses: {
+    type: String,
   },
 });
 </script>
