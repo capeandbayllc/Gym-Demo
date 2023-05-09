@@ -1,81 +1,80 @@
 <template>
-    <club-card :title-icon="PropertyManagementIcon" title="Property Management">
-        <property-list :columns="columns" :items="items"></property-list>
-    </club-card>
+  <club-card :title-icon="PropertyManagementIcon" title="Property Management">
+    <property-list :columns="columns" :items="items"></property-list>
+  </club-card>
 </template>
 <script setup>
-    import { PropertyManagementIcon } from '~~/components/icons'
-    import ClubCard from '../club-card.vue';
-    import PropertyList from './property-list.vue';
-    import { useQuery } from "@vue/apollo-composable";
-    import location from "~/api/queries/location";
+import { PropertyManagementIcon } from "~~/components/icons";
+import ClubCard from "../club-card.vue";
+import PropertyList from "./property-list.vue";
+import { useQuery } from "@vue/apollo-composable";
+import location from "~/api/queries/location";
 
-    onMounted(async () => {
-        await nextTick();
-        window.dispatchEvent(new Event('resize'))
-    });
+onMounted(async () => {
+  await nextTick();
+  window.dispatchEvent(new Event("resize"));
+});
 
-    const columns = [
-        {
-            label: 'Location',
-            class: 'text-secondary text-center w-[30%]'
-        },
-        {
-            label: 'Address',
-            class: 'text-secondary text-center w-[40%]',
-        },
-        {
-            label: 'Manager',
-            class: 'text-secondary text-center w-[30%]'
-        },
-    ];
+const columns = [
+  {
+    label: "Location",
+    class: "text-secondary text-center w-[30%]",
+  },
+  {
+    label: "Address",
+    class: "text-secondary text-center w-[40%]",
+  },
+  {
+    label: "Manager",
+    class: "text-secondary text-center w-[30%]",
+  },
+];
 
-    const items = ref([
-        {
-            id:1,
-            location: '',
-            address: '1234 Street Address',
-            manager: 'Name',
-        },
-        {
-            id:2,
-            location: '',
-            address: '1234 Street Address',
-            manager: 'Name',
-        },
-        {
-            id:3,
-            location: '',
-            address: '1234 Street Address',
-            manager: 'Name',
-        },
-        {
-            id:4,
-            location: '',
-            address: '1234 Street Address',
-            manager: 'Name',
-        },
-        {
-            id:5,
-            location: '',
-            address: '1234 Street Address',
-            manager: 'Name',
-        },
-        {
-            id:6,
-            location: '',
-            address: '1234 Street Address',
-            manager: 'Name',
-        },
-    ]);
+const items = ref([
+  {
+    id: 1,
+    location: "",
+    address: "1234 Street Address",
+    manager: "Name",
+  },
+  {
+    id: 2,
+    location: "",
+    address: "1234 Street Address",
+    manager: "Name",
+  },
+  {
+    id: 3,
+    location: "",
+    address: "1234 Street Address",
+    manager: "Name",
+  },
+  {
+    id: 4,
+    location: "",
+    address: "1234 Street Address",
+    manager: "Name",
+  },
+  {
+    id: 5,
+    location: "",
+    address: "1234 Street Address",
+    manager: "Name",
+  },
+  {
+    id: 6,
+    location: "",
+    address: "1234 Street Address",
+    manager: "Name",
+  },
+]);
 
-    const locationData = ref(null);
-    const { result } = useQuery(location.query.browse, { first: 1 });
-    watch(result, () => {
-        locationData.value = result.value.locations.data[0];
-        items.value.forEach(e => {
-            e.location = locationData.value.name;
-        });
-    });
-
+const locationData = ref(null);
+const { result } = useQuery(location.query.browse, { first: 1 });
+watch(result, () => {
+  locationData.value = result.value.locations.data[0];
+  items.value.forEach((e) => {
+    e.location = locationData.value.name;
+  });
+});
 </script>
