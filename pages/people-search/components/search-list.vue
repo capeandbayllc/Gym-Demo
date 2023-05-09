@@ -11,9 +11,7 @@
 </template>
 <script setup>
 import PeopleSearchTable from "./people-search-table.vue";
-import AlertSearchTable from "./alert-search-table.vue";
 import { useQuery } from "@vue/apollo-composable";
-
 import member from "~/api/queries/member";
 import { getRandomInt } from "~/api/utils/number";
 const props = defineProps({
@@ -58,7 +56,7 @@ const types = ["platinum", "gold", "silver", "bronze"];
 
 const { result } = useQuery(member.query.browse);
 watchEffect(() => {
-  if(!result?.value) return
+  if (!result?.value) return;
   console.info("data.data.members", result.value.members);
   result.value.members.data.forEach((member) => {
     membersData.value.push(
@@ -72,7 +70,7 @@ watchEffect(() => {
       )
     );
   });
-})
+});
 
 const employeeData = ref([]);
 watch(

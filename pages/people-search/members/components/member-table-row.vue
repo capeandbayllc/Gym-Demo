@@ -35,7 +35,7 @@
             Preview
           </div>
           <div class="dropdown-item" tabindex="-1">
-            <span @click="navigateToCheckIn(void 0)">Edit</span>
+            <span @click="navigateToCheckIn(false)">Edit</span>
           </div>
           <div class="dropdown-item" tabindex="-1">Trash</div>
           <div class="" tabindex="-1">

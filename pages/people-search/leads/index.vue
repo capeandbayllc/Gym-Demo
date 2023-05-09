@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full max-w-7xl">
     <div class="text-center mb-4">
       <button @click="openAddMemberPopUp">
         <AddIcon
@@ -10,24 +10,10 @@
       <p class="text-xs mt-1">Add a Lead</p>
     </div>
     <div class="py-4 pr-5 w-full h-fit">
+      <SearchTableToggler heading="Leads" />
+
       <div
-        class="bg-secondary flex justify-between rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-7xl page-content items-center"
-      >
-        <span>Leads</span>
-        <div class="flex items-center h-8">
-          <button class="mx-4" @click="isSearchEnable = !isSearchEnable">
-            <SearchIcon />
-          </button>
-          <input
-            v-if="isSearchEnable"
-            type="text"
-            placeholder="Search"
-            class="input input-sm max-w-xs bg-secondary border border-base-content rounded"
-          />
-        </div>
-      </div>
-      <div
-        class="-md:px-4 page-content block border border-secondary bg-base-300 rounded-b p-7 flex-col"
+        class="block border border-secondary bg-base-300 rounded-b p-7 flex-col"
       >
         <div class="flex flex-row justify-between space-x-4 mb-4">
           <div class="flex gap-4">
@@ -88,7 +74,7 @@
 </template>
 <script setup>
 import LeadTableRow from "./components/lead-table-row.vue";
-import { SearchIcon, AddIcon, NextIcon } from "@/components/icons";
+import { AddIcon, NextIcon } from "@/components/icons";
 import Welcome from "~/pages/check-in/profile-card/add-member/welcom.vue";
 import JoinTour from "~/pages/check-in/profile-card/add-member/join-tour.vue";
 import Infomrmation from "~/pages/check-in/profile-card/add-member/information.vue";
@@ -101,7 +87,7 @@ import { useMutation } from "@vue/apollo-composable";
 import { useQuery } from "@vue/apollo-composable";
 import location from "~/api/queries/location";
 import lead from "~/api/queries/lead";
-import gql from "graphql-tag";
+import SearchTableToggler from "../components/search-table-toggler.vue";
 
 const newMemberData = ref({
   first_name: "",
@@ -169,7 +155,6 @@ const saveLead = () => {
   newMemberData.value = { ...newMemberDataReset.value };
 };
 
-const isSearchEnable = ref(false);
 const addMemberPopUp = ref(null);
 const addMemberScreens = ref([
   Welcome,
@@ -302,27 +287,6 @@ const leadStatus = [
   {
     value: "Lost",
     label: "Lost",
-  },
-];
-const columns = [
-  {
-    label: "Created",
-    class: "text-secondary",
-  },
-  {
-    label: "Opportunity",
-    class: "text-secondary",
-  },
-  {
-    label: "First Name",
-    class: "text-secondary",
-  },
-  {
-    label: "Last Name",
-    class: "text-secondary",
-  },
-  {
-    label: "Location",
     class: "text-secondary",
   },
   {

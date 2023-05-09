@@ -12,7 +12,6 @@ export function apply(
   info: GraphQLResolveInfo
 ) {
   const schema: DbCollection = mirageSchema.users;
-  // @ts-ignore
   const user = schema.find(args.input.id);
 
   return user.update(args.input);
