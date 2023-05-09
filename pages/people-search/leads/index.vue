@@ -1,67 +1,19 @@
 <template>
-  <div class="w-full">
+  <div class="w-full max-w-7xl">
     <div class="text-center mb-4">
-      <button @click="openAddMemberPopUp">
-        <AddIcon
-          class="aspect-square w-10 h-auto border inline-block border-secondary rounded-full font-semibold cursor-pointer"
-        />
-      </button>
-
+      <AddIcon
+        class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold cursor-pointer"
+        @click="openAddMemberPopUp"
+      />
       <p class="text-xs mt-1">Add a Lead</p>
     </div>
-    <div class="py-4 pr-5 w-full h-fit">
-      <div
-        class="bg-secondary flex justify-between rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-7xl page-content items-center"
-      >
-        <span>Leads</span>
-        <div class="flex items-center h-8">
-          <button class="mx-4" @click="isSearchEnable = !isSearchEnable">
-            <SearchIcon />
-          </button>
-          <input
-            v-if="isSearchEnable"
-            type="text"
-            placeholder="Search"
-            class="input input-sm max-w-xs bg-secondary border border-base-content rounded"
-          />
-        </div>
-      </div>
-      <div
-        class="-md:px-4 page-content block border border-secondary bg-base-300 rounded-b p-7 flex-col"
-      >
-        <div class="flex flex-row justify-between space-x-4 mb-4">
-          <div class="flex gap-4">
-            <select-box
-              :items="locationType"
-              value=""
-              :label="'Locations'"
-              :secondary="true"
-              class="w-40 filter-selected"
-            >
-            </select-box>
-            <select-box
-              :items="leadType"
-              value=""
-              :label="'Lead Type'"
-              :secondary="true"
-              class="w-40 filter-selected"
-            >
-            </select-box>
-          </div>
-        </div>
-        <div>
-          <data-table
-            :columns="columns"
-            :data="leads_display"
-            :row-component="LeadTableRow"
-            class="h-96 overflow-y-auto"
-          />
-        </div>
-      </div>
-    </div>
     <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit">
-      <div class="bg-base-300 rounded-md p-6 border border-secondary">
-        <component :is="addMemberScreens[addMemberScreenIndex]"></component>
+      <div class="bg-black rounded-md p-6 border border-secondary">
+        <component
+          :is="addMemberScreens[addMemberScreenIndex]"
+          :newMemberData="newMemberData"
+          @changeNewMemberData="newMemberData = $event"
+        ></component>
         <div class="flex justify-end mt-6">
           <button
             class="normal-case mx-2"
@@ -85,11 +37,82 @@
       </div>
     </daisy-modal>
   </div>
+  <div class="py-4 pr-5 w-full h-fit">
+    <SearchTableToggler class="page-content" heading="Leads" />
+
+    <div
+      class="-md:px-4 page-content block border border-secondary bg-base-300 rounded-b p-7 flex-col"
+    >
+      <div class="flex flex-row justify-between space-x-4 mb-4">
+        <div class="flex gap-4">
+          <select-box
+            :items="locationType"
+            value=""
+            :label="'Locations'"
+            :secondary="true"
+            class="w-40 filter-selected"
+          >
+          </select-box>
+          <select-box
+            :items="leadTypes"
+            value=""
+            :label="'Lead Type'"
+            :secondary="true"
+            class="w-40 filter-selected"
+          >
+          </select-box>
+          <select-box
+            :items="leadStatuses"
+            value=""
+            @onChange="filters.status = $event"
+            :label="'Lead Status'"
+            :secondary="true"
+            class="w-40 filter-selected"
+          >
+          </select-box>
+        </div>
+      </div>
+      <div>
+        <data-table
+          :columns="columns"
+          :data="leads_display"
+          :row-component="LeadTableRow"
+          class="h-96 overflow-y-auto"
+        />
+      </div>
+    </div>
+  </div>
+  <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit">
+    <div class="bg-base-300 rounded-md p-6 border border-secondary">
+      <component
+        :is="addMemberScreens[addMemberScreenIndex]"
+        @change="newMemberData = $event"
+      ></component>
+      <div class="flex justify-end mt-6">
+        <button
+          class="normal-case mx-2"
+          ghost
+          @click="prevScreen"
+          v-if="addMemberScreenIndex > 0"
+        >
+          <NextIcon />
+        </button>
+        <Button size="sm" class="normal-case mx-2 ml-auto" ghost>Cancel</Button>
+        <Button
+          size="sm"
+          class="normal-case mx-2 border border-secondary"
+          outline
+          @click="nextScreen"
+          >Continue ></Button
+        >
+      </div>
+    </div>
+  </daisy-modal>
 </template>
 
 <script setup>
 import LeadTableRow from "./components/lead-table-row.vue";
-import { SearchIcon, AddIcon, NextIcon } from "@/components/icons";
+import { AddIcon, NextIcon } from "@/components/icons";
 import Welcome from "~/pages/check-in/profile-card/add-member/welcom.vue";
 import JoinTour from "~/pages/check-in/profile-card/add-member/join-tour.vue";
 import Infomrmation from "~/pages/check-in/profile-card/add-member/information.vue";
@@ -97,10 +120,92 @@ import PersonalInformation from "~/pages/check-in/user-info/personal-information
 import Interests from "~/pages/check-in/profile-card/add-member/interests.vue";
 import EmergencyInfo from "~/pages/check-in/profile-card/add-member/emergency-info.vue";
 import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today.vue";
-import { request } from "~/api/utils/request";
+import { useQuery, useMutation } from "@vue/apollo-composable";
 import lead from "~/api/queries/lead";
+import leadStatusQuery from "~/api/queries/leadStatus";
+import userMutation from "~/api/mutations/user";
+import location from "~~/api/queries/location";
+import { v4 as uuidv4 } from "uuid";
 
-const isSearchEnable = ref(false);
+const newMemberData = ref({
+  firstName: "",
+  lastName: "",
+  birthDate: "",
+  male: "",
+  female: "",
+  other: "",
+  homeAddress1: "",
+  homeAddress2: "",
+  city: "",
+  state: "",
+  zipCode: "",
+  emergencyContactName: "",
+  emergencyContactPhone: "",
+  mobilePhone: "",
+  email: "",
+  sendMePromotionalTexts: "",
+  sendMePromotionalEmails: "",
+});
+
+const newMemberDataReset = ref({});
+const leadStatuses = ref([]);
+
+const { result: resultLocation } = useQuery(location.query.browse, {
+  first: 1,
+});
+watchEffect(() => {
+  if (!resultLocation.value?.locations?.data[0]) return;
+  newMemberData.value.home_location_id =
+    resultLocation.value?.locations?.data[0].id;
+  newMemberDataReset.value.home_location_id = { ...newMemberData.value };
+});
+
+onMounted(() => {
+  newMemberDataReset.value = { ...newMemberData.value };
+});
+
+const saveLead = () => {
+  addMemberScreenIndex.value = 0;
+  const { mutate: createMember } = useMutation(
+    userMutation.mutation.createUser
+  );
+  createMember({
+    input: {
+      id: uuidv4(),
+      first_name: newMemberData.value.firstName,
+      last_name: newMemberData.value.lastName,
+      date_of_birth: newMemberData.value.birthDate,
+      gender: newMemberData.value.gender,
+      email: newMemberData.value.email,
+      address1: newMemberData.value.homeAddress1,
+      address2: newMemberData.value.homeAddress2,
+      city: newMemberData.value.city,
+      state: newMemberData.value.state,
+      phone: newMemberData.value.phone,
+    },
+  }).then((response) => {
+    console.log(response);
+    leads.value = [];
+    getLeadsQuery();
+  });
+
+  newMemberData.value = { ...newMemberDataReset.value };
+};
+
+let { result } = useQuery(leadStatusQuery.query.browse);
+watchEffect(() => {
+  if (!result.value?.lead_statuses) return;
+
+  let statuses = result.value?.lead_statuses.slice();
+  statuses.sort((a, b) => a.order - b.order);
+  const mappedStatuses = statuses.map((status) => ({
+    value: status.id,
+    label: status.status,
+  }));
+  leadStatuses.value = mappedStatuses;
+});
+import SearchTableToggler from "../components/search-table-toggler.vue";
+
 const addMemberPopUp = ref(null);
 const addMemberScreens = ref([
   Welcome,
@@ -111,21 +216,26 @@ const addMemberScreens = ref([
   EmergencyInfo,
   BroughtToday,
 ]);
+
 const addMemberScreenIndex = ref(0);
 const leads = ref([]);
-
-const leadTypes = [
-  "app_referal",
-  "grand_opening",
-  "snapshot",
-  "free_trial",
-  "streaming_preview",
-];
+const filters = ref({ status: "" });
 const opportunity = ["error", "warning", "accent"];
 
-request(lead.query.browse).then(({ data }) => {
-  leads.value = data.data.leads.data;
+const getLeadsQuery = () => {
+  let { result } = useQuery(lead.query.browse, { filter: filters.value });
+  watchEffect(() => {
+    if (!result.value?.leads.data) return;
+    leads.value = result.value?.leads.data;
+  });
+};
+getLeadsQuery();
+
+watch(filters.value, () => {
+  leads.value = [];
+  getLeadsQuery();
 });
+
 const getRandomType = () => {
   return leadTypes[Math.floor(Math.random() * leadTypes.length)];
 };
@@ -139,7 +249,6 @@ const leads_display = computed(() => {
       ...item,
       type: getRandomType(),
       opportunity: getRandomOpportunity(),
-      status: "available",
     };
   });
 });
@@ -148,6 +257,10 @@ const openAddMemberPopUp = () => {
   addMemberPopUp.value.open();
 };
 const nextScreen = () => {
+  if (!(addMemberScreenIndex.value < addMemberScreens.value.length - 1)) {
+    saveLead();
+    addMemberPopUp.value.close();
+  }
   addMemberScreenIndex.value =
     addMemberScreenIndex.value < addMemberScreens.value.length - 1
       ? addMemberScreenIndex.value + 1
@@ -183,7 +296,7 @@ const locationType = [
     label: "Location 5",
   },
 ];
-const leadType = [
+const leadTypes = [
   {
     value: "1",
     label: "App Referal",

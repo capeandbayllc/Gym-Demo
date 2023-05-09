@@ -193,6 +193,10 @@ function getMutationResolvers(
       // @ts-ignore
       mutations[name] = MutationResolver.make;
     }
+    if (name == "createUser") {
+      // @ts-ignore
+      mutations[name] = MutationResolver.make;
+    }
   });
 
   return mutations;

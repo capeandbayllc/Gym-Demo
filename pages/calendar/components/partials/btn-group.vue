@@ -1,25 +1,25 @@
 <template>
-    <div
-        class="inline-block bg-secondary-content py-1 px-2 border-2 border-secondary-focus rounded-xl mx-auto"
+  <div
+    class="inline-block bg-secondary-content py-1 px-2 border-2 border-secondary-focus rounded-xl mx-auto"
+  >
+    <button
+      type="button"
+      class="capitalize px-4 rounded-lg border-2 border-transparent font-light text-[0.8rem]"
+      :class="{
+        'selected-button': currentValue === btn,
+      }"
+      v-for="btn in choices"
+      :key="btn"
+      @click="
+        {
+          currentValue = btn;
+          if (emitEvents) $emit(btn);
+        }
+      "
     >
-        <button
-            type="button"
-            class="capitalize px-4 rounded-lg border-2 border-transparent font-light text-[0.8rem]"
-            :class="{
-                'selected-button': currentValue === btn,
-            }"
-            v-for="btn in choices"
-            :key="btn"
-            @click="
-                {
-                    currentValue = btn;
-                    if (emitEvents) $emit(btn);
-                }
-            "
-        >
-            {{ String(btn).replaceAll("_", " ") }}
-        </button>
-    </div>
+      {{ String(btn).replaceAll("_", " ") }}
+    </button>
+  </div>
 </template>
 
 <script setup>
@@ -37,18 +37,18 @@
  */
 
 const props = defineProps({
-    choices: {
-        type: Array,
-        default: [],
-    },
-    modelValue: {
-        type: String,
-        default: "",
-    },
-    emitEvents: {
-        type: Boolean,
-        default: false,
-    },
+  choices: {
+    type: Array,
+    default: [],
+  },
+  modelValue: {
+    type: String,
+    default: "",
+  },
+  emitEvents: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 /** Component State */
@@ -60,6 +60,6 @@ watch(currentValue, (nv, ov) => emit("update:modelValue", nv));
 
 <style scoped lang="postcss">
 .selected-button {
-    @apply bg-secondary border-2 border-secondary-focus !rounded-lg;
+  @apply bg-secondary border-2 border-secondary-focus !rounded-lg;
 }
 </style>

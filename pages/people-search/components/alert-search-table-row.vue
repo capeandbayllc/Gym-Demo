@@ -38,15 +38,11 @@
         <div class="mr-[40px]">
           <SmsSquareIcon @click.stop="contactOption = 'text'" />
         </div>
-        <!-- <a :href="'mailto:' + data.email" class="mr-[40px]">
-                    <EmailSquareIcon />
-                </a> -->
+
         <a class="mr-[40px]">
           <EmailSquareIcon @click.stop="contactOption = 'email'" />
         </a>
-        <!-- <a :href="'tel:' + data.phone">
-                    <CallSquareIcon  />
-                </a> -->
+
         <a>
           <CallSquareIcon @click.stop="contactOption = 'call'" />
         </a>
@@ -211,7 +207,8 @@
     />
   </div>
 </template>
-<style scoped>
+
+<style scoped lang="postcss">
 .people-lead-tbl-row {
   @apply bg-base-100 rounded-[15px] h-14 flex items-center px-[20px] py-[30px] my-[13px] cursor-pointer transition-all duration-75 border-2 border-base-100 hover:border-secondary hover:bg-primary;
 
@@ -230,9 +227,6 @@
   .type-secondary {
     @apply bg-secondary;
   }
-}
-
-.more-icon .more-icon-normal {
 }
 .people-search-tbl-content thead {
   @apply top-0 bg-black h-10 text-white;

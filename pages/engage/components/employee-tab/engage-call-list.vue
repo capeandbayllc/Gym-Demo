@@ -42,8 +42,7 @@ const members2 = computed(() => {
     return {
       ...item,
       membership_type: getRandomMembershipType(),
-      updated_at: new Date(item.updated_at)
-        .toLocaleDateString('en-GB')
+      updated_at: new Date(item.updated_at).toLocaleDateString("en-GB"),
     };
   });
 });

@@ -39,7 +39,6 @@ const props = defineProps({
 const callModalRef = ref(null);
 const emailModalRef = ref(null);
 
-/** Call */
 const openCallModal = () => {
   callModalRef.value.open();
 };
@@ -47,7 +46,6 @@ const closeCallModal = () => {
   callModalRef.value.close();
 };
 
-/** Email */
 const openEmailModal = () => {
   emailModalRef.value.open();
 };
