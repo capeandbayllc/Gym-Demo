@@ -13,7 +13,7 @@
           Personal Information (Profile)
         </div>
         <div
-          class="max-h-[70vh] overflow-x-hidden overflow-y-scroll grid pr-2 grid-cols-2 gap-4 w-[650px] text-sm width-full"
+          class="max-h-[50vh] xl:max-h-[70vh] overflow-x-hidden overflow-y-scroll grid pr-2 grid-cols-2 gap-4 w-[650px] text-sm width-full"
         >
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">First Name</div>
@@ -30,9 +30,21 @@
           <div
             class="col-span-1 -lg:col-span-2 -md:col-auto mr-auto flex flex-wrap items-center"
           >
-            <custom-toggle v-model="maleCheck" title="Male" />
-            <custom-toggle v-model="femaleCheck" title="Female" />
-            <custom-toggle v-model="otherCheck" title="Other" />
+            <custom-toggle
+              :modelValue="personalInfoForm.gender == 'male'"
+              @update:modelValue="updateGender($event, 'male')"
+              title="Male"
+            />
+            <custom-toggle
+              :modelValue="personalInfoForm.gender == 'female'"
+              @update:modelValue="updateGender($event, 'female')"
+              title="Female"
+            />
+            <custom-toggle
+              :modelValue="personalInfoForm.gender === 'other'"
+              @update:modelValue="updateGender($event, 'other')"
+              title="Other"
+            />
           </div>
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Home Address 1*</div>
@@ -122,6 +134,28 @@ import member from "@/api/queries/member";
 import CustomToggle from "~/components/toggle/custom-toggle.vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 
+const emit = defineEmits(["change"]);
+const props = defineProps({
+  modalClass: {
+    type: String,
+  },
+  value: {
+    Object,
+  },
+});
+
+onMounted(() => {
+  if (props.value) {
+    personalInfoForm.value = props.value;
+  }
+});
+
+const updateGender = (value, gender) => {
+  if (value) {
+    personalInfoForm.value.gender = gender;
+  }
+};
+
 const route = useRoute();
 const profileId = route.query.id;
 const isLeadView = route.query.type === "lead";
@@ -132,9 +166,7 @@ const personalInfoForm = ref({
   firstName: "",
   lastName: "",
   birthDate: "",
-  male: "",
-  female: "",
-  other: "",
+  gender: "",
   homeAddress1: "",
   homeAddress2: "",
   city: "",
@@ -146,6 +178,10 @@ const personalInfoForm = ref({
   email: "",
   sendMePromotionalTexts: "",
   sendMePromotionalEmails: "",
+});
+
+watchEffect(() => {
+  emit("change", personalInfoForm);
 });
 
 getMember();
@@ -160,16 +196,6 @@ function getMember() {
     ProfileInfo.value = user.value;
   }
 }
-
-const props = defineProps({
-  modalClass: {
-    type: String,
-  },
-});
-
-const maleCheck = ref(false);
-const femaleCheck = ref(false);
-const otherCheck = ref(false);
 </script>
 <style scoped lang="postcss">
 .gray-input {

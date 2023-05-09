@@ -9,7 +9,8 @@
       :class="{
         'bg-secondary': secondary,
         'bg-transparent': transparent && !secondary,
-        'rounded-t': !isCollapsed,
+        'rounded-t': !isCollapsed && !roundedXl,
+        'rounded-t-lg': !isCollapsed && roundedXl,
         'select-box-btn-primary': !isCollapsed && bgSecondaryOpened,
         rounded: isCollapsed,
         [classButton]: classButton,
@@ -51,7 +52,7 @@
   @apply relative min-w-fit;
 }
 .select-box-btn {
-  @apply flex flex-row px-2 py-1 items-center justify-between transition-colors duration-300 w-[165px] h-[29px];
+  @apply flex flex-row px-2 py-1 items-center justify-between transition-colors duration-300 w-[165px] h-[29px] !border-0;
 }
 
 .select-box-filter-size {
@@ -156,6 +157,10 @@ const props = defineProps({
   showClearList: {
     type: Boolean,
     default: true,
+  },
+  roundedXl: {
+    type: Boolean,
+    default: false,
   },
 });
 
