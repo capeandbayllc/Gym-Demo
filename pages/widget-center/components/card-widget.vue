@@ -16,7 +16,7 @@
         </div>
         <button
           v-if="buttonText != ''"
-          class="absolute right-[10px] bottom-[-10px] text-white text-right my-4"
+          class="absolute right-[10px] bottom-[-10px] text-white text-right my-4 slim-text text-[0.7rem]"
           :class="buttonSecondary ? 'bg-secondary px-3 rounded py-1' : ''"
         >
           {{ buttonText }}
@@ -29,10 +29,7 @@
 .statistics-card {
   @apply w-full h-[380px] flex flex-col;
   .total-sale {
-    @apply text-secondary font-bold text-6xl mb-6 flex justify-center items-center;
-  }
-  .total-sale {
-    @apply text-secondary font-bold text-6xl text-center mb-6;
+    @apply text-secondary tracking-wider font-normal text-4xl mb-6 flex justify-center items-center;
   }
   .total-symbol {
     @apply text-[30px] inline-block align-top;
@@ -63,7 +60,11 @@
   @apply w-[14px] h-[14px] rounded-full my-auto mx-[3px];
 }
 .statistic-icon {
-  @apply mt-2 mr-1;
+  @apply w-[40px];
+}
+
+.slim-text {
+  @apply tracking-wider font-light;
 }
 </style>
 <script setup>

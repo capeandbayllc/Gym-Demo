@@ -13,7 +13,7 @@
 </template>
 <style scoped lang="postcss">
 .page-dashboard-container {
-  @apply py-4 pr-5 w-full h-fit -xl:pr-6;
+  @apply w-full h-fit -xl:pr-6;
   .page-content {
     @apply m-auto;
   }

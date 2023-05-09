@@ -1,10 +1,10 @@
 <template>
   <div class="pb-5 pt-4 mx-auto w-full px-10 max-w-[1600px]">
     <div class="pl-10 pr-4 mb-2 flex justify-content">
-      <div class="flex flex-auto">Widget Center</div>
+      <div class="flex flex-auto slim-text">Widget Center</div>
       <div class="flex gap-3 items-end pb-2 pr-10">
         <div class="dropdown dropdown-end">
-          <Button secondary="" size="xs">
+          <Button secondary="" size="xs" class="!rounded-full slim-text">
             <font-awesome-icon
               :icon="['fas', 'plus']"
               size="md"
@@ -34,7 +34,7 @@
         <Button
           outline
           size="xs"
-          class="border-secondary hover:bg-secondary hover:border-secondary hover:text-white"
+          class="border-secondary hover:bg-secondary hover:border-secondary hover:text-white !rounded-full slim-text"
         >
           Rearrange
         </Button>
@@ -51,6 +51,10 @@
 <style scoped lang="postcss">
 .page-content {
   @apply text-center text-secondary p-6 border-secondary border-2 rounded-[26px] bg-secondary-focus max-w-[85vw];
+}
+
+.slim-text {
+  @apply tracking-wide font-light;
 }
 </style>
 <script setup>
