@@ -33,7 +33,7 @@
 .page-dashboard-container {
   @apply w-full;
   .page-content {
-    @apply border border-secondary rounded-2xl bg-base-300/80 px-8 py-5 text-left w-full max-w-[1600px];
+    @apply border border-secondary rounded-2xl bg-base-300 px-8 py-5 text-left w-full max-w-[1600px];
     .dashboard-fields-container {
       @apply bg-neutral;
     }

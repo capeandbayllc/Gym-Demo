@@ -1,5 +1,9 @@
 <template>
-  <stat-card statValue="102" :icon="Statistic1Icon">
+  <stat-card-template
+    statValue="102"
+    :icon="Statistic1Icon"
+    title="Statistic 1"
+  >
     <div class="flex flex-col 2xl:flex-row justify-center gap-5 w-full">
       <div class="mx-auto 2xl:mx-0">
         <chart />
@@ -19,11 +23,11 @@
         </div>
       </div>
     </div>
-  </stat-card>
+  </stat-card-template>
 </template>
 
 <script setup>
 import Chart from "./chart";
 import { Statistic1Icon } from "~/components/icons";
-import StatCard from "../stats-card";
+import StatCardTemplate from "../../../stat-card-template";
 </script>

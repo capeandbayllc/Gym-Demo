@@ -1,5 +1,5 @@
 <template>
-  <div class="page-reporting-container">
+  <div class="page-reporting-container slim-text">
     <div class="page-content">
       <h3 class="text-base-content text-xl">Reporting</h3>
       <div class="reporting-fields">
@@ -14,7 +14,11 @@
         <reporting8-card />
       </div>
       <div class="flex justify-end">
-        <Button secondary="" size="xs" class="hover:border-2 hover:bg-base-300">
+        <Button
+          secondary=""
+          size="xs"
+          class="hover:border-2 hover:bg-base-300 rounded-full"
+        >
           <font-awesome-icon
             :icon="['fas', 'plus']"
             size="md"
@@ -30,17 +34,21 @@
 </template>
 <style scoped lang="postcss">
 .page-reporting-container {
-  @apply py-4 pr-5 w-full;
+  @apply w-full;
   .page-content {
-    @apply border border-secondary rounded-2xl bg-base-300 px-8 py-5 text-left w-full max-w-[1600px];
+    @apply border border-secondary rounded-2xl bg-base-300/80 px-8 py-5 text-left w-full max-w-[1600px];
     .reporting-fields-container {
       @apply bg-neutral;
     }
 
     .reporting-fields {
-      @apply grid grid-cols-3 4xl:grid-cols-4 -md:grid-cols-1 -xl:grid-cols-2 gap-y-8 gap-x-5 py-8;
+      @apply grid grid-cols-4 4xl:grid-cols-4 -md:grid-cols-1 -xl:grid-cols-2 gap-y-8 gap-x-5 py-8;
     }
   }
+}
+
+.slim-text {
+  @apply tracking-wider font-light;
 }
 </style>
 

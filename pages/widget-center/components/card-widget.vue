@@ -16,7 +16,7 @@
         </div>
         <button
           v-if="buttonText != ''"
-          class="absolute right-[10px] bottom-[-10px] text-white text-right my-4 slim-text text-[0.7rem]"
+          class="absolute right-[10px] bottom-[-10px] text-white text-right my-4 slim-text text-[0.7rem] rounded-full"
           :class="buttonSecondary ? 'bg-secondary px-3 rounded py-1' : ''"
         >
           {{ buttonText }}

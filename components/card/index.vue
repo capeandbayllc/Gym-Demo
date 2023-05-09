@@ -11,7 +11,7 @@
       :class="smallHeader ? 'h-9' : 'h-12'"
     >
       <div
-        class="card-title border-none"
+        class="card-title border-none slim-text"
         :class="smallHeader ? 'text-sm' : 'text-lg'"
       >
         {{ title }}
@@ -53,6 +53,10 @@
 }
 .card-container.collapsed {
   @apply h-fit;
+}
+
+.slim-text {
+  @apply font-light !tracking-wider;
 }
 </style>
 <script setup>

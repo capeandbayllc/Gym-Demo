@@ -50,7 +50,7 @@
 </template>
 <style scoped lang="postcss">
 .page-content {
-  @apply text-center text-secondary p-6 border-secondary border-2 rounded-[26px] bg-secondary-focus max-w-[85vw];
+  @apply text-center text-secondary p-6 border-secondary border-2 rounded-[26px] bg-secondary-focus max-w-[85vw] flex flex-col;
 }
 
 .slim-text {
