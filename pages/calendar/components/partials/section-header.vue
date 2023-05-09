@@ -1,19 +1,19 @@
 <template>
-    <div
-        class="w-full from-secondary to-transparent bg-gradient-to-r py-2 px-6 border-base-content rounded-md font-normal"
-        :class="{
-            'border-l-4': border,
-        }"
-    >
-        <slot name="title">
-            <h1 class="text-xl">{{ title }}</h1>
-        </slot>
-        <div class="mt-1 flex gap-4 items-center">
-            <slot name="subtitle">
-                <span>{{ subtitle }}</span>
-            </slot>
-        </div>
+  <div
+    class="w-full from-secondary to-transparent bg-gradient-to-r py-2 px-6 border-base-content rounded-md font-normal"
+    :class="{
+      'border-l-4': border,
+    }"
+  >
+    <slot name="title">
+      <h1 class="text-xl">{{ title }}</h1>
+    </slot>
+    <div class="mt-1 flex gap-4 items-center">
+      <slot name="subtitle">
+        <span>{{ subtitle }}</span>
+      </slot>
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -27,17 +27,17 @@
  */
 
 const props = defineProps({
-    title: {
-        type: String,
-        default: "Default Section Heading Title",
-    },
-    subtitle: {
-        type: String,
-        default: "Default Section Subtitle",
-    },
-    border: {
-        type: Boolean,
-        default: true,
-    },
+  title: {
+    type: String,
+    default: "Default Section Heading Title",
+  },
+  subtitle: {
+    type: String,
+    default: "Default Section Subtitle",
+  },
+  border: {
+    type: Boolean,
+    default: true,
+  },
 });
 </script>
