@@ -1,27 +1,17 @@
 <template>
-  <card-widget title="Statistics 3">
-    <template #summary>
-      <div class="total-sale">
-        <statistic4-icon class="statistic-icon" /> 27
+  <stat-card statValue="27" :icon="Statistic4Icon">
+    <div
+      class="flex flex-row justify-center items-center py-2 rounded-xl border-base-content"
+    >
+      <div class="slim-text -ml-5">
+        <chart />
       </div>
-    </template>
-    <template #content>
-      <div class="total-sale">
-        <statistic4-icon class="statistic-icon" /> 27
-      </div>
-      <div
-        class="flex flex-row justify-center pr-5 items-center py-2 rounded-xl border border-base-content border"
-      >
-        <div>
-          <chart />
-        </div>
-      </div>
-    </template>
-  </card-widget>
+    </div>
+  </stat-card>
 </template>
 
 <script setup>
 import Chart from "./chart";
-import CardWidget from "../../../card-widget.vue";
 import { Statistic4Icon } from "~/components/icons";
+import StatCard from "../stats-card";
 </script>
