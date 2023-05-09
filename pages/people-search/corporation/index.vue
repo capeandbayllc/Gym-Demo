@@ -1,5 +1,5 @@
 <template>
-  <div class="page-corporation-center-container">
+  <div class="py-4 pr-5 w-full h-fit">
     <div>
       <div
         class="bg-secondary flex justify-between rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-7xl page-content items-center"
@@ -17,7 +17,9 @@
           />
         </div>
       </div>
-      <div class="-md:px-4 page-content custom-page-content flex-col">
+      <div
+        class="-md:px-4 page-content block border border-secondary bg-base-300 rounded-b p-7 flex-col"
+      >
         <div>
           <data-table
             :columns="columns"
@@ -30,33 +32,10 @@
     </div>
   </div>
 </template>
-<style scoped>
-.page-corporation-center-container {
-  @apply py-4 pr-5 w-full h-fit;
-  .custom-page-content {
-    @apply block border border-secondary bg-black rounded-b p-7;
-  }
-  .custom-page-content-header {
-    @apply bg-secondary rounded-t-lg pl-6 p-3 font-semibold;
-    .search-icon {
-      @apply float-right m-1 mr-6 cursor-pointer;
-    }
-    .search-input {
-      @apply float-right -mt-1 mr-6 cursor-pointer bg-secondary border border-white rounded;
-    }
-  }
-}
-</style>
-<style>
-/* @media (max-width: 1300px) {
-    .page-content {
-        width: 90% !important;
-    }
-} */
-</style>
+
 <script setup>
 import CorporationTableRow from "./components/corporation-table-row.vue";
-import { SearchIcon, AddIcon } from "@/components/icons";
+import { SearchIcon } from "@/components/icons";
 import { faker } from "@faker-js/faker";
 
 const isSearchEnable = ref(false);
