@@ -17,7 +17,7 @@
         <Button
           secondary=""
           size="xs"
-          class="hover:border-2 hover:bg-base-300 rounded-full"
+          class="hover:border-2 hover:bg-base-300 rounded-full slim-text"
         >
           <font-awesome-icon
             :icon="['fas', 'plus']"

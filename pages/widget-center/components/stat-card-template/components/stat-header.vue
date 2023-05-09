@@ -5,7 +5,7 @@
       {{ statValue }}
     </span>
   </div>
-  <div class="stat-title-container" v-else>
+  <div class="stat-title-container" v-else-if="statValue">
     <span
       class="p-2 rounded-full bg-white/20 w-[40px] h-[40px] flex flex-row justify-center"
     >
@@ -15,6 +15,7 @@
       {{ statValue }}
     </span>
   </div>
+  <div v-else class="h-[40px]"></div>
 </template>
 
 <style scoped lang="postcss">

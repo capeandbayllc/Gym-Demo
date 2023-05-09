@@ -6,7 +6,7 @@
     buttonSecondary
   >
     <div
-      class="flex flex-row justify-center pl-5 items-center py-2 rounded-xl border-base-content"
+      class="flex flex-row justify-center items-center py-2 rounded-xl border-base-content"
     >
       <div>
         <div class="mb-3">
