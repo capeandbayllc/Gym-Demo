@@ -1,17 +1,3 @@
-<!-- [
-<template>
-    <card-widget buttonSecondary buttonText="GO" title="Statistics 8">
-        <template #summary> </template>
-        <template #content> </template>
-    </card-widget>
-</template>
-
-<script setup>
-import CardWidget from "../../../card-widget.vue";
-import FunnelIcon from "~/pages/report/components/cards/sales-funnel-card/funnel-icon.vue";
-</script>
-] -->
-
 <template>
   <stat-card-template title="Statistics 8" buttonText="Go" buttonSecondary>
     <div>

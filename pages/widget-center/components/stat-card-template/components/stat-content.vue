@@ -1,6 +1,10 @@
 <template>
   <div class="flex flex-col justify-center items-center rounded-xl gap-5">
-    <stat-header :icon="icon" :stat-value="statValue" />
+    <stat-header
+      :icon="icon"
+      :statValue="statValue"
+      :hideStatValue="hideStatValue"
+    />
     <div
       class="rounded-3xl bg-gray-600/60 w-full h-[12rem] flex flex-col justify-center px-5 overflow-y-scroll no-scrollbar"
     >
@@ -40,6 +44,9 @@ const props = defineProps({
   },
   icon: {
     type: Object,
+  },
+  hideStatValue: {
+    type: Boolean,
   },
 });
 </script>

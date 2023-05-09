@@ -1,10 +1,24 @@
 <template>
-  <card-widget class="slim-text" :title="title" :button-text="buttonText">
+  <card-widget
+    class="slim-text"
+    :class="cardClasses"
+    :title="title"
+    :button-text="buttonText"
+  >
     <template #summary>
-      <stat-header :icon="icon" :stat-value="statValue" />
+      <stat-header
+        :icon="icon"
+        :statValue="statValue"
+        :hideStatValue="hideStatValue"
+        :isSummaryHeader="true"
+      />
     </template>
     <template #content>
-      <stat-content :icon="icon" :stat-value="statValue">
+      <stat-content
+        :icon="icon"
+        :statValue="statValue"
+        :hideStatValue="hideStatValue"
+      >
         <slot></slot>
       </stat-content>
     </template>
@@ -38,6 +52,14 @@ const props = defineProps({
   title: {
     type: String,
     default: "Statistic Card",
+  },
+  hideStatValue: {
+    type: Boolean,
+    default: false,
+  },
+  cardClasses: {
+    type: String,
+    default: "",
   },
 });
 </script>

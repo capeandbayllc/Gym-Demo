@@ -1,21 +1,35 @@
 <template>
-  <div class="stat-title-container" v-if="icon">
-    <component :is="icon" class="statistic-icon" />
-    <span class="my-auto text-[1.5rem] font-normal tracking-wide text-white">
-      {{ statValue }}
-    </span>
-  </div>
-  <div class="stat-title-container" v-else-if="statValue">
-    <span
-      class="p-2 rounded-full bg-white/20 w-[40px] h-[40px] flex flex-row justify-center"
+  <div v-if="!hideStatValue" class="w-full">
+    <div class="stat-title-container" v-if="icon">
+      <component :is="icon" class="statistic-icon" />
+      <span class="my-auto text-[1.5rem] font-normal tracking-wide text-white">
+        {{ statValue }}
+      </span>
+    </div>
+    <div class="stat-title-container" v-else-if="statValue">
+      <span
+        class="p-2 rounded-full bg-white/20 w-[40px] h-[40px] flex flex-row justify-center"
+      >
+        <DocumentIcon class="text-white fill-white" />
+      </span>
+      <span class="my-auto text-[1.5rem] font-normal tracking-wide text-white">
+        {{ statValue }}
+      </span>
+    </div>
+    <div
+      class="stat-title-container !to-rose-700/50 !via-rose-700/50"
+      v-else-if="isSummaryHeader"
     >
-      <DocumentIcon class="text-white fill-white" />
-    </span>
-    <span class="my-auto text-[1.5rem] font-normal tracking-wide text-white">
-      {{ statValue }}
-    </span>
+      <span
+        class="p-2 rounded-full bg-white/20 w-[40px] h-[40px] bg-rose-700 flex flex-row justify-center"
+      >
+      </span>
+      <span class="my-auto text-[0.8rem] font-normal tracking-wide text-white">
+        No Data to Display
+      </span>
+    </div>
+    <div v-else class="h-[40px]"></div>
   </div>
-  <div v-else class="h-[40px]"></div>
 </template>
 
 <style scoped lang="postcss">
@@ -32,6 +46,12 @@ const props = defineProps({
   },
   icon: {
     type: Object,
+  },
+  hideStatValue: {
+    type: Boolean,
+  },
+  isSummaryHeader: {
+    type: Boolean,
   },
 });
 </script>

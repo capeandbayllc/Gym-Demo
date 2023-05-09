@@ -27,7 +27,7 @@
 </template>
 <style lang="postcss">
 .statistics-card {
-  @apply w-full h-[380px] flex flex-col;
+  @apply w-full h-[380px] flex flex-col bg-gradient-to-tr from-secondary/30;
   .total-sale {
     @apply text-secondary tracking-wider font-normal text-4xl mb-6 flex justify-center items-center;
   }
