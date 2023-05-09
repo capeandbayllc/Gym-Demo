@@ -60,7 +60,7 @@
   @apply w-[14px] h-[14px] rounded-full my-auto mx-[3px];
 }
 .statistic-icon {
-  @apply w-[40px];
+  @apply h-[40px] w-[40px] my-auto;
 }
 
 .slim-text {
