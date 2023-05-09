@@ -1,12 +1,12 @@
 <template>
   <div class="flex justify-center items-center gap-10 pt-8 pb-16">
     <button class="flex flex-col items-center" @click="$emit('newAgreement')">
-      <NewAgreementIcon class="w-[140px] h-[45px] mb-2" />
+      <NewAgreementIcon class="w-36 h-11 mb-2" />
       <span class="font-semibold">Start a New Agreement</span>
     </button>
   </div>
   <simple-card title="Current Agreements">
-    <people-search-table
+    <AgreementTable
       :columns="columns"
       :items="agreements"
       class="p-6 text-sm"
@@ -15,45 +15,40 @@
 </template>
 
 <script setup>
-import PeopleSearchTable from "./people-search-table.vue";
+import AgreementTable from "./agreement-table.vue";
 import { NewAgreementIcon } from "@/components/icons";
 import agreement from "~/api/queries/agreement";
 import { useQuery } from "@vue/apollo-composable";
 import dateFormat from "dateformat";
+
+
 const columns = [
   {
-    label: "Segment",
-    class: "text-secondary text-left",
+    label: "Agreement Name",
+    class: "text-secondary",
   },
   {
-    label: "First Name",
-    class: "text-secondary text-left",
+    label: "Agreement Category",
+    class: "text-secondary",
   },
   {
-    label: "Last Name",
-    class: "text-secondary text-left",
+    label: "Created Date",
+    class: "text-secondary",
   },
   {
-    label: "Mobile",
-    class: "text-secondary text-left",
+    label: "Invoice Amount",
+    class: "text-secondary",
   },
   {
-    label: "Email",
-    class: "text-secondary text-left",
+    label: "Total Agreement Value",
+    class: "text-secondary",
   },
   {
-    label: "Location",
-    class: "text-secondary text-left",
-  },
-  {
-    label: "Type",
-    class: "text-secondary text-left",
-  },
-  {
-    label: "Created",
-    class: "text-secondary text-left",
+    label: "Billing Schedule Type",
+    class: "text-secondary",
   },
 ];
+
 const getType = () => {
   const types = ["bronze", "silver", "gold", "platinum"];
   const randomIndex = Math.floor(Math.random() * types.length);

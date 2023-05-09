@@ -34,7 +34,7 @@
             Preview
           </div>
           <div class="dropdown-item" tabindex="-1">
-            <span @click="navigateToCheckIn(void 0)">Edit</span>
+            <span @click="navigateToCheckIn(false)">Edit</span>
           </div>
           <div class="dropdown-item" tabindex="-1">Trash</div>
           <div class="" tabindex="-1">
@@ -125,20 +125,30 @@ td:last-child {
 <script setup lang="ts">
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Options from "~/pages/components/contact/Options.vue";
 import NoteCardModal from "~/pages/check-in/note-card/index.vue";
-import { Ref } from "vue";
 import dateFormat from "dateformat";
+
+interface Employee {
+  created_at: Date | string;
+  last_name: string;
+  first_name: string;
+  department: string;
+  position: string;
+  status: string;
+  id: string;
+}
+
+interface Props {
+  data: Employee;
+}
 
 export type ContactMethod = "text" | "email" | "call" | null;
 const router = useRouter();
 
 library.add(faEllipsisH);
-const props = defineProps<{
-  data: Object;
-}>();
+const props = defineProps<Props>();
 
 const contactOption: Ref<ContactMethod> = ref(null);
 const noteCardModalRef: Ref<any> = ref(null);
