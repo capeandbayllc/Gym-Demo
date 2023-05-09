@@ -4,7 +4,7 @@
     :options="{ favorite: false, collapse: true }"
     class="statistics-card"
   >
-    <template #summary>
+    <template #summary v-if="hasSummary">
       <div class="statistics-info">
         <slot name="summary"></slot>
       </div>
@@ -80,6 +80,9 @@ const props = defineProps({
   buttonText: {
     type: String,
     default: "View more",
+  },
+  hasSummary: {
+    type: Boolean,
   },
 });
 </script>

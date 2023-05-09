@@ -4,6 +4,7 @@
     :class="cardClasses"
     :title="title"
     :button-text="buttonText"
+    :hasSummary="hasSummary"
   >
     <template #summary v-if="hasSummary">
       <stat-header
