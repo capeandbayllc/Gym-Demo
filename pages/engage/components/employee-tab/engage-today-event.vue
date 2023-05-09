@@ -10,7 +10,11 @@
         </div>
         <div class="event-item-content">
           <div class="event-name">
-            <img v-if="item.avatar" :src="item.avatar" class="rounded-full border h-6 mr-2" />
+            <img
+              v-if="item.avatar"
+              :src="item.avatar"
+              class="rounded-full border h-6 mr-2"
+            />
             {{ item.name }}
           </div>
           <div>{{ item.event_name }}</div>

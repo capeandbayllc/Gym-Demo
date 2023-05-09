@@ -140,14 +140,12 @@ const locations = ref([]);
 
 const locationsData = ref([]);
 request(location.query.browse).then(({ data }) => {
-    locationsData.value = data.data.locations;
-    locations.value = locationsData.value.data.map((e)=>{
-      return {
-        value: e.id,
-        label: e.name
-      }
-    })
+  locationsData.value = data.data.locations;
+  locations.value = locationsData.value.data.map((e) => {
+    return {
+      value: e.id,
+      label: e.name,
+    };
+  });
 });
-
-
 </script>

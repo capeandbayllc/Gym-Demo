@@ -10,15 +10,18 @@ const GET_LEAD: DocumentNode = gql`
         first_name
         last_name
         email
+        leadStatus {
+          status
+        }
+        # type {
+        #   name
+        # }
         gender
         phone
         profile_photo_path
         created_at
         updated_at
         opportunity
-        locations {
-          name
-        }
         homeLocation {
           name
         }
@@ -41,6 +44,12 @@ const GET_SINGLE_LEAD: DocumentNode = gql`
       id
       user_id
       first_name
+      status {
+        name
+      }
+      type {
+        name
+      }
       middle_name
       last_name
       date_of_birth
@@ -52,6 +61,15 @@ const GET_SINGLE_LEAD: DocumentNode = gql`
       email
       primary_phone
       profile_photo_path
+      home
+      location {
+        name
+        address1
+        address2
+        city
+        state
+        zip
+      }
       homeLocation {
         name
         address1

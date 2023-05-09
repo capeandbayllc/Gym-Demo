@@ -28,9 +28,32 @@ const FIND_BY_ID: DocumentNode = gql`
   }
 `;
 
+const GET_USERS: DocumentNode = gql`
+  query AllUsers {
+    users(first: 100) {
+      data {
+        id
+        first_name
+        last_name
+        email
+        phone
+        homeLocation {
+          id
+        }
+      }
+      paginatorInfo {
+        count
+        perPage
+        total
+      }
+    }
+  }
+`;
+
 export interface UserQuery {
   findByMail: DocumentNode;
   findById: DocumentNode;
+  browse: DocumentNode;
   get: DocumentNode;
 }
 
@@ -38,6 +61,7 @@ const user: GraphQLQueryInterface<UserQuery> = {
   query: {
     findByMail: FIND_BY_MAIL,
     findById: FIND_BY_ID,
+    browse: GET_USERS,
     get: FIND_BY_ID,
   },
 };

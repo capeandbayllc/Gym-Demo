@@ -13,10 +13,10 @@
 </template>
 <style scoped lang="postcss">
 .page-fitness-container {
-    @apply py-4 pr-5 w-full h-fit;
-    .page-content {
-        @apply text-center text-secondary p-6 border-secondary border-2 rounded-[26px] bg-secondary-focus max-w-[85vw];
-    }
+  @apply py-4 pr-5 w-full h-fit;
+  .page-content {
+    @apply text-center text-secondary p-6 border-secondary border-2 rounded-[26px] bg-secondary-focus max-w-[85vw];
+  }
 }
 </style>
 <script setup>

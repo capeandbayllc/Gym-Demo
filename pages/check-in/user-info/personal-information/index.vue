@@ -17,15 +17,18 @@
         >
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">First Name</div>
-            <input class="gray-input" v-model="personalInfoForm.firstName" />
+            <input class="gray-input" v-model="personalInfoForm.first_name" />
           </div>
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Last Name</div>
-            <input class="gray-input" v-model="personalInfoForm.lastName" />
+            <input class="gray-input" v-model="personalInfoForm.last_name" />
           </div>
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Birth Date</div>
-            <input class="gray-input" v-model="personalInfoForm.birthDate" />
+            <input
+              class="gray-input"
+              v-model="personalInfoForm.date_of_birth"
+            />
           </div>
           <div
             class="col-span-1 -lg:col-span-2 -md:col-auto mr-auto flex flex-wrap items-center"
@@ -48,11 +51,11 @@
           </div>
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Home Address 1*</div>
-            <input class="gray-input" v-model="personalInfoForm.homeAddress1" />
+            <input class="gray-input" v-model="personalInfoForm.address1" />
           </div>
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">Home Address 2</div>
-            <input class="gray-input" v-model="personalInfoForm.homeAddress2" />
+            <input class="gray-input" v-model="personalInfoForm.address2" />
           </div>
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
             <div class="mb-2">City*</div>
@@ -69,15 +72,15 @@
                 :showSearch="false"
                 :showClearList="false"
                 :bgSecondaryOpened="false"
-                @onChange=""
+                @onChange="personalInfoForm.state = $event"
                 classButton="my-[5px] mx-[10px]"
-                class="bg-base-100 text-base-content rounded-[10px] w-full"
+                class="bg-[#5a5a5a] text-white rounded-[10px] w-full"
               >
               </select-box>
             </div>
             <div>
               <div class="mb-2">Zip Code*</div>
-              <input class="gray-input" v-model="personalInfoForm.zipCode" />
+              <input class="gray-input" v-model="personalInfoForm.zip" />
             </div>
           </div>
           <div class="col-span-1 -lg:col-span-2 -md:col-auto mx-auto w-full">
@@ -134,13 +137,17 @@ import member from "@/api/queries/member";
 import CustomToggle from "~/components/toggle/custom-toggle.vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 
-const emit = defineEmits(["change"]);
+const emit = defineEmits(["change", "changeNewMemberData"]);
 const props = defineProps({
   modalClass: {
     type: String,
   },
   value: {
     Object,
+  },
+  newMemberData: {
+    type: Object,
+    default: null,
   },
 });
 
@@ -171,7 +178,7 @@ const personalInfoForm = ref({
   homeAddress2: "",
   city: "",
   state: "",
-  zipCode: "",
+  zip: "",
   emergencyContactName: "",
   emergencyContactPhone: "",
   mobilePhone: "",
