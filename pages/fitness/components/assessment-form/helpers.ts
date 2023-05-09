@@ -51,8 +51,6 @@ export interface KeyQuestionPair {
   key: keyof IAssessmentFormData;
 }
 
-export type OIKey<T, K extends keyof T> = { [k in K]: T[k] };
-
 export const physicalActivityQuestions: KeyQuestionPair[] = [
   {
     question:

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full max-w-7xl">
     <div class="text-center mb-4">
       <AddIcon
         class="h-[40px] w-[40px] border inline-block border-secondary rounded-full font-semibold cursor-pointer"
@@ -38,22 +38,8 @@
     </daisy-modal>
   </div>
   <div class="py-4 pr-5 w-full h-fit">
-    <div
-      class="bg-secondary flex justify-between rounded-t-lg pl-6 p-3 font-semibold mx-auto w-full max-w-7xl page-content items-center"
-    >
-      <span>Leads</span>
-      <div class="flex items-center h-8">
-        <button class="mx-4" @click="isSearchEnable = !isSearchEnable">
-          <SearchIcon />
-        </button>
-        <input
-          v-if="isSearchEnable"
-          type="text"
-          placeholder="Search"
-          class="input input-sm max-w-xs bg-secondary border border-base-content rounded"
-        />
-      </div>
-    </div>
+    <SearchTableToggler class="page-content" heading="Leads" />
+
     <div
       class="-md:px-4 page-content block border border-secondary bg-base-300 rounded-b p-7 flex-col"
     >
@@ -98,7 +84,10 @@
   </div>
   <daisy-modal id="addMemberPopUp" ref="addMemberPopUp" class="w-fit">
     <div class="bg-base-300 rounded-md p-6 border border-secondary">
-      <component :is="addMemberScreens[addMemberScreenIndex]"></component>
+      <component
+        :is="addMemberScreens[addMemberScreenIndex]"
+        @change="newMemberData = $event"
+      ></component>
       <div class="flex justify-end mt-6">
         <button
           class="normal-case mx-2"
@@ -123,7 +112,7 @@
 
 <script setup>
 import LeadTableRow from "./components/lead-table-row.vue";
-import { SearchIcon, AddIcon, NextIcon } from "@/components/icons";
+import { AddIcon, NextIcon } from "@/components/icons";
 import Welcome from "~/pages/check-in/profile-card/add-member/welcom.vue";
 import JoinTour from "~/pages/check-in/profile-card/add-member/join-tour.vue";
 import Infomrmation from "~/pages/check-in/profile-card/add-member/information.vue";
@@ -131,32 +120,31 @@ import PersonalInformation from "~/pages/check-in/user-info/personal-information
 import Interests from "~/pages/check-in/profile-card/add-member/interests.vue";
 import EmergencyInfo from "~/pages/check-in/profile-card/add-member/emergency-info.vue";
 import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today.vue";
-import { useQuery } from "@vue/apollo-composable";
+import { useQuery, useMutation } from "@vue/apollo-composable";
 import lead from "~/api/queries/lead";
 import leadStatusQuery from "~/api/queries/leadStatus";
 import userMutation from "~/api/mutations/user";
-import { useMutation } from "@vue/apollo-composable";
 import location from "~~/api/queries/location";
-import gql from "graphql-tag";
+import { v4 as uuidv4 } from "uuid";
 
 const newMemberData = ref({
-  id: "19bb102e-dc34-4f5a-8edd-07ed997e69fa",
-  first_name: "Pete",
-  middle_name: "",
-  last_name: "Mahvash",
-  date_of_birth: null,
-  gender: "other",
-  drivers_license_number: null,
-  occupation: null,
-  employer: null,
-  barcode: null,
-  email: "Cedrick.Schmeler@yahoo.com",
-  home_location_id: "afea5d32-ec62-480d-af29-d67fc8c9c7a3",
-  address1: "4782 Lehner Avenue Suite 976",
-  address2: "Apt. 344",
-  city: "Port Wendy",
-  state: "MT",
-  phone: "9846188996",
+  firstName: "",
+  lastName: "",
+  birthDate: "",
+  male: "",
+  female: "",
+  other: "",
+  homeAddress1: "",
+  homeAddress2: "",
+  city: "",
+  state: "",
+  zipCode: "",
+  emergencyContactName: "",
+  emergencyContactPhone: "",
+  mobilePhone: "",
+  email: "",
+  sendMePromotionalTexts: "",
+  sendMePromotionalEmails: "",
 });
 
 const newMemberDataReset = ref({});
@@ -183,22 +171,15 @@ const saveLead = () => {
   );
   createMember({
     input: {
-      first_name: newMemberData.value.first_name,
-      middle_name: newMemberData.value.middle_name,
-      last_name: newMemberData.value.last_name,
-      date_of_birth: newMemberData.value.date_of_birth,
+      id: uuidv4(),
+      first_name: newMemberData.value.firstName,
+      last_name: newMemberData.value.lastName,
+      date_of_birth: newMemberData.value.birthDate,
       gender: newMemberData.value.gender,
-      drivers_license_number: newMemberData.value.drivers_license_number,
-      occupation: newMemberData.value.occupation,
-      employer: newMemberData.value.employer,
-      barcode: newMemberData.value.barcode,
       email: newMemberData.value.email,
-      home_location_id: newMemberData.value.home_location_id,
-      address1: newMemberData.value.address1,
-      address2: newMemberData.value.address2,
+      address1: newMemberData.value.homeAddress1,
+      address2: newMemberData.value.homeAddress2,
       city: newMemberData.value.city,
-      state: newMemberData.value.state,
-      phone: newMemberData.value.phone,
       state: newMemberData.value.state,
       phone: newMemberData.value.phone,
     },
@@ -223,8 +204,8 @@ watchEffect(() => {
   }));
   leadStatuses.value = mappedStatuses;
 });
+import SearchTableToggler from "../components/search-table-toggler.vue";
 
-const isSearchEnable = ref(false);
 const addMemberPopUp = ref(null);
 const addMemberScreens = ref([
   Welcome,
@@ -337,24 +318,6 @@ const leadTypes = [
     label: "Streaming Preview",
   },
 ];
-// const leadStatus = [
-//   {
-//     value: "New",
-//     label: "New",
-//   },
-//   {
-//     value: "Not Interested",
-//     label: "Not Interested",
-//   },
-//   {
-//     value: "No Show",
-//     label: "No Show",
-//   },
-//   {
-//     value: "Missed",
-//     label: "Missed",
-//   },
-// ];
 const columns = [
   {
     label: "Created",

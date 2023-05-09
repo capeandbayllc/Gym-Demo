@@ -33,7 +33,7 @@
             Preview
           </button>
           <div class="dropdown-item" tabindex="-1">
-            <button @click="navigateToCheckIn(void 0)">Edit</button>
+            <button @click="navigateToCheckIn(false)">Edit</button>
           </div>
 
           <div class="" tabindex="-1">
