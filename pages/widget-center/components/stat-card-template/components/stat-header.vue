@@ -5,7 +5,12 @@
       {{ statValue }}
     </span>
   </div>
-  <div class="stat-title-container !justify-end" v-else>
+  <div class="stat-title-container" v-else>
+    <span
+      class="p-2 rounded-full bg-white/20 w-[40px] h-[40px] flex flex-row justify-center"
+    >
+      <DocumentIcon class="text-white fill-white" />
+    </span>
     <span class="my-auto text-[1.5rem] font-normal tracking-wide text-white">
       {{ statValue }}
     </span>
@@ -19,6 +24,7 @@
 </style>
 
 <script setup>
+import { DocumentIcon } from "~~/layouts/components/circular-menu/menu-icons";
 const props = defineProps({
   statValue: {
     type: String,
