@@ -1,7 +1,7 @@
 <template>
-    <div class="w-full">
-        <PosPage />
-    </div>
+  <div class="w-full">
+    <PosPage />
+  </div>
 </template>
 
 <script setup>
