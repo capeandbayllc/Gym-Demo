@@ -5,7 +5,7 @@
       <span class="font-semibold">Start a New Agreement</span>
     </button>
   </div>
-  <simple-card title="Current Agreements">
+  <simple-card title="Active Agreements">
     <AgreementTable
       :columns="columns"
       :items="agreements"
@@ -60,7 +60,7 @@ watchEffect(() => {
   agreements.value = result?.value?.agreements.data.map((agreement) => {
     return {
       id: agreement.id,
-      segment: agreement.agreement_category.name,
+      segment: agreement.agreementCategory.name,
       phone: agreement.user.phone,
       photo: agreement.user.profile_photo_path,
       email: agreement.user.email,
