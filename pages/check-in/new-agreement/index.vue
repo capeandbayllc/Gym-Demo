@@ -1,10 +1,7 @@
 <template>
   <simple-card title="Agreements" class="agreements-card" closable>
     <div class="p-8 card-gradient-bg">
-      <CurrentAgreement
-        v-if="!showNewAgreement"
-        @new-agreement="newAgreement"
-      />
+      <ActiveAgreement v-if="!showNewAgreement" @new-agreement="newAgreement" />
       <component
         v-else
         :is="agreementScreens[agreementScreenIndex]"
@@ -42,7 +39,7 @@
 </template>
 
 <script setup>
-import CurrentAgreement from "./current-agreement.vue";
+import ActiveAgreement from "./active-agreement.vue";
 import SelectGym from "../user-info/select-gym";
 import PersonalInformation from "../user-info/personal-information";
 import PersonalInformationNext from "../user-info/personal-information/personal-info-next.vue";
