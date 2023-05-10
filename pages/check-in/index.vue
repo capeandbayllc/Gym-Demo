@@ -93,7 +93,7 @@
 </style>
 
 <script setup>
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import member from "@/api/queries/member";
 import lead from "~/api/queries/lead";
 import userQuery from "~/api/queries/user";
@@ -229,8 +229,9 @@ const getMember = () => {
   if (profileId) {
     const view =
       typeView === "lead" ? lead : typeView === "user" ? userQuery : member;
-    request(view.query.get, { id: profileId }).then(({ data }) => {
-      let user = data.data[typeView];
+    const { result } = useQuery(view.query.get, { id: profileId });
+    watch(result, () => {
+      let user = result.value[typeView];
       ProfileInfo.value = {
         ...user,
         name: `${user.first_name} ${user.last_name}`,

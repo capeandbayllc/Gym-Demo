@@ -176,7 +176,7 @@ import { ref } from "vue";
 import { ArrowIcon, CrossIcon } from "~~/components/icons";
 import SideBarMember from "./side-bar-member.vue";
 import SelectLocation from "./select-location";
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import member from "~/api/queries/member";
 import SideBarMemberCheckIn from "./side-bar-member-check-in";
 
@@ -211,12 +211,16 @@ const activeMembers = ref(0);
 
 const membersData = ref([]);
 const types = ["platinum", "gold", "silver", "bronze"];
-request(member.query.browse, { first: 100 }).then(({ data }) => {
-  activeMembers.value = data.data.members.data.length;
-  data.data.members.data.forEach((member) => {
-    member["checkIn"] = false;
-    membersData.value.push(member);
+
+const { result } = useQuery(member.query.browse);
+watchEffect(() => {
+  if (!result?.value) return;
+
+  activeMembers.value = result.value.members.data.length;
+  const newMembersData = result.value.members.data.map((member) => {
+    return { ...member, checkIn: false };
   });
+  membersData.value = newMembersData;
 });
 
 const updateActiveMembers = (addRemove) => {

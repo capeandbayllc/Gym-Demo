@@ -58,7 +58,7 @@ const columns = [
     class: "text-secondary",
   },
 ];
-const leads = [
+const leads = ref([
   {
     id: 1,
     first_name: faker.company.companyName(),
@@ -108,5 +108,5 @@ const leads = [
     phone: faker.phone.number("501-###-###"),
     email: "email@email.com",
   },
-];
+]);
 </script>

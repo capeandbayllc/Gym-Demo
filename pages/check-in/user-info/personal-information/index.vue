@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="ProfileInfo">
     <div class="profile-image-container">
       <div class="profile-image">
         <div class="profile-avatar">
@@ -132,7 +132,7 @@
   </div>
 </template>
 <script setup>
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import member from "@/api/queries/member";
 import CustomToggle from "~/components/toggle/custom-toggle.vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
@@ -194,11 +194,12 @@ watchEffect(() => {
 getMember();
 function getMember() {
   if (profileId) {
-    request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-      ({ data }) => {
-        ProfileInfo.value = data.data[isLeadView ? "lead" : "member"];
-      }
-    );
+    const { result } = useQuery((isLeadView ? lead : member).query.get, {
+      id: profileId,
+    });
+    watch(result, () => {
+      ProfileInfo.value = result.value[isLeadView ? "lead" : "member"];
+    });
   } else {
     ProfileInfo.value = user.value;
   }

@@ -203,10 +203,10 @@
 </template>
 
 <script setup>
-import { request } from "~/api/utils/request";
 import user from "~/api/queries/user";
 import { KIOSK_EMAIL } from "~/api/data/users/UserFactory";
-import { useLazyQuery, useQuery } from "@vue/apollo-composable";
+import axios from "axios";
+import { print } from "graphql/language";
 
 const username = ref("");
 const password = ref("");
@@ -250,7 +250,11 @@ const handleClickLogin = async () => {
 };
 
 const authenticate = async (username, password) => {
-  const result = await request(user.query.findByMail, { email: username });
+  const result = await axios.post("/graphql", {
+    query: print(user.query.findByMail),
+    variables: { email: username },
+  });
+
   // Password: "Hello123!"
   if (!result.data.data.user || btoa(password) !== "SGVsbG8xMjMh") {
     return null;

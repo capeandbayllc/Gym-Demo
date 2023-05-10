@@ -143,7 +143,6 @@ import EventForm from "./components/event-form.vue";
 import GrCalendar from "./components/gr-calendar.vue";
 import OfferUp from "./components/partials/offer-up.vue";
 import user from "~/api/queries/user";
-import { request } from "~/api/utils/request";
 
 /** Component State */
 const initialized = ref(false);
@@ -348,10 +347,14 @@ watch(result, async (ov, nv) => {
   let tempEventsContainer = [...result.value.calendarEvents];
 
   for (let event of tempEventsContainer) {
-    request(user.query.findById, { id: event.owner_id }).then(({ data }) => {
+    const { result: ownerResult } = useQuery(user.query.findById, {
+      id: event.owner_id,
+    });
+    watch(ownerResult, () => {
+      const ownerData = ownerResult.value.user;
       events.value.push({
         ...event,
-        owner: data.data.user,
+        owner: ownerData,
         attendees: event.attendees.map((attendeeId) => ({
           id: attendeeId,
           name: null,
@@ -438,13 +441,15 @@ const showMoreDetails = async () => {
   eventInformationVisibibility.value = true;
 
   for (let attendee of eventDetails.value.extendedProps.users) {
-    const { data } = await request(user.query.findById, {
+    const { result } = await useQuery(user.query.findById, {
       id: attendee.id.entity_id,
     });
-    attendee.name = `${data.data.user.first_name} ${data.data.user.last_name}`;
-    attendee.email = data.data.user.email;
-    attendee.phone = data.data.user.phone;
-    attendee.profile_photo_path = data.data.user.profile_photo_path;
+    watch(result, () => {
+      attendee.name = `${result.value.user.first_name} ${result.value.user.last_name}`;
+      attendee.email = result.value.user.email;
+      attendee.phone = result.value.user.phone;
+      attendee.profile_photo_path = result.value.user.profile_photo_path;
+    });
   }
 
   console.log(eventDetails.value);
