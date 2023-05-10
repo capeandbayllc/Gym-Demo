@@ -189,6 +189,13 @@ type BillingSchedulePaginator {
   data: [BillingSchedule!]!
 }
 
+type CalendarAttendee {
+  id: ID!
+  entity_id: ID!
+  entity_type: String
+  invitation_status: String
+}
+
 type CalendarEvent {
   id: ID!
   title: String!
@@ -205,10 +212,10 @@ type CalendarEvent {
   event_completion: DateTime
   color: String
   editable: Int
-  user_attendees: [EventAttendee]
-  lead_attendees: [EventAttendee]
-  member_attendees: [EventAttendee]
-  attendees: [EventAttendee]
+  user_attendees: [CalendarAttendee]
+  lead_attendees: [CalendarAttendee]
+  member_attendees: [CalendarAttendee]
+  attendees: [CalendarAttendee]
   location_id: String
   call_task: Int
   im_attending: Boolean
@@ -890,14 +897,6 @@ type EnumObject {
 interface ErrorResponse {
   status: ResponseStatus!
   message: String!
-}
-
-type EventAttendee {
-  id: ID!
-  entity_id: ID!
-  entity_type: String
-  invitation_status: String
-  entity_data: AttendeeDetailData
 }
 
 type File {
