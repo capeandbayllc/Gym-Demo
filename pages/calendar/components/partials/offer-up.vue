@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-base-200 absolute top-0 right-0 h-full rounded-l-3xl border-2 border-r-0 border-secondary z-50 overflow-hidden font-light tracking-wide"
+    class="bg-base-200 fixed top-16 right-0 h-full rounded-l-3xl border-2 border-r-0 border-secondary z-50 overflow-hidden font-light tracking-wide"
     :class="{
       'w-[50%] opacity-100 p-8': showOfferUp,
       'w-[0%] opacity-0 p-0': !showOfferUp,

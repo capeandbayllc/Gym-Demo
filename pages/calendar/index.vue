@@ -333,7 +333,7 @@ watch(result, async (ov, nv) => {
   console.log("GQL Result:", result.value);
   eventTypes.value = result.value.calendarEvents.data;
   employees.value = [];
-  for (let employee of result.value.employee.data) {
+  for (let employee of result.value.employees.data) {
     employees.value.push({
       ...employee,
       name: `${employee.first_name} ${employee.last_name}`,
