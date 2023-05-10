@@ -23,27 +23,35 @@ import dateFormat from "dateformat";
 
 const columns = [
   {
-    label: "Agreement Name",
+    label: "Segment",
     class: "text-secondary",
   },
   {
-    label: "Agreement Category",
+    label: "First Name",
     class: "text-secondary",
   },
   {
-    label: "Created Date",
+    label: "Last Name",
     class: "text-secondary",
   },
   {
-    label: "Invoice Amount",
+    label: "Mobile",
     class: "text-secondary",
   },
   {
-    label: "Total Agreement Value",
+    label: "Email",
     class: "text-secondary",
   },
   {
-    label: "Billing Schedule Type",
+    label: "Location",
+    class: "text-secondary",
+  },
+  {
+    label: "Type",
+    class: "text-secondary",
+  },
+  {
+    label: "Created",
     class: "text-secondary",
   },
 ];
@@ -57,22 +65,33 @@ const agreements = ref([]);
 onMounted(() => {});
 const { result } = useQuery(agreement.query.browse);
 watchEffect(() => {
+  console.log(result);
   agreements.value = result?.value?.agreements.data.map((agreement) => {
     return {
-      id: agreement.id,
-      segment: agreement.agreementCategory.name,
-      phone: agreement.user.phone,
-      photo: agreement.user.profile_photo_path,
-      email: agreement.user.email,
-      created: dateFormat(
+      name: agreement.template_name,
+      category: agreement.agreementCategory.name,
+      created_at: dateFormat(
         new Date(agreement.created_at),
         "m/d yyyy, h:MM:ssTT"
       ),
-      first_name: agreement.user.first_name,
-      last_name: agreement.user.last_name,
-      location: agreement.gr_location_id,
-      type: getType(),
+      invoice_amount: "",
+      agreement_value: "",
+      billing_schedule_type: "",
+      // id: agreement.id,
+      // segment: agreement.agreementCategory.name,
+      // phone: agreement.user.phone,
+      // photo: agreement.user.profile_photo_path,
+      // email: agreement.user.email,
+      // created: dateFormat(
+      //   new Date(agreement.created_at),
+      //   "m/d yyyy, h:MM:ssTT"
+      // ),
+      // first_name: agreement.user.first_name,
+      // last_name: agreement.user.last_name,
+      // location: agreement.gr_location_id,
+      // type: getType(),
     };
   });
 });
 </script>
+''

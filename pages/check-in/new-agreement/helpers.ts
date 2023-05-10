@@ -1,5 +1,6 @@
 export enum AgreementCategory {
   membership = "membership",
+  personal_training = "Personal Training",
 }
 
 export enum BillingSchedule {
