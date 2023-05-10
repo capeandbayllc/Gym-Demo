@@ -63,7 +63,7 @@
 <script setup>
 import NotificationTableRow from "./notification-table-row.vue";
 import notification from "~/api/queries/notification";
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 
 const currentPage = ref(1);
 const notifications = ref([]);
@@ -73,14 +73,15 @@ getNotifications(useState("auth"));
 function getNotifications(user) {
   if (!user.value) return;
   userData.value = user.value;
-  request(notification.query.browse, {
+  const { result } = useQuery(notification.query.browse, {
     user_id: user.value.id,
     page: currentPage.value,
-  }).then(({ data }) => {
-    if (data?.data?.notifications?.data.length && !noMoreData.value) {
+  });
+  watch(result, () => {
+    if (result?.value?.notifications?.data.length && !noMoreData.value) {
       notifications.value = [
         ...notifications?.value,
-        ...data.data.notifications.data,
+        ...result.value.notifications.data,
       ];
     } else {
       noMoreData.value = true;

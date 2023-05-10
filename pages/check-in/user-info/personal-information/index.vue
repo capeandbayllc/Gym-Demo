@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="profileInfo">
     <div class="profile-image-container">
       <div class="profile-image">
         <div class="profile-avatar">
@@ -163,11 +163,6 @@ const updateGender = (value, gender) => {
     personalInfoForm.value.gender = gender;
   }
 };
-
-const route = useRoute();
-const profileId = route.query.id;
-const isLeadView = route.query.type === "lead";
-const user = useState("auth");
 
 const personalInfoForm = ref({
   firstName: "",

@@ -8,12 +8,13 @@
       <TableRowDropdown @email="openEmailModal" @call="openCallModal" />
       <daisy-modal ref="callModalRef">
         <outgoing-call-modal
+          :user="data"
           @callNow="closeCallModal"
           @close="closeOutgoingCall"
         ></outgoing-call-modal>
       </daisy-modal>
       <daisy-modal ref="emailModalRef">
-        <EmailModal @close="closeEmailModal" />
+        <EmailModal :user="data" @close="closeEmailModal" />
       </daisy-modal>
     </td>
   </tr>
