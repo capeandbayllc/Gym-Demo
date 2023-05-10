@@ -89,7 +89,7 @@ import FinancialCollect from "./financial-collect/due-today.vue";
 import TermsAndCondition from "~/pages/agreement/components/agreement-type.vue";
 import PayNow from "./pay-now.vue";
 import UserInfoCard from "./user-info-card.vue";
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import member from "@/api/queries/member";
 
 const route = useRoute();
@@ -218,11 +218,13 @@ const profileInfo = ref(null);
 getMember();
 function getMember() {
   if (profileId) {
-    request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-      ({ data }) => {
-        profileInfo.value = data.data[isLeadView ? "lead" : "member"];
-      }
-    );
+    const { result } = useQuery((isLeadView ? lead : member).query.get, {
+      id: profileId,
+    });
+
+    watch(result, () => {
+      profileInfo.value = result.value[isLeadView ? "lead" : "member"];
+    });
   } else {
     profileInfo.value = user.value;
   }

@@ -68,9 +68,8 @@ import BroughtToday from "../../../pages/check-in/profile-card/add-member/brough
 import MembershipType from "../../../pages/check-in/new-agreement/membership-type.vue";
 import isThisYou from "~~/pages/check-in/profile-card/add-member/is-this-you.vue";
 import { NextIcon, AddLead } from "@/components/icons";
-import { request } from "~/api/utils/request";
 import member from "@/api/queries/member";
-import { useMutation } from "@vue/apollo-composable";
+import { useMutation, useQuery } from "@vue/apollo-composable";
 import userMutation from "~/api/mutations/user";
 import { v4 as uuidv4 } from "uuid";
 
@@ -167,11 +166,13 @@ const profileInfo = ref(null);
 getMember();
 function getMember() {
   if (profileId) {
-    request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-      ({ data }) => {
-        profileInfo.value = data.data[isLeadView ? "lead" : "member"];
-      }
-    );
+    const { result } = useQuery((isLeadView ? lead : member).query.get, {
+      id: profileId,
+    });
+
+    watch(result, () => {
+      profileInfo.value = result.value[isLeadView ? "lead" : "member"];
+    });
   } else {
     profileInfo.value = user.value;
   }
