@@ -23,8 +23,13 @@ export default async function make(
 
   // filter
   if (param?.viewUser) {
-    // @ts-ignore
-    records = records.filter((e) => e.owner_id == param.viewUser);
+    records = records.filter((e: any) => {
+      if (e.attendees && e.attendees.models) {
+        // @ts-ignore
+        return e.attendees.models.some((a) => a.entity_id === param.viewUser);
+      }
+      return false;
+    });
   }
 
   return records;

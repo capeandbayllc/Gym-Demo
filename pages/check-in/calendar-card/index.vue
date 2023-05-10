@@ -89,14 +89,8 @@ const employees = ref([]);
 const members = ref([]);
 const eventsIsLoading = ref(true);
 
-const { result, onError } = await useQuery(
-  calendarEventsQuery.query.browse_by_user,
-  {
-    param: { viewUser: props.user.id },
-  }
-);
-onError((error) => {
-  console.log(error);
+const { result } = await useQuery(calendarEventsQuery.query.browse_by_user, {
+  param: { viewUser: props.user.id },
 });
 
 const getFormattedEvents = computed(() => {

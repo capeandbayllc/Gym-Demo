@@ -41,7 +41,7 @@ const GET_CALENDAR_EVENTS_BY_USER: DocumentNode = gql`
         entity_id
       }
     }
-    employee {
+    employees {
       data {
         id
         user_id
