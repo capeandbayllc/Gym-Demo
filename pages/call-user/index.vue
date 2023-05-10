@@ -27,7 +27,7 @@ import MakeCall from "~/pages/check-in/side-car-split/make-call.vue";
 import OngoingCall from "~/pages/check-in/side-car-split/ongoing-call.vue";
 import EndCallModal from "./components/end-call-modal.vue";
 import IncomingCallModal from "./components/incoming-call-modal.vue";
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import member from "@/api/queries/member";
 import lead from "~/api/queries/lead";
 
@@ -65,15 +65,17 @@ const showIncomingCallModal = () => {
 
 const getMember = () => {
   if (profileId) {
-    request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-      ({ data }) => {
-        let user = data.data[isLeadView ? "lead" : "member"];
-        ProfileInfo.value = {
-          ...user,
-          name: `${user.first_name} ${user.last_name}`,
-        };
-      }
-    );
+    const { result } = useQuery((isLeadView ? lead : member).query.get, {
+      id: profileId,
+    });
+
+    watch(result, () => {
+      let user = result.value[isLeadView ? "lead" : "member"];
+      ProfileInfo.value = {
+        ...user,
+        name: `${user.first_name} ${user.last_name}`,
+      };
+    });
   } else {
     ProfileInfo.value = {
       ...user.value,

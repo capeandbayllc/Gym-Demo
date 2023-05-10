@@ -47,9 +47,9 @@
 }
 </style>
 <script setup>
-import { request } from "~/api/utils/request";
-import lead from "~/api/queries/lead";
 import member from "~/api/queries/member";
+import { useQuery } from "@vue/apollo-composable";
+import lead from "~/api/queries/lead";
 import AudienceBuilderTableRow from "./audience-builder-table-row.vue";
 
 const isLoading = ref(true);
@@ -58,15 +58,15 @@ const members = ref([]);
 const currentTab = ref("leads");
 const columns = [" ", "name", "", "", ""];
 
-request(lead.query.browse).then(({ data }) => {
-  leads.value = data.data.leads.data;
-
+const { result } = useQuery(lead.query.browse, { first: 5 });
+watch(result, () => {
+  leads.value = result.value.leads.data;
   isLoading.value = false;
 });
 
-request(member.query.browse).then(({ data }) => {
-  members.value = data.data.members.data;
-
+const { result: memberResult } = useQuery(member.query.browse, { first: 5 });
+watch(memberResult, () => {
+  members.value = memberResult.value.members.data;
   isLoading.value = false;
 });
 </script>

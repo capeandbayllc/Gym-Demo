@@ -173,7 +173,7 @@ import {
   MessageIcon,
   EditIcon,
 } from "~~/components/icons";
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import member from "@/api/queries/member";
 import lead from "~/api/queries/lead";
 import userQuery from "~/api/queries/user";
@@ -244,8 +244,9 @@ function getMember() {
   if (profileId) {
     const view =
       typeView === "lead" ? lead : typeView === "user" ? userQuery : member;
-    request(view.query.get, { id: profileId }).then(({ data }) => {
-      ProfileInfo.value = data.data[typeView];
+    const { result } = useQuery(view.query.get, { id: profileId });
+    watch(result, () => {
+      ProfileInfo.value = result.value[typeView];
     });
   } else {
     ProfileInfo.value = user.value;
