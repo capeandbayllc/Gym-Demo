@@ -53,7 +53,10 @@
     </div>
     <daisy-modal id="addMemberPopUp" ref="addEmployeePopUp" class="w-fit">
       <div class="bg-black rounded-md p-6 border border-secondary">
-        <component :is="addEmployeeScreens[addEmployeeScreenIndex]"></component>
+        <component
+          :is="addEmployeeScreens[addEmployeeScreenIndex]"
+          :profile-info="profileInfo"
+        ></component>
         <div class="flex justify-end mt-6">
           <button
             class="normal-case mx-2"
@@ -92,6 +95,10 @@ import BroughtToday from "~/pages/check-in/profile-card/add-member/brought-today
 import employee from "~/api/queries/employee";
 import SearchTableToggler from "../components/search-table-toggler.vue";
 import { useQuery } from "@vue/apollo-composable";
+const route = useRoute();
+const profileId = route.query.id;
+const isLeadView = route.query.type === "lead";
+const user = useState("auth");
 
 const addEmployeePopUp = ref(null);
 const addEmployeeScreens = ref([
@@ -159,6 +166,23 @@ const prevScreen = () => {
       ? addEmployeeScreenIndex.value - 1
       : addEmployeeScreenIndex.value;
 };
+
+const profileInfo = ref(null);
+getMember();
+function getMember() {
+  if (profileId) {
+    const { result: memberResult } = useQuery(
+      (isLeadView ? lead : member).query.get,
+      { id: profileId }
+    );
+
+    watch(memberResult, () => {
+      profileInfo.value = result.value[isLeadView ? "lead" : "member"];
+    });
+  } else {
+    profileInfo.value = user.value;
+  }
+}
 
 const locationType = [
   {

@@ -23,6 +23,7 @@ import {
   InputInterface,
   UpdateMutationResolver,
 } from "~/api/mutations/resolvers/ResolverInterfaces";
+import calendarEventsResolver from "~~/api/queries/resolver/calendarEvents";
 
 class QueryResolver {
   protected schema?: DbCollection;
@@ -161,20 +162,29 @@ function getQueryResolvers(
   server: Server
 ): object {
   const queries: object = {};
+  const customResolvers: any = {
+    calendarEvents: calendarEventsResolver,
+  };
+
   query.fields?.forEach((query: FieldDefinitionNode) => {
-    // @ts-ignore
-    const isFilterable: boolean = query.arguments?.some(
-      (a: FieldDefinitionNode) => a.type?.name?.value === "Filter"
-    );
     const type: TypeNode = query.type;
     const name: string = query.name.value;
     const isPaginatable: boolean =
       type.kind === Kind.NAMED_TYPE && type.name.value.endsWith("Paginator");
 
-    if (isPaginatable || isFilterable) {
-      const resolver = new QueryResolver(server, isFilterable, isPaginatable);
+    if (customResolvers.hasOwnProperty(name)) {
       // @ts-ignore
-      queries[name] = resolver.make.bind(resolver);
+      queries[name] = customResolvers[name];
+    } else if (query.arguments) {
+      // @ts-ignore
+      const isFilterable: boolean = query.arguments?.some(
+        (a: FieldDefinitionNode) => a.type?.name?.value === "Filter"
+      );
+      if (isPaginatable || isFilterable) {
+        const resolver = new QueryResolver(server, isFilterable, isPaginatable);
+        // @ts-ignore
+        queries[name] = resolver.make.bind(resolver);
+      }
     }
   });
 

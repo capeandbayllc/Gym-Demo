@@ -7,6 +7,13 @@ export interface Filter {
   status: String;
 }
 
+export interface CalendarEventInput {
+  search: String;
+  start: String;
+  end: String;
+  viewUser: String;
+}
+
 export interface Filterable {
   apply: (
     records: Collection<any>,
@@ -47,4 +54,8 @@ export interface PaginatorArgs {
   page?: number;
 
   filter?: Filter;
+}
+
+export interface CalendarEventArgs {
+  param?: CalendarEventInput;
 }

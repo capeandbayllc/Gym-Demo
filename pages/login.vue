@@ -250,7 +250,10 @@ const handleClickLogin = async () => {
 };
 
 const authenticate = async (username, password) => {
-  const result = await axios.post('/graphql', { query: print(user.query.findByMail), variables: { email: username } });
+  const result = await axios.post("/graphql", {
+    query: print(user.query.findByMail),
+    variables: { email: username },
+  });
 
   // Password: "Hello123!"
   if (!result.data.data.user || btoa(password) !== "SGVsbG8xMjMh") {

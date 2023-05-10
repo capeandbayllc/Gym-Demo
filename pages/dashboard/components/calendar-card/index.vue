@@ -1,7 +1,7 @@
 <template>
   <dashboard-card
     :title-icon="CalendarIcon"
-    title="December"
+    :title="month"
     class="flex flex-col justify-between bg-base-300"
   >
     <Datepicker
@@ -95,6 +95,7 @@ const page = ref(new Date());
 const handleMonthYear = ({ instance, month, year }) => {
   page.value = new Date(year, month, 1);
 };
+
 const month = computed(() => {
   const options = { month: "long" };
   return Intl.DateTimeFormat("en-US", options).format(page.value);
