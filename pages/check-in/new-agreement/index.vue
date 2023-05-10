@@ -56,6 +56,7 @@ import TermsAndCondition from "~/pages/agreement/components/agreement-type.vue";
 import PayNow from "../user-info/pay-now.vue";
 import { useQuery } from "@vue/apollo-composable";
 import member from "@/api/queries/member";
+import lead from "@/api/queries/lead";
 
 const route = useRoute();
 const profileId = route.query.id;
@@ -112,8 +113,8 @@ function getMember() {
     const { result } = useQuery((isLeadView ? lead : member).query.get, {
       id: profileId,
     });
-
-    watch(result, () => {
+    watchEffect(() => {
+      if (!result.value) return;
       profileInfo.value = result.value[isLeadView ? "lead" : "member"];
     });
   } else {
