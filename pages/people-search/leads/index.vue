@@ -11,6 +11,7 @@
       <div class="bg-black rounded-md p-6 border border-secondary">
         <component
           :is="addMemberScreens[addMemberScreenIndex]"
+          :profile-info="profileInfo"
           :newMemberData="newMemberData"
           @changeNewMemberData="newMemberData = $event"
         ></component>
@@ -86,6 +87,7 @@
     <div class="bg-base-300 rounded-md p-6 border border-secondary">
       <component
         :is="addMemberScreens[addMemberScreenIndex]"
+        :profile-info="profileInfo"
         @change="newMemberData = $event"
       ></component>
       <div class="flex justify-end mt-6">
@@ -126,6 +128,10 @@ import userMutation from "~/api/mutations/user";
 import location from "~~/api/queries/location";
 import { v4 as uuidv4 } from "uuid";
 import SearchTableToggler from "../components/search-table-toggler.vue";
+const route = useRoute();
+const profileId = route.query.id;
+const isLeadView = route.query.type === "lead";
+const user = useState("auth");
 
 const newMemberData = ref({
   first_name: "",
@@ -283,6 +289,23 @@ const prevScreen = () => {
       ? addMemberScreenIndex.value - 1
       : addMemberScreenIndex.value;
 };
+
+const profileInfo = ref(null);
+getMember();
+function getMember() {
+  if (profileId) {
+    const { result: memberResult } = useQuery(
+      (isLeadView ? lead : member).query.get,
+      { id: profileId }
+    );
+
+    watch(memberResult, () => {
+      profileInfo.value = result.value[isLeadView ? "lead" : "member"];
+    });
+  } else {
+    profileInfo.value = user.value;
+  }
+}
 
 const locationType = [
   {
