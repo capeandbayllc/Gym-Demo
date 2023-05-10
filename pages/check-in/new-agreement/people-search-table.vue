@@ -4,7 +4,7 @@
       :columns="columns"
       :data="items"
       :row-component="PeopleSearchTableRow"
-      no-data-message="No new agreements are currently available."
+      :no-data-message="noDataMessage"
       class="h-56 overflow-y-auto"
     />
   </div>
@@ -19,6 +19,10 @@ const props = defineProps({
   items: {
     type: Array,
     default: [],
+  },
+  noDataMessage: {
+    type: String,
+    dafault: "There is currently no available data.",
   },
 });
 </script>
