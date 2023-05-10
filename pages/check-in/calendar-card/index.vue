@@ -61,7 +61,6 @@
 <style scoped lang="postcss">
 .checkin-calendar-card {
   @apply m-auto bg-neutral max-w-[1120px] xl:w-[1120px] w-full;
-
   .calendar-card-body {
     @apply flex flex-col md:flex-row py-6 px-9 md:gap-2 gap-12 justify-center;
   }
@@ -90,8 +89,14 @@ const employees = ref([]);
 const members = ref([]);
 const eventsIsLoading = ref(true);
 
-const { result } = await useQuery(calendarEventsQuery.query.browse_by_user, {
-  param: { viewUser: props.user.id },
+const { result, onError } = await useQuery(
+  calendarEventsQuery.query.browse_by_user,
+  {
+    param: { viewUser: props.user.id },
+  }
+);
+onError((error) => {
+  console.log(error);
 });
 
 const getFormattedEvents = computed(() => {
@@ -123,7 +128,7 @@ watchEffect(() => {
   members.value = result.value.members.data;
   let tempEventsContainer = [...result.value.calendarEvents];
   employees.value = [];
-  for (let employee of result.value.employee.data) {
+  for (let employee of result.value.employees.data) {
     employees.value.push({
       ...employee,
       name: `${employee.first_name} ${employee.last_name}`,

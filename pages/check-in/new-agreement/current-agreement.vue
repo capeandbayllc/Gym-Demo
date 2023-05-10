@@ -21,7 +21,6 @@ import agreement from "~/api/queries/agreement";
 import { useQuery } from "@vue/apollo-composable";
 import dateFormat from "dateformat";
 
-
 const columns = [
   {
     label: "Agreement Name",

@@ -1,5 +1,3 @@
 <template>
-    <div>
-        Search Tab
-    </div>
+  <div>Search Tab</div>
 </template>

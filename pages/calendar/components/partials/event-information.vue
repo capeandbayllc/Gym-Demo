@@ -1,6 +1,6 @@
 <template>
   <section
-    class="w-full bg-neutral border-2 h-[88vh] lg:h-[87.5vh] rounded-3xl rounded-l-none fixed top-8 right-0 font-light no-scrollbar m-8"
+    class="w-full bg-neutral border-2 h-[88vh] lg:h-[87.5vh] rounded-3xl rounded-l-none absolute top-0 right-0 font-light no-scrollbar m-8"
     :class="{
       '!w-[50%] lg:!w-[40%] xl:!w-[35%] opacity-100 z-20 overflow-y-scroll':
         eventInformationVisibibility,
