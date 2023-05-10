@@ -70,7 +70,6 @@
 import "@vuepic/vue-datepicker/dist/main.css";
 import { useQuery } from "@vue/apollo-composable";
 import userQuery from "~/api/queries/user";
-import { request } from "~/api/utils/request";
 import EventDetails from "~/pages/calendar/components/partials/event-details.vue";
 import GrCalendar from "~/pages/calendar/components/gr-calendar.vue";
 import OfferUp from "~/pages/calendar/components/partials/offer-up.vue";
@@ -193,13 +192,15 @@ const showMoreDetails = async () => {
   eventInformationVisibibility.value = true;
 
   for (let attendee of eventDetails.value.extendedProps.users) {
-    const { data } = await request(userQuery.query.findById, {
+    const { result } = await useQuery(userQuery.query.findById, {
       id: attendee.id.entity_id,
     });
-    attendee.name = `${data.data.user.first_name} ${data.data.user.last_name}`;
-    attendee.email = data.data.user.email;
-    attendee.phone = data.data.user.phone;
-    attendee.profile_photo_path = data.data.user.profile_photo_path;
+    watch(result, () => {
+      attendee.name = `${result.value.user.first_name} ${result.value.user.last_name}`;
+      attendee.email = result.value.user.email;
+      attendee.phone = result.value.user.phone;
+      attendee.profile_photo_path = result.value.user.profile_photo_path;
+    });
   }
 
   eventIsLoading.value = false;
@@ -240,7 +241,10 @@ const handleCreateEvent = (form) => {
 };
 
 const handleCalendarEvent = (e) => {
-  request(userQuery.query.findById, { id: e._def.extendedProps.owner_id }).then(
+  const { result } = useQuery(userQuery.query.findById, {
+    id: e._def.extendedProps.owner_id,
+  });
+  watch(result, () => {
     ({ data }) => {
       e._def.extendedProps = {
         ...e._def.extendedProps,
@@ -254,7 +258,7 @@ const handleCalendarEvent = (e) => {
       };
       eventDetails.value = eventInfo;
       eventDetailsVisibibility.value = true;
-    }
-  );
+    };
+  });
 };
 </script>
