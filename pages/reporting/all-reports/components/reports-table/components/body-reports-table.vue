@@ -17,7 +17,9 @@
             v-model="data.agreeElectronics"
           />
           <star-icon clear class="text-secondary text-2xl mb-1" />
-          {{ item.report_name ? item.report_name : "-" }}
+          <div class="whitespace-nowrap">
+            {{ item.report_name ? item.report_name : "-" }}
+          </div>
         </div>
       </td>
       <td>{{ item.description ? item.description : "-" }}</td>
