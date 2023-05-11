@@ -1,6 +1,6 @@
 <template>
   <div class="card-container">
-    <div class="max-w-full rounded-xl overflow-auto max-h-[70vh]">
+    <div class="max-w-full rounded-xl overflow-auto max-h-[70vh] min-h-[102%]">
       <table class="rounded-2xl">
         <head-reports-table />
         <body-reports-table :data="data" />
