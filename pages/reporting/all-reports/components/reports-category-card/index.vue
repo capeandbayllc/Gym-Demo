@@ -8,9 +8,7 @@
           placeholder="Search All Reports"
         />
       </div>
-      <div class="actual-category">
-        {{ actualCategory }}
-      </div>
+      <div class="actual-category">My Reports</div>
     </div>
     <div class="card-content">
       <div class="categories-container">
@@ -18,8 +16,9 @@
           <div
             v-for="(category, j) in section"
             :key="j"
-            @click="actualCategory = category"
+            @click="emit('changeActualCategory', category)"
             class="item"
+            :class="{ 'item-selected': category == actualCategory }"
           >
             {{ category }}
           </div>
@@ -39,7 +38,7 @@
     .all-reports-search {
       @apply min-h-[30px] p-4;
       .search-input {
-        @apply min-w-full min-h-[32px] rounded-[10px] bg-neutral-content/40 text-base-content float-right py-[2px] px-[10px] transition-all duration-300 text-[16px] !tracking-normal;
+        @apply w-full min-h-[32px] rounded-[10px] bg-neutral-content/40 text-base-content float-right py-[2px] px-[10px] transition-all duration-300 text-[16px] !tracking-normal;
       }
       .search-input:hover,
       .search-input:focus {
@@ -51,7 +50,7 @@
       }
     }
     .actual-category {
-      @apply bg-secondary py-1 px-8 font-light;
+      @apply bg-secondary py-1 px-8 font-semibold;
     }
   }
   .card-content {
@@ -61,6 +60,9 @@
       .item {
         @apply my-1 py-1 px-8 font-light cursor-pointer;
       }
+      .item-selected {
+        @apply bg-secondary;
+      }
     }
     .section:last-child {
       @apply border-b-0;
@@ -69,17 +71,21 @@
       @apply bg-secondary font-semibold;
     }
     .categories-container {
-      @apply overflow-auto w-full;
-      height: calc(70vh - 120px);
+      @apply overflow-auto w-full h-[calc(70vh-120px)];
     }
   }
 }
 </style>
 <script setup>
-var actualCategory = ref("My Reports");
+const emit = defineEmits(["changeActualCategory"]);
+const props = defineProps({
+  actualCategory: {
+    type: String,
+    default: "",
+  },
+});
 var categories = [
   [
-    "My Reports",
     "All Reports",
     "Favorites",
     "Recently Viewed",
