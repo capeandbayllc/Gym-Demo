@@ -38,7 +38,7 @@
       @apply absolute border-secondary/50 border-y-transparent;
     }
     .item-content {
-      @apply flex w-full h-full z-10 items-center justify-center;
+      @apply flex w-full h-full z-10 items-center justify-center bg-gradient-to-bl from-secondary/30;
       .active-chart-section {
         @apply bg-primary text-lg pl-6 pr-6 rounded border-white border-2;
       }

@@ -1,30 +1,25 @@
 <template>
-  <card-widget buttonSecondary buttonText="GO" title="Statistics 5">
-    <template #summary>
-      <div class="total-sale"><span class="total-symbol">$</span>16,000</div>
-    </template>
-    <template #content>
-      <div class="total-sale"><span class="total-symbol">$</span>16,000</div>
-      <div
-        class="flex flex-row justify-center items-center py-2 mx-auto rounded-xl border border-base-content border"
-      >
-        <div class="flex flex-row justify-center communication-card">
-          <div class="communication-list">
-            <div
-              class="communication-item"
-              v-for="lead in leads"
-              :key="lead.id"
-            >
-              <span class="lead-name">{{ lead.name }}</span>
-              <com-calendar-icon />
-              <com-chat-icon :count="lead.count" />
-              <com-sms-icon />
-            </div>
+  <stat-card-template
+    title="Statistics 5"
+    statValue="$16,000"
+    buttonText="Go"
+    buttonSecondary
+  >
+    <div
+      class="flex flex-row justify-center items-center py-2 mx-auto rounded-xl border-base-content"
+    >
+      <div class="flex flex-row justify-center communication-card">
+        <div class="communication-list">
+          <div class="communication-item" v-for="lead in leads" :key="lead.id">
+            <span class="lead-name line-clamp-1">{{ lead.name }}</span>
+            <com-calendar-icon />
+            <com-chat-icon :count="lead.count" />
+            <com-sms-icon />
           </div>
         </div>
       </div>
-    </template>
-  </card-widget>
+    </div>
+  </stat-card-template>
 </template>
 
 <style scoped lang="postcss">
@@ -34,11 +29,11 @@
     @apply w-0 h-0;
   }
   .communication-list {
-    @apply flex flex-col gap-2 h-40 overflow-y-auto text-base-content;
+    @apply flex flex-col gap-2 h-40 overflow-y-auto text-base-content w-full;
     .communication-item {
-      @apply flex flex-row gap-4 items-center;
+      @apply flex flex-row gap-4 items-center rounded-full bg-indigo-400/20 w-full px-3;
       .lead-name {
-        @apply text-secondary text-lg flex-grow mr-4;
+        @apply text-lg flex-grow mr-4 text-[0.8rem] text-white;
       }
     }
   }
@@ -46,10 +41,10 @@
 </style>
 
 <script setup>
-import CardWidget from "../../../card-widget.vue";
 import ComCalendarIcon from "~/pages/report/components/cards/communication-card/com-calendar.vue";
 import ComChatIcon from "~/pages/report/components/cards/communication-card/com-chat.vue";
 import ComSmsIcon from "~/pages/report/components/cards/communication-card/com-sms.vue";
+import StatCardTemplate from "../../../stat-card-template";
 
 const leads = [
   {

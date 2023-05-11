@@ -1,7 +1,7 @@
 <template>
   <card
     title="Statistic Title"
-    class="bg-base-300 text-base-content text-left"
+    class="bg-gradient-to-tr from-base-300 via-base-300/70 slim-text text-base-content text-left"
     :options="{ favorite: false, collapse: false }"
   >
     <template #content>
@@ -30,7 +30,7 @@
                 <div class="">{{ item.title }}</div>
               </div>
               <div>
-                <p class="px-2 font-semibold rounded bg-base-100">
+                <p class="px-2 font-normal rounded bg-base-100">
                   {{ item.statistic }}
                 </p>
               </div>

@@ -223,7 +223,7 @@ const navList = [
     navigation: [
       {
         icon: WidgetIcon,
-        url: "/engage",
+        url: "/widget-center",
       },
       {
         label: "Leads",
@@ -267,7 +267,7 @@ const navList = [
     navigation: [
       {
         icon: WidgetIcon,
-        url: "/engage",
+        url: "/widget-center",
       },
       {
         label: "Leads",
@@ -311,7 +311,7 @@ const navList = [
     navigation: [
       {
         icon: WidgetIcon,
-        url: "/engage",
+        url: "/widget-center",
       },
       {
         label: "Leads",
@@ -385,7 +385,7 @@ const navList = [
     navigation: [
       {
         icon: WidgetIcon,
-        url: "/engage",
+        url: "/widget-center",
       },
     ],
   },
