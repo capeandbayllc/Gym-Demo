@@ -1,6 +1,7 @@
 export { default as AddIcon } from "./add.vue";
 export { default as AddAgreementIcon } from "./add-agreement.vue";
 export { default as MemberInfoIcon } from "./member-info.vue";
+export { default as AllReportsIcon } from "./all-reports.vue";
 export { default as AnnouncementIcon } from "./announcement.vue";
 export { default as AlarmIcon } from "./alarm.vue";
 export { default as AlertIcon } from "./alert.vue";
@@ -110,6 +111,7 @@ export { default as LocationDotIcon } from "./location-dot.vue";
 export { default as BiDirArrowIcon } from "./bi-dir-arrow.vue";
 export { default as WaiversIcon } from "./waivers.vue";
 export { default as ReportingIcon } from "./reporting.vue";
+export { default as ReportingCircleIcon } from "./reporting-circle.vue";
 export { default as QuestionnaireIcon } from "./questionnaire.vue";
 export { default as Up } from "./Up.vue";
 export { default as ArrowUp } from "./ArrowUp.vue";
