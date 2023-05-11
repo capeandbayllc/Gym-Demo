@@ -1,44 +1,185 @@
 <template>
   <div class="card-container">
-    <div class="card-header"></div>
-    <div class="card-content"></div>
+    <div class="max-w-full rounded-xl overflow-auto max-h-[70vh]">
+      <table class="rounded-2xl">
+        <head-reports-table />
+        <body-reports-table :data="data" />
+      </table>
+    </div>
   </div>
 </template>
+
 <style scoped lang="postcss">
 .card-container {
-  @apply overflow-auto w-full py-[8px] h-[70vh] overflow-visible border border-secondary rounded-2xl bg-base-300 text-left;
+  @apply w-full pb-[8px] h-[70vh] overflow-visible border border-secondary rounded-2xl bg-base-300 text-left max-w-full overflow-auto mx-auto;
+
   .card-title-container {
     @apply flex justify-between items-center;
   }
-  .card-header {
-    @apply h-[100px] flex flex-col justify-between;
-  }
+
   .card-content {
-    @apply h-full;
+    @apply h-full mx-3;
   }
+}
+
+table {
+  @apply w-[99.5%];
 }
 </style>
 <script setup>
-var actualCategory = ref("My Reports");
-var categories = [
-  [
-    "My Reports",
-    "All Reports",
-    "Favorites",
-    "Recently Viewed",
-    "Scheduled Reports",
-    "Recently Deleted",
-    "Report Queue",
-  ],
-  [
-    "Campaign Reports",
-    "Communication Reports",
-    "Email Reports",
-    "Financial Reports",
-    "Fitness Reports",
-    "Lead Reports",
-    "Member Reports",
-    "People Reports",
-  ],
+import headReportsTable from "./components/head-reports-table.vue";
+import bodyReportsTable from "./components/body-reports-table.vue";
+
+const data = [
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
+  {
+    id: 1,
+    report_name: "Report Name",
+    description: "",
+    report_type: "",
+    date_created: "",
+    last_run_date: "10 min ago",
+    created_by: "",
+    last_edited_by: "Ron",
+  },
 ];
 </script>

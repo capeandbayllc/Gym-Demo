@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-5 pt-4 mx-auto w-full px-10 max-w-[1600px]">
+  <div class="pb-5 pt-4 mx-auto w-full px-10 max-w-[1932px]">
     <div class="pl-10 pr-4 mb-2 flex justify-content">
       <div class="flex flex-auto">Reporting</div>
     </div>
@@ -23,9 +23,12 @@
           </Button>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-3 mt-2">
-        <ReportsCategoryCard />
-        <ReportsTable class="col-span-2" />
+      <div class="grid grid-cols-4 gap-3 mt-2">
+        <ReportsCategoryCard
+          :actual-category="actualCategory"
+          @changeActualCategory="actualCategory = $event"
+        />
+        <ReportsTable class="col-span-3" />
       </div>
     </div>
   </div>
@@ -53,4 +56,6 @@
 <script setup>
 import ReportsCategoryCard from "./components/reports-category-card/index.vue";
 import ReportsTable from "./components/reports-table/index.vue";
+
+const actualCategory = ref("My Reports");
 </script>
