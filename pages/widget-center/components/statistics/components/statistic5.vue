@@ -1,7 +1,7 @@
 <template>
   <card
     title="Statistic 1"
-    class="bg-base-300"
+    class="bg-gradient-to-tr from-base-300 via-base-300/70 slim-text"
     :options="{ favorite: false, collapse: false }"
   >
     <template #content>
@@ -14,7 +14,7 @@
               item.dateColor ? `text-${item.dateColor}` : 'text-secondary'
             "
           >
-            <p class="text-2xl font-semibold mb-[-10px]">
+            <p class="text-2xl font-normal mb-[-10px]">
               {{ dateFormat(item.date, "d") }}
             </p>
             <p>{{ dateFormat(item.date, "mmm") }}</p>

@@ -1,7 +1,7 @@
 <template>
   <card
     title="Statistic 1"
-    class="bg-base-300"
+    class="bg-gradient-to-tr from-base-300 via-base-300/70 slim-text"
     :options="{ favorite: false, collapse: false }"
   >
     <template #content>
