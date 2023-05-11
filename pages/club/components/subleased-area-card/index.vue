@@ -7,7 +7,7 @@
 import { SubleasedAreaIcon } from "~~/components/icons";
 import ClubCard from "../club-card.vue";
 import SubleasedAreaList from "./subleased-area-list.vue";
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import location from "~~/api/queries/location";
 
 onMounted(async () => {
@@ -30,8 +30,9 @@ const clubItems = ref({
 });
 
 const locationData = ref(null);
-request(location.query.browse, { first: 1 }).then(({ data }) => {
-  locationData.value = data.data.locations.data[0];
+const { result } = useQuery(location.query.browse, { first: 1 });
+watch(result, () => {
+  locationData.value = result.value.locations.data[0];
   clubItems.value.club_name = locationData.value.name;
 });
 </script>

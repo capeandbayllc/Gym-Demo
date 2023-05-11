@@ -95,8 +95,8 @@ import { ref } from "vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { CalendarIcon } from "~~/components/icons";
-import { request } from "~/api/utils/request";
 import location from "~~/api/queries/location";
+import { useQuery } from "@vue/apollo-composable";
 
 const format = (date) => {
   const day = date.getDate();
@@ -139,9 +139,11 @@ const fields = [
 const locations = ref([]);
 
 const locationsData = ref([]);
-request(location.query.browse).then(({ data }) => {
-  locationsData.value = data.data.locations;
-  locations.value = locationsData.value.data.map((e) => {
+const { result } = useQuery(location.query.browse);
+watchEffect(() => {
+  if (!result?.value) return;
+  locationsData.value = result.value?.locations?.data;
+  locations.value = locationsData.value.map((e) => {
     return {
       value: e.id,
       label: e.name,
@@ -149,3 +151,4 @@ request(location.query.browse).then(({ data }) => {
   });
 });
 </script>
+>

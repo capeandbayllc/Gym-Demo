@@ -1,13 +1,12 @@
 <template>
   <simple-card title="Agreements" class="agreements-card" closable>
     <div class="p-8 card-gradient-bg">
-      <CurrentAgreement
-        v-if="!showNewAgreement"
-        @new-agreement="newAgreement"
-      />
+      <ActiveAgreement v-if="!showNewAgreement" @new-agreement="newAgreement" />
       <component
         v-else
         :is="agreementScreens[agreementScreenIndex]"
+        :enableLocationSelection="true"
+        :profile-info="profileInfo"
         :modalClass="
           'bg-base-300 w-fit mx-auto p-[17px] border border-secondary new-agreements-wrapper ' +
           (agreementScreenIndex == 0 ? 'rounded-[8px]' : 'rounded-[19px]')
@@ -42,7 +41,7 @@
 </template>
 
 <script setup>
-import CurrentAgreement from "./current-agreement.vue";
+import ActiveAgreement from "./active-agreement.vue";
 import SelectGym from "../user-info/select-gym";
 import PersonalInformation from "../user-info/personal-information";
 import PersonalInformationNext from "../user-info/personal-information/personal-info-next.vue";
@@ -52,8 +51,15 @@ import SecondaryPayments from "../user-info/financial-collect/secondary-payments
 import AgreementModal from "~/pages/agreement/components/agreement-modal.vue";
 import TermsAndCondition from "~/pages/agreement/components/agreement-type.vue";
 import PayNow from "../user-info/pay-now.vue";
+import { useQuery } from "@vue/apollo-composable";
+import member from "@/api/queries/member";
+import lead from "@/api/queries/lead";
 
 const route = useRoute();
+const profileId = route.query.id;
+const isLeadView = route.query.type === "lead";
+const user = useState("auth");
+
 const openDetail = route.query.openDetail;
 
 onMounted(() => {
@@ -96,6 +102,22 @@ const prevScreen = () => {
       ? agreementScreenIndex.value - 1
       : agreementScreenIndex.value;
 };
+
+const profileInfo = ref(null);
+getMember();
+function getMember() {
+  if (profileId) {
+    const { result } = useQuery((isLeadView ? lead : member).query.get, {
+      id: profileId,
+    });
+    watchEffect(() => {
+      if (!result.value) return;
+      profileInfo.value = result.value[isLeadView ? "lead" : "member"];
+    });
+  } else {
+    profileInfo.value = user.value;
+  }
+}
 </script>
 
 <style scoped lang="postcss">

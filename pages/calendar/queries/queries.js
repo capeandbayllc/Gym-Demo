@@ -17,7 +17,7 @@ export const query = gql`
         name
       }
     }
-    employee {
+    employees {
       data {
         id
         user_id
@@ -81,9 +81,9 @@ export const query = gql`
         entity_id
       }
       # owner {
-      #     id
-      #     name
-      #     profile_photo_path
+      #   id
+      #   name
+      #   profile_photo_path
       # }
     }
   }

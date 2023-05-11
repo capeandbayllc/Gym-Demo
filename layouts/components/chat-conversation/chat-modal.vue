@@ -465,7 +465,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { far } from "@fortawesome/pro-regular-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/pro-solid-svg-icons";
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import member from "~/api/queries/member";
 import location from "~/api/queries/location";
 import { getRandomInt } from "~/api/utils/number";
@@ -510,8 +510,9 @@ const chatItems = ref([
 ]);
 
 const locationData = ref(null);
-request(location.query.browse, { first: 1 }).then(({ data }) => {
-  locationData.value = data.data.locations.data[0];
+const { result } = useQuery(location.query.browse, { first: 1 });
+watch(result, () => {
+  locationData.value = result.value.locations.data[0];
   chatItems.value[2].name = locationData.value.name;
 });
 
@@ -519,8 +520,9 @@ const user = useState("auth");
 const floatingTooltip = inject("floating-modal");
 const status = ["online", "offline"];
 
-request(member.query.browse, { first: 50 }).then(({ data }) => {
-  data.data.members.data.forEach((member) => {
+const { result: memberResult } = useQuery(member.query.browse, { first: 50 });
+watch(memberResult, () => {
+  memberResult.value.members.data.forEach((member) => {
     members.value.push({
       ...member,
       name: `${member.first_name} ${member.last_name}`,

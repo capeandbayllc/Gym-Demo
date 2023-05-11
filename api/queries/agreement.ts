@@ -15,7 +15,7 @@ const GET_AGREEMENTS: DocumentNode = gql`
           email
           phone
         }
-        agreement_category {
+        agreementCategory {
           id
           name
         }

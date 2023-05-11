@@ -11,6 +11,7 @@
       <div class="bg-black rounded-md p-6 border border-secondary">
         <component
           :is="addMemberScreens[addMemberScreenIndex]"
+          :profile-info="profileInfo"
           :newMemberData="newMemberData"
           @changeNewMemberData="newMemberData = $event"
         ></component>
@@ -86,6 +87,7 @@
     <div class="bg-base-300 rounded-md p-6 border border-secondary">
       <component
         :is="addMemberScreens[addMemberScreenIndex]"
+        :profile-info="profileInfo"
         @change="newMemberData = $event"
       ></component>
       <div class="flex justify-end mt-6">
@@ -109,7 +111,6 @@
     </div>
   </daisy-modal>
 </template>
-
 <script setup>
 import LeadTableRow from "./components/lead-table-row.vue";
 import { AddIcon, NextIcon } from "@/components/icons";
@@ -126,25 +127,29 @@ import leadStatusQuery from "~/api/queries/leadStatus";
 import userMutation from "~/api/mutations/user";
 import location from "~~/api/queries/location";
 import { v4 as uuidv4 } from "uuid";
+import SearchTableToggler from "../components/search-table-toggler.vue";
+const route = useRoute();
+const profileId = route.query.id;
+const isLeadView = route.query.type === "lead";
+const user = useState("auth");
 
 const newMemberData = ref({
-  firstName: "",
-  lastName: "",
-  birthDate: "",
-  male: "",
-  female: "",
-  other: "",
-  homeAddress1: "",
-  homeAddress2: "",
+  first_name: "",
+  middle_name: "",
+  last_name: "",
+  date_of_birth: null,
+  gender: "",
+  drivers_license_number: null,
+  occupation: null,
+  employer: null,
+  barcode: null,
+  email: "",
+  home_location_id: "",
+  address1: "",
+  address2: "",
   city: "",
   state: "",
-  zipCode: "",
-  emergencyContactName: "",
-  emergencyContactPhone: "",
-  mobilePhone: "",
-  email: "",
-  sendMePromotionalTexts: "",
-  sendMePromotionalEmails: "",
+  phone: "",
 });
 
 const newMemberDataReset = ref({});
@@ -204,7 +209,16 @@ watchEffect(() => {
   }));
   leadStatuses.value = mappedStatuses;
 });
-import SearchTableToggler from "../components/search-table-toggler.vue";
+
+onMounted(() => {
+  const locationData = ref(null);
+  const { result } = useQuery(location.query.browse, { first: 1 });
+  watch(result, () => {
+    newMemberData.value.home_location_id = result.value.locations.data[0].id;
+    newMemberDataReset.value = { ...newMemberData.value };
+  });
+  getLeadsQuery();
+});
 
 const addMemberPopUp = ref(null);
 const addMemberScreens = ref([
@@ -220,13 +234,14 @@ const addMemberScreens = ref([
 const addMemberScreenIndex = ref(0);
 const leads = ref([]);
 const filters = ref({ status: "" });
+
 const opportunity = ["error", "warning", "accent"];
+// TODO implement filters
 
 const getLeadsQuery = () => {
-  let { result } = useQuery(lead.query.browse, { filter: filters.value });
-  watchEffect(() => {
-    if (!result.value?.leads.data) return;
-    leads.value = result.value?.leads.data;
+  const { result } = useQuery(lead.query.browse, { first: 5 });
+  watch(result, () => {
+    leads.value = result.value.leads.data;
   });
 };
 getLeadsQuery();
@@ -247,8 +262,9 @@ const leads_display = computed(() => {
   return leads.value.map((item) => {
     return {
       ...item,
-      type: getRandomType(),
       opportunity: getRandomOpportunity(),
+      status: "available",
+      type: getRandomType(),
     };
   });
 });
@@ -273,6 +289,23 @@ const prevScreen = () => {
       ? addMemberScreenIndex.value - 1
       : addMemberScreenIndex.value;
 };
+
+const profileInfo = ref(null);
+getMember();
+function getMember() {
+  if (profileId) {
+    const { result: memberResult } = useQuery(
+      (isLeadView ? lead : member).query.get,
+      { id: profileId }
+    );
+
+    watch(memberResult, () => {
+      profileInfo.value = result.value[isLeadView ? "lead" : "member"];
+    });
+  } else {
+    profileInfo.value = user.value;
+  }
+}
 
 const locationType = [
   {
@@ -318,25 +351,22 @@ const leadTypes = [
     label: "Streaming Preview",
   },
 ];
-const columns = [
+const leadStatus = [
   {
-    label: "Created",
-    class: "text-secondary",
+    value: "New",
+    label: "New",
   },
   {
-    label: "Opportunity",
-    class: "text-secondary",
+    value: "Contacted",
+    label: "Contacted",
   },
   {
-    label: "First Name",
-    class: "text-secondary",
+    value: "Converted",
+    label: "Converted",
   },
   {
-    label: "Last Name",
-    class: "text-secondary",
-  },
-  {
-    label: "Location",
+    value: "Lost",
+    label: "Lost",
     class: "text-secondary",
   },
   {

@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div v-if="profileInfo">
     <div class="profile-image-container">
       <div class="profile-image">
         <div class="profile-avatar">
-          <img :src="ProfileInfo.profile_photo_path" alt="profile image" />
+          <img :src="profileInfo.profile_photo_path" alt="profile image" />
         </div>
       </div>
     </div>
@@ -132,8 +132,6 @@
   </div>
 </template>
 <script setup>
-import { request } from "~/api/utils/request";
-import member from "@/api/queries/member";
 import CustomToggle from "~/components/toggle/custom-toggle.vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 
@@ -144,6 +142,9 @@ const props = defineProps({
   },
   value: {
     Object,
+  },
+  profileInfo: {
+    type: Object,
   },
   newMemberData: {
     type: Object,
@@ -162,12 +163,6 @@ const updateGender = (value, gender) => {
     personalInfoForm.value.gender = gender;
   }
 };
-
-const route = useRoute();
-const profileId = route.query.id;
-const isLeadView = route.query.type === "lead";
-const ProfileInfo = ref(null);
-const user = useState("auth");
 
 const personalInfoForm = ref({
   firstName: "",
@@ -190,19 +185,6 @@ const personalInfoForm = ref({
 watchEffect(() => {
   emit("change", personalInfoForm);
 });
-
-getMember();
-function getMember() {
-  if (profileId) {
-    request((isLeadView ? lead : member).query.get, { id: profileId }).then(
-      ({ data }) => {
-        ProfileInfo.value = data.data[isLeadView ? "lead" : "member"];
-      }
-    );
-  } else {
-    ProfileInfo.value = user.value;
-  }
-}
 </script>
 <style scoped lang="postcss">
 .gray-input {

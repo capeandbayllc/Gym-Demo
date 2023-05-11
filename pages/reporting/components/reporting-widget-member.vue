@@ -68,12 +68,10 @@
 }
 </style>
 <script setup>
-import FilterList from "../components/filter-list.vue";
-import ComparisonSelector from "../components/comparison-selector.vue";
 import ReportingMembersLineChart from "./reporting-members-line-chart.vue";
 import ReportingMembersChart from "./reporting-members-chart.vue";
 import MembersList from "./members-list-item.vue";
-import { request } from "~/api/utils/request";
+import { useQuery } from "@vue/apollo-composable";
 import member from "~/api/queries/member";
 import { getRandomInt } from "~/api/utils/number";
 const columns = ["Members Name", "Members Type", "Date"];
@@ -108,12 +106,12 @@ const membersList = reactive([
 
 const membershipTypes = ["platinum", "gold", "silver", "bronze"];
 
-request(member.query.browse, { first: 15 }).then((response) => {
-  const members = response.data.data.members.data.map((m) => ({
+const { result } = useQuery(member.query.browse, { first: 15 });
+watch(result, () => {
+  const members = result.value.members.data.map((m) => ({
     ...m,
-    type: membershipTypes[getRandomInt(membershipTypes.length - 1)],
+    type: membershipTypes[getRandomInt(membershipTypes.length)],
   }));
-
   data.value = members.splice(0, 6);
   while (members.length > 0) {
     for (let i = 0; i < 3; i++) {

@@ -19,6 +19,7 @@
     >
       <component
         :is="addMemberScreens[addMemberScreenIndex]"
+        :profile-info="profileInfo"
         :value="data"
         @change="data = $event"
       ></component>
@@ -67,9 +68,15 @@ import BroughtToday from "../../../pages/check-in/profile-card/add-member/brough
 import MembershipType from "../../../pages/check-in/new-agreement/membership-type.vue";
 import isThisYou from "~~/pages/check-in/profile-card/add-member/is-this-you.vue";
 import { NextIcon, AddLead } from "@/components/icons";
-import { useMutation } from "@vue/apollo-composable";
-import user from "~/api/mutations/user";
+import member from "@/api/queries/member";
+import { useMutation, useQuery } from "@vue/apollo-composable";
+import userMutation from "~/api/mutations/user";
 import { v4 as uuidv4 } from "uuid";
+
+const route = useRoute();
+const profileId = route.query.id;
+const isLeadView = route.query.type === "lead";
+const user = useState("auth");
 
 const data = ref({
   firstName: "",
@@ -155,7 +162,22 @@ const prevScreen = () => {
       : addMemberScreenIndex.value;
 };
 
-const { mutate } = useMutation(user.mutation.createUser);
+const profileInfo = ref(null);
+getMember();
+function getMember() {
+  if (profileId) {
+    const { result } = useQuery((isLeadView ? lead : member).query.get, {
+      id: profileId,
+    });
+
+    watch(result, () => {
+      profileInfo.value = result.value[isLeadView ? "lead" : "member"];
+    });
+  } else {
+    profileInfo.value = user.value;
+  }
+}
+const { mutate } = useMutation(userMutation.mutation.createUser);
 
 const addLeadAndGoToNewAgreement = async () => {
   const variables = {
