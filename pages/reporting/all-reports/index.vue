@@ -6,7 +6,7 @@
     <div class="page-content gap-5">
       <div class="flex justify-between">
         <h3 class="text-2xl font-semibold">{{ actualCategory }}</h3>
-        <div class="flex gap-3 items-center pb-2 pr-10">
+        <div class="flex gap-3 items-center pb-2">
           <div class="all-reports-search col-span-4">
             <input
               class="search-input"
@@ -15,6 +15,7 @@
             />
           </div>
           <Button
+            @click="showCreateReportModal"
             secondary
             size="xs"
             class="normal-case px-5 !h-[30px] border-secondary hover:bg-secondary hover:border-secondary hover:text-white rounded-lg"
@@ -30,6 +31,14 @@
         />
         <ReportsTable :data="data" class="col-span-3 mt-3 md:mt-0" />
       </div>
+
+      <daisy-modal
+        :overlay="true"
+        id="createReportModal"
+        ref="createReportModal"
+      >
+        <create-report-modal />
+      </daisy-modal>
     </div>
   </div>
 </template>
@@ -38,15 +47,19 @@
 .page-content {
   @apply text-center text-base-content p-6 border-secondary border-2 rounded-[26px] bg-secondary-focus max-w-[85vw];
 }
+
 .all-reports-search {
   @apply min-h-[30px];
+
   .search-input {
     @apply min-w-[210px] min-h-[32px] rounded-[10px] bg-neutral/60 float-right py-[2px] px-[10px] transition-all duration-300 text-[16px] !tracking-normal;
   }
+
   .search-input:hover,
   .search-input:focus {
     @apply bg-neutral-content/80;
   }
+
   .search-input:focus {
     box-shadow: none;
     outline: none;
@@ -57,8 +70,11 @@
 import ReportsCategoryCard from "./components/reports-category-card/index.vue";
 import ReportsTable from "./components/reports-table/index.vue";
 import { getRandomInt } from "~/api/utils/number";
+import CreateReportModal from "./components/create-report-modal/index.vue";
 
 const actualCategory = ref("All Reports");
+
+const createReportModal = ref(false);
 
 const data = computed(() => {
   let array = [];
@@ -76,4 +92,8 @@ const data = computed(() => {
   }
   return array;
 });
+
+const showCreateReportModal = () => {
+  createReportModal.value.open();
+};
 </script>
