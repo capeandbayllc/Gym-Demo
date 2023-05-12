@@ -29,6 +29,7 @@ export { default as EmailSquareIcon } from "./email-square.vue";
 export { default as EmailIcon } from "./email.vue";
 export { default as EmptyFileIcon } from "./empty-file.vue";
 export { default as FavoriteCircleIcon } from "./favorite-circle.vue";
+export { default as FiltersReportingIcon } from "./filters-reporting.vue";
 export { default as FitnessAssessmentsIcon } from "./fitness-assessments.vue";
 export { default as FitnessIcon } from "./fitness.vue";
 export { default as LocationIcon } from "./location.vue";
