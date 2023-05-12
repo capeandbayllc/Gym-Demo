@@ -4,7 +4,6 @@
       class="reports-table-row"
       v-for="item in data"
       :key="item.id"
-      @click="rowClicked(item)"
       @handle="eventHandle"
       :data="item"
     >
@@ -17,7 +16,10 @@
             v-model="data.agreeElectronics"
           />
           <star-icon clear class="text-secondary text-2xl mb-1" />
-          <div class="whitespace-nowrap">
+          <div
+            class="whitespace-nowrap cursor-pointer"
+            @click="rowClicked(item)"
+          >
             {{ item.report_name ? item.report_name : "-" }}
           </div>
         </div>
