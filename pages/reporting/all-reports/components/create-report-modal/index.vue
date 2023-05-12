@@ -20,10 +20,20 @@
       </div>
     </div>
     <div class="text-right pt-6 pb-4">
-      <Button ghost size="sm" class="normal-case mr-2 rounded-lg">
+      <Button
+        ghost
+        size="sm"
+        class="normal-case mr-2 rounded-lg"
+        @click="emit('close')"
+      >
         Cancel
       </Button>
-      <Button size="sm" secondary="" class="normal-case rounded-lg">
+      <Button
+        size="sm"
+        secondary=""
+        class="normal-case rounded-lg"
+        @click="emit('close')"
+      >
         Save
       </Button>
     </div>
@@ -56,6 +66,8 @@
 </style>
 
 <script setup>
+const emit = defineEmits(["close"]);
+
 const selects = [
   {
     title: "Select Primary Modal",

@@ -5,7 +5,7 @@
     </div>
     <div class="page-content gap-5">
       <div class="flex justify-between">
-        <h3 class="text-2xl font-semibold">{{ actualCategory }}</h3>
+        <h3 class="text-2xl font-semibold">{{ actualFolder }}</h3>
         <div class="flex gap-3 items-center pb-2">
           <div class="all-reports-search col-span-4">
             <input
@@ -15,7 +15,7 @@
             />
           </div>
           <Button
-            @click="showCreateReportModal"
+            @click="openCreateReportModal"
             secondary
             size="xs"
             class="normal-case px-5 !h-[30px] border-secondary hover:bg-secondary hover:border-secondary hover:text-white rounded-lg"
@@ -25,9 +25,9 @@
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 mt-2">
-        <ReportsCategoryCard
-          :actual-category="actualCategory"
-          @changeActualCategory="actualCategory = $event"
+        <ReportsFoldersCard
+          :actual-folder="actualFolder"
+          @changeActualFolder="actualFolder = $event"
         />
         <ReportsTable :data="data" class="col-span-3 mt-3 md:mt-0" />
       </div>
@@ -37,7 +37,7 @@
         id="createReportModal"
         ref="createReportModal"
       >
-        <create-report-modal />
+        <create-report-modal @close="closeCreateReportModal" />
       </daisy-modal>
     </div>
   </div>
@@ -67,21 +67,21 @@
 }
 </style>
 <script setup>
-import ReportsCategoryCard from "./components/reports-category-card/index.vue";
+import ReportsFoldersCard from "./components/reports-folders-card/index.vue";
 import ReportsTable from "./components/reports-table/index.vue";
 import { getRandomInt } from "~/api/utils/number";
 import CreateReportModal from "./components/create-report-modal/index.vue";
 
-const actualCategory = ref("All Reports");
+const actualFolder = ref("My Reports");
 
 const createReportModal = ref(false);
 
 const data = computed(() => {
   let array = [];
-  for (let i = 0; i < getRandomInt(actualCategory.value.length * 3, 0); i++) {
+  for (let i = 0; i < getRandomInt(actualFolder.value.length * 3, 0); i++) {
     array.push({
       id: 1,
-      report_name: actualCategory.value,
+      report_name: actualFolder.value,
       description: "",
       report_type: "",
       date_created: "",
@@ -93,7 +93,10 @@ const data = computed(() => {
   return array;
 });
 
-const showCreateReportModal = () => {
+const openCreateReportModal = () => {
   createReportModal.value.open();
+};
+const closeCreateReportModal = () => {
+  createReportModal.value.close();
 };
 </script>

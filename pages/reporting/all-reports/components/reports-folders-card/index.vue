@@ -8,19 +8,18 @@
           placeholder="Search All Reports"
         />
       </div>
-      <div class="actual-category">My Reports</div>
     </div>
     <div class="card-content">
-      <div class="categories-container">
-        <div class="section" v-for="(section, i) in categories" :key="i">
+      <div class="folders-container">
+        <div class="section" v-for="(section, i) in folders" :key="i">
           <div
-            v-for="(category, j) in section"
+            v-for="(folder, j) in section"
             :key="j"
-            @click="emit('changeActualCategory', category)"
-            class="item"
-            :class="{ 'item-selected': category == actualCategory }"
+            @click="emit('changeActualFolder', folder)"
+            class="folder"
+            :class="{ 'folder-selected': folder == actualFolder }"
           >
-            {{ category }}
+            {{ folder }}
           </div>
         </div>
       </div>
@@ -34,7 +33,7 @@
     @apply flex justify-between items-center;
   }
   .card-header {
-    @apply h-[100px] flex flex-col justify-between;
+    @apply h-[70px] flex flex-col justify-between;
     .all-reports-search {
       @apply min-h-[30px] p-4;
       .search-input {
@@ -49,43 +48,38 @@
         outline: none;
       }
     }
-    .actual-category {
-      @apply bg-secondary py-1 px-8 font-semibold;
-    }
   }
   .card-content {
     @apply h-full;
     .section {
       @apply border-b border-base-content/30;
-      .item {
+      .folder {
         @apply my-1 py-1 px-8 font-light cursor-pointer;
       }
-      .item-selected {
-        @apply bg-secondary;
+      .folder-selected {
+        @apply bg-secondary font-semibold;
       }
     }
     .section:last-child {
       @apply border-b-0;
     }
-    .header-selected {
-      @apply bg-secondary font-semibold;
-    }
-    .categories-container {
-      @apply overflow-auto w-full h-[calc(70vh-120px)];
+    .folders-container {
+      @apply overflow-auto w-full h-[calc(70vh-80px)];
     }
   }
 }
 </style>
 <script setup>
-const emit = defineEmits(["changeActualCategory"]);
+const emit = defineEmits(["changeActualFolder"]);
 const props = defineProps({
-  actualCategory: {
+  actualFolder: {
     type: String,
     default: "",
   },
 });
-var categories = [
+var folders = [
   [
+    "My Reports",
     "All Reports",
     "Favorites",
     "Recently Viewed",
