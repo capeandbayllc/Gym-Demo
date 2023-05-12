@@ -69,6 +69,7 @@ import MembershipType from "../../../pages/check-in/new-agreement/membership-typ
 import isThisYou from "~~/pages/check-in/profile-card/add-member/is-this-you.vue";
 import { NextIcon, AddLead } from "@/components/icons";
 import member from "@/api/queries/member";
+import lead from "@/api/queries/lead";
 import { useMutation, useQuery } from "@vue/apollo-composable";
 import userMutation from "~/api/mutations/user";
 import { v4 as uuidv4 } from "uuid";

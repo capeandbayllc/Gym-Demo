@@ -74,33 +74,10 @@ const emit = defineEmits(["on-profile-update"]);
 const route = useRoute();
 const profileId = route.query.id;
 const isLeadView = route.query.type === "lead";
-
-const { result } = useQuery((isLeadView ? lead : member).query.get, {
-  id: profileId,
-});
-
-watch(result, () => {
-  const user = result.value[isLeadView ? "lead" : "member"];
-  const newUser = { ...user, homeLocation: undefined };
-
-  memberInfo.value = {
-    ...newUser,
-    ...{ id: user.user_id, address: { ...user.homeLocation } },
-  };
-  demographicsObj.value = { ...user };
-});
-
-const handleEditAttachment = (v) => {
-  console.log("edit attachment with id", v);
-};
-
-const handleSaveAttachment = (v) => {
-  console.log("save attachment with id", v);
-};
+const memberInfo = ref({});
 
 const isActiveMember = ref(false);
 const isProcessing = ref(false);
-const memberInfo = ref({});
 
 const demographicsObj = ref({});
 const demographics = ref([
@@ -170,6 +147,33 @@ const demographics = ref([
     class: "neutral-input",
   },*/
 ]);
+
+const { result, onError } = useQuery((isLeadView ? lead : member).query.get, {
+  id: profileId,
+});
+
+watchEffect(() => {
+  if (!result.value) return;
+  const user = result.value[isLeadView ? "lead" : "member"];
+  const newUser = { ...user, homeLocation: undefined };
+
+  console.log("result");
+  console.log(result);
+
+  memberInfo.value = {
+    ...newUser,
+    ...{ id: user.user_id, address: { ...user.homeLocation } },
+  };
+  demographicsObj.value = { ...user };
+});
+
+const handleEditAttachment = (v) => {
+  console.log("edit attachment with id", v);
+};
+
+const handleSaveAttachment = (v) => {
+  console.log("save attachment with id", v);
+};
 
 function updateUser() {
   isProcessing.value = true;

@@ -95,7 +95,7 @@
 <script setup>
 import { useQuery } from "@vue/apollo-composable";
 import member from "@/api/queries/member";
-import lead from "~/api/queries/lead";
+import lead from "@/api/queries/lead";
 import userQuery from "~/api/queries/user";
 import EventCard from "./event-card/index.vue";
 import ProfileCard from "./profile-card/index.vue";
