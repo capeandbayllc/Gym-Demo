@@ -77,12 +77,16 @@
           <Button
             size="sm"
             outline
-            class="normal-case rounded-lg"
+            class="normal-case rounded-lg hover:text-secondary"
             @click="emit('close')"
           >
             Cancel
           </Button>
-          <Button size="sm" outline class="normal-case rounded-lg">
+          <Button
+            size="sm"
+            outline
+            class="normal-case rounded-lg hover:text-secondary"
+          >
             Run
           </Button>
           <select-dropdown
@@ -95,14 +99,22 @@
       </div>
     </div>
     <div class="modal-content">
-      <div class="max-full h-[60vh] overflow-auto"></div>
+      <div class="max-w-full rounded-xl overflow-auto max-h-full min-h-[102%]">
+        <table class="rounded-2xl">
+          <head-report-details-table />
+          <body-report-details-table
+            :data="data"
+            @row-clicked="openReportDetailsModal"
+          />
+        </table>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="postcss">
 .modal-container {
-  @apply py-4 px-6 md:px-8 w-[90vw] bg-base-300 border-2 rounded-3xl text-[0.9rem] flex flex-col border-secondary relative bg-gradient-to-b from-secondary-focus to-base-300/30;
+  @apply py-4 px-6 md:px-8 w-[90vw] max-w-[1465px] bg-base-300 border-2 rounded-3xl text-[0.9rem] flex flex-col border-secondary relative bg-gradient-to-b from-secondary-focus to-base-300/30;
   .modal-header {
     .dropdown {
       @apply absolute top-[28px] right-[0px] h-auto z-[20];
@@ -118,9 +130,7 @@
     }
   }
   .modal-content {
-    ::-webkit-scrollbar {
-      @apply hidden;
-    }
+    @apply w-full pb-[8px] h-[50vh] lg:h-[60vh] xl:h-[65vh] overflow-visible border border-secondary rounded-2xl bg-base-300 text-left max-w-full overflow-auto mx-auto;
     .select-container {
       @apply mb-7;
       .select-title {
@@ -137,6 +147,10 @@
 <script setup>
 import selectDropdown from "./components/select-dropdown.vue";
 import equalToIcon from "./components/equal-to-icon.vue";
+import HeadReportDetailsTable from "./components/head-reports-details-table.vue";
+import BodyReportDetailsTable from "./components/body-report-details-table.vue";
+import { getRandomInt } from "~/api/utils/number";
+
 import {
   VerticalEllipsis,
   ArrowLeft,
@@ -156,6 +170,25 @@ const showTitleDropdown = ref(false);
 const toggleTitleDropdown = () => {
   showTitleDropdown.value = !showTitleDropdown.value;
 };
+
+const data = computed(() => {
+  let array = [];
+  for (
+    let i = 0;
+    i < getRandomInt(props.report.report_name.length * 30, 0);
+    i++
+  ) {
+    array.push({
+      id: 1,
+      name: "Kelly Price",
+      annual_revenue: "",
+      brand_category: "",
+      city: "",
+      company: "HydraMassage",
+    });
+  }
+  return array;
+});
 
 const totalRecordsOptions = [
   "Total records",
