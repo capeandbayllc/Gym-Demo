@@ -4,7 +4,7 @@
       <div class="flex flex-auto">Reporting</div>
     </div>
     <div class="page-content gap-5">
-      <div class="flex justify-between">
+      <div class="flex justify-between flex-wrap gap-3">
         <h3 class="text-2xl font-semibold">{{ actualFolder }}</h3>
         <div class="flex gap-3 items-center pb-2">
           <div class="all-reports-search col-span-4">
@@ -57,7 +57,7 @@
 
   .search-input:hover,
   .search-input:focus {
-    @apply bg-neutral-content/80;
+    @apply bg-neutral-content/80 placeholder-base-content;
   }
 
   .search-input:focus {

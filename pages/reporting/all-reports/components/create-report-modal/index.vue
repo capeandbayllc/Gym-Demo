@@ -14,6 +14,7 @@
             :show-search="false"
             :showClearList="false"
             :label="item.title"
+            :class="`z-[${i}]`"
             class="select-box"
           />
         </div>
@@ -54,13 +55,23 @@
       @apply mb-7;
 
       .select-title {
-        @apply pb-2 text-[15px];
+        @apply pb-2 text-[15px] font-semibold;
       }
 
       .select-box {
-        @apply bg-neutral-content text-base-content font-semibold rounded-lg !text-left;
+        @apply bg-neutral text-base-content !h-10 py-2 rounded-lg !text-left;
       }
     }
+  }
+}
+</style>
+<style lang="postcss">
+.select-box {
+  .select-box-btn {
+    @apply !h-10 rounded-lg;
+  }
+  .select-box-content {
+    @apply top-[8px];
   }
 }
 </style>

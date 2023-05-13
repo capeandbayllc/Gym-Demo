@@ -38,22 +38,22 @@
             grayContent
             :items="timeOptions"
             label="None"
-            class="select-dropdown bg-neutral"
+            class="select-dropdown bg-neutral z-[50]"
           />
-          <equal-to-icon />
+          <equal-to-icon class="!z-[55]" />
           <select-dropdown
             value=""
             grayContent
             :items="timeOptions"
             label="Created Time"
-            class="select-dropdown bg-neutral"
+            class="select-dropdown bg-neutral z-[45]"
           />
           <select-dropdown
             value=""
             :items="totalRecordsOptions"
             countCircle="37"
             label="Total records"
-            class="select-dropdown bg-secondary"
+            class="select-dropdown bg-secondary z-[40]"
           />
           <Button
             size="sm"
@@ -117,7 +117,7 @@
   @apply py-4 px-6 md:px-8 w-[90vw] max-w-[1465px] bg-base-300 border-2 rounded-3xl text-[0.9rem] flex flex-col border-secondary relative bg-gradient-to-b from-secondary-focus to-base-300/30;
   .modal-header {
     .dropdown {
-      @apply absolute top-[28px] right-[0px] h-auto z-[20];
+      @apply absolute top-[28px] right-[0px] h-auto z-[60];
       .dropdown-container {
         @apply bg-base-300 border-secondary border text-base font-normal rounded-2xl p-3 px-5 w-[120px];
         .dropdown-item {
