@@ -65,6 +65,8 @@ import {
   ComTowerIcon,
   WidgetIcon,
   PeopleSearchIcon,
+  AllReportsIcon,
+  ReportingCircleIcon,
 } from "@/components/icons";
 import NavItem from "./nav-item.vue";
 import PosWindow from "~~/pages/pos/components/pos-window.vue";
@@ -84,6 +86,16 @@ const reporting = [
     url: "/widget-center",
   },
   {
+    label: "Back to Reporting",
+    icon: ReportingCircleIcon,
+    url: "/reporting",
+  },
+  {
+    label: "Favorites",
+    url: null,
+    icon: FavoriteCircleIcon,
+  },
+  {
     label: "Financial Reporting",
     icon: ReportIcon,
     url: null,
@@ -94,34 +106,24 @@ const reporting = [
     icon: MassComIcon,
   },
   {
-    label: "Favorites",
+    label: "Point of Sale",
     url: null,
-    icon: FavoriteCircleIcon,
+    icon: PosIcon,
   },
   {
-    label: "Physical Therapy",
+    label: "Fitness",
     url: null,
     icon: FitnessIcon,
   },
   {
-    label: "KPIS",
+    label: "KPI's",
     url: null,
     icon: SpeedMeterIcon,
   },
   {
-    label: "Employee Tracking",
-    url: null,
-    icon: LocationIcon,
-  },
-  {
-    label: "Company Inbox",
-    url: null,
-    icon: DownloadIcon,
-  },
-  {
-    label: "Marketing",
-    url: null,
-    icon: MarketingIcon,
+    label: "All reports",
+    url: "/reporting/all-reports",
+    icon: AllReportsIcon,
   },
 ];
 
@@ -138,6 +140,10 @@ const navList = [
   },
   {
     type: "reporting",
+    navigation: reporting,
+  },
+  {
+    type: "reporting-all-reports",
     navigation: reporting,
   },
   {

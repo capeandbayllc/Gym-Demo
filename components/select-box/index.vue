@@ -11,6 +11,7 @@
         'bg-transparent': transparent && !secondary,
         'rounded-t': !isCollapsed && !roundedXl,
         'rounded-t-lg': !isCollapsed && roundedXl,
+        '!bg-base-100 text-white': !isCollapsed && bgGrayOpened,
         'select-box-btn-primary': !isCollapsed && bgSecondaryOpened,
         rounded: isCollapsed,
         [classButton]: classButton,
@@ -119,6 +120,10 @@ const props = defineProps({
   bgSecondaryOpened: {
     type: Boolean,
     default: true,
+  },
+  bgGrayOpened: {
+    type: Boolean,
+    default: false,
   },
   classButton: {
     type: String,
