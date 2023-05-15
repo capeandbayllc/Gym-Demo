@@ -150,7 +150,7 @@
   background-image: url("/equal_bg.png");
 }
 </style>
-<style>
+<style lang="postcss">
 .reporting-form-card {
   @apply bg-neutral-focus;
   .card-title {
