@@ -74,7 +74,7 @@ const chartOptions = {
     colors: ["#00"],
   },
   stroke: {
-    width: 3,
+    width: 2,
   },
   tooltip: {
     enabled: false,

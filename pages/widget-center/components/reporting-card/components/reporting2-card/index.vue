@@ -1,31 +1,30 @@
 <template>
-  <card-widget buttonSecondary buttonText="GO" title="Statistics 2">
-    <template #summary>
-      <div class="total-sale"><span class="total-symbol">$</span>10,000</div>
-    </template>
-    <template #content>
-      <div class="total-sale"><span class="total-symbol">$</span>10,000</div>
-      <div
-        class="flex flex-row justify-center pl-5 items-center py-2 rounded-xl border border-base-content border"
-      >
-        <div>
-          <div class="mb-3">
-            <h5 class="text-xl">Goal One</h5>
-            <p class="text-base-content">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure quis
-              expedita, eius laborum inventore.
-            </p>
-          </div>
+  <stat-card-template
+    title="Statistics 2"
+    statValue="$10,000"
+    buttonText="Go"
+    buttonSecondary
+  >
+    <div
+      class="flex flex-row justify-center items-center py-2 rounded-xl border-base-content"
+    >
+      <div>
+        <div class="mb-3">
+          <h5 class="text-[1.2rem]">Goal One</h5>
+          <p class="text-base-content text-[0.7rem]">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure quis
+            expedita, eius laborum inventore.
+          </p>
+        </div>
 
-          <div>
-            <h5 class="text-xl">Goal Two</h5>
-          </div>
+        <div>
+          <h5 class="text-[1.2rem]">Goal One</h5>
         </div>
       </div>
-    </template>
-  </card-widget>
+    </div>
+  </stat-card-template>
 </template>
 
 <script setup>
-import CardWidget from "../../../card-widget.vue";
+import StatCardTemplate from "../../../stat-card-template";
 </script>

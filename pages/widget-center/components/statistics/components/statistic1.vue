@@ -1,7 +1,7 @@
 <template>
   <card
     title="Statistic Title"
-    class="bg-base-300"
+    class="bg-gradient-to-tr from-base-300 via-base-300/70 slim-text"
     :options="{ favorite: false, collapse: false }"
   >
     <template #content>
@@ -10,9 +10,9 @@
           <div
             v-for="(item, index) in percentages"
             :key="index"
-            class="percent-item grid grid-cols-1"
+            class="percent-item grid grid-cols-1 slim-text"
           >
-            <PercentPie class="" :item="item" />
+            <PercentPie class="slim-text" :item="item" />
             <hr class="border-base-content border-opacity-50 my-3" />
           </div>
         </div>
@@ -26,6 +26,9 @@
 }
 .percentages .percent-item:last-child hr {
   @apply hidden;
+}
+.slim-text {
+  @apply tracking-wider font-light;
 }
 </style>
 <script setup>

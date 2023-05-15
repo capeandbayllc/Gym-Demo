@@ -11,7 +11,7 @@
       :class="smallHeader ? 'h-9' : 'h-12'"
     >
       <div
-        class="card-title border-none"
+        class="card-title border-none slim-text"
         :class="smallHeader ? 'text-sm' : 'text-lg'"
       >
         {{ title }}
@@ -41,7 +41,7 @@
   .card-title-container {
     @apply flex flex-row justify-between items-center text-xl rounded-tl-[15px] rounded-tr-[15px] font-semibold px-6 text-base-content bg-gradient-to-b from-secondary to-base-300/30 bg-secondary bg-blend-darken;
     .card-title {
-      @apply font-bold;
+      @apply tracking-wide font-normal text-[0.9rem];
     }
     .card-actions {
       @apply flex flex-row space-x-2 cursor-pointer items-center;
@@ -53,6 +53,10 @@
 }
 .card-container.collapsed {
   @apply h-fit;
+}
+
+.slim-text {
+  @apply font-light !tracking-wider;
 }
 </style>
 <script setup>

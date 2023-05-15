@@ -2,8 +2,8 @@
   <ClientOnly>
     <apexchart
       type="donut"
-      height="140"
-      width="190"
+      height="120"
+      width="120"
       :options="options"
       :series="[25, 65, 10]"
     />

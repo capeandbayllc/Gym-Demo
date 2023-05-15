@@ -1,7 +1,7 @@
 <template>
   <div class="page-sales-funnel-container">
     <div class="page-content">
-      <h3 class="text-base-content text-xl">Sales Funnel</h3>
+      <h3 class="text-base-content text-xl slim-text">Sales Funnel</h3>
       <div class="sales-funnel-fields">
         <statistic1-card />
         <funnel-chart
@@ -11,7 +11,11 @@
         />
       </div>
       <div class="flex justify-end">
-        <Button secondary="" size="xs" class="hover:border-2 hover:bg-base-300">
+        <Button
+          secondary=""
+          size="xs"
+          class="hover:border-2 hover:bg-base-300 rounded-full slim-text"
+        >
           <font-awesome-icon
             :icon="['fas', 'plus']"
             size="md"

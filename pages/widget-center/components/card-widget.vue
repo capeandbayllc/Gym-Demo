@@ -4,7 +4,7 @@
     :options="{ favorite: false, collapse: true }"
     class="statistics-card"
   >
-    <template #summary>
+    <template #summary v-if="hasSummary">
       <div class="statistics-info">
         <slot name="summary"></slot>
       </div>
@@ -16,7 +16,7 @@
         </div>
         <button
           v-if="buttonText != ''"
-          class="absolute right-[10px] bottom-[-10px] text-white text-right my-4"
+          class="absolute right-[10px] bottom-[-10px] text-white text-right my-4 slim-text text-[0.7rem] rounded-full"
           :class="buttonSecondary ? 'bg-secondary px-3 rounded py-1' : ''"
         >
           {{ buttonText }}
@@ -27,12 +27,9 @@
 </template>
 <style lang="postcss">
 .statistics-card {
-  @apply w-full h-[380px] flex flex-col;
+  @apply w-full h-[380px] flex flex-col bg-gradient-to-tr from-secondary/30;
   .total-sale {
-    @apply text-secondary font-bold text-6xl mb-6 flex justify-center items-center;
-  }
-  .total-sale {
-    @apply text-secondary font-bold text-6xl text-center mb-6;
+    @apply text-secondary tracking-wider font-normal text-4xl mb-6 flex justify-center items-center;
   }
   .total-symbol {
     @apply text-[30px] inline-block align-top;
@@ -63,7 +60,11 @@
   @apply w-[14px] h-[14px] rounded-full my-auto mx-[3px];
 }
 .statistic-icon {
-  @apply mt-2 mr-1;
+  @apply h-[40px] w-[40px] my-auto;
+}
+
+.slim-text {
+  @apply tracking-wider font-light;
 }
 </style>
 <script setup>
@@ -79,6 +80,9 @@ const props = defineProps({
   buttonText: {
     type: String,
     default: "View more",
+  },
+  hasSummary: {
+    type: Boolean,
   },
 });
 </script>

@@ -5,7 +5,9 @@
     <div
       class="relative bg-base-300 min-w-[35px] min-h-[35px] text-[12px] rounded-full"
     >
-      <span class="absolute inset-0 flex items-center justify-center">
+      <span
+        class="absolute inset-0 flex items-center justify-center bg-gradient-to-tr from-secondary rounded-full"
+      >
         <span>{{ value }}%</span>
       </span>
       <div
