@@ -33,7 +33,7 @@
         size="sm"
         secondary=""
         class="normal-case rounded-lg"
-        @click="emit('close')"
+        @click="emit('next')"
       >
         Save
       </Button>
