@@ -143,6 +143,10 @@ const selects = [
     title: "Post Rate",
     values: [
       {
+        value: "excel",
+        label: "Excel",
+      },
+      {
         value: "csv",
         label: "CSV",
       },
@@ -156,6 +160,10 @@ const selects = [
     title: "Reocurring Report",
     values: [
       {
+        value: "excel",
+        label: "Excel",
+      },
+      {
         value: "csv",
         label: "CSV",
       },
@@ -168,6 +176,10 @@ const selects = [
   {
     title: "Schedule",
     values: [
+      {
+        value: "excel",
+        label: "Excel",
+      },
       {
         value: "csv",
         label: "CSV",

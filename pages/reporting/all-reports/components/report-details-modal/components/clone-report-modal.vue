@@ -1,11 +1,15 @@
 <template>
   <div class="modal-container">
-    <div class="modal-content">
+    <div class="modal-content relative">
+      <button @click="emit('close')" class="absolute top-[15px] right-[20px]">
+        <close-me size="big" />
+      </button>
+
       <div>
-        <div class="max-h-[80vh] overflow-y-auto flex flex-col gap-10 mb-5">
+        <div class="overflow-visible flex flex-col gap-10 mb-5">
           <h3 class="text-lg font-semibold">Rename Report Here</h3>
 
-          <div class="flex items-center gap-4">
+          <div class="modal-section">
             <div class="w-[110px] font-semibold">Report name</div>
             <div class="w-full relative">
               <input
@@ -13,9 +17,12 @@
                 class="input-text"
                 value="Launch Party Leads_Cloned"
               />
-              <i class="input-text-icon" @click.stop="toggleRecipientDropdown">
+              <button
+                class="input-text-icon"
+                @click.stop="toggleRecipientDropdown"
+              >
                 <recipient-search-icon />
-              </i>
+              </button>
               <recipient-dropdown
                 @close="toggleRecipientDropdown"
                 v-show="showRecipientDropdown"
@@ -23,7 +30,7 @@
             </div>
           </div>
 
-          <div class="flex items-start gap-4">
+          <div class="modal-section !items-start">
             <div class="w-[110px] font-semibold mt-4">Description</div>
             <div class="w-full">
               <textarea
@@ -32,8 +39,8 @@
             </div>
           </div>
 
-          <div class="flex items-center gap-4">
-            <div class="w-24 font-semibold">Report Type</div>
+          <div class="modal-section">
+            <div class="w-[110px] font-semibold">Report Type</div>
             <div class="w-full">
               <select-box
                 :items="reportTypes"
@@ -48,7 +55,13 @@
         </div>
 
         <div class="flex justify-end gap-3">
-          <Button size="sm" ghost outline class="normal-case rounded-xl">
+          <Button
+            size="sm"
+            ghost
+            outline
+            class="normal-case rounded-xl"
+            @click="emit('close')"
+          >
             Cancel
           </Button>
           <Button size="sm" secondary class="normal-case rounded-xl">
@@ -68,14 +81,17 @@
   }
   .modal-content {
     @apply w-full p-[30px] md:px-[80px] border border-secondary rounded-2xl bg-base-300 text-left max-w-full;
-    .select-box {
-      @apply bg-neutral-content/70 text-base-content !h-10 py-2 rounded-lg !text-left w-full;
-    }
-    .input-text {
-      @apply bg-neutral-content/70 text-base-content !h-10 px-2 rounded-lg !text-left w-full focus:outline-none !pr-10;
-    }
-    .input-text-icon {
-      @apply absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer;
+    .modal-section {
+      @apply flex flex-col sm:flex-row sm:items-center gap-4;
+      .select-box {
+        @apply bg-neutral-content/70 text-base-content !h-10 py-2 rounded-lg !text-left w-full;
+      }
+      .input-text {
+        @apply bg-neutral-content/70 text-base-content !h-10 px-3 !pr-10 rounded-lg !text-left w-full focus:outline-none;
+      }
+      .input-text-icon {
+        @apply absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer;
+      }
     }
   }
 }
@@ -83,7 +99,7 @@
 <style lang="postcss">
 .select-box {
   .select-box-btn {
-    @apply !h-10 rounded-lg;
+    @apply !h-10 rounded-lg !px-3;
   }
   .select-box-content {
     @apply top-[8px];
@@ -92,8 +108,10 @@
 </style>
 
 <script setup>
-import { RecipientSearchIcon } from "~/components/icons";
+import { RecipientSearchIcon, CloseMe } from "~/components/icons";
 import RecipientDropdown from "./recipient-dropdown.vue";
+
+const emit = defineEmits(["close"]);
 
 const showRecipientDropdown = ref(false);
 
@@ -103,15 +121,15 @@ const toggleRecipientDropdown = () => {
 
 const reportTypes = ref([
   {
-    value: "Excel",
+    value: "excel",
     label: "Excel",
   },
   {
-    value: "CSV",
+    value: "csv",
     label: "CSV",
   },
   {
-    value: "PDF",
+    value: "pdf",
     label: "PDF",
   },
 ]);

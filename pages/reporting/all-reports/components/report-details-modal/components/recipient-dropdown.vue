@@ -73,7 +73,7 @@
   .dropdown-container {
     @apply bg-base-300 border-secondary border text-base font-normal rounded-2xl pt-8 w-[220px] relative;
     .dropdown-selection {
-      @apply max-h-[220px] overflow-y-auto;
+      @apply max-h-[270px] overflow-y-auto;
       .dropdown-item {
         @apply px-4 mb-2 py-[4px] w-full cursor-pointer flex items-center gap-3;
       }
@@ -103,7 +103,6 @@ import { CrossIcon } from "~/components/icons";
 const colors = [
   "primary",
   "primary-focus",
-  "secondary",
   "secondary-focus",
   "accent-focus",
   "warning",
