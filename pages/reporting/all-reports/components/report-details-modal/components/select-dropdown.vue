@@ -22,6 +22,7 @@
           '!bg-neutral border-neutral': grayContent,
           '!bg-secondary border-secondary': !grayContent,
           '!overflow-y-hidden': !scrollable,
+          '!overflow-y-scroll': scrollable,
         }"
         v-if="!isCollapsed"
       >

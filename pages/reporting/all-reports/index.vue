@@ -37,7 +37,12 @@
         id="createReportModal"
         ref="createReportModal"
       >
-        <create-report-modal @close="closeCreateReportModal" />
+        <component
+          :is="createReportScreens[createReportScreenIndex]"
+          @next="createReportScreenIndex++"
+          @close="closeCreateReportModal"
+        >
+        </component>
       </daisy-modal>
     </div>
   </div>
@@ -71,9 +76,12 @@ import ReportsFoldersCard from "./components/reports-folders-card/index.vue";
 import ReportsTable from "./components/reports-table/index.vue";
 import { getRandomInt } from "~/api/utils/number";
 import CreateReportModal from "./components/create-report-modal/index.vue";
+import ReportingColumns from "./components/create-report-modal/components/reporting-columns/index.vue";
 
 const actualFolder = ref("My Reports");
 
+const createReportScreens = ref([CreateReportModal, ReportingColumns]);
+const createReportScreenIndex = ref(0);
 const createReportModal = ref(false);
 
 const data = computed(() => {
@@ -97,6 +105,7 @@ const openCreateReportModal = () => {
   createReportModal.value.open();
 };
 const closeCreateReportModal = () => {
+  createReportScreenIndex.value = 0;
   createReportModal.value.close();
 };
 </script>
