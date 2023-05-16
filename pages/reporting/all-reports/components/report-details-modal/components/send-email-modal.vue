@@ -6,17 +6,15 @@
       </button>
 
       <div>
-        <div class="overflow-visible flex flex-col gap-10 mb-5">
-          <h3 class="text-lg font-semibold">Rename Report Here</h3>
+        <div class="overflow-visible flex flex-col gap-8 mb-5">
+          <h3 class="text-lg font-semibold text-center">
+            Mail Sending Options
+          </h3>
 
           <div class="modal-section">
-            <div class="w-[110px] font-semibold">Report name</div>
+            <div class="w-[130px] font-semibold sm:text-right">Recipients</div>
             <div class="w-full relative">
-              <input
-                type="text"
-                class="input-text"
-                value="Launch Party Leads_Cloned"
-              />
+              <input type="text" class="input-text" value="Kevin Buchanan" />
               <button
                 class="input-text-icon"
                 @click.stop="toggleRecipientDropdown"
@@ -31,23 +29,41 @@
           </div>
 
           <div class="modal-section !items-start">
-            <div class="w-[110px] font-semibold mt-4">Description</div>
             <div class="w-full">
               <textarea
-                class="w-full h-[200px] rounded-xl bg-secondary-focus/50 h-28 p-2 focus:outline-none resize-none"
+                class="w-full h-[200px] rounded-xl bg-secondary-focus/50 h-28 p-2 focus:outline-none resize-none p-4"
+                placeholder="Message"
               ></textarea>
             </div>
           </div>
 
           <div class="modal-section">
-            <div class="w-[110px] font-semibold">Report Type</div>
+            <div class="w-[130px] font-semibold sm:text-right">
+              Export Files As
+            </div>
             <div class="w-full">
               <select-box
                 :items="reportTypes"
                 :bg-secondary-opened="true"
                 :show-search="false"
                 :showClearList="false"
-                :label="'Leads Folder'"
+                :label="'Select'"
+                class="select-box"
+              />
+            </div>
+          </div>
+
+          <div class="modal-section">
+            <div class="w-[130px] font-semibold sm:text-right">
+              Send Options
+            </div>
+            <div class="w-full">
+              <select-box
+                :items="sendOptions"
+                :bg-secondary-opened="true"
+                :show-search="false"
+                :showClearList="false"
+                :label="'Select'"
                 class="select-box"
               />
             </div>
@@ -65,7 +81,7 @@
             Cancel
           </Button>
           <Button size="sm" secondary class="normal-case rounded-xl">
-            Export
+            Send
           </Button>
         </div>
       </div>
@@ -80,7 +96,7 @@
     @apply hidden;
   }
   .modal-content {
-    @apply w-full p-[30px] md:px-[80px] border border-secondary rounded-2xl bg-base-300 text-left max-w-full;
+    @apply w-full max-h-[90vh] overflow-y-auto p-[30px] md:px-[80px] border border-secondary rounded-2xl bg-base-300 text-left max-w-full;
     .modal-section {
       @apply flex flex-col sm:flex-row sm:items-center gap-4;
       .select-box {
@@ -131,6 +147,17 @@ const reportTypes = ref([
   {
     value: "pdf",
     label: "PDF",
+  },
+]);
+
+const sendOptions = ref([
+  {
+    value: "immediately",
+    label: "Send Immediately",
+  },
+  {
+    value: "later",
+    label: "Send for Later",
   },
 ]);
 </script>

@@ -34,7 +34,7 @@
             <div class="w-[110px] font-semibold mt-4">Description</div>
             <div class="w-full">
               <textarea
-                class="w-full h-[200px] rounded-xl bg-secondary-focus/50 h-28 p-2 focus:outline-none resize-none"
+                class="w-full h-[200px] rounded-xl bg-secondary-focus/50 h-28 p-2 focus:outline-none resize-none p-4"
               ></textarea>
             </div>
           </div>

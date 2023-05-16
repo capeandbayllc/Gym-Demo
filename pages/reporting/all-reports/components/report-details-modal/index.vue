@@ -122,10 +122,18 @@
   <daisy-modal
     :overlay="true"
     :showCloseButton="false"
-    ref="cloneExportModal"
+    ref="exportReportModal"
     class="w-fit"
   >
     <export-report-modal @close="closeExportReportModal" />
+  </daisy-modal>
+  <daisy-modal
+    :overlay="true"
+    :showCloseButton="false"
+    ref="sendEmailModal"
+    class="w-fit"
+  >
+    <send-email-modal @close="closeSendEmailModal" />
   </daisy-modal>
 </template>
 
@@ -168,6 +176,7 @@ import HeadReportDetailsTable from "./components/head-reports-details-table.vue"
 import BodyReportDetailsTable from "./components/body-report-details-table.vue";
 import CloneReportModal from "./components/clone-report-modal.vue";
 import ExportReportModal from "./components/export-report-modal.vue";
+import SendEmailModal from "./components/send-email-modal.vue";
 import { getRandomInt } from "~/api/utils/number";
 
 import {
@@ -194,7 +203,9 @@ const selectEditOption = (item) => {
   if (item == "Clone") {
     openCloneReportModal();
   } else if (item == "Export") {
-    openCloneExportModal();
+    openExportReportModal();
+  } else if (item == "Send Email") {
+    openSendEmailModal();
   }
 };
 
@@ -206,12 +217,20 @@ const closeCloneReportModal = () => {
   cloneReportModal.value.close();
 };
 
-const cloneExportModal = ref(null);
-const openCloneExportModal = () => {
-  cloneExportModal.value.open();
+const exportReportModal = ref(null);
+const openExportReportModal = () => {
+  exportReportModal.value.open();
 };
 const closeExportReportModal = () => {
-  cloneExportModal.value.close();
+  exportReportModal.value.close();
+};
+
+const sendEmailModal = ref(null);
+const openSendEmailModal = () => {
+  sendEmailModal.value.open();
+};
+const closeSendEmailModal = () => {
+  sendEmailModal.value.close();
 };
 
 const data = computed(() => {
