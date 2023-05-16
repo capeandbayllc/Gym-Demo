@@ -78,6 +78,7 @@ export { default as WidgetIcon } from "./widget.vue";
 export { default as VendorIcon } from "./vendor.vue";
 export { default as CorporationIcon } from "./corporation.vue";
 export { default as RecruitingIcon } from "./recruiting.vue";
+export { default as RecipientSearchIcon } from "./recipient-search.vue";
 export { default as EventTypeIcon } from "./event-type.vue";
 export { default as MakeCopyeIcon } from "./make-copy.vue";
 export { default as DraftIcon } from "./draft.vue";

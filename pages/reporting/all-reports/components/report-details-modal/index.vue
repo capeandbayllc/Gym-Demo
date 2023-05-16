@@ -45,13 +45,14 @@
             value=""
             grayContent
             :items="timeOptions"
+            :scrollable="true"
             label="Created Time"
             class="select-dropdown bg-neutral z-[45]"
           />
           <select-dropdown
             value=""
             :items="totalRecordsOptions"
-            countCircle="37"
+            :countCircle="data.length"
             label="Total records"
             class="select-dropdown bg-secondary z-[40]"
           />
@@ -60,7 +61,6 @@
             outline
             error
             class="normal-case rounded-lg !text-base-content border-error"
-            @click="emit('close')"
           >
             Clear
           </Button>
@@ -92,6 +92,7 @@
           <select-dropdown
             value=""
             :items="['Clone', 'Export', 'Send Email']"
+            @onChange="selectEditOption"
             label="Edit"
             class="bg-secondary h-9 !w-[120px] rounded-xl px-1 w-full"
           />
@@ -110,6 +111,30 @@
       </div>
     </div>
   </div>
+  <daisy-modal
+    :overlay="true"
+    :showCloseButton="false"
+    ref="cloneReportModal"
+    class="w-fit"
+  >
+    <clone-report-modal @close="closeCloneReportModal" />
+  </daisy-modal>
+  <daisy-modal
+    :overlay="true"
+    :showCloseButton="false"
+    ref="exportReportModal"
+    class="w-fit"
+  >
+    <export-report-modal @close="closeExportReportModal" />
+  </daisy-modal>
+  <daisy-modal
+    :overlay="true"
+    :showCloseButton="false"
+    ref="sendEmailModal"
+    class="w-fit"
+  >
+    <send-email-modal @close="closeSendEmailModal" />
+  </daisy-modal>
 </template>
 
 <style scoped lang="postcss">
@@ -149,6 +174,9 @@ import selectDropdown from "./components/select-dropdown.vue";
 import equalToIcon from "./components/equal-to-icon.vue";
 import HeadReportDetailsTable from "./components/head-reports-details-table.vue";
 import BodyReportDetailsTable from "./components/body-report-details-table.vue";
+import CloneReportModal from "./components/clone-report-modal.vue";
+import ExportReportModal from "./components/export-report-modal.vue";
+import SendEmailModal from "./components/send-email-modal.vue";
 import { getRandomInt } from "~/api/utils/number";
 
 import {
@@ -169,6 +197,40 @@ const showTitleDropdown = ref(false);
 
 const toggleTitleDropdown = () => {
   showTitleDropdown.value = !showTitleDropdown.value;
+};
+
+const selectEditOption = (item) => {
+  if (item == "Clone") {
+    openCloneReportModal();
+  } else if (item == "Export") {
+    openExportReportModal();
+  } else if (item == "Send Email") {
+    openSendEmailModal();
+  }
+};
+
+const cloneReportModal = ref(null);
+const openCloneReportModal = () => {
+  cloneReportModal.value.open();
+};
+const closeCloneReportModal = () => {
+  cloneReportModal.value.close();
+};
+
+const exportReportModal = ref(null);
+const openExportReportModal = () => {
+  exportReportModal.value.open();
+};
+const closeExportReportModal = () => {
+  exportReportModal.value.close();
+};
+
+const sendEmailModal = ref(null);
+const openSendEmailModal = () => {
+  sendEmailModal.value.open();
+};
+const closeSendEmailModal = () => {
+  sendEmailModal.value.close();
 };
 
 const data = computed(() => {

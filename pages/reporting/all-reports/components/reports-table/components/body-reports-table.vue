@@ -16,12 +16,12 @@
             v-model="data.agreeElectronics"
           />
           <star-icon clear class="text-secondary text-2xl mb-1" />
-          <div
+          <button
             class="whitespace-nowrap cursor-pointer"
             @click="rowClicked(item)"
           >
             {{ item.report_name ? item.report_name : "-" }}
-          </div>
+          </button>
         </div>
       </td>
       <td>{{ item.description ? item.description : "-" }}</td>

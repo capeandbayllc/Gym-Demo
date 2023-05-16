@@ -17,10 +17,11 @@
     </button>
     <transition name="fade">
       <select-box-content
-        class="!rounded-b-xl !rounded-t-[0px] !top-[-2px] !pt-[2px] !max-h-[350px] !p-0 !overflow-y-hidden"
+        class="!rounded-b-xl !rounded-t-[0px] !top-[-2px] !pt-[2px] !max-h-[350px] !p-0"
         :class="{
           '!bg-neutral border-neutral': grayContent,
           '!bg-secondary border-secondary': !grayContent,
+          '!overflow-y-hidden': !scrollable,
         }"
         v-if="!isCollapsed"
       >
@@ -29,6 +30,7 @@
             <div v-for="(item, i) in items" :key="i">
               <div
                 class="option"
+                @click="selectValue(item)"
                 :class="{
                   'hover:bg-secondary': grayContent,
                   'hover:bg-base-300': !grayContent,
@@ -55,6 +57,10 @@
 }
 .select-box-btn.bg-secondary {
   @apply border-0;
+}
+
+::-webkit-scrollbar {
+  @apply hidden;
 }
 </style>
 <script setup>
@@ -91,12 +97,21 @@ const props = defineProps({
     type: Number,
     default: null,
   },
+  scrollable: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const selectContentEl = ref(null);
 const isCollapsed = ref(true);
 const toggleCollapsed = () => {
   isCollapsed.value = !isCollapsed.value;
+};
+
+const selectValue = (item) => {
+  emit("onChange", item);
+  toggleCollapsed();
 };
 
 const handleOutClick = (e) => {
