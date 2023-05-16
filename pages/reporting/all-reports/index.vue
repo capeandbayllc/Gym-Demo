@@ -75,12 +75,12 @@
 import ReportsFoldersCard from "./components/reports-folders-card/index.vue";
 import ReportsTable from "./components/reports-table/index.vue";
 import { getRandomInt } from "~/api/utils/number";
-import CreateReportModal from "./components/create-report-modal/index.vue";
-import ReportingColumns from "./components/create-report-modal/components/reporting-columns/index.vue";
+import NewReport from "./components/create-report/new-report.vue";
+import Reporting from "./components/create-report/reporting.vue";
 
 const actualFolder = ref("My Reports");
 
-const createReportScreens = ref([CreateReportModal, ReportingColumns]);
+const createReportScreens = ref([NewReport, Reporting]);
 const createReportScreenIndex = ref(0);
 const createReportModal = ref(false);
 

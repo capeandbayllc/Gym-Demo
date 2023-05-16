@@ -7,7 +7,7 @@
           @click="emit('close')"
         ></arrow-left>
         <h5 class="text-2xl">Report name</h5>
-        <div class="">
+        <div class="relative">
           <button @click.stop="toggleTitleDropdown">
             <vertical-ellipsis
               class="h-6 fill-base-content transform rotate-90 mt-[9px]"
@@ -63,8 +63,8 @@
         </div>
       </div>
 
-      <ReportsFoldersCard :actual-folder="actualFolder" />
-      <ReportsTable :data="data" class="col-span-3 mt-3 md:mt-0" />
+      <sidebar />
+      <reporting-table :data="data" class="col-span-3 mt-3 md:mt-0" />
     </div>
   </div>
 </template>
@@ -84,37 +84,14 @@
       }
     }
   }
-
-  .select-container {
-    @apply mb-7;
-
-    .select-title {
-      @apply pb-2 text-[15px] font-semibold;
-    }
-
-    .select-box {
-      @apply bg-neutral text-base-content !h-10 py-2 rounded-lg !text-left;
-    }
-  }
-}
-</style>
-<style lang="postcss">
-.select-box {
-  .select-box-btn {
-    @apply !h-10 rounded-lg;
-  }
-
-  .select-box-content {
-    @apply top-[8px];
-  }
 }
 </style>
 
 <script setup>
-import ReportsFoldersCard from "~/pages/reporting/all-reports/components/reports-folders-card/index.vue";
-import ReportsTable from "~/pages/reporting/all-reports/components/reports-table/index.vue";
+import Sidebar from "./components/sidebar.vue";
+import ReportingTable from "./components/reporting-table.vue";
 import { getRandomInt } from "~/api/utils/number";
-import EditReport from "../../../edit-report/index.vue";
+import EditReport from "../edit-report/index.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
@@ -128,19 +105,17 @@ const toggleTitleDropdown = () => {
   showTitleDropdown.value = !showTitleDropdown.value;
 };
 
-const actualFolder = ref("My Reports");
 const data = computed(() => {
   let array = [];
-  for (let i = 0; i < getRandomInt(actualFolder.value.length * 3, 0); i++) {
+  for (let i = 0; i < getRandomInt(20 * 3, 0); i++) {
     array.push({
-      id: 1,
-      report_name: actualFolder.value,
-      description: "",
-      report_type: "",
-      date_created: "",
-      last_run_date: "10 min ago",
-      created_by: "",
-      last_edited_by: "Ron",
+      id: i,
+      name: "Kelly Price",
+      annual_revenue: "",
+      brand_category: "",
+      city: "",
+      last_saved: "",
+      company: "HydraMassage",
     });
   }
   return array;
