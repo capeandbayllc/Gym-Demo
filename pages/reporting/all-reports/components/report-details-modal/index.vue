@@ -111,8 +111,21 @@
       </div>
     </div>
   </div>
-  <daisy-modal :overlay="true" ref="cloneReportModal" class="w-fit">
+  <daisy-modal
+    :overlay="true"
+    :showCloseButton="false"
+    ref="cloneReportModal"
+    class="w-fit"
+  >
     <clone-report-modal @close="closeCloneReportModal" />
+  </daisy-modal>
+  <daisy-modal
+    :overlay="true"
+    :showCloseButton="false"
+    ref="cloneExportModal"
+    class="w-fit"
+  >
+    <export-report-modal @close="closeExportReportModal" />
   </daisy-modal>
 </template>
 
@@ -154,6 +167,7 @@ import equalToIcon from "./components/equal-to-icon.vue";
 import HeadReportDetailsTable from "./components/head-reports-details-table.vue";
 import BodyReportDetailsTable from "./components/body-report-details-table.vue";
 import CloneReportModal from "./components/clone-report-modal.vue";
+import ExportReportModal from "./components/export-report-modal.vue";
 import { getRandomInt } from "~/api/utils/number";
 
 import {
@@ -179,6 +193,8 @@ const toggleTitleDropdown = () => {
 const selectEditOption = (item) => {
   if (item == "Clone") {
     openCloneReportModal();
+  } else if (item == "Export") {
+    openCloneExportModal();
   }
 };
 
@@ -188,6 +204,14 @@ const openCloneReportModal = () => {
 };
 const closeCloneReportModal = () => {
   cloneReportModal.value.close();
+};
+
+const cloneExportModal = ref(null);
+const openCloneExportModal = () => {
+  cloneExportModal.value.open();
+};
+const closeExportReportModal = () => {
+  cloneExportModal.value.close();
 };
 
 const data = computed(() => {
