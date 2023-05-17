@@ -1,5 +1,5 @@
 <template>
-  <tbody>
+  <tbody v-if="data">
     <tr
       class="reports-details-table-row"
       v-for="item in data"
@@ -7,15 +7,12 @@
       @handle="eventHandle"
       :data="item"
     >
-      <td>{{ item.name ? item.name : "-" }}</td>
-      <td>{{ item.annual_revenue ? item.annual_revenue : "-" }}</td>
-      <td>{{ item.brand_category ? item.brand_category : "-" }}</td>
-      <td>{{ item.city ? item.city : "-" }}</td>
-      <td>{{ item.last_saved ? item.last_saved : "-" }}</td>
-      <td>{{ item.company ? item.company : "-" }}</td>
+      <td v-for="column in columns">
+        {{ item[column.value] ? item[column.value] : "-" }}
+      </td>
     </tr>
   </tbody>
-  <p class="pl-3 mt-3" v-show="!data.length">No data available at the moment</p>
+  <p class="pl-3 mt-3" v-else>No data available at the moment</p>
 </template>
 
 <style scoped lang="postcss">
@@ -36,6 +33,10 @@
 <script setup>
 const props = defineProps({
   data: {
+    type: Array,
+    default: [],
+  },
+  columns: {
     type: Array,
     default: [],
   },

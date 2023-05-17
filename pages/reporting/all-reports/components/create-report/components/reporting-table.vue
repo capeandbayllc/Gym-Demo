@@ -2,8 +2,8 @@
   <div class="card-container">
     <div class="max-w-full rounded-xl overflow-auto max-h-[70vh] min-h-[102%]">
       <table class="rounded-2xl">
-        <head-reporting-table />
-        <body-reporting-table :data="data" />
+        <head-reporting-table :columns="columns" />
+        <body-reporting-table :columns="columns" :data="data" />
       </table>
     </div>
   </div>
@@ -32,6 +32,10 @@ import BodyReportingTable from "./body-reporting-table.vue";
 
 const props = defineProps({
   data: {
+    type: Array,
+    default: [],
+  },
+  columns: {
     type: Array,
     default: [],
   },

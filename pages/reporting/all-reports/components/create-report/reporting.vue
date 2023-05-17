@@ -77,7 +77,8 @@
         class="sm:col-span-4 md:col-span-5 xl:col-span-3"
       />
       <reporting-table
-        :data="data"
+        :data="actualData"
+        :columns="actualColumns"
         class="mt-3 sm:mt-0 sm:col-span-8 md:col-span-7 xl:col-span-9"
       />
     </div>
@@ -156,7 +157,14 @@ const closeRenameModal = () => {
   renameModal.value.close();
 };
 
-const data = computed(() => {
+const actualData = computed(() => {
+  if (actualSection.value == "Columns") {
+    return dataColumns.value;
+  } else if (actualSection.value == "Filters") {
+    return dataFilters.value;
+  }
+});
+const dataColumns = computed(() => {
   let array = [];
   for (let i = 0; i < getRandomInt(20 * 3, 0); i++) {
     array.push({
@@ -171,4 +179,86 @@ const data = computed(() => {
   }
   return array;
 });
+const dataFilters = computed(() => {
+  let array = [];
+  for (let i = 0; i < getRandomInt(20 * 3, 0); i++) {
+    array.push({
+      id: i,
+      name: "Kelly Price",
+      annual_revenue: "",
+      bi_conctract_expiration: "",
+      bi_monthly_cost: "",
+      bi_notes: "",
+    });
+  }
+  return array;
+});
+
+const actualColumns = computed(() => {
+  if (actualSection.value == "Columns") {
+    return columnsColumns;
+  } else if (actualSection.value == "Filters") {
+    return columnsFilters;
+  }
+});
+const columnsColumns = [
+  {
+    label: "Name",
+    value: "name",
+    class: "!w-[150px]",
+  },
+  {
+    label: "Annual Revenue",
+    value: "annual_revenue",
+    class: "!w-[150px]",
+  },
+  {
+    label: "Brand Category",
+    value: "brand_category",
+    class: "!w-[150px]",
+  },
+  {
+    label: "City",
+    value: "city",
+    class: "!w-[150px]",
+  },
+  {
+    label: "Last Saved",
+    value: "last_saved",
+    class: "!w-[150px]",
+  },
+  {
+    label: "Company",
+    value: "company",
+    class: "!w-[150px]",
+  },
+];
+
+const columnsFilters = [
+  {
+    label: "Name",
+    value: "name",
+    class: "!w-[150px]",
+  },
+  {
+    label: "Annual Revenue",
+    value: "annual_revenue",
+    class: "!w-[150px]",
+  },
+  {
+    label: "BI Conctract Expiration",
+    value: "bi_conctract_expiration",
+    class: "!w-[150px]",
+  },
+  {
+    label: "BI Monthly Cost",
+    value: "bi_monthly_cost",
+    class: "!w-[150px]",
+  },
+  {
+    label: "BI Notes",
+    value: "bi_notes",
+    class: "!w-[150px]",
+  },
+];
 </script>

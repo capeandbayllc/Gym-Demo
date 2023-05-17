@@ -41,37 +41,17 @@
 <script setup>
 import selectBoxReport from "../../reports-table/components/select-box-report.vue";
 
-const columns = [
-  {
-    label: "Name",
-    class: "!w-[150px]",
+const props = defineProps({
+  columns: {
+    type: Array,
+    default: [],
   },
-  {
-    label: "Annual Revenue",
-    class: "!w-[150px]",
-  },
-  {
-    label: "Brand Category",
-    class: "!w-[150px]",
-  },
-  {
-    label: "City",
-    class: "!w-[150px]",
-  },
-  {
-    label: "Last Saved",
-    class: "!w-[150px]",
-  },
-  {
-    label: "Company",
-    class: "!w-[150px]",
-  },
-];
+});
 
 const getOptions = (name) => {
   let array = [];
   for (let i = 1; i <= 5; i++) {
-    array.push({ label: name, value: i });
+    array.push({ label: name, value: i, showCheck: false });
   }
   return array;
 };

@@ -52,7 +52,7 @@
 .option {
   @apply text-[14px] py-3 flex items-center;
   .white-circle {
-    @apply w-[20px] h-[20px] rounded-full !bg-base-content/70 mr-2;
+    @apply min-w-[20px] w-[20px] h-[20px] rounded-full !bg-base-content/70 mr-2;
   }
 }
 .select-box-btn {
