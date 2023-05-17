@@ -25,7 +25,22 @@
       </div>
 
       <div class="col-span-3 flex justify-between gap-4 items-center">
-        <div class="flex items-center gap-8">
+        <div class="flex items-center gap-8" v-if="actualSection == 'Filters'">
+          <div class="flex flex-nowrap items-center">
+            <font-awesome-icon
+              :icon="['fas', 'circle-info']"
+              size="md"
+              class="mr-1 focus:outline-none"
+              tabindex="0"
+              @click.prevent.stop
+            />
+            <p>
+              Preview shown with limited number of rows. Run the report to see
+              actual aggregate values.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-8" v-else>
           <span class="text-lg font-semibold">Leads</span>
           <div class="flex flex-nowrap items-center">
             <font-awesome-icon

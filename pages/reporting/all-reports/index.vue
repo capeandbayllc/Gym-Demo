@@ -36,9 +36,11 @@
         :overlay="true"
         id="createReportModal"
         ref="createReportModal"
+        @close="createReportScreenIndex = 0"
       >
         <component
           :is="createReportScreens[createReportScreenIndex]"
+          @back="createReportScreenIndex--"
           @next="createReportScreenIndex++"
           @close="closeCreateReportModal"
         >
@@ -105,7 +107,6 @@ const openCreateReportModal = () => {
   createReportModal.value.open();
 };
 const closeCreateReportModal = () => {
-  createReportScreenIndex.value = 0;
   createReportModal.value.close();
 };
 </script>

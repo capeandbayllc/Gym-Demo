@@ -3,26 +3,39 @@
     <div class="flex justify-center">
       <div class="card-header">
         <button
-          @click="sectionSelected = 'Columns'"
+          @click="emit('changeActualSection', 'Columns')"
           class="card-button"
-          :class="{ 'card-button-selected': sectionSelected == 'Columns' }"
+          :class="{ 'card-button-selected': actualSection == 'Columns' }"
         >
           Columns
         </button>
         <button
-          @click="sectionSelected = 'Filters'"
+          @click="emit('changeActualSection', 'Filters')"
           class="card-button"
-          :class="{ 'card-button-selected': sectionSelected == 'Filters' }"
+          :class="{ 'card-button-selected': actualSection == 'Filters' }"
         >
           Filters
         </button>
       </div>
     </div>
     <div class="card-content">
-      <div class="section" v-for="(section, i) in content" :key="i">
+      <div class="section" v-for="(section, i) in actualContent" :key="i">
         <div class="flex justify-between pt-3 pb-1">
           <h3 class="text-[16px] font-semibold">{{ section.title }}</h3>
-          <button class="add-new-button">
+          <button
+            class="add-new-button"
+            v-if="section.icon_type && section.icon_type == 'pencil'"
+          >
+            <font-awesome-icon
+              :icon="['far', 'pencil']"
+              size="md"
+              class="hidden-icon-hover mr-1 focus:outline-none h-[10px]"
+              tabindex="0"
+              @click.prevent.stop
+            />
+            <plus-icon class="show-icon-hover hidden" />
+          </button>
+          <button v-else class="add-new-button">
             <plus-icon />
           </button>
         </div>
@@ -43,7 +56,17 @@
               {{ item }}
             </button>
 
-            <button class="xmark-button">
+            <button v-if="section.add_type && section.add_type == 'add_filter'">
+              <font-awesome-icon
+                :icon="['fas', 'plus']"
+                size="md"
+                class="mr-1 focus:outline-none h-[16px] text-secondary"
+                tabindex="0"
+                @click="openAddFilterModal"
+              />
+            </button>
+
+            <button class="xmark-button" v-else>
               <font-awesome-icon
                 :icon="['fas', 'xmark']"
                 size="md"
@@ -61,6 +84,9 @@
         </div>
       </div>
     </div>
+    <daisy-modal :overlay="true" id="addFilterModal" ref="addFilterModal">
+      <add-filter-modal @close="closeAddFilterModal" />
+    </daisy-modal>
   </div>
 </template>
 <style scoped lang="postcss">
@@ -91,6 +117,14 @@
       .add-new-button {
         @apply border-secondary border text-white w-[25px] h-[25px] p-[4px] rounded-lg flex justify-center items-center hover:bg-secondary;
       }
+      .add-new-button:hover {
+        .hidden-icon-hover {
+          @apply !hidden;
+        }
+        .show-icon-hover {
+          @apply !block;
+        }
+      }
     }
   }
 }
@@ -98,17 +132,38 @@
 <script setup>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faXmark,
+  faPlus,
+  faPencil,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(faPlus);
 library.add(faBars);
 library.add(faXmark);
+library.add(faPencil);
 
 import { PlusIcon } from "~/components/icons";
+import AddFilterModal from "./add-filter-modal.vue";
 
-const emit = defineEmits(["changeActualFolder"]);
+const emit = defineEmits(["changeActualSection"]);
 
-const sectionSelected = ref("Columns");
+const props = defineProps({
+  actualSection: {
+    type: String,
+    default: "",
+  },
+});
 
-var content = [
+const actualContent = computed(() => {
+  if (props.actualSection == "Columns") {
+    return contentColumns;
+  } else if (props.actualSection == "Filters") {
+    return contentFilters;
+  }
+});
+
+var contentColumns = [
   {
     title: "Columns",
     items: [
@@ -134,6 +189,24 @@ var content = [
   {
     title: "Visability",
     items: ["Locations", "Security Roles", "User"],
+  },
+];
+
+const addFilterModal = ref(null);
+
+const openAddFilterModal = () => {
+  addFilterModal.value.open();
+};
+const closeAddFilterModal = () => {
+  addFilterModal.value.close();
+};
+
+var contentFilters = [
+  {
+    title: "Filters",
+    icon_type: "pencil",
+    add_type: "add_filter",
+    items: ["Title", "Title 2", "Add filter"],
   },
 ];
 </script>
