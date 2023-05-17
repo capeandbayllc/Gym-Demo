@@ -122,7 +122,7 @@
       }
     }
     .select-dropdown {
-      @apply h-9 !w-[170px] rounded-xl px-1;
+      @apply h-9 !w-[170px] rounded-xl px-1 !max-h-[350px];
     }
   }
   .modal-content {
