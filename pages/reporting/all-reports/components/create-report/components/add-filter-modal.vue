@@ -26,14 +26,14 @@
               class="select-dropdown bg-neutral z-[48]"
             />
             <Datepicker
-              class="custom-date-input"
+              class="custom-date-input-dark"
               dark
               v-model="data.startDate"
               :enable-time-picker="false"
               auto-apply
             ></Datepicker>
             <Datepicker
-              class="custom-date-input"
+              class="custom-date-input-dark"
               dark
               v-model="data.endDate"
               :enable-time-picker="false"
@@ -165,7 +165,7 @@
     @apply top-[8px];
   }
 }
-.custom-date-input {
+.custom-date-input-dark {
   .dp__input {
     @apply h-9 max-w-[150px] rounded-xl bg-neutral border-0;
   }

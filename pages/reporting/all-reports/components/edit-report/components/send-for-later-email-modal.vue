@@ -47,14 +47,14 @@
             <div class="w-[120px] font-semibold">Send Options</div>
             <div class="w-full flex gap-3">
               <Datepicker
-                class="custom-date-input w-full"
+                class="custom-date-input-neutral-content w-full"
                 dark
                 v-model="data.startDate"
                 :enable-time-picker="false"
                 auto-apply
               ></Datepicker>
               <Datepicker
-                class="custom-date-input w-full"
+                class="custom-date-input-neutral-content w-full"
                 dark
                 v-model="data.endDate"
                 :enable-time-picker="false"
@@ -115,9 +115,9 @@
     @apply top-[8px];
   }
 }
-.custom-date-input {
+.custom-date-input-neutral-content {
   .dp__input {
-    @apply h-9 max-w-full !w-full rounded-xl bg-neutral-content/70 border-0;
+    @apply h-9 !max-w-full !w-full rounded-xl !bg-neutral-content/70 border-0;
   }
 }
 </style>
