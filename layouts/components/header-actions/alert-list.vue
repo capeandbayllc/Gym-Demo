@@ -1,6 +1,6 @@
 <template>
   <div class="alet-list-container">
-    <div class="alet-list-title">Alerts</div>
+    <div class="alet-list-title">Notifications</div>
     <div class="alet-list-body">
       <div v-for="(item, i) in list" :key="i" class="alert-list-item">
         <div>{{ item.text }}</div>
