@@ -4,7 +4,7 @@
       <div class="relative flex items-center gap-5">
         <arrow-left
           class="pt-1 h-12 cursor-pointer"
-          @click="emit('close')"
+          @click="emit('back')"
         ></arrow-left>
         <h5 class="text-2xl">Report name</h5>
         <div class="relative">
@@ -13,14 +13,12 @@
               class="h-6 fill-base-content transform rotate-90 mt-[9px]"
             />
           </button>
-          <div
-            class="dropdown"
-            @click.stop="toggleTitleDropdown"
-            v-show="showTitleDropdown"
-          >
+          <div class="dropdown" v-show="showTitleDropdown">
             <div class="dropdown-container">
-              <div class="dropdown-item">Rename</div>
-              <div class="dropdown-item">Delete</div>
+              <div class="dropdown-item" @click="openRenameModal">Rename</div>
+              <div class="dropdown-item" @click.stop="toggleTitleDropdown">
+                Delete
+              </div>
             </div>
           </div>
         </div>
@@ -63,10 +61,16 @@
         </div>
       </div>
 
-      <sidebar />
+      <sidebar
+        :actualSection="actualSection"
+        @changeActualSection="actualSection = $event"
+      />
       <reporting-table :data="data" class="col-span-3 mt-3 md:mt-0" />
     </div>
   </div>
+  <daisy-modal :overlay="true" :show-close-button="false" ref="renameModal">
+    <rename-modal @close="closeRenameModal" />
+  </daisy-modal>
 </template>
 
 <style scoped lang="postcss">
@@ -90,6 +94,7 @@
 <script setup>
 import Sidebar from "./components/sidebar.vue";
 import ReportingTable from "./components/reporting-table.vue";
+import RenameModal from "./components/rename-modal.vue";
 import { getRandomInt } from "~/api/utils/number";
 import EditReport from "../edit-report/index.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -101,8 +106,22 @@ import { VerticalEllipsis, ArrowLeft } from "~/components/icons";
 
 const showTitleDropdown = ref(false);
 
+const emit = defineEmits(["close", "back", "next"]);
+
+const actualSection = ref("Columns");
+
 const toggleTitleDropdown = () => {
   showTitleDropdown.value = !showTitleDropdown.value;
+};
+
+const renameModal = ref(null);
+
+const openRenameModal = () => {
+  toggleTitleDropdown();
+  renameModal.value.open();
+};
+const closeRenameModal = () => {
+  renameModal.value.close();
 };
 
 const data = computed(() => {
