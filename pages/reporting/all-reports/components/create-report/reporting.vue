@@ -1,62 +1,57 @@
 <template>
   <div class="modal-content">
-    <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 mt-2">
-      <div class="relative flex items-center gap-5">
-        <arrow-left
-          class="pt-1 h-12 cursor-pointer"
-          @click="emit('back')"
-        ></arrow-left>
-        <h5 class="text-2xl">Report name</h5>
-        <div class="relative">
-          <button @click.stop="toggleTitleDropdown">
-            <vertical-ellipsis
-              class="h-6 fill-base-content transform rotate-90 mt-[9px]"
-            />
-          </button>
-          <div class="dropdown" v-show="showTitleDropdown">
-            <div class="dropdown-container">
-              <div class="dropdown-item" @click="openRenameModal">Rename</div>
-              <div class="dropdown-item" @click.stop="toggleTitleDropdown">
-                Delete
+    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 mt-2">
+      <div
+        class="relative flex flex-wrap items-center gap-5 sm:col-span-4 md:col-span-5 xl:col-span-3"
+      >
+        <div class="flex items-center gap-3">
+          <arrow-left
+            class="pt-1 min-w-12 max-w-12 h-12 cursor-pointer"
+            @click="emit('back')"
+          ></arrow-left>
+          <h5 class="text-2xl whitespace-nowrap mr-2">Report name</h5>
+          <div class="relative">
+            <button @click.stop="toggleTitleDropdown">
+              <vertical-ellipsis
+                class="h-6 fill-base-content transform rotate-90 mt-[9px]"
+              />
+            </button>
+            <div class="dropdown" v-show="showTitleDropdown">
+              <div class="dropdown-container">
+                <div class="dropdown-item" @click="openRenameModal">Rename</div>
+                <div class="dropdown-item" @click.stop="toggleTitleDropdown">
+                  Delete
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-span-3 flex justify-between gap-4 items-center">
-        <div class="flex items-center gap-8" v-if="actualSection == 'Filters'">
-          <div class="flex flex-nowrap items-center">
+      <div
+        class="flex flex-wrap justify-between gap-4 items-center sm:col-span-8 md:col-span-7 xl:col-span-9"
+      >
+        <div class="flex items-center gap-8">
+          <span v-if="actualInfo.title" class="text-lg font-semibold">{{
+            actualInfo.title
+          }}</span>
+          <div class="flex gap-1 flex-nowrap items-start">
             <font-awesome-icon
               :icon="['fas', 'circle-info']"
               size="md"
-              class="mr-1 focus:outline-none"
+              class="mr-1 mt-[4px] focus:outline-none"
               tabindex="0"
               @click.prevent.stop
             />
             <p>
-              Preview shown with limited number of rows. Run the report to see
-              actual aggregate values.
+              {{ actualInfo.info }}
+              <span v-if="actualInfo.link" class="text-secondary font-semibold">
+                {{ actualInfo.link }}
+              </span>
             </p>
           </div>
         </div>
-        <div class="flex items-center gap-8" v-else>
-          <span class="text-lg font-semibold">Leads</span>
-          <div class="flex flex-nowrap items-center">
-            <font-awesome-icon
-              :icon="['fas', 'circle-info']"
-              size="md"
-              class="mr-1 focus:outline-none"
-              tabindex="0"
-              @click.prevent.stop
-            />
-            <p>
-              Do you want to run another report?
-              <span class="text-secondary font-semibold">Joined Report.</span>
-            </p>
-          </div>
-        </div>
-        <div class="flex gap-4">
+        <div class="flex gap-4 ml-auto">
           <Button
             size="sm"
             outline
@@ -79,8 +74,12 @@
       <sidebar
         :actualSection="actualSection"
         @changeActualSection="actualSection = $event"
+        class="sm:col-span-4 md:col-span-5 xl:col-span-3"
       />
-      <reporting-table :data="data" class="col-span-3 mt-3 md:mt-0" />
+      <reporting-table
+        :data="data"
+        class="mt-3 sm:mt-0 sm:col-span-8 md:col-span-7 xl:col-span-9"
+      />
     </div>
   </div>
   <daisy-modal :overlay="true" :show-close-button="false" ref="renameModal">
@@ -124,6 +123,24 @@ const showTitleDropdown = ref(false);
 const emit = defineEmits(["close", "back", "next"]);
 
 const actualSection = ref("Columns");
+
+const columnsInfo = {
+  title: "Leads",
+  info: "Do you want to run another report?",
+  link: "Joined Report.",
+};
+
+const filtersInfo = {
+  info: "Preview shown with limited number of rows. Run the report to see actual aggregate values.",
+};
+
+const actualInfo = computed(() => {
+  if (actualSection.value == "Columns") {
+    return columnsInfo;
+  } else if (actualSection.value == "Filters") {
+    return filtersInfo;
+  }
+});
 
 const toggleTitleDropdown = () => {
   showTitleDropdown.value = !showTitleDropdown.value;
