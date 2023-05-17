@@ -23,7 +23,7 @@
               :scrollable="true"
               :items="timeOptions"
               label="Between"
-              class="select-dropdown bg-neutral z-[45]"
+              class="select-dropdown bg-neutral z-[48]"
             />
             <Datepicker
               class="custom-date-input"
@@ -57,7 +57,7 @@
               :scrollable="true"
               :items="timeOptions"
               label="None"
-              class="select-dropdown bg-neutral z-[40]"
+              class="select-dropdown bg-neutral z-[46]"
             />
             <select-dropdown
               value=""
@@ -65,7 +65,7 @@
               :scrollable="true"
               :items="timeOptions"
               label="None"
-              class="select-dropdown bg-neutral z-[35]"
+              class="select-dropdown bg-neutral z-[44]"
             />
             <div
               class="h-[36px] flex items-center overflow-auto text-secondary"
@@ -86,7 +86,7 @@
               :scrollable="true"
               :items="filterOption"
               label="Annual Revenue"
-              class="select-dropdown bg-neutral z-[50]"
+              class="select-dropdown bg-neutral z-[42]"
             />
             <select-dropdown
               value=""
@@ -94,7 +94,7 @@
               :scrollable="true"
               :items="filterOption"
               label="="
-              class="select-dropdown bg-neutral z-[45]"
+              class="select-dropdown bg-neutral z-[40]"
             />
             <select-dropdown
               value=""
@@ -102,7 +102,7 @@
               :scrollable="true"
               :items="filterOption"
               label="Value"
-              class="select-dropdown bg-neutral z-[50]"
+              class="select-dropdown bg-neutral z-[38]"
             />
             <input type="text" value="USD" class="dark-input max-w-[60px]" />
             <input
@@ -141,7 +141,7 @@
 
 <style scoped lang="postcss">
 .modal-container {
-  @apply border-secondary text-base-content px-5 py-4 border-2 bg-base-300 rounded-2xl max-w-[960px] w-[90vw] max-h-[85vh] overflow-y-visible gap-5 w-[90vw];
+  @apply border-secondary text-base-content px-5 py-4 border-2 bg-base-300 rounded-2xl max-w-[960px] max-h-[85vh] overflow-y-visible gap-5 w-[90vw];
   ::-webkit-scrollbar {
     @apply hidden;
   }

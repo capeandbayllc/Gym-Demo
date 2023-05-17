@@ -16,6 +16,7 @@
             :label="item.title"
             :class="`z-[${i}]`"
             class="select-box"
+            @on-change="changeSelect(item, $event)"
           />
         </div>
       </div>
@@ -39,6 +40,13 @@
       </Button>
     </div>
   </div>
+  <daisy-modal
+    :overlay="true"
+    id="reportSchedulerModal"
+    ref="reportSchedulerModal"
+  >
+    <report-scheduler-modal @close="closeReportSchedulerModal" />
+  </daisy-modal>
 </template>
 
 <style scoped lang="postcss">
@@ -77,7 +85,23 @@
 </style>
 
 <script setup>
+import ReportSchedulerModal from "./components/report-scheduler-modal.vue";
+
+const reportSchedulerModal = ref(null);
+
+const openReportSchedulerModal = () => {
+  reportSchedulerModal.value.open();
+};
+const closeReportSchedulerModal = () => {
+  reportSchedulerModal.value.close();
+};
 const emit = defineEmits(["close"]);
+
+const changeSelect = (item, selected) => {
+  if (item.title == "Schedule") {
+    openReportSchedulerModal();
+  }
+};
 
 const selects = [
   {
