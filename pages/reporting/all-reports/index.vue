@@ -11,7 +11,7 @@
             <input
               class="search-input"
               type="text"
-              placeholder="Search All Reports"
+              :placeholder="`Search ${actualFolder}`"
             />
           </div>
           <Button

@@ -2,11 +2,7 @@
   <div class="card-container">
     <div class="card-header">
       <div class="all-reports-search">
-        <input
-          class="search-input"
-          type="text"
-          placeholder="Search All Reports"
-        />
+        <input class="search-input" type="text" placeholder="Search Reports" />
       </div>
     </div>
     <div class="card-content">

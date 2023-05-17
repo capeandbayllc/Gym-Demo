@@ -2,7 +2,7 @@
   <div class="modal-content">
     <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 mt-2">
       <div
-        class="relative flex flex-wrap items-center gap-5 sm:col-span-4 md:col-span-5 xl:col-span-3"
+        class="relative flex flex-wrap items-center gap-5 sm:col-span-4 md:col-span-4 xl:col-span-3"
       >
         <div class="flex items-center gap-3">
           <arrow-left
@@ -29,7 +29,7 @@
       </div>
 
       <div
-        class="flex flex-wrap justify-between gap-4 items-center sm:col-span-8 md:col-span-7 xl:col-span-9"
+        class="flex flex-wrap justify-between gap-4 items-center sm:col-span-8 md:col-span-8 xl:col-span-9"
       >
         <div class="flex items-center gap-8">
           <span v-if="actualInfo.title" class="text-lg font-semibold">{{
@@ -74,12 +74,12 @@
       <sidebar
         :actualSection="actualSection"
         @changeActualSection="actualSection = $event"
-        class="sm:col-span-4 md:col-span-5 xl:col-span-3"
+        class="sm:col-span-4 md:col-span-4 xl:col-span-3"
       />
       <reporting-table
         :data="actualData"
         :columns="actualColumns"
-        class="mt-3 sm:mt-0 sm:col-span-8 md:col-span-7 xl:col-span-9"
+        class="mt-3 sm:mt-0 sm:col-span-8 md:col-span-8 xl:col-span-9"
       />
     </div>
   </div>
