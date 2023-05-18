@@ -14,16 +14,18 @@
         v-if="!isCollapsed"
       >
         <div class="text-base-content gap-2 flex flex-col">
-          <select-box
-            v-if="!disableSort"
-            :items="sortOptions"
-            :bg-secondary-opened="false"
-            :bg-gray-opened="true"
-            :show-search="false"
-            :showClearList="false"
-            label="Sort Entire Table"
-            class="bg-base-content/60 text-neutral/80 font-semibold rounded-lg !text-left"
-          />
+          <div class="max-w-[90%]">
+            <select-box
+              v-if="!disableSort"
+              :items="sortOptions"
+              :bg-secondary-opened="false"
+              :bg-gray-opened="true"
+              :show-search="false"
+              :showClearList="false"
+              label="Sort Entire Table"
+              class="bg-base-content/60 text-neutral/80 font-semibold rounded-lg !text-left"
+            />
+          </div>
           <input
             v-if="!disableSearch"
             type="text"
@@ -33,14 +35,22 @@
           <div class="">
             <div v-for="(option, i) in optionsMapped" :key="i">
               <button class="option" @click="option.checked = !option.checked">
-                <font-awesome-icon
-                  v-if="option.checked"
-                  :icon="['fas', 'check']"
-                  size="md"
-                  class="focus:outline-none w-[20px] h-[20px] mr-2"
-                  tabindex="0"
-                />
-                <div v-else class="white-circle"></div>
+                <div
+                  class="h-[20px] w-[20px] flex overflow-visible mr-2 relative"
+                >
+                  <transition name="fade">
+                    <font-awesome-icon
+                      v-if="option.checked"
+                      :icon="['fas', 'check']"
+                      size="md"
+                      class="check-icon"
+                      tabindex="0"
+                    />
+                  </transition>
+                  <transition name="fade">
+                    <div v-if="!option.checked" class="white-circle"></div>
+                  </transition>
+                </div>
                 {{ option.label }}
               </button>
             </div>
@@ -61,8 +71,11 @@
 <style scoped lang="postcss">
 .option {
   @apply text-[14px] py-3 cursor-pointer flex items-center;
+  .check-icon {
+    @apply focus:outline-none w-[20px] h-[20px] mr-2 absolute;
+  }
   .white-circle {
-    @apply min-w-[20px] w-[20px] h-[20px] rounded-full !bg-base-content/70 mr-2;
+    @apply min-w-[20px] w-[20px] h-[20px] rounded-full !bg-base-content/70 mr-2 absolute;
   }
 }
 .select-box-btn {
