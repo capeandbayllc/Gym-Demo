@@ -1,36 +1,5 @@
 <template>
   <tbody>
-    <!-- <tr
-      class="reports-table-row"
-      v-for="item in data"
-      :key="item.id"
-      @handle="eventHandle"
-      :data="item"
-    >
-      <td>
-        <div class="flex items-center gap-2">
-          <input
-            type="checkbox"
-            name="agree"
-            id="agree"
-            v-model="data.agreeElectronics"
-          />
-          <star-icon clear class="text-secondary text-2xl mb-1" />
-          <button
-            class="whitespace-nowrap cursor-pointer"
-            @click="rowClicked(item)"
-          >
-            {{ item.report_name ? item.report_name : "-" }}
-          </button>
-        </div>
-      </td>
-      <td>{{ item.description ? item.description : "-" }}</td>
-      <td>{{ item.report_type ? item.report_type : "-" }}</td>
-      <td>{{ item.date_created ? item.date_created : "-" }}</td>
-      <td>{{ item.last_run_date ? item.last_run_date : "-" }}</td>
-      <td>{{ item.created_by ? item.created_by : "-" }}</td>
-      <td>{{ item.last_edited_by ? item.last_edited_by : "-" }}</td>
-    </tr> -->
     <tr
       class="reports-table-row"
       v-for="item in data"
@@ -39,7 +8,15 @@
       :data="item"
     >
       <td v-for="column in columns">
-        {{ item[column.value] ? item[column.value] : "-" }}
+        <component
+          v-if="column.component"
+          :is="column.component"
+          :column="column"
+          :item="item"
+        />
+        <span v-else>
+          {{ item[column.value] ? item[column.value] : "-" }}
+        </span>
       </td>
     </tr>
   </tbody>
@@ -58,17 +35,10 @@
   td:last-child {
     @apply border-r-2 rounded-r capitalize px-4;
   }
-  input[type="checkbox"] {
-    @apply rounded-[6px] bg-base-content appearance-none m-0 h-5 w-5 border border-neutral-content outline-none focus:border;
-  }
-  input[type="checkbox"]:checked {
-    @apply bg-secondary border-primary;
-  }
 }
 </style>
 
 <script setup>
-import { StarIcon } from "~/components/icons";
 const props = defineProps({
   data: {
     type: Array,

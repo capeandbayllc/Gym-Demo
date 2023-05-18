@@ -48,24 +48,27 @@ const props = defineProps({
   },
 });
 
-const options = [
-  {
-    label: "Title 1",
-    value: "1",
-  },
-  {
-    label: "Title 2",
-    value: "2",
-  },
-  {
-    label: "Title 3",
-    value: "3",
-  },
-  {
-    label: "Title 4",
-    value: "4",
-  },
-];
+const options = computed(() => {
+  return [
+    {
+      label: "Title 1",
+      value: "1",
+    },
+    {
+      label: "Title 2",
+      value: "2",
+    },
+    {
+      label: "Title 3",
+      value: "3",
+    },
+    {
+      label: "Title 4",
+      value: "4",
+    },
+  ];
+});
+
 const sortOptions = [
   {
     value: "A",

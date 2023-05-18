@@ -89,6 +89,8 @@ import ReportsTable from "./components/reports-table/index.vue";
 import { getRandomInt } from "~/api/utils/number";
 import NewReport from "./components/create-report/new-report.vue";
 import Reporting from "./components/create-report/reporting.vue";
+import ReportNameColumn from "./components/reports-table/components/columns/reportNameColumn.vue";
+import UserColumn from "./components/reports-table/components/columns/userColumn.vue";
 
 const subFolders = ref([
   "Campaign Reports",
@@ -104,6 +106,7 @@ const defaultColumns = ref([
   {
     label: "Report Name",
     value: "report_name",
+    component: ReportNameColumn,
     class: "w-full",
   },
   {
@@ -162,6 +165,7 @@ const folders = ref([
       {
         label: "Report Name",
         value: "report_name",
+        component: ReportNameColumn,
         class: "w-full",
       },
       {
@@ -189,7 +193,7 @@ const folders = ref([
       {
         label: "User",
         value: "user",
-        component: "userComponent",
+        component: UserColumn,
         class: "!w-[146px]",
       },
       {
