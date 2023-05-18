@@ -11,6 +11,7 @@
         <component
           v-if="column.component"
           :is="column.component"
+          @row-clicked="rowClicked"
           :column="column"
           :item="item"
         />

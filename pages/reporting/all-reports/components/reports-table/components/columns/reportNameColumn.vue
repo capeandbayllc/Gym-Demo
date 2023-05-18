@@ -29,4 +29,10 @@ const props = defineProps({
     default: {},
   },
 });
+
+const emit = defineEmits(["row-clicked", "handle"]);
+
+const rowClicked = (data) => {
+  emit("row-clicked", data);
+};
 </script>
