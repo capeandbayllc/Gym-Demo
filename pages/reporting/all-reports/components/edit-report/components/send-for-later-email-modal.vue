@@ -8,11 +8,12 @@
       <div>
         <div class="overflow-visible flex flex-col gap-8 mb-5">
           <h3 class="text-lg font-semibold text-center">
-            Mail Sending Options
+            Mail Sending Options -
+            <span class="font-normal">Schedule for Later</span>
           </h3>
 
           <div class="modal-section">
-            <div class="w-[130px] font-semibold sm:text-right">Recipients</div>
+            <div class="w-[120px] font-semibold">Recipients</div>
             <div class="w-full relative">
               <input type="text" class="input-text" value="Kevin Buchanan" />
               <button
@@ -28,44 +29,37 @@
             </div>
           </div>
 
-          <div class="modal-section !items-start">
-            <div class="w-full">
-              <textarea
-                class="w-full h-[200px] rounded-xl bg-secondary-focus/50 h-28 p-2 focus:outline-none resize-none p-4"
-                placeholder="Message"
-              ></textarea>
-            </div>
-          </div>
-
           <div class="modal-section">
-            <div class="w-[130px] font-semibold sm:text-right">
-              Export Files As
-            </div>
+            <div class="w-[120px] font-semibold">Export File As</div>
             <div class="w-full">
               <select-box
                 :items="reportTypes"
                 :bg-secondary-opened="true"
                 :show-search="false"
                 :showClearList="false"
-                :label="'Select'"
+                :label="'Leads Folder'"
                 class="select-box"
               />
             </div>
           </div>
 
           <div class="modal-section">
-            <div class="w-[130px] font-semibold sm:text-right">
-              Send Options
-            </div>
-            <div class="w-full">
-              <select-box
-                :items="sendOptions"
-                :bg-secondary-opened="true"
-                :show-search="false"
-                :showClearList="false"
-                :label="'Select'"
-                class="select-box"
-              />
+            <div class="w-[120px] font-semibold">Send Options</div>
+            <div class="w-full flex gap-3">
+              <Datepicker
+                class="custom-date-input-neutral-content w-full"
+                dark
+                v-model="data.startDate"
+                :enable-time-picker="false"
+                auto-apply
+              ></Datepicker>
+              <Datepicker
+                class="custom-date-input-neutral-content w-full"
+                dark
+                v-model="data.endDate"
+                :enable-time-picker="false"
+                auto-apply
+              ></Datepicker>
             </div>
           </div>
         </div>
@@ -96,7 +90,7 @@
     @apply hidden;
   }
   .modal-content {
-    @apply w-full max-h-[90vh] overflow-y-auto p-[30px] md:px-[80px] border border-secondary rounded-2xl bg-base-300 text-left max-w-full;
+    @apply w-full max-h-[90vh] overflow-y-visible p-[30px] md:px-[80px] border border-secondary rounded-2xl bg-base-300 text-left max-w-full;
     .modal-section {
       @apply flex flex-col sm:flex-row sm:items-center gap-4;
       .select-box {
@@ -121,11 +115,23 @@
     @apply top-[8px];
   }
 }
+.custom-date-input-neutral-content {
+  .dp__input {
+    @apply h-9 !max-w-full !w-full rounded-xl !bg-neutral-content/70 border-0;
+  }
+}
 </style>
 
 <script setup>
+import Datepicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 import { RecipientSearchIcon, CloseMe } from "~/components/icons";
 import RecipientDropdown from "./recipient-dropdown.vue";
+
+const data = ref({
+  startDate: "",
+  endDate: "",
+});
 
 const emit = defineEmits(["close"]);
 

@@ -17,11 +17,12 @@
     </button>
     <transition name="fade">
       <select-box-content
-        class="!rounded-b-xl !rounded-t-[0px] !top-[-2px] !pt-[2px] !max-h-[350px] !p-0"
+        class="!rounded-b-xl !rounded-t-[0px] !top-[-2px] !pt-[2px] !p-0"
         :class="{
           '!bg-neutral border-neutral': grayContent,
           '!bg-secondary border-secondary': !grayContent,
           '!overflow-y-hidden': !scrollable,
+          '!overflow-y-scroll': scrollable,
         }"
         v-if="!isCollapsed"
       >

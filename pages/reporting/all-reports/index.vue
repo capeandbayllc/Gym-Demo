@@ -11,7 +11,7 @@
             <input
               class="search-input"
               type="text"
-              placeholder="Search All Reports"
+              :placeholder="`Search ${actualFolder}`"
             />
           </div>
           <Button
@@ -36,8 +36,15 @@
         :overlay="true"
         id="createReportModal"
         ref="createReportModal"
+        @close="createReportScreenIndex = 0"
       >
-        <create-report-modal @close="closeCreateReportModal" />
+        <component
+          :is="createReportScreens[createReportScreenIndex]"
+          @back="createReportScreenIndex--"
+          @next="createReportScreenIndex++"
+          @close="closeCreateReportModal"
+        >
+        </component>
       </daisy-modal>
     </div>
   </div>
@@ -70,10 +77,13 @@
 import ReportsFoldersCard from "./components/reports-folders-card/index.vue";
 import ReportsTable from "./components/reports-table/index.vue";
 import { getRandomInt } from "~/api/utils/number";
-import CreateReportModal from "./components/create-report-modal/index.vue";
+import NewReport from "./components/create-report/new-report.vue";
+import Reporting from "./components/create-report/reporting.vue";
 
 const actualFolder = ref("My Reports");
 
+const createReportScreens = ref([NewReport, Reporting]);
+const createReportScreenIndex = ref(0);
 const createReportModal = ref(false);
 
 const data = computed(() => {
