@@ -91,6 +91,7 @@ import NewReport from "./components/create-report/new-report.vue";
 import Reporting from "./components/create-report/reporting.vue";
 import ReportNameColumn from "./components/reports-table/components/columns/reportNameColumn.vue";
 import UserColumn from "./components/reports-table/components/columns/userColumn.vue";
+import ExportColumn from "./components/reports-table/components/columns/exportColumn.vue";
 
 const subFolders = ref([
   "Campaign Reports",
@@ -102,6 +103,7 @@ const subFolders = ref([
   "Member Reports",
   "People Reports",
 ]);
+
 const defaultColumns = ref([
   {
     label: "Report Name",
@@ -207,6 +209,7 @@ const folders = ref([
       {
         label: "Export",
         value: "export",
+        component: ExportColumn,
         class: "!w-[146px]",
       },
     ],
@@ -232,6 +235,7 @@ const folders = ref([
     columns: defaultColumns.value,
   },
 ]);
+
 const actualFolder = ref(folders.value[0]);
 const actualSubFolder = ref("");
 
