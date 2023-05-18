@@ -15,6 +15,7 @@
       >
         <div class="text-base-content gap-2 flex flex-col">
           <select-box
+            v-if="!disableSort"
             :items="sortOptions"
             :bg-secondary-opened="false"
             :bg-gray-opened="true"
@@ -24,20 +25,29 @@
             class="bg-base-content/60 text-neutral/80 font-semibold rounded-lg !text-left"
           />
           <input
+            v-if="!disableSearch"
             type="text"
             class="rounded-lg w-full font-semibold tracking-normal p-2 focus:outline-none text-neutral"
             placeholder="Search"
           />
           <div class="">
-            <div v-for="(option, i) in options" :key="i">
-              <div class="option">
-                <div class="white-circle"></div>
+            <div v-for="(option, i) in optionsMapped" :key="i">
+              <button class="option" @click="option.checked = !option.checked">
+                <font-awesome-icon
+                  v-if="option.checked"
+                  :icon="['fas', 'check']"
+                  size="md"
+                  class="focus:outline-none w-[20px] h-[20px] mr-2"
+                  tabindex="0"
+                />
+                <div v-else class="white-circle"></div>
                 {{ option.label }}
-              </div>
+              </button>
             </div>
           </div>
 
           <Button
+            v-if="!disableConfirm"
             size="sm"
             outline=""
             class="normal-case rounded-xl text-[12px] ml-auto"
@@ -50,7 +60,7 @@
 </template>
 <style scoped lang="postcss">
 .option {
-  @apply text-[14px] py-3 flex items-center;
+  @apply text-[14px] py-3 cursor-pointer flex items-center;
   .white-circle {
     @apply min-w-[20px] w-[20px] h-[20px] rounded-full !bg-base-content/70 mr-2;
   }
@@ -70,6 +80,11 @@ export default {
 <script setup>
 import SelectBoxIcon from "~/components/select-box/select-box-icon.vue";
 import SelectBoxContent from "~/components/select-box/SelectBoxContent.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faCheck);
 
 const emit = defineEmits(["onChange"]);
 
@@ -101,6 +116,25 @@ const props = defineProps({
     type: Array,
     default: [],
   },
+  disableSearch: {
+    type: Boolean,
+    default: false,
+  },
+  disableSort: {
+    type: Boolean,
+    default: false,
+  },
+  disableConfirm: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const optionsMapped = ref();
+watchEffect(() => {
+  optionsMapped.value = props.options.map((item) => {
+    return { ...item, checked: false };
+  });
 });
 
 const selectContentEl = ref(null);

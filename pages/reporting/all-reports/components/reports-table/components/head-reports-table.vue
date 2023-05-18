@@ -10,7 +10,10 @@
         <div class="text-white text-center">
           <select-box-report
             value=""
-            :options="options"
+            :disable-search="column.disableSearch"
+            :disable-sort="column.disableSort"
+            :disable-confirm="column.disableConfirm"
+            :options="getOptions(column)"
             :sort-options="sortOptions"
             :label="column.label"
             class="bg-secondary select-box-filter-size w-full"
@@ -48,26 +51,20 @@ const props = defineProps({
   },
 });
 
-const options = computed(() => {
-  return [
-    {
-      label: "Title 1",
-      value: "1",
-    },
-    {
-      label: "Title 2",
-      value: "2",
-    },
-    {
-      label: "Title 3",
-      value: "3",
-    },
-    {
-      label: "Title 4",
-      value: "4",
-    },
-  ];
-});
+const getOptions = (column) => {
+  if (column.options) {
+    return column.options;
+  }
+
+  let array = [];
+  for (let i = 1; i <= 4; i++) {
+    array.push({
+      label: column.label,
+      value: i,
+    });
+  }
+  return array;
+};
 
 const sortOptions = [
   {

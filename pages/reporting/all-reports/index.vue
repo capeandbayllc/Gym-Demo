@@ -176,6 +176,14 @@ const folders = ref([
       {
         label: "Status",
         value: "status",
+        disableSearch: true,
+        disableSort: true,
+        disableConfirm: true,
+        options: [
+          { label: "Completed", value: "completed" },
+          { label: "Pending", value: "pending" },
+          { label: "Failed", value: "failed" },
+        ],
         class: "!w-[146px]",
       },
       {
