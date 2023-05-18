@@ -15,6 +15,9 @@
             :disable-confirm="column.disableConfirm"
             :options="getOptions(column)"
             :sort-options="sortOptions"
+            @applyFilter="
+              emit('applyFilter', { type: column.label, values: $event })
+            "
             :label="column.label"
             class="bg-secondary select-box-filter-size w-full"
             :class="column.class"
@@ -27,7 +30,7 @@
 
 <style scoped lang="postcss">
 .report-table-header {
-  @apply bg-secondary !h-[50px] sticky top-[-1px];
+  @apply bg-secondary !h-[50px] sticky top-[-1px] z-[70];
 
   th {
     @apply border-y-2 border-secondary text-center;
@@ -43,6 +46,8 @@
 
 <script setup>
 import selectBoxReport from "./select-box-report.vue";
+
+const emit = defineEmits(["applyFilter"]);
 
 const props = defineProps({
   columns: {

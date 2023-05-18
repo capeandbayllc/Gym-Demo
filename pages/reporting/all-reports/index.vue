@@ -258,6 +258,9 @@ const actualData = computed(() => {
       let value = column.default ? column.default : "";
       if (column.value == "report_name") {
         value = actualName;
+      } else if (column.options?.length) {
+        value =
+          column.options[getRandomInt(column.options.length - 1, 0)].label;
       }
       item[column.value] = value;
     });

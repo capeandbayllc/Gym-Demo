@@ -2,9 +2,9 @@
   <div class="card-container">
     <div class="max-w-full rounded-xl overflow-auto max-h-[70vh] min-h-[102%]">
       <table class="rounded-2xl">
-        <head-reports-table :columns="columns" />
+        <head-reports-table :columns="columns" @applyFilter="applyFilter" />
         <body-reports-table
-          :data="data"
+          :data="dataFiltered"
           :columns="columns"
           @row-clicked="openReportDetailsModal"
         />
@@ -59,6 +59,28 @@ const props = defineProps({
     default: [],
   },
 });
+
+const dataFiltered = computed(() => {
+  const statusFilterActive = filters.value.status
+    ? filters.value.status.some((statusItem) => statusItem.checked === true)
+    : false;
+
+  if (statusFilterActive) {
+    return props.data.filter((item) => {
+      return filters.value.status.some((statusItem) => {
+        return statusItem.checked && statusItem.label === item.status;
+      });
+    });
+  }
+
+  return props.data;
+});
+
+const filters = ref({});
+
+const applyFilter = (filter) => {
+  filters.value[filter.type.toLowerCase().replace(/\s/g, "_")] = filter.values;
+};
 
 const openReportDetailsModal = (report) => {
   selectedReport.value = report;

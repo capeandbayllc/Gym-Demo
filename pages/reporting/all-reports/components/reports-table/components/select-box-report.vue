@@ -34,7 +34,7 @@
           />
           <div class="">
             <div v-for="(option, i) in optionsMapped" :key="i">
-              <button class="option" @click="option.checked = !option.checked">
+              <button class="option" @click="toggleOption(option)">
                 <div
                   class="h-[20px] w-[20px] flex overflow-visible mr-2 relative"
                 >
@@ -99,7 +99,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faCheck);
 
-const emit = defineEmits(["onChange"]);
+const emit = defineEmits(["onChange", "applyFilter"]);
 
 const props = defineProps({
   label: {
@@ -149,6 +149,11 @@ watchEffect(() => {
     return { ...item, checked: false };
   });
 });
+
+const toggleOption = (option) => {
+  option.checked = !option.checked;
+  emit("applyFilter", optionsMapped.value);
+};
 
 const selectContentEl = ref(null);
 const isCollapsed = ref(true);
