@@ -35,7 +35,11 @@
           @changeActualSubFolder="actualSubFolder = $event"
           :folders="folders"
         />
-        <ReportsTable :data="data" class="col-span-3 mt-3 md:mt-0" />
+        <ReportsTable
+          :data="actualData"
+          :columns="actualColumns"
+          class="col-span-3 mt-3 md:mt-0"
+        />
       </div>
 
       <daisy-modal
@@ -96,10 +100,51 @@ const subFolders = ref([
   "Member Reports",
   "People Reports",
 ]);
+const defaultColumns = ref([
+  {
+    label: "Report Name",
+    value: "report_name",
+    class: "w-full",
+  },
+  {
+    label: "Description",
+    value: "description",
+    class: "w-full",
+  },
+  {
+    label: "Report Type",
+    value: "report_type",
+    class: "!w-[146px]",
+  },
+  {
+    label: "Date Created",
+    value: "date_created",
+    class: "!w-[146px]",
+  },
+  {
+    label: "Last Run Date",
+    value: "last_run_date",
+    default: "10 min ago",
+    class: "!w-[146px]",
+  },
+  {
+    label: "Created By",
+    value: "created_by",
+    class: "!w-[146px]",
+  },
+  {
+    label: "Last Edited By",
+    value: "last_edited_by",
+    default: "Ron",
+    class: "w-full",
+  },
+]);
+
 const folders = ref([
   {
     name: "All Reports",
     subFolders: subFolders.value,
+    columns: defaultColumns.value,
   },
   {
     name: "Report Queue",
@@ -113,22 +158,66 @@ const folders = ref([
       "Quote Reports",
       "Sales Orders Reports",
     ],
+    columns: [
+      {
+        label: "Report Name",
+        value: "report_name",
+        class: "w-full",
+      },
+      {
+        label: "Description",
+        value: "description",
+        class: "w-full",
+      },
+      {
+        label: "Status",
+        value: "status",
+        class: "!w-[146px]",
+      },
+      {
+        label: "Completed Date",
+        value: "completed_date",
+        default: "April 9, 2023",
+        class: "!w-[146px]",
+      },
+      {
+        label: "Completed Time",
+        value: "completed_time",
+        default: "1:00 PM",
+        class: "!w-[146px]",
+      },
+      {
+        label: "User",
+        value: "user",
+        component: "userComponent",
+        class: "!w-[146px]",
+      },
+      {
+        label: "Export",
+        value: "export",
+        class: "!w-[146px]",
+      },
+    ],
   },
   {
     name: "Favorites",
     subFolders: subFolders.value,
+    columns: defaultColumns.value,
   },
   {
     name: "Recently Viewed",
     subFolders: subFolders.value,
+    columns: defaultColumns.value,
   },
   {
     name: "Scheduled Reports",
     subFolders: subFolders.value,
+    columns: defaultColumns.value,
   },
   {
     name: "Recently Deleted",
     subFolders: subFolders.value,
+    columns: defaultColumns.value,
   },
 ]);
 const actualFolder = ref(folders.value[0]);
@@ -138,26 +227,30 @@ const createReportScreens = ref([NewReport, Reporting]);
 const createReportScreenIndex = ref(0);
 const createReportModal = ref(false);
 
-const data = computed(() => {
+const actualData = computed(() => {
   let array = [];
+
   let actualName =
     actualSubFolder.value == ""
       ? actualFolder.value.name
       : actualSubFolder.value;
-  console.log(actualName);
+
+  console.log(actualColumns.value);
   for (let i = 0; i < getRandomInt(actualName.length * 3, 0); i++) {
-    array.push({
-      id: 1,
-      report_name: actualName,
-      description: "",
-      report_type: "",
-      date_created: "",
-      last_run_date: "10 min ago",
-      created_by: "",
-      last_edited_by: "Ron",
+    let item = {};
+    actualColumns.value.forEach((column) => {
+      let value = column.default ? column.default : "";
+      if (column.value == "report_name") {
+        value = actualName;
+      }
+      item[column.value] = value;
     });
+    array.push(item);
   }
   return array;
+});
+const actualColumns = computed(() => {
+  return actualFolder.value.columns;
 });
 
 const openCreateReportModal = () => {

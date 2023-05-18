@@ -1,6 +1,6 @@
 <template>
   <tbody>
-    <tr
+    <!-- <tr
       class="reports-table-row"
       v-for="item in data"
       :key="item.id"
@@ -30,6 +30,17 @@
       <td>{{ item.last_run_date ? item.last_run_date : "-" }}</td>
       <td>{{ item.created_by ? item.created_by : "-" }}</td>
       <td>{{ item.last_edited_by ? item.last_edited_by : "-" }}</td>
+    </tr> -->
+    <tr
+      class="reports-table-row"
+      v-for="item in data"
+      :key="item.id"
+      @handle="eventHandle"
+      :data="item"
+    >
+      <td v-for="column in columns">
+        {{ item[column.value] ? item[column.value] : "-" }}
+      </td>
     </tr>
   </tbody>
   <p class="pl-3 mt-3" v-show="!data.length">No data available at the moment</p>
@@ -60,6 +71,10 @@
 import { StarIcon } from "~/components/icons";
 const props = defineProps({
   data: {
+    type: Array,
+    default: [],
+  },
+  columns: {
     type: Array,
     default: [],
   },

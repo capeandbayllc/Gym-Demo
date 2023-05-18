@@ -41,36 +41,12 @@
 <script setup>
 import selectBoxReport from "./select-box-report.vue";
 
-const columns = [
-  {
-    label: "Report Name",
-    class: "w-full",
+const props = defineProps({
+  columns: {
+    type: Array,
+    default: [],
   },
-  {
-    label: "Description",
-    class: "w-full",
-  },
-  {
-    label: "Report Type",
-    class: "!w-[146px]",
-  },
-  {
-    label: "Date Created",
-    class: "!w-[146px]",
-  },
-  {
-    label: "Last Run Date",
-    class: "!w-[146px]",
-  },
-  {
-    label: "Created By",
-    class: "!w-[146px]",
-  },
-  {
-    label: " Last Edited By",
-    class: "w-full",
-  },
-];
+});
 
 const options = [
   {

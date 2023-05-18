@@ -2,9 +2,10 @@
   <div class="card-container">
     <div class="max-w-full rounded-xl overflow-auto max-h-[70vh] min-h-[102%]">
       <table class="rounded-2xl">
-        <head-reports-table />
+        <head-reports-table :columns="columns" />
         <body-reports-table
           :data="data"
+          :columns="columns"
           @row-clicked="openReportDetailsModal"
         />
       </table>
@@ -50,6 +51,10 @@ const selectedReport = ref();
 
 const props = defineProps({
   data: {
+    type: Array,
+    default: [],
+  },
+  columns: {
     type: Array,
     default: [],
   },
