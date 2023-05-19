@@ -149,12 +149,26 @@ const defaultColumns = ref([
 
 const getFavoritesReports = () => {
   let array = [];
+
   folders.value.forEach((folder) => {
     if (folder.name == "Favorites") return;
+
     folder.data?.forEach((item) => {
-      if (item.isFavorite) array.push(item);
+      if (item.isFavorite && array.findIndex((e) => e.id == item.id) != -1)
+        array.push(item);
+    });
+
+    folder?.subFolders?.forEach((subFolder) => {
+      subFolder.data?.forEach((subItem) => {
+        if (
+          subItem.isFavorite &&
+          array.findIndex((e) => e.id == subItem.id) == -1
+        )
+          array.push(subItem);
+      });
     });
   });
+
   return array;
 };
 
