@@ -16,7 +16,7 @@
             :class="{
               'folder-selected':
                 folder.name == actualFolder.name &&
-                actualSubFolder?.label == null,
+                actualSubFolder?.name == null,
             }"
           >
             {{ folder.name }}
@@ -29,10 +29,10 @@
             @click="emit('changeActualSubFolder', subFolder)"
             class="folder"
             :class="{
-              'folder-selected': subFolder.label == actualSubFolder?.label,
+              'folder-selected': subFolder.name == actualSubFolder?.name,
             }"
           >
-            {{ subFolder.label }}
+            {{ subFolder.name }}
           </div>
         </div>
       </div>

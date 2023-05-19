@@ -96,14 +96,14 @@ import ExportColumn from "./components/reports-table/components/columns/exportCo
 import { v4 as uuidv4 } from "uuid";
 
 const defaultSubFolders = ref([
-  { label: "Campaign Reports" },
-  { label: "Communication Reports" },
-  { label: "Email Reports" },
-  { label: "Financial Reports" },
-  { label: "Fitness Reports" },
-  { label: "Lead Reports" },
-  { label: "Member Reports" },
-  { label: "People Reports" },
+  { name: "Campaign Reports" },
+  { name: "Communication Reports" },
+  { name: "Email Reports" },
+  { name: "Financial Reports" },
+  { name: "Fitness Reports" },
+  { name: "Lead Reports" },
+  { name: "Member Reports" },
+  { name: "People Reports" },
 ]);
 
 const defaultColumns = ref([
@@ -161,14 +161,14 @@ const folders = ref([
   {
     name: "Report Queue",
     subFolders: [
-      { label: "Account and Contact Reports" },
-      { label: "Deal Reports" },
-      { label: "Campaign Reports" },
-      { label: "Case and Solution Reports" },
-      { label: "Product Reports" },
-      { label: "Vendor Reports" },
-      { label: "Quote Reports" },
-      { label: "Sales Orders Reports" },
+      { name: "Account and Contact Reports" },
+      { name: "Deal Reports" },
+      { name: "Campaign Reports" },
+      { name: "Case and Solution Reports" },
+      { name: "Product Reports" },
+      { name: "Vendor Reports" },
+      { name: "Quote Reports" },
+      { name: "Sales Orders Reports" },
     ],
     columns: [
       {
@@ -263,7 +263,7 @@ const fillFoldersWithData = () => {
           value = folder.name + ` ${i + 1}`;
         } else if (column.options?.length) {
           value =
-            column.options[getRandomInt(column.options.length - 1, 0)].label;
+            column.options[getRandomInt(column.options.length - 1, 0)].name;
         }
         item[column.value] = value;
       });
@@ -279,7 +279,7 @@ const fillFoldersWithData = () => {
           .map((item) => {
             return {
               ...item,
-              report_name: subFolder.label,
+              report_name: subFolder.name,
               id: uuidv4(),
               isFavorite: false,
             };
@@ -304,10 +304,17 @@ const folderSelected = computed(() => {
 });
 
 const toggleIsFavorite = (itemSelected) => {
-  const folderActual = folders.value.find((folder) => {
-    console.log(folder);
-    return folder.name == actualFolder.value.name;
-  });
+  let folderActual = null;
+  if (actualSubFolder?.value != null) {
+    folderActual = actualFolder.value.subFolders.find((folder) => {
+      return folder.name == actualSubFolder.value.name;
+    });
+  } else {
+    folderActual = folders.value.find((folder) => {
+      return folder.name == actualFolder.value.name;
+    });
+  }
+
   folderActual.data.forEach((item) => {
     if (item.id == itemSelected.id) {
       item.isFavorite = !item.isFavorite;
