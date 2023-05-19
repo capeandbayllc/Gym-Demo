@@ -148,7 +148,14 @@ const defaultColumns = ref([
 ]);
 
 const getFavoritesReports = () => {
-  return folders.value[0].data;
+  let array = [];
+  folders.value.forEach((folder) => {
+    if (folder.name == "Favorites") return;
+    folder.data?.forEach((item) => {
+      if (item.isFavorite) array.push(item);
+    });
+  });
+  return array;
 };
 
 const folders = ref([
@@ -276,15 +283,15 @@ const fillFoldersWithData = () => {
       folder.subFolders.forEach((subFolder) => {
         subFolder.columns = folder.columns;
         subFolder.data = array
-          .map((item) => {
+          .map((item, i) => {
             return {
               ...item,
-              report_name: subFolder.name,
+              report_name: subFolder.name + ` ${i + 1}`,
               id: uuidv4(),
               isFavorite: false,
             };
           })
-          .slice(getRandomInt(array.length - 1, 0));
+          .slice(0, getRandomInt(array.length - 1, 0));
       });
     }
 
