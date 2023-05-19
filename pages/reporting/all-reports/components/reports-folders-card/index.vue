@@ -7,15 +7,29 @@
     </div>
     <div class="card-content">
       <div class="folders-container">
-        <div class="section" v-for="(section, i) in folders" :key="i">
+        <div class="section">
           <div
-            v-for="(folder, j) in section"
-            :key="j"
+            v-for="(folder, i) in folders"
+            :key="i"
             @click="emit('changeActualFolder', folder)"
             class="folder"
-            :class="{ 'folder-selected': folder == actualFolder }"
+            :class="{
+              'folder-selected':
+                folder.name == actualFolder.name && actualSubFolder == '',
+            }"
           >
-            {{ folder }}
+            {{ folder.name }}
+          </div>
+        </div>
+        <div class="section">
+          <div
+            v-for="(subFolder, i) in actualFolder.subFolders"
+            :key="i"
+            @click="emit('changeActualSubFolder', subFolder)"
+            class="folder"
+            :class="{ 'folder-selected': subFolder == actualSubFolder }"
+          >
+            {{ subFolder }}
           </div>
         </div>
       </div>
@@ -66,32 +80,19 @@
 }
 </style>
 <script setup>
-const emit = defineEmits(["changeActualFolder"]);
+const emit = defineEmits(["changeActualFolder", "changeActualSubFolder"]);
 const props = defineProps({
-  actualFolder: {
+  actualSubFolder: {
     type: String,
     default: "",
   },
+  actualFolder: {
+    type: Object,
+    default: null,
+  },
+  folders: {
+    type: Array,
+    default: [],
+  },
 });
-var folders = [
-  [
-    "My Reports",
-    "All Reports",
-    "Favorites",
-    "Recently Viewed",
-    "Scheduled Reports",
-    "Recently Deleted",
-    "Report Queue",
-  ],
-  [
-    "Campaign Reports",
-    "Communication Reports",
-    "Email Reports",
-    "Financial Reports",
-    "Fitness Reports",
-    "Lead Reports",
-    "Member Reports",
-    "People Reports",
-  ],
-];
 </script>

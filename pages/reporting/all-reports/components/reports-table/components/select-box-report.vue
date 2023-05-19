@@ -14,30 +14,50 @@
         v-if="!isCollapsed"
       >
         <div class="text-base-content gap-2 flex flex-col">
-          <select-box
-            :items="sortOptions"
-            :bg-secondary-opened="false"
-            :bg-gray-opened="true"
-            :show-search="false"
-            :showClearList="false"
-            label="Sort Entire Table"
-            class="bg-base-content/60 text-neutral/80 font-semibold rounded-lg !text-left"
-          />
+          <div class="max-w-[90%]">
+            <select-box
+              v-if="!disableSort"
+              :items="sortOptions"
+              :bg-secondary-opened="false"
+              :bg-gray-opened="true"
+              :show-search="false"
+              :showClearList="false"
+              label="Sort Entire Table"
+              class="bg-base-content/60 text-neutral/80 font-semibold rounded-lg !text-left"
+            />
+          </div>
           <input
+            v-if="!disableSearch"
             type="text"
             class="rounded-lg w-full font-semibold tracking-normal p-2 focus:outline-none text-neutral"
             placeholder="Search"
           />
           <div class="">
-            <div v-for="(option, i) in options" :key="i">
-              <div class="option">
-                <div class="white-circle"></div>
+            <div v-for="(option, i) in optionsMapped" :key="i">
+              <button class="option" @click="toggleOption(option)">
+                <div
+                  class="h-[20px] w-[20px] flex overflow-visible mr-2 relative"
+                >
+                  <transition name="fade">
+                    <font-awesome-icon
+                      v-if="option.checked"
+                      :icon="['fas', 'check']"
+                      size="md"
+                      class="check-icon"
+                      tabindex="0"
+                    />
+                  </transition>
+                  <transition name="fade">
+                    <div v-if="!option.checked" class="white-circle"></div>
+                  </transition>
+                </div>
                 {{ option.label }}
-              </div>
+              </button>
             </div>
           </div>
 
           <Button
+            v-if="!disableConfirm"
             size="sm"
             outline=""
             class="normal-case rounded-xl text-[12px] ml-auto"
@@ -50,9 +70,12 @@
 </template>
 <style scoped lang="postcss">
 .option {
-  @apply text-[14px] py-3 flex items-center;
+  @apply text-[14px] py-3 cursor-pointer flex items-center;
+  .check-icon {
+    @apply focus:outline-none w-[20px] h-[20px] mr-2 absolute;
+  }
   .white-circle {
-    @apply min-w-[20px] w-[20px] h-[20px] rounded-full !bg-base-content/70 mr-2;
+    @apply min-w-[20px] w-[20px] h-[20px] rounded-full !bg-base-content/70 mr-2 absolute;
   }
 }
 .select-box-btn {
@@ -70,8 +93,13 @@ export default {
 <script setup>
 import SelectBoxIcon from "~/components/select-box/select-box-icon.vue";
 import SelectBoxContent from "~/components/select-box/SelectBoxContent.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
-const emit = defineEmits(["onChange"]);
+library.add(faCheck);
+
+const emit = defineEmits(["onChange", "applyFilter"]);
 
 const props = defineProps({
   label: {
@@ -101,7 +129,31 @@ const props = defineProps({
     type: Array,
     default: [],
   },
+  disableSearch: {
+    type: Boolean,
+    default: false,
+  },
+  disableSort: {
+    type: Boolean,
+    default: false,
+  },
+  disableConfirm: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const optionsMapped = ref();
+watchEffect(() => {
+  optionsMapped.value = props.options.map((item) => {
+    return { ...item, checked: false };
+  });
+});
+
+const toggleOption = (option) => {
+  option.checked = !option.checked;
+  emit("applyFilter", optionsMapped.value);
+};
 
 const selectContentEl = ref(null);
 const isCollapsed = ref(true);

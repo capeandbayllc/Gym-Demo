@@ -10,8 +10,14 @@
         <div class="text-white text-center">
           <select-box-report
             value=""
-            :options="options"
+            :disable-search="column.disableSearch"
+            :disable-sort="column.disableSort"
+            :disable-confirm="column.disableConfirm"
+            :options="getOptions(column)"
             :sort-options="sortOptions"
+            @applyFilter="
+              emit('applyFilter', { type: column.label, values: $event })
+            "
             :label="column.label"
             class="bg-secondary select-box-filter-size w-full"
             :class="column.class"
@@ -24,7 +30,7 @@
 
 <style scoped lang="postcss">
 .report-table-header {
-  @apply bg-secondary !h-[50px] sticky top-[-1px];
+  @apply bg-secondary !h-[50px] sticky top-[-1px] z-[70];
 
   th {
     @apply border-y-2 border-secondary text-center;
@@ -41,55 +47,30 @@
 <script setup>
 import selectBoxReport from "./select-box-report.vue";
 
-const columns = [
-  {
-    label: "Report Name",
-    class: "w-full",
-  },
-  {
-    label: "Description",
-    class: "w-full",
-  },
-  {
-    label: "Report Type",
-    class: "!w-[146px]",
-  },
-  {
-    label: "Date Created",
-    class: "!w-[146px]",
-  },
-  {
-    label: "Last Run Date",
-    class: "!w-[146px]",
-  },
-  {
-    label: "Created By",
-    class: "!w-[146px]",
-  },
-  {
-    label: " Last Edited By",
-    class: "w-full",
-  },
-];
+const emit = defineEmits(["applyFilter"]);
 
-const options = [
-  {
-    label: "Title 1",
-    value: "1",
+const props = defineProps({
+  columns: {
+    type: Array,
+    default: [],
   },
-  {
-    label: "Title 2",
-    value: "2",
-  },
-  {
-    label: "Title 3",
-    value: "3",
-  },
-  {
-    label: "Title 4",
-    value: "4",
-  },
-];
+});
+
+const getOptions = (column) => {
+  if (column.options) {
+    return column.options;
+  }
+
+  let array = [];
+  for (let i = 1; i <= 4; i++) {
+    array.push({
+      label: column.label,
+      value: i,
+    });
+  }
+  return array;
+};
+
 const sortOptions = [
   {
     value: "A",
