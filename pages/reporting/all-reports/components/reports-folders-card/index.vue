@@ -15,7 +15,8 @@
             class="folder"
             :class="{
               'folder-selected':
-                folder.name == actualFolder.name && actualSubFolder == '',
+                folder.name == actualFolder.name &&
+                actualSubFolder?.label == null,
             }"
           >
             {{ folder.name }}
@@ -27,9 +28,11 @@
             :key="i"
             @click="emit('changeActualSubFolder', subFolder)"
             class="folder"
-            :class="{ 'folder-selected': subFolder == actualSubFolder }"
+            :class="{
+              'folder-selected': subFolder.label == actualSubFolder?.label,
+            }"
           >
-            {{ subFolder }}
+            {{ subFolder.label }}
           </div>
         </div>
       </div>
@@ -83,8 +86,8 @@
 const emit = defineEmits(["changeActualFolder", "changeActualSubFolder"]);
 const props = defineProps({
   actualSubFolder: {
-    type: String,
-    default: "",
+    type: Object,
+    default: null,
   },
   actualFolder: {
     type: Object,

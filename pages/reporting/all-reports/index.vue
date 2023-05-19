@@ -30,14 +30,14 @@
           :actual-sub-folder="actualSubFolder"
           @changeActualFolder="
             actualFolder = $event;
-            actualSubFolder = '';
+            actualSubFolder = null;
           "
           @changeActualSubFolder="actualSubFolder = $event"
           :folders="folders"
         />
         <ReportsTable
-          :data="actualData"
-          :columns="actualColumns"
+          :data="folderSelected.data"
+          :columns="folderSelected.columns"
           class="col-span-3 mt-3 md:mt-0"
         />
       </div>
@@ -92,16 +92,17 @@ import Reporting from "./components/create-report/reporting.vue";
 import ReportNameColumn from "./components/reports-table/components/columns/reportNameColumn.vue";
 import UserColumn from "./components/reports-table/components/columns/userColumn.vue";
 import ExportColumn from "./components/reports-table/components/columns/exportColumn.vue";
+import { v4 as uuidv4 } from "uuid";
 
-const subFolders = ref([
-  "Campaign Reports",
-  "Communication Reports",
-  "Email Reports",
-  "Financial Reports",
-  "Fitness Reports",
-  "Lead Reports",
-  "Member Reports",
-  "People Reports",
+const defaultSubFolders = ref([
+  { label: "Campaign Reports" },
+  { label: "Communication Reports" },
+  { label: "Email Reports" },
+  { label: "Financial Reports" },
+  { label: "Fitness Reports" },
+  { label: "Lead Reports" },
+  { label: "Member Reports" },
+  { label: "People Reports" },
 ]);
 
 const defaultColumns = ref([
@@ -148,20 +149,21 @@ const defaultColumns = ref([
 const folders = ref([
   {
     name: "All Reports",
-    subFolders: subFolders.value,
+    subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
+    data: "defaultData",
   },
   {
     name: "Report Queue",
     subFolders: [
-      "Account and Contact Reports",
-      "Deal Reports",
-      "Campaign Reports",
-      "Case and Solution Reports",
-      "Product Reports",
-      "Vendor Reports",
-      "Quote Reports",
-      "Sales Orders Reports",
+      { label: "Account and Contact Reports" },
+      { label: "Deal Reports" },
+      { label: "Campaign Reports" },
+      { label: "Case and Solution Reports" },
+      { label: "Product Reports" },
+      { label: "Vendor Reports" },
+      { label: "Quote Reports" },
+      { label: "Sales Orders Reports" },
     ],
     columns: [
       {
@@ -213,31 +215,85 @@ const folders = ref([
         class: "!w-[146px]",
       },
     ],
+    data: "defaultData",
   },
   {
     name: "Favorites",
-    subFolders: subFolders.value,
+    subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
+    // data: "defaultData"
   },
   {
     name: "Recently Viewed",
-    subFolders: subFolders.value,
+    subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
+    data: "defaultData",
   },
   {
     name: "Scheduled Reports",
-    subFolders: subFolders.value,
+    subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
+    data: "defaultData",
   },
   {
     name: "Recently Deleted",
-    subFolders: subFolders.value,
+    subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
+    data: "defaultData",
   },
 ]);
 
+onMounted(() => {
+  fillFoldersWithData();
+});
+
+const fillFoldersWithData = () => {
+  folders.value.forEach((folder) => {
+    console.log("folder");
+    console.log(folder);
+    let array = [];
+    for (let i = 0; i < getRandomInt(folder.name.length * 5, 0); i++) {
+      let item = {};
+      folder.columns.forEach((column) => {
+        let value = column.default ? column.default : "";
+        if (column.value == "report_name") {
+          value = folder.name;
+        } else if (column.options?.length) {
+          value =
+            column.options[getRandomInt(column.options.length - 1, 0)].label;
+        }
+        item[column.value] = value;
+      });
+      item.id = uuidv4();
+      array.push(item);
+    }
+
+    if (folder.subFolders) {
+      folder.subFolders.forEach((subFolder) => {
+        subFolder.columns = folder.columns;
+        subFolder.data = array
+          .map((item) => {
+            return { ...item, report_name: subFolder.label, id: uuidv4() };
+          })
+          .slice(getRandomInt(array.length - 1, 0));
+      });
+    }
+
+    if (folder.data == "defaultData") {
+      folder.data = array;
+    }
+  });
+};
+
+const folderSelected = computed(() => {
+  if (actualSubFolder.value != null) {
+    return actualSubFolder.value;
+  }
+  return actualFolder.value;
+});
+
 const actualFolder = ref(folders.value[0]);
-const actualSubFolder = ref("");
+const actualSubFolder = ref(null);
 
 const createReportScreens = ref([NewReport, Reporting]);
 const createReportScreenIndex = ref(0);
@@ -251,10 +307,9 @@ const actualData = computed(() => {
       ? actualFolder.value.name
       : actualSubFolder.value;
 
-  console.log(actualColumns.value);
   for (let i = 0; i < getRandomInt(actualName.length * 3, 0); i++) {
     let item = {};
-    actualColumns.value.forEach((column) => {
+    actualFolder.value.columns.forEach((column) => {
       let value = column.default ? column.default : "";
       if (column.value == "report_name") {
         value = actualName;
@@ -267,9 +322,6 @@ const actualData = computed(() => {
     array.push(item);
   }
   return array;
-});
-const actualColumns = computed(() => {
-  return actualFolder.value.columns;
 });
 
 const openCreateReportModal = () => {
