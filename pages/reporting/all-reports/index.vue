@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 mt-2">
-        <ReportsFoldersCard
+        <reports-folders-card
           :actual-folder="actualFolder"
           :actual-sub-folder="actualSubFolder"
           @changeActualFolder="
@@ -35,8 +35,9 @@
           @changeActualSubFolder="actualSubFolder = $event"
           :folders="folders"
         />
-        <ReportsTable
+        <reports-table
           :data="folderSelected.data"
+          @toggle-is-favorite="toggleIsFavorite"
           :columns="folderSelected.columns"
           class="col-span-3 mt-3 md:mt-0"
         />
@@ -146,6 +147,10 @@ const defaultColumns = ref([
   },
 ]);
 
+const getFavoritesReports = () => {
+  return folders.value[0].data;
+};
+
 const folders = ref([
   {
     name: "All Reports",
@@ -221,7 +226,7 @@ const folders = ref([
     name: "Favorites",
     subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
-    // data: "defaultData"
+    getData: getFavoritesReports,
   },
   {
     name: "Recently Viewed",
@@ -249,15 +254,13 @@ onMounted(() => {
 
 const fillFoldersWithData = () => {
   folders.value.forEach((folder) => {
-    console.log("folder");
-    console.log(folder);
     let array = [];
     for (let i = 0; i < getRandomInt(folder.name.length * 5, 0); i++) {
       let item = {};
       folder.columns.forEach((column) => {
         let value = column.default ? column.default : "";
         if (column.value == "report_name") {
-          value = folder.name;
+          value = folder.name + ` ${i + 1}`;
         } else if (column.options?.length) {
           value =
             column.options[getRandomInt(column.options.length - 1, 0)].label;
@@ -265,6 +268,7 @@ const fillFoldersWithData = () => {
         item[column.value] = value;
       });
       item.id = uuidv4();
+      item.isFavorite = false;
       array.push(item);
     }
 
@@ -273,7 +277,12 @@ const fillFoldersWithData = () => {
         subFolder.columns = folder.columns;
         subFolder.data = array
           .map((item) => {
-            return { ...item, report_name: subFolder.label, id: uuidv4() };
+            return {
+              ...item,
+              report_name: subFolder.label,
+              id: uuidv4(),
+              isFavorite: false,
+            };
           })
           .slice(getRandomInt(array.length - 1, 0));
       });
@@ -289,8 +298,22 @@ const folderSelected = computed(() => {
   if (actualSubFolder.value != null) {
     return actualSubFolder.value;
   }
+  if (actualFolder.value.getData)
+    actualFolder.value.data = actualFolder.value.getData();
   return actualFolder.value;
 });
+
+const toggleIsFavorite = (itemSelected) => {
+  const folderActual = folders.value.find((folder) => {
+    console.log(folder);
+    return folder.name == actualFolder.value.name;
+  });
+  folderActual.data.forEach((item) => {
+    if (item.id == itemSelected.id) {
+      item.isFavorite = !item.isFavorite;
+    }
+  });
+};
 
 const actualFolder = ref(folders.value[0]);
 const actualSubFolder = ref(null);
@@ -298,31 +321,6 @@ const actualSubFolder = ref(null);
 const createReportScreens = ref([NewReport, Reporting]);
 const createReportScreenIndex = ref(0);
 const createReportModal = ref(false);
-
-const actualData = computed(() => {
-  let array = [];
-
-  let actualName =
-    actualSubFolder.value == ""
-      ? actualFolder.value.name
-      : actualSubFolder.value;
-
-  for (let i = 0; i < getRandomInt(actualName.length * 3, 0); i++) {
-    let item = {};
-    actualFolder.value.columns.forEach((column) => {
-      let value = column.default ? column.default : "";
-      if (column.value == "report_name") {
-        value = actualName;
-      } else if (column.options?.length) {
-        value =
-          column.options[getRandomInt(column.options.length - 1, 0)].label;
-      }
-      item[column.value] = value;
-    });
-    array.push(item);
-  }
-  return array;
-});
 
 const openCreateReportModal = () => {
   createReportModal.value.open();

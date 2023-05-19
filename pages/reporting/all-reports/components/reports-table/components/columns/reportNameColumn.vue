@@ -4,14 +4,14 @@
     <Button
       size="sm"
       class="bg-transparent border-0 px-0 mb-1"
-      @click="selected = !selected"
+      @click="emit('toggleIsFavorite')"
     >
       <star-icon
         clear
         class="text-2xl mb-1"
         :class="{
-          'text-secondary': selected,
-          'text-base-content/80': !selected,
+          'text-secondary': item.isFavorite,
+          'text-base-content/80': !item.isFavorite,
         }"
       />
     </Button>
@@ -33,7 +33,6 @@ input[type="checkbox"]:checked {
 <script setup>
 import { StarIcon } from "~/components/icons";
 
-const selected = ref(false);
 const props = defineProps({
   item: {
     type: Array,
@@ -45,7 +44,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["row-clicked", "handle"]);
+const emit = defineEmits(["row-clicked", "handle", "toggleIsFavorite"]);
 
 const rowClicked = (data) => {
   emit("row-clicked", data);
