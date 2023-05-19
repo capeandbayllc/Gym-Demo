@@ -1,7 +1,20 @@
 <template>
   <div class="flex items-center gap-2">
     <input type="checkbox" name="agree" id="agree" />
-    <star-icon clear class="text-secondary text-2xl mb-1" />
+    <Button
+      size="sm"
+      class="bg-transparent border-0 px-0 mb-1"
+      @click="emit('toggleIsFavorite')"
+    >
+      <star-icon
+        clear
+        class="text-2xl mb-1"
+        :class="{
+          'text-secondary': item.isFavorite,
+          'text-base-content/80': !item.isFavorite,
+        }"
+      />
+    </Button>
     <button class="whitespace-nowrap cursor-pointer" @click="rowClicked(item)">
       {{ item[column.value] ? item[column.value] : "-" }}
     </button>
@@ -19,6 +32,7 @@ input[type="checkbox"]:checked {
 
 <script setup>
 import { StarIcon } from "~/components/icons";
+
 const props = defineProps({
   item: {
     type: Array,
@@ -30,7 +44,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["row-clicked", "handle"]);
+const emit = defineEmits(["row-clicked", "handle", "toggleIsFavorite"]);
 
 const rowClicked = (data) => {
   emit("row-clicked", data);

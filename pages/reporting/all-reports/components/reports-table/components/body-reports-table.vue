@@ -12,6 +12,7 @@
           v-if="column.component"
           :is="column.component"
           @row-clicked="rowClicked"
+          @toggle-is-favorite="emit('toggleIsFavorite', item)"
           :column="column"
           :item="item"
         />
@@ -51,7 +52,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["row-clicked", "handle"]);
+const emit = defineEmits(["row-clicked", "handle", "toggleIsFavorite"]);
 
 const rowClicked = (data) => {
   emit("row-clicked", data);

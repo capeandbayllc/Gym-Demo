@@ -25,19 +25,20 @@
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 mt-2">
-        <ReportsFoldersCard
+        <reports-folders-card
           :actual-folder="actualFolder"
           :actual-sub-folder="actualSubFolder"
           @changeActualFolder="
             actualFolder = $event;
-            actualSubFolder = '';
+            actualSubFolder = null;
           "
           @changeActualSubFolder="actualSubFolder = $event"
           :folders="folders"
         />
-        <ReportsTable
-          :data="actualData"
-          :columns="actualColumns"
+        <reports-table
+          :data="folderSelected.data"
+          @toggle-is-favorite="toggleIsFavorite"
+          :columns="folderSelected.columns"
           class="col-span-3 mt-3 md:mt-0"
         />
       </div>
@@ -92,16 +93,17 @@ import Reporting from "./components/create-report/reporting.vue";
 import ReportNameColumn from "./components/reports-table/components/columns/reportNameColumn.vue";
 import UserColumn from "./components/reports-table/components/columns/userColumn.vue";
 import ExportColumn from "./components/reports-table/components/columns/exportColumn.vue";
+import { v4 as uuidv4 } from "uuid";
 
-const subFolders = ref([
-  "Campaign Reports",
-  "Communication Reports",
-  "Email Reports",
-  "Financial Reports",
-  "Fitness Reports",
-  "Lead Reports",
-  "Member Reports",
-  "People Reports",
+const defaultSubFolders = ref([
+  { name: "Campaign Reports" },
+  { name: "Communication Reports" },
+  { name: "Email Reports" },
+  { name: "Financial Reports" },
+  { name: "Fitness Reports" },
+  { name: "Lead Reports" },
+  { name: "Member Reports" },
+  { name: "People Reports" },
 ]);
 
 const defaultColumns = ref([
@@ -145,23 +147,49 @@ const defaultColumns = ref([
   },
 ]);
 
+const getFavoritesReports = () => {
+  let array = [];
+
+  folders.value.forEach((folder) => {
+    if (folder.name == "Favorites") return;
+
+    folder.data?.forEach((item) => {
+      if (item.isFavorite && array.findIndex((e) => e.id == item.id) != -1)
+        array.push(item);
+    });
+
+    folder?.subFolders?.forEach((subFolder) => {
+      subFolder.data?.forEach((subItem) => {
+        if (
+          subItem.isFavorite &&
+          array.findIndex((e) => e.id == subItem.id) == -1
+        )
+          array.push(subItem);
+      });
+    });
+  });
+
+  return array;
+};
+
 const folders = ref([
   {
     name: "All Reports",
-    subFolders: subFolders.value,
+    subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
+    data: "defaultData",
   },
   {
     name: "Report Queue",
     subFolders: [
-      "Account and Contact Reports",
-      "Deal Reports",
-      "Campaign Reports",
-      "Case and Solution Reports",
-      "Product Reports",
-      "Vendor Reports",
-      "Quote Reports",
-      "Sales Orders Reports",
+      { name: "Account and Contact Reports" },
+      { name: "Deal Reports" },
+      { name: "Campaign Reports" },
+      { name: "Case and Solution Reports" },
+      { name: "Product Reports" },
+      { name: "Vendor Reports" },
+      { name: "Quote Reports" },
+      { name: "Sales Orders Reports" },
     ],
     columns: [
       {
@@ -213,64 +241,114 @@ const folders = ref([
         class: "!w-[146px]",
       },
     ],
+    data: "defaultData",
   },
   {
     name: "Favorites",
-    subFolders: subFolders.value,
+    subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
+    getData: getFavoritesReports,
   },
   {
     name: "Recently Viewed",
-    subFolders: subFolders.value,
+    subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
+    data: "defaultData",
   },
   {
     name: "Scheduled Reports",
-    subFolders: subFolders.value,
+    subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
+    data: "defaultData",
   },
   {
     name: "Recently Deleted",
-    subFolders: subFolders.value,
+    subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
+    data: "defaultData",
   },
 ]);
 
+onMounted(() => {
+  fillFoldersWithData();
+});
+
+const fillFoldersWithData = () => {
+  folders.value.forEach((folder) => {
+    let array = [];
+    for (let i = 0; i < getRandomInt(folder.name.length * 5, 0); i++) {
+      let item = {};
+      folder.columns.forEach((column) => {
+        let value = column.default ? column.default : "";
+        if (column.value == "report_name") {
+          value = folder.name + ` ${i + 1}`;
+        } else if (column.options?.length) {
+          value =
+            column.options[getRandomInt(column.options.length - 1, 0)].name;
+        }
+        item[column.value] = value;
+      });
+      item.id = uuidv4();
+      item.isFavorite = false;
+      array.push(item);
+    }
+
+    if (folder.subFolders) {
+      folder.subFolders.forEach((subFolder) => {
+        subFolder.columns = folder.columns;
+        subFolder.data = array
+          .map((item, i) => {
+            return {
+              ...item,
+              report_name: subFolder.name + ` ${i + 1}`,
+              id: uuidv4(),
+              isFavorite: false,
+            };
+          })
+          .slice(0, getRandomInt(array.length - 1, 0));
+      });
+    }
+
+    if (folder.data == "defaultData") {
+      folder.data = array;
+    }
+  });
+};
+
+const folderSelected = computed(() => {
+  if (actualSubFolder.value != null) {
+    return actualSubFolder.value;
+  }
+  if (actualFolder.value.getData)
+    actualFolder.value.data = actualFolder.value.getData();
+  return actualFolder.value;
+});
+
+const toggleIsFavorite = (itemSelected) => {
+  let folderActual = null;
+  if (actualSubFolder?.value != null) {
+    folderActual = actualFolder.value.subFolders.find((folder) => {
+      return folder.name == actualSubFolder.value.name;
+    });
+  } else {
+    folderActual = folders.value.find((folder) => {
+      return folder.name == actualFolder.value.name;
+    });
+  }
+
+  folderActual.data.forEach((item) => {
+    if (item.id == itemSelected.id) {
+      item.isFavorite = !item.isFavorite;
+    }
+  });
+};
+
 const actualFolder = ref(folders.value[0]);
-const actualSubFolder = ref("");
+const actualSubFolder = ref(null);
 
 const createReportScreens = ref([NewReport, Reporting]);
 const createReportScreenIndex = ref(0);
 const createReportModal = ref(false);
-
-const actualData = computed(() => {
-  let array = [];
-
-  let actualName =
-    actualSubFolder.value == ""
-      ? actualFolder.value.name
-      : actualSubFolder.value;
-
-  console.log(actualColumns.value);
-  for (let i = 0; i < getRandomInt(actualName.length * 3, 0); i++) {
-    let item = {};
-    actualColumns.value.forEach((column) => {
-      let value = column.default ? column.default : "";
-      if (column.value == "report_name") {
-        value = actualName;
-      } else if (column.options?.length) {
-        value =
-          column.options[getRandomInt(column.options.length - 1, 0)].label;
-      }
-      item[column.value] = value;
-    });
-    array.push(item);
-  }
-  return array;
-});
-const actualColumns = computed(() => {
-  return actualFolder.value.columns;
-});
 
 const openCreateReportModal = () => {
   createReportModal.value.open();

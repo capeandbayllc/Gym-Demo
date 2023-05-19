@@ -6,6 +6,7 @@
         <body-reports-table
           :data="dataFiltered"
           :columns="columns"
+          @toggle-is-favorite="emit('toggleIsFavorite', $event)"
           @row-clicked="openReportDetailsModal"
         />
       </table>
@@ -45,6 +46,9 @@ table {
 import HeadReportsTable from "./components/head-reports-table.vue";
 import BodyReportsTable from "./components/body-reports-table.vue";
 import ReportDetailsModal from "../report-details-modal/index.vue";
+
+const emit = defineEmits(["row-clicked", "handle", "toggleIsFavorite"]);
+
 const reportDetailsModal = ref(false);
 
 const selectedReport = ref();
