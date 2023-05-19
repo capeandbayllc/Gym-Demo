@@ -30,7 +30,7 @@
 
 <style scoped lang="postcss">
 .report-table-header {
-  @apply bg-secondary !h-[50px] sticky top-[-1px] z-[70];
+  @apply bg-secondary !h-[50px] sticky top-[-1px] z-[24];
 
   th {
     @apply border-y-2 border-secondary text-center;
