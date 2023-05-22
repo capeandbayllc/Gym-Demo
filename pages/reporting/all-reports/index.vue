@@ -338,7 +338,6 @@ const folderSelected = computed(() => {
 });
 
 const toggleIsFavorite = (itemSelected) => {
-  console.log(activeFolderOrSubFolder.value);
   activeFolderOrSubFolder.value.data.forEach((item) => {
     if (item.id == itemSelected.id) {
       item.isFavorite = !item.isFavorite;
@@ -373,7 +372,6 @@ const activeFolderOrSubFolder = computed(() => {
 
 const selectedReports = computed(() => {
   let reports = activeFolderOrSubFolder.value.data;
-  console.log("reports");
   if (Array.isArray(reports)) {
     return reports.filter((item) => {
       return item.selected;
@@ -381,6 +379,16 @@ const selectedReports = computed(() => {
   }
 });
 
+watch(activeFolderOrSubFolder, () => {
+  // reset folders selection state
+  clearSelection();
+});
+
+const clearSelection = () => {
+  activeFolderOrSubFolder?.value?.data?.forEach((item) => {
+    item.selected = false;
+  });
+};
 const createReportScreens = ref([NewReport, Reporting]);
 const createReportScreenIndex = ref(0);
 const createReportModal = ref(false);
