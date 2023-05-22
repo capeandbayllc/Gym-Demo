@@ -3,7 +3,9 @@
     <span class="inline-block whitespace-nowrap text-center">
       {{ selectedReports?.length }} report selected
     </span>
-    <button class="text-secondary">Clear</button>
+    <button class="text-secondary" @click="emit('clearSelection')">
+      Clear
+    </button>
     <select-box
       :items="foldersSelect"
       label="Move to folder"
@@ -39,6 +41,8 @@ const props = defineProps({
     default: [],
   },
 });
+
+const emit = defineEmits(["clearSelection"]);
 
 const foldersSelect = computed(() => {
   let foldersSelect = [];

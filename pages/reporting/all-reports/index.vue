@@ -13,6 +13,7 @@
             :folders="folders"
             v-show="selectedReports?.length"
             :selected-reports="selectedReports"
+            @clearSelection="clearSelection"
           />
           <div class="flex gap-3 ml-auto">
             <div class="all-reports-search col-span-4">

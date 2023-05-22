@@ -4,7 +4,7 @@
       type="checkbox"
       name="agree"
       id="agree"
-      :value="item.selected"
+      v-model="item.selected"
       @click="emit('toggleSelectReport')"
     />
     <Button
