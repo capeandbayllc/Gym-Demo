@@ -15,6 +15,7 @@
       placeholderSearch="Search Folder"
     >
       <button
+        @click="openCreateFolderModal"
         class="text-secondary text-center w-[138px] py-1 bg-neutral-content/10"
       >
         <font-awesome-icon :icon="['fas', 'fa-plus']" />
@@ -24,6 +25,19 @@
     <button class="border rounded px-3 h-[29px]" @click="emit('deleteReports')">
       Delete
     </button>
+    <daisy-modal
+      :overlay="true"
+      id="createFolderModal"
+      ref="createFolderModal"
+      class="w-fit"
+      :showCloseButton="false"
+    >
+      <create-folder-modal
+        :foldersSelect="foldersSelect"
+        @closeCreateFolderModal="closeCreateFolderModal"
+      >
+      </create-folder-modal>
+    </daisy-modal>
   </div>
 </template>
 
@@ -31,6 +45,7 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import CreateFolderModal from "./components/create-folder-modal.vue";
 
 library.add(faPlus);
 const props = defineProps({
@@ -43,6 +58,15 @@ const props = defineProps({
     default: [],
   },
 });
+
+const createFolderModal = ref(null);
+
+const openCreateFolderModal = () => {
+  createFolderModal.value.open();
+};
+const closeCreateFolderModal = () => {
+  createFolderModal.value.close();
+};
 
 const emit = defineEmits(["clearSelection", "deleteReports"]);
 
