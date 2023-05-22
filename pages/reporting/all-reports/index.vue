@@ -4,26 +4,32 @@
       <div class="flex flex-auto">Reporting</div>
     </div>
     <div class="page-content gap-5">
-      <div class="flex justify-between flex-wrap gap-3">
+      <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 text-start">
         <h3 class="text-2xl font-semibold">{{ actualFolder.name }}</h3>
-        <div class="flex gap-3 items-center pb-2">
-          <div class="all-reports-search col-span-4">
-            <input
-              class="search-input"
-              type="text"
-              :placeholder="`Search ${actualFolder.name}`"
-            />
+        <div
+          class="flex justify-between flex-wrap-reverse gap-3 items-center pb-2 col-span-3 mt-3 md:mt-0"
+        >
+          <report-selection-actions />
+          <div class="flex gap-3">
+            <div class="all-reports-search col-span-4">
+              <input
+                class="search-input"
+                type="text"
+                :placeholder="`Search ${actualFolder.name}`"
+              />
+            </div>
+            <Button
+              @click="openCreateReportModal"
+              secondary
+              size="xs"
+              class="normal-case px-5 !h-[30px] border-secondary hover:bg-secondary hover:border-secondary hover:text-white rounded-lg"
+            >
+              Create a report
+            </Button>
           </div>
-          <Button
-            @click="openCreateReportModal"
-            secondary
-            size="xs"
-            class="normal-case px-5 !h-[30px] border-secondary hover:bg-secondary hover:border-secondary hover:text-white rounded-lg"
-          >
-            Create a report
-          </Button>
         </div>
       </div>
+
       <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 mt-2">
         <reports-folders-card
           :actual-folder="actualFolder"
@@ -93,6 +99,7 @@ import Reporting from "./components/create-report/reporting.vue";
 import ReportNameColumn from "./components/reports-table/components/columns/reportNameColumn.vue";
 import UserColumn from "./components/reports-table/components/columns/userColumn.vue";
 import ExportColumn from "./components/reports-table/components/columns/exportColumn.vue";
+import ReportSelectionActions from "./components/report-selection-actions/index.vue";
 import { v4 as uuidv4 } from "uuid";
 
 const defaultSubFolders = ref([
@@ -154,7 +161,7 @@ const getFavoritesReports = () => {
     if (folder.name == "Favorites") return;
 
     folder.data?.forEach((item) => {
-      if (item.isFavorite && array.findIndex((e) => e.id == item.id) != -1)
+      if (item.isFavorite && array.findIndex((e) => e.id == item.id) == -1)
         array.push(item);
     });
 
