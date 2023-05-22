@@ -9,8 +9,11 @@
         <div
           class="flex justify-between flex-wrap-reverse gap-3 items-center pb-2 col-span-3 mt-3 md:mt-0"
         >
-          <report-selection-actions />
-          <div class="flex gap-3">
+          <report-selection-actions
+            v-show="selectedReports?.length"
+            :selected-reports="selectedReports"
+          />
+          <div class="flex gap-3 ml-auto">
             <div class="all-reports-search col-span-4">
               <input
                 class="search-input"
@@ -44,6 +47,7 @@
         <reports-table
           :data="folderSelected.data"
           @toggle-is-favorite="toggleIsFavorite"
+          @toggle-select-report="toggleSelectReport"
           :columns="folderSelected.columns"
           class="col-span-3 mt-3 md:mt-0"
         />
@@ -296,6 +300,7 @@ const fillFoldersWithData = () => {
         item[column.value] = value;
       });
       item.id = uuidv4();
+      item.selected = false;
       item.isFavorite = false;
       array.push(item);
     }
@@ -309,6 +314,7 @@ const fillFoldersWithData = () => {
               ...item,
               report_name: subFolder.name + ` ${i + 1}`,
               id: uuidv4(),
+              selected: false,
               isFavorite: false,
             };
           })
@@ -332,6 +338,26 @@ const folderSelected = computed(() => {
 });
 
 const toggleIsFavorite = (itemSelected) => {
+  console.log(activeFolderOrSubFolder.value);
+  activeFolderOrSubFolder.value.data.forEach((item) => {
+    if (item.id == itemSelected.id) {
+      item.isFavorite = !item.isFavorite;
+    }
+  });
+};
+
+const toggleSelectReport = (itemSelected) => {
+  activeFolderOrSubFolder.value.data.forEach((item) => {
+    if (item.id == itemSelected.id) {
+      item.selected = !item.selected;
+    }
+  });
+};
+
+const actualFolder = ref(folders.value[0]);
+const actualSubFolder = ref(null);
+
+const activeFolderOrSubFolder = computed(() => {
   let folderActual = null;
   if (actualSubFolder?.value != null) {
     folderActual = actualFolder.value.subFolders.find((folder) => {
@@ -342,16 +368,18 @@ const toggleIsFavorite = (itemSelected) => {
       return folder.name == actualFolder.value.name;
     });
   }
+  return folderActual;
+});
 
-  folderActual.data.forEach((item) => {
-    if (item.id == itemSelected.id) {
-      item.isFavorite = !item.isFavorite;
-    }
-  });
-};
-
-const actualFolder = ref(folders.value[0]);
-const actualSubFolder = ref(null);
+const selectedReports = computed(() => {
+  let reports = activeFolderOrSubFolder.value.data;
+  console.log("reports");
+  if (Array.isArray(reports)) {
+    return reports.filter((item) => {
+      return item.selected;
+    });
+  }
+});
 
 const createReportScreens = ref([NewReport, Reporting]);
 const createReportScreenIndex = ref(0);

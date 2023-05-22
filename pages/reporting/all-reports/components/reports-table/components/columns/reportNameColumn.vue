@@ -1,6 +1,12 @@
 <template>
   <div class="flex items-center gap-2">
-    <input type="checkbox" name="agree" id="agree" />
+    <input
+      type="checkbox"
+      name="agree"
+      id="agree"
+      :value="item.selected"
+      @click="emit('toggleSelectReport')"
+    />
     <Button
       size="sm"
       class="bg-transparent border-0 px-0 mb-1"
@@ -44,7 +50,12 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["row-clicked", "handle", "toggleIsFavorite"]);
+const emit = defineEmits([
+  "row-clicked",
+  "handle",
+  "toggleIsFavorite",
+  "toggleSelectReport",
+]);
 
 const rowClicked = (data) => {
   emit("row-clicked", data);

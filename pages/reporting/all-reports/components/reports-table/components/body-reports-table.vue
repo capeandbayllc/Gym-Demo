@@ -13,6 +13,7 @@
           :is="column.component"
           @row-clicked="rowClicked"
           @toggle-is-favorite="emit('toggleIsFavorite', item)"
+          @toggle-select-report="emit('toggleSelectReport', item)"
           :column="column"
           :item="item"
         />
@@ -52,7 +53,12 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["row-clicked", "handle", "toggleIsFavorite"]);
+const emit = defineEmits([
+  "row-clicked",
+  "handle",
+  "toggleIsFavorite",
+  "toggleSelectReport",
+]);
 
 const rowClicked = (data) => {
   emit("row-clicked", data);
