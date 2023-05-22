@@ -35,6 +35,14 @@
               Create a report
             </Button>
           </div>
+          <Button
+            @click="openCreateReportModal"
+            secondary
+            size="xs"
+            class="normal-case px-5 !h-[30px] border-secondary hover:bg-secondary hover:border-secondary hover:text-white rounded-lg"
+          >
+            {{ createReportLabel }}
+          </Button>
         </div>
       </div>
 
@@ -273,6 +281,7 @@ const folders = ref([
   },
   {
     name: "Scheduled Reports",
+    createReportLabel: "New Scheduled Reports",
     subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
     data: "defaultData",
@@ -342,21 +351,12 @@ const folderSelected = computed(() => {
   return actualFolder.value;
 });
 
-const toggleIsFavorite = (itemSelected) => {
-  activeFolderOrSubFolder.value.data.forEach((item) => {
-    if (item.id == itemSelected.id) {
-      item.isFavorite = !item.isFavorite;
-    }
-  });
-};
-
-const toggleSelectReport = (itemSelected) => {
-  activeFolderOrSubFolder.value.data.forEach((item) => {
-    if (item.id == itemSelected.id) {
-      item.selected = !item.selected;
-    }
-  });
-};
+const createReportLabel = computed(() => {
+  if (activeFolderOrSubFolder.value.createReportLabel) {
+    return activeFolderOrSubFolder.value.createReportLabel;
+  }
+  return "Create a report";
+});
 
 const actualFolder = ref(folders.value[0]);
 const actualSubFolder = ref(null);
