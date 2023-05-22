@@ -14,6 +14,7 @@
             v-show="selectedReports?.length"
             :selected-reports="selectedReports"
             @clearSelection="clearSelection"
+            @deleteReports="deleteReports"
           />
           <div class="flex gap-3 ml-auto">
             <div class="all-reports-search col-span-4">
@@ -391,6 +392,17 @@ const clearSelection = () => {
     item.selected = false;
   });
 };
+
+const deleteReports = () => {
+  selectedReports.value.forEach((report) => {
+    activeFolderOrSubFolder.value.data.forEach((item, i) => {
+      if (item.id === report.id) {
+        activeFolderOrSubFolder.value.data.splice(i, 1);
+      }
+    });
+  });
+};
+
 const createReportScreens = ref([NewReport, Reporting]);
 const createReportScreenIndex = ref(0);
 const createReportModal = ref(false);

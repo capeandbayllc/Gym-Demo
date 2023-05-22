@@ -21,7 +21,9 @@
         Create a folder
       </button>
     </select-box>
-    <button class="border rounded px-3 h-[29px]">Delete</button>
+    <button class="border rounded px-3 h-[29px]" @click="emit('deleteReports')">
+      Delete
+    </button>
   </div>
 </template>
 
@@ -42,7 +44,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["clearSelection"]);
+const emit = defineEmits(["clearSelection", "deleteReports"]);
 
 const foldersSelect = computed(() => {
   let foldersSelect = [];
