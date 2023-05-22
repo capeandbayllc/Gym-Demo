@@ -54,10 +54,6 @@ const props = defineProps({
     type: Array,
     default: [],
   },
-  folders: {
-    type: Array,
-    default: [],
-  },
   actualFolder: {
     type: Object,
   },
@@ -85,9 +81,8 @@ const emit = defineEmits(["clearSelection", "deleteReports", "moveToFolder"]);
 
 const foldersSelect = computed(() => {
   let foldersSelect = [];
-  if (Array.isArray(props.folders)) {
-    props.folders?.forEach((folder) => {
-      if (folder.name == "Favorites") return;
+  if (Array.isArray(props.actualFolder.subFolders)) {
+    props.actualFolder.subFolders?.forEach((folder) => {
       if (props.actualFolder?.name === folder.name) return;
 
       foldersSelect.push({ value: folder.name, label: folder.name });

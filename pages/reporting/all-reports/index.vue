@@ -410,16 +410,17 @@ const moveToFolder = (folderName) => {
     folderName = "New folder";
   }
 
-  let findFolder = folders.value.find((folder) => folder.name === folderName);
+  let findFolder = actualFolder.value.subFolders.find(
+    (folder) => folder.name === folderName
+  );
 
   if (!findFolder) {
     findFolder = {
       name: folderName,
-      subFolders: defaultSubFolders.value,
       columns: defaultColumns.value,
       data: [],
     };
-    folders.value.push(findFolder);
+    actualFolder.value.subFolders.push(findFolder);
   }
 
   selectedReports.value.forEach((report) => {
@@ -435,7 +436,7 @@ const moveToFolder = (folderName) => {
     }
   });
 
-  actualFolder.value = findFolder;
+  actualSubFolder.value = findFolder;
 };
 
 const createReportScreens = ref([NewReport, Reporting]);
