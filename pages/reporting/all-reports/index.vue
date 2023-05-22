@@ -14,7 +14,8 @@
             v-show="selectedReports?.length"
             :selected-reports="selectedReports"
             @clearSelection="clearSelection"
-            @deleteReports="deleteReports"
+            @deleteReports="deleteSelectedReports"
+            @moveToFolder="moveToFolder"
           />
           <div class="flex gap-3 ml-auto">
             <div class="all-reports-search col-span-4">
@@ -393,7 +394,7 @@ const clearSelection = () => {
   });
 };
 
-const deleteReports = () => {
+const deleteSelectedReports = () => {
   selectedReports.value.forEach((report) => {
     activeFolderOrSubFolder.value.data.forEach((item, i) => {
       if (item.id === report.id) {
@@ -401,6 +402,25 @@ const deleteReports = () => {
       }
     });
   });
+};
+
+const moveToFolder = (folderName) => {
+  const findFolder = folders.value.find((folder) => folder.name === folderName);
+
+  selectedReports.value.forEach((report) => {
+    const reportIndex = activeFolderOrSubFolder.value.data.findIndex(
+      (item) => item.id === report.id
+    );
+    if (reportIndex !== -1) {
+      const reportToMove = activeFolderOrSubFolder.value.data.splice(
+        reportIndex,
+        1
+      )[0];
+      findFolder.data.push(reportToMove);
+    }
+  });
+
+  actualFolder.value = findFolder;
 };
 
 const createReportScreens = ref([NewReport, Reporting]);

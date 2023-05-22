@@ -12,12 +12,17 @@
       <div class="flex gap-5 items-center">
         <p class="w-[140px]">Share folder to</p>
         <select-box
-          :items="foldersSelect"
-          label="Only me"
+          :label="shareFolderTo"
+          :items="[
+            { value: 'Only me', label: 'Only me' },
+            { value: 'My Team', label: 'My Team' },
+            { value: 'Select Users', label: 'Select Users' },
+          ]"
+          @onChange="shareFolderTo = $event"
           secondary
           class="share-folder-select w-full"
           :show-clear-list="false"
-          placeholderSearch="Search Folder"
+          :show-search="false"
         >
         </select-box>
       </div>
@@ -27,30 +32,27 @@
           size="sm"
           ghost
           class="normal-case"
-          @click="closeCreateFolderModal"
-          >Cancel</Button
+          @click="emit('closeCreateFolderModal')"
         >
+          Cancel
+        </Button>
         <Button
           size="sm"
           secondary
           class="normal-case"
-          @click="closeCreateFolderModal"
-          >Send And Move</Button
+          @click="emit('closeCreateFolderModal')"
         >
+          Send And Move
+        </Button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-const props = defineProps({
-  foldersSelect: {
-    type: Array,
-    default: [],
-  },
-});
-
 const emit = defineEmits(["closeCreateFolderModal"]);
+
+const shareFolderTo = ref("Only me");
 </script>
 
 <style scoped lang="postcss">

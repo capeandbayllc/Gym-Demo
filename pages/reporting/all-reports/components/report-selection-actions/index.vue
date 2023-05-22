@@ -12,6 +12,7 @@
       secondary
       class="move-folder-select !w-[120px]"
       :show-clear-list="false"
+      @onChange="moveToFolder"
       placeholderSearch="Search Folder"
     >
       <button
@@ -32,10 +33,7 @@
       class="w-fit"
       :showCloseButton="false"
     >
-      <create-folder-modal
-        :foldersSelect="foldersSelect"
-        @closeCreateFolderModal="closeCreateFolderModal"
-      >
+      <create-folder-modal @closeCreateFolderModal="closeCreateFolderModal">
       </create-folder-modal>
     </daisy-modal>
   </div>
@@ -68,12 +66,17 @@ const closeCreateFolderModal = () => {
   createFolderModal.value.close();
 };
 
-const emit = defineEmits(["clearSelection", "deleteReports"]);
+const moveToFolder = (folder) => {
+  emit("moveToFolder", folder);
+};
+
+const emit = defineEmits(["clearSelection", "deleteReports", "moveToFolder"]);
 
 const foldersSelect = computed(() => {
   let foldersSelect = [];
   if (Array.isArray(props.folders)) {
     props.folders?.forEach((folder) => {
+      if (folder.name == "Favorites") return;
       foldersSelect.push({ value: folder.name, label: folder.name });
     });
   }
