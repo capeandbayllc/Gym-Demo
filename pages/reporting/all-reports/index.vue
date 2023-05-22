@@ -20,7 +20,7 @@
             size="xs"
             class="normal-case px-5 !h-[30px] border-secondary hover:bg-secondary hover:border-secondary hover:text-white rounded-lg"
           >
-            Create a report
+            {{ createReportLabel }}
           </Button>
         </div>
       </div>
@@ -257,6 +257,7 @@ const folders = ref([
   },
   {
     name: "Scheduled Reports",
+    createReportLabel: "New Scheduled Reports",
     subFolders: defaultSubFolders.value,
     columns: defaultColumns.value,
     data: "defaultData",
@@ -322,6 +323,27 @@ const folderSelected = computed(() => {
   if (actualFolder.value.getData)
     actualFolder.value.data = actualFolder.value.getData();
   return actualFolder.value;
+});
+
+const activeFolderOrSubFolder = computed(() => {
+  let folderActual = null;
+  if (actualSubFolder?.value != null) {
+    folderActual = actualFolder.value.subFolders.find((folder) => {
+      return folder.name == actualSubFolder.value.name;
+    });
+  } else {
+    folderActual = folders.value.find((folder) => {
+      return folder.name == actualFolder.value.name;
+    });
+  }
+  return folderActual;
+});
+
+const createReportLabel = computed(() => {
+  if (activeFolderOrSubFolder.value.createReportLabel) {
+    return activeFolderOrSubFolder.value.createReportLabel;
+  }
+  return "Create a report";
 });
 
 const toggleIsFavorite = (itemSelected) => {
