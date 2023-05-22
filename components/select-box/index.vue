@@ -23,27 +23,30 @@
     </button>
     <transition name="fade">
       <select-box-content v-if="!isCollapsed">
-        <select-box-search-input
-          v-if="showSearch"
-          :secondary="false"
-          :placeholder="placeholderSearch"
-          size="xs"
-        ></select-box-search-input>
-        <select-box-item
-          v-for="item in items"
-          :key="item.value"
-          :value="item.value"
-          :label="item.label"
-          :selected="item.value === value"
-          :onClick="onChange"
-        />
-        <p
-          class="select-box-clear-btn"
-          v-if="showClearList"
-          :onClick="clearList"
-        >
-          Clear List
-        </p>
+        <div class="select-box-content-scrollable">
+          <select-box-search-input
+            v-if="showSearch"
+            :secondary="false"
+            :placeholder="placeholderSearch"
+            size="xs"
+          ></select-box-search-input>
+          <select-box-item
+            v-for="item in items"
+            :key="item.value"
+            :value="item.value"
+            :label="item.label"
+            :selected="item.value === value"
+            :onClick="onChange"
+          />
+          <p
+            class="select-box-clear-btn"
+            v-if="showClearList"
+            :onClick="clearList"
+          >
+            Clear List
+          </p>
+        </div>
+        <slot class="select-box-clear-btn"></slot>
       </select-box-content>
     </transition>
   </div>
@@ -89,6 +92,9 @@
 .fade-enter-from,
 .fade-leave-to {
   @apply opacity-0;
+}
+.select-box-content-scrollable {
+  @apply overflow-y-scroll max-h-[200px] py-2;
 }
 </style>
 <script>

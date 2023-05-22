@@ -10,6 +10,7 @@
           class="flex justify-between flex-wrap-reverse gap-3 items-center pb-2 col-span-3 mt-3 md:mt-0"
         >
           <report-selection-actions
+            :folders="folders"
             v-show="selectedReports?.length"
             :selected-reports="selectedReports"
           />
