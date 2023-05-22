@@ -11,6 +11,7 @@
         >
           <report-selection-actions
             :folders="folders"
+            :actual-folder="actualFolder"
             v-show="selectedReports?.length"
             :selected-reports="selectedReports"
             @clearSelection="clearSelection"
@@ -405,7 +406,21 @@ const deleteSelectedReports = () => {
 };
 
 const moveToFolder = (folderName) => {
-  const findFolder = folders.value.find((folder) => folder.name === folderName);
+  if (folderName === "") {
+    folderName = "New folder";
+  }
+
+  let findFolder = folders.value.find((folder) => folder.name === folderName);
+
+  if (!findFolder) {
+    findFolder = {
+      name: folderName,
+      subFolders: defaultSubFolders.value,
+      columns: defaultColumns.value,
+      data: [],
+    };
+    folders.value.push(findFolder);
+  }
 
   selectedReports.value.forEach((report) => {
     const reportIndex = activeFolderOrSubFolder.value.data.findIndex(

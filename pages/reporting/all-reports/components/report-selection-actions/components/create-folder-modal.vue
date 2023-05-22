@@ -6,7 +6,7 @@
       <h4 class="text-xl font-semibold">Create a Folder</h4>
       <div class="flex gap-5 items-center">
         <p class="w-[140px]">Folder Name</p>
-        <input type="text" class="folder-input" />
+        <input type="text" class="folder-input" v-model="folderName" />
       </div>
 
       <div class="flex gap-5 items-center">
@@ -40,7 +40,7 @@
           size="sm"
           secondary
           class="normal-case"
-          @click="emit('closeCreateFolderModal')"
+          @click="createFolderAndMove"
         >
           Send And Move
         </Button>
@@ -48,12 +48,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-const emit = defineEmits(["closeCreateFolderModal"]);
-
-const shareFolderTo = ref("Only me");
-</script>
 
 <style scoped lang="postcss">
 .folder-input {
@@ -65,3 +59,16 @@ const shareFolderTo = ref("Only me");
   @apply !h-[32px];
 }
 </style>
+
+<script setup>
+const emit = defineEmits(["closeCreateFolderModal", "createFolderAndMove"]);
+
+const shareFolderTo = ref("Only me");
+
+const folderName = ref("");
+
+const createFolderAndMove = () => {
+  emit("createFolderAndMove", folderName.value);
+  folderName.value = "";
+};
+</script>

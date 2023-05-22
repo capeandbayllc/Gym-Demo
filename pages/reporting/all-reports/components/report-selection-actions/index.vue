@@ -33,7 +33,10 @@
       class="w-fit"
       :showCloseButton="false"
     >
-      <create-folder-modal @closeCreateFolderModal="closeCreateFolderModal">
+      <create-folder-modal
+        @closeCreateFolderModal="closeCreateFolderModal"
+        @createFolderAndMove="createFolderAndMove"
+      >
       </create-folder-modal>
     </daisy-modal>
   </div>
@@ -52,8 +55,11 @@ const props = defineProps({
     default: [],
   },
   folders: {
-    array: Array,
+    type: Array,
     default: [],
+  },
+  actualFolder: {
+    type: Object,
   },
 });
 
@@ -70,6 +76,11 @@ const moveToFolder = (folder) => {
   emit("moveToFolder", folder);
 };
 
+const createFolderAndMove = (folderName) => {
+  closeCreateFolderModal();
+  emit("moveToFolder", folderName);
+};
+
 const emit = defineEmits(["clearSelection", "deleteReports", "moveToFolder"]);
 
 const foldersSelect = computed(() => {
@@ -77,6 +88,8 @@ const foldersSelect = computed(() => {
   if (Array.isArray(props.folders)) {
     props.folders?.forEach((folder) => {
       if (folder.name == "Favorites") return;
+      if (props.actualFolder?.name === folder.name) return;
+
       foldersSelect.push({ value: folder.name, label: folder.name });
     });
   }
