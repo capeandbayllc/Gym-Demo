@@ -4,15 +4,36 @@
       <div class="flex flex-auto">Reporting</div>
     </div>
     <div class="page-content gap-5">
-      <div class="flex justify-between flex-wrap gap-3">
+      <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 text-start">
         <h3 class="text-2xl font-semibold">{{ actualFolder.name }}</h3>
-        <div class="flex gap-3 items-center pb-2">
-          <div class="all-reports-search col-span-4">
-            <input
-              class="search-input"
-              type="text"
-              :placeholder="`Search ${actualFolder.name}`"
-            />
+        <div
+          class="flex justify-between flex-wrap-reverse gap-3 items-center pb-2 col-span-3 mt-3 md:mt-0"
+        >
+          <report-selection-actions
+            :folders="folders"
+            :actual-folder="actualFolder"
+            v-show="selectedReports?.length"
+            :selected-reports="selectedReports"
+            @clearSelection="clearSelection"
+            @deleteReports="deleteSelectedReports"
+            @moveToFolder="moveToFolder"
+          />
+          <div class="flex gap-3 ml-auto">
+            <div class="all-reports-search col-span-4">
+              <input
+                class="search-input"
+                type="text"
+                :placeholder="`Search ${actualFolder.name}`"
+              />
+            </div>
+            <Button
+              @click="openCreateReportModal"
+              secondary
+              size="xs"
+              class="normal-case px-5 !h-[30px] border-secondary hover:bg-secondary hover:border-secondary hover:text-white rounded-lg"
+            >
+              Create a report
+            </Button>
           </div>
           <Button
             @click="openCreateReportModal"
@@ -24,6 +45,7 @@
           </Button>
         </div>
       </div>
+
       <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 mt-2">
         <reports-folders-card
           :actual-folder="actualFolder"
@@ -38,6 +60,7 @@
         <reports-table
           :data="folderSelected.data"
           @toggle-is-favorite="toggleIsFavorite"
+          @toggle-select-report="toggleSelectReport"
           :columns="folderSelected.columns"
           class="col-span-3 mt-3 md:mt-0"
         />
@@ -93,6 +116,7 @@ import Reporting from "./components/create-report/reporting.vue";
 import ReportNameColumn from "./components/reports-table/components/columns/reportNameColumn.vue";
 import UserColumn from "./components/reports-table/components/columns/userColumn.vue";
 import ExportColumn from "./components/reports-table/components/columns/exportColumn.vue";
+import ReportSelectionActions from "./components/report-selection-actions/index.vue";
 import { v4 as uuidv4 } from "uuid";
 
 const defaultSubFolders = ref([
@@ -154,7 +178,7 @@ const getFavoritesReports = () => {
     if (folder.name == "Favorites") return;
 
     folder.data?.forEach((item) => {
-      if (item.isFavorite && array.findIndex((e) => e.id == item.id) != -1)
+      if (item.isFavorite && array.findIndex((e) => e.id == item.id) == -1)
         array.push(item);
     });
 
@@ -290,6 +314,7 @@ const fillFoldersWithData = () => {
         item[column.value] = value;
       });
       item.id = uuidv4();
+      item.selected = false;
       item.isFavorite = false;
       array.push(item);
     }
@@ -303,6 +328,7 @@ const fillFoldersWithData = () => {
               ...item,
               report_name: subFolder.name + ` ${i + 1}`,
               id: uuidv4(),
+              selected: false,
               isFavorite: false,
             };
           })
@@ -325,6 +351,16 @@ const folderSelected = computed(() => {
   return actualFolder.value;
 });
 
+const createReportLabel = computed(() => {
+  if (activeFolderOrSubFolder.value.createReportLabel) {
+    return activeFolderOrSubFolder.value.createReportLabel;
+  }
+  return "Create a report";
+});
+
+const actualFolder = ref(folders.value[0]);
+const actualSubFolder = ref(null);
+
 const activeFolderOrSubFolder = computed(() => {
   let folderActual = null;
   if (actualSubFolder?.value != null) {
@@ -339,34 +375,69 @@ const activeFolderOrSubFolder = computed(() => {
   return folderActual;
 });
 
-const createReportLabel = computed(() => {
-  if (activeFolderOrSubFolder.value.createReportLabel) {
-    return activeFolderOrSubFolder.value.createReportLabel;
+const selectedReports = computed(() => {
+  let reports = activeFolderOrSubFolder.value.data;
+  if (Array.isArray(reports)) {
+    return reports.filter((item) => {
+      return item.selected;
+    });
   }
-  return "Create a report";
 });
 
-const toggleIsFavorite = (itemSelected) => {
-  let folderActual = null;
-  if (actualSubFolder?.value != null) {
-    folderActual = actualFolder.value.subFolders.find((folder) => {
-      return folder.name == actualSubFolder.value.name;
-    });
-  } else {
-    folderActual = folders.value.find((folder) => {
-      return folder.name == actualFolder.value.name;
-    });
-  }
+watch(activeFolderOrSubFolder, () => {
+  // reset folders selection state
+  clearSelection();
+});
 
-  folderActual.data.forEach((item) => {
-    if (item.id == itemSelected.id) {
-      item.isFavorite = !item.isFavorite;
-    }
+const clearSelection = () => {
+  activeFolderOrSubFolder?.value?.data?.forEach((item) => {
+    item.selected = false;
   });
 };
 
-const actualFolder = ref(folders.value[0]);
-const actualSubFolder = ref(null);
+const deleteSelectedReports = () => {
+  selectedReports.value.forEach((report) => {
+    activeFolderOrSubFolder.value.data.forEach((item, i) => {
+      if (item.id === report.id) {
+        activeFolderOrSubFolder.value.data.splice(i, 1);
+      }
+    });
+  });
+};
+
+const moveToFolder = (folderName) => {
+  if (folderName === "") {
+    folderName = "New folder";
+  }
+
+  let findFolder = actualFolder.value.subFolders.find(
+    (folder) => folder.name === folderName
+  );
+
+  if (!findFolder) {
+    findFolder = {
+      name: folderName,
+      columns: defaultColumns.value,
+      data: [],
+    };
+    actualFolder.value.subFolders.push(findFolder);
+  }
+
+  selectedReports.value.forEach((report) => {
+    const reportIndex = activeFolderOrSubFolder.value.data.findIndex(
+      (item) => item.id === report.id
+    );
+    if (reportIndex !== -1) {
+      const reportToMove = activeFolderOrSubFolder.value.data.splice(
+        reportIndex,
+        1
+      )[0];
+      findFolder.data.push(reportToMove);
+    }
+  });
+
+  actualSubFolder.value = findFolder;
+};
 
 const createReportScreens = ref([NewReport, Reporting]);
 const createReportScreenIndex = ref(0);
