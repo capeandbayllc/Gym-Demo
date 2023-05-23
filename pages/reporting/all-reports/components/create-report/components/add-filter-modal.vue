@@ -14,16 +14,20 @@
               grayContent
               :scrollable="true"
               :items="timeOptions"
-              label="Converted Date and Time"
+              :label="
+                data.selectTime1 ? data.selectTime1 : 'Converted Date and Time'
+              "
               class="select-dropdown bg-neutral z-[50]"
+              @on-change="data.selectTime1 = $event"
             />
             <select-dropdown
               value=""
               grayContent
               :scrollable="true"
               :items="timeOptions"
-              label="Between"
+              :label="data.selectTime2 ? data.selectTime2 : 'Select'"
               class="select-dropdown bg-neutral z-[48]"
+              @on-change="data.selectTime2 = $event"
             />
             <Datepicker
               class="custom-date-input-dark"
@@ -56,16 +60,18 @@
               grayContent
               :scrollable="true"
               :items="timeOptions"
-              label="None"
+              :label="data.selectTime3 ? data.selectTime3 : 'Select'"
               class="select-dropdown bg-neutral z-[46]"
+              @on-change="data.selectTime3 = $event"
             />
             <select-dropdown
               value=""
               grayContent
               :scrollable="true"
               :items="timeOptions"
-              label="None"
+              :label="data.selectTime4 ? data.selectTime4 : 'Select'"
               class="select-dropdown bg-neutral z-[44]"
+              @on-change="data.selectTime4 = $event"
             />
             <div
               class="h-[36px] flex items-center overflow-auto text-secondary"
@@ -85,29 +91,40 @@
               grayContent
               :scrollable="true"
               :items="filterOption"
-              label="Annual Revenue"
+              :label="data.annualRevenue ? data.annualRevenue : 'Select'"
               class="select-dropdown bg-neutral z-[42]"
+              @on-change="data.annualRevenue = $event"
             />
             <select-dropdown
               value=""
               grayContent
               :scrollable="true"
               :items="filterOption"
-              label="="
+              :label="
+                data.advancedOperator1 ? data.advancedOperator1 : 'Select'
+              "
               class="select-dropdown bg-neutral z-[40]"
+              @on-change="data.advancedOperator1 = $event"
             />
             <select-dropdown
               value=""
               grayContent
               :scrollable="true"
               :items="filterOption"
-              label="Value"
+              :label="
+                data.advancedOperator2 ? data.advancedOperator2 : 'Select'
+              "
               class="select-dropdown bg-neutral z-[38]"
+              @on-change="data.advancedOperator2 = $event"
             />
-            <input type="text" value="USD" class="dark-input max-w-[60px]" />
+            <input
+              v-model="data.currecy"
+              type="text"
+              class="dark-input max-w-[60px]"
+            />
             <input
               type="number"
-              value="25000"
+              v-model="data.price"
               class="dark-input max-w-[180px]"
             />
 
@@ -141,7 +158,7 @@
 
 <style scoped lang="postcss">
 .modal-container {
-  @apply border-secondary text-base-content px-5 py-4 border-2 bg-base-300 rounded-2xl max-w-[960px] max-h-[85vh] overflow-y-visible gap-5 w-[90vw];
+  @apply border-secondary text-base-content px-5 py-4 border-2 bg-base-300 rounded-2xl max-w-[1000px] max-h-[85vh] overflow-y-visible gap-5 w-[90vw];
   ::-webkit-scrollbar {
     @apply hidden;
   }
@@ -179,8 +196,17 @@ import selectDropdown from "../../report-details-modal/components/select-dropdow
 import { PlusIcon } from "~/components/icons";
 
 const data = ref({
+  selectTime1: "",
+  selectTime2: "Between",
   startDate: "",
   endDate: "",
+  selectTime3: "None",
+  selectTime4: "None",
+  annualRevenue: "Annual Revenue",
+  advancedOperator1: "=",
+  advancedOperator2: "Value",
+  currecy: "USD",
+  price: "25000",
 });
 
 const emit = defineEmits(["close"]);
