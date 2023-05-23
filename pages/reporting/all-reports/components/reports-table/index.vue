@@ -6,6 +6,8 @@
         <body-reports-table
           :data="dataFiltered"
           :columns="columns"
+          :show-favorite-button="showFavoriteButton"
+          :show-select-button="showSelectButton"
           @toggle-is-favorite="emit('toggleIsFavorite', $event)"
           @toggle-select-report="emit('toggleSelectReport', $event)"
           @row-clicked="emit('row-clicked', $event)"
@@ -70,6 +72,14 @@ const props = defineProps({
     default: [],
   },
   activeReportDetailsModal: {
+    type: Boolean,
+    default: true,
+  },
+  showFavoriteButton: {
+    type: Boolean,
+    default: true,
+  },
+  showSelectButton: {
     type: Boolean,
     default: true,
   },

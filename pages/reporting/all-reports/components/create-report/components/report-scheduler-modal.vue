@@ -171,6 +171,8 @@
             :data="folderSelected.data"
             :active-report-details-modal="false"
             :columns="folderSelected.columns"
+            :show-favorite-button="false"
+            :show-select-button="false"
             @row-clicked="closeSelectReportModal"
             class="col-span-3 mt-3 md:mt-0"
           />

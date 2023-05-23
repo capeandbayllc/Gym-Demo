@@ -20,6 +20,8 @@
           @toggle-select-report="emit('toggleSelectReport', item)"
           :column="column"
           :item="item"
+          :show-favorite-button="showFavoriteButton"
+          :show-select-button="showSelectButton"
         />
         <span v-else>
           {{ item[column.value] ? item[column.value] : "-" }}
@@ -54,6 +56,14 @@ const props = defineProps({
   columns: {
     type: Array,
     default: [],
+  },
+  showFavoriteButton: {
+    type: Boolean,
+    default: true,
+  },
+  showSelectButton: {
+    type: Boolean,
+    default: true,
   },
 });
 
