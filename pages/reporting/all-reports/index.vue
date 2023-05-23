@@ -5,16 +5,7 @@
     </div>
     <div class="page-content gap-5">
       <div class="flex flex-row justify-between md:gap-3 text-start">
-        <h3 class="text-2xl font-semibold">
-          {{ actualFolder.name }}
-          <span
-            class="text-rose-600 text-[0.75rem] my-auto block leading-none font-normal"
-            v-if="actualFolder.name === 'Recently Deleted'"
-          >
-            Reports that have been in the 'Recently Deleted' folder for more
-            than 30 days will be automatically deleted
-          </span>
-        </h3>
+        <h3 class="text-2xl font-semibold">{{ actualFolder.name }}</h3>
         <div
           class="flex flex-row justify-between gap-3 items-center pb-2 col-span-3 mt-3 md:mt-0"
         >
@@ -53,6 +44,17 @@
             {{ createReportLabel }}
           </Button>
         </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3">
+        <span class="col-span-1"></span>
+        <span
+          class="text-rose-600 text-[0.9rem] leading-none col-span-3 text-left"
+          v-if="actualFolder.name === 'Recently Deleted'"
+        >
+          Reports that have been in the 'Recently Deleted' folder for more than
+          30 days will be automatically deleted
+        </span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 mt-2">
