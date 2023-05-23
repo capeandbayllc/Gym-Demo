@@ -7,7 +7,11 @@
       @handle="eventHandle"
       :data="item"
     >
-      <td v-for="column in columns" @click="rowClicked(item)">
+      <td
+        class="min-w-[250px]"
+        v-for="column in columns"
+        @click="rowClicked(item)"
+      >
         <component
           v-if="column.component"
           :is="column.component"
