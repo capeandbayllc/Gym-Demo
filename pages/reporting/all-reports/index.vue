@@ -27,22 +27,15 @@
               />
             </div>
             <Button
+              v-if="actualFolder.name !== 'Recently Deleted'"
               @click="openCreateReportModal"
               secondary
               size="xs"
               class="normal-case px-5 !h-[30px] border-secondary hover:bg-secondary hover:border-secondary hover:text-white rounded-lg"
             >
-              Create a report
+              {{ createReportLabel }}
             </Button>
           </div>
-          <Button
-            @click="openCreateReportModal"
-            secondary
-            size="xs"
-            class="normal-case px-5 !h-[30px] border-secondary hover:bg-secondary hover:border-secondary hover:text-white rounded-lg"
-          >
-            {{ createReportLabel }}
-          </Button>
         </div>
       </div>
 
