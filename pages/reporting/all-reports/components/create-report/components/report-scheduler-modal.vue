@@ -26,7 +26,7 @@
                   :scrollable="true"
                   :items="fileOptions"
                   label="XLS"
-                  class="select-dropdown bg-neutral z-[50]"
+                  class="select-dropdown bg-neutral z-[55]"
                 />
               </div>
               <div class="flex justify-between gap-2">
