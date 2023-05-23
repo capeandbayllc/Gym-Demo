@@ -19,13 +19,20 @@
       </div>
     </div>
     <div class="card-content">
-      <div class="section" v-for="(section, i) in actualContent" :key="i">
+      <div
+        v-if="actualSection == 'Columns'"
+        class="section"
+        v-for="(section, i) in columnsContent"
+        :key="i"
+      >
         <div class="flex justify-between pt-3 pb-1">
           <h3 class="text-[16px] font-semibold">{{ section.title }}</h3>
           <button
-            class="add-new-button"
             v-if="section.icon_type && section.icon_type == 'pencil'"
+            class="add-new-button"
+            @click="openAddFilterModal"
           >
+            Add Filter
             <font-awesome-icon
               :icon="['far', 'pencil']"
               size="md"
@@ -55,18 +62,7 @@
               />
               {{ item }}
             </button>
-
-            <button v-if="section.add_type && section.add_type == 'add_filter'">
-              <font-awesome-icon
-                :icon="['fas', 'plus']"
-                size="md"
-                class="mr-1 focus:outline-none h-[16px] text-secondary"
-                tabindex="0"
-                @click="openAddFilterModal"
-              />
-            </button>
-
-            <button class="xmark-button" v-else>
+            <button class="xmark-button">
               <font-awesome-icon
                 :icon="['fas', 'xmark']"
                 size="md"
@@ -81,6 +77,21 @@
           <span class="text-base-content/40 font-light tracking-wide">
             No Column Selected
           </span>
+        </div>
+      </div>
+      <div v-if="actualSection == 'Filters'" class="section">
+        <div :key="i" class="flex justify-between pt-3 pb-1">
+          <h3 class="text-[16px] font-semibold">Filters</h3>
+          <button class="add-new-button" @click="openAddFilterModal">
+            <font-awesome-icon
+              :icon="['far', 'pencil']"
+              size="md"
+              class="hidden-icon-hover mr-1 focus:outline-none h-[10px]"
+              tabindex="0"
+              @click.prevent.stop
+            />
+            <plus-icon class="show-icon-hover hidden" />
+          </button>
         </div>
       </div>
     </div>
@@ -155,15 +166,7 @@ const props = defineProps({
   },
 });
 
-const actualContent = computed(() => {
-  if (props.actualSection == "Columns") {
-    return contentColumns;
-  } else if (props.actualSection == "Filters") {
-    return contentFilters;
-  }
-});
-
-var contentColumns = [
+var columnsContent = [
   {
     title: "Columns",
     items: [
@@ -200,13 +203,4 @@ const openAddFilterModal = () => {
 const closeAddFilterModal = () => {
   addFilterModal.value.close();
 };
-
-var contentFilters = [
-  {
-    title: "Filters",
-    icon_type: "pencil",
-    add_type: "add_filter",
-    items: ["Title", "Title 2", "Add filter"],
-  },
-];
 </script>
