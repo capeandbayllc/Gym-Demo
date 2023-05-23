@@ -509,4 +509,8 @@ const openCreateReportModal = () => {
 const closeCreateReportModal = () => {
   createReportModal.value.close();
 };
+
+const toggleIsFavorite = (item) => {
+  item.isFavorite = !item.isFavorite;
+};
 </script>
