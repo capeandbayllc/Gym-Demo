@@ -7,11 +7,11 @@
       @handle="eventHandle"
       :data="item"
     >
-      <td v-for="column in columns">
+      <td v-for="column in columns" @click="rowClicked(item)">
         <component
           v-if="column.component"
           :is="column.component"
-          @row-clicked="rowClicked"
+          @row-clicked="emit('openReportDetailsModal', item)"
           @toggle-is-favorite="emit('toggleIsFavorite', item)"
           @toggle-select-report="emit('toggleSelectReport', item)"
           :column="column"
@@ -55,6 +55,7 @@ const props = defineProps({
 
 const emit = defineEmits([
   "row-clicked",
+  "openReportDetailsModal",
   "handle",
   "toggleIsFavorite",
   "toggleSelectReport",

@@ -53,7 +53,7 @@
           <select-dropdown
             value=""
             :items="totalRecordsOptions"
-            :countCircle="data.length"
+            :countCircle="data?.length"
             label="Total records"
             class="select-dropdown bg-secondary z-[40]"
           />
@@ -172,7 +172,7 @@ const data = computed(() => {
   let array = [];
   for (
     let i = 0;
-    i < getRandomInt(props.report.report_name.length * 30, 0);
+    i < getRandomInt(props.report?.report_name?.length * 30, 0);
     i++
   ) {
     array.push({

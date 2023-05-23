@@ -70,6 +70,7 @@
       @back="createReportScreenIndex--"
       @next="createReportScreenIndex++"
       @close="closeCreateReportModal"
+      :folders="folders"
     >
     </component>
   </daisy-modal>
@@ -78,7 +79,10 @@
     id="reportSchedulerModal"
     ref="reportSchedulerModal"
   >
-    <report-scheduler-modal @close="closeReportSchedulerModal" />
+    <report-scheduler-modal
+      :folders="folders"
+      @close="closeReportSchedulerModal"
+    />
   </daisy-modal>
 </template>
 
