@@ -4,10 +4,10 @@
       <div class="flex flex-auto">Reporting</div>
     </div>
     <div class="page-content gap-5">
-      <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 text-start">
+      <div class="flex flex-row justify-between md:gap-3 text-start">
         <h3 class="text-2xl font-semibold">{{ actualFolder.name }}</h3>
         <div
-          class="flex justify-between flex-wrap-reverse gap-3 items-center pb-2 col-span-3 mt-3 md:mt-0"
+          class="flex flex-row justify-between gap-3 items-center pb-2 col-span-3 mt-3 md:mt-0"
         >
           <report-selection-actions
             :folders="folders"
@@ -44,6 +44,17 @@
             {{ createReportLabel }}
           </Button>
         </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3">
+        <span class="col-span-1"></span>
+        <span
+          class="text-rose-600 text-[0.9rem] leading-none col-span-3 text-left"
+          v-if="actualFolder.name === 'Recently Deleted'"
+        >
+          Reports that have been in the 'Recently Deleted' folder for more than
+          30 days will be automatically deleted
+        </span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 mt-2">
@@ -130,46 +141,151 @@ const defaultSubFolders = ref([
   { name: "People Reports" },
 ]);
 
-const defaultColumns = ref([
-  {
-    label: "Report Name",
-    value: "report_name",
-    component: ReportNameColumn,
-    class: "w-full",
-  },
-  {
-    label: "Description",
-    value: "description",
-    class: "w-full",
-  },
-  {
-    label: "Report Type",
-    value: "report_type",
-    class: "!w-[146px]",
-  },
-  {
-    label: "Date Created",
-    value: "date_created",
-    class: "!w-[146px]",
-  },
-  {
-    label: "Last Run Date",
-    value: "last_run_date",
-    default: "10 min ago",
-    class: "!w-[146px]",
-  },
-  {
-    label: "Created By",
-    value: "created_by",
-    class: "!w-[146px]",
-  },
-  {
-    label: "Last Edited By",
-    value: "last_edited_by",
-    default: "Ron",
-    class: "w-full",
-  },
-]);
+const reportNameHeader = {
+  label: "Report Name",
+  value: "report_name",
+  component: ReportNameColumn,
+  class: "w-full",
+};
+const descriptionHeader = {
+  label: "Description",
+  value: "description",
+  class: "w-full",
+};
+const reportTypeHeader = {
+  label: "Report Type",
+  value: "report_type",
+  class: "!w-[146px]",
+};
+const dateCreatedHeader = {
+  label: "Date Created",
+  value: "date_created",
+  class: "!w-[146px]",
+};
+const lastRunDateHeader = {
+  label: "Last Run Date",
+  value: "last_run_date",
+  default: "10 min ago",
+  class: "!w-[146px]",
+};
+const createdByHeader = {
+  label: "Created By",
+  value: "created_by",
+  class: "!w-[146px]",
+};
+const lastEditedByHeader = {
+  label: "Last Edited By",
+  value: "last_edited_by",
+  default: "Ron",
+  class: "w-full",
+};
+const deletedByHeader = {
+  label: "Deleted By",
+  value: "deleted_by",
+  default: "Ron",
+  class: "w-full",
+};
+const permanentDeletingIn = {
+  label: "Permanently Deleted In",
+  value: "permanently_deleted_in",
+  default: "5 days",
+  class: "w-full",
+};
+const reportStatusHeader = {
+  label: "Status",
+  value: "status",
+  disableSearch: true,
+  disableSort: true,
+  disableConfirm: true,
+  options: [
+    { label: "Completed", value: "completed" },
+    { label: "Pending", value: "pending" },
+    { label: "Failed", value: "failed" },
+  ],
+  class: "!w-[146px]",
+};
+
+const completedDateHeader = {
+  label: "Completed Date",
+  value: "completed_date",
+  default: "April 9, 2023",
+  class: "!w-[146px]",
+};
+const completedTimeHeader = {
+  label: "Completed Time",
+  value: "completed_time",
+  default: "1:00 PM",
+  class: "!w-[146px]",
+};
+const userHeader = {
+  label: "User",
+  value: "user",
+  component: UserColumn,
+  class: "!w-[146px]",
+};
+const exportHeader = {
+  label: "Export",
+  value: "export",
+  component: ExportColumn,
+  class: "!w-[146px]",
+};
+
+const defaultColumns = ref({
+  allReports: [
+    reportNameHeader,
+    descriptionHeader,
+    reportTypeHeader,
+    dateCreatedHeader,
+    lastRunDateHeader,
+    createdByHeader,
+    lastEditedByHeader,
+  ],
+  reportQueue: [
+    reportNameHeader,
+    descriptionHeader,
+    reportStatusHeader,
+    completedDateHeader,
+    completedTimeHeader,
+    userHeader,
+    exportHeader,
+  ],
+  favorites: [
+    reportNameHeader,
+    descriptionHeader,
+    reportTypeHeader,
+    dateCreatedHeader,
+    lastRunDateHeader,
+    createdByHeader,
+    lastEditedByHeader,
+  ],
+  recentlyViewed: [
+    reportNameHeader,
+    descriptionHeader,
+    reportTypeHeader,
+    dateCreatedHeader,
+    lastRunDateHeader,
+    createdByHeader,
+    lastEditedByHeader,
+  ],
+  scheduledReports: [
+    reportNameHeader,
+    descriptionHeader,
+    reportTypeHeader,
+    dateCreatedHeader,
+    lastRunDateHeader,
+    createdByHeader,
+    lastEditedByHeader,
+  ],
+  recentlyDeleted: [
+    reportNameHeader,
+    descriptionHeader,
+    dateCreatedHeader,
+    lastRunDateHeader,
+    createdByHeader,
+    deletedByHeader,
+    permanentDeletingIn,
+  ],
+});
 
 const getFavoritesReports = () => {
   let array = [];
@@ -200,7 +316,7 @@ const folders = ref([
   {
     name: "All Reports",
     subFolders: defaultSubFolders.value,
-    columns: defaultColumns.value,
+    columns: defaultColumns.value.allReports,
     data: "defaultData",
   },
   {
@@ -215,81 +331,32 @@ const folders = ref([
       { name: "Quote Reports" },
       { name: "Sales Orders Reports" },
     ],
-    columns: [
-      {
-        label: "Report Name",
-        value: "report_name",
-        component: ReportNameColumn,
-        class: "w-full",
-      },
-      {
-        label: "Description",
-        value: "description",
-        class: "w-full",
-      },
-      {
-        label: "Status",
-        value: "status",
-        disableSearch: true,
-        disableSort: true,
-        disableConfirm: true,
-        options: [
-          { label: "Completed", value: "completed" },
-          { label: "Pending", value: "pending" },
-          { label: "Failed", value: "failed" },
-        ],
-        class: "!w-[146px]",
-      },
-      {
-        label: "Completed Date",
-        value: "completed_date",
-        default: "April 9, 2023",
-        class: "!w-[146px]",
-      },
-      {
-        label: "Completed Time",
-        value: "completed_time",
-        default: "1:00 PM",
-        class: "!w-[146px]",
-      },
-      {
-        label: "User",
-        value: "user",
-        component: UserColumn,
-        class: "!w-[146px]",
-      },
-      {
-        label: "Export",
-        value: "export",
-        component: ExportColumn,
-        class: "!w-[146px]",
-      },
-    ],
+    columns: defaultColumns.value.reportQueue,
     data: "defaultData",
   },
   {
     name: "Favorites",
     subFolders: defaultSubFolders.value,
-    columns: defaultColumns.value,
+    columns: defaultColumns.value.favorites,
     getData: getFavoritesReports,
   },
   {
     name: "Recently Viewed",
     subFolders: defaultSubFolders.value,
-    columns: defaultColumns.value,
+    columns: defaultColumns.value.recentlyViewed,
     data: "defaultData",
   },
   {
     name: "Scheduled Reports",
     createReportLabel: "New Scheduled Reports",
     subFolders: defaultSubFolders.value,
-    columns: defaultColumns.value,
+    columns: defaultColumns.value.scheduledReports,
     data: "defaultData",
   },
   {
     name: "Recently Deleted",
     subFolders: defaultSubFolders.value,
-    columns: defaultColumns.value,
+    columns: defaultColumns.value.recentlyDeleted,
     data: "defaultData",
   },
 ]);
