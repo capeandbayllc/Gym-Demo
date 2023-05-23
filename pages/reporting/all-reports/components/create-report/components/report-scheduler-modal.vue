@@ -31,8 +31,11 @@
                   grayContent
                   :scrollable="true"
                   :items="fileOptions"
-                  label="XLS"
+                  :label="
+                    selectedExportFilesAs ? selectedExportFilesAs : 'Select'
+                  "
                   class="select-dropdown bg-neutral z-[60]"
+                  @on-change="selectedExportFilesAs = $event"
                 />
               </div>
               <div class="flex justify-between gap-2">
@@ -64,8 +67,9 @@
                   grayContent
                   :scrollable="true"
                   :items="repeatTypeOptions"
-                  label="Daily"
+                  :label="selectedRepeatType ? selectedRepeatType : 'Select'"
                   class="select-dropdown bg-neutral z-[55]"
+                  @on-change="selectedRepeatType = $event"
                 />
               </div>
             </div>
@@ -88,8 +92,11 @@
                   grayContent
                   :scrollable="true"
                   :items="sendOptions"
-                  label="Email"
+                  :label="
+                    selectedSendReportVia ? selectedSendReportVia : 'Select'
+                  "
                   class="select-dropdown bg-neutral z-[50]"
+                  @on-change="selectedSendReportVia = $event"
                 />
               </div>
 
@@ -228,6 +235,10 @@ const props = defineProps({
     default: [""],
   },
 });
+
+const selectedExportFilesAs = ref("XLS");
+const selectedRepeatType = ref("Daily");
+const selectedSendReportVia = ref("Email");
 
 const selectedReport = ref(null);
 
