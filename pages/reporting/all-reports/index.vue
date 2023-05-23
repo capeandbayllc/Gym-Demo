@@ -389,7 +389,7 @@ const fillFoldersWithData = () => {
               report_name: subFolder.name + ` ${i + 1}`,
               id: uuidv4(),
               selected: false,
-              isFavorite: false,
+              isFavorite: Math.random() < 0.5,
             };
           })
           .slice(0, getRandomInt(array.length - 1, 0));
@@ -508,5 +508,9 @@ const openCreateReportModal = () => {
 };
 const closeCreateReportModal = () => {
   createReportModal.value.close();
+};
+
+const toggleIsFavorite = (item) => {
+  item.isFavorite = !item.isFavorite;
 };
 </script>
