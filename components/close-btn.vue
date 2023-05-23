@@ -5,7 +5,7 @@
 </template>
 <style scoped>
 .close-btn {
-  @apply transition duration-200 ease-in-out cursor-pointer rounded-full w-[41px];
+  @apply transition duration-200 ease-in-out cursor-pointer rounded-full border-none;
 }
 .close-btn:hover {
   @apply rotate-90;
