@@ -26,16 +26,16 @@
                 :placeholder="`Search ${actualFolder.name}`"
               />
             </div>
-            <Button
-              v-if="actualFolder.name !== 'Recently Deleted'"
-              @click="openCreateReportModal"
-              secondary
-              size="xs"
-              class="normal-case px-5 !h-[30px] border-secondary hover:bg-secondary hover:border-secondary hover:text-white rounded-lg"
-            >
-              {{ createReportLabel }}
-            </Button>
           </div>
+          <Button
+            v-if="actualFolder.name !== 'Recently Deleted'"
+            @click="createReportClick()"
+            secondary
+            size="xs"
+            class="normal-case px-5 !h-[30px] border-secondary hover:bg-secondary hover:border-secondary hover:text-white rounded-lg"
+          >
+            {{ createReportLabel }}
+          </Button>
         </div>
       </div>
 
@@ -69,23 +69,33 @@
           class="col-span-3 mt-3 md:mt-0"
         />
       </div>
-
-      <daisy-modal
-        :overlay="true"
-        id="createReportModal"
-        ref="createReportModal"
-        @close="createReportScreenIndex = 0"
-      >
-        <component
-          :is="createReportScreens[createReportScreenIndex]"
-          @back="createReportScreenIndex--"
-          @next="createReportScreenIndex++"
-          @close="closeCreateReportModal"
-        >
-        </component>
-      </daisy-modal>
     </div>
   </div>
+  <daisy-modal
+    :overlay="true"
+    id="createReportModal"
+    ref="createReportModal"
+    @close="createReportScreenIndex = 0"
+  >
+    <component
+      :is="createReportScreens[createReportScreenIndex]"
+      @back="createReportScreenIndex--"
+      @next="createReportScreenIndex++"
+      @close="closeCreateReportModal"
+      :folders="folders"
+    >
+    </component>
+  </daisy-modal>
+  <daisy-modal
+    :overlay="true"
+    id="reportSchedulerModal"
+    ref="reportSchedulerModal"
+  >
+    <report-scheduler-modal
+      :folders="folders"
+      @close="closeReportSchedulerModal"
+    />
+  </daisy-modal>
 </template>
 
 <style scoped lang="postcss">
@@ -121,6 +131,7 @@ import ReportNameColumn from "./components/reports-table/components/columns/repo
 import UserColumn from "./components/reports-table/components/columns/userColumn.vue";
 import ExportColumn from "./components/reports-table/components/columns/exportColumn.vue";
 import ReportSelectionActions from "./components/report-selection-actions/index.vue";
+import ReportSchedulerModal from "./components/create-report/components/report-scheduler-modal.vue";
 import { v4 as uuidv4 } from "uuid";
 
 const defaultSubFolders = ref([
@@ -305,6 +316,24 @@ const getFavoritesReports = () => {
   return array;
 };
 
+const createReportScreens = ref([NewReport, Reporting]);
+const createReportScreenIndex = ref(0);
+const createReportModal = ref(false);
+const openCreateReportModal = () => {
+  createReportModal.value.open();
+};
+const closeCreateReportModal = () => {
+  createReportModal.value.close();
+};
+const reportSchedulerModal = ref(null);
+
+const openReportSchedulerModal = () => {
+  reportSchedulerModal.value.open();
+};
+const closeReportSchedulerModal = () => {
+  reportSchedulerModal.value.close();
+};
+
 const folders = ref([
   {
     name: "All Reports",
@@ -342,6 +371,7 @@ const folders = ref([
   {
     name: "Scheduled Reports",
     createReportLabel: "New Scheduled Reports",
+    createReportClick: openReportSchedulerModal,
     subFolders: defaultSubFolders.value,
     columns: defaultColumns.value.scheduledReports,
     data: "defaultData",
@@ -418,6 +448,13 @@ const createReportLabel = computed(() => {
   return "Create a report";
 });
 
+const createReportClick = computed(() => {
+  if (activeFolderOrSubFolder.value.createReportClick) {
+    return activeFolderOrSubFolder.value.createReportClick;
+  }
+  return openCreateReportModal;
+});
+
 const actualFolder = ref(folders.value[0]);
 const actualSubFolder = ref(null);
 
@@ -443,6 +480,22 @@ const selectedReports = computed(() => {
     });
   }
 });
+
+const toggleIsFavorite = (itemSelected) => {
+  activeFolderOrSubFolder.value.data.forEach((item) => {
+    if (item.id == itemSelected.id) {
+      item.isFavorite = !item.isFavorite;
+    }
+  });
+};
+
+const toggleSelectReport = (itemSelected) => {
+  activeFolderOrSubFolder.value.data.forEach((item) => {
+    if (item.id == itemSelected.id) {
+      item.selected = !item.selected;
+    }
+  });
+};
 
 watch(activeFolderOrSubFolder, () => {
   // reset folders selection state
@@ -497,20 +550,5 @@ const moveToFolder = (folderName) => {
   });
 
   actualSubFolder.value = findFolder;
-};
-
-const createReportScreens = ref([NewReport, Reporting]);
-const createReportScreenIndex = ref(0);
-const createReportModal = ref(false);
-
-const openCreateReportModal = () => {
-  createReportModal.value.open();
-};
-const closeCreateReportModal = () => {
-  createReportModal.value.close();
-};
-
-const toggleIsFavorite = (item) => {
-  item.isFavorite = !item.isFavorite;
 };
 </script>

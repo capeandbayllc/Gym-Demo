@@ -45,7 +45,10 @@
     id="reportSchedulerModal"
     ref="reportSchedulerModal"
   >
-    <report-scheduler-modal @close="closeReportSchedulerModal" />
+    <report-scheduler-modal
+      @close="closeReportSchedulerModal"
+      :folders="folders"
+    />
   </daisy-modal>
 </template>
 
@@ -88,6 +91,13 @@
 import ReportSchedulerModal from "./components/report-scheduler-modal.vue";
 
 const reportSchedulerModal = ref(null);
+
+const props = defineProps({
+  folders: {
+    type: Array,
+    default: [],
+  },
+});
 
 const openReportSchedulerModal = () => {
   reportSchedulerModal.value.open();
