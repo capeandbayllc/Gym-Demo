@@ -389,7 +389,7 @@ const fillFoldersWithData = () => {
               report_name: subFolder.name + ` ${i + 1}`,
               id: uuidv4(),
               selected: false,
-              isFavorite: Math.random() < 0.5,
+              isFavorite: false,
             };
           })
           .slice(0, getRandomInt(array.length - 1, 0));
