@@ -6,6 +6,15 @@
     <div class="pb-5">
       <h3 class="text-center text-xl font-semibold">Rename Report</h3>
     </div>
+
+    <input
+      type="text"
+      class="dark-input"
+      placeholder="Enter a name"
+      maxlength="22"
+      v-model="inputReportName"
+    />
+
     <div class="flex justify-center sm:justify-end gap-4 pt-10">
       <Button
         size="sm"
@@ -15,8 +24,8 @@
       >
         Cancel
       </Button>
-      <Button size="sm" secondary class="normal-case rounded-lg">
-        Export
+      <Button size="sm" secondary class="normal-case rounded-lg" @click="save">
+        Save
       </Button>
     </div>
   </div>
@@ -29,10 +38,29 @@
     @apply hidden;
   }
 }
+.dark-input {
+  @apply rounded-lg h-9 bg-neutral placeholder:text-base-content/40 px-3 w-full disabled:text-base-content/50 outline-none;
+}
 </style>
 
 <script setup>
 import { CloseMe } from "~/components/icons";
+const props = defineProps({
+  reportName: {
+    type: String,
+    default: "",
+  },
+});
 
-const emit = defineEmits(["close"]);
+const inputReportName = ref("");
+onMounted(() => {
+  inputReportName.value = props.reportName;
+});
+
+const save = () => {
+  emit("changeName", inputReportName.value);
+  emit("close");
+};
+
+const emit = defineEmits(["close", "changeName"]);
 </script>

@@ -9,7 +9,7 @@
             class="pt-1 min-w-12 max-w-12 h-12 cursor-pointer"
             @click="emit('back')"
           ></arrow-left>
-          <h5 class="text-2xl whitespace-nowrap mr-2">Untitled Report</h5>
+          <h5 class="text-2xl whitespace-nowrap mr-2">{{ reportName }}</h5>
           <div class="relative">
             <button @click.stop="toggleTitleDropdown">
               <vertical-ellipsis
@@ -88,7 +88,11 @@
     </div>
   </div>
   <daisy-modal :overlay="true" :show-close-button="false" ref="renameModal">
-    <rename-modal @close="closeRenameModal" />
+    <rename-modal
+      @close="closeRenameModal"
+      :report-name="reportName"
+      @changeName="reportName = $event"
+    />
   </daisy-modal>
   <daisy-modal
     :overlay="true"
@@ -97,7 +101,7 @@
   >
     <create-joined-report-modal
       @close="closeCreateJoinedReportModal"
-      report-name="Untitled Report"
+      :report-name="reportName"
     />
   </daisy-modal>
 </template>
@@ -135,6 +139,7 @@ library.add(faInfoCircle);
 import { VerticalEllipsis, ArrowLeft } from "~/components/icons";
 
 const showTitleDropdown = ref(false);
+const reportName = ref("Untitled Report");
 
 const emit = defineEmits(["close", "back", "next"]);
 
