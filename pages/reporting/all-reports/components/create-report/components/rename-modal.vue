@@ -13,8 +13,17 @@
       placeholder="Enter a name"
       maxlength="22"
       v-model="inputReportName"
+      @focusin="focusInput = true"
+      @focusout="focusInput = false"
+      @keypress="validationMessage = ''"
     />
 
+    <span
+      class="text-error text-sm"
+      :class="{ 'font-[600] tracking-tight': focusInput }"
+    >
+      {{ validationMessage }}
+    </span>
     <div class="flex justify-center sm:justify-end gap-4 pt-10">
       <Button
         size="sm"
@@ -24,7 +33,12 @@
       >
         Cancel
       </Button>
-      <Button size="sm" secondary class="normal-case rounded-lg" @click="save">
+      <Button
+        size="sm"
+        secondary
+        class="normal-case rounded-lg"
+        @click="validateAndSave"
+      >
         Save
       </Button>
     </div>
@@ -33,7 +47,7 @@
 
 <style scoped lang="postcss">
 .rename-modal-content {
-  @apply border-secondary text-base-content sm:px-20 py-8 bg-base-300 border-2 rounded-2xl max-w-[500px] w-[90vw];
+  @apply border-secondary text-base-content px-4 sm:px-20 py-8 bg-base-300 border-2 rounded-2xl max-w-[500px] w-[90vw];
   ::-webkit-scrollbar {
     @apply hidden;
   }
@@ -52,14 +66,24 @@ const props = defineProps({
   },
 });
 
+const focusInput = ref(false);
 const inputReportName = ref("");
+const validationMessage = ref("");
+
 onMounted(() => {
   inputReportName.value = props.reportName;
 });
 
-const save = () => {
-  emit("changeName", inputReportName.value);
-  emit("close");
+const validateAndSave = () => {
+  if (inputReportName.value.length == 0) {
+    validationMessage.value = "The report name cannot be empty.";
+  } else if (inputReportName.value.length < 5) {
+    validationMessage.value =
+      "The report name must be at least 5 characters long.";
+  } else {
+    emit("changeName", inputReportName.value);
+    emit("close");
+  }
 };
 
 const emit = defineEmits(["close", "changeName"]);
