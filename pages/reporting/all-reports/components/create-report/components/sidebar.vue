@@ -19,13 +19,20 @@
       </div>
     </div>
     <div class="card-content">
-      <div class="section" v-for="(section, i) in actualContent" :key="i">
+      <div
+        v-if="actualSection == 'Columns'"
+        class="section"
+        v-for="(section, i) in columnsContent"
+        :key="i"
+      >
         <div class="flex justify-between pt-3 pb-1">
           <h3 class="text-[16px] font-semibold">{{ section.title }}</h3>
           <button
-            class="add-new-button"
             v-if="section.icon_type && section.icon_type == 'pencil'"
+            class="add-new-button"
+            @click="openAddFilterModal"
           >
+            Add Filter
             <font-awesome-icon
               :icon="['far', 'pencil']"
               size="md"
@@ -55,18 +62,7 @@
               />
               {{ item }}
             </button>
-
-            <button v-if="section.add_type && section.add_type == 'add_filter'">
-              <font-awesome-icon
-                :icon="['fas', 'plus']"
-                size="md"
-                class="mr-1 focus:outline-none h-[16px] text-secondary"
-                tabindex="0"
-                @click="openAddFilterModal"
-              />
-            </button>
-
-            <button class="xmark-button" v-else>
+            <button class="xmark-button">
               <font-awesome-icon
                 :icon="['fas', 'xmark']"
                 size="md"
@@ -83,9 +79,52 @@
           </span>
         </div>
       </div>
+      <div v-if="actualSection == 'Filters'" class="section">
+        <div class="flex justify-between pt-3 pb-1">
+          <h3 class="text-[16px] font-semibold">Filters</h3>
+          <button class="add-new-button" @click="openAddFilterModal">
+            <font-awesome-icon
+              :icon="['far', 'pencil']"
+              size="md"
+              class="hidden-icon-hover mr-1 focus:outline-none h-[10px]"
+              tabindex="0"
+              @click.prevent.stop
+            />
+            <plus-icon class="show-icon-hover hidden" />
+          </button>
+        </div>
+        <div v-if="filters.length">
+          Date Filter
+          <div class="filter-item" v-for="(filter, i) in filters" :key="i">
+            <div>
+              <span>
+                {{ filter.dateFilter?.field }}
+              </span>
+              <p>
+                {{ filter.dateFilter?.timeRange.toUpperCase() }}
+                {{ filter.dateFilter?.operator }}
+                {{ filter.dateFilter?.value }}
+              </p>
+            </div>
+            <button class="xmark-button" @click="deleteFilter(i)">
+              <font-awesome-icon
+                :icon="['fas', 'xmark']"
+                size="md"
+                class="mr-1 focus:outline-none h-[12px] text-secondary"
+                tabindex="0"
+              />
+            </button>
+          </div>
+        </div>
+        <div v-else>
+          <span class="text-base-content/40 font-light tracking-wide">
+            No Filters Found
+          </span>
+        </div>
+      </div>
     </div>
     <daisy-modal :overlay="true" id="addFilterModal" ref="addFilterModal">
-      <add-filter-modal @close="closeAddFilterModal" />
+      <add-filter-modal @close="closeAddFilterModal" @save="createNewFilter" />
     </daisy-modal>
   </div>
 </template>
@@ -104,12 +143,21 @@
   .card-content {
     @apply mt-5;
     .section-item {
-      @apply pb-1 hover:text-secondary flex justify-between;
+      @apply pb-1 hover:text-secondary flex justify-between pr-[14px] hover:pr-0;
       .xmark-button {
         @apply hidden;
       }
     }
     .section-item:hover .xmark-button {
+      @apply !block;
+    }
+    .filter-item {
+      @apply flex justify-between p-3 my-1 mb-3 bg-base-200/70 border border-base-content/40 rounded w-full text-start;
+      .xmark-button {
+        @apply hidden;
+      }
+    }
+    .filter-item:hover .xmark-button {
       @apply !block;
     }
     .section {
@@ -155,15 +203,7 @@ const props = defineProps({
   },
 });
 
-const actualContent = computed(() => {
-  if (props.actualSection == "Columns") {
-    return contentColumns;
-  } else if (props.actualSection == "Filters") {
-    return contentFilters;
-  }
-});
-
-var contentColumns = [
+var columnsContent = [
   {
     title: "Columns",
     items: [
@@ -192,7 +232,26 @@ var contentColumns = [
   },
 ];
 
+const filters = ref([]);
+
+const createNewFilter = (filter) => {
+  closeAddFilterModal();
+  console.log(filter);
+  if (
+    filter?.dateFilter?.field != "None" &&
+    filter?.dateFilter?.timeRange != "None" &&
+    filter?.dateFilter?.operator &&
+    filter?.dateFilter?.value
+  ) {
+    filters.value.push(JSON.parse(JSON.stringify(filter)));
+  }
+};
+
 const addFilterModal = ref(null);
+
+const deleteFilter = (index) => {
+  filters.value.splice(index, 1);
+};
 
 const openAddFilterModal = () => {
   addFilterModal.value.open();
@@ -200,13 +259,4 @@ const openAddFilterModal = () => {
 const closeAddFilterModal = () => {
   addFilterModal.value.close();
 };
-
-var contentFilters = [
-  {
-    title: "Filters",
-    icon_type: "pencil",
-    add_type: "add_filter",
-    items: ["Title", "Title 2", "Add filter"],
-  },
-];
 </script>
