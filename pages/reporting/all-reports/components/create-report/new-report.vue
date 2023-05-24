@@ -3,20 +3,31 @@
     <div class="modal-content">
       <div class="font-semibold text-xl mb-7">Create a Report</div>
 
-      <div class="max-full max-h-[60vh] overflow-auto">
-        <div class="select-container" v-for="(item, i) in selects" :key="i">
-          <div class="select-title">
-            {{ item.title }}
-          </div>
+      <div class="max-full min-h-[350px] max-h-[60vh] overflow-auto">
+        <div class="select-container">
+          <div class="select-title">Select Primary Module</div>
           <select-box
-            :items="item.values"
+            :items="primaryModules"
             :bg-secondary-opened="true"
             :show-search="false"
             :showClearList="false"
-            :label="item.title"
+            label="Select Primary Module"
             :class="`z-[${i}]`"
             class="select-box"
-            @on-change="changeSelect(item, $event)"
+            :value="selectedPrimaryModule"
+            @on-change="setPrimaryModule"
+          />
+        </div>
+        <div class="select-container" v-if="selectedPrimaryModule">
+          <div class="select-title">Select Secondary Module</div>
+          <select-box
+            :items="[]"
+            :bg-secondary-opened="true"
+            :show-search="false"
+            :showClearList="false"
+            label="Select Secondary Module"
+            :class="`z-[${i}]`"
+            class="select-box"
           />
         </div>
       </div>
@@ -113,116 +124,152 @@ const changeSelect = (item, selected) => {
   }
 };
 
-const selects = [
+const selectedPrimaryModule = ref(null);
+const primaryModules = [
   {
-    title: "Select Primary Modal",
-    values: [
-      {
-        value: "leads",
-        label: "Leads",
-      },
-      {
-        value: "contacts",
-        label: "Contacts",
-      },
-      {
-        value: "accounts",
-        label: "Accounts",
-      },
-      {
-        value: "deals",
-        label: "Deals",
-      },
-      {
-        value: "tasks",
-        label: "Tasks",
-      },
-      {
-        value: "meetings",
-        label: "Meetings",
-      },
-      {
-        value: "calls",
-        label: "Calls",
-      },
-    ],
+    value: "leads",
+    label: "Leads",
   },
   {
-    title: "Start Date",
-    values: [
-      {
-        value: "today",
-        label: "Today",
-      },
-      {
-        value: "tomorrow",
-        label: "Tomorrow",
-      },
-    ],
+    value: "contacts",
+    label: "Contacts",
   },
   {
-    title: "End Date",
-    values: [
-      {
-        value: "today",
-        label: "Today",
-      },
-      {
-        value: "tomorrow",
-        label: "Tomorrow",
-      },
-    ],
+    value: "accounts",
+    label: "Accounts",
   },
   {
-    title: "Post Rate",
-    values: [
-      {
-        value: "excel",
-        label: "Excel",
-      },
-      {
-        value: "csv",
-        label: "CSV",
-      },
-      {
-        value: "pdf",
-        label: "PDF",
-      },
-    ],
+    value: "deals",
+    label: "Deals",
   },
   {
-    title: "Reocurring Report",
-    values: [
-      {
-        value: "excel",
-        label: "Excel",
-      },
-      {
-        value: "csv",
-        label: "CSV",
-      },
-      {
-        value: "pdf",
-        label: "PDF",
-      },
-    ],
+    value: "tasks",
+    label: "Tasks",
   },
   {
-    title: "Schedule",
-    values: [
-      {
-        value: "excel",
-        label: "Excel",
-      },
-      {
-        value: "csv",
-        label: "CSV",
-      },
-      {
-        value: "pdf",
-        label: "PDF",
-      },
-    ],
+    value: "meetings",
+    label: "Meetings",
+  },
+  {
+    value: "calls",
+    label: "Calls",
   },
 ];
+
+const setPrimaryModule = (moduleName) => {
+  console.log(moduleName);
+  selectedPrimaryModule.value = moduleName;
+};
+// const selects = [
+//     {
+//         title: "Select Primary Module",
+//         values: [
+//             {
+//                 value: "leads",
+//                 label: "Leads",
+//             },
+//             {
+//                 value: "contacts",
+//                 label: "Contacts",
+//             },
+//             {
+//                 value: "accounts",
+//                 label: "Accounts",
+//             },
+//             {
+//                 value: "deals",
+//                 label: "Deals",
+//             },
+//             {
+//                 value: "tasks",
+//                 label: "Tasks",
+//             },
+//             {
+//                 value: "meetings",
+//                 label: "Meetings",
+//             },
+//             {
+//                 value: "calls",
+//                 label: "Calls",
+//             },
+//         ],
+//     },
+//       {
+//         title: "Start Date",
+//         values: [
+//           {
+//             value: "today",
+//             label: "Today",
+//           },
+//           {
+//             value: "tomorrow",
+//             label: "Tomorrow",
+//           },
+//         ],
+//       },
+//       {
+//         title: "End Date",
+//         values: [
+//           {
+//             value: "today",
+//             label: "Today",
+//           },
+//           {
+//             value: "tomorrow",
+//             label: "Tomorrow",
+//           },
+//         ],
+//       },
+//       {
+//         title: "Post Rate",
+//         values: [
+//           {
+//             value: "excel",
+//             label: "Excel",
+//           },
+//           {
+//             value: "csv",
+//             label: "CSV",
+//           },
+//           {
+//             value: "pdf",
+//             label: "PDF",
+//           },
+//         ],
+//       },
+//       {
+//         title: "Reocurring Report",
+//         values: [
+//           {
+//             value: "excel",
+//             label: "Excel",
+//           },
+//           {
+//             value: "csv",
+//             label: "CSV",
+//           },
+//           {
+//             value: "pdf",
+//             label: "PDF",
+//           },
+//         ],
+//       },
+//       {
+//         title: "Schedule",
+//         values: [
+//           {
+//             value: "excel",
+//             label: "Excel",
+//           },
+//           {
+//             value: "csv",
+//             label: "CSV",
+//           },
+//           {
+//             value: "pdf",
+//             label: "PDF",
+//           },
+//         ],
+//       },
+// ];
 </script>
