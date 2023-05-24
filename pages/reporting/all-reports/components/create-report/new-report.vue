@@ -12,7 +12,6 @@
             :show-search="false"
             :showClearList="false"
             label="Select Primary Module"
-            :class="`z-[${i}]`"
             class="select-box"
             :value="selectedPrimaryModule"
             @on-change="setPrimaryModule"
@@ -26,7 +25,6 @@
             :show-search="false"
             :showClearList="false"
             label="Select Secondary Module"
-            :class="`z-[${i}]`"
             class="select-box"
           />
         </div>
