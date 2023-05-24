@@ -31,10 +31,8 @@
       <div
         class="flex flex-wrap justify-between gap-4 items-center sm:col-span-8 md:col-span-8 xl:col-span-9"
       >
-        <div class="flex items-center gap-8">
-          <span v-if="actualInfo.title" class="text-lg font-semibold">{{
-            actualInfo.title
-          }}</span>
+        <div class="flex items-center gap-8" v-if="actualSection == 'Columns'">
+          <span class="text-lg font-semibold"> Leads </span>
           <div class="flex gap-1 flex-nowrap items-start">
             <font-awesome-icon
               :icon="['fas', 'circle-info']"
@@ -44,13 +42,32 @@
               @click.prevent.stop
             />
             <p>
-              {{ actualInfo.info }}
-              <span v-if="actualInfo.link" class="text-secondary font-semibold">
-                {{ actualInfo.link }}
-              </span>
+              Do you want to run another report?
+              <button
+                @click="openCreateJoinedReportModal"
+                class="text-secondary font-semibold"
+              >
+                Joined Report
+              </button>
             </p>
           </div>
         </div>
+        <div class="flex items-center gap-8" v-if="actualSection == 'Filters'">
+          <div class="flex gap-1 flex-nowrap items-start">
+            <font-awesome-icon
+              :icon="['fas', 'circle-info']"
+              size="md"
+              class="mr-1 mt-[4px] focus:outline-none"
+              tabindex="0"
+              @click.prevent.stop
+            />
+            <p>
+              Preview shown with limited number of rows. Run the report to see
+              actual aggregate values.
+            </p>
+          </div>
+        </div>
+
         <div class="flex gap-4 ml-auto">
           <Button
             size="sm"
@@ -86,6 +103,13 @@
   <daisy-modal :overlay="true" :show-close-button="false" ref="renameModal">
     <rename-modal @close="closeRenameModal" />
   </daisy-modal>
+  <daisy-modal
+    :overlay="true"
+    :show-close-button="false"
+    ref="createJoinedReportModal"
+  >
+    <create-joined-report-modal @close="closeCreateJoinedReportModal" />
+  </daisy-modal>
 </template>
 
 <style scoped lang="postcss">
@@ -115,6 +139,7 @@ import EditReport from "../edit-report/index.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import CreateJoinedReportModal from "./components/create-joined-report-modal.vue";
 library.add(faInfoCircle);
 
 import { VerticalEllipsis, ArrowLeft } from "~/components/icons";
@@ -124,24 +149,6 @@ const showTitleDropdown = ref(false);
 const emit = defineEmits(["close", "back", "next"]);
 
 const actualSection = ref("Columns");
-
-const columnsInfo = {
-  title: "Leads",
-  info: "Do you want to run another report?",
-  link: "Joined Report.",
-};
-
-const filtersInfo = {
-  info: "Preview shown with limited number of rows. Run the report to see actual aggregate values.",
-};
-
-const actualInfo = computed(() => {
-  if (actualSection.value == "Columns") {
-    return columnsInfo;
-  } else if (actualSection.value == "Filters") {
-    return filtersInfo;
-  }
-});
 
 const toggleTitleDropdown = () => {
   showTitleDropdown.value = !showTitleDropdown.value;
@@ -155,6 +162,15 @@ const openRenameModal = () => {
 };
 const closeRenameModal = () => {
   renameModal.value.close();
+};
+
+const createJoinedReportModal = ref(null);
+
+const openCreateJoinedReportModal = () => {
+  createJoinedReportModal.value.open();
+};
+const closeCreateJoinedReportModal = () => {
+  createJoinedReportModal.value.close();
 };
 
 const actualData = computed(() => {
