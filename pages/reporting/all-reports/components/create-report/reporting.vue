@@ -9,7 +9,7 @@
             class="pt-1 min-w-12 max-w-12 h-12 cursor-pointer"
             @click="emit('back')"
           ></arrow-left>
-          <h5 class="text-2xl whitespace-nowrap mr-2">Report name</h5>
+          <h5 class="text-2xl whitespace-nowrap mr-2">Untitled Report</h5>
           <div class="relative">
             <button @click.stop="toggleTitleDropdown">
               <vertical-ellipsis
@@ -95,7 +95,10 @@
     :show-close-button="false"
     ref="createJoinedReportModal"
   >
-    <create-joined-report-modal @close="closeCreateJoinedReportModal" />
+    <create-joined-report-modal
+      @close="closeCreateJoinedReportModal"
+      report-name="Untitled Report"
+    />
   </daisy-modal>
 </template>
 

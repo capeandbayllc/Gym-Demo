@@ -68,7 +68,7 @@
         ghost
         size="sm"
         class="normal-case mr-2 rounded-lg"
-        @click="emit('close')"
+        @click="resetDataAndClose"
       >
         Cancel
       </Button>
@@ -76,22 +76,12 @@
         size="sm"
         secondary=""
         class="normal-case rounded-lg"
-        @click="emit('close')"
+        @click="resetDataAndClose"
       >
         Save
       </Button>
     </div>
   </div>
-  <daisy-modal
-    :overlay="true"
-    id="reportSchedulerModal"
-    ref="reportSchedulerModal"
-  >
-    <report-scheduler-modal
-      @close="closeReportSchedulerModal"
-      :folders="folders"
-    />
-  </daisy-modal>
 </template>
 
 <style scoped lang="postcss">
@@ -143,23 +133,36 @@ const props = defineProps({
     type: Array,
     default: [],
   },
+  reportName: {
+    type: String,
+    default: "",
+  },
 });
 
 const emit = defineEmits(["close"]);
 
 const selectedReports = ref([
   {
-    label: "Untitled report",
-    value: "Untitled report",
+    label: props.reportName,
+    value: props.reportName,
     disabled: true,
   },
   {},
 ]);
+const resetSelectedReports = ref(null);
+onMounted(() => {
+  resetSelectedReports.value = [...selectedReports.value];
+});
 
 const selectReport = (index, report) => {
   selectedReports.value[index] = reportsOptions.value.find(
     (i) => i.value == report
   );
+};
+
+const resetDataAndClose = () => {
+  selectedReports.value = resetSelectedReports.value;
+  emit("close");
 };
 
 const deleteSelectedReport = (index) => {
@@ -168,32 +171,8 @@ const deleteSelectedReport = (index) => {
 
 const reportsOptions = ref([
   {
-    value: "leads",
-    label: "Leads",
-  },
-  {
-    value: "contacts",
-    label: "Contacts",
-  },
-  {
-    value: "accounts",
-    label: "Accounts",
-  },
-  {
-    value: "deals",
-    label: "Deals",
-  },
-  {
-    value: "tasks",
-    label: "Tasks",
-  },
-  {
-    value: "meetings",
-    label: "Meetings",
-  },
-  {
-    value: "calls",
-    label: "Calls",
+    value: "empty",
+    label: "Report 1",
   },
 ]);
 </script>
