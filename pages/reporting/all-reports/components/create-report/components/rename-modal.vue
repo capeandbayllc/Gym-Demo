@@ -64,13 +64,18 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  open: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const focusInput = ref(false);
 const inputReportName = ref("");
 const validationMessage = ref("");
 
-onMounted(() => {
+watchEffect(() => {
+  if (!props.open) return;
   inputReportName.value = props.reportName;
 });
 

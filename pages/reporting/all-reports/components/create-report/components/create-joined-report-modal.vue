@@ -150,8 +150,28 @@ const selectedReports = ref([
   {},
 ]);
 const resetSelectedReports = ref(null);
+
 onMounted(() => {
   resetSelectedReports.value = [...selectedReports.value];
+});
+
+watchEffect(() => {
+  selectedReports.value = [
+    {
+      label: props.reportName,
+      value: props.reportName,
+      disabled: true,
+    },
+    {},
+  ];
+  resetSelectedReports.value = [
+    {
+      label: props.reportName,
+      value: props.reportName,
+      disabled: true,
+    },
+    {},
+  ];
 });
 
 const selectReport = (index, report) => {

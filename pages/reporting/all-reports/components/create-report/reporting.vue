@@ -92,6 +92,7 @@
       @close="closeRenameModal"
       :report-name="reportName"
       @changeName="reportName = $event"
+      :open="renameModal?.isOpen"
     />
   </daisy-modal>
   <daisy-modal
