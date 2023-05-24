@@ -11,8 +11,14 @@
             <div class="flex flex-col gap-4">
               <div>
                 <h5>Report</h5>
-                <div class="relative">
-                  <input type="text" class="input-text" value="" />
+                <div class="relative" @click="openSelectReportModal">
+                  <input
+                    type="text"
+                    class="input-text cursor-pointer"
+                    :value="selectedReport?.report_name"
+                    disabled
+                    value=""
+                  />
                   <button class="input-text-icon">
                     <search-icon />
                   </button>
@@ -25,8 +31,11 @@
                   grayContent
                   :scrollable="true"
                   :items="fileOptions"
-                  label="XLS"
-                  class="select-dropdown bg-neutral z-[50]"
+                  :label="
+                    selectedExportFilesAs ? selectedExportFilesAs : 'Select'
+                  "
+                  class="select-dropdown bg-neutral z-[60]"
+                  @on-change="selectedExportFilesAs = $event"
                 />
               </div>
               <div class="flex justify-between gap-2">
@@ -58,8 +67,9 @@
                   grayContent
                   :scrollable="true"
                   :items="repeatTypeOptions"
-                  label="Daily"
-                  class="select-dropdown bg-neutral z-[9]"
+                  :label="selectedRepeatType ? selectedRepeatType : 'Select'"
+                  class="select-dropdown bg-neutral z-[55]"
+                  @on-change="selectedRepeatType = $event"
                 />
               </div>
             </div>
@@ -82,8 +92,11 @@
                   grayContent
                   :scrollable="true"
                   :items="sendOptions"
-                  label="Email"
+                  :label="
+                    selectedSendReportVia ? selectedSendReportVia : 'Select'
+                  "
                   class="select-dropdown bg-neutral z-[50]"
+                  @on-change="selectedSendReportVia = $event"
                 />
               </div>
 
@@ -135,6 +148,38 @@
       </div>
     </div>
   </div>
+  <daisy-modal
+    :overlay="true"
+    id="selectReportModal"
+    ref="selectReportModal"
+    @close="createReportScreenIndex = 0"
+  >
+    <div class="modal-container !p-3">
+      <div class="modal-content !p-3">
+        <div class="grid grid-cols-1 md:grid-cols-4 md:gap-3 mt-2">
+          <reports-folders-card
+            :actual-folder="actualFolder"
+            :actual-sub-folder="actualSubFolder"
+            @changeActualFolder="
+              actualFolder = $event;
+              actualSubFolder = null;
+            "
+            @changeActualSubFolder="actualSubFolder = $event"
+            :folders="folders"
+          />
+          <reports-table
+            :data="folderSelected.data"
+            :active-report-details-modal="false"
+            :columns="folderSelected.columns"
+            :show-favorite-button="false"
+            :show-select-button="false"
+            @row-clicked="closeSelectReportModal"
+            class="col-span-3 mt-3 md:mt-0"
+          />
+        </div>
+      </div>
+    </div>
+  </daisy-modal>
 </template>
 
 <style scoped lang="postcss">
@@ -171,7 +216,7 @@
 }
 .custom-date-input {
   .dp__input {
-    @apply h-9 max-w-[150px] rounded-xl bg-neutral border-0;
+    @apply h-9 w-full rounded-xl bg-neutral border-0;
   }
 }
 </style>
@@ -183,6 +228,42 @@ import selectDropdown from "../../report-details-modal/components/select-dropdow
 const showRecipientDropdown = ref(false);
 import { RecipientSearchIcon, SearchIcon } from "~/components/icons";
 import RecipientDropdown from "~/pages/reporting/all-reports/components/edit-report/components/recipient-dropdown.vue";
+import ReportsFoldersCard from "~/pages/reporting/all-reports/components/reports-folders-card/index.vue";
+import ReportsTable from "~/pages/reporting/all-reports/components/reports-table/index.vue";
+
+const props = defineProps({
+  folders: {
+    type: Array,
+    default: [""],
+  },
+});
+
+const selectedExportFilesAs = ref("XLS");
+const selectedRepeatType = ref("Daily");
+const selectedSendReportVia = ref("Email");
+
+const selectedReport = ref(null);
+
+const selectReportModal = ref(null);
+const openSelectReportModal = () => {
+  selectReportModal.value.open();
+};
+const closeSelectReportModal = (report) => {
+  selectedReport.value = report;
+  selectReportModal.value.close();
+};
+
+const actualFolder = ref(props?.folders[0]);
+const actualSubFolder = ref(null);
+
+const folderSelected = computed(() => {
+  if (actualSubFolder.value != null) {
+    return actualSubFolder.value;
+  }
+  if (actualFolder.value.getData)
+    actualFolder.value.data = actualFolder.value.getData();
+  return actualFolder.value;
+});
 
 const toggleRecipientDropdown = () => {
   showRecipientDropdown.value = !showRecipientDropdown.value;

@@ -1,6 +1,7 @@
 <template>
   <div class="flex items-center gap-2">
     <input
+      v-if="showSelectButton"
       type="checkbox"
       name="agree"
       id="agree"
@@ -8,6 +9,7 @@
       @click="emit('toggleSelectReport')"
     />
     <Button
+      v-if="showFavoriteButton"
       size="sm"
       class="bg-transparent border-0 px-0 mb-1"
       @click="emit('toggleIsFavorite')"
@@ -47,6 +49,14 @@ const props = defineProps({
   column: {
     type: Array,
     default: {},
+  },
+  showFavoriteButton: {
+    type: Boolean,
+    default: true,
+  },
+  showSelectButton: {
+    type: Boolean,
+    default: true,
   },
 });
 

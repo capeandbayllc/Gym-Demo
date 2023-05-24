@@ -6,9 +6,12 @@
         <body-reports-table
           :data="dataFiltered"
           :columns="columns"
+          :show-favorite-button="showFavoriteButton"
+          :show-select-button="showSelectButton"
           @toggle-is-favorite="emit('toggleIsFavorite', $event)"
           @toggle-select-report="emit('toggleSelectReport', $event)"
-          @row-clicked="openReportDetailsModal"
+          @row-clicked="emit('row-clicked', $event)"
+          @openReportDetailsModal="openReportDetailsModal"
         />
       </table>
       <daisy-modal
@@ -68,6 +71,18 @@ const props = defineProps({
     type: Array,
     default: [],
   },
+  activeReportDetailsModal: {
+    type: Boolean,
+    default: true,
+  },
+  showFavoriteButton: {
+    type: Boolean,
+    default: true,
+  },
+  showSelectButton: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const dataFiltered = computed(() => {
@@ -93,8 +108,12 @@ const applyFilter = (filter) => {
 };
 
 const openReportDetailsModal = (report) => {
-  selectedReport.value = report;
-  reportDetailsModal.value.open();
+  if (props.activeReportDetailsModal) {
+    selectedReport.value = report;
+    reportDetailsModal.value.open();
+  } else {
+    emit("row-clicked", report);
+  }
 };
 
 const closeReportDetailsModal = () => {
