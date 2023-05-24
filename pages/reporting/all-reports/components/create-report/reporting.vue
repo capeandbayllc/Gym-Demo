@@ -31,8 +31,10 @@
       <div
         class="flex flex-wrap justify-between gap-4 items-center sm:col-span-8 md:col-span-8 xl:col-span-9"
       >
-        <div class="flex items-center gap-8" v-if="actualSection == 'Columns'">
-          <span class="text-lg font-semibold"> Leads </span>
+        <div class="flex items-center gap-8">
+          <span class="text-lg font-semibold" v-if="actualSection == 'Columns'">
+            Leads
+          </span>
           <div class="flex gap-1 flex-nowrap items-start">
             <font-awesome-icon
               :icon="['fas', 'circle-info']"
@@ -49,21 +51,6 @@
               >
                 Joined Report
               </button>
-            </p>
-          </div>
-        </div>
-        <div class="flex items-center gap-8" v-if="actualSection == 'Filters'">
-          <div class="flex gap-1 flex-nowrap items-start">
-            <font-awesome-icon
-              :icon="['fas', 'circle-info']"
-              size="md"
-              class="mr-1 mt-[4px] focus:outline-none"
-              tabindex="0"
-              @click.prevent.stop
-            />
-            <p>
-              Preview shown with limited number of rows. Run the report to see
-              actual aggregate values.
             </p>
           </div>
         </div>

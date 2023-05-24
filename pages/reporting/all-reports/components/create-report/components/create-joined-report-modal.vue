@@ -7,36 +7,58 @@
       </p>
       <div class="max-full max-h-[60vh] overflow-visible">
         <div class="select-container">
-          <div>
-            <div class="select-title">Report 1</div>
-            <input
-              type="text"
-              disabled
-              value="Untitled report"
-              class="dark-input"
-            />
-          </div>
-          <div>
-            <label class="select-title">Report 2</label>
-            <select-box
-              :items="primaryModules"
-              :bg-secondary-opened="true"
-              :show-search="false"
-              :showClearList="false"
-              label="Select report"
-              :class="`z-[${i}]`"
-              class="select-box"
-              :value="selectedPrimaryModule"
-              @on-change="setPrimaryModule"
-            />
+          <div v-for="(selectedReport, i) in selectedReports" :key="i">
+            <div class="select-title">Report {{ i + 1 }}</div>
+            <div class="flex gap-2 justify-content items-center">
+              <select-box
+                v-if="!selectedReport.disabled"
+                :items="reportsOptions"
+                :bg-secondary-opened="true"
+                :show-search="false"
+                :showClearList="false"
+                :label="
+                  selectedReport.value ? selectedReport.label : 'Select report'
+                "
+                class="select-box"
+                :value="selectedPrimaryModule"
+                @on-change="selectReport(i, $event)"
+              />
+              <input
+                v-else
+                type="text"
+                disabled
+                :value="selectedReport.label"
+                class="dark-input"
+              />
+              <div class="w-[18px]">
+                <button
+                  v-if="!selectedReport.disabled && selectedReports.length > 2"
+                  @click="deleteSelectedReport(i)"
+                >
+                  <font-awesome-icon
+                    :icon="['fas', 'xmark']"
+                    size="md"
+                    class="mt-[2px] focus:outline-none h-[18px] text-secondary"
+                    tabindex="0"
+                  />
+                </button>
+              </div>
+            </div>
           </div>
           <div class="text-left">
             <button
-              @click="openCreateJoinedReportModal"
-              class="text-secondary font-semibold"
+              :disabled="
+                selectedReports.length >= 3 ||
+                !selectedReports.every((report) => report.value)
+              "
+              @click="selectedReports.push({})"
+              class="text-secondary font-semibold disabled:text-base-content/50"
             >
               Add Report
             </button>
+            <p class="mb-3" v-if="selectedReports.length >= 3">
+              We cannot add more than 3 reports
+            </p>
           </div>
         </div>
       </div>
@@ -54,7 +76,7 @@
         size="sm"
         secondary=""
         class="normal-case rounded-lg"
-        @click="emit('next')"
+        @click="emit('close')"
       >
         Save
       </Button>
@@ -94,7 +116,7 @@
       }
     }
     .dark-input {
-      @apply rounded-xl h-9 bg-neutral px-3 w-full;
+      @apply rounded-lg h-9 bg-neutral px-3 w-full disabled:text-base-content/50;
     }
   }
 }
@@ -111,6 +133,11 @@
 </style>
 
 <script setup>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+library.add(faXmark);
+
 const props = defineProps({
   folders: {
     type: Array,
@@ -120,8 +147,26 @@ const props = defineProps({
 
 const emit = defineEmits(["close"]);
 
-const selectedPrimaryModule = ref(null);
-const primaryModules = [
+const selectedReports = ref([
+  {
+    label: "Untitled report",
+    value: "Untitled report",
+    disabled: true,
+  },
+  {},
+]);
+
+const selectReport = (index, report) => {
+  selectedReports.value[index] = reportsOptions.value.find(
+    (i) => i.value == report
+  );
+};
+
+const deleteSelectedReport = (index) => {
+  selectedReports.value.splice(index, 1);
+};
+
+const reportsOptions = ref([
   {
     value: "leads",
     label: "Leads",
@@ -150,5 +195,5 @@ const primaryModules = [
     value: "calls",
     label: "Calls",
   },
-];
+]);
 </script>
