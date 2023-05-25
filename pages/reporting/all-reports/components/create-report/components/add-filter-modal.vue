@@ -150,7 +150,7 @@
       @apply h-9 !w-[170px] rounded-xl px-1;
     }
     .dark-input {
-      @apply rounded-xl h-9 bg-neutral px-3;
+      @apply rounded-lg h-9 bg-neutral placeholder:text-base-content/40 px-3 w-full disabled:text-base-content/50 outline-none;
     }
   }
 }

@@ -106,7 +106,7 @@
       }
     }
     .dark-input {
-      @apply rounded-lg h-9 bg-neutral px-3 w-full disabled:text-base-content/50;
+      @apply rounded-lg h-9 bg-neutral placeholder:text-base-content/40 px-3 w-full disabled:text-base-content/50 outline-none;
     }
   }
 }
@@ -150,8 +150,28 @@ const selectedReports = ref([
   {},
 ]);
 const resetSelectedReports = ref(null);
+
 onMounted(() => {
   resetSelectedReports.value = [...selectedReports.value];
+});
+
+watchEffect(() => {
+  selectedReports.value = [
+    {
+      label: props.reportName,
+      value: props.reportName,
+      disabled: true,
+    },
+    {},
+  ];
+  resetSelectedReports.value = [
+    {
+      label: props.reportName,
+      value: props.reportName,
+      disabled: true,
+    },
+    {},
+  ];
 });
 
 const selectReport = (index, report) => {
