@@ -20,7 +20,9 @@
               v-show="showTitleDropdown"
             >
               <div class="dropdown-container">
-                <div class="dropdown-item">Rename</div>
+                <button class="dropdown-item" @click="openRenameModal">
+                  Rename
+                </button>
                 <div class="dropdown-item">Delete</div>
               </div>
             </div>
@@ -106,6 +108,11 @@
       </div>
     </div>
   </div>
+  <daisy-modal :overlay="true" :show-close-button="false" ref="renameModal">
+    <rename-modal @close="closeRenameModal" :open="renameModal?.isOpen" />
+    <!-- :report-name="reportName"
+      @changeName="reportName = $event" -->
+  </daisy-modal>
 </template>
 
 <style scoped lang="postcss">
@@ -146,6 +153,7 @@ import equalToIcon from "./components/equal-to-icon.vue";
 import HeadReportDetailsTable from "./components/head-reports-details-table.vue";
 import BodyReportDetailsTable from "./components/body-report-details-table.vue";
 import EditReport from "../edit-report/index.vue";
+import RenameModal from "../rename-modal.vue";
 import { getRandomInt } from "~/api/utils/number";
 
 import {
@@ -186,6 +194,16 @@ const data = computed(() => {
   }
   return array;
 });
+
+const renameModal = ref(null);
+
+const openRenameModal = () => {
+  toggleTitleDropdown();
+  renameModal.value.open();
+};
+const closeRenameModal = () => {
+  renameModal.value.close();
+};
 
 const totalRecordsOptions = [
   "Total records",
