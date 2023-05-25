@@ -63,6 +63,7 @@
         />
         <reports-table
           :data="folderSelected.data"
+          @changeReportName="changeReportName"
           @toggle-is-favorite="toggleIsFavorite"
           @toggle-select-report="toggleSelectReport"
           :columns="folderSelected.columns"

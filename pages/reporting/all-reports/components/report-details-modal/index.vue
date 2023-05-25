@@ -8,19 +8,27 @@
             @click="emit('close')"
           ></arrow-left>
           {{ report.report_name }}
-          <div class="">
-            <button @click.stop="toggleTitleDropdown">
+          <div class="dropdown">
+            <button @click.stop="showTitleDropdown = true">
               <vertical-ellipsis
                 class="h-6 fill-base-content transform rotate-90 mt-[9px]"
               />
             </button>
             <div
-              class="dropdown"
-              @click.stop="toggleTitleDropdown"
+              class="dropdown-report dropdown-content"
+              @click="toggleTitleDropdown"
               v-show="showTitleDropdown"
             >
               <div class="dropdown-container">
-                <div class="dropdown-item">Rename</div>
+                <button
+                  class="dropdown-item"
+                  @click="
+                    toggleTitleDropdown();
+                    openRenameModal();
+                  "
+                >
+                  Rename
+                </button>
                 <div class="dropdown-item">Delete</div>
               </div>
             </div>
@@ -106,13 +114,21 @@
       </div>
     </div>
   </div>
+  <daisy-modal :overlay="true" :show-close-button="false" ref="renameModal">
+    <rename-modal
+      @changeName="emit('changeReportName', $event)"
+      :report-name="report.report_name"
+      @close="closeRenameModal"
+      :open="renameModal?.isOpen"
+    />
+  </daisy-modal>
 </template>
 
 <style scoped lang="postcss">
 .modal-container {
   @apply py-4 px-6 md:px-8 w-[90vw] max-w-[1465px] bg-base-300 border-2 rounded-3xl text-[0.9rem] flex flex-col border-secondary relative bg-gradient-to-b from-secondary-focus to-base-300/30;
   .modal-header {
-    .dropdown {
+    .dropdown-report {
       @apply absolute top-[28px] right-[0px] h-auto z-[60];
       .dropdown-container {
         @apply bg-base-300 border-secondary border text-base font-normal rounded-2xl p-3 px-5 w-[120px];
@@ -146,6 +162,7 @@ import equalToIcon from "./components/equal-to-icon.vue";
 import HeadReportDetailsTable from "./components/head-reports-details-table.vue";
 import BodyReportDetailsTable from "./components/body-report-details-table.vue";
 import EditReport from "../edit-report/index.vue";
+import RenameModal from "../rename-modal.vue";
 import { getRandomInt } from "~/api/utils/number";
 
 import {
@@ -154,7 +171,7 @@ import {
   FiltersReportingIcon,
 } from "~/components/icons";
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close", "changeReportName"]);
 
 const props = defineProps({
   report: {
@@ -186,6 +203,16 @@ const data = computed(() => {
   }
   return array;
 });
+
+const renameModal = ref(null);
+
+const openRenameModal = () => {
+  toggleTitleDropdown();
+  renameModal.value.open();
+};
+const closeRenameModal = () => {
+  renameModal.value.close();
+};
 
 const totalRecordsOptions = [
   "Total records",

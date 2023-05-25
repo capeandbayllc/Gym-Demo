@@ -128,7 +128,7 @@
 <script setup>
 import Sidebar from "./components/sidebar.vue";
 import ReportingTable from "./components/reporting-table.vue";
-import RenameModal from "./components/rename-modal.vue";
+import RenameModal from "../rename-modal.vue";
 import { getRandomInt } from "~/api/utils/number";
 import EditReport from "../edit-report/index.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
