@@ -3,9 +3,11 @@
     <div @mouseover="showFocus" @mouseleave="hideFocus">
       <FormAppInput
         ref="globalSearchInput"
+        @click="$emit('show-global-search')"
         placeholder="Search"
         v-model="globalSearch"
-        @click="$emit('show-global-search')"
+        :readonly="true"
+        class="cursor-text"
       />
     </div>
     <div class="relative">
@@ -58,7 +60,7 @@
   @apply -right-2 left-auto z-10 ease-linear;
 }
 </style>
-<style scoped>
+<style scoped lang="postcss">
 .header-actions {
   @apply flex items-center justify-end space-x-9 mx-8 -lg:space-x-4 -xl:space-x-3;
   > button svg {
@@ -105,20 +107,10 @@ import UserAddMenu from "./user-add-menu.vue";
 import TrophyIcon from "~/components/icons/trophy.vue";
 
 const userMenu = ref(null);
-const globalSearchInput = ref("");
-const showFocus = () => {
-  // globalSearchInput.value.style = "";
-  // globalSearchInput.value?.focus();
-};
-
-const globalSearch = ref("");
 
 const emit = defineEmits(["show-leader-board"]);
 const showLeaderBoard = () => {
   emit("show-leader-board");
-};
-const hideFocus = () => {
-  // globalSearchInput.value.blur();
 };
 const isLeaderboardPopoverVisible = ref(false);
 const openLeaderboardPopover = () => {

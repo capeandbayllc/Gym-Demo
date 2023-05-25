@@ -1,6 +1,7 @@
 <template>
   <input
     :ref="ref"
+    :readonly="readonly"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
     :placeholder="placeholder"
@@ -16,5 +17,9 @@ const props = defineProps({
   modelValue: String,
   width: String,
   height: String,
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>

@@ -23,7 +23,7 @@
     </div>
   </div>
 </template>
-<style scoped>
+<style scoped lang="postcss">
 .global-search-container {
   @apply flex bg-primary absolute z-10 justify-center;
   width: calc(100vw - 3.5rem);
