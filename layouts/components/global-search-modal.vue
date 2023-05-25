@@ -112,6 +112,7 @@ watchEffect(() => {
     }, 550);
   }
 });
+
 const emit = defineEmits(["row-clicked"]);
 
 const clickRow = (data) => {
@@ -164,7 +165,7 @@ const filterSelected = (value) => {
 }
 
 .search-input:focus {
-  @apply outline-none border-[2px] border-secondary bg-white text-secondary;
+  @apply outline-none border-[2px] border-secondary bg-white !text-secondary;
 }
 .search-icon {
   @apply relative top-[31px] left-[18px] w-0;
