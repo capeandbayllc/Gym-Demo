@@ -22,6 +22,7 @@
         <report-details-modal
           v-if="selectedReport"
           @close="closeReportDetailsModal"
+          @changeReportName="changeReportName"
           :report="selectedReport"
         />
       </daisy-modal>
@@ -105,6 +106,10 @@ const filters = ref({});
 
 const applyFilter = (filter) => {
   filters.value[filter.type.toLowerCase().replace(/\s/g, "_")] = filter.values;
+};
+
+const changeReportName = (name) => {
+  selectedReport.value.report_name = name;
 };
 
 const openReportDetailsModal = (report) => {

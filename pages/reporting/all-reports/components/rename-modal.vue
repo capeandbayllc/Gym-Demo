@@ -9,7 +9,7 @@
 
     <input
       type="text"
-      class="dark-input"
+      class="dark-input block"
       placeholder="Enter a name"
       maxlength="22"
       v-model="inputReportName"
@@ -18,10 +18,7 @@
       @keypress="validationMessage = ''"
     />
 
-    <span
-      class="text-error text-sm"
-      :class="{ 'font-[600] tracking-tight': focusInput }"
-    >
+    <span class="text-error text-sm" :class="{ '': focusInput }">
       {{ validationMessage }}
     </span>
     <div class="flex justify-center sm:justify-end gap-4 pt-10">
