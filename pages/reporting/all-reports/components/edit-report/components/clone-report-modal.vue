@@ -16,9 +16,14 @@
                 type="text"
                 class="input-text"
                 v-model="inputReportName"
+                @focusin="focusInput = true"
+                @focusout="focusInput = false"
                 @keypress="validationMessage = ''"
               />
-              <span class="text-error text-sm" :class="{ '': focusInput }">
+              <span
+                class="text-error text-sm"
+                :class="{ 'font-bold tracking-tight': focusInput }"
+              >
                 {{ validationMessage }}
               </span>
               <button
@@ -102,7 +107,7 @@
         @apply bg-neutral-content/70 text-base-content !h-10 px-3 !pr-10 rounded-lg !text-left w-full focus:outline-none;
       }
       .input-text-icon {
-        @apply absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer;
+        @apply absolute right-3 top-[20px] transform -translate-y-1/2 cursor-pointer;
       }
     }
   }
@@ -138,6 +143,7 @@ const props = defineProps({
 const showRecipientDropdown = ref(false);
 const inputReportName = ref("");
 const validationMessage = ref("");
+const focusInput = ref(false);
 
 watchEffect(() => {
   if (!props.open) return;

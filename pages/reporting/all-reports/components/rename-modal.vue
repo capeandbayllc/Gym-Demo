@@ -18,7 +18,10 @@
       @keypress="validationMessage = ''"
     />
 
-    <span class="text-error text-sm" :class="{ '': focusInput }">
+    <span
+      class="text-error text-sm"
+      :class="{ 'font-bold tracking-tight': focusInput }"
+    >
       {{ validationMessage }}
     </span>
     <div class="flex justify-center sm:justify-end gap-4 pt-10">
