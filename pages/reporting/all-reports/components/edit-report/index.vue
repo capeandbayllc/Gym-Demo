@@ -14,6 +14,7 @@
   >
     <clone-report-modal
       @close="closeCloneReportModal"
+      @save="emit('saveClonedReport', $event)"
       :open="cloneReportModal?.isOpen"
       :reportName="report.report_name"
     />
@@ -47,6 +48,8 @@ const props = defineProps({
     type: Object,
   },
 });
+
+const emit = defineEmits("saveClonedReport");
 
 const selectEditOption = (item) => {
   if (item == "Clone") {

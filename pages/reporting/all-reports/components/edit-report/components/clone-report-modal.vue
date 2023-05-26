@@ -128,7 +128,7 @@
 import { RecipientSearchIcon, CloseMe } from "~/components/icons";
 import RecipientDropdown from "./recipient-dropdown.vue";
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close", "save"]);
 const props = defineProps({
   reportName: {
     type: String,
@@ -156,8 +156,11 @@ const validateAndSave = () => {
   } else if (inputReportName.value.length < 5) {
     validationMessage.value =
       "The report name must be at least 5 characters long.";
+  } else if (inputReportName.value == props.reportName) {
+    validationMessage.value =
+      "The report name must be different from the current one.";
   } else {
-    // emit("changeName", inputReportName.value);
+    emit("save", inputReportName.value);
     emit("close");
   }
 };

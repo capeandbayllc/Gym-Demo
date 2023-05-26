@@ -98,7 +98,13 @@
           >
             Run
           </Button>
-          <edit-report :report="report"></edit-report>
+          <edit-report
+            :report="report"
+            @saveClonedReport="
+              emit('saveClonedReport', $event);
+              emit('close');
+            "
+          ></edit-report>
         </div>
       </div>
     </div>
