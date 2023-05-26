@@ -98,7 +98,7 @@
           >
             Run
           </Button>
-          <edit-report></edit-report>
+          <edit-report :report="report"></edit-report>
         </div>
       </div>
     </div>

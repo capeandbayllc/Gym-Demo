@@ -15,8 +15,12 @@
               <input
                 type="text"
                 class="input-text"
-                value="Launch Party Leads_Cloned"
+                v-model="inputReportName"
+                @keypress="validationMessage = ''"
               />
+              <span class="text-error text-sm" :class="{ '': focusInput }">
+                {{ validationMessage }}
+              </span>
               <button
                 class="input-text-icon"
                 @click.stop="toggleRecipientDropdown"
@@ -63,6 +67,14 @@
             @click="emit('close')"
           >
             Cancel
+          </Button>
+          <Button
+            size="sm"
+            secondary
+            class="normal-case rounded-xl"
+            @click="validateAndSave"
+          >
+            Save
           </Button>
           <Button size="sm" secondary class="normal-case rounded-xl">
             Export
@@ -112,8 +124,37 @@ import { RecipientSearchIcon, CloseMe } from "~/components/icons";
 import RecipientDropdown from "./recipient-dropdown.vue";
 
 const emit = defineEmits(["close"]);
+const props = defineProps({
+  reportName: {
+    type: String,
+    default: "",
+  },
+  open: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 const showRecipientDropdown = ref(false);
+const inputReportName = ref("");
+const validationMessage = ref("");
+
+watchEffect(() => {
+  if (!props.open) return;
+  inputReportName.value = props.reportName;
+});
+
+const validateAndSave = () => {
+  if (inputReportName.value.length == 0) {
+    validationMessage.value = "The report name cannot be empty.";
+  } else if (inputReportName.value.length < 5) {
+    validationMessage.value =
+      "The report name must be at least 5 characters long.";
+  } else {
+    // emit("changeName", inputReportName.value);
+    emit("close");
+  }
+};
 
 const toggleRecipientDropdown = () => {
   showRecipientDropdown.value = !showRecipientDropdown.value;

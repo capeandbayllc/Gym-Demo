@@ -12,7 +12,11 @@
     ref="cloneReportModal"
     class="w-fit"
   >
-    <clone-report-modal @close="closeCloneReportModal" />
+    <clone-report-modal
+      @close="closeCloneReportModal"
+      :open="cloneReportModal?.isOpen"
+      :reportName="report.report_name"
+    />
   </daisy-modal>
   <daisy-modal
     :overlay="true"
@@ -37,6 +41,12 @@ import CloneReportModal from "./components/clone-report-modal.vue";
 import ExportReportModal from "./components/export-report-modal.vue";
 import SendEmailModal from "./components/send-email-modal.vue";
 import selectDropdown from "../report-details-modal/components/select-dropdown.vue";
+
+const props = defineProps({
+  report: {
+    type: Object,
+  },
+});
 
 const selectEditOption = (item) => {
   if (item == "Clone") {
