@@ -53,7 +53,10 @@
     </div>
   </div>
   <daisy-modal :overlay="true" id="globalSearchModal" ref="globalSearchModal">
-    <GlobalSearchModal @row-clicked="selectPerson" />
+    <GlobalSearchModal
+      :isOpen="globalSearchModal?.isOpen"
+      @row-clicked="selectPerson"
+    />
   </daisy-modal>
 </template>
 

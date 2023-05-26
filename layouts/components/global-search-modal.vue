@@ -36,6 +36,7 @@
             <input
               type="text"
               placeholder="Search"
+              ref="searchInputField"
               class="search-input"
               @focusin="changeOpenSearchInput(true)"
               @focusout="changeOpenSearchInput(false)"
@@ -87,12 +88,31 @@
 import PeopleSearchAction from "~~/pages/people-search/components/people-search-action.vue";
 import SearchList from "~~/pages/people-search/components/search-list.vue";
 
+const searchInputField = ref();
+
 const props = defineProps({
   currentPage: {
     type: String,
     default: "",
   },
+  isOpen: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+watchEffect(() => {
+  if (props.isOpen) {
+    let interval = setInterval(() => {
+      searchInputField.value?.focus();
+    }, 50);
+
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 550);
+  }
+});
+
 const emit = defineEmits(["row-clicked"]);
 
 const clickRow = (data) => {
@@ -125,7 +145,7 @@ const filterSelected = (value) => {
   tblFilter.value = value;
 };
 </script>
-<style scoped>
+<style scoped lang="postcss">
 .global-search-popup-card {
   @apply rounded-2xl bg-neutral;
   .global-search-popup-container {
@@ -145,7 +165,7 @@ const filterSelected = (value) => {
 }
 
 .search-input:focus {
-  @apply outline-none border-[2px] border-secondary bg-white text-secondary;
+  @apply outline-none border-[2px] border-secondary bg-white !text-secondary;
 }
 .search-icon {
   @apply relative top-[31px] left-[18px] w-0;

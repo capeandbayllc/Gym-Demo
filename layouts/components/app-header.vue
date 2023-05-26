@@ -50,7 +50,10 @@
       <people-search-modal />
     </daisy-modal>
     <daisy-modal :overlay="true" id="globalSearchModal" ref="globalSearchModal">
-      <global-search-modal @row-clicked="rowClicked" />
+      <global-search-modal
+        :isOpen="globalSearchModal?.isOpen"
+        @row-clicked="rowClicked"
+      />
     </daisy-modal>
     <daisy-modal :overlay="true" id="alertModal" ref="alertModal">
       <alert-modal />
