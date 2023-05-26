@@ -16,7 +16,7 @@
       @close="closeCloneReportModal"
       @save="emit('saveClonedReport', $event)"
       :open="cloneReportModal?.isOpen"
-      :reportName="report.report_name"
+      :reportName="report?.report_name"
     />
   </daisy-modal>
   <daisy-modal
