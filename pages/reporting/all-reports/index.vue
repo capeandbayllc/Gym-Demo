@@ -90,6 +90,17 @@
   </daisy-modal>
   <daisy-modal
     :overlay="true"
+    id="closeCreateReportReminderModal"
+    ref="closeCreateReportReminderModal"
+  >
+    <close-create-report-reminder-modal
+      @close="closeCloseCreateReportReminderModal"
+      @cancel="cancelReminderModal"
+    />
+  </daisy-modal>
+  <button @click="openCloseCreateReportReminderModal">Open modal</button>
+  <daisy-modal
+    :overlay="true"
     id="reportSchedulerModal"
     ref="reportSchedulerModal"
   >
@@ -134,9 +145,11 @@ import UserColumn from "./components/reports-table/components/columns/userColumn
 import ExportColumn from "./components/reports-table/components/columns/exportColumn.vue";
 import ReportSelectionActions from "./components/report-selection-actions/index.vue";
 import ReportSchedulerModal from "./components/create-report/components/report-scheduler-modal.vue";
+import CloseCreateReportReminderModal from "./components/close-create-report-reminder-modal.vue";
 import { v4 as uuidv4 } from "uuid";
 
 const selectedReport = ref(null);
+const closeCreateReportReminderModal = ref(null);
 
 const defaultSubFolders = ref([
   { name: "Campaign Reports" },
@@ -561,5 +574,29 @@ const moveToFolder = (folderName) => {
   });
 
   actualSubFolder.value = findFolder;
+};
+
+const closeCloseCreateReportReminderModal = () => {
+  closeCreateReportReminderModal.value.close();
+};
+
+const openCloseCreateReportReminderModal = () => {
+  closeCreateReportReminderModal.value.open();
+};
+
+watch(createReportScreenIndex, (actualValue, oldValue) => {
+  if (
+    actualValue == 0 &&
+    oldValue == 1 &&
+    createReportModal.value.isOpen == false
+  ) {
+    closeCreateReportReminderModal.value.open();
+  }
+});
+
+const cancelReminderModal = () => {
+  createReportScreenIndex.value = 1;
+  closeCloseCreateReportReminderModal();
+  openCreateReportModal();
 };
 </script>
