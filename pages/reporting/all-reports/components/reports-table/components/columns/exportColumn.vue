@@ -38,7 +38,7 @@
   @apply h-6 fill-base-content  transform rotate-90;
 }
 .dropdown-content {
-  @apply absolute top-[0px] right-[90px] h-auto z-[20];
+  @apply absolute top-[0px] right-[90px] h-auto z-[15];
   .dropdown-container {
     @apply bg-base-300 border-secondary border text-base font-normal rounded-2xl p-3 px-5 w-[110px] flex flex-col gap-[3px];
     .dropdown-item {
