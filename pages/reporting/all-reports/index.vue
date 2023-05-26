@@ -63,9 +63,10 @@
         />
         <reports-table
           :data="folderSelected.data"
-          @changeReportName="changeReportName"
           @toggle-is-favorite="toggleIsFavorite"
           @toggle-select-report="toggleSelectReport"
+          @save-cloned-report="saveClonedReport"
+          @change-selected-report="selectedReport = $event"
           :columns="folderSelected.columns"
           class="col-span-3 mt-3 md:mt-0"
         />
@@ -134,6 +135,8 @@ import ExportColumn from "./components/reports-table/components/columns/exportCo
 import ReportSelectionActions from "./components/report-selection-actions/index.vue";
 import ReportSchedulerModal from "./components/create-report/components/report-scheduler-modal.vue";
 import { v4 as uuidv4 } from "uuid";
+
+const selectedReport = ref(null);
 
 const defaultSubFolders = ref([
   { name: "Campaign Reports" },
@@ -516,6 +519,13 @@ const deleteSelectedReports = () => {
         activeFolderOrSubFolder.value.data.splice(i, 1);
       }
     });
+  });
+};
+
+const saveClonedReport = (name) => {
+  activeFolderOrSubFolder.value.data.unshift({
+    ...selectedReport.value,
+    report_name: name,
   });
 };
 

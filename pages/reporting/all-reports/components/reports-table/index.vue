@@ -23,6 +23,7 @@
           v-if="selectedReport"
           @close="closeReportDetailsModal"
           @changeReportName="changeReportName"
+          @saveClonedReport="emit('saveClonedReport', $event)"
           :report="selectedReport"
         />
       </daisy-modal>
@@ -57,11 +58,16 @@ const emit = defineEmits([
   "handle",
   "toggleIsFavorite",
   "toggleSelectReport",
+  "saveClonedReport",
+  "changeSelectedReport",
 ]);
 
 const reportDetailsModal = ref(false);
 
 const selectedReport = ref();
+watchEffect(() => {
+  emit("changeSelectedReport", selectedReport.value);
+});
 
 const props = defineProps({
   data: {

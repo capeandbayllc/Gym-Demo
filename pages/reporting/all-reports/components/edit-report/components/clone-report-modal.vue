@@ -15,8 +15,17 @@
               <input
                 type="text"
                 class="input-text"
-                value="Launch Party Leads_Cloned"
+                v-model="inputReportName"
+                @focusin="focusInput = true"
+                @focusout="focusInput = false"
+                @keypress="validationMessage = ''"
               />
+              <span
+                class="text-error text-sm"
+                :class="{ 'font-bold tracking-tight': focusInput }"
+              >
+                {{ validationMessage }}
+              </span>
               <button
                 class="input-text-icon"
                 @click.stop="toggleRecipientDropdown"
@@ -64,6 +73,14 @@
           >
             Cancel
           </Button>
+          <Button
+            size="sm"
+            secondary
+            class="normal-case rounded-xl"
+            @click="validateAndSave"
+          >
+            Save
+          </Button>
           <Button size="sm" secondary class="normal-case rounded-xl">
             Export
           </Button>
@@ -90,7 +107,7 @@
         @apply bg-neutral-content/70 text-base-content !h-10 px-3 !pr-10 rounded-lg !text-left w-full focus:outline-none;
       }
       .input-text-icon {
-        @apply absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer;
+        @apply absolute right-3 top-[20px] transform -translate-y-1/2 cursor-pointer;
       }
     }
   }
@@ -111,9 +128,42 @@
 import { RecipientSearchIcon, CloseMe } from "~/components/icons";
 import RecipientDropdown from "./recipient-dropdown.vue";
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close", "save"]);
+const props = defineProps({
+  reportName: {
+    type: String,
+    default: "",
+  },
+  open: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 const showRecipientDropdown = ref(false);
+const inputReportName = ref("");
+const validationMessage = ref("");
+const focusInput = ref(false);
+
+watchEffect(() => {
+  if (!props.open) return;
+  inputReportName.value = props.reportName;
+});
+
+const validateAndSave = () => {
+  if (inputReportName.value.length == 0) {
+    validationMessage.value = "The report name cannot be empty.";
+  } else if (inputReportName.value.length < 5) {
+    validationMessage.value =
+      "The report name must be at least 5 characters long.";
+  } else if (inputReportName.value == props.reportName) {
+    validationMessage.value =
+      "The report name must be different from the current one.";
+  } else {
+    emit("save", inputReportName.value);
+    emit("close");
+  }
+};
 
 const toggleRecipientDropdown = () => {
   showRecipientDropdown.value = !showRecipientDropdown.value;
