@@ -21,7 +21,7 @@
           size="sm"
           secondary
           class="normal-case rounded-lg"
-          @click="emit('close')"
+          @click="emit('confirm')"
         >
           Confirm
         </Button>
@@ -43,5 +43,5 @@
 </style>
 
 <script setup>
-const emit = defineEmits(["cancel"]);
+const emit = defineEmits(["cancel", "confirm"]);
 </script>

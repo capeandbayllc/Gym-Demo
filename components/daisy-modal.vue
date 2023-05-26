@@ -73,6 +73,10 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    confirmClose: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props, { emit }) {
     const { locked, lock, unlock } = useLockScroll("body", "no-scroll");
@@ -87,13 +91,22 @@ export default defineComponent({
     // const close = () => (isOpen.value = false);
     // const open = () => (isOpen.value = true);
 
-    const close = () => {
+    const confirmClose = () => {
       isOpen.value = false;
       if (locked) {
         unlock();
       }
       emit("close");
     };
+
+    const close = () => {
+      if (props.confirmClose) {
+        emit("confirmClose");
+      } else {
+        confirmClose();
+      }
+    };
+
     const open = () => {
       isOpen.value = true;
       emit("open");
@@ -101,11 +114,13 @@ export default defineComponent({
     };
 
     watchEffect(() => {
-      if (props.open) {
-        open();
-      } else {
-        close();
-        emit("close");
+      if (!props.confirmClose) {
+        if (props.open) {
+          open();
+        } else {
+          close();
+          emit("close");
+        }
       }
     });
 
@@ -121,8 +136,8 @@ export default defineComponent({
       unlock();
     });
 
-    return { isOpen, close, open };
+    return { isOpen, close, open, confirmClose };
   },
-  emits: ["close", "open"],
+  emits: ["close", "open", "confirmClose"],
 });
 </script>

@@ -74,9 +74,10 @@
     </div>
   </div>
   <daisy-modal
-    :overlay="true"
     id="createReportModal"
     ref="createReportModal"
+    :confirm-close="createReportScreenIndex > 0"
+    @confirmClose="openCloseCreateReportReminderModal"
     @close="createReportScreenIndex = 0"
   >
     <component
@@ -90,12 +91,12 @@
   </daisy-modal>
   <daisy-modal
     :overlay="true"
-    id="closeCreateReportReminderModal"
     ref="closeCreateReportReminderModal"
+    id="closeCreateReportReminderModal"
   >
     <close-create-report-reminder-modal
-      @close="closeCloseCreateReportReminderModal"
-      @cancel="cancelReminderModal"
+      @confirm="confirmCancellationReportCreation"
+      @cancel="cancelCancellationReportCreation"
     />
   </daisy-modal>
   <button @click="openCloseCreateReportReminderModal">Open modal</button>
@@ -594,9 +595,15 @@ watch(createReportScreenIndex, (actualValue, oldValue) => {
   }
 });
 
-const cancelReminderModal = () => {
+const confirmCancellationReportCreation = () => {
+  createReportModal.value.confirmClose();
+  setTimeout(() => {
+    closeCreateReportReminderModal.value.close();
+  }, 100);
+};
+
+const cancelCancellationReportCreation = () => {
   createReportScreenIndex.value = 1;
   closeCloseCreateReportReminderModal();
-  openCreateReportModal();
 };
 </script>
