@@ -223,7 +223,7 @@ var columnsContent = [
     items: [],
   },
   {
-    title: "Aggregate Groups",
+    title: "Aggregate Columns",
     items: [],
   },
   {
