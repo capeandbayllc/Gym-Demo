@@ -74,9 +74,10 @@
     </div>
   </div>
   <daisy-modal
-    :overlay="true"
     id="createReportModal"
     ref="createReportModal"
+    :confirm-close="createReportScreenIndex > 0"
+    @confirmClose="openCloseCreateReportReminderModal"
     @close="createReportScreenIndex = 0"
   >
     <component
@@ -88,6 +89,17 @@
     >
     </component>
   </daisy-modal>
+  <daisy-modal
+    :overlay="true"
+    ref="closeCreateReportReminderModal"
+    id="closeCreateReportReminderModal"
+  >
+    <close-create-report-reminder-modal
+      @confirm="confirmCancellationReportCreation"
+      @cancel="cancelCancellationReportCreation"
+    />
+  </daisy-modal>
+  <button @click="openCloseCreateReportReminderModal">Open modal</button>
   <daisy-modal
     :overlay="true"
     id="reportSchedulerModal"
@@ -134,9 +146,11 @@ import UserColumn from "./components/reports-table/components/columns/userColumn
 import ExportColumn from "./components/reports-table/components/columns/exportColumn.vue";
 import ReportSelectionActions from "./components/report-selection-actions/index.vue";
 import ReportSchedulerModal from "./components/create-report/components/report-scheduler-modal.vue";
+import CloseCreateReportReminderModal from "./components/close-create-report-reminder-modal.vue";
 import { v4 as uuidv4 } from "uuid";
 
 const selectedReport = ref(null);
+const closeCreateReportReminderModal = ref(null);
 
 const defaultSubFolders = ref([
   { name: "Campaign Reports" },
@@ -561,5 +575,35 @@ const moveToFolder = (folderName) => {
   });
 
   actualSubFolder.value = findFolder;
+};
+
+const closeCloseCreateReportReminderModal = () => {
+  closeCreateReportReminderModal.value.close();
+};
+
+const openCloseCreateReportReminderModal = () => {
+  closeCreateReportReminderModal.value.open();
+};
+
+watch(createReportScreenIndex, (actualValue, oldValue) => {
+  if (
+    actualValue == 0 &&
+    oldValue == 1 &&
+    createReportModal.value.isOpen == false
+  ) {
+    closeCreateReportReminderModal.value.open();
+  }
+});
+
+const confirmCancellationReportCreation = () => {
+  createReportModal.value.confirmClose();
+  setTimeout(() => {
+    closeCreateReportReminderModal.value.close();
+  }, 100);
+};
+
+const cancelCancellationReportCreation = () => {
+  createReportScreenIndex.value = 1;
+  closeCloseCreateReportReminderModal();
 };
 </script>
