@@ -29,7 +29,6 @@
           @saveClonedReport="emit('saveClonedReport', $event)"
           :report="selectedReport"
         />
-        {{ reportDetailsModal.isOpen }}
       </daisy-modal>
     </div>
   </div>
