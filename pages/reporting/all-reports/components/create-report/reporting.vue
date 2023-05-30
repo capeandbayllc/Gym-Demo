@@ -73,7 +73,9 @@
           >
             Run
           </Button>
-          <edit-report></edit-report>
+          <edit-report>
+            <button class="bg-secondary rounded-l-xl px-5">Save</button>
+          </edit-report>
         </div>
       </div>
 

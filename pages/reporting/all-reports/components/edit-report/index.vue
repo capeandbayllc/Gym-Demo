@@ -1,6 +1,6 @@
 <template>
   <div class="flex mr-5">
-    <button class="bg-secondary rounded-l-xl px-5">Edit</button>
+    <slot></slot>
     <select-dropdown
       value=""
       :items="['Clone', 'Export', 'Send Email']"
@@ -42,9 +42,9 @@
 
 <style lang="postcss">
 .edit-dropdown {
-  @apply bg-secondary h-9 !w-[20px] pr-2 rounded-r-xl w-full border-l border-base-content/50;
+  @apply bg-secondary h-9 !w-[20px] rounded-r-xl w-full border-l border-base-content/50;
   .select-box-btn {
-    @apply !w-[24px] !px-0 !mx-0;
+    @apply !w-[24px] !px-0 !mx-0 !pr-[32px] py-[18px] rounded-r-xl;
   }
   .select-box-content {
     @apply overflow-x-visible min-w-[97px] !left-[-65px] !top-[12px] !rounded-xl border border-base-content;
