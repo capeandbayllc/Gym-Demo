@@ -86,6 +86,8 @@
       @next="createReportScreenIndex++"
       @close="closeCreateReportModal"
       :folders="folders"
+      :data="newReportData"
+      @change="newReportData = $event"
     >
     </component>
   </daisy-modal>
@@ -147,6 +149,8 @@ import ReportSelectionActions from "./components/report-selection-actions/index.
 import ReportSchedulerModal from "./components/create-report/components/report-scheduler-modal.vue";
 import CloseCreateReportReminderModal from "./components/close-create-report-reminder-modal.vue";
 import { v4 as uuidv4 } from "uuid";
+
+const newReportData = ref(null);
 
 const selectedReport = ref(null);
 const closeCreateReportReminderModal = ref(null);

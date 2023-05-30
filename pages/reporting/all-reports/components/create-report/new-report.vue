@@ -109,10 +109,6 @@
 </style>
 
 <script setup>
-import ReportSchedulerModal from "./components/report-scheduler-modal.vue";
-
-const reportSchedulerModal = ref(null);
-
 const focusInput = ref(false);
 const inputReportName = ref("");
 const validationMessage = ref("");
@@ -129,6 +125,11 @@ const validateAndSave = () => {
     validationMessage.value =
       "The report name must be at least 5 characters long.";
   } else {
+    if (inputReportName.value.length == 0) {
+      emit("change", { report_name: "Untitled Report" });
+    } else {
+      emit("change", { report_name: inputReportName.value });
+    }
     emit("next");
   }
 };
@@ -136,7 +137,7 @@ const validateAndSave = () => {
 const setPrimaryModule = (moduleName) => {
   selectedPrimaryModule.value = moduleName;
 };
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close", "change"]);
 
 const selectedPrimaryModule = ref(null);
 const primaryModules = [
