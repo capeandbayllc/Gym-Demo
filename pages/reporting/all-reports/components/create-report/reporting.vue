@@ -79,6 +79,7 @@
 
       <sidebar
         :actualSection="actualSection"
+        :columns="columnsColumns"
         @changeActualSection="actualSection = $event"
         class="sm:col-span-4 md:col-span-4 xl:col-span-3"
       />
@@ -204,9 +205,9 @@ const dataFilters = computed(() => {
   for (let i = 0; i < getRandomInt(20 * 3, 0); i++) {
     array.push({
       id: i,
-      name: "Kelly Price",
+      full_name: "Kelly Price",
       annual_revenue: "",
-      bi_conctract_expiration: "",
+      bi_contract_expiration: "",
       bi_monthly_cost: "",
       bi_notes: "",
     });
@@ -228,8 +229,8 @@ const changeName = (event) => {
 
 const columnsColumns = [
   {
-    label: "Name",
-    value: "name",
+    label: "Full Name",
+    value: "full_name",
     class: "!w-[150px]",
   },
   {
@@ -238,23 +239,18 @@ const columnsColumns = [
     class: "!w-[150px]",
   },
   {
-    label: "Brand Category",
-    value: "brand_category",
+    label: "BI contract Expiration",
+    value: "bi_contract_expiration",
     class: "!w-[150px]",
   },
   {
-    label: "City",
-    value: "city",
+    label: "BI Monthly Cost",
+    value: "bi_monthly_cost",
     class: "!w-[150px]",
   },
   {
-    label: "Last Saved",
-    value: "last_saved",
-    class: "!w-[150px]",
-  },
-  {
-    label: "Company",
-    value: "company",
+    label: "BI Notes",
+    value: "bi_notes",
     class: "!w-[150px]",
   },
 ];
