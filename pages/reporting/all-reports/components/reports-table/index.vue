@@ -19,13 +19,17 @@
         id="reportDetailsModal"
         ref="reportDetailsModal"
       >
-        <report-details-modal
+        <component
           v-if="selectedReport"
+          :is="reportDetailsScreens[reportDetailsScreenIndex]"
+          @back="reportDetailsScreenIndex--"
+          @next="reportDetailsScreenIndex++"
           @close="closeReportDetailsModal"
           @changeReportName="changeReportName"
           @saveClonedReport="emit('saveClonedReport', $event)"
           :report="selectedReport"
         />
+        {{ reportDetailsModal.isOpen }}
       </daisy-modal>
     </div>
   </div>
@@ -52,6 +56,7 @@ table {
 import HeadReportsTable from "./components/head-reports-table.vue";
 import BodyReportsTable from "./components/body-reports-table.vue";
 import ReportDetailsModal from "../report-details-modal/index.vue";
+import Reporting from "~/pages/reporting/all-reports/components/create-report/reporting.vue";
 
 const emit = defineEmits([
   "row-clicked",
@@ -63,6 +68,26 @@ const emit = defineEmits([
 ]);
 
 const reportDetailsModal = ref(false);
+const reportDetailsScreens = ref([ReportDetailsModal, Reporting]);
+const reportDetailsScreenIndex = ref(0);
+const openReportDetailsModal = (report) => {
+  if (props.activeReportDetailsModal) {
+    selectedReport.value = report;
+    reportDetailsModal.value.open();
+  } else {
+    emit("row-clicked", report);
+  }
+};
+
+watchEffect(() => {
+  if (reportDetailsModal.value.isOpen) {
+    reportDetailsScreenIndex.value = 0;
+  }
+});
+
+const closeReportDetailsModal = () => {
+  reportDetailsModal.value.close();
+};
 
 const selectedReport = ref();
 watchEffect(() => {
@@ -116,18 +141,5 @@ const applyFilter = (filter) => {
 
 const changeReportName = (name) => {
   selectedReport.value.report_name = name;
-};
-
-const openReportDetailsModal = (report) => {
-  if (props.activeReportDetailsModal) {
-    selectedReport.value = report;
-    reportDetailsModal.value.open();
-  } else {
-    emit("row-clicked", report);
-  }
-};
-
-const closeReportDetailsModal = () => {
-  reportDetailsModal.value.close();
 };
 </script>

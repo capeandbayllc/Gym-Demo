@@ -108,7 +108,7 @@
           >
             <button
               class="bg-secondary rounded-l-xl px-5"
-              @click="openCreateReportModal"
+              @click="emit('next')"
             >
               Edit
             </button>
@@ -135,14 +135,6 @@
       @close="closeRenameModal"
       :open="renameModal?.isOpen"
     />
-  </daisy-modal>
-  <daisy-modal :overlay="true" ref="createReportModal">
-    <Reporting
-      @back="closeCreateReportModal"
-      :data="report"
-      @change="emit('changeReportName', $event.report_name)"
-    >
-    </Reporting>
   </daisy-modal>
 </template>
 
@@ -186,7 +178,6 @@ import BodyReportDetailsTable from "./components/body-report-details-table.vue";
 import EditReport from "../edit-report/index.vue";
 import RenameModal from "../rename-modal.vue";
 import { getRandomInt } from "~/api/utils/number";
-import Reporting from "~/pages/reporting/all-reports/components/create-report/reporting.vue";
 
 import {
   VerticalEllipsis,
@@ -235,14 +226,6 @@ const openRenameModal = () => {
 };
 const closeRenameModal = () => {
   renameModal.value.close();
-};
-
-const createReportModal = ref(false);
-const openCreateReportModal = () => {
-  createReportModal.value.open();
-};
-const closeCreateReportModal = () => {
-  createReportModal.value.close();
 };
 
 const totalRecordsOptions = [

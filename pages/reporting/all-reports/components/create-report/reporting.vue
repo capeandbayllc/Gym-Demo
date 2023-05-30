@@ -10,7 +10,7 @@
             @click="emit('back')"
           ></arrow-left>
           <h5 class="text-2xl whitespace-nowrap mr-2">
-            {{ data.report_name }}
+            {{ report.report_name }}
           </h5>
           <div class="relative">
             <button @click.stop="toggleTitleDropdown">
@@ -94,7 +94,7 @@
   <daisy-modal :overlay="true" :show-close-button="false" ref="renameModal">
     <rename-modal
       @close="closeRenameModal"
-      :report-name="data.report_name"
+      :report-name="report.report_name"
       @changeName="changeName"
       :open="renameModal?.isOpen"
     />
@@ -106,7 +106,7 @@
   >
     <create-joined-report-modal
       @close="closeCreateJoinedReportModal"
-      :report-name="data.report_name"
+      :report-name="report.report_name"
     />
   </daisy-modal>
 </template>
@@ -143,16 +143,15 @@ import CreateJoinedReportModal from "./components/create-joined-report-modal.vue
 library.add(faInfoCircle);
 
 const props = defineProps({
-  data: {
+  report: {
     type: Object,
     default: null,
   },
 });
 
 const showTitleDropdown = ref(false);
-const reportName = ref("Untitled Report");
 
-const emit = defineEmits(["close", "back", "next", "change"]);
+const emit = defineEmits(["close", "back", "next", "changeReportName"]);
 
 const actualSection = ref("Columns");
 
@@ -225,7 +224,7 @@ const actualColumns = computed(() => {
 });
 
 const changeName = (event) => {
-  emit("change", { ...props.data, report_name: event });
+  emit("changeReportName", event);
 };
 
 const columnsColumns = [
