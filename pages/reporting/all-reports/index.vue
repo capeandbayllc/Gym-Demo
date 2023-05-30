@@ -99,7 +99,6 @@
       @cancel="cancelCancellationReportCreation"
     />
   </daisy-modal>
-  <button @click="openCloseCreateReportReminderModal">Open modal</button>
   <daisy-modal
     :overlay="true"
     id="reportSchedulerModal"

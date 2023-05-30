@@ -30,7 +30,22 @@
         </div>
         <div class="select-container" v-if="selectedPrimaryModule">
           <div class="select-title">Report name</div>
-          <input type="text" placeholder="Untitled Report" class="dark-input" />
+          <input
+            type="text"
+            placeholder="Untitled Report"
+            class="dark-input"
+            maxlength="22"
+            v-model="inputReportName"
+            @focusin="focusInput = true"
+            @focusout="focusInput = false"
+            @keypress="validationMessage = ''"
+          />
+          <span
+            class="text-error text-sm"
+            :class="{ 'font-bold tracking-tight': focusInput }"
+          >
+            {{ validationMessage }}
+          </span>
         </div>
       </div>
     </div>
@@ -47,22 +62,12 @@
         size="sm"
         secondary=""
         class="normal-case rounded-lg"
-        @click="emit('next')"
+        @click="validateAndSave"
       >
         Save
       </Button>
     </div>
   </div>
-  <daisy-modal
-    :overlay="true"
-    id="reportSchedulerModal"
-    ref="reportSchedulerModal"
-  >
-    <report-scheduler-modal
-      @close="closeReportSchedulerModal"
-      :folders="folders"
-    />
-  </daisy-modal>
 </template>
 
 <style scoped lang="postcss">
@@ -108,6 +113,10 @@ import ReportSchedulerModal from "./components/report-scheduler-modal.vue";
 
 const reportSchedulerModal = ref(null);
 
+const focusInput = ref(false);
+const inputReportName = ref("");
+const validationMessage = ref("");
+
 const props = defineProps({
   folders: {
     type: Array,
@@ -115,19 +124,19 @@ const props = defineProps({
   },
 });
 
-const openReportSchedulerModal = () => {
-  reportSchedulerModal.value.open();
-};
-const closeReportSchedulerModal = () => {
-  reportSchedulerModal.value.close();
-};
-const emit = defineEmits(["close"]);
-
-const changeSelect = (item, selected) => {
-  if (item.title == "Schedule") {
-    openReportSchedulerModal();
+const validateAndSave = () => {
+  if (inputReportName.value.length < 5 && inputReportName.value.length > 0) {
+    validationMessage.value =
+      "The report name must be at least 5 characters long.";
+  } else {
+    emit("next");
   }
 };
+
+const setPrimaryModule = (moduleName) => {
+  selectedPrimaryModule.value = moduleName;
+};
+const emit = defineEmits(["close"]);
 
 const selectedPrimaryModule = ref(null);
 const primaryModules = [
@@ -160,9 +169,4 @@ const primaryModules = [
     label: "Calls",
   },
 ];
-
-const setPrimaryModule = (moduleName) => {
-  console.log(moduleName);
-  selectedPrimaryModule.value = moduleName;
-};
 </script>
