@@ -9,7 +9,9 @@
             class="pt-1 min-w-12 max-w-12 h-12 cursor-pointer"
             @click="emit('back')"
           ></arrow-left>
-          <h5 class="text-2xl whitespace-nowrap mr-2">{{ reportName }}</h5>
+          <h5 class="text-2xl whitespace-nowrap mr-2">
+            {{ data.report_name }}
+          </h5>
           <div class="relative">
             <button @click.stop="toggleTitleDropdown">
               <vertical-ellipsis
@@ -90,8 +92,8 @@
   <daisy-modal :overlay="true" :show-close-button="false" ref="renameModal">
     <rename-modal
       @close="closeRenameModal"
-      :report-name="reportName"
-      @changeName="reportName = $event"
+      :report-name="data.report_name"
+      @changeName="changeName"
       :open="renameModal?.isOpen"
     />
   </daisy-modal>
@@ -102,7 +104,7 @@
   >
     <create-joined-report-modal
       @close="closeCreateJoinedReportModal"
-      :report-name="reportName"
+      :report-name="data.report_name"
     />
   </daisy-modal>
 </template>
@@ -134,15 +136,21 @@ import EditReport from "../edit-report/index.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { VerticalEllipsis, ArrowLeft } from "~/components/icons";
 import CreateJoinedReportModal from "./components/create-joined-report-modal.vue";
 library.add(faInfoCircle);
 
-import { VerticalEllipsis, ArrowLeft } from "~/components/icons";
+const props = defineProps({
+  data: {
+    type: Object,
+    default: null,
+  },
+});
 
 const showTitleDropdown = ref(false);
 const reportName = ref("Untitled Report");
 
-const emit = defineEmits(["close", "back", "next"]);
+const emit = defineEmits(["close", "back", "next", "change"]);
 
 const actualSection = ref("Columns");
 
@@ -213,6 +221,11 @@ const actualColumns = computed(() => {
     return columnsFilters;
   }
 });
+
+const changeName = (event) => {
+  emit("change", { ...props.data, report_name: event });
+};
+
 const columnsColumns = [
   {
     label: "Name",

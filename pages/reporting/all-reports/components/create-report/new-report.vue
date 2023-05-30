@@ -12,9 +12,9 @@
             :show-search="false"
             :showClearList="false"
             label="Select Primary Module"
-            class="select-box"
-            :value="selectedPrimaryModule"
+            class="select-box z-[25]"
             @on-change="setPrimaryModule"
+            :value="selectedPrimaryModule"
           />
         </div>
         <div class="select-container" v-if="selectedPrimaryModule">
@@ -25,8 +25,27 @@
             :show-search="false"
             :showClearList="false"
             label="Select Secondary Module"
-            class="select-box"
+            class="select-box z-[20]"
           />
+        </div>
+        <div class="select-container" v-if="selectedPrimaryModule">
+          <div class="select-title">Report name</div>
+          <input
+            type="text"
+            placeholder="Untitled Report"
+            class="dark-input"
+            maxlength="22"
+            v-model="inputReportName"
+            @focusin="focusInput = true"
+            @focusout="focusInput = false"
+            @keypress="validationMessage = ''"
+          />
+          <span
+            class="text-error text-sm"
+            :class="{ 'font-bold tracking-tight': focusInput }"
+          >
+            {{ validationMessage }}
+          </span>
         </div>
       </div>
     </div>
@@ -43,22 +62,12 @@
         size="sm"
         secondary=""
         class="normal-case rounded-lg"
-        @click="emit('next')"
+        @click="validateAndSave"
       >
         Save
       </Button>
     </div>
   </div>
-  <daisy-modal
-    :overlay="true"
-    id="reportSchedulerModal"
-    ref="reportSchedulerModal"
-  >
-    <report-scheduler-modal
-      @close="closeReportSchedulerModal"
-      :folders="folders"
-    />
-  </daisy-modal>
 </template>
 
 <style scoped lang="postcss">
@@ -81,6 +90,9 @@
       .select-box {
         @apply bg-neutral text-base-content !h-10 py-2 rounded-lg !text-left;
       }
+      .dark-input {
+        @apply rounded-lg h-9 bg-neutral placeholder:text-base-content/40 px-3 w-full disabled:text-base-content/50 outline-none;
+      }
     }
   }
 }
@@ -97,9 +109,9 @@
 </style>
 
 <script setup>
-import ReportSchedulerModal from "./components/report-scheduler-modal.vue";
-
-const reportSchedulerModal = ref(null);
+const focusInput = ref(false);
+const inputReportName = ref("");
+const validationMessage = ref("");
 
 const props = defineProps({
   folders: {
@@ -108,19 +120,24 @@ const props = defineProps({
   },
 });
 
-const openReportSchedulerModal = () => {
-  reportSchedulerModal.value.open();
-};
-const closeReportSchedulerModal = () => {
-  reportSchedulerModal.value.close();
-};
-const emit = defineEmits(["close"]);
-
-const changeSelect = (item, selected) => {
-  if (item.title == "Schedule") {
-    openReportSchedulerModal();
+const validateAndSave = () => {
+  if (inputReportName.value.length < 5 && inputReportName.value.length > 0) {
+    validationMessage.value =
+      "The report name must be at least 5 characters long.";
+  } else {
+    if (inputReportName.value.length == 0) {
+      emit("change", { report_name: "Untitled Report" });
+    } else {
+      emit("change", { report_name: inputReportName.value });
+    }
+    emit("next");
   }
 };
+
+const setPrimaryModule = (moduleName) => {
+  selectedPrimaryModule.value = moduleName;
+};
+const emit = defineEmits(["close", "change"]);
 
 const selectedPrimaryModule = ref(null);
 const primaryModules = [
@@ -153,121 +170,4 @@ const primaryModules = [
     label: "Calls",
   },
 ];
-
-const setPrimaryModule = (moduleName) => {
-  console.log(moduleName);
-  selectedPrimaryModule.value = moduleName;
-};
-// const selects = [
-//     {
-//         title: "Select Primary Module",
-//         values: [
-//             {
-//                 value: "leads",
-//                 label: "Leads",
-//             },
-//             {
-//                 value: "contacts",
-//                 label: "Contacts",
-//             },
-//             {
-//                 value: "accounts",
-//                 label: "Accounts",
-//             },
-//             {
-//                 value: "deals",
-//                 label: "Deals",
-//             },
-//             {
-//                 value: "tasks",
-//                 label: "Tasks",
-//             },
-//             {
-//                 value: "meetings",
-//                 label: "Meetings",
-//             },
-//             {
-//                 value: "calls",
-//                 label: "Calls",
-//             },
-//         ],
-//     },
-//       {
-//         title: "Start Date",
-//         values: [
-//           {
-//             value: "today",
-//             label: "Today",
-//           },
-//           {
-//             value: "tomorrow",
-//             label: "Tomorrow",
-//           },
-//         ],
-//       },
-//       {
-//         title: "End Date",
-//         values: [
-//           {
-//             value: "today",
-//             label: "Today",
-//           },
-//           {
-//             value: "tomorrow",
-//             label: "Tomorrow",
-//           },
-//         ],
-//       },
-//       {
-//         title: "Post Rate",
-//         values: [
-//           {
-//             value: "excel",
-//             label: "Excel",
-//           },
-//           {
-//             value: "csv",
-//             label: "CSV",
-//           },
-//           {
-//             value: "pdf",
-//             label: "PDF",
-//           },
-//         ],
-//       },
-//       {
-//         title: "Reocurring Report",
-//         values: [
-//           {
-//             value: "excel",
-//             label: "Excel",
-//           },
-//           {
-//             value: "csv",
-//             label: "CSV",
-//           },
-//           {
-//             value: "pdf",
-//             label: "PDF",
-//           },
-//         ],
-//       },
-//       {
-//         title: "Schedule",
-//         values: [
-//           {
-//             value: "excel",
-//             label: "Excel",
-//           },
-//           {
-//             value: "csv",
-//             label: "CSV",
-//           },
-//           {
-//             value: "pdf",
-//             label: "PDF",
-//           },
-//         ],
-//       },
-// ];
 </script>
