@@ -12,9 +12,9 @@
             :show-search="false"
             :showClearList="false"
             label="Select Primary Module"
-            class="select-box"
-            :value="selectedPrimaryModule"
+            class="select-box z-[25]"
             @on-change="setPrimaryModule"
+            :value="selectedPrimaryModule"
           />
         </div>
         <div class="select-container" v-if="selectedPrimaryModule">
@@ -25,8 +25,12 @@
             :show-search="false"
             :showClearList="false"
             label="Select Secondary Module"
-            class="select-box"
+            class="select-box z-[20]"
           />
+        </div>
+        <div class="select-container" v-if="selectedPrimaryModule">
+          <div class="select-title">Report name</div>
+          <input type="text" placeholder="Untitled Report" class="dark-input" />
         </div>
       </div>
     </div>
@@ -80,6 +84,9 @@
 
       .select-box {
         @apply bg-neutral text-base-content !h-10 py-2 rounded-lg !text-left;
+      }
+      .dark-input {
+        @apply rounded-lg h-9 bg-neutral placeholder:text-base-content/40 px-3 w-full disabled:text-base-content/50 outline-none;
       }
     }
   }
@@ -158,116 +165,4 @@ const setPrimaryModule = (moduleName) => {
   console.log(moduleName);
   selectedPrimaryModule.value = moduleName;
 };
-// const selects = [
-//     {
-//         title: "Select Primary Module",
-//         values: [
-//             {
-//                 value: "leads",
-//                 label: "Leads",
-//             },
-//             {
-//                 value: "contacts",
-//                 label: "Contacts",
-//             },
-//             {
-//                 value: "accounts",
-//                 label: "Accounts",
-//             },
-//             {
-//                 value: "deals",
-//                 label: "Deals",
-//             },
-//             {
-//                 value: "tasks",
-//                 label: "Tasks",
-//             },
-//             {
-//                 value: "meetings",
-//                 label: "Meetings",
-//             },
-//             {
-//                 value: "calls",
-//                 label: "Calls",
-//             },
-//         ],
-//     },
-//       {
-//         title: "Start Date",
-//         values: [
-//           {
-//             value: "today",
-//             label: "Today",
-//           },
-//           {
-//             value: "tomorrow",
-//             label: "Tomorrow",
-//           },
-//         ],
-//       },
-//       {
-//         title: "End Date",
-//         values: [
-//           {
-//             value: "today",
-//             label: "Today",
-//           },
-//           {
-//             value: "tomorrow",
-//             label: "Tomorrow",
-//           },
-//         ],
-//       },
-//       {
-//         title: "Post Rate",
-//         values: [
-//           {
-//             value: "excel",
-//             label: "Excel",
-//           },
-//           {
-//             value: "csv",
-//             label: "CSV",
-//           },
-//           {
-//             value: "pdf",
-//             label: "PDF",
-//           },
-//         ],
-//       },
-//       {
-//         title: "Reocurring Report",
-//         values: [
-//           {
-//             value: "excel",
-//             label: "Excel",
-//           },
-//           {
-//             value: "csv",
-//             label: "CSV",
-//           },
-//           {
-//             value: "pdf",
-//             label: "PDF",
-//           },
-//         ],
-//       },
-//       {
-//         title: "Schedule",
-//         values: [
-//           {
-//             value: "excel",
-//             label: "Excel",
-//           },
-//           {
-//             value: "csv",
-//             label: "CSV",
-//           },
-//           {
-//             value: "pdf",
-//             label: "PDF",
-//           },
-//         ],
-//       },
-// ];
 </script>

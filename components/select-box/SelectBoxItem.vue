@@ -2,7 +2,7 @@
   <div
     class="font-medium text-sm hover:neutral hover:bg-base-content px-4 py-2"
     :class="{
-      'bg-secondary text-base-content': selected,
+      'bg-secondary text-base-content hover:bg-secondary': selected,
     }"
     @click="handleClick"
   >
