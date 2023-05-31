@@ -1,19 +1,13 @@
 <template>
   <div class="card-container">
-    <div>
-      <column-columns
-        v-if="actualSection == 'Columns'"
-        :columnsContent="columnsContent"
-        class="section"
-        @changeActualSection="emit('changeActualSection', $event)"
-      />
-      <column-filters
-        @changeActualSection="emit('changeActualSection', $event)"
-        v-if="actualSection == 'Filters'"
-        class="section"
-      />
-      <select-columns v-if="actualSection == 'SelectColumns'" class="section" />
-    </div>
+    <component
+      v-for="(column, i) in columnComponents"
+      :key="i"
+      @changeActualSection="emit('changeActualSection', $event)"
+      :columnsContent="columnsContent"
+      v-show="actualSection == column.name"
+      :is="column.component"
+    />
   </div>
 </template>
 <style scoped lang="postcss">
@@ -25,6 +19,21 @@
 import SelectColumns from "./select-columns.vue";
 import ColumnFilters from "./column-filters.vue";
 import ColumnColumns from "./column-columns.vue";
+
+const columnComponents = ref([
+  {
+    name: "Columns",
+    component: ColumnColumns,
+  },
+  {
+    name: "Filters",
+    component: ColumnFilters,
+  },
+  {
+    name: "SelectColumns",
+    component: SelectColumns,
+  },
+]);
 
 const emit = defineEmits(["changeActualSection"]);
 
