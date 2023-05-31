@@ -242,6 +242,12 @@ const columnsColumns = [
     class: "!w-[150px]",
   },
   {
+    label: "Area",
+    value: "area",
+    active: false,
+    class: "!w-[150px]",
+  },
+  {
     label: "BI Contract Expiration",
     value: "bi_contract_expiration",
     active: true,
