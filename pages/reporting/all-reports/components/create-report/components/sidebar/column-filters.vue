@@ -1,49 +1,58 @@
 <template>
   <div>
-    <div class="flex justify-between pt-3 pb-1">
-      <h3 class="text-[16px] font-semibold">Filters</h3>
-      <button class="add-new-button" @click="openAddFilterModal">
-        <font-awesome-icon
-          :icon="['far', 'pencil']"
-          size="md"
-          class="hidden-icon-hover mr-1 focus:outline-none h-[10px]"
-          tabindex="0"
-          @click.prevent.stop
-        />
-        <plus-icon class="show-icon-hover hidden" />
-      </button>
-    </div>
-    <div v-if="filters.length">
-      Date Filter
-      <div class="filter-item" v-for="(filter, i) in filters" :key="i">
-        <div>
-          <span>
-            {{ filter.dateFilter?.field }}
-          </span>
-          <p>
-            {{ filter.dateFilter?.timeRange.toUpperCase() }}
-            {{ filter.dateFilter?.operator }}
-            {{ filter.dateFilter?.value }}
-          </p>
-        </div>
-        <button class="xmark-button" @click="deleteFilter(i)">
+    <nav-columns
+      actualSection="Filters"
+      @changeActualSection="emit('changeActualSection', $event)"
+    />
+    <div class="mt-5 pb-5 px-5">
+      <div class="flex justify-between pb-1 pt-3">
+        <h3 class="text-[16px] font-semibold">Filters</h3>
+        <button class="add-new-button" @click="openAddFilterModal">
           <font-awesome-icon
-            :icon="['fas', 'xmark']"
+            :icon="['far', 'pencil']"
             size="md"
-            class="mr-1 focus:outline-none h-[12px] text-secondary"
+            class="hidden-icon-hover mr-1 focus:outline-none h-[10px]"
             tabindex="0"
+            @click.prevent.stop
           />
+          <plus-icon class="show-icon-hover hidden" />
         </button>
       </div>
+      <div v-if="filters.length">
+        Date Filter
+        <div class="filter-item" v-for="(filter, i) in filters" :key="i">
+          <div>
+            <span>
+              {{ filter.dateFilter?.field }}
+            </span>
+            <p>
+              {{ filter.dateFilter?.timeRange.toUpperCase() }}
+              {{ filter.dateFilter?.operator }}
+              {{ filter.dateFilter?.value }}
+            </p>
+          </div>
+          <button class="xmark-button" @click="deleteFilter(i)">
+            <font-awesome-icon
+              :icon="['fas', 'xmark']"
+              size="md"
+              class="mr-1 focus:outline-none h-[12px] text-secondary"
+              tabindex="0"
+            />
+          </button>
+        </div>
+      </div>
+      <div v-else>
+        <span class="text-base-content/40 font-light tracking-wide">
+          No Filters Found
+        </span>
+      </div>
+      <daisy-modal :overlay="true" id="addFilterModal" ref="addFilterModal">
+        <add-filter-modal
+          @close="closeAddFilterModal"
+          @save="createNewFilter"
+        />
+      </daisy-modal>
     </div>
-    <div v-else>
-      <span class="text-base-content/40 font-light tracking-wide">
-        No Filters Found
-      </span>
-    </div>
-    <daisy-modal :overlay="true" id="addFilterModal" ref="addFilterModal">
-      <add-filter-modal @close="closeAddFilterModal" @save="createNewFilter" />
-    </daisy-modal>
   </div>
 </template>
 
@@ -78,6 +87,9 @@ import { faXmark, faPencil } from "@fortawesome/free-solid-svg-icons";
 library.add(faPencil);
 library.add(faXmark);
 import { PlusIcon } from "~/components/icons";
+import NavColumns from "./nav-columns.vue";
+
+const emit = defineEmits(["changeActualSection"]);
 
 const filters = ref([]);
 

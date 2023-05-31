@@ -1,55 +1,28 @@
 <template>
   <div class="card-container">
-    <div class="flex justify-center">
-      <div class="card-header">
-        <button
-          @click="emit('changeActualSection', 'Columns')"
-          class="card-button"
-          :class="{ 'card-button-selected': actualSection == 'Columns' }"
-        >
-          Columns
-        </button>
-        <button
-          @click="emit('changeActualSection', 'Filters')"
-          class="card-button"
-          :class="{ 'card-button-selected': actualSection == 'Filters' }"
-        >
-          Filters
-        </button>
-      </div>
-    </div>
-    <div class="card-content">
+    <div>
       <column-columns
         v-if="actualSection == 'Columns'"
         :columnsContent="columnsContent"
         class="section"
+        @changeActualSection="emit('changeActualSection', $event)"
       />
-      <column-filters v-if="actualSection == 'Filters'" class="section" />
+      <column-filters
+        @changeActualSection="emit('changeActualSection', $event)"
+        v-if="actualSection == 'Filters'"
+        class="section"
+      />
+      <select-columns v-if="actualSection == 'SelectColumns'" class="section" />
     </div>
   </div>
 </template>
 <style scoped lang="postcss">
 .card-container {
   @apply overflow-y-auto w-full py-[20px] h-[70vh] overflow-visible border border-secondary rounded-2xl bg-base-300 text-left;
-  .card-header {
-    @apply bg-secondary-focus border border-secondary rounded flex flex-wrap mx-5 gap-3 justify-center px-5 py-1;
-    .card-button {
-      @apply rounded px-3 py-1 font-semibold;
-    }
-    .card-button-selected {
-      @apply bg-secondary  rounded font-semibold;
-    }
-  }
-  .card-content {
-    @apply mt-5;
-    .section {
-      @apply pb-5 px-5;
-    }
-  }
 }
 </style>
 <script setup>
-// import SelectColumns from "./select-columns.vue";
+import SelectColumns from "./select-columns.vue";
 import ColumnFilters from "./column-filters.vue";
 import ColumnColumns from "./column-columns.vue";
 
@@ -77,7 +50,7 @@ const selectColumns = ref(null);
 var columnsContent = ref([
   {
     title: "Columns",
-    // selectColumns: SelectColumns,
+    selectColumns: SelectColumns,
     items: [],
   },
   {
