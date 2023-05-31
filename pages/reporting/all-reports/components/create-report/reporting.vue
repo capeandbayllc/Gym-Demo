@@ -239,7 +239,7 @@ const columnsColumns = [
     class: "!w-[150px]",
   },
   {
-    label: "BI contract Expiration",
+    label: "BI Contract Expiration",
     value: "bi_contract_expiration",
     class: "!w-[150px]",
   },
