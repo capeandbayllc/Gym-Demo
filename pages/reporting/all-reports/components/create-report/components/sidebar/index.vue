@@ -59,7 +59,7 @@ onMounted(() => {
     props.columns.map((column) => ({ ...column, active: false }));
 
   columnsContent.value.find(
-    (content) => content.title === "Column Groups"
+    (content) => content.title === "Aggregate Columns"
   ).items = props.columns.map((column) => ({ ...column, active: false }));
 });
 
@@ -68,11 +68,12 @@ const actualSubSection = ref(null);
 const columnsContent = ref([
   {
     title: "Columns",
-    selectColumns: SelectColumns,
+    selectColumns: true,
     items: [],
   },
   {
     title: "Row Groups",
+    selectColumns: true,
     items: [],
   },
   {
@@ -81,6 +82,7 @@ const columnsContent = ref([
   },
   {
     title: "Aggregate Columns",
+    selectColumns: true,
     items: [],
   },
   {

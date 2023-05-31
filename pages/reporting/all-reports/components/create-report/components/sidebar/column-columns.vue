@@ -8,13 +8,7 @@
       <div v-for="(section, i) in columnsContent" :key="i">
         <div class="flex justify-between pt-3 pb-1">
           <h3 class="text-[16px] font-semibold">{{ section.title }}</h3>
-          <button
-            class="add-new-button"
-            @click="
-              emit('changeActualSubSection', section.title);
-              emit('changeActualSection', 'SelectColumns');
-            "
-          >
+          <button class="add-new-button" @click="clickAddNewButton(section)">
             <plus-icon />
           </button>
         </div>
@@ -85,6 +79,13 @@ library.add(faBars);
 library.add(faXmark);
 
 const emit = defineEmits(["changeActualSection", "changeActualSubSection"]);
+
+const clickAddNewButton = (section) => {
+  if (section.selectColumns) {
+    emit("changeActualSubSection", section.title);
+    emit("changeActualSection", "SelectColumns");
+  }
+};
 
 const props = defineProps({
   columnsContent: {

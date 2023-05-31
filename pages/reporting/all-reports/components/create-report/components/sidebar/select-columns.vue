@@ -29,13 +29,15 @@
         </div>
         <div class="flex justify-between">
           <span>Leads</span>
-          <button class="font-semibold text-base-content/50">Clear All</button>
+          <button class="font-semibold text-base-content/50" @click="clearAll">
+            Clear All
+          </button>
         </div>
       </div>
 
       <div class="flex-grow overflow-y-auto my-2">
         <div
-          v-for="(column, i) in actualContent"
+          v-for="(column, i) in filteredContent"
           class="mb-2 flex items-center gap-[7px]"
         >
           <input type="checkbox" v-model="column.active" :id="i" />
@@ -96,9 +98,18 @@ const props = defineProps({
 
 const searchQuery = ref(null);
 
+const filteredContent = computed(() => {
+  return searchQuery.value
+    ? actualContent.value.filter((item) =>
+        item.label.toLowerCase().includes(searchQuery.value.toLowerCase())
+      )
+    : actualContent.value;
+});
+
 const actualContent = ref(null);
 
 watchEffect(() => {
+  searchQuery.value = "";
   if (props.actualSection == "SelectColumns")
     actualContent.value = JSON.parse(
       JSON.stringify(
@@ -122,6 +133,12 @@ const saveChanges = () => {
   });
 
   emit("changeActualSection", "Columns");
+};
+
+const clearAll = () => {
+  actualContent.value.forEach((item) => {
+    item.active = false;
+  });
 };
 
 const fieldOptions = ref([
