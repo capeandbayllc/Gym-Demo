@@ -1,11 +1,14 @@
 <template>
-  <select-dropdown
-    value=""
-    :items="['Clone', 'Export', 'Send Email']"
-    @onChange="selectEditOption"
-    label="Edit"
-    class="bg-secondary h-9 !w-[120px] rounded-xl px-1 w-full"
-  />
+  <div class="flex mr-5">
+    <slot></slot>
+    <select-dropdown
+      value=""
+      :items="['Clone', 'Export', 'Send Email']"
+      @onChange="selectEditOption"
+      label=""
+      class="edit-dropdown"
+    />
+  </div>
   <daisy-modal
     :overlay="true"
     :showCloseButton="false"
@@ -36,6 +39,21 @@
     <send-email-modal @close="closeSendEmailModal" />
   </daisy-modal>
 </template>
+
+<style lang="postcss">
+.edit-dropdown {
+  @apply bg-secondary h-9 !w-[20px] rounded-r-xl w-full border-l border-base-content/50;
+  .select-box-btn {
+    @apply !w-[24px] !px-0 !mx-0 !pr-[32px] py-[18px] rounded-r-xl;
+  }
+  .select-box-content {
+    @apply overflow-x-visible min-w-[97px] !left-[-65px] !top-[12px] !rounded-xl border border-base-content;
+  }
+  .select-box-content div:first-child {
+    @apply min-w-[120px];
+  }
+}
+</style>
 
 <script setup>
 import CloneReportModal from "./components/clone-report-modal.vue";

@@ -99,12 +99,20 @@
             Run
           </Button>
           <edit-report
+            @edit-button="true"
             :report="report"
             @saveClonedReport="
               emit('saveClonedReport', $event);
               emit('close');
             "
-          ></edit-report>
+          >
+            <button
+              class="bg-secondary rounded-l-xl px-5"
+              @click="emit('next')"
+            >
+              Edit
+            </button>
+          </edit-report>
         </div>
       </div>
     </div>
