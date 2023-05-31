@@ -5,6 +5,7 @@
       :key="i"
       @changeActualSection="emit('changeActualSection', $event)"
       @changeActualSubSection="actualSubSection = $event"
+      :actualSection="actualSection"
       :actualSubSection="actualSubSection"
       :columnsContent="columnsContent"
       v-show="actualSection == column.name"
@@ -85,9 +86,18 @@ const columnsContent = ref([
   {
     title: "Visability",
     items: [
-      { label: "Locations" },
-      { label: "Security Roles" },
-      { label: "User" },
+      {
+        label: "Locations",
+        active: true,
+      },
+      {
+        label: "Security Roles",
+        active: true,
+      },
+      {
+        label: "User",
+        active: true,
+      },
     ],
   },
 ]);

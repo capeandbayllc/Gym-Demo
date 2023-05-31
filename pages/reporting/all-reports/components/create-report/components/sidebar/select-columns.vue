@@ -35,9 +35,7 @@
 
       <div class="flex-grow overflow-y-auto my-2">
         <div
-          v-for="(column, i) in columnsContent.find(
-            (content) => content.title == actualSubSection
-          )?.items"
+          v-for="(column, i) in actualContent"
           class="mb-2 flex items-center gap-[7px]"
         >
           <input type="checkbox" v-model="column.active" :id="i" />
@@ -48,7 +46,12 @@
       </div>
 
       <div class="flex gap-3 border-t border-base-content/30 pt-3">
-        <Button size="sm" class="normal-case border border-secondary" secondary>
+        <Button
+          size="sm"
+          class="normal-case border border-secondary"
+          secondary
+          @click="saveChanges"
+        >
           Continue
         </Button>
         <Button
@@ -81,11 +84,45 @@ const props = defineProps({
     type: Array,
     default: [],
   },
+  actualSection: {
+    type: String,
+    default: "",
+  },
   actualSubSection: {
     type: String,
     default: "",
   },
 });
+
+const searchQuery = ref(null);
+
+const actualContent = ref(null);
+
+watchEffect(() => {
+  if (props.actualSection == "SelectColumns")
+    actualContent.value = JSON.parse(
+      JSON.stringify(
+        props.columnsContent.find(
+          (content) => content.title == props.actualSubSection
+        )?.items
+      )
+    );
+});
+
+const saveChanges = () => {
+  let columnContent = props.columnsContent.find(
+    (content) => content.title == props.actualSubSection
+  )?.items;
+
+  columnContent.forEach((item) => {
+    const matchingItem = actualContent.value.find(
+      (ac) => ac.label === item.label
+    );
+    item.active = matchingItem ? matchingItem.active : false;
+  });
+
+  emit("changeActualSection", "Columns");
+};
 
 const fieldOptions = ref([
   {
