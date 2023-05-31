@@ -87,7 +87,7 @@
       />
       <reporting-table
         :data="actualData"
-        :columns="actualColumns"
+        :columns="actualColumns?.filter((column) => column.active)"
         class="mt-3 sm:mt-0 sm:col-span-8 md:col-span-8 xl:col-span-9"
       />
     </div>
@@ -180,7 +180,7 @@ const closeCreateJoinedReportModal = () => {
 };
 
 const actualData = computed(() => {
-  if (actualSection.value == "Columns") {
+  if (["Columns", "SelectColumns"].includes(actualSection.value)) {
     return dataColumns.value;
   } else if (actualSection.value == "Filters") {
     return dataFilters.value;
@@ -217,7 +217,7 @@ const dataFilters = computed(() => {
 });
 
 const actualColumns = computed(() => {
-  if (actualSection.value == "Columns") {
+  if (["Columns", "SelectColumns"].includes(actualSection.value)) {
     return columnsColumns;
   } else if (actualSection.value == "Filters") {
     return columnsFilters;
@@ -265,26 +265,31 @@ const columnsFilters = [
   {
     label: "Name",
     value: "name",
+    active: true,
     class: "!w-[150px]",
   },
   {
     label: "Annual Revenue",
     value: "annual_revenue",
+    active: true,
     class: "!w-[150px]",
   },
   {
     label: "BI Conctract Expiration",
     value: "bi_conctract_expiration",
+    active: true,
     class: "!w-[150px]",
   },
   {
     label: "BI Monthly Cost",
     value: "bi_monthly_cost",
+    active: true,
     class: "!w-[150px]",
   },
   {
     label: "BI Notes",
     value: "bi_notes",
+    active: true,
     class: "!w-[150px]",
   },
 ];
