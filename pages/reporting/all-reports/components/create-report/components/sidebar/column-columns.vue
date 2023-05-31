@@ -10,36 +10,44 @@
           <h3 class="text-[16px] font-semibold">{{ section.title }}</h3>
           <button
             class="add-new-button"
-            @click="emit('changeActualSection', 'SelectColumns')"
+            @click="
+              emit('changeActualSubSection', section.title);
+              emit('changeActualSection', 'SelectColumns');
+            "
           >
             <plus-icon />
           </button>
         </div>
         <div
-          v-for="(item, j) in section.items"
-          v-if="section.items.length"
-          :key="j"
+          v-if="
+            section.items.length &&
+            section.items
+              .map((column) => column.active)
+              .some((active) => active === true)
+          "
         >
-          <div class="section-item">
-            <button class="flex gap-1 items-center w-full">
-              <font-awesome-icon
-                :icon="['far', 'bars']"
-                size="md"
-                class="mr-1 focus:outline-none h-[12px]"
-                tabindex="0"
-                @click.prevent.stop
-              />
-              {{ item }}
-            </button>
-            <button class="xmark-button">
-              <font-awesome-icon
-                :icon="['fas', 'xmark']"
-                size="md"
-                class="mr-1 focus:outline-none h-[12px] text-secondary"
-                tabindex="0"
-                @click.prevent.stop
-              />
-            </button>
+          <div v-for="(item, j) in section.items" v-show="item.active" :key="j">
+            <div class="section-item">
+              <button class="flex gap-1 items-center w-full">
+                <font-awesome-icon
+                  :icon="['far', 'bars']"
+                  size="md"
+                  class="mr-1 focus:outline-none h-[12px]"
+                  tabindex="0"
+                  @click.prevent.stop
+                />
+                {{ item.label }}
+              </button>
+              <button class="xmark-button">
+                <font-awesome-icon
+                  :icon="['fas', 'xmark']"
+                  size="md"
+                  class="mr-1 focus:outline-none h-[12px] text-secondary"
+                  tabindex="0"
+                  @click.prevent.stop
+                />
+              </button>
+            </div>
           </div>
         </div>
         <div v-else>
@@ -76,7 +84,7 @@ import navColumns from "./nav-columns.vue";
 library.add(faBars);
 library.add(faXmark);
 
-const emit = defineEmits(["changeActualSection"]);
+const emit = defineEmits(["changeActualSection", "changeActualSubSection"]);
 
 const props = defineProps({
   columnsContent: {

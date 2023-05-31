@@ -4,6 +4,8 @@
       v-for="(column, i) in columnComponents"
       :key="i"
       @changeActualSection="emit('changeActualSection', $event)"
+      @changeActualSubSection="actualSubSection = $event"
+      :actualSubSection="actualSubSection"
       :columnsContent="columnsContent"
       v-show="actualSection == column.name"
       :is="column.component"
@@ -49,14 +51,20 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  const columnsLabels = props.columns.map((column) => column.label);
   columnsContent.value.find((content) => content.title === "Columns").items =
-    columnsLabels;
+    props.columns;
+
+  columnsContent.value.find((content) => content.title === "Row Groups").items =
+    props.columns.map((column) => ({ ...column, active: false }));
+
+  columnsContent.value.find(
+    (content) => content.title === "Column Groups"
+  ).items = props.columns.map((column) => ({ ...column, active: false }));
 });
 
-const selectColumns = ref(null);
+const actualSubSection = ref(null);
 
-var columnsContent = ref([
+const columnsContent = ref([
   {
     title: "Columns",
     selectColumns: SelectColumns,
@@ -76,7 +84,11 @@ var columnsContent = ref([
   },
   {
     title: "Visability",
-    items: ["Locations", "Security Roles", "User"],
+    items: [
+      { label: "Locations" },
+      { label: "Security Roles" },
+      { label: "User" },
+    ],
   },
 ]);
 </script>

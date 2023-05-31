@@ -1,56 +1,65 @@
 <template>
-  <div class="px-5 pb-5 flex flex-col h-full">
-    <div class="flex flex-col gap-2 border-b border-base-content/30 pb-2">
-      <h5 class="text-xl font-semibold">Columns</h5>
-      <div class="flex flex-col gap-3">
-        <select-box
-          :items="fieldOptions"
-          :label="fieldOptions.find((e) => e.value == selectedField).label"
-          :show-search="false"
-          :show-clear-list="false"
-          class="dark-input"
-        ></select-box>
-        <div class="relative">
-          <input
-            v-model="searchQuery"
-            type="text"
-            class="dark-input h-[29px] pl-8 pr-2"
-            placeholder="Search Fields"
-            id="searchInput"
-          />
-          <label for="searchInput">
-            <SearchIcon
-              class="absolute left-2 top-1/2 transform -translate-y-1/2 cursor-pointer !h-[15px] mt-[1px]"
-              @click="focusSearchInput"
+  <div>
+    <div class="px-5 pb-5 flex flex-col h-full">
+      <div class="flex flex-col gap-2 border-b border-base-content/30 pb-2">
+        <h5 class="text-xl font-semibold">Columns</h5>
+        <div class="flex flex-col gap-3">
+          <select-box
+            :items="fieldOptions"
+            :label="fieldOptions.find((e) => e.value == selectedField).label"
+            :show-search="false"
+            :show-clear-list="false"
+            class="dark-input"
+          ></select-box>
+          <div class="relative">
+            <input
+              v-model="searchQuery"
+              type="text"
+              class="dark-input h-[29px] pl-8 pr-2"
+              placeholder="Search Fields"
+              id="searchInput"
             />
-          </label>
+            <label for="searchInput">
+              <SearchIcon
+                class="absolute left-2 top-1/2 transform -translate-y-1/2 cursor-pointer !h-[15px] mt-[1px]"
+                @click="focusSearchInput"
+              />
+            </label>
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <span>Leads</span>
+          <button class="font-semibold text-base-content/50">Clear All</button>
         </div>
       </div>
-      <div class="flex justify-between">
-        <span>Leads</span>
-        <button class="font-semibold text-base-content/50">Clear All</button>
-      </div>
-    </div>
 
-    <div class="flex-grow overflow-y-auto my-2">
-      <div v-for="(column, i) in columns" class="mb-2 flex items-center gap-1">
-        <input type="checkbox" />
-        {{ column }}
+      <div class="flex-grow overflow-y-auto my-2">
+        <div
+          v-for="(column, i) in columnsContent.find(
+            (content) => content.title == actualSubSection
+          )?.items"
+          class="mb-2 flex items-center gap-[7px]"
+        >
+          <input type="checkbox" v-model="column.active" :id="i" />
+          <button>
+            <label :for="i">{{ column.label }}</label>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="flex gap-3 border-t border-base-content/30 pt-3">
-      <Button size="sm" class="normal-case border border-secondary" secondary>
-        Continue
-      </Button>
-      <Button
-        size="sm"
-        class="normal-case border-base-content/60"
-        outline
-        @click="emit('changeActualSection', 'Columns')"
-      >
-        Cancel
-      </Button>
+      <div class="flex gap-3 border-t border-base-content/30 pt-3">
+        <Button size="sm" class="normal-case border border-secondary" secondary>
+          Continue
+        </Button>
+        <Button
+          size="sm"
+          class="normal-case border-base-content/60"
+          outline
+          @click="emit('changeActualSection', 'Columns')"
+        >
+          Cancel
+        </Button>
+      </div>
     </div>
   </div>
 </template>
@@ -67,20 +76,22 @@
 <script setup>
 import { SearchIcon } from "@/components/icons";
 
+const props = defineProps({
+  columnsContent: {
+    type: Array,
+    default: [],
+  },
+  actualSubSection: {
+    type: String,
+    default: "",
+  },
+});
+
 const fieldOptions = ref([
   {
     value: "1",
     label: "All fields",
   },
-]);
-
-const columns = ref([
-  "Account",
-  "Annual Revenue",
-  "Area",
-  "BI Contract Expiration",
-  "BI monthly Cost",
-  "BI Notes",
 ]);
 
 const selectedField = ref("1");

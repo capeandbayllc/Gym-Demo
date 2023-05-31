@@ -232,26 +232,31 @@ const columnsColumns = [
   {
     label: "Full Name",
     value: "full_name",
+    active: true,
     class: "!w-[150px]",
   },
   {
     label: "Annual Revenue",
     value: "annual_revenue",
+    active: true,
     class: "!w-[150px]",
   },
   {
     label: "BI Contract Expiration",
     value: "bi_contract_expiration",
+    active: true,
     class: "!w-[150px]",
   },
   {
     label: "BI Monthly Cost",
     value: "bi_monthly_cost",
+    active: true,
     class: "!w-[150px]",
   },
   {
     label: "BI Notes",
     value: "bi_notes",
+    active: true,
     class: "!w-[150px]",
   },
 ];

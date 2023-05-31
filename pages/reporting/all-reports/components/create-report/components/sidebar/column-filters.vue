@@ -11,7 +11,7 @@
           <font-awesome-icon
             :icon="['far', 'pencil']"
             size="md"
-            class="hidden-icon-hover mr-1 focus:outline-none h-[10px]"
+            class="hidden-icon-hover focus:outline-none h-[10px]"
             tabindex="0"
             @click.prevent.stop
           />
