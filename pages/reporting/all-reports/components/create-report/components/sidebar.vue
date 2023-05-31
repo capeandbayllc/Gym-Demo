@@ -201,18 +201,22 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  columns: {
+    type: Array,
+    default: [],
+  },
 });
 
-var columnsContent = [
+onMounted(() => {
+  const columnsLabels = props.columns.map((column) => column.label);
+  columnsContent.value.find((content) => content.title === "Columns").items =
+    columnsLabels;
+});
+
+var columnsContent = ref([
   {
     title: "Columns",
-    items: [
-      "Full Name",
-      "Annual Revenue",
-      "BI Contract Expiration",
-      "BI Monthly Cost",
-      "BI Notes",
-    ],
+    items: [],
   },
   {
     title: "Row Groups",
@@ -230,7 +234,7 @@ var columnsContent = [
     title: "Visability",
     items: ["Locations", "Security Roles", "User"],
   },
-];
+]);
 
 const filters = ref([]);
 
