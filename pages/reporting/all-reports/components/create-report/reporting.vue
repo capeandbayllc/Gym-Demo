@@ -131,7 +131,7 @@
 </style>
 
 <script setup>
-import Sidebar from "./components/sidebar.vue";
+import Sidebar from "./components/sidebar/index.vue";
 import ReportingTable from "./components/reporting-table.vue";
 import RenameModal from "../rename-modal.vue";
 import { getRandomInt } from "~/api/utils/number";

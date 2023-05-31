@@ -172,9 +172,7 @@
 </style>
 
 <script setup>
-import Datepicker from "@vuepic/vue-datepicker";
-import "@vuepic/vue-datepicker/dist/main.css";
-import selectDropdown from "../../report-details-modal/components/select-dropdown.vue";
+import selectDropdown from "../../../report-details-modal/components/select-dropdown.vue";
 import { PlusIcon } from "~/components/icons";
 
 const data = ref({
