@@ -86,7 +86,7 @@
       @next="createReportScreenIndex++"
       @close="closeCreateReportModal"
       :folders="folders"
-      :data="newReportData"
+      :report="newReportData"
       @change="newReportData = $event"
     >
     </component>
