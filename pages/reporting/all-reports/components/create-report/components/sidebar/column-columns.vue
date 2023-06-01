@@ -20,29 +20,36 @@
               .some((active) => active === true)
           "
         >
-          <div v-for="(item, j) in section.items" v-show="item.active" :key="j">
-            <div class="section-item">
-              <button class="flex gap-1 items-center w-full">
-                <font-awesome-icon
-                  :icon="['far', 'bars']"
-                  size="md"
-                  class="mr-1 focus:outline-none h-[12px]"
-                  tabindex="0"
-                  @click.prevent.stop
-                />
-                {{ item.label }}
-              </button>
-              <button class="xmark-button">
-                <font-awesome-icon
-                  :icon="['fas', 'xmark']"
-                  size="md"
-                  class="mr-1 focus:outline-none h-[12px] text-secondary"
-                  tabindex="0"
-                  @click.prevent.stop
-                />
-              </button>
-            </div>
-          </div>
+          <draggable
+            :list="section.items"
+            class="list-group"
+            handle=".handle"
+            ghost-class="ghost"
+          >
+            <template #item="{ element }">
+              <div class="section-item list-group-item">
+                <button>
+                  <font-awesome-icon
+                    :icon="['far', 'bars']"
+                    size="md"
+                    class="handle cursor-move mr-1 focus:outline-none h-[12px]"
+                    tabindex="0"
+                    @click.prevent.stop
+                  />
+                  {{ element.label }}
+                </button>
+                <button class="xmark-button">
+                  <font-awesome-icon
+                    :icon="['fas', 'xmark']"
+                    size="md"
+                    class="mr-1 focus:outline-none h-[12px] text-secondary"
+                    tabindex="0"
+                    @click.prevent.stop
+                  />
+                </button>
+              </div>
+            </template>
+          </draggable>
         </div>
         <div v-else>
           <span class="text-base-content/40 font-light tracking-wide">
@@ -70,6 +77,7 @@
 </style>
 
 <script setup>
+import draggable from "vuedraggable";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
