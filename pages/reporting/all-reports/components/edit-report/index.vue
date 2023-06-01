@@ -7,6 +7,10 @@
       @onChange="selectEditOption"
       label=""
       class="edit-dropdown"
+      :class="{
+        'edit-dropdown-outline': selectOutline,
+        'edit-dropdown-secondary': !selectOutline,
+      }"
     />
   </div>
   <daisy-modal
@@ -42,7 +46,7 @@
 
 <style lang="postcss">
 .edit-dropdown {
-  @apply bg-secondary h-9 !w-[20px] rounded-r-xl w-full border-l border-base-content/50;
+  @apply h-8 !w-[20px] rounded-r-lg w-full border-l;
   .select-box-btn {
     @apply !w-[24px] !px-0 !mx-0 !pr-[32px] py-[18px] rounded-r-xl;
   }
@@ -52,6 +56,12 @@
   .select-box-content div:first-child {
     @apply min-w-[120px];
   }
+}
+.edit-dropdown-outline {
+  @apply border;
+}
+.edit-dropdown-secondary {
+  @apply bg-secondary border-base-content/50;
 }
 </style>
 
@@ -64,6 +74,10 @@ import selectDropdown from "../report-details-modal/components/select-dropdown.v
 const props = defineProps({
   report: {
     type: Object,
+  },
+  selectOutline: {
+    type: Boolean,
+    default: false,
   },
 });
 

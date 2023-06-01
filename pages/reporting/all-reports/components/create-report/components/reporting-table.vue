@@ -1,6 +1,9 @@
 <template>
   <div class="card-container">
-    <div class="max-w-full rounded-xl overflow-auto max-h-[70vh] min-h-[102%]">
+    <div
+      class="max-w-full rounded-xl overflow-auto max-h-[70vh] min-h-[102%]"
+      :class="tableClass"
+    >
       <table class="rounded-2xl">
         <head-reporting-table :columns="columns" />
         <body-reporting-table :columns="columns" :data="data" />
@@ -38,6 +41,10 @@ const props = defineProps({
   columns: {
     type: Array,
     default: [],
+  },
+  tableClass: {
+    type: String,
+    default: "",
   },
 });
 </script>

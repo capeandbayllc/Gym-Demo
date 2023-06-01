@@ -68,7 +68,7 @@ const actualData = computed(() => {
 
 const dataColumns = computed(() => {
   let array = [];
-  for (let i = 0; i < getRandomInt(20 * 3, 0); i++) {
+  for (let i = 0; i < getRandomInt(20 * 30, 0); i++) {
     array.push({
       id: i,
       name: "Kelly Price",
