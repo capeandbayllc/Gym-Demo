@@ -66,7 +66,7 @@
         size="sm"
         outline
         class="normal-case rounded-lg hover:text-secondary"
-        @click="openRunModal"
+        @click="emit('runReport')"
       >
         Run
       </Button>
@@ -126,7 +126,7 @@ const props = defineProps({
     default: "",
   },
 });
-const emit = defineEmits(["changeReport"]);
+const emit = defineEmits(["changeReport", "runReport"]);
 
 const showTitleDropdown = ref(false);
 

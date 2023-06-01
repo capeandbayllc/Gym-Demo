@@ -1,10 +1,11 @@
 <template>
   <div class="modal-content">
-    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 mt-2">
+    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 mt-2" v-if="!runReport">
       <reporting-actions
         :report="report"
         :actualSection="actualSection"
         @changeReport="emit('changeReport', $event)"
+        @runReport="runReport = true"
       />
       <sidebar
         :actualSection="actualSection"
@@ -18,6 +19,13 @@
         class="mt-3 sm:mt-0 sm:col-span-8 md:col-span-8 xl:col-span-9"
       />
     </div>
+    <reporting-run
+      v-else
+      :report="report"
+      :actualData="actualData"
+      :actualColumns="actualColumns"
+      @closeRunReport="runReport = false"
+    />
   </div>
 </template>
 
@@ -35,6 +43,7 @@ import Sidebar from "./components/sidebar/index.vue";
 import ReportingTable from "./components/reporting-table.vue";
 import { getRandomInt } from "~/api/utils/number";
 import ReportingActions from "./components/reporting/reporting-actions.vue";
+import ReportingRun from "./components/reporting/reporting-run.vue";
 
 const props = defineProps({
   report: {
@@ -46,6 +55,8 @@ const props = defineProps({
 const emit = defineEmits(["close", "back", "next", "changeReport"]);
 
 const actualSection = ref("Columns");
+
+const runReport = ref(false);
 
 const actualData = computed(() => {
   if (["Columns", "SelectColumns"].includes(actualSection.value)) {
