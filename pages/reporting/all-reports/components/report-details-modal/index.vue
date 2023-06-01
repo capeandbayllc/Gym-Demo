@@ -91,13 +91,6 @@
           >
             Cancel
           </Button>
-          <Button
-            size="sm"
-            outline
-            class="normal-case rounded-lg hover:text-secondary"
-          >
-            Run
-          </Button>
           <edit-report
             @edit-button="true"
             :report="report"
