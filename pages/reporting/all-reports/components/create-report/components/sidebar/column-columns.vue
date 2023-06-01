@@ -27,7 +27,7 @@
             ghost-class="ghost"
           >
             <template #item="{ element }">
-              <div class="section-item list-group-item">
+              <div class="section-item list-group-item" v-if="element.active">
                 <button>
                   <font-awesome-icon
                     :icon="['far', 'bars']"
