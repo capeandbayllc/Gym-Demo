@@ -81,13 +81,13 @@
 
       <sidebar
         :actualSection="actualSection"
-        :columns="columnsColumns"
+        :columns="columnColumns"
         @changeActualSection="actualSection = $event"
         class="sm:col-span-4 md:col-span-4 xl:col-span-3"
       />
       <reporting-table
         :data="actualData"
-        :columns="actualColumns?.filter((column) => column.active)"
+        :columns="actualColumns"
         class="mt-3 sm:mt-0 sm:col-span-8 md:col-span-8 xl:col-span-9"
       />
     </div>
@@ -218,9 +218,9 @@ const dataFilters = computed(() => {
 
 const actualColumns = computed(() => {
   if (["Columns", "SelectColumns"].includes(actualSection.value)) {
-    return columnsColumns;
+    return columnColumns.value?.filter((column) => column.active);
   } else if (actualSection.value == "Filters") {
-    return columnsFilters;
+    return columnsFilters.value?.filter((column) => column.active);
   }
 });
 
@@ -228,7 +228,7 @@ const changeName = (event) => {
   emit("changeReportName", event);
 };
 
-const columnsColumns = [
+const columnColumns = ref([
   {
     label: "Full Name",
     value: "full_name",
@@ -265,9 +265,9 @@ const columnsColumns = [
     active: true,
     class: "!w-[150px]",
   },
-];
+]);
 
-const columnsFilters = [
+const columnsFilters = ref([
   {
     label: "Name",
     value: "name",
@@ -298,5 +298,5 @@ const columnsFilters = [
     active: true,
     class: "!w-[150px]",
   },
-];
+]);
 </script>
