@@ -6,7 +6,7 @@
         :actualSection="actualSection"
         @close="emit('close')"
         @updateReport="emit('updateReport', $event)"
-        @saveReport="emit('saveReport', report)"
+        @saveReport="saveReport"
         @runReport="runReport = true"
       />
       <sidebar
@@ -76,7 +76,7 @@ const actualData = computed(() => {
 
 const dataColumns = computed(() => {
   let array = [];
-  for (let i = 0; i < getRandomInt(20 * 30, 0); i++) {
+  for (let i = 0; i < getRandomInt(100, 0); i++) {
     array.push({
       id: i,
       name: "Kelly Price",
@@ -112,6 +112,14 @@ const actualColumns = computed(() => {
     return columnsFilters.value?.filter((column) => column.active);
   }
 });
+
+const saveReport = () => {
+  props.report.report_details = {
+    columns: toRaw(columnColumns.value),
+    data: dataColumns.value,
+  };
+  emit("saveReport", props.report);
+};
 
 const columnColumns = ref([
   {

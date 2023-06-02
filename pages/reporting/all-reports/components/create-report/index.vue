@@ -50,6 +50,7 @@ export default defineComponent({
       type: Object,
     },
   },
+  emits: ["saveReport"],
   components: {
     CloseCreateReportReminderModal,
   },
@@ -105,10 +106,12 @@ export default defineComponent({
     };
 
     const saveReport = (report) => {
-      console.log("report");
-      console.log(report);
-      console.log("folders.value");
-      console.log(props.folders);
+      report.id = uuidv4();
+      createReportScreenIndex.value = 0;
+      setTimeout(() => {
+        closeCreateReportModal();
+      }, 100);
+      emit("saveReport", report);
     };
 
     const openCreateReportModal = () => {

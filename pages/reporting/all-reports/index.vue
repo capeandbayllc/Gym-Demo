@@ -81,6 +81,7 @@
     ref="createReportModal"
     :folders="folders"
     :actualFolderOrSubFolder="actualFolderOrSubFolder"
+    @saveReport="saveReport"
   />
   <daisy-modal
     :overlay="true"
@@ -378,26 +379,31 @@ const createReportDetails = () => {
       {
         label: "Name",
         value: "name",
+        active: true,
         class: "w-full",
       },
       {
         label: "Annual Revenue",
         value: "annual_revenue",
+        active: true,
         class: "w-full",
       },
       {
         label: "Brand Category",
         value: "brand_category",
+        active: true,
         class: "w-full",
       },
       {
         label: "City",
         value: "city",
+        active: true,
         class: "w-full",
       },
       {
         label: "Company",
         value: "company",
+        active: true,
         class: "w-full text-center",
       },
     ],
@@ -611,5 +617,7 @@ const updateReport = (reportData) => {
   });
 };
 
-const saveReport = (reportData) => {};
+const saveReport = (reportData) => {
+  actualFolderOrSubFolder.value?.data.unshift(toRaw(reportData));
+};
 </script>

@@ -3,6 +3,7 @@
     <tr>
       <th
         v-for="(column, ndx) in columns"
+        v-show="column.active"
         :key="column.field ? column.field : ndx"
         class="px-3 capitalize font-normal whitespace-nowrap"
         :class="column.class"

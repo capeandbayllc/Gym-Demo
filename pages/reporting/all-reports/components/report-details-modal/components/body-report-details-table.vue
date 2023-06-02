@@ -7,7 +7,12 @@
       @handle="eventHandle"
       :data="item"
     >
-      <td class="min-w-[250px]" v-for="column in columns" :class="column.class">
+      <td
+        class="min-w-[250px]"
+        v-for="column in columns"
+        v-show="column.active"
+        :class="column.class"
+      >
         <span>
           {{ item[column.value] ? item[column.value] : "-" }}
         </span>
