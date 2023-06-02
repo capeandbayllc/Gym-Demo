@@ -101,6 +101,7 @@ const updateReportName = (report_name) => {
 const saveReport = (report) => {
   selectedReport.value = report;
   reportDetailsScreenIndex.value--;
+  closeReportDetailsModal();
 };
 
 const props = defineProps({
