@@ -73,34 +73,7 @@
       </div>
     </div>
   </div>
-  <daisy-modal
-    id="createReportModal"
-    ref="createReportModal"
-    :confirm-close="createReportScreenIndex > 0"
-    @confirmClose="openCloseCreateReportReminderModal"
-    @close="createReportScreenIndex = 0"
-  >
-    <component
-      :is="createReportScreens[createReportScreenIndex]"
-      @back="createReportScreenIndex--"
-      @next="createReportScreenIndex++"
-      @close="closeCreateReportModal"
-      :folders="folders"
-      :report="newReportData"
-      @changeReport="newReportData = $event"
-    >
-    </component>
-  </daisy-modal>
-  <daisy-modal
-    :overlay="true"
-    ref="closeCreateReportReminderModal"
-    id="closeCreateReportReminderModal"
-  >
-    <close-create-report-reminder-modal
-      @confirm="confirmCancellationReportCreation"
-      @cancel="cancelCancellationReportCreation"
-    />
-  </daisy-modal>
+  <create-report-modal ref="createReportModal" :folders="folders" />
   <daisy-modal
     :overlay="true"
     id="reportSchedulerModal"
@@ -140,20 +113,15 @@
 import ReportsFoldersCard from "./components/reports-folders-card/index.vue";
 import ReportsTable from "./components/reports-table/index.vue";
 import { getRandomInt } from "~/api/utils/number";
-import NewReport from "./components/create-report/new-report.vue";
-import Reporting from "./components/create-report/reporting.vue";
 import ReportNameColumn from "./components/reports-table/components/columns/reportNameColumn.vue";
 import UserColumn from "./components/reports-table/components/columns/userColumn.vue";
 import ExportColumn from "./components/reports-table/components/columns/exportColumn.vue";
 import ReportSelectionActions from "./components/report-selection-actions/index.vue";
 import ReportSchedulerModal from "./components/create-report/components/report-scheduler-modal.vue";
-import CloseCreateReportReminderModal from "./components/close-create-report-reminder-modal.vue";
 import { v4 as uuidv4 } from "uuid";
-
-const newReportData = ref(null);
+import CreateReportModal from "./components/create-report/index.vue";
 
 const selectedReport = ref(null);
-const closeCreateReportReminderModal = ref(null);
 
 const defaultSubFolders = ref([
   { name: "Campaign Reports" },
@@ -337,15 +305,6 @@ const getFavoritesReports = () => {
   return array;
 };
 
-const createReportScreens = ref([NewReport, Reporting]);
-const createReportScreenIndex = ref(0);
-const createReportModal = ref(false);
-const openCreateReportModal = () => {
-  createReportModal.value.open();
-};
-const closeCreateReportModal = () => {
-  createReportModal.value.close();
-};
 const reportSchedulerModal = ref(null);
 
 const openReportSchedulerModal = () => {
@@ -405,10 +364,6 @@ const folders = ref([
   },
 ]);
 
-onMounted(() => {
-  fillFoldersWithData();
-});
-
 const fillFoldersWithData = () => {
   folders.value.forEach((folder) => {
     let array = [];
@@ -452,6 +407,11 @@ const fillFoldersWithData = () => {
     }
   });
 };
+onMounted(() => {
+  fillFoldersWithData();
+});
+
+const createReportModal = ref(null);
 
 const folderSelected = computed(() => {
   if (actualSubFolder.value != null) {
@@ -473,7 +433,7 @@ const createReportClick = computed(() => {
   if (activeFolderOrSubFolder.value.createReportClick) {
     return activeFolderOrSubFolder.value.createReportClick;
   }
-  return openCreateReportModal;
+  return createReportModal.value.openCreateReportModal;
 });
 
 const actualFolder = ref(folders.value[0]);
@@ -578,35 +538,5 @@ const moveToFolder = (folderName) => {
   });
 
   actualSubFolder.value = findFolder;
-};
-
-const closeCloseCreateReportReminderModal = () => {
-  closeCreateReportReminderModal.value.close();
-};
-
-const openCloseCreateReportReminderModal = () => {
-  closeCreateReportReminderModal.value.open();
-};
-
-watch(createReportScreenIndex, (actualValue, oldValue) => {
-  if (
-    actualValue == 0 &&
-    oldValue == 1 &&
-    createReportModal.value.isOpen == false
-  ) {
-    closeCreateReportReminderModal.value.open();
-  }
-});
-
-const confirmCancellationReportCreation = () => {
-  createReportModal.value.confirmClose();
-  setTimeout(() => {
-    closeCreateReportReminderModal.value.close();
-  }, 100);
-};
-
-const cancelCancellationReportCreation = () => {
-  createReportScreenIndex.value = 1;
-  closeCloseCreateReportReminderModal();
 };
 </script>

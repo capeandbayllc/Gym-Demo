@@ -71,7 +71,12 @@
         Run
       </Button>
       <edit-report>
-        <button class="bg-secondary rounded-l-lg px-5 h-8">Save</button>
+        <button
+          class="bg-secondary rounded-l-lg px-5 h-8"
+          @click="emit('saveReport')"
+        >
+          Save
+        </button>
       </edit-report>
     </div>
   </div>
@@ -126,7 +131,7 @@ const props = defineProps({
     default: "",
   },
 });
-const emit = defineEmits(["changeReport", "runReport"]);
+const emit = defineEmits(["changeReport", "runReport", "saveReport"]);
 
 const showTitleDropdown = ref(false);
 

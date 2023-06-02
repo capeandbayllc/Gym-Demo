@@ -5,6 +5,7 @@
         :report="report"
         :actualSection="actualSection"
         @changeReport="emit('changeReport', $event)"
+        @saveReport="emit('saveReport', report)"
         @runReport="runReport = true"
       />
       <sidebar
@@ -158,8 +159,8 @@ const columnsFilters = ref([
     class: "!w-[150px]",
   },
   {
-    label: "BI Conctract Expiration",
-    value: "bi_conctract_expiration",
+    label: "BI Contract Expiration",
+    value: "bi_contract_expiration",
     active: true,
     class: "!w-[150px]",
   },
