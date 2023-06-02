@@ -70,7 +70,7 @@
           @toggle-is-favorite="toggleIsFavorite"
           @toggle-select-report="toggleSelectReport"
           @save-cloned-report="saveClonedReport"
-          @change-selected-report="selectedReport = $event"
+          @update-report="updateReport"
           :columns="folderSelected.columns"
           class="col-span-3 mt-3 md:mt-0"
         />
@@ -142,57 +142,57 @@ const defaultSubFolders = ref([
   { name: "People Reports" },
 ]);
 
-const reportNameHeader = {
+const reportNameHeader = ref({
   label: "Report Name",
   value: "report_name",
   component: ReportNameColumn,
   class: "w-full",
-};
-const descriptionHeader = {
+});
+const descriptionHeader = ref({
   label: "Description",
   value: "description",
   class: "w-full",
-};
-const reportTypeHeader = {
+});
+const reportTypeHeader = ref({
   label: "Report Type",
   value: "report_type",
   class: "!w-[146px]",
-};
-const dateCreatedHeader = {
+});
+const dateCreatedHeader = ref({
   label: "Date Created",
   value: "date_created",
   class: "!w-[146px]",
-};
-const lastRunDateHeader = {
+});
+const lastRunDateHeader = ref({
   label: "Last Run Date",
   value: "last_run_date",
   default: "10 min ago",
   class: "!w-[146px]",
-};
-const createdByHeader = {
+});
+const createdByHeader = ref({
   label: "Created By",
   value: "created_by",
   class: "!w-[146px]",
-};
-const lastEditedByHeader = {
+});
+const lastEditedByHeader = ref({
   label: "Last Edited By",
   value: "last_edited_by",
   default: "Ron",
   class: "w-full",
-};
-const deletedByHeader = {
+});
+const deletedByHeader = ref({
   label: "Deleted By",
   value: "deleted_by",
   default: "Ron",
   class: "w-full",
-};
-const permanentDeletingIn = {
+});
+const permanentDeletingIn = ref({
   label: "Permanently Deleted In",
   value: "permanently_deleted_in",
   default: "5 days",
   class: "w-full",
-};
-const reportStatusHeader = {
+});
+const reportStatusHeader = ref({
   label: "Status",
   value: "status",
   disableSearch: true,
@@ -204,87 +204,87 @@ const reportStatusHeader = {
     { label: "Failed", value: "failed" },
   ],
   class: "!w-[146px]",
-};
+});
 
-const completedDateHeader = {
+const completedDateHeader = ref({
   label: "Completed Date",
   value: "completed_date",
   default: "April 9, 2023",
   class: "!w-[146px]",
-};
-const completedTimeHeader = {
+});
+const completedTimeHeader = ref({
   label: "Completed Time",
   value: "completed_time",
   default: "1:00 PM",
   class: "!w-[146px]",
-};
-const userHeader = {
+});
+const userHeader = ref({
   label: "User",
   value: "user",
   component: UserColumn,
   class: "!w-[146px]",
-};
-const exportHeader = {
+});
+const exportHeader = ref({
   label: "Export",
   value: "export",
   component: ExportColumn,
   class: "!w-[146px]",
-};
+});
 
 const defaultColumns = ref({
   allReports: [
-    reportNameHeader,
-    descriptionHeader,
-    reportTypeHeader,
-    dateCreatedHeader,
-    lastRunDateHeader,
-    createdByHeader,
-    lastEditedByHeader,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    reportTypeHeader.value,
+    dateCreatedHeader.value,
+    lastRunDateHeader.value,
+    createdByHeader.value,
+    lastEditedByHeader.value,
   ],
   reportQueue: [
-    reportNameHeader,
-    descriptionHeader,
-    reportStatusHeader,
-    completedDateHeader,
-    completedTimeHeader,
-    userHeader,
-    exportHeader,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    reportStatusHeader.value,
+    completedDateHeader.value,
+    completedTimeHeader.value,
+    userHeader.value,
+    exportHeader.value,
   ],
   favorites: [
-    reportNameHeader,
-    descriptionHeader,
-    reportTypeHeader,
-    dateCreatedHeader,
-    lastRunDateHeader,
-    createdByHeader,
-    lastEditedByHeader,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    reportTypeHeader.value,
+    dateCreatedHeader.value,
+    lastRunDateHeader.value,
+    createdByHeader.value,
+    lastEditedByHeader.value,
   ],
   recentlyViewed: [
-    reportNameHeader,
-    descriptionHeader,
-    reportTypeHeader,
-    dateCreatedHeader,
-    lastRunDateHeader,
-    createdByHeader,
-    lastEditedByHeader,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    reportTypeHeader.value,
+    dateCreatedHeader.value,
+    lastRunDateHeader.value,
+    createdByHeader.value,
+    lastEditedByHeader.value,
   ],
   scheduledReports: [
-    reportNameHeader,
-    descriptionHeader,
-    reportTypeHeader,
-    dateCreatedHeader,
-    lastRunDateHeader,
-    createdByHeader,
-    lastEditedByHeader,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    reportTypeHeader.value,
+    dateCreatedHeader.value,
+    lastRunDateHeader.value,
+    createdByHeader.value,
+    lastEditedByHeader.value,
   ],
   recentlyDeleted: [
-    reportNameHeader,
-    descriptionHeader,
-    dateCreatedHeader,
-    lastRunDateHeader,
-    createdByHeader,
-    deletedByHeader,
-    permanentDeletingIn,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    dateCreatedHeader.value,
+    lastRunDateHeader.value,
+    createdByHeader.value,
+    deletedByHeader.value,
+    permanentDeletingIn.value,
   ],
 });
 
@@ -593,4 +593,23 @@ const moveToFolder = (folderName) => {
 
   actualSubFolder.value = findFolder;
 };
+
+const updateReport = (reportData) => {
+  folders.value.forEach((folder, folderIndex) => {
+    if (folder.data) {
+      folder.data.forEach((report, reportIndex) => {
+        if (report.id == reportData.id) {
+          folders.value[folderIndex].data[reportIndex] = { ...reportData };
+        }
+      });
+      folder.data.forEach((report, reportIndex) => {
+        if (report.id == reportData.id) {
+          folders.value[folderIndex].data[reportIndex] = { ...reportData };
+        }
+      });
+    }
+  });
+};
+
+const saveReport = (reportData) => {};
 </script>
