@@ -25,7 +25,7 @@
           @back="reportDetailsScreenIndex--"
           @next="reportDetailsScreenIndex++"
           @close="closeReportDetailsModal"
-          @changeReport="selectedReport = $event"
+          @updateReport="selectedReport = $event"
           @saveClonedReport="emit('saveClonedReport', $event)"
           :report="selectedReport"
         />

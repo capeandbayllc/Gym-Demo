@@ -57,8 +57,12 @@
           @changeActualFolder="
             actualFolder = $event;
             actualSubFolder = null;
+            createReportModal?.generateNewReportData();
           "
-          @changeActualSubFolder="actualSubFolder = $event"
+          @changeActualSubFolder="
+            actualSubFolder = $event;
+            createReportModal?.generateNewReportData();
+          "
           :folders="folders"
         />
         <reports-table
@@ -73,7 +77,11 @@
       </div>
     </div>
   </div>
-  <create-report-modal ref="createReportModal" :folders="folders" />
+  <create-report-modal
+    ref="createReportModal"
+    :folders="folders"
+    :actualFolderOrSubFolder="actualFolderOrSubFolder"
+  />
   <daisy-modal
     :overlay="true"
     id="reportSchedulerModal"
@@ -423,15 +431,15 @@ const folderSelected = computed(() => {
 });
 
 const createReportLabel = computed(() => {
-  if (activeFolderOrSubFolder.value.createReportLabel) {
-    return activeFolderOrSubFolder.value.createReportLabel;
+  if (actualFolderOrSubFolder.value.createReportLabel) {
+    return actualFolderOrSubFolder.value.createReportLabel;
   }
   return "Create a report";
 });
 
 const createReportClick = computed(() => {
-  if (activeFolderOrSubFolder.value.createReportClick) {
-    return activeFolderOrSubFolder.value.createReportClick;
+  if (actualFolderOrSubFolder.value.createReportClick) {
+    return actualFolderOrSubFolder.value.createReportClick;
   }
   return createReportModal.value.openCreateReportModal;
 });
@@ -439,7 +447,7 @@ const createReportClick = computed(() => {
 const actualFolder = ref(folders.value[0]);
 const actualSubFolder = ref(null);
 
-const activeFolderOrSubFolder = computed(() => {
+const actualFolderOrSubFolder = computed(() => {
   let folderActual = null;
   if (actualSubFolder?.value != null) {
     folderActual = actualFolder.value.subFolders.find((folder) => {
@@ -454,7 +462,7 @@ const activeFolderOrSubFolder = computed(() => {
 });
 
 const selectedReports = computed(() => {
-  let reports = activeFolderOrSubFolder.value.data;
+  let reports = actualFolderOrSubFolder.value.data;
   if (Array.isArray(reports)) {
     return reports.filter((item) => {
       return item.selected;
@@ -463,7 +471,7 @@ const selectedReports = computed(() => {
 });
 
 const toggleIsFavorite = (itemSelected) => {
-  activeFolderOrSubFolder.value.data.forEach((item) => {
+  actualFolderOrSubFolder.value.data.forEach((item) => {
     if (item.id == itemSelected.id) {
       item.isFavorite = !item.isFavorite;
     }
@@ -471,36 +479,36 @@ const toggleIsFavorite = (itemSelected) => {
 };
 
 const toggleSelectReport = (itemSelected) => {
-  activeFolderOrSubFolder.value.data.forEach((item) => {
+  actualFolderOrSubFolder.value.data.forEach((item) => {
     if (item.id == itemSelected.id) {
       item.selected = !item.selected;
     }
   });
 };
 
-watch(activeFolderOrSubFolder, () => {
+watch(actualFolderOrSubFolder, () => {
   // reset folders selection state
   clearSelection();
 });
 
 const clearSelection = () => {
-  activeFolderOrSubFolder?.value?.data?.forEach((item) => {
+  actualFolderOrSubFolder?.value?.data?.forEach((item) => {
     item.selected = false;
   });
 };
 
 const deleteSelectedReports = () => {
   selectedReports.value.forEach((report) => {
-    activeFolderOrSubFolder.value.data.forEach((item, i) => {
+    actualFolderOrSubFolder.value.data.forEach((item, i) => {
       if (item.id === report.id) {
-        activeFolderOrSubFolder.value.data.splice(i, 1);
+        actualFolderOrSubFolder.value.data.splice(i, 1);
       }
     });
   });
 };
 
 const saveClonedReport = (name) => {
-  activeFolderOrSubFolder.value.data.unshift({
+  actualFolderOrSubFolder.value.data.unshift({
     ...selectedReport.value,
     report_name: name,
   });
@@ -525,11 +533,11 @@ const moveToFolder = (folderName) => {
   }
 
   selectedReports.value.forEach((report) => {
-    const reportIndex = activeFolderOrSubFolder.value.data.findIndex(
+    const reportIndex = actualFolderOrSubFolder.value.data.findIndex(
       (item) => item.id === report.id
     );
     if (reportIndex !== -1) {
-      const reportToMove = activeFolderOrSubFolder.value.data.splice(
+      const reportToMove = actualFolderOrSubFolder.value.data.splice(
         reportIndex,
         1
       )[0];

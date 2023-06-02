@@ -5,7 +5,7 @@
     <div class="flex items-center gap-3">
       <arrow-left
         class="pt-1 min-w-12 max-w-12 h-12 cursor-pointer"
-        @click="emit('back')"
+        @click="emit('close')"
       ></arrow-left>
       <h5 class="text-2xl whitespace-nowrap mr-2">
         {{ report?.report_name }}
@@ -131,7 +131,7 @@ const props = defineProps({
     default: "",
   },
 });
-const emit = defineEmits(["changeReport", "runReport", "saveReport"]);
+const emit = defineEmits(["close", "updateReport", "runReport", "saveReport"]);
 
 const showTitleDropdown = ref(false);
 
@@ -161,6 +161,6 @@ const closeCreateJoinedReportModal = () => {
 };
 
 const changeName = (name) => {
-  emit("changeReport", { ...props.report, report_name: name });
+  emit("updateReport", { ...props.report, report_name: name });
 };
 </script>

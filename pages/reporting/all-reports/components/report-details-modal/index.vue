@@ -130,7 +130,7 @@
   </div>
   <daisy-modal :overlay="true" :show-close-button="false" ref="renameModal">
     <rename-modal
-      @changeName="emit('changeReportName', $event)"
+      @changeName="emit('updateReportName', $event)"
       :report-name="report.report_name"
       @close="closeRenameModal"
       :open="renameModal?.isOpen"
@@ -185,7 +185,7 @@ import {
   FiltersReportingIcon,
 } from "~/components/icons";
 
-const emit = defineEmits(["close", "changeReportName"]);
+const emit = defineEmits(["close", "updateReportName"]);
 
 const props = defineProps({
   report: {

@@ -4,7 +4,8 @@
       <reporting-actions
         :report="report"
         :actualSection="actualSection"
-        @changeReport="emit('changeReport', $event)"
+        @back="emit('close')"
+        @updateReport="emit('updateReport', $event)"
         @saveReport="emit('saveReport', report)"
         @runReport="runReport = true"
       />
@@ -53,7 +54,13 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["close", "back", "next", "changeReport"]);
+const emit = defineEmits([
+  "close",
+  "back",
+  "next",
+  "updateReport",
+  "saveReport",
+]);
 
 const actualSection = ref("Columns");
 
