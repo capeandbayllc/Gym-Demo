@@ -7,11 +7,10 @@
       @confirmClose="openCloseCreateReportReminderModal"
       @close="createReportScreenIndex = 0"
     >
-      <!-- {{ newReportData }} -->
       <component
         :is="createReportScreens[createReportScreenIndex]"
-        @back="createReportScreenIndex--"
         @next="createReportScreenIndex++"
+        @back="closeCreateReportModal"
         @close="closeCreateReportModal"
         @saveReport="saveReport"
         :folders="folders"
@@ -62,6 +61,8 @@ export default defineComponent({
     const createReportScreens = ref([NewReport, Reporting]);
     const createReportScreenIndex = ref(0);
 
+    const actualFolderOrSubFolderName = ref("");
+
     watch(createReportScreenIndex, (actualValue, oldValue) => {
       if (
         actualValue == 0 &&
@@ -88,6 +89,15 @@ export default defineComponent({
       newReportData.value = item;
       console.log(newReportData.value);
     };
+
+    watchEffect(() => {
+      if (
+        props.actualFolderOrSubFolder.name != actualFolderOrSubFolderName.value
+      ) {
+        actualFolderOrSubFolderName.value = props.actualFolderOrSubFolder.name;
+        generateNewReportData();
+      }
+    });
 
     onMounted(() => {
       generateNewReportData();
@@ -133,6 +143,7 @@ export default defineComponent({
       newReportData,
       createReportScreens,
       createReportScreenIndex,
+      actualFolderOrSubFolderName,
       generateNewReportData,
       confirmCancellationReportCreation,
       cancelCancellationReportCreation,

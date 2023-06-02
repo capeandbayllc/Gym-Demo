@@ -57,12 +57,8 @@
           @changeActualFolder="
             actualFolder = $event;
             actualSubFolder = null;
-            createReportModal?.generateNewReportData();
           "
-          @changeActualSubFolder="
-            actualSubFolder = $event;
-            createReportModal?.generateNewReportData();
-          "
+          @changeActualSubFolder="actualSubFolder = $event"
           :folders="folders"
         />
         <reports-table
@@ -605,12 +601,12 @@ const updateReport = (reportData) => {
     if (folder.data) {
       folder.data.forEach((report, reportIndex) => {
         if (report.id == reportData.id) {
-          folders.value[folderIndex].data[reportIndex] = { ...reportData };
+          folders.value[folderIndex].data[reportIndex] = toRaw(reportData);
         }
       });
       folder.data.forEach((report, reportIndex) => {
         if (report.id == reportData.id) {
-          folders.value[folderIndex].data[reportIndex] = { ...reportData };
+          folders.value[folderIndex].data[reportIndex] = toRaw(reportData);
         }
       });
     }

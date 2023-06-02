@@ -5,7 +5,7 @@
     <div class="flex items-center gap-3">
       <arrow-left
         class="pt-1 min-w-12 max-w-12 h-12 cursor-pointer"
-        @click="emit('close')"
+        @click="emit('back')"
       ></arrow-left>
       <h5 class="text-2xl whitespace-nowrap mr-2">
         {{ report?.report_name }}
@@ -58,7 +58,7 @@
         size="sm"
         outline
         class="normal-case rounded-lg hover:text-secondary h-8"
-        @click="emit('close')"
+        @click="emit('back')"
       >
         Cancel
       </Button>
@@ -131,7 +131,13 @@ const props = defineProps({
     default: "",
   },
 });
-const emit = defineEmits(["close", "updateReport", "runReport", "saveReport"]);
+const emit = defineEmits([
+  "back",
+  "close",
+  "updateReport",
+  "runReport",
+  "saveReport",
+]);
 
 const showTitleDropdown = ref(false);
 

@@ -4,8 +4,9 @@
       <reporting-actions
         :report="report"
         :actualSection="actualSection"
+        @back="emit('back')"
         @close="emit('close')"
-        @updateReport="emit('updateReport', $event)"
+        @updateReport="report = $event"
         @saveReport="saveReport"
         @runReport="runReport = true"
       />
