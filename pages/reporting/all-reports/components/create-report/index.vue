@@ -7,6 +7,7 @@
       @confirmClose="openCloseCreateReportReminderModal"
       @close="createReportScreenIndex = 0"
     >
+      <!-- {{ newReportData }} -->
       <component
         :is="createReportScreens[createReportScreenIndex]"
         @back="createReportScreenIndex--"

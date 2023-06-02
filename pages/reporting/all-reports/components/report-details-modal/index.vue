@@ -61,7 +61,7 @@
           <select-dropdown
             value=""
             :items="totalRecordsOptions"
-            :countCircle="data?.length"
+            :countCircle="report.report_details.data?.length"
             label="Total records"
             class="select-dropdown bg-secondary z-[40]"
           />
@@ -119,9 +119,10 @@
     <div class="modal-content">
       <div class="max-w-full rounded-xl overflow-auto max-h-full min-h-[102%]">
         <table class="rounded-2xl">
-          <head-report-details-table />
+          <head-report-details-table :columns="report.report_details.columns" />
           <body-report-details-table
-            :data="data"
+            :columns="report.report_details.columns"
+            :data="report.report_details.data"
             @row-clicked="openReportDetailsModal"
           />
         </table>
@@ -198,25 +199,6 @@ const showTitleDropdown = ref(false);
 const toggleTitleDropdown = () => {
   showTitleDropdown.value = !showTitleDropdown.value;
 };
-
-const data = computed(() => {
-  let array = [];
-  for (
-    let i = 0;
-    i < getRandomInt(props.report?.report_name?.length * 30, 0);
-    i++
-  ) {
-    array.push({
-      id: 1,
-      name: "Kelly Price",
-      annual_revenue: "",
-      brand_category: "",
-      city: "",
-      company: "HydraMassage",
-    });
-  }
-  return array;
-});
 
 const renameModal = ref(null);
 

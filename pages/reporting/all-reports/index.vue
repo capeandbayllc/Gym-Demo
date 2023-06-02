@@ -372,6 +372,50 @@ const folders = ref([
   },
 ]);
 
+const createReportDetails = () => {
+  let report_details = {
+    columns: [
+      {
+        label: "Name",
+        value: "name",
+        class: "w-full",
+      },
+      {
+        label: "Annual Revenue",
+        value: "annual_revenue",
+        class: "w-full",
+      },
+      {
+        label: "Brand Category",
+        value: "brand_category",
+        class: "w-full",
+      },
+      {
+        label: "City",
+        value: "city",
+        class: "w-full",
+      },
+      {
+        label: "Company",
+        value: "company",
+        class: "w-full text-center",
+      },
+    ],
+    data: [],
+  };
+  for (let i = 0; i < getRandomInt(100, 0); i++) {
+    report_details.data.push({
+      id: 1,
+      name: "Kelly Price",
+      annual_revenue: "",
+      brand_category: "",
+      city: "",
+      company: "HydraMassage",
+    });
+  }
+  return report_details;
+};
+
 const fillFoldersWithData = () => {
   folders.value.forEach((folder) => {
     let array = [];
@@ -385,6 +429,7 @@ const fillFoldersWithData = () => {
           value =
             column.options[getRandomInt(column.options.length - 1, 0)].name;
         }
+        item["report_details"] = createReportDetails();
         item[column.value] = value;
       });
       item.id = uuidv4();
@@ -401,6 +446,7 @@ const fillFoldersWithData = () => {
             return {
               ...item,
               report_name: subFolder.name + ` ${i + 1}`,
+              report_details: createReportDetails(),
               id: uuidv4(),
               selected: false,
               isFavorite: false,

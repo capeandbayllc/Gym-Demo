@@ -41,28 +41,12 @@
 <script setup>
 import selectBoxReport from "../../reports-table/components/select-box-report.vue";
 
-const columns = [
-  {
-    label: "Name",
-    class: "!w-[250px]",
+const props = defineProps({
+  columns: {
+    type: Array,
+    default: [],
   },
-  {
-    label: "Annual Revenue",
-    class: "!w-[250px]",
-  },
-  {
-    label: "Brand Category",
-    class: "!w-[250px]",
-  },
-  {
-    label: "City",
-    class: "!w-[250px]",
-  },
-  {
-    label: "Company",
-    class: "!w-[250px]",
-  },
-];
+});
 
 const options = [
   {
