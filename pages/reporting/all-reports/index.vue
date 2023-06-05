@@ -66,41 +66,19 @@
           @toggle-is-favorite="toggleIsFavorite"
           @toggle-select-report="toggleSelectReport"
           @save-cloned-report="saveClonedReport"
-          @change-selected-report="selectedReport = $event"
+          @update-report="updateReport"
           :columns="folderSelected.columns"
           class="col-span-3 mt-3 md:mt-0"
         />
       </div>
     </div>
   </div>
-  <daisy-modal
-    id="createReportModal"
+  <create-report-modal
     ref="createReportModal"
-    :confirm-close="createReportScreenIndex > 0"
-    @confirmClose="openCloseCreateReportReminderModal"
-    @close="createReportScreenIndex = 0"
-  >
-    <component
-      :is="createReportScreens[createReportScreenIndex]"
-      @back="createReportScreenIndex--"
-      @next="createReportScreenIndex++"
-      @close="closeCreateReportModal"
-      :folders="folders"
-      :report="newReportData"
-      @changeReport="newReportData = $event"
-    >
-    </component>
-  </daisy-modal>
-  <daisy-modal
-    :overlay="true"
-    ref="closeCreateReportReminderModal"
-    id="closeCreateReportReminderModal"
-  >
-    <close-create-report-reminder-modal
-      @confirm="confirmCancellationReportCreation"
-      @cancel="cancelCancellationReportCreation"
-    />
-  </daisy-modal>
+    :folders="folders"
+    :actualFolderOrSubFolder="actualFolderOrSubFolder"
+    @saveReport="saveReport"
+  />
   <daisy-modal
     :overlay="true"
     id="reportSchedulerModal"
@@ -140,20 +118,15 @@
 import ReportsFoldersCard from "./components/reports-folders-card/index.vue";
 import ReportsTable from "./components/reports-table/index.vue";
 import { getRandomInt } from "~/api/utils/number";
-import NewReport from "./components/create-report/new-report.vue";
-import Reporting from "./components/create-report/reporting.vue";
 import ReportNameColumn from "./components/reports-table/components/columns/reportNameColumn.vue";
 import UserColumn from "./components/reports-table/components/columns/userColumn.vue";
 import ExportColumn from "./components/reports-table/components/columns/exportColumn.vue";
 import ReportSelectionActions from "./components/report-selection-actions/index.vue";
 import ReportSchedulerModal from "./components/create-report/components/report-scheduler-modal.vue";
-import CloseCreateReportReminderModal from "./components/close-create-report-reminder-modal.vue";
 import { v4 as uuidv4 } from "uuid";
-
-const newReportData = ref(null);
+import CreateReportModal from "./components/create-report/index.vue";
 
 const selectedReport = ref(null);
-const closeCreateReportReminderModal = ref(null);
 
 const defaultSubFolders = ref([
   { name: "Campaign Reports" },
@@ -166,57 +139,57 @@ const defaultSubFolders = ref([
   { name: "People Reports" },
 ]);
 
-const reportNameHeader = {
+const reportNameHeader = ref({
   label: "Report Name",
   value: "report_name",
   component: ReportNameColumn,
   class: "w-full",
-};
-const descriptionHeader = {
+});
+const descriptionHeader = ref({
   label: "Description",
   value: "description",
   class: "w-full",
-};
-const reportTypeHeader = {
+});
+const reportTypeHeader = ref({
   label: "Report Type",
   value: "report_type",
   class: "!w-[146px]",
-};
-const dateCreatedHeader = {
+});
+const dateCreatedHeader = ref({
   label: "Date Created",
   value: "date_created",
   class: "!w-[146px]",
-};
-const lastRunDateHeader = {
+});
+const lastRunDateHeader = ref({
   label: "Last Run Date",
   value: "last_run_date",
   default: "10 min ago",
   class: "!w-[146px]",
-};
-const createdByHeader = {
+});
+const createdByHeader = ref({
   label: "Created By",
   value: "created_by",
   class: "!w-[146px]",
-};
-const lastEditedByHeader = {
+});
+const lastEditedByHeader = ref({
   label: "Last Edited By",
   value: "last_edited_by",
   default: "Ron",
   class: "w-full",
-};
-const deletedByHeader = {
+});
+const deletedByHeader = ref({
   label: "Deleted By",
   value: "deleted_by",
   default: "Ron",
   class: "w-full",
-};
-const permanentDeletingIn = {
+});
+const permanentDeletingIn = ref({
   label: "Permanently Deleted In",
   value: "permanently_deleted_in",
   default: "5 days",
   class: "w-full",
-};
-const reportStatusHeader = {
+});
+const reportStatusHeader = ref({
   label: "Status",
   value: "status",
   disableSearch: true,
@@ -228,87 +201,87 @@ const reportStatusHeader = {
     { label: "Failed", value: "failed" },
   ],
   class: "!w-[146px]",
-};
+});
 
-const completedDateHeader = {
+const completedDateHeader = ref({
   label: "Completed Date",
   value: "completed_date",
   default: "April 9, 2023",
   class: "!w-[146px]",
-};
-const completedTimeHeader = {
+});
+const completedTimeHeader = ref({
   label: "Completed Time",
   value: "completed_time",
   default: "1:00 PM",
   class: "!w-[146px]",
-};
-const userHeader = {
+});
+const userHeader = ref({
   label: "User",
   value: "user",
   component: UserColumn,
   class: "!w-[146px]",
-};
-const exportHeader = {
+});
+const exportHeader = ref({
   label: "Export",
   value: "export",
   component: ExportColumn,
   class: "!w-[146px]",
-};
+});
 
 const defaultColumns = ref({
   allReports: [
-    reportNameHeader,
-    descriptionHeader,
-    reportTypeHeader,
-    dateCreatedHeader,
-    lastRunDateHeader,
-    createdByHeader,
-    lastEditedByHeader,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    reportTypeHeader.value,
+    dateCreatedHeader.value,
+    lastRunDateHeader.value,
+    createdByHeader.value,
+    lastEditedByHeader.value,
   ],
   reportQueue: [
-    reportNameHeader,
-    descriptionHeader,
-    reportStatusHeader,
-    completedDateHeader,
-    completedTimeHeader,
-    userHeader,
-    exportHeader,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    reportStatusHeader.value,
+    completedDateHeader.value,
+    completedTimeHeader.value,
+    userHeader.value,
+    exportHeader.value,
   ],
   favorites: [
-    reportNameHeader,
-    descriptionHeader,
-    reportTypeHeader,
-    dateCreatedHeader,
-    lastRunDateHeader,
-    createdByHeader,
-    lastEditedByHeader,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    reportTypeHeader.value,
+    dateCreatedHeader.value,
+    lastRunDateHeader.value,
+    createdByHeader.value,
+    lastEditedByHeader.value,
   ],
   recentlyViewed: [
-    reportNameHeader,
-    descriptionHeader,
-    reportTypeHeader,
-    dateCreatedHeader,
-    lastRunDateHeader,
-    createdByHeader,
-    lastEditedByHeader,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    reportTypeHeader.value,
+    dateCreatedHeader.value,
+    lastRunDateHeader.value,
+    createdByHeader.value,
+    lastEditedByHeader.value,
   ],
   scheduledReports: [
-    reportNameHeader,
-    descriptionHeader,
-    reportTypeHeader,
-    dateCreatedHeader,
-    lastRunDateHeader,
-    createdByHeader,
-    lastEditedByHeader,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    reportTypeHeader.value,
+    dateCreatedHeader.value,
+    lastRunDateHeader.value,
+    createdByHeader.value,
+    lastEditedByHeader.value,
   ],
   recentlyDeleted: [
-    reportNameHeader,
-    descriptionHeader,
-    dateCreatedHeader,
-    lastRunDateHeader,
-    createdByHeader,
-    deletedByHeader,
-    permanentDeletingIn,
+    reportNameHeader.value,
+    descriptionHeader.value,
+    dateCreatedHeader.value,
+    lastRunDateHeader.value,
+    createdByHeader.value,
+    deletedByHeader.value,
+    permanentDeletingIn.value,
   ],
 });
 
@@ -337,15 +310,6 @@ const getFavoritesReports = () => {
   return array;
 };
 
-const createReportScreens = ref([NewReport, Reporting]);
-const createReportScreenIndex = ref(0);
-const createReportModal = ref(false);
-const openCreateReportModal = () => {
-  createReportModal.value.open();
-};
-const closeCreateReportModal = () => {
-  createReportModal.value.close();
-};
 const reportSchedulerModal = ref(null);
 
 const openReportSchedulerModal = () => {
@@ -405,9 +369,54 @@ const folders = ref([
   },
 ]);
 
-onMounted(() => {
-  fillFoldersWithData();
-});
+const createReportDetails = () => {
+  let report_details = {
+    columns: [
+      {
+        label: "Name",
+        value: "name",
+        active: true,
+        class: "w-full",
+      },
+      {
+        label: "Annual Revenue",
+        value: "annual_revenue",
+        active: true,
+        class: "w-full",
+      },
+      {
+        label: "Brand Category",
+        value: "brand_category",
+        active: true,
+        class: "w-full",
+      },
+      {
+        label: "City",
+        value: "city",
+        active: true,
+        class: "w-full",
+      },
+      {
+        label: "Company",
+        value: "company",
+        active: true,
+        class: "w-full text-center",
+      },
+    ],
+    data: [],
+  };
+  for (let i = 0; i < getRandomInt(100, 0); i++) {
+    report_details.data.push({
+      id: 1,
+      name: "Kelly Price",
+      annual_revenue: "",
+      brand_category: "",
+      city: "",
+      company: "HydraMassage",
+    });
+  }
+  return report_details;
+};
 
 const fillFoldersWithData = () => {
   folders.value.forEach((folder) => {
@@ -422,6 +431,7 @@ const fillFoldersWithData = () => {
           value =
             column.options[getRandomInt(column.options.length - 1, 0)].name;
         }
+        item["report_details"] = createReportDetails();
         item[column.value] = value;
       });
       item.id = uuidv4();
@@ -438,6 +448,7 @@ const fillFoldersWithData = () => {
             return {
               ...item,
               report_name: subFolder.name + ` ${i + 1}`,
+              report_details: createReportDetails(),
               id: uuidv4(),
               selected: false,
               isFavorite: false,
@@ -452,6 +463,11 @@ const fillFoldersWithData = () => {
     }
   });
 };
+onMounted(() => {
+  fillFoldersWithData();
+});
+
+const createReportModal = ref(null);
 
 const folderSelected = computed(() => {
   if (actualSubFolder.value != null) {
@@ -463,23 +479,23 @@ const folderSelected = computed(() => {
 });
 
 const createReportLabel = computed(() => {
-  if (activeFolderOrSubFolder.value.createReportLabel) {
-    return activeFolderOrSubFolder.value.createReportLabel;
+  if (actualFolderOrSubFolder.value.createReportLabel) {
+    return actualFolderOrSubFolder.value.createReportLabel;
   }
   return "Create a report";
 });
 
 const createReportClick = computed(() => {
-  if (activeFolderOrSubFolder.value.createReportClick) {
-    return activeFolderOrSubFolder.value.createReportClick;
+  if (actualFolderOrSubFolder.value.createReportClick) {
+    return actualFolderOrSubFolder.value.createReportClick;
   }
-  return openCreateReportModal;
+  return createReportModal.value.openCreateReportModal;
 });
 
 const actualFolder = ref(folders.value[0]);
 const actualSubFolder = ref(null);
 
-const activeFolderOrSubFolder = computed(() => {
+const actualFolderOrSubFolder = computed(() => {
   let folderActual = null;
   if (actualSubFolder?.value != null) {
     folderActual = actualFolder.value.subFolders.find((folder) => {
@@ -494,7 +510,7 @@ const activeFolderOrSubFolder = computed(() => {
 });
 
 const selectedReports = computed(() => {
-  let reports = activeFolderOrSubFolder.value.data;
+  let reports = actualFolderOrSubFolder.value.data;
   if (Array.isArray(reports)) {
     return reports.filter((item) => {
       return item.selected;
@@ -503,7 +519,7 @@ const selectedReports = computed(() => {
 });
 
 const toggleIsFavorite = (itemSelected) => {
-  activeFolderOrSubFolder.value.data.forEach((item) => {
+  actualFolderOrSubFolder.value.data.forEach((item) => {
     if (item.id == itemSelected.id) {
       item.isFavorite = !item.isFavorite;
     }
@@ -511,36 +527,36 @@ const toggleIsFavorite = (itemSelected) => {
 };
 
 const toggleSelectReport = (itemSelected) => {
-  activeFolderOrSubFolder.value.data.forEach((item) => {
+  actualFolderOrSubFolder.value.data.forEach((item) => {
     if (item.id == itemSelected.id) {
       item.selected = !item.selected;
     }
   });
 };
 
-watch(activeFolderOrSubFolder, () => {
+watch(actualFolderOrSubFolder, () => {
   // reset folders selection state
   clearSelection();
 });
 
 const clearSelection = () => {
-  activeFolderOrSubFolder?.value?.data?.forEach((item) => {
+  actualFolderOrSubFolder?.value?.data?.forEach((item) => {
     item.selected = false;
   });
 };
 
 const deleteSelectedReports = () => {
   selectedReports.value.forEach((report) => {
-    activeFolderOrSubFolder.value.data.forEach((item, i) => {
+    actualFolderOrSubFolder.value.data.forEach((item, i) => {
       if (item.id === report.id) {
-        activeFolderOrSubFolder.value.data.splice(i, 1);
+        actualFolderOrSubFolder.value.data.splice(i, 1);
       }
     });
   });
 };
 
 const saveClonedReport = (name) => {
-  activeFolderOrSubFolder.value.data.unshift({
+  actualFolderOrSubFolder.value.data.unshift({
     ...selectedReport.value,
     report_name: name,
   });
@@ -565,11 +581,11 @@ const moveToFolder = (folderName) => {
   }
 
   selectedReports.value.forEach((report) => {
-    const reportIndex = activeFolderOrSubFolder.value.data.findIndex(
+    const reportIndex = actualFolderOrSubFolder.value.data.findIndex(
       (item) => item.id === report.id
     );
     if (reportIndex !== -1) {
-      const reportToMove = activeFolderOrSubFolder.value.data.splice(
+      const reportToMove = actualFolderOrSubFolder.value.data.splice(
         reportIndex,
         1
       )[0];
@@ -580,33 +596,24 @@ const moveToFolder = (folderName) => {
   actualSubFolder.value = findFolder;
 };
 
-const closeCloseCreateReportReminderModal = () => {
-  closeCreateReportReminderModal.value.close();
+const updateReport = (reportData) => {
+  folders.value.forEach((folder, folderIndex) => {
+    if (folder.data) {
+      folder.data.forEach((report, reportIndex) => {
+        if (report.id == reportData.id) {
+          folders.value[folderIndex].data[reportIndex] = toRaw(reportData);
+        }
+      });
+      folder.data.forEach((report, reportIndex) => {
+        if (report.id == reportData.id) {
+          folders.value[folderIndex].data[reportIndex] = toRaw(reportData);
+        }
+      });
+    }
+  });
 };
 
-const openCloseCreateReportReminderModal = () => {
-  closeCreateReportReminderModal.value.open();
-};
-
-watch(createReportScreenIndex, (actualValue, oldValue) => {
-  if (
-    actualValue == 0 &&
-    oldValue == 1 &&
-    createReportModal.value.isOpen == false
-  ) {
-    closeCreateReportReminderModal.value.open();
-  }
-});
-
-const confirmCancellationReportCreation = () => {
-  createReportModal.value.confirmClose();
-  setTimeout(() => {
-    closeCreateReportReminderModal.value.close();
-  }, 100);
-};
-
-const cancelCancellationReportCreation = () => {
-  createReportScreenIndex.value = 1;
-  closeCloseCreateReportReminderModal();
+const saveReport = (reportData) => {
+  actualFolderOrSubFolder.value?.data.unshift(toRaw(reportData));
 };
 </script>

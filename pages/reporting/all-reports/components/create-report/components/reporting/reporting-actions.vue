@@ -58,7 +58,7 @@
         size="sm"
         outline
         class="normal-case rounded-lg hover:text-secondary h-8"
-        @click="emit('close')"
+        @click="emit('back')"
       >
         Cancel
       </Button>
@@ -71,7 +71,12 @@
         Run
       </Button>
       <edit-report>
-        <button class="bg-secondary rounded-l-lg px-5 h-8">Save</button>
+        <button
+          class="bg-secondary rounded-l-lg px-5 h-8"
+          @click="emit('saveReport')"
+        >
+          Save
+        </button>
       </edit-report>
     </div>
   </div>
@@ -126,7 +131,13 @@ const props = defineProps({
     default: "",
   },
 });
-const emit = defineEmits(["changeReport", "runReport"]);
+const emit = defineEmits([
+  "back",
+  "close",
+  "updateReport",
+  "runReport",
+  "saveReport",
+]);
 
 const showTitleDropdown = ref(false);
 
@@ -156,6 +167,6 @@ const closeCreateJoinedReportModal = () => {
 };
 
 const changeName = (name) => {
-  emit("changeReport", { ...props.report, report_name: name });
+  emit("updateReport", { ...props.report, report_name: name });
 };
 </script>

@@ -7,11 +7,16 @@
       @handle="eventHandle"
       :data="item"
     >
-      <td>{{ item.name ? item.name : "-" }}</td>
-      <td>{{ item.annual_revenue ? item.annual_revenue : "-" }}</td>
-      <td>{{ item.brand_category ? item.brand_category : "-" }}</td>
-      <td>{{ item.city ? item.city : "-" }}</td>
-      <td class="text-center">{{ item.company ? item.company : "-" }}</td>
+      <td
+        class="min-w-[250px]"
+        v-for="column in columns"
+        v-show="column.active"
+        :class="column.class"
+      >
+        <span>
+          {{ item[column.value] ? item[column.value] : "-" }}
+        </span>
+      </td>
     </tr>
   </tbody>
   <p class="pl-3 mt-3" v-show="!data.length">No data available at the moment</p>
@@ -35,6 +40,10 @@
 <script setup>
 const props = defineProps({
   data: {
+    type: Array,
+    default: [],
+  },
+  columns: {
     type: Array,
     default: [],
   },

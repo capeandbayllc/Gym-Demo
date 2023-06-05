@@ -25,7 +25,8 @@
           @back="reportDetailsScreenIndex--"
           @next="reportDetailsScreenIndex++"
           @close="closeReportDetailsModal"
-          @changeReport="selectedReport = $event"
+          @saveReport="saveReport"
+          @updateReportName="updateReportName"
           @saveClonedReport="emit('saveClonedReport', $event)"
           :report="selectedReport"
         />
@@ -63,12 +64,13 @@ const emit = defineEmits([
   "toggleIsFavorite",
   "toggleSelectReport",
   "saveClonedReport",
-  "changeSelectedReport",
+  "updateReport",
 ]);
 
 const reportDetailsModal = ref(false);
 const reportDetailsScreens = ref([ReportDetailsModal, Reporting]);
 const reportDetailsScreenIndex = ref(0);
+const selectedReport = ref();
 const openReportDetailsModal = (report) => {
   if (props.activeReportDetailsModal) {
     selectedReport.value = report;
@@ -88,10 +90,19 @@ const closeReportDetailsModal = () => {
   reportDetailsModal.value.close();
 };
 
-const selectedReport = ref();
 watchEffect(() => {
-  emit("changeSelectedReport", selectedReport.value);
+  if (selectedReport.value) emit("updateReport", selectedReport.value);
 });
+
+const updateReportName = (report_name) => {
+  selectedReport.value = { ...selectedReport.value, report_name };
+};
+
+const saveReport = (report) => {
+  selectedReport.value = report;
+  reportDetailsScreenIndex.value--;
+  closeReportDetailsModal();
+};
 
 const props = defineProps({
   data: {
