@@ -87,7 +87,7 @@
       @close="closeCreateReportModal"
       :folders="folders"
       :report="newReportData"
-      @change="newReportData = $event"
+      @changeReport="newReportData = $event"
     >
     </component>
   </daisy-modal>

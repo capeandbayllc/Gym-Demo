@@ -126,9 +126,9 @@ const validateAndSave = () => {
       "The report name must be at least 5 characters long.";
   } else {
     if (inputReportName.value.length == 0) {
-      emit("change", { report_name: "Untitled Report" });
+      emit("changeReport", { report_name: "Untitled Report" });
     } else {
-      emit("change", { report_name: inputReportName.value });
+      emit("changeReport", { report_name: inputReportName.value });
     }
     emit("next");
   }
@@ -137,7 +137,7 @@ const validateAndSave = () => {
 const setPrimaryModule = (moduleName) => {
   selectedPrimaryModule.value = moduleName;
 };
-const emit = defineEmits(["close", "change"]);
+const emit = defineEmits(["close", "changeReport"]);
 
 const selectedPrimaryModule = ref(null);
 const primaryModules = [

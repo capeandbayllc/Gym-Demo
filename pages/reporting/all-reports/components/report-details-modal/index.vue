@@ -86,7 +86,7 @@
           <Button
             size="sm"
             outline
-            class="normal-case rounded-lg hover:text-secondary"
+            class="normal-case rounded-lg hover:text-secondary h-8"
             @click="emit('close')"
           >
             Cancel
@@ -100,7 +100,7 @@
             "
           >
             <button
-              class="bg-secondary rounded-l-xl px-5"
+              class="bg-secondary rounded-l-lg px-5 h-8"
               @click="emit('next')"
             >
               Edit

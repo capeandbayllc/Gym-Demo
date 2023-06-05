@@ -25,7 +25,7 @@
           @back="reportDetailsScreenIndex--"
           @next="reportDetailsScreenIndex++"
           @close="closeReportDetailsModal"
-          @changeReportName="changeReportName"
+          @changeReport="selectedReport = $event"
           @saveClonedReport="emit('saveClonedReport', $event)"
           :report="selectedReport"
         />
@@ -136,9 +136,5 @@ const filters = ref({});
 
 const applyFilter = (filter) => {
   filters.value[filter.type.toLowerCase().replace(/\s/g, "_")] = filter.values;
-};
-
-const changeReportName = (name) => {
-  selectedReport.value.report_name = name;
 };
 </script>
