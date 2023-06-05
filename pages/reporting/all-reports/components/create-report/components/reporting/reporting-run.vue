@@ -63,44 +63,7 @@
       <span>Total Records: </span>
       <span class="font-semibold">{{ actualData.length }}</span>
     </div>
-    <div
-      class="border border-base-content/60 py-2 px-3 rounded-xl flex flex-wrap items-center gap-3"
-    >
-      <div class="flex flex-nowrap">
-        <font-awesome-icon
-          :icon="['far', 'filter']"
-          size="md"
-          class="mr-1 mt-[4px] focus:outline-none"
-          tabindex="0"
-          @click.prevent.stop
-        />
-        <span>Filters</span>
-      </div>
-      <select-dropdown
-        value=""
-        grayContent
-        :scrollable="true"
-        :items="filterOptions"
-        label="None"
-        class="select-dropdown"
-      />
-      <select-dropdown
-        value=""
-        grayContent
-        :scrollable="true"
-        :items="filterOptions"
-        label="None"
-        class="select-dropdown"
-      />
-      <input type="text" class="dark-input" />
-
-      <button
-        class="bg-secondary rounded-xl px-4 h-8 disabled:bg-secondary/80 disabled:text-base-content/80"
-        disabled
-      >
-        Apply
-      </button>
-    </div>
+    <report-filters />
     <reporting-table
       :data="actualData"
       :columns="actualColumns"
@@ -110,14 +73,6 @@
   </div>
 </template>
 
-<style scoped lang="postcss">
-.select-dropdown {
-  @apply bg-neutral h-9 !w-[170px] rounded-xl px-1;
-}
-.dark-input {
-  @apply rounded-xl h-9 bg-neutral placeholder:text-base-content/40 px-3 w-[170px] max-w-full disabled:text-base-content/50 outline-none;
-}
-</style>
 <script setup>
 import ReportingTable from "../reporting-table.vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -127,9 +82,9 @@ import {
   faCircleInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import selectDropdown from "../../../report-details-modal/components/select-dropdown.vue";
-import EditReport from "../../../edit-report/index.vue";
 import { ArrowIcon } from "~~/components/icons";
+import ReportFilters from "../../../report-filters.vue";
+import EditReport from "../../../edit-report/index.vue";
 library.add(faFilter);
 library.add(faRotateRight);
 library.add(faCircleInfo);

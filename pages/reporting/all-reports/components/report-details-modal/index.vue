@@ -1,8 +1,8 @@
 <template>
   <div class="modal-container">
     <div class="modal-header relative">
-      <div class="font-semibold text-2xl flex">
-        <div class="relative flex items-center gap-5">
+      <div class="font-semibold flex justify-between">
+        <div class="relative flex items-center gap-5 text-2xl">
           <arrow-left
             class="pt-1 h-12 cursor-pointer"
             @click="emit('close')"
@@ -34,54 +34,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="text-right pt-6 pb-4 flex justify-between gap-4 flex-wrap">
-        <div class="flex gap-4 items-center flex-wrap">
-          <div class="text-[18px] flex items-center gap-2 font-semibold">
-            <filters-reporting-icon class="w-7" />
-            Filters
-          </div>
-          <select-dropdown
-            value=""
-            grayContent
-            :scrollable="true"
-            :items="timeOptions"
-            label="None"
-            class="select-dropdown bg-neutral z-[50]"
-          />
-          <equal-to-icon class="!z-[55]" />
-          <select-dropdown
-            value=""
-            grayContent
-            :items="timeOptions"
-            :scrollable="true"
-            label="Created Time"
-            class="select-dropdown bg-neutral z-[45]"
-          />
-          <select-dropdown
-            value=""
-            :items="totalRecordsOptions"
-            :countCircle="report.report_details.data?.length"
-            label="Total records"
-            class="select-dropdown bg-secondary z-[40]"
-          />
-          <Button
-            size="sm"
-            outline
-            error
-            class="normal-case rounded-lg !text-base-content border-error"
-          >
-            Clear
-          </Button>
-          <Button
-            size="sm"
-            outline
-            success
-            class="normal-case rounded-lg !text-base-content border-success"
-          >
-            Apply
-          </Button>
-        </div>
         <div class="flex gap-4 items-center">
           <Button
             size="sm"
@@ -108,6 +60,7 @@
           </edit-report>
         </div>
       </div>
+      <report-filters class="my-4" />
     </div>
     <div class="modal-content">
       <div class="max-w-full rounded-xl overflow-auto max-h-full min-h-[102%]">
@@ -165,19 +118,13 @@
 </style>
 
 <script setup>
-import selectDropdown from "./components/select-dropdown.vue";
-import equalToIcon from "./components/equal-to-icon.vue";
 import HeadReportDetailsTable from "./components/head-reports-details-table.vue";
 import BodyReportDetailsTable from "./components/body-report-details-table.vue";
 import EditReport from "../edit-report/index.vue";
 import RenameModal from "../rename-modal.vue";
-import { getRandomInt } from "~/api/utils/number";
+import ReportFilters from "../report-filters.vue";
 
-import {
-  VerticalEllipsis,
-  ArrowLeft,
-  FiltersReportingIcon,
-} from "~/components/icons";
+import { VerticalEllipsis, ArrowLeft } from "~/components/icons";
 
 const emit = defineEmits(["close", "updateReportName"]);
 
@@ -202,46 +149,4 @@ const openRenameModal = () => {
 const closeRenameModal = () => {
   renameModal.value.close();
 };
-
-const totalRecordsOptions = [
-  "Total records",
-  "Total records",
-  "Total records",
-  "Total records",
-];
-
-const timeOptions = [
-  "Between",
-  "is before",
-  "is after",
-  "Yesterday",
-  "Today",
-  "Tomorrow",
-  "Last Week",
-  "Current Week",
-  "Next Week",
-  "Lost Month",
-  "Current Month",
-  "Next Month",
-  "Lost 3 Months",
-  "Lost 6 Months",
-  "Lost 12 Months",
-  "Next 3 Months",
-  "Next 6 Months",
-  "Next 12 Month",
-  "Age in Days",
-  "Age in Months",
-  "Age in Years",
-  "Due in Days",
-  "Current Quarter",
-  "Current Year",
-  "Previous Querter",
-  "Previous Year",
-  "Next Quarter",
-  "Next Year",
-  "1st Quarter",
-  "2nd Quarter",
-  "3rd Quarter",
-  "4th Quarter",
-];
 </script>
