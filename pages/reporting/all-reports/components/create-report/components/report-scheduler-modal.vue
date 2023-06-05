@@ -277,43 +277,56 @@ const data = ref({
 const emit = defineEmits(["close"]);
 
 const timeOptions = [
-  "Between",
-  "is before",
-  "is after",
-  "Yesterday",
-  "Today",
-  "Tomorrow",
-  "Last Week",
-  "Current Week",
-  "Next Week",
-  "Lost Month",
-  "Current Month",
-  "Next Month",
-  "Lost 3 Months",
-  "Lost 6 Months",
-  "Lost 12 Months",
-  "Next 3 Months",
-  "Next 6 Months",
-  "Next 12 Month",
-  "Age in Days",
-  "Age in Months",
-  "Age in Years",
-  "Due in Days",
-  "Current Quarter",
-  "Current Year",
-  "Previous Querter",
-  "Previous Year",
-  "Next Quarter",
-  "Next Year",
-  "1st Quarter",
-  "2nd Quarter",
-  "3rd Quarter",
-  "4th Quarter",
+  { value: "between", label: "Between" },
+  { value: "is_before", label: "is before" },
+  { value: "is_after", label: "is after" },
+  { value: "yesterday", label: "Yesterday" },
+  { value: "today", label: "Today" },
+  { value: "tomorrow", label: "Tomorrow" },
+  { value: "last_week", label: "Last Week" },
+  { value: "current_week", label: "Current Week" },
+  { value: "next_week", label: "Next Week" },
+  { value: "last_month", label: "Last Month" },
+  { value: "current_month", label: "Current Month" },
+  { value: "next_month", label: "Next Month" },
+  { value: "last_3_months", label: "Last 3 Months" },
+  { value: "last_6_months", label: "Last 6 Months" },
+  { value: "last_12_months", label: "Last 12 Months" },
+  { value: "next_3_months", label: "Next 3 Months" },
+  { value: "next_6_months", label: "Next 6 Months" },
+  { value: "next_12_month", label: "Next 12 Month" },
+  { value: "age_in_days", label: "Age in Days" },
+  { value: "age_in_months", label: "Age in Months" },
+  { value: "age_in_years", label: "Age in Years" },
+  { value: "due_in_days", label: "Due in Days" },
+  { value: "current_quarter", label: "Current Quarter" },
+  { value: "current_year", label: "Current Year" },
+  { value: "previous_querter", label: "Previous Querter" },
+  { value: "previous_year", label: "Previous Year" },
+  { value: "next_quarter", label: "Next Quarter" },
+  { value: "next_year", label: "Next Year" },
+  { value: "1st_quarter", label: "1st Quarter" },
+  { value: "2nd_quarter", label: "2nd Quarter" },
+  { value: "3rd_quarter", label: "3rd Quarter" },
+  { value: "4th_quarter", label: "4th Quarter" },
 ];
 
-const repeatTypeOptions = ["None", "Daily", "Weekly", "Monthly", "Yearly"];
+const repeatTypeOptions = [
+  { value: "none", label: "None" },
+  { value: "daily", label: "Daily" },
+  { value: "weekly", label: "Weekly" },
+  { value: "monthly", label: "Monthly" },
+  { value: "yearly", label: "Yearly" },
+];
 
-const fileOptions = ["PDF", "XLS", "CSV"];
+const fileOptions = [
+  { value: "pdf", label: "PDF" },
+  { value: "xls", label: "XLS" },
+  { value: "csv", label: "CSV" },
+];
 
-const sendOptions = ["Sms", "Email"];
+const sendOptions = [
+  { value: "sms", label: "Sms" },
+  { value: "email", label: "Email" },
+];
 </script>

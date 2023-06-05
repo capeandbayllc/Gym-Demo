@@ -3,7 +3,7 @@
     <slot></slot>
     <select-dropdown
       value=""
-      :items="['Clone', 'Export', 'Send Email']"
+      :items="exportOptions"
       @onChange="selectEditOption"
       label=""
       class="edit-dropdown"
@@ -84,11 +84,11 @@ const props = defineProps({
 const emit = defineEmits("saveClonedReport");
 
 const selectEditOption = (item) => {
-  if (item == "Clone") {
+  if (item == "clone") {
     openCloneReportModal();
-  } else if (item == "Export") {
+  } else if (item == "export") {
     openExportReportModal();
-  } else if (item == "Send Email") {
+  } else if (item == "send_email") {
     openSendEmailModal();
   }
 };
@@ -116,4 +116,10 @@ const openSendEmailModal = () => {
 const closeSendEmailModal = () => {
   sendEmailModal.value.close();
 };
+
+const exportOptions = [
+  { value: "clone", label: "Clone" },
+  { value: "export", label: "Export" },
+  { value: "send_email", label: "Send Email" },
+];
 </script>
