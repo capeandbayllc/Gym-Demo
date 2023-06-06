@@ -10,39 +10,37 @@
           <h5>Date</h5>
           <div class="flex flex-wrap gap-3 mt-3">
             <select-dropdown
-              value=""
               grayContent
               :scrollable="true"
               :items="fieldOptions"
-              :label="
-                data.dateFilter.field
-                  ? data.dateFilter.field
-                  : 'Converted Date and Time'
-              "
+              label="None"
               class="select-dropdown bg-neutral z-[50]"
-              @on-change="data.dateFilter.field = $event"
+              :value="data.dateFilter.field.value"
+              @on-change="
+                data.dateFilter.field = searchItem(fieldOptions, $event)
+              "
             />
             <select-dropdown
-              value=""
               grayContent
               :scrollable="true"
               :items="timeRangeOptions"
-              :label="
-                data.dateFilter.timeRange ? data.dateFilter.timeRange : 'Select'
-              "
+              label="None"
               class="select-dropdown bg-neutral z-[48]"
-              @on-change="data.dateFilter.timeRange = $event"
+              :value="data.dateFilter.timeRange.value"
+              @on-change="
+                data.dateFilter.timeRange = searchItem(timeRangeOptions, $event)
+              "
             />
             <select-dropdown
-              value=""
               grayContent
               :scrollable="true"
               :items="operatorOptions"
-              :label="
-                data.dateFilter.operator ? data.dateFilter.operator : 'Select'
-              "
+              label="Select"
               class="select-dropdown bg-neutral z-[48]"
-              @on-change="data.dateFilter.operator = $event"
+              :value="data.dateFilter.operator.value"
+              @on-change="
+                data.dateFilter.operator = searchItem(operatorOptions, $event)
+              "
             />
             <input
               v-model="data.dateFilter.value"
@@ -56,43 +54,46 @@
           <h5>Advanced Filter</h5>
           <div class="flex flex-wrap gap-3 mt-3">
             <select-dropdown
-              value=""
               grayContent
               :scrollable="true"
-              :items="filterOption"
-              :label="
-                data.advancedFilters.annualRevenue
-                  ? data.advancedFilters.annualRevenue
-                  : 'Select'
-              "
+              :items="filterOptions"
+              label="Select"
               class="select-dropdown bg-neutral z-[42]"
-              @on-change="data.advancedFilters.annualRevenue = $event"
+              :value="data.advancedFilters.annualRevenue.value"
+              @on-change="
+                data.advancedFilters.annualRevenue = searchItem(
+                  filterOptions,
+                  $event
+                )
+              "
             />
             <select-dropdown
-              value=""
               grayContent
               :scrollable="true"
-              :items="filterOption"
-              :label="
-                data.advancedFilters.advancedOperator1
-                  ? data.advancedFilters.advancedOperator1
-                  : 'Select'
-              "
+              :items="filterOptions"
+              label="Select"
               class="select-dropdown bg-neutral z-[40]"
-              @on-change="data.advancedFilters.advancedOperator1 = $event"
+              :value="data.advancedFilters.advancedOperator1.value"
+              @on-change="
+                data.advancedFilters.advancedOperator1 = searchItem(
+                  filterOptions,
+                  $event
+                )
+              "
             />
             <select-dropdown
-              value=""
               grayContent
               :scrollable="true"
-              :items="filterOption"
-              :label="
-                data.advancedFilters.advancedOperator2
-                  ? data.advancedFilters.advancedOperator2
-                  : 'Select'
-              "
+              :items="filterOptions"
+              label="Select"
               class="select-dropdown bg-neutral z-[38]"
-              @on-change="data.advancedFilters.advancedOperator2 = $event"
+              :value="data.advancedFilters.advancedOperator2.value"
+              @on-change="
+                data.advancedFilters.advancedOperator2 = searchItem(
+                  filterOptions,
+                  $event
+                )
+              "
             />
             <input
               v-model="data.advancedFilters.currecy"
@@ -177,15 +178,15 @@ import { PlusIcon } from "~/components/icons";
 
 const data = ref({
   dateFilter: {
-    field: "None",
-    timeRange: "None",
+    field: { value: "", label: "" },
+    timeRange: { value: "", label: "" },
     operator: "=",
     value: "",
   },
   advancedFilters: {
-    annualRevenue: "Annual Revenue",
-    advancedOperator1: "=",
-    advancedOperator2: "Value",
+    annualRevenue: { value: "", label: "" },
+    advancedOperator1: { value: "", label: "" },
+    advancedOperator2: { value: "", label: "" },
     currecy: "USD",
     price: "25000",
   },
@@ -203,79 +204,83 @@ const saveFilter = () => {
 
 const emit = defineEmits(["close"]);
 
+const searchItem = (options, selected) => {
+  return options.find((item) => item.value == selected);
+};
+
 const fieldOptions = [
-  "None",
-  "Converted Date Time",
-  "Created Time",
-  "Desired Decision Date",
-  "Desired Go-Live Date",
-  "Discovery Date",
-  "Last Activity Time",
+  { value: "", label: "None" },
+  { value: "converted_date_time", label: "Converted Date Time" },
+  { value: "created_time", label: "Created Time" },
+  { value: "desired_decision_date", label: "Desired Decision Date" },
+  { value: "desired_go_live_date", label: "Desired Go-Live Date" },
+  { value: "discovery_date", label: "Discovery Date" },
+  { value: "last_activity_time", label: "Last Activity Time" },
 ];
 
 const timeRangeOptions = [
-  "None",
-  "Between",
-  "is before",
-  "is after",
-  "Yesterday",
-  "Today",
-  "Tomorrow",
-  "Last Week",
-  "Current Week",
-  "Next Week",
-  "Lost Month",
-  "Current Month",
-  "Next Month",
-  "Lost 3 Months",
-  "Lost 6 Months",
-  "Lost 12 Months",
-  "Next 3 Months",
-  "Next 6 Months",
-  "Next 12 Month",
-  "Age in Days",
-  "Age in Months",
-  "Age in Years",
-  "Due in Days",
-  "Current Quarter",
-  "Current Year",
-  "Previous Querter",
-  "Previous Year",
-  "Next Quarter",
-  "Next Year",
-  "1st Quarter",
-  "2nd Quarter",
-  "3rd Quarter",
-  "4th Quarter",
+  { value: "", label: "None" },
+  { value: "between", label: "Between" },
+  { value: "is_before", label: "is before" },
+  { value: "is_after", label: "is after" },
+  { value: "yesterday", label: "Yesterday" },
+  { value: "today", label: "Today" },
+  { value: "tomorrow", label: "Tomorrow" },
+  { value: "last_week", label: "Last Week" },
+  { value: "current_week", label: "Current Week" },
+  { value: "next_week", label: "Next Week" },
+  { value: "last_month", label: "Last Month" },
+  { value: "current_month", label: "Current Month" },
+  { value: "next_month", label: "Next Month" },
+  { value: "last_3_months", label: "Last 3 Months" },
+  { value: "last_6_months", label: "Last 6 Months" },
+  { value: "last_12_months", label: "Last 12 Months" },
+  { value: "next_3_months", label: "Next 3 Months" },
+  { value: "next_6_months", label: "Next 6 Months" },
+  { value: "next_12_month", label: "Next 12 Month" },
+  { value: "age_in_days", label: "Age in Days" },
+  { value: "age_in_months", label: "Age in Months" },
+  { value: "age_in_years", label: "Age in Years" },
+  { value: "due_in_days", label: "Due in Days" },
+  { value: "current_quarter", label: "Current Quarter" },
+  { value: "current_year", label: "Current Year" },
+  { value: "previous_querter", label: "Previous Querter" },
+  { value: "previous_year", label: "Previous Year" },
+  { value: "next_quarter", label: "Next Quarter" },
+  { value: "next_year", label: "Next Year" },
+  { value: "1st_quarter", label: "1st Quarter" },
+  { value: "2nd_quarter", label: "2nd Quarter" },
+  { value: "3rd_quarter", label: "3rd Quarter" },
+  { value: "4th_quarter", label: "4th Quarter" },
 ];
 
 const operatorOptions = [
-  "=",
-  "<>",
-  ">",
-  ">=",
-  "<",
-  "<=",
-  "Starts with",
-  "Does not start with",
-  "Ends with",
-  "Does not end with",
-  "Contains",
-  "Does not contain",
-  "Is empty",
-  "Is not empty",
-  "In",
-  "Not in",
-  "Between",
-  "Not between",
+  { value: "=", label: "=" },
+  { value: "<>", label: "<>" },
+  { value: ">", label: ">" },
+  { value: ">=", label: ">=" },
+  { value: "<", label: "<" },
+  { value: "<=", label: "<=" },
+  { value: "starts_with", label: "Starts with" },
+  { value: "does_not_start_with", label: "Does not start with" },
+  { value: "ends_with", label: "Ends with" },
+  { value: "does_not_end_with", label: "Does not end with" },
+  { value: "contains", label: "Contains" },
+  { value: "does_not_contain", label: "Does not contain" },
+  { value: "is_empty", label: "Is empty" },
+  { value: "is_not_empty", label: "Is not empty" },
+  { value: "in", label: "In" },
+  { value: "not_in", label: "Not in" },
+  { value: "between", label: "Between" },
+  { value: "not_between", label: "Not between" },
 ];
 
-const filterOption = [
-  "begins with",
-  "does not begin with",
-  "ends with",
-  "does not begin with",
-  "contains",
-  "does not contain",
+const filterOptions = [
+  { value: "begins_with", label: "begins with" },
+  { value: "does_not_begin_with", label: "does not begin with" },
+  { value: "ends_with", label: "ends with" },
+  { value: "does_not_end_with", label: "does not begin with" },
+  { value: "contains", label: "contains" },
+  { value: "does_not_contain", label: "does not contain" },
 ];
 </script>

@@ -23,11 +23,11 @@
         <div class="filter-item" v-for="(filter, i) in filters" :key="i">
           <div>
             <span>
-              {{ filter.dateFilter?.field }}
+              {{ filter.dateFilter?.field?.label }}
             </span>
             <p>
-              {{ filter.dateFilter?.timeRange.toUpperCase() }}
-              {{ filter.dateFilter?.operator }}
+              {{ filter.dateFilter?.timeRange?.label.toUpperCase() }}
+              {{ filter.dateFilter?.operator?.label }}
               {{ filter.dateFilter?.value }}
             </p>
           </div>

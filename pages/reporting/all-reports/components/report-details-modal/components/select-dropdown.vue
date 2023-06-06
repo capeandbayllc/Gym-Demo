@@ -4,7 +4,7 @@
     :class="className"
     class="flex items-center w-full"
   >
-    <button class="select-box-btn" :onClick="toggleCollapsed">
+    <button class="select-box-btn" :onClick="disabled ? null : toggleCollapsed">
       {{ value ? selected : !isCollapsed && labelOpened ? labelOpened : label }}
       <div class="flex items-center justify-end">
         <div v-if="countCircle" class="count-circle">
@@ -31,13 +31,14 @@
             <div v-for="(item, i) in items" :key="i">
               <div
                 class="option"
-                @click="selectValue(item)"
+                @click="selectValue(item.value)"
                 :class="{
                   'hover:bg-secondary': grayContent,
                   'hover:bg-base-300': !grayContent,
+                  'bg-secondary bg-base-300': item.label == selected,
                 }"
               >
-                {{ item }}
+                {{ item.label }}
               </div>
             </div>
           </div>
@@ -102,6 +103,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const selectContentEl = ref(null);
@@ -109,6 +114,12 @@ const isCollapsed = ref(true);
 const toggleCollapsed = () => {
   isCollapsed.value = !isCollapsed.value;
 };
+
+watchEffect(() => {
+  if (props.disabled) {
+    isCollapsed.value = true;
+  }
+});
 
 const selectValue = (item) => {
   emit("onChange", item);
@@ -136,11 +147,16 @@ onUnmounted(() => {
 const className = computed({
   get() {
     let additional = isCollapsed.value ? " collapsed" : "  ";
-    return "select-box-wrapper " + props.class + additional;
+    return (
+      "select-box-wrapper " +
+      props.class +
+      additional +
+      (props.disabled ? " text-base-content/50" : null)
+    );
   },
 });
 
 const selected = computed(
-  () => props.items?.filter((item) => item === props.value)[0]?.label
+  () => props.items?.filter((item) => item.value === props.value)[0]?.label
 );
 </script>
