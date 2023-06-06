@@ -115,6 +115,12 @@ const toggleCollapsed = () => {
   isCollapsed.value = !isCollapsed.value;
 };
 
+watchEffect(() => {
+  if (props.disabled) {
+    isCollapsed.value = true;
+  }
+});
+
 const selectValue = (item) => {
   emit("onChange", item);
   toggleCollapsed();
