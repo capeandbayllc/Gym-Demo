@@ -19,49 +19,49 @@
         :items="filterOptions"
         label="None"
         class="select-dropdown"
-        :value="filter.first"
-        @onChange="filter.first = $event"
+        :value="filters.first"
+        @onChange="filters.first = $event"
       />
       <select-dropdown
         grayContent
-        :disabled="!filter.first"
+        :disabled="!filters.first"
         :scrollable="true"
         :items="filterTypes"
         label="None"
         class="select-dropdown"
-        :value="filter.second"
-        @onChange="filter.second = $event"
+        :value="filters.second"
+        @onChange="filters.second = $event"
       />
 
       <select-dropdown
-        v-if="showComparisonOperatorsWith.includes(filter.second)"
+        v-if="showComparisonOperatorsWith.includes(filters.second)"
         grayContent
         :scrollable="true"
         :items="comparisonOperators"
         label="None"
         class="select-dropdown"
-        :value="filter.operator"
-        @onChange="filter.operator = $event"
+        :value="filters.operator"
+        @onChange="filters.operator = $event"
       />
       <input
         type="number"
         class="dark-input"
-        v-model="filter.text"
-        :disabled="!showComparisonOperatorsWith.includes(filter.second)"
-        v-if="!showStartDateWith.includes(filter.second)"
+        v-model="filters.text"
+        :disabled="!showComparisonOperatorsWith.includes(filters.second)"
+        v-if="!showStartDateWith.includes(filters.second)"
       />
 
       <Datepicker
-        v-if="showStartDateWith.includes(filter.second)"
+        v-if="showStartDateWith.includes(filters.second)"
         class="custom-date-input"
-        v-model="filter.dateStart"
+        v-model="filters.dateStart"
         :enable-time-picker="false"
         auto-apply
       ></Datepicker>
       <Datepicker
-        v-if="showEndDateWith.includes(filter.second)"
+        v-if="showEndDateWith.includes(filters.second)"
         class="custom-date-input"
-        v-model="filter.dateEnd"
+        v-model="filters.dateEnd"
         :enable-time-picker="false"
         auto-apply
       ></Datepicker>
@@ -69,7 +69,8 @@
 
     <button
       class="bg-secondary rounded-xl px-4 h-8 disabled:bg-secondary/50 disabled:text-base-content/70"
-      :disabled="isAppliedFilters"
+      :disabled="!isAppliedFilters"
+      @click="applyFilters"
     >
       Apply
     </button>
@@ -104,28 +105,28 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import Datepicker from "@vuepic/vue-datepicker";
-library.add(faFilter);
-
 import selectDropdown from "./report-details-modal/components/select-dropdown.vue";
 
-const dateValue = ref("");
+library.add(faFilter);
 
 const showComparisonOperatorsWith = ["age_in_days", "due_in_days"];
 const showStartDateWith = ["between", "is_before"];
 const showEndDateWith = ["between"];
 
-const filter = ref({
+const emit = defineEmits(["applyFilters"]);
+
+const filters = ref({
   first: "",
   second: "",
-  dateStart: null,
-  dateEnd: null,
+  dateStart: "",
+  dateEnd: "",
   text: "",
   operator: "=",
 });
 
 watch(
-  filter,
-  (val, old) => {
+  filters,
+  (val) => {
     if (!val.first) {
       val.second = "";
     }
@@ -156,19 +157,24 @@ watch(
 const appliedFilters = ref({
   first: "",
   second: "",
-  dateStart: null,
-  dateEnd: null,
+  dateStart: "",
+  dateEnd: "",
   text: "",
 });
 
 const isAppliedFilters = computed(() => {
-  for (const key in filter.value) {
-    if (filter.value[key] !== appliedFilters.value[key]) {
-      return false;
+  for (const key in filters.value) {
+    if (filters.value[key] !== appliedFilters.value[key]) {
+      return true;
     }
   }
-  return true;
+  return false;
 });
+
+const applyFilters = () => {
+  appliedFilters.value = { ...toRaw(filters.value) };
+  emit("applyFilters", toRaw(appliedFilters.value));
+};
 
 const filterOptions = [
   {

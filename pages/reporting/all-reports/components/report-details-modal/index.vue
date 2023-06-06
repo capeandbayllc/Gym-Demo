@@ -60,7 +60,7 @@
           </edit-report>
         </div>
       </div>
-      <report-filters class="my-4" />
+      <report-filters @apply-filters="appliedFilters = $event" class="my-4" />
     </div>
     <div class="modal-content">
       <div class="max-w-full rounded-xl overflow-auto max-h-full min-h-[102%]">
@@ -68,7 +68,7 @@
           <head-report-details-table :columns="report.report_details.columns" />
           <body-report-details-table
             :columns="report.report_details.columns"
-            :data="report.report_details.data"
+            :data="dataFiltered"
             @row-clicked="openReportDetailsModal"
           />
         </table>
@@ -139,6 +139,42 @@ const showTitleDropdown = ref(false);
 const toggleTitleDropdown = () => {
   showTitleDropdown.value = !showTitleDropdown.value;
 };
+
+const defaultFilters = ref({
+  first: "",
+  second: "",
+  dateStart: "",
+  dateEnd: "",
+  text: "",
+  operator: "=",
+});
+
+const appliedFilters = ref({
+  first: "",
+  second: "",
+  dateStart: "",
+  dateEnd: "",
+  text: "",
+  operator: "=",
+});
+
+const isAppliedFilters = computed(() => {
+  for (const key in defaultFilters.value) {
+    if (defaultFilters.value[key] !== appliedFilters.value[key]) {
+      return true;
+    }
+  }
+  return false;
+});
+
+const dataFiltered = computed(() => {
+  console.log(isAppliedFilters.value);
+  if (isAppliedFilters.value) {
+    return [];
+  } else {
+    return props.report.report_details.data;
+  }
+});
 
 const renameModal = ref(null);
 
