@@ -54,14 +54,14 @@
       <Datepicker
         v-if="showStartDateWith.includes(filter.second)"
         class="custom-date-input"
-        v-model="dateValue"
+        v-model="filter.dateStart"
         :enable-time-picker="false"
         auto-apply
       ></Datepicker>
       <Datepicker
         v-if="showEndDateWith.includes(filter.second)"
         class="custom-date-input"
-        v-model="dateValue"
+        v-model="filter.dateEnd"
         :enable-time-picker="false"
         auto-apply
       ></Datepicker>
@@ -122,6 +122,36 @@ const filter = ref({
   text: "",
   operator: "=",
 });
+
+watch(
+  filter,
+  (val, old) => {
+    if (!val.first) {
+      val.second = "";
+    }
+
+    if (!val.second) {
+      val.dateStart = "";
+      val.dateEnd = "";
+      val.text = "";
+      val.operator = "=";
+    }
+
+    if (!showComparisonOperatorsWith.includes(val.second)) {
+      val.text = "";
+      val.operator = "=";
+    }
+
+    if (!showStartDateWith.includes(val.second)) {
+      val.dateStart = "";
+    }
+
+    if (!showEndDateWith.includes(val.second)) {
+      val.dateEnd = "";
+    }
+  },
+  { deep: true }
+);
 
 const appliedFilters = ref({
   first: "",
