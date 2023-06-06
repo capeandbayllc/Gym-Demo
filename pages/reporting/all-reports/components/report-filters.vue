@@ -19,49 +19,51 @@
         :items="filterOptions"
         label="None"
         class="select-dropdown"
-        :value="filters.first"
-        @onChange="filters.first = $event"
+        :value="selectedFilters.first"
+        @onChange="selectedFilters.first = $event"
       />
       <select-dropdown
         grayContent
-        :disabled="!filters.first"
+        :disabled="!selectedFilters.first"
         :scrollable="true"
         :items="filterTypes"
         label="None"
         class="select-dropdown"
-        :value="filters.second"
-        @onChange="filters.second = $event"
+        :value="selectedFilters.second"
+        @onChange="selectedFilters.second = $event"
       />
 
       <select-dropdown
-        v-if="showComparisonOperatorsWith.includes(filters.second)"
+        v-if="showComparisonOperatorsWith.includes(selectedFilters.second)"
         grayContent
         :scrollable="true"
         :items="comparisonOperators"
         label="None"
         class="select-dropdown"
-        :value="filters.operator"
-        @onChange="filters.operator = $event"
+        :value="selectedFilters.operator"
+        @onChange="selectedFilters.operator = $event"
       />
       <input
         type="number"
         class="dark-input"
-        v-model="filters.text"
-        :disabled="!showComparisonOperatorsWith.includes(filters.second)"
-        v-if="!showStartDateWith.includes(filters.second)"
+        v-model="selectedFilters.text"
+        :disabled="
+          !showComparisonOperatorsWith.includes(selectedFilters.second)
+        "
+        v-if="!showStartDateWith.includes(selectedFilters.second)"
       />
 
       <Datepicker
-        v-if="showStartDateWith.includes(filters.second)"
+        v-if="showStartDateWith.includes(selectedFilters.second)"
         class="custom-date-input"
-        v-model="filters.dateStart"
+        v-model="selectedFilters.dateStart"
         :enable-time-picker="false"
         auto-apply
       ></Datepicker>
       <Datepicker
-        v-if="showEndDateWith.includes(filters.second)"
+        v-if="showEndDateWith.includes(selectedFilters.second)"
         class="custom-date-input"
-        v-model="filters.dateEnd"
+        v-model="selectedFilters.dateEnd"
         :enable-time-picker="false"
         auto-apply
       ></Datepicker>
@@ -73,6 +75,13 @@
       @click="applyFilters"
     >
       Apply
+    </button>
+    <button
+      v-if="showClearFilters"
+      class="text-secondary"
+      @click="clearFilters"
+    >
+      Clear Filters
     </button>
   </div>
 </template>
@@ -115,7 +124,7 @@ const showEndDateWith = ["between"];
 
 const emit = defineEmits(["applyFilters"]);
 
-const filters = ref({
+const selectedFilters = ref({
   first: "",
   second: "",
   dateStart: "",
@@ -125,7 +134,7 @@ const filters = ref({
 });
 
 watch(
-  filters,
+  selectedFilters,
   (val) => {
     if (!val.first) {
       val.second = "";
@@ -154,17 +163,47 @@ watch(
   { deep: true }
 );
 
+const defaultFilters = ref({
+  first: "",
+  second: "",
+  dateStart: "",
+  dateEnd: "",
+  text: "",
+  operator: "=",
+});
+
 const appliedFilters = ref({
   first: "",
   second: "",
   dateStart: "",
   dateEnd: "",
   text: "",
+  operator: "=",
+});
+
+const clearFilters = () => {
+  selectedFilters.value = { ...toRaw(defaultFilters.value) };
+  appliedFilters.value = { ...toRaw(defaultFilters.value) };
+  emit("applyFilters", toRaw(appliedFilters.value));
+};
+
+const showClearFilters = computed(() => {
+  for (const key in defaultFilters.value) {
+    if (defaultFilters.value[key] !== selectedFilters.value[key]) {
+      return true;
+    }
+  }
+  for (const key in defaultFilters.value) {
+    if (defaultFilters.value[key] !== appliedFilters.value[key]) {
+      return true;
+    }
+  }
+  return false;
 });
 
 const isAppliedFilters = computed(() => {
-  for (const key in filters.value) {
-    if (filters.value[key] !== appliedFilters.value[key]) {
+  for (const key in selectedFilters.value) {
+    if (selectedFilters.value[key] !== appliedFilters.value[key]) {
       return true;
     }
   }
@@ -172,7 +211,7 @@ const isAppliedFilters = computed(() => {
 });
 
 const applyFilters = () => {
-  appliedFilters.value = { ...toRaw(filters.value) };
+  appliedFilters.value = { ...toRaw(selectedFilters.value) };
   emit("applyFilters", toRaw(appliedFilters.value));
 };
 
